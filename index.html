@@ -5,12 +5,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>MerchantHaus – ISO Solutions for U.S. Retail</title>
 
-  <script src="https://cdn.tailwindcss.com"></script>
+  
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
-  <script src="https://unpkg.com/lucide@latest"></script>
-
+  
+  <!-- Load Tailwind CSS first, so the `tailwind` object is available for the config script -->
+  <script src="https://cdn.tailwindcss.com"></script>
   <script>
     tailwind.config = {
       darkMode: 'class',
@@ -29,13 +30,15 @@
       }
     }
   </script>
+  <script src="https://unpkg.com/lucide@latest"></script>
+
   <style>
     :root { color-scheme: light dark; }
     body { font-family: 'Montserrat', sans-serif; }
     .grad-text { background: linear-gradient(90deg,#c21b35,#ef3c5b,#ff9aa8,#ef3c5b,#c21b35); -webkit-background-clip:text; background-clip:text; color: transparent; background-size: 300% 100%; animation: shimmer 12s linear infinite; }
     .field:focus { outline: none; box-shadow: 0 0 0 3px rgba(239,60,91,.35); }
   </style>
-  <link rel="icon" type="image/x-icon" href="assets/img/logo.ico">
+  <link rel="icon" type="image/x-icon" href="shield.ico">
 </head>
 
 <body class="bg-white text-slate-900 dark:bg-slate-950 dark:text-slate-100">
@@ -43,7 +46,7 @@
   <header class="sticky top-0 z-50 bg-white/75 dark:bg-slate-950/60 backdrop-blur border-b border-slate-200/70 dark:border-slate-800">
     <div class="max-w-7xl mx-auto px-4 py-4 flex items-center justify-between">
       <a href="#" class="flex items-center gap-2 group">
-        <div class="h-8 w-8 rounded-xl bg-gradient-to-br from-brand-600 to-brand-400 grid place-items-center text-white shadow-md"><i data-lucide="badge-dollar-sign" class="h-4 w-4"></i></div>
+        <img src="shield.png" alt="MerchantHaus Logo" class="h-8 w-8">
         <span class="font-extrabold tracking-wide">MerchantHaus</span>
       </a>
       <nav class="hidden md:flex items-center gap-7 text-sm">
@@ -101,76 +104,11 @@
             <span>ISO solutions for U.S. retail</span>
           </div>
           
-<div class="backdrop-blur-md bg-white/20 dark:bg-slate-800/30 p-8 rounded-xl text-center">
-  <h1 class="text-6xl md:text-8xl font-ubuntu font-bold animated-gradient mb-4">
-    MerchantHaus
-  </h1>
-  <p id="tagline" class="text-2xl md:text-3xl font-ubuntu text-white">
-    <span id="typewriter"></span><span class="cursor">|</span>
-  </p>
-</div>
-
-<style>
-@import url('https://fonts.googleapis.com/css2?family=Ubuntu:wght@700&display=swap');
-.font-ubuntu { font-family: 'Ubuntu', sans-serif; }
-.animated-gradient {
-  background: linear-gradient(270deg, #dc2743, #ef3c5b, #c21b35);
-  background-size: 600% 600%;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  animation: gradientMove 8s ease infinite;
-}
-@keyframes gradientMove {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
-}
-.cursor {
-  display: inline-block;
-  animation: blink 1s step-end infinite;
-}
-@keyframes blink {
-  50% { opacity: 0; }
-}
-</style>
-
-<script>
-document.addEventListener("DOMContentLoaded", function() {
-  const taglineText = "safe . smart. secure";
-  const typewriter = document.getElementById("typewriter");
-  const cursor = document.querySelector(".cursor");
-
-  function typeEffect(callback) {
-    let i = 0;
-    typewriter.textContent = "";
-    cursor.style.display = "inline-block";
-    setTimeout(function typing() {
-      if (i < taglineText.length) {
-        typewriter.textContent += taglineText.charAt(i);
-        i++;
-        setTimeout(typing, 150);
-      } else {
-        setTimeout(callback, 5000); // Hold for 5 seconds before restarting
-      }
-    }, 1000); // Delay before typing starts
-  }
-
-  function startTypingLoop() {
-    typeEffect(function() {
-      startTypingLoop();
-    });
-  }
-
-  startTypingLoop();
-});
-</script>
-
-          <p class="mt-4 text-slate-600 dark:text-slate-300 max-w-prose">Accept cards, ACH, and pay‑by‑link across POS and e‑commerce. Route across processors, cut costs, and reduce fraud with built‑in tools — all tailored for U.S. retail merchants.</p>
-          <div class="mt-6 flex flex-wrap gap-3 text-xs text-slate-600 dark:text-slate-300">
-            <span class="flex items-center gap-1"><i data-lucide="layers" class="h-4 w-4"></i> Multi‑processor routing</span>
-            <span class="flex items-center gap-1"><i data-lucide="shield-check" class="h-4 w-4"></i> PCI‑ready controls</span>
-            <span class="flex items-center gap-1"><i data-lucide="cpu" class="h-4 w-4"></i> AI fraud heuristics</span>
+          <div class="mt-4 rounded-2xl border border-slate-200/50 dark:border-slate-800/50 bg-white/10 dark:bg-black/10 backdrop-blur-lg p-8">
+            <h1 class="text-6xl md:text-7xl font-extrabold tracking-tight">AI-Powered<br><span class="grad-text">Payments Stack</span></h1>
+            <p class="mt-4 text-slate-700 dark:text-slate-200 max-w-prose">Accept cards, ACH, and pay‑by‑link across POS and e‑commerce. Route across processors, cut costs, and reduce fraud with built‑in tools — all tailored for U.S. retail merchants.</p>
           </div>
+
           <div class="mt-8 flex gap-3">
             <button class="js-cta px-5 py-3 rounded-xl bg-brand-600 text-white font-semibold hover:bg-brand-700">Request a Demo</button>
             <a href="#pricing" class="px-5 py-3 rounded-xl border border-slate-300 dark:border-slate-700 font-semibold hover:bg-slate-50 dark:hover:bg-slate-900">See pricing</a>
@@ -453,7 +391,7 @@ document.addEventListener("DOMContentLoaded", function() {
     <div class="max-w-7xl mx-auto px-4 grid md:grid-cols-3 gap-8 text-sm">
       <div>
         <div class="flex items-center gap-2">
-          <div class="h-7 w-7 rounded-lg bg-gradient-to-br from-brand-600 to-brand-400 grid place-items-center text-white"><i data-lucide="badge-dollar-sign" class="h-4 w-4"></i></div>
+          <img src="shield.png" alt="MerchantHaus Logo" class="h-7 w-7">
           <span class="font-extrabold">MerchantHaus</span>
         </div>
         <p class="mt-3 text-slate-600 dark:text-slate-300">Simple. Smart. Secure.</p>
@@ -509,7 +447,6 @@ document.addEventListener("DOMContentLoaded", function() {
   </div>
 
   <!-- Scripts -->
-  <script src="/assets/app.js"></script>
   <script>
     // Icons
     document.addEventListener('DOMContentLoaded', () => { if (window.lucide) lucide.createIcons(); });
@@ -540,7 +477,7 @@ document.addEventListener("DOMContentLoaded", function() {
     function calc() {
       const vol = Math.max(0, Number(document.getElementById('vol').value || 0));
       const ticket = Math.max(1, Number(document.getElementById('ticket').value || 1));
-      const tx = Math.floor(vol / ticket);
+      const tx = vol > 0 && ticket > 0 ? Math.floor(vol / ticket) : 0;
 
       const mix = {
         regDebit: Number(document.getElementById('mixRegDebit').value || 0),
@@ -576,13 +513,11 @@ document.addEventListener("DOMContentLoaded", function() {
         rewards: { vol: vol * frac(mix.rewards), tx: tx * frac(mix.rewards) },
         amex: { vol: vol * frac(mix.amex), tx: tx * frac(mix.amex) }
       };
-        regDebit: { vol: vol * frac(mix.regDebit), tx: tx * frac(mix.regDebit) },
-        unregDebit: { vol: vol * frac(mix.unregDebit), tx: tx * frac(mix.unregDebit) },
-        credit: { vol: vol * frac(mix.credit), tx: tx * frac(mix(mix.credit)) }
-      };
+
       function feesFor(kind) {
         const s = schedule[kind];
         const sp = splits[kind];
+        if (!s || !sp) return 0;
         return (sp.vol * s.pct) + (sp.tx * s.per);
       }
       const interchangeTotal = feesFor('regDebit') + feesFor('unregDebit') + feesFor('credit') + feesFor('rewards') + feesFor('amex');
@@ -599,10 +534,50 @@ document.addEventListener("DOMContentLoaded", function() {
         </div>
         <p class="mt-3 text-sm">Estimated effective rate: <span class="font-semibold">${effRate.toFixed(2)}%</span> (illustrative).</p>`;
     }
-    document.getElementById('calc').addEventListener('click', calc);
-    calc();
+    
+    // Modal handlers
+    const bookModal = document.getElementById('book-modal');
+    const bookForm = document.getElementById('book-form');
+    const bookOut = document.getElementById('book-out');
+
+    document.querySelectorAll('.js-cta').forEach(el => {
+      el.addEventListener('click', (e) => {
+        e.preventDefault();
+        bookModal.classList.remove('hidden');
+      });
+    });
+
+    bookModal.addEventListener('click', (e) => {
+      if (e.target.dataset.close !== undefined) {
+        bookModal.classList.add('hidden');
+      }
+    });
+
+    bookForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      // Honeypot check
+      if (bookForm.hp.value) return;
+
+      bookOut.textContent = 'Sending...';
+      // In a real app, you would send this data to a server or service
+      setTimeout(() => {
+        bookOut.textContent = 'Success! Check your email for the booking link.';
+        bookForm.reset();
+      }, 1000);
+    });
+
+    // Initial calculations on load
+    document.addEventListener('DOMContentLoaded', () => {
+        if (document.getElementById('calc')) {
+            calc();
+            ['vol', 'ticket', 'mixRegDebit', 'mixUnregDebit', 'mixCredit', 'mixRewards', 'mixAmex', 'markupBps', 'markupTx', 'gw'].forEach(id => {
+                const element = document.getElementById(id);
+                if (element) {
+                    element.addEventListener('input', calc);
+                }
+            });
+        }
+    });
   </script>
-</body>
-</html>
 </body>
 </html>
