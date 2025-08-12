@@ -1,0 +1,75 @@
+<!doctype html><html lang="en">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>MerchantHaus × Shopify — Retail Payments</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script><script src="https://unpkg.com/lucide@latest"></script>
+  <style>body{font-family:Montserrat,system-ui,sans-serif}</style>
+  <link rel="icon" type="image/x-icon" href="assets/img/logo.ico">
+</head>
+<body class="bg-white text-slate-900 dark:bg-slate-950 dark:text-slate-100">
+  <main class="max-w-5xl mx-auto px-4 py-12">
+    <a href="/" class="text-sm text-brand-600">&larr; Back to MerchantHaus</a>
+    <header class="mt-4 flex items-center gap-4">
+      <img src="/assets/logos/shopify.svg" alt="Shopify" class="h-10 w-auto">
+      <h1 class="text-3xl font-extrabold">MerchantHaus for Shopify</h1>
+    </header>
+    <p class="mt-3 text-slate-600 dark:text-slate-300">Boost approvals, reduce fraud, and keep processor flexibility while selling on Shopify.</p>
+
+    <section class="mt-8 grid md:grid-cols-2 gap-6">
+      <div class="p-6 rounded-2xl border border-slate-200 dark:border-slate-800">
+        <h2 class="font-bold">What you get</h2>
+        <ul class="mt-2 text-sm list-disc list-inside space-y-1 text-slate-700 dark:text-slate-300">
+          <li>Multi-processor routing (keep your bank, add a backup)</li>
+          <li>Pay-by-link + invoicing for phone orders</li>
+          <li>Tokenization & subscriptions with card updater</li>
+          <li>3-D Secure + fraud heuristics tuned for retail</li>
+        </ul>
+      </div>
+      <div class="p-6 rounded-2xl border border-slate-200 dark:border-slate-800">
+        <h2 class="font-bold">Implementation</h2>
+        <ol class="mt-2 text-sm list-decimal list-inside space-y-1 text-slate-700 dark:text-slate-300">
+          <li>Book a demo and share a recent processing statement</li>
+          <li>We provision your <strong>Merchant ID and credentials</strong></li>
+          <li>Apply credentials to checkout connector and run test orders</li>
+          <li>Go live and monitor approvals in your dashboard</li>
+        </ol>
+      </div>
+    </section>
+
+    <div class="mt-8 p-6 rounded-2xl bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800">
+      <h3 class="font-bold">Pricing</h3>
+      <p class="text-sm mt-2 text-slate-700 dark:text-slate-300">Interchange++ with volume-based discounts. Effective rates depend on card mix and ticket size. Get a tailored quote.</p>
+      <button class="js-cta inline-block mt-4 px-4 py-2 rounded-lg bg-brand-600 text-white font-semibold">Request a Demo</button>
+    </div>
+  </main>
+
+  <!-- Shared modal -->
+  <div id="book-modal" class="fixed inset-0 z-[70] hidden">
+    <div class="absolute inset-0 bg-black/60" data-close></div>
+    <div class="mx-auto mt-[10vh] w-[min(560px,92vw)] rounded-2xl bg-white dark:bg-slate-900 p-6 border border-slate-200 dark:border-slate-800 shadow-2xl">
+      <div class="flex items-center justify-between">
+        <h3 class="text-xl font-extrabold">Book a 20-minute consultation</h3>
+        <button class="p-2 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800" data-close aria-label="Close">
+          <i data-lucide="x" class="h-5 w-5"></i>
+        </button>
+      </div>
+      <p class="mt-1 text-sm text-slate-600 dark:text-slate-300">Tell us a bit about you and we’ll send a private booking link immediately.</p>
+
+      <form id="book-form" class="mt-4 grid gap-3">
+        <input name="name" placeholder="Your name" class="field rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-950 px-3 py-2" required>
+        <input name="email" type="email" placeholder="Work email" class="field rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-950 px-3 py-2" required>
+        <input name="company" placeholder="Company" class="field rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-950 px-3 py-2">
+        <input name="phone" placeholder="Phone (optional)" class="field rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-950 px-3 py-2">
+        <textarea name="notes" placeholder="Anything specific you want to cover?" rows="3" class="field rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-950 px-3 py-2"></textarea>
+        <input type="text" name="hp" class="hidden" tabindex="-1" autocomplete="off">
+        <button class="rounded-lg bg-brand-600 text-white font-semibold px-4 py-2 hover:bg-brand-700" type="submit">Send me the booking link</button>
+        <p id="book-out" class="text-xs text-slate-500"></p>
+      </form>
+    </div>
+  </div>
+
+  <script src="/assets/app.js"></script>
+</body>
+</html>

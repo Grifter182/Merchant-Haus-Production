@@ -1,0 +1,13 @@
+{
+  "name": "merchanthaus-us-iso-site",
+  "version": "1.0.0",
+  "private": true,
+  "description": "MerchantHaus ISO for U.S. retail \u2013 static site with Netlify function for private demo booking.",
+  "scripts": {
+    "dev": "netlify dev",
+    "start": "netlify dev"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}
