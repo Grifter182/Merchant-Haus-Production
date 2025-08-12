@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/><meta content="width=device-width,initial-scale=1" name="viewport"/>
+<title>MerchantHaus × Shopify — Retail Payments</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com"></script><script src="https://unpkg.com/lucide@latest"></script>
+<style>body{font-family:Montserrat,system-ui,sans-serif}</style>
+<link href="/shield.ico" rel="icon" type="image/x-icon"/>
+<link href="/shield.ico" rel="shortcut icon" type="image/x-icon"/><link href="/shield.png" rel="apple-touch-icon"/></head>
+<body class="bg-white text-slate-900 dark:bg-slate-950 dark:text-slate-100">
+<main class="max-w-5xl mx-auto px-4 py-12">
+<a class="text-sm text-brand-600" href="/">← Back to MerchantHaus</a>
+<header class="mt-4 flex items-center gap-4">
+<img alt="Shopify" class="h-10 w-auto" src="/shield.png"/>
+<h1 class="text-3xl font-extrabold">MerchantHaus for Shopify</h1>
+<nav><a href="/services">Payment Services</a><a href="/pricing">Plans &amp; Pricing</a><a href="/contact">Contact Us</a><a href="/setup-checklist">Setup Checklist</a><a href="/privacy">Privacy Policy</a><a href="/terms">Terms &amp; Conditions</a></nav></header>
+<p class="mt-3 text-slate-600 dark:text-slate-300">Boost approvals, reduce fraud, and keep processor flexibility while selling on Shopify.</p>
+<section class="mt-8 grid md:grid-cols-2 gap-6">
+<div class="p-6 rounded-2xl border border-slate-200 dark:border-slate-800">
+<h2 class="font-bold">What you get</h2>
+<ul class="mt-2 text-sm list-disc list-inside space-y-1 text-slate-700 dark:text-slate-300">
+<li>Multi-processor routing (keep your bank, add a backup)</li>
+<li>Pay-by-link + invoicing for phone orders</li>
+<li>Tokenization &amp; subscriptions with card updater</li>
+<li>3-D Secure + fraud heuristics tuned for retail</li>
+</ul>
+</div>
+<div class="p-6 rounded-2xl border border-slate-200 dark:border-slate-800">
+<h2 class="font-bold">Implementation</h2>
+<ol class="mt-2 text-sm list-decimal list-inside space-y-1 text-slate-700 dark:text-slate-300">
+<li>Book a demo and share a recent processing statement</li>
+<li>We provision your <strong>Merchant ID and credentials</strong></li>
+<li>Apply credentials to checkout connector and run test orders</li>
+<li>Go live and monitor approvals in your dashboard</li>
+</ol>
+</div>
+</section>
+<div class="mt-8 p-6 rounded-2xl bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800">
+<h3 class="font-bold">Pricing</h3>
+<p class="text-sm mt-2 text-slate-700 dark:text-slate-300">Interchange++ with volume-based discounts. Effective rates depend on card mix and ticket size. Get a tailored quote.</p>
+<button class="js-cta inline-block mt-4 px-4 py-2 rounded-lg bg-brand-600 text-white font-semibold">Request a Demo</button>
+</div>
+</main>
+<!-- Shared modal -->
+<div class="fixed inset-0 z-[70] hidden" id="book-modal">
+<div class="absolute inset-0 bg-black/60" data-close=""></div>
+<div class="mx-auto mt-[10vh] w-[min(560px,92vw)] rounded-2xl bg-white dark:bg-slate-900 p-6 border border-slate-200 dark:border-slate-800 shadow-2xl">
+<div class="flex items-center justify-between">
+<h3 class="text-xl font-extrabold">Book a 20-minute consultation</h3>
+<button aria-label="Close" class="p-2 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800" data-close="">
+<i class="h-5 w-5" data-lucide="x"></i>
+</button>
+</div>
+<p class="mt-1 text-sm text-slate-600 dark:text-slate-300">Tell us a bit about you and we’ll send a private booking link immediately.</p>
+<form class="mt-4 grid gap-3" id="book-form">
+<input class="field rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-950 px-3 py-2" name="name" placeholder="Your name" required=""/>
+<input class="field rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-950 px-3 py-2" name="email" placeholder="Work email" required="" type="email"/>
+<input class="field rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-950 px-3 py-2" name="company" placeholder="Company"/>
+<input class="field rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-950 px-3 py-2" name="phone" placeholder="Phone (optional)"/>
+<textarea class="field rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-950 px-3 py-2" name="notes" placeholder="Anything specific you want to cover?" rows="3"></textarea>
+<input autocomplete="off" class="hidden" name="hp" tabindex="-1" type="text"/>
+<button class="rounded-lg bg-brand-600 text-white font-semibold px-4 py-2 hover:bg-brand-700" type="submit">Send me the booking link</button>
+<p class="text-xs text-slate-500" id="book-out"></p>
+</form>
+</div>
+</div>
+<script src="/assets/app.js"></script>
+<footer><div><ul><li><a href="/services">Payment Services</a></li><li><a href="/pricing">Plans &amp; Pricing</a></li><li><a href="/setup-checklist">Setup Checklist</a></li><li><a href="/contact">Contact Support</a></li><li><a href="/faqs">FAQs</a></li><li><a href="/privacy">Privacy Policy</a></li><li><a href="/terms">Terms &amp; Conditions</a></li></ul></div><p>Merchant Haus – Payments made simple.</p></footer></body>
+</html>
