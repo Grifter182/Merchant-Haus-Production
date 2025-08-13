@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MerchantHaus – Terms & Conditions</title>
+
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: { sans: ['Montserrat', 'ui-sans-serif', 'system-ui'] },
+          colors: {
+            brand: { 600:'#dc2743', 700:'#c21b35', 400:'#ef3c5b' }
+          },
+          keyframes: {
+            shimmer: { '0%': { backgroundPosition: '200% 0' }, '100%': { backgroundPosition: '-200% 0' } },
+            floaty: { '0%,100%': { transform: 'translateY(0)' }, '50%': { transform: 'translateY(-6px)' } }
+          },
+          animation: { shimmer: 'shimmer 10s linear infinite', floaty: 'floaty 6s ease-in-out infinite' }
+        }
+      }
+    }
+  </script>
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <style>
+    :root { color-scheme: light dark; }
+    body { font-family: 'Montserrat', sans-serif; }
+    .grad-text { background: linear-gradient(90deg,#c21b35,#ef3c5b,#ff9aa8,#ef3c5b,#c21b35); -webkit-background-clip:text; background-clip:text; color: transparent; background-size: 300% 100%; animation: shimmer 12s linear infinite; }
+    .field:focus { outline: none; box-shadow: 0 0 0 3px rgba(239,60,91,.35); }
+    @keyframes shimmer {
+      0% { background-position: 200% 0; }
+      100% { background-position: -200% 0; }
+    }
+  </style>
+  <link rel="icon" type="image/x-icon" href="shield.ico">
+  <link rel="shortcut icon" type="image/x-icon" href="shield.ico">
+  <link rel="apple-touch-icon" href="shield.png">
+</head>
+
+<body class="bg-white text-slate-900 dark:bg-slate-950 dark:text-slate-100">
+  <!-- Header -->
+  <header class="sticky top-0 z-50 bg-white/75 dark:bg-slate-950/60 backdrop-blur border-b border-slate-200/70 dark:border-slate-800">
+    <div class="max-w-7xl mx-auto px-4 py-4 flex items-center justify-between">
+      <a href="index.html" class="flex items-center gap-2 group">
+        <img src="shield.png" alt="MerchantHaus Logo" class="h-10 w-10">
+        <span class="font-extrabold tracking-wide grad-text">MerchantHaus</span>
+      </a>
+      <nav class="hidden md:flex items-center gap-7 text-sm">
+        <a href="index.html#payments" class="hover:text-brand-600">Payment Services</a>
+        <a href="index.html#pricing" class="hover:text-brand-600">Plans & Pricing</a>
+        <a href="#" class="js-cta hover:text-brand-600">Contact Us</a>
+        <a href="compliance.html" class="hover:text-brand-600">Setup Checklist</a>
+      </nav>
+      <div class="flex items-center gap-2">
+        <button id="themeToggle" class="p-2 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800" aria-label="Toggle theme"><i data-lucide="moon" class="h-5 w-5"></i></button>
+        <button class="js-cta px-4 py-2 text-sm font-semibold rounded-lg bg-slate-800 text-white hover:bg-slate-950 dark:bg-slate-200 dark:text-slate-900 dark:hover:bg-white">Request a Demo</button>
+        <button class="js-cta px-4 py-2 text-sm font-semibold rounded-lg bg-brand-600 text-white hover:bg-brand-700">Get Started</button>
+        <button id="openMobile" class="md:hidden p-2 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800" aria-label="Open menu"><i data-lucide="menu" class="h-5 w-5"></i></button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Mobile Sheet -->
+  <div id="mobileSheet" class="fixed inset-0 z-50 hidden">
+    <div class="absolute inset-0 bg-black/50" data-close></div>
+    <div class="ml-auto h-full w-[88%] max-w-sm bg-white dark:bg-slate-900 p-6 shadow-2xl">
+      <div class="flex items-center justify-between">
+        <span class="font-extrabold">Menu</span>
+        <button class="p-2 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800" data-close aria-label="Close menu"><i data-lucide="x" class="h-5 w-5"></i></button>
+      </div>
+      <nav class="mt-6 grid gap-4 text-sm">
+        <a href="index.html#payments" data-close class="hover:text-brand-600">Payment Services</a>
+        <a href="index.html#pricing" data-close class="hover:text-brand-600">Plans & Pricing</a>
+        <a href="#" data-close class="js-cta hover:text-brand-600">Contact Us</a>
+        <a href="compliance.html" data-close class="hover:text-brand-600">Setup Checklist</a>
+        <a href="privacy_policy.html" data-close class="hover:text-brand-600">Privacy Policy</a>
+        <a href="terms.html" data-close class="text-brand-600 font-bold">Terms & Conditions</a>
+      </nav>
+      <div class="mt-6 flex flex-col gap-3">
+        <button class="js-cta w-full px-4 py-2 rounded-lg bg-slate-100 dark:bg-slate-800 font-semibold">Request a Demo</button>
+        <button class="js-cta w-full px-4 py-2 rounded-lg bg-brand-600 text-white font-semibold hover:bg-brand-700">Get Started</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Main Content -->
+  <main class="min-h-screen pt-16 pb-16">
+    <div class="max-w-3xl mx-auto px-4 py-12">
+        <h1 class="text-4xl font-extrabold text-slate-900 dark:text-slate-100 mb-4 text-center">Terms and Conditions</h1>
+        <p class="text-slate-600 dark:text-slate-300 mb-8 text-center">
+            Effective Date: August 13, 2025
+        </p>
+
+        <div class="space-y-8">
+            <p class="text-slate-600 dark:text-slate-300 leading-relaxed">These Terms and Conditions (“Agreement”) govern your use of payment processing services provided by Merchant Haus of Merchant Haus LLC (“Merchant Haus,” “we,” “us,” or “our”). By registering for, accessing, or using our services, you agree to comply with and be bound by these Terms.</p>
+            <p class="text-slate-600 dark:text-slate-300 leading-relaxed">Merchant Haus operates as an Independent Sales Organization (ISO) under a white-label agreement with Network Merchants LLC (NMI). NMI provides the gateway technology infrastructure; Merchant Haus is solely responsible for onboarding, support, and merchant relationships.</p>
+
+            <div>
+                <h2 class="text-2xl font-bold text-slate-900 dark:text-slate-100 mb-4 border-b pb-2 border-slate-200 dark:border-slate-800">1. Scope of Services</h2>
+                <p class="text-slate-600 dark:text-slate-300 leading-relaxed">Merchant Haus provides merchants with access to:</p>
+                <ul class="list-disc list-inside text-slate-600 dark:text-slate-300 leading-relaxed space-y-2 mt-4">
+                    <li>Card and digital payment processing via integrated processor connections.</li>
+                    <li>Fund settlement via our sponsoring bank(s) and acquiring partners.</li>
+                    <li>Reporting dashboards and reconciliation tools.</li>
+                    <li>Secure data storage via tokenization and PCI DSS Level 1-compliant infrastructure.</li>
+                    <li>Optional value-add services such as recurring billing, fraud prevention tools, and ACH payment processing.</li>
+                </ul>
+            </div>
+
+            <div>
+                <h2 class="text-2xl font-bold text-slate-900 dark:text-slate-100 mb-4 border-b pb-2 border-slate-200 dark:border-slate-800">2. Fees and Pricing</h2>
+                 <ul class="list-disc list-inside text-slate-600 dark:text-slate-300 leading-relaxed space-y-2">
+                    <li>All fees, including transaction rates, monthly service fees, PCI compliance fees, chargeback fees, and early termination fees, will be disclosed during onboarding or by written notice.</li>
+                    <li>Pricing may be updated with at least 30 days’ written notice.</li>
+                    <li>All amounts are exclusive of taxes unless expressly stated otherwise.</li>
+                    <li>Any third-party pass-through fees (e.g., network fees, regulatory fees) may be billed directly to you.</li>
+                </ul>
+            </div>
+
+            <div>
+                <h2 class="text-2xl font-bold text-slate-900 dark:text-slate-100 mb-4 border-b pb-2 border-slate-200 dark:border-slate-800">3. Merchant Responsibilities</h2>
+                <p class="text-slate-600 dark:text-slate-300 leading-relaxed">You agree to:</p>
+                 <ul class="list-disc list-inside text-slate-600 dark:text-slate-300 leading-relaxed space-y-2 mt-4">
+                    <li>Process only lawful, authorized transactions.</li>
+                    <li>Maintain full compliance with the Payment Card Industry Data Security Standard (PCI DSS) and applicable card network rules.</li>
+                    <li>Keep all business, banking, and contact details current and accurate.</li>
+                    <li>Review transaction and settlement reports promptly and notify us within 30 days of any discrepancies.</li>
+                    <li>Adhere to our Acceptable Use Policy, which prohibits processing for certain restricted categories (including but not limited to: gambling, CBD, adult content, and high-risk activities — see prohibited MCC list provided during onboarding).</li>
+                    <li>Cooperate fully with fraud, dispute, and regulatory investigations.</li>
+                </ul>
+            </div>
+            
+            <div>
+                <h2 class="text-2xl font-bold text-slate-900 dark:text-slate-100 mb-4 border-b pb-2 border-slate-200 dark:border-slate-800">4. Data Security & Privacy</h2>
+                 <ul class="list-disc list-inside text-slate-600 dark:text-slate-300 leading-relaxed space-y-2">
+                    <li>Merchant Haus and NMI use industry-standard encryption, tokenization, and security monitoring.</li>
+                    <li>You are responsible for the security of systems under your control.</li>
+                    <li>Our Privacy Policy governs data collection, usage, and sharing.</li>
+                </ul>
+            </div>
+
+            <div>
+                <h2 class="text-2xl font-bold text-slate-900 dark:text-slate-100 mb-4 border-b pb-2 border-slate-200 dark:border-slate-800">5. Chargebacks, Disputes & Retrieval Requests</h2>
+                 <ul class="list-disc list-inside text-slate-600 dark:text-slate-300 leading-relaxed space-y-2">
+                    <li>You are responsible for handling customer disputes.</li>
+                    <li>Merchant Haus may debit your account for chargebacks, related fees, or penalties assessed by card networks or processors.</li>
+                    <li>Failure to respond to a chargeback notification within 7 calendar days may result in automatic loss of the dispute.</li>
+                </ul>
+            </div>
+
+            <div>
+                <h2 class="text-2xl font-bold text-slate-900 dark:text-slate-100 mb-4 border-b pb-2 border-slate-200 dark:border-slate-800">6. Acceptable Use & Prohibited Transactions</h2>
+                 <ul class="list-disc list-inside text-slate-600 dark:text-slate-300 leading-relaxed space-y-2">
+                    <li>Prohibited categories include: illegal goods/services, unlicensed gambling, firearms, certain nutraceuticals, adult content, unapproved cryptocurrency sales, and other activities listed in our Acceptable Use Policy.</li>
+                    <li>Processing prohibited transactions may result in immediate suspension or termination.</li>
+                </ul>
+            </div>
+            
+            <div>
+                <h2 class="text-2xl font-bold text-slate-900 dark:text-slate-100 mb-4 border-b pb-2 border-slate-200 dark:border-slate-800">7. Term & Termination</h2>
+                 <ul class="list-disc list-inside text-slate-600 dark:text-slate-300 leading-relaxed space-y-2">
+                    <li>Either party may terminate with 60 days’ written notice, or immediately for cause (e.g., breach, suspected fraud, or regulatory violation).</li>
+                    <li>Upon termination:
+                        <ul class="list-disc list-inside ml-6">
+                            <li>All outstanding fees are immediately due.</li>
+                            <li>Access to the payment gateway and related services will cease.</li>
+                            <li>Records may be retained as required by law or card network rules.</li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+
+            <div>
+                <h2 class="text-2xl font-bold text-slate-900 dark:text-slate-100 mb-4 border-b pb-2 border-slate-200 dark:border-slate-800">8. Contact Us</h2>
+                <p class="text-slate-600 dark:text-slate-300 leading-relaxed">
+                    For questions or concerns, contact us at:
+                </p>
+                <p class="text-slate-600 dark:text-slate-300 leading-relaxed mt-2">
+                    Email: <a href="mailto:support@merchanthaus.io" class="text-brand-600 hover:underline">support@merchanthaus.io</a><br>
+                    Phone: +27 [Insert Number]<br>
+                    Address: [Insert Address]
+                </p>
+            </div>
+        </div>
+        <div class="mt-12 text-center">
+            <a href="index.html" class="px-5 py-3 rounded-xl border border-slate-300 dark:border-slate-700 text-sm font-medium hover:bg-slate-50 dark:hover:bg-slate-900">Back to Home</a>
+        </div>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="border-t border-slate-200 dark:border-slate-800 py-10">
+    <div class="max-w-7xl mx-auto px-4 grid sm:grid-cols-2 lg:grid-cols-4 gap-8 text-sm">
+      <div class="space-y-3">
+        <a href="index.html" class="flex items-center gap-2">
+            <img src="shield.png" alt="MerchantHaus Logo" class="h-9 w-9">
+            <span class="font-extrabold tracking-wide grad-text">MerchantHaus</span>
+        </a>
+        <p class="text-gray-600 dark:text-slate-300">Merchant Haus – Payments made simple.</p>
+      </div>
+      <nav class="space-y-2">
+        <h3 class="font-semibold">Product</h3>
+        <a href="index.html#payments" class="block hover:underline">Payment Services</a>
+        <a href="index.html#pricing" class="block hover:underline">Plans & Pricing</a>
+        <a href="compliance.html" class="block hover:underline">Setup Checklist</a>
+      </nav>
+      <nav class="space-y-2">
+        <h3 class="font-semibold">Support</h3>
+        <a href="#" class="js-cta block hover:underline">Contact Support</a>
+        <a href="index.html#faq" class="block hover:underline">FAQs</a>
+      </nav>
+      <nav class="space-y-2">
+        <h3 class="font-semibold">Legal</h3>
+        <a href="privacy_policy.html" class="block hover:underline">Privacy Policy</a>
+        <a href="terms.html" class="block hover:underline">Terms & Conditions</a>
+      </nav>
+    </div>
+    <div class="text-center text-xs text-gray-500 pt-8 mt-8 border-t border-slate-200 dark:border-slate-800">© <span id="year"></span> Merchant Haus. All rights reserved.</div>
+  </footer>
+
+  <!-- Booking Modal (shared across site) -->
+  <div id="book-modal" class="fixed inset-0 z-[70] hidden">
+    <div class="absolute inset-0 bg-black/60" data-close></div>
+    <div class="mx-auto mt-[10vh] w-[min(560px,92vw)] rounded-2xl bg-white dark:bg-slate-900 p-6 border border-slate-200 dark:border-slate-800 shadow-2xl">
+      <div class="flex items-center justify-between">
+        <h3 class="text-xl font-extrabold">Book a 20-minute consultation</h3>
+        <button class="p-2 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800" data-close aria-label="Close">
+          <i data-lucide="x" class="h-5 w-5"></i>
+        </button>
+      </div>
+      <p class="mt-1 text-sm text-slate-600 dark:text-slate-300">Tell us a bit about you and we’ll send a private booking link immediately.</p>
+
+      <form id="book-form" class="mt-4 grid gap-3">
+        <input name="name" placeholder="Your name" class="field rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-950 px-3 py-2" required>
+        <input name="email" type="email" placeholder="Work email" class="field rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-950 px-3 py-2" required>
+        <input name="company" placeholder="Company" class="field rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-950 px-3 py-2">
+        <input name="phone" placeholder="Phone (optional)" class="field rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-950 px-3 py-2">
+        <textarea name="notes" placeholder="Anything specific you want to cover?" rows="3" class="field rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-950 px-3 py-2"></textarea>
+        <input type="text" name="hp" class="hidden" tabindex="-1" autocomplete="off">
+        <button class="rounded-lg bg-brand-600 text-white font-semibold px-4 py-2 hover:bg-brand-700" type="submit">Send me the booking link</button>
+        <p id="book-out" class="text-xs text-slate-500"></p>
+      </form>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script>
+    // Set current year in footer
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Icons
+    document.addEventListener('DOMContentLoaded', () => { if (window.lucide) lucide.createIcons(); });
+
+    // Theme toggle with preference memory
+    const themeToggle = document.getElementById('themeToggle');
+    function applyTheme() {
+      const saved = localStorage.getItem('theme');
+      const systemDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      const isDark = saved ? saved === 'dark' : systemDark;
+      document.documentElement.classList.toggle('dark', isDark);
+      if (window.lucide) themeToggle.innerHTML = isDark ? '<i data-lucide="sun" class="h-5 w-5"></i>' : '<i data-lucide="moon" class="h-5 w-5"></i>';
+      if (window.lucide) lucide.createIcons();
+    }
+    applyTheme();
+    themeToggle.addEventListener('click', () => {
+      const isDark = document.documentElement.classList.toggle('dark');
+      localStorage.setItem('theme', isDark ? 'dark' : 'light');
+      applyTheme();
+    });
+
+    // Mobile sheet show/hide
+    const mobile = document.getElementById('mobileSheet');
+    document.getElementById('openMobile').addEventListener('click', () => mobile.classList.remove('hidden'));
+    mobile.addEventListener('click', (e) => { if (e.target.dataset.close !== undefined) mobile.classList.add('hidden'); });
+
+    // Modal handlers
+    const bookModal = document.getElementById('book-modal');
+    const bookForm = document.getElementById('book-form');
+    const bookOut = document.getElementById('book-out');
+
+    document.querySelectorAll('.js-cta').forEach(el => {
+      el.addEventListener('click', (e) => {
+        e.preventDefault();
+        bookModal.classList.remove('hidden');
+      });
+    });
+
+    bookModal.addEventListener('click', (e) => {
+      if (e.target.dataset.close !== undefined) {
+        bookModal.classList.add('hidden');
+      }
+    });
+
+    bookForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      // Honeypot check
+      if (bookForm.hp.value) return;
+
+      bookOut.textContent = 'Sending...';
+      // In a real app, you would send this data to a server or service
+      setTimeout(() => {
+        bookOut.textContent = 'Success! Check your email for the booking link.';
+        bookForm.reset();
+      }, 1000);
+    });
+  </script>
+</body>
+</html>
