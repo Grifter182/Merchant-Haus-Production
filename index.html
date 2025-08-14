@@ -34,11 +34,25 @@
   <style>
     :root { color-scheme: light dark; }
     body { font-family: 'Montserrat', sans-serif; }
-    .grad-text { background: linear-gradient(90deg,#c21b35,#ef3c5b,#ff9aa8,#ef3c5b,#c21b35); -webkit-background-clip:text; background-clip:text; color: transparent; background-size: 300% 100%; animation: shimmer 12s linear infinite; }
+    .grad-text { background: linear-gradient(90deg, #c21b35, #ef3c5b, #FFD700, #39FF14, #08D9D6, #A020F0, #CC5500, #ef3c5b, #c21b35); -webkit-background-clip:text; background-clip:text; color: transparent; background-size: 600% 600%; animation: shimmer 15s linear infinite; }
+    .grad-text-static { background: linear-gradient(90deg, #c21b35, #ef3c5b, #ff9aa8, #ef3c5b, #c21b35); -webkit-background-clip:text; background-clip:text; color: transparent; background-size: 300% 100%; }
     .field:focus { outline: none; box-shadow: 0 0 0 3px rgba(239,60,91,.35); }
     @keyframes shimmer {
-      0% { background-position: 200% 0; }
-      100% { background-position: -200% 0; }
+      0%{background-position:0% 50%}
+      50%{background-position:100% 50%}
+      100%{background-position:0% 50%}
+    }
+    .cursor {
+      display: inline-block;
+      width: 3px;
+      height: 1em;
+      background-color: #dc2743;
+      animation: blink-caret .75s step-end infinite;
+      vertical-align: bottom;
+    }
+    @keyframes blink-caret {
+      from, to { background-color: transparent; }
+      50% { background-color: #dc2743; }
     }
   </style>
   <link rel="apple-touch-icon" sizes="180x180" href="shield/apple-touch-icon.png">
@@ -53,17 +67,20 @@
     <div class="max-w-7xl mx-auto px-4 py-4 flex items-center justify-between">
       <a href="#" class="flex items-center gap-3 group">
         <img src="shield/shield.png" alt="MerchantHaus Logo" class="h-10 w-10">
-        <span class="text-xl font-extrabold tracking-wide grad-text">MerchantHaus</span>
+        <div>
+            <div id="logo-container" class="text-3xl font-extrabold tracking-wide grad-text"></div>
+            <p id="animated-tagline" class="text-xs text-slate-500 dark:text-slate-400 h-4"></p>
+        </div>
       </a>
       <nav class="hidden md:flex items-center gap-7 text-sm">
         <a href="#payments" class="hover:text-brand-600">Payment Services</a>
         <a href="#pricing" class="hover:text-brand-600">Plans & Pricing</a>
-        <a href="#contact" class="hover:text-brand-600">Contact Us</a>
+        <a href="#" class="js-cta hover:text-brand-600">Contact Us</a>
         <a href="compliance.html" class="hover:text-brand-600">Setup Checklist</a>
       </nav>
       <div class="flex items-center gap-2">
         <button id="themeToggle" class="p-2 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800" aria-label="Toggle theme"><i data-lucide="moon" class="h-5 w-5"></i></button>
-        <button class="js-cta px-4 py-2 text-sm font-semibold rounded-lg bg-slate-800 text-white hover:bg-slate-950 dark:bg-slate-200 dark:text-slate-900 dark:hover:bg-white">Request a Demo</button>
+        <button class="js-cta px-4 py-2 text-sm font-semibold rounded-lg bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700">Request a Demo</button>
         <button class="js-cta px-4 py-2 text-sm font-semibold rounded-lg bg-brand-600 text-white hover:bg-brand-700">Get Started</button>
         <button id="openMobile" class="md:hidden p-2 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800" aria-label="Open menu"><i data-lucide="menu" class="h-5 w-5"></i></button>
       </div>
@@ -81,7 +98,7 @@
       <nav class="mt-6 grid gap-4 text-sm">
         <a href="#payments" data-close class="hover:text-brand-600">Payment Services</a>
         <a href="#pricing" data-close class="hover:text-brand-600">Plans & Pricing</a>
-        <a href="#contact" data-close class="hover:text-brand-600">Contact Us</a>
+        <a href="#" data-close class="js-cta hover:text-brand-600">Contact Us</a>
         <a href="compliance.html" data-close class="hover:text-brand-600">Setup Checklist</a>
         <a href="privacy_policy.html" data-close class="hover:text-brand-600">Privacy Policy</a>
         <a href="terms.html" data-close class="hover:text-brand-600">Terms & Conditions</a>
@@ -103,7 +120,7 @@
     <div class="max-w-7xl mx-auto px-4 pt-16 md:pt-24 pb-14">
       <div class="grid md:grid-cols-2 gap-10 items-center">
         <div class="space-y-6">
-          <h1 class="text-4xl sm:text-5xl font-bold tracking-tight">Accept Payments Anywhere—<span class="grad-text">Fast, Secure, and Flexible.</span></h1>
+          <h1 class="text-4xl sm:text-5xl font-bold tracking-tight">Accept Payments Anywhere—<span class="grad-text-static">Fast, Secure, and Flexible.</span></h1>
           <p class="text-lg text-slate-600 dark:text-slate-300">Easily set up your business payment profile and start accepting cards, ACH, and payment links—whether online or in-store.</p>
           <div class="flex flex-col sm:flex-row gap-3">
             <button class="js-cta px-5 py-3 rounded-xl bg-brand-600 text-white text-sm font-medium hover:bg-brand-700">Get Started</button>
@@ -180,7 +197,7 @@
       <div class="space-y-3">
         <a href="#" class="flex items-center gap-3">
             <img src="shield/shield.png" alt="MerchantHaus Logo" class="h-9 w-9">
-            <span class="text-lg font-extrabold tracking-wide grad-text">MerchantHaus</span>
+            <span class="text-2xl font-extrabold tracking-wide grad-text">MerchantHaus</span>
         </a>
         <p class="text-gray-600 dark:text-slate-300">Merchant Haus – Payments made simple.</p>
       </div>
@@ -192,7 +209,7 @@
       </nav>
       <nav class="space-y-2">
         <h3 class="font-semibold">Support</h3>
-        <a href="#contact" class="block hover:underline">Contact Support</a>
+        <a href="#" class="js-cta block hover:underline">Contact Support</a>
         <a href="#faq" class="block hover:underline">FAQs</a>
       </nav>
       <nav class="space-y-2">
@@ -299,7 +316,7 @@
         const question = faqQuestionInput.value.trim();
         if (!question) return;
 
-        faqAnswerContainer.classList.remove('hidden');
+        faqAnswerContainer.classList.remove('hidden');a
         faqAnswerContainer.textContent = 'Thinking...';
 
         const prompt = `You are a helpful assistant for MerchantHaus, a payment processing company. A user has a question: "${question}". Based on the information available on the MerchantHaus website, provide a clear and concise answer.`;
@@ -335,6 +352,36 @@
             console.error('Error fetching AI response:', error);
             faqAnswerContainer.textContent = 'Sorry, something went wrong. Please try again later.';
         }
+    });
+
+    // Header logo and slogan animation
+    const logoContainer = document.getElementById('logo-container');
+    const animatedTagline = document.getElementById('animated-tagline');
+    const logoText = "MerchantHaus";
+    const taglineText = "safe . smart . secure";
+    const typingSpeed = 100;
+
+    function typeWriter(element, text, speed, callback) {
+        let i = 0;
+        element.innerHTML = '';
+        const typingInterval = setInterval(() => {
+            if (i < text.length) {
+                element.innerHTML = text.substring(0, i + 1) + '<span class="cursor"></span>';
+                i++;
+            } else {
+                clearInterval(typingInterval);
+                element.innerHTML = text;
+                if (callback) callback();
+            }
+        }, speed);
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+        typeWriter(logoContainer, logoText, 120, () => {
+            setTimeout(() => {
+                typeWriter(animatedTagline, taglineText, 100);
+            }, 500);
+        });
     });
   </script>
 </body>
