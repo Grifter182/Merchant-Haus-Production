@@ -5,11 +5,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>MerchantHaus – ISO Solutions for U.S. Retail</title>
 
-  
+  <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
   
+  <!-- Tailwind CSS -->
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
     tailwind.config = {
@@ -29,8 +30,11 @@
       }
     }
   </script>
+  
+  <!-- Lucide Icons -->
   <script src="https://unpkg.com/lucide@latest"></script>
 
+  <!-- Custom Styles -->
   <style>
     :root { color-scheme: light dark; }
     body { font-family: 'Montserrat', sans-serif; }
@@ -54,11 +58,28 @@
       from, to { background-color: transparent; }
       50% { background-color: #dc2743; }
     }
+    .loader {
+        width: 16px;
+        height: 16px;
+        border: 2px solid #FFF;
+        border-bottom-color: transparent;
+        border-radius: 50%;
+        display: inline-block;
+        box-sizing: border-box;
+        animation: rotation 1s linear infinite;
+        vertical-align: middle;
+        margin-right: 8px;
+    }
+    @keyframes rotation {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+    }
   </style>
-  <link rel="apple-touch-icon" sizes="180x180" href="shield/apple-touch-icon.png">
-  <link rel="icon" type="image/png" sizes="32x32" href="shield/favicon-32x32.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="shield/favicon-16x16.png">
-  <link rel="manifest" href="shield/site.webmanifest">
+
+  <!-- Favicons (using placeholders) -->
+  <link rel="icon" href="https://placehold.co/32x32/dc2743/FFFFFF?text=MH">
+  <link rel="apple-touch-icon" href="https://placehold.co/180x180/dc2743/FFFFFF?text=MH">
+
 </head>
 
 <body class="bg-white text-slate-900 dark:bg-slate-950 dark:text-slate-100">
@@ -66,7 +87,7 @@
   <header class="sticky top-0 z-50 bg-white/75 dark:bg-slate-950/60 backdrop-blur border-b border-slate-200/70 dark:border-slate-800">
     <div class="max-w-7xl mx-auto px-4 py-4 flex items-center justify-between">
       <a href="#" class="flex items-center gap-3 group">
-        <img src="shield/shield.png" alt="MerchantHaus Logo" class="h-10 w-10">
+        <img src="https://placehold.co/64x64/dc2743/FFFFFF?text=MH" alt="MerchantHaus Logo" class="h-10 w-10 rounded-md">
         <div>
             <div id="logo-container" class="text-3xl font-extrabold tracking-wide grad-text"></div>
             <p id="animated-tagline" class="text-xs text-slate-500 dark:text-slate-400 h-4"></p>
@@ -74,12 +95,14 @@
       </a>
       <nav class="hidden md:flex items-center gap-7 text-sm">
         <a href="#payments" class="hover:text-brand-600">Payment Services</a>
-        <a href="#pricing" class="hover:text-brand-600">Plans & Pricing</a>
+        <a href="#integrations" class="hover:text-brand-600">Integrations</a>
+        <a href="#checklist" class="hover:text-brand-600">Setup Checklist</a>
+        <a href="#ai-faq" class="hover:text-brand-600">FAQ</a>
         <a href="#" class="js-cta hover:text-brand-600">Contact Us</a>
-        <a href="compliance.html" class="hover:text-brand-600">Setup Checklist</a>
       </nav>
       <div class="flex items-center gap-2">
         <button id="themeToggle" class="p-2 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800" aria-label="Toggle theme"><i data-lucide="moon" class="h-5 w-5"></i></button>
+        <a href="#" class="px-4 py-2 text-sm font-semibold rounded-lg border border-slate-300 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-900">Login</a>
         <button class="js-cta px-4 py-2 text-sm font-semibold rounded-lg bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700">Request a Demo</button>
         <button class="js-cta px-4 py-2 text-sm font-semibold rounded-lg bg-brand-600 text-white hover:bg-brand-700">Get Started</button>
         <button id="openMobile" class="md:hidden p-2 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800" aria-label="Open menu"><i data-lucide="menu" class="h-5 w-5"></i></button>
@@ -96,12 +119,14 @@
         <button class="p-2 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800" data-close aria-label="Close menu"><i data-lucide="x" class="h-5 w-5"></i></button>
       </div>
       <nav class="mt-6 grid gap-4 text-sm">
+        <a href="#" data-close class="font-semibold hover:text-brand-600 border-b border-slate-200 dark:border-slate-800 pb-3 mb-1">Merchant Login</a>
         <a href="#payments" data-close class="hover:text-brand-600">Payment Services</a>
-        <a href="#pricing" data-close class="hover:text-brand-600">Plans & Pricing</a>
+        <a href="#integrations" data-close class="hover:text-brand-600">Integrations</a>
+        <a href="#checklist" data-close class="hover:text-brand-600">Setup Checklist</a>
+        <a href="#ai-faq" data-close class="hover:text-brand-600">FAQ</a>
         <a href="#" data-close class="js-cta hover:text-brand-600">Contact Us</a>
-        <a href="compliance.html" data-close class="hover:text-brand-600">Setup Checklist</a>
-        <a href="privacy_policy.html" data-close class="hover:text-brand-600">Privacy Policy</a>
-        <a href="terms.html" data-close class="hover:text-brand-600">Terms & Conditions</a>
+        <a href="#" data-close class="hover:text-brand-600">Privacy Policy</a>
+        <a href="#" data-close class="hover:text-brand-600">Terms & Conditions</a>
       </nav>
       <div class="mt-6 flex flex-col gap-3">
         <button class="js-cta w-full px-4 py-2 rounded-lg bg-slate-100 dark:bg-slate-800 font-semibold">Request a Demo</button>
@@ -153,13 +178,32 @@
         <li class="p-4 rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-950"><strong>Bank Payments & ACH Support</strong> – Lower‑cost transfers directly to your account.</li>
         <li class="p-4 rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-950"><strong>Fraud Prevention & Verification Tools</strong> – Built‑in safeguards to keep your business secure.</li>
       </ul>
-      <div class="mt-8 text-center">
-        <a href="#pricing" class="inline-block px-5 py-3 rounded-xl bg-brand-600 text-white text-sm font-medium hover:bg-brand-700">See Pricing</a>
+    </div>
+  </section>
+
+  <!-- Integrations Section -->
+  <section id="integrations" class="py-16 md:py-24">
+    <div class="max-w-5xl mx-auto px-4 text-center">
+      <h2 class="text-3xl font-bold mb-3">Integrate with Your Favorite Tools</h2>
+      <p class="text-gray-600 dark:text-slate-300 mb-10">Connect MerchantHaus with the platforms you already use to streamline your workflow.</p>
+      <div class="flex justify-center items-center gap-8 md:gap-16">
+        <!-- Shopify Logo -->
+        <a href="#" class="group">
+          <img src="https://placehold.co/240x80/f0f0f0/95BF47?text=shopify.png" alt="Shopify Logo" class="h-12 md:h-14 grayscale opacity-70 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-300">
+        </a>
+        <!-- GoHighLevel Logo -->
+        <a href="#" class="group">
+          <!-- Light theme logo -->
+          <img src="https://placehold.co/240x80/ffffff/1a1a1a?text=gohighlevellight.png" alt="GoHighLevel Logo" class="h-12 md:h-14 grayscale opacity-70 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-300 block dark:hidden">
+          <!-- Dark theme logo -->
+          <img src="https://placehold.co/240x80/1a1a1a/ffffff?text=gohighleveldark.png" alt="GoHighLevel Logo" class="h-12 md:h-14 grayscale opacity-70 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-300 hidden dark:block">
+        </a>
       </div>
-    </section>
+    </div>
+  </section>
 
     <!-- Setup Checklist -->
-    <section id="checklist" class="py-16 md:py-24">
+    <section id="checklist" class="py-16 md:py-24 bg-slate-50 dark:bg-slate-900/40 border-y border-slate-200/70 dark:border-slate-800">
         <div class="max-w-3xl mx-auto px-4">
             <h2 class="text-3xl font-bold mb-3 text-center">Setup Checklist: What You’ll Need to Begin</h2>
             <p class="text-gray-600 dark:text-slate-300 mb-6 text-center">Here’s everything we’ll ask for during setup—business details, security info, documentation. We’ll guide you step‑by‑step.</p>
@@ -177,14 +221,14 @@
     </section>
     
     <!-- AI-Powered FAQ Section -->
-    <section id="ai-faq" class="py-16 md:py-24 bg-slate-50 dark:bg-slate-900/40 border-y border-slate-200/70 dark:border-slate-800">
+    <section id="ai-faq" class="py-16 md:py-24">
         <div class="max-w-3xl mx-auto px-4">
             <h2 class="text-3xl font-bold mb-3 text-center">✨ AI-Powered FAQ</h2>
             <p class="text-gray-600 dark:text-slate-300 mb-8 text-center">Have a question about our services? Ask our AI assistant for an instant answer.</p>
             
             <div class="flex gap-2">
                 <input id="faq-question" type="text" placeholder="e.g., What are your transaction fees?" class="field w-full rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-900 p-3">
-                <button id="ask-faq" class="px-5 py-3 rounded-lg bg-brand-600 text-white font-semibold hover:bg-brand-700">Ask</button>
+                <button id="ask-faq" class="px-5 py-3 rounded-lg bg-brand-600 text-white font-semibold hover:bg-brand-700 w-28 text-center">Ask</button>
             </div>
 
             <div id="faq-answer" class="mt-6 p-4 rounded-lg bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 hidden"></div>
@@ -196,7 +240,7 @@
     <div class="max-w-7xl mx-auto px-4 grid sm:grid-cols-2 lg:grid-cols-4 gap-8 text-sm">
       <div class="space-y-3">
         <a href="#" class="flex items-center gap-3">
-            <img src="shield/shield.png" alt="MerchantHaus Logo" class="h-9 w-9">
+            <img src="https://placehold.co/64x64/dc2743/FFFFFF?text=MH" alt="MerchantHaus Logo" class="h-9 w-9 rounded-md">
             <span class="text-2xl font-extrabold tracking-wide grad-text">MerchantHaus</span>
         </a>
         <p class="text-gray-600 dark:text-slate-300">Merchant Haus – Payments made simple.</p>
@@ -204,18 +248,19 @@
       <nav class="space-y-2">
         <h3 class="font-semibold">Product</h3>
         <a href="#payments" class="block hover:underline">Payment Services</a>
-        <a href="#pricing" class="block hover:underline">Plans & Pricing</a>
-        <a href="compliance.html" class="block hover:underline">Setup Checklist</a>
+        <a href="#integrations" class="block hover:underline">Integrations</a>
+        <a href="#checklist" class="block hover:underline">Setup Checklist</a>
+        <a href="#ai-faq" class="block hover:underline">FAQ</a>
       </nav>
       <nav class="space-y-2">
         <h3 class="font-semibold">Support</h3>
         <a href="#" class="js-cta block hover:underline">Contact Support</a>
-        <a href="#faq" class="block hover:underline">FAQs</a>
+        <a href="#ai-faq" class="block hover:underline">FAQs</a>
       </nav>
       <nav class="space-y-2">
         <h3 class="font-semibold">Legal</h3>
-        <a href="privacy_policy.html" class="block hover:underline">Privacy Policy</a>
-        <a href="terms.html" class="block hover:underline">Terms & Conditions</a>
+        <a href="#" class="block hover:underline">Privacy Policy</a>
+        <a href="#" class="block hover:underline">Terms & Conditions</a>
       </nav>
     </div>
     <div class="text-center text-xs text-gray-500 pt-8 mt-8 border-t border-slate-200 dark:border-slate-800">© <span id="year"></span> Merchant Haus. All rights reserved.</div>
@@ -248,6 +293,8 @@
 
   <!-- Scripts -->
   <script>
+    // --- CORE UI & EVENT LISTENERS ---
+
     // Set current year in footer
     document.getElementById('year').textContent = new Date().getFullYear();
 
@@ -261,8 +308,10 @@
       const systemDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
       const isDark = saved ? saved === 'dark' : systemDark;
       document.documentElement.classList.toggle('dark', isDark);
-      if (window.lucide) themeToggle.innerHTML = isDark ? '<i data-lucide="sun" class="h-5 w-5"></i>' : '<i data-lucide="moon" class="h-5 w-5"></i>';
-      if (window.lucide) lucide.createIcons();
+      if (window.lucide) {
+        themeToggle.innerHTML = isDark ? '<i data-lucide="sun" class="h-5 w-5"></i>' : '<i data-lucide="moon" class="h-5 w-5"></i>';
+        lucide.createIcons();
+      }
     }
     applyTheme();
     themeToggle.addEventListener('click', () => {
@@ -307,23 +356,63 @@
       }, 1000);
     });
 
-    // AI-Powered FAQ
+    // --- HEADER ANIMATION ---
+    const logoContainer = document.getElementById('logo-container');
+    const animatedTagline = document.getElementById('animated-tagline');
+    const logoText = "MerchantHaus";
+    const taglineText = "safe . smart . secure";
+    
+    function typeWriter(element, text, speed, callback) {
+        let i = 0;
+        element.innerHTML = '';
+        const typingInterval = setInterval(() => {
+            if (i < text.length) {
+                element.innerHTML = text.substring(0, i + 1) + '<span class="cursor"></span>';
+                i++;
+            } else {
+                clearInterval(typingInterval);
+                element.innerHTML = text; // Remove cursor at the end
+                if (callback) callback();
+            }
+        }, speed);
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+        typeWriter(logoContainer, logoText, 120, () => {
+            setTimeout(() => {
+                typeWriter(animatedTagline, taglineText, 100);
+            }, 500);
+        });
+    });
+
+    // --- AI-POWERED FAQ ---
     const askFaqBtn = document.getElementById('ask-faq');
     const faqQuestionInput = document.getElementById('faq-question');
     const faqAnswerContainer = document.getElementById('faq-answer');
 
-    askFaqBtn.addEventListener('click', async () => {
+    // Function to get the page content for context
+    const getPageContext = () => {
+        let context = "Page Content:\n\n";
+        document.querySelectorAll('h1, h2, h3, p, li').forEach(el => {
+            context += el.textContent.trim() + "\n";
+        });
+        return context;
+    };
+
+    const handleFaqSubmit = async () => {
         const question = faqQuestionInput.value.trim();
         if (!question) return;
 
-        faqAnswerContainer.classList.remove('hidden');a
-        faqAnswerContainer.textContent = 'Thinking...';
+        faqAnswerContainer.classList.remove('hidden');
+        askFaqBtn.disabled = true;
+        askFaqBtn.innerHTML = '<span class="loader"></span>';
+        faqAnswerContainer.innerHTML = 'Thinking...';
 
-        const prompt = `You are a helpful assistant for MerchantHaus, a payment processing company. A user has a question: "${question}". Based on the information available on the MerchantHaus website, provide a clear and concise answer.`;
+        const pageContext = getPageContext();
+        const prompt = `You are a helpful assistant for MerchantHaus, a payment processing company. A user has a question: "${question}". Based *only* on the following context from the MerchantHaus website, provide a clear and concise answer. If the answer is not in the context, say "I'm sorry, I can't find information about that on this page. Please contact support for more details."\n\nContext:\n${pageContext}`;
 
         try {
-            let chatHistory = [];
-            chatHistory.push({ role: "user", parts: [{ text: prompt }] });
+            let chatHistory = [{ role: "user", parts: [{ text: prompt }] }];
             const payload = { contents: chatHistory };
             const apiKey = ""; // API key will be injected in a production environment
             const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-05-20:generateContent?key=${apiKey}`;
@@ -344,45 +433,33 @@
                 result.candidates[0].content && result.candidates[0].content.parts &&
                 result.candidates[0].content.parts.length > 0) {
                 const text = result.candidates[0].content.parts[0].text;
-                faqAnswerContainer.textContent = text;
+                let html = text.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+                html = html.replace(/^\* (.*$)/gm, '<li>$1</li>');
+                html = html.replace(/<\/li><li>/g, '</li><li>');
+                if (html.includes('<li>')) {
+                    html = `<ul class="list-disc pl-5 space-y-2">${html}</ul>`;
+                }
+                faqAnswerContainer.innerHTML = html;
+
             } else {
                 faqAnswerContainer.textContent = 'Sorry, I could not find an answer to your question.';
             }
         } catch (error) {
             console.error('Error fetching AI response:', error);
             faqAnswerContainer.textContent = 'Sorry, something went wrong. Please try again later.';
+        } finally {
+            askFaqBtn.disabled = false;
+            askFaqBtn.innerHTML = 'Ask';
+        }
+    };
+
+    askFaqBtn.addEventListener('click', handleFaqSubmit);
+    faqQuestionInput.addEventListener('keypress', (e) => {
+        if (e.key === 'Enter') {
+            handleFaqSubmit();
         }
     });
 
-    // Header logo and slogan animation
-    const logoContainer = document.getElementById('logo-container');
-    const animatedTagline = document.getElementById('animated-tagline');
-    const logoText = "MerchantHaus";
-    const taglineText = "safe . smart . secure";
-    const typingSpeed = 100;
-
-    function typeWriter(element, text, speed, callback) {
-        let i = 0;
-        element.innerHTML = '';
-        const typingInterval = setInterval(() => {
-            if (i < text.length) {
-                element.innerHTML = text.substring(0, i + 1) + '<span class="cursor"></span>';
-                i++;
-            } else {
-                clearInterval(typingInterval);
-                element.innerHTML = text;
-                if (callback) callback();
-            }
-        }, speed);
-    }
-
-    document.addEventListener('DOMContentLoaded', () => {
-        typeWriter(logoContainer, logoText, 120, () => {
-            setTimeout(() => {
-                typeWriter(animatedTagline, taglineText, 100);
-            }, 500);
-        });
-    });
   </script>
 </body>
 </html>
