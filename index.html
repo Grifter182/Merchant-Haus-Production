@@ -54,7 +54,6 @@
       background-clip:text; 
       color: transparent; 
       background-size: 400% 400%; 
-      animation: shimmer 15s linear infinite; 
     }
     .grad-text-static { background: linear-gradient(90deg, #c21b35, #ef3c5b, #ff9aa8, #ef3c5b, #c21b35); -webkit-background-clip:text; background-clip:text; color: transparent; background-size: 300% 100%; }
     .field:focus { outline: none; box-shadow: 0 0 0 3px rgba(239,60,91,.35); }
@@ -120,7 +119,8 @@
       <a href="#" class="flex items-center gap-3 group">
         <img src="shield/shield.png" alt="MerchantHaus Logo" class="h-10 w-10">
         <div>
-            <div id="logo-container" class="text-xl md:text-2xl font-extrabold tracking-wide grad-text"></div>
+            <!-- Added animate-shimmer class -->
+            <div id="logo-container" class="text-xl md:text-2xl font-extrabold tracking-wide grad-text animate-shimmer"></div>
             <p id="animated-tagline" class="text-xs text-slate-500 dark:text-slate-400 h-4"></p>
         </div>
       </a>
@@ -163,7 +163,8 @@
     <div class="max-w-7xl mx-auto px-4 pt-16 md:pt-24 pb-14">
         <div class="grid md:grid-cols-2 gap-10 items-center">
             <div class="space-y-6 text-center md:text-left">
-                <h1 class="text-4xl sm:text-5xl font-bold tracking-tight">Accept Payments Anywhere—<span class="grad-text-static">Fast, Secure, and Flexible.</span></h1>
+                <!-- Updated Headline -->
+                <h1 class="text-4xl sm:text-5xl font-bold tracking-tight">Payments Everywhere—<span class="grad-text-static">Built for Speed, Security, and Scale.</span></h1>
                 <p class="text-lg text-slate-600 dark:text-slate-300">Easily set up your business payment profile and start accepting cards, ACH, and payment links—whether online or in-store.</p>
             </div>
             <div class="w-full">
@@ -236,7 +237,8 @@
       <div class="space-y-3">
         <a href="#" class="flex items-center gap-3">
             <img src="shield/shield.png" alt="MerchantHaus Logo" class="h-9 w-9">
-            <span class="text-2xl font-extrabold tracking-wide grad-text">MerchantHaus</span>
+            <!-- Added animate-shimmer class -->
+            <span class="text-2xl font-extrabold tracking-wide grad-text animate-shimmer">MerchantHaus</span>
         </a>
         <p class="text-gray-600 dark:text-slate-300">Payments made simple.</p>
       </div>
