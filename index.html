@@ -23,9 +23,8 @@
           },
           keyframes: {
             shimmer: { 
-              '0%, 33%': { backgroundPosition: '100% 50%' }, /* Start and hold red gradient */
-              '50%': { backgroundPosition: '0% 50%' }, /* Cycle through full spectrum */
-              '100%': { backgroundPosition: '-100% 50%' }
+              '0%, 33%': { backgroundPosition: '0% 50%' }, /* Hold on red start for 5s */
+              '100%': { backgroundPosition: '100% 50%' } /* Scroll for 10s */
             },
             floaty: { '0%,100%': { transform: 'translateY(0)' }, '50%': { transform: 'translateY(-6px)' } },
             scroll: { '0%': { transform: 'translateX(0)' }, '100%': { transform: 'translateX(-100%)' } }
@@ -47,13 +46,18 @@
   <style>
     :root { color-scheme: light dark; }
     body { font-family: 'Montserrat', sans-serif; }
-    /* Updated gradient with new red scheme and full spectrum */
+    /* Re-engineered gradient for a seamless loop */
     .grad-text { 
-      background: linear-gradient(90deg, #ef3c5b, #c21b35, #ef3c5b, #c21b35, #FFD700, #39FF14, #08D9D6, #A020F0, #CC5500, #ef3c5b, #c21b35, #ef3c5b); 
+      background: linear-gradient(90deg, 
+        /* Start of Pattern */
+        #ef3c5b, #c21b35, #ef3c5b, #c21b35, #FFD700, #39FF14, #08D9D6, #A020F0, #CC5500,
+        /* Repeat of Pattern for seamless loop */
+        #ef3c5b, #c21b35, #ef3c5b, #c21b35, #FFD700, #39FF14, #08D9D6, #A020F0, #CC5500
+      ); 
       -webkit-background-clip:text; 
       background-clip:text; 
       color: transparent; 
-      background-size: 400% 400%; 
+      background-size: 200% auto; 
     }
     .grad-text-static { background: linear-gradient(90deg, #c21b35, #ef3c5b, #ff9aa8, #ef3c5b, #c21b35); -webkit-background-clip:text; background-clip:text; color: transparent; background-size: 300% 100%; }
     .field:focus { outline: none; box-shadow: 0 0 0 3px rgba(239,60,91,.35); }
