@@ -22,10 +22,19 @@
             brand: { 600:'#dc2743', 700:'#c21b35', 400:'#ef3c5b' }
           },
           keyframes: {
-            shimmer: { '0%': { backgroundPosition: '200% 0' }, '100%': { backgroundPosition: '-200% 0' } },
-            floaty: { '0%,100%': { transform: 'translateY(0)' }, '50%': { transform: 'translateY(-6px)' } }
+            shimmer: { 
+              '0%, 33%': { backgroundPosition: '100% 50%' }, /* Start and hold red gradient */
+              '50%': { backgroundPosition: '0% 50%' }, /* Cycle through full spectrum */
+              '100%': { backgroundPosition: '-100% 50%' }
+            },
+            floaty: { '0%,100%': { transform: 'translateY(0)' }, '50%': { transform: 'translateY(-6px)' } },
+            scroll: { '0%': { transform: 'translateX(0)' }, '100%': { transform: 'translateX(-100%)' } }
           },
-          animation: { shimmer: 'shimmer 10s linear infinite', floaty: 'floaty 6s ease-in-out infinite' }
+          animation: { 
+            shimmer: 'shimmer 15s linear infinite', 
+            floaty: 'floaty 6s ease-in-out infinite',
+            scroll: 'scroll 40s linear infinite'
+          }
         }
       }
     }
@@ -38,14 +47,17 @@
   <style>
     :root { color-scheme: light dark; }
     body { font-family: 'Montserrat', sans-serif; }
-    .grad-text { background: linear-gradient(90deg, #c21b35, #ef3c5b, #FFD700, #39FF14, #08D9D6, #A020F0, #CC5500, #ef3c5b, #c21b35); -webkit-background-clip:text; background-clip:text; color: transparent; background-size: 600% 600%; animation: shimmer 15s linear infinite; }
+    /* Updated gradient with new red scheme and full spectrum */
+    .grad-text { 
+      background: linear-gradient(90deg, #ef3c5b, #c21b35, #ef3c5b, #c21b35, #FFD700, #39FF14, #08D9D6, #A020F0, #CC5500, #ef3c5b, #c21b35, #ef3c5b); 
+      -webkit-background-clip:text; 
+      background-clip:text; 
+      color: transparent; 
+      background-size: 400% 400%; 
+      animation: shimmer 15s linear infinite; 
+    }
     .grad-text-static { background: linear-gradient(90deg, #c21b35, #ef3c5b, #ff9aa8, #ef3c5b, #c21b35); -webkit-background-clip:text; background-clip:text; color: transparent; background-size: 300% 100%; }
     .field:focus { outline: none; box-shadow: 0 0 0 3px rgba(239,60,91,.35); }
-    @keyframes shimmer {
-      0%{background-position:0% 50%}
-      50%{background-position:100% 50%}
-      100%{background-position:0% 50%}
-    }
     .cursor {
       display: inline-block;
       width: 3px;
@@ -74,13 +86,23 @@
         0% { transform: rotate(0deg); }
         100% { transform: rotate(360deg); }
     }
-    /* Style for blending logos with non-transparent backgrounds */
-    .integration-logo-blend {
-        mix-blend-mode: multiply;
+    .panel-overlay, .panel-container { transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
+    
+    .feature-display {
+        display: flex; align-items: center; justify-content: center;
+        min-width: 150px; height: 38px; padding: 0 16px; border-radius: 9999px;
+        background-color: #F3F4F6;
+        color: #111827;
+        font-size: 0.875rem; font-weight: 500; transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
+        opacity: 0; transform: translateX(-50%) translateY(10px); position: absolute; left: 50%; white-space: nowrap;
     }
-    .dark .integration-logo-blend {
-        mix-blend-mode: screen;
+    .dark .feature-display { 
+        background-color: #1f2937;
+        color: #f9fafb;
     }
+    .feature-display.active { opacity: 1; transform: translateX(-50%) translateY(0); }
+    .feature-display.exiting { opacity: 0; transform: translateX(-50%) translateY(-10px); }
+
   </style>
 
   <!-- Favicons -->
@@ -98,51 +120,37 @@
       <a href="#" class="flex items-center gap-3 group">
         <img src="shield/shield.png" alt="MerchantHaus Logo" class="h-10 w-10">
         <div>
-            <!-- Responsive Font Size Added -->
-            <div id="logo-container" class="text-2xl md:text-3xl font-extrabold tracking-wide grad-text"></div>
+            <div id="logo-container" class="text-xl md:text-2xl font-extrabold tracking-wide grad-text"></div>
             <p id="animated-tagline" class="text-xs text-slate-500 dark:text-slate-400 h-4"></p>
         </div>
       </a>
-      <nav class="hidden md:flex items-center gap-7 text-sm">
-        <a href="#payments" class="hover:text-brand-600">Payment Services</a>
-        <a href="#integrations" class="hover:text-brand-600">Integrations</a>
-        <a href="#checklist" class="hover:text-brand-600">Setup Checklist</a>
-        <a href="#ai-faq" class="hover:text-brand-600">FAQ</a>
-        <a href="#" class="js-cta hover:text-brand-600">Contact Us</a>
-      </nav>
       <div class="flex items-center gap-2">
         <button id="themeToggle" class="p-2 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800" aria-label="Toggle theme"><i data-lucide="moon" class="h-5 w-5"></i></button>
-        <a href="#" class="px-4 py-2 text-sm font-semibold rounded-lg border border-slate-300 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-900">Login</a>
-        <button class="js-cta px-4 py-2 text-sm font-semibold rounded-lg bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700">Request a Demo</button>
-        <button class="js-cta px-4 py-2 text-sm font-semibold rounded-lg bg-brand-600 text-white hover:bg-brand-700">Get Started</button>
-        <button id="openMobile" class="md:hidden p-2 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800" aria-label="Open menu"><i data-lucide="menu" class="h-5 w-5"></i></button>
+        <a href="#" class="hidden sm:block px-4 py-2 text-sm font-semibold rounded-lg border border-slate-300 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-900">Login</a>
+        <button class="js-support hidden sm:block px-4 py-2 text-sm font-semibold rounded-lg bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700">Support</button>
+        <button class="js-cta hidden sm:block px-4 py-2 text-sm font-semibold rounded-lg bg-brand-600 text-white hover:bg-brand-700">Get Started</button>
+        <button id="open-menu-btn" class="p-2 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800" aria-label="Open menu"><i data-lucide="menu" class="h-5 w-5"></i></button>
       </div>
     </div>
   </header>
 
-  <!-- Mobile Sheet -->
-  <div id="mobileSheet" class="fixed inset-0 z-50 hidden">
-    <div class="absolute inset-0 bg-black/50" data-close></div>
-    <div class="ml-auto h-full w-[88%] max-w-sm bg-white dark:bg-slate-900 p-6 shadow-2xl">
-      <div class="flex items-center justify-between">
-        <span class="font-extrabold">Menu</span>
-        <button class="p-2 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800" data-close aria-label="Close menu"><i data-lucide="x" class="h-5 w-5"></i></button>
+  <!-- Slide-out Menu -->
+  <div id="menu-panel-overlay" class="panel-overlay fixed inset-0 bg-black/60 z-50 opacity-0 invisible">
+      <div id="menu-panel" class="panel-container fixed top-0 right-0 h-full w-full max-w-xs bg-white dark:bg-slate-900 shadow-2xl transform translate-x-full">
+          <div class="p-6 flex flex-col h-full">
+              <div class="flex justify-between items-center mb-8">
+                  <h2 class="text-2xl font-bold">Menu</h2>
+                  <button id="close-menu-btn" class="p-2 -mr-2 text-slate-600 dark:text-slate-400 hover:text-brand-600 dark:hover:text-brand-400"><i data-lucide="x" class="h-6 w-6"></i></button>
+              </div>
+              <nav class="flex flex-col space-y-4 text-lg font-medium">
+                  <a href="#payments" data-close class="hover:text-brand-600 dark:hover:text-brand-400 transition-colors">Payment Services</a>
+                  <a href="#integrations" data-close class="hover:text-brand-600 dark:hover:text-brand-400 transition-colors">Integrations</a>
+                  <a href="#checklist" data-close class="hover:text-brand-600 dark:hover:text-brand-400 transition-colors">Setup Checklist</a>
+                  <a href="#" data-close class="js-support hover:text-brand-600 dark:hover:text-brand-400 transition-colors">Contact Support</a>
+                  <a href="#" data-close class="sm:hidden block hover:text-brand-600 dark:hover:text-brand-400 transition-colors pt-4 border-t border-slate-200 dark:border-slate-800">Login</a>
+              </nav>
+          </div>
       </div>
-      <nav class="mt-6 grid gap-4 text-sm">
-        <a href="#" data-close class="font-semibold hover:text-brand-600 border-b border-slate-200 dark:border-slate-800 pb-3 mb-1">Merchant Login</a>
-        <a href="#payments" data-close class="hover:text-brand-600">Payment Services</a>
-        <a href="#integrations" data-close class="hover:text-brand-600">Integrations</a>
-        <a href="#checklist" data-close class="hover:text-brand-600">Setup Checklist</a>
-        <a href="#ai-faq" data-close class="hover:text-brand-600">FAQ</a>
-        <a href="#" data-close class="js-cta hover:text-brand-600">Contact Us</a>
-        <a href="#" data-close class="hover:text-brand-600">Privacy Policy</a>
-        <a href="#" data-close class="hover:text-brand-600">Terms & Conditions</a>
-      </nav>
-      <div class="mt-6 flex flex-col gap-3">
-        <button class="js-cta w-full px-4 py-2 rounded-lg bg-slate-100 dark:bg-slate-800 font-semibold">Request a Demo</button>
-        <button class="js-cta w-full px-4 py-2 rounded-lg bg-brand-600 text-white font-semibold hover:bg-brand-700">Get Started</button>
-      </div>
-    </div>
   </div>
 
   <!-- Hero -->
@@ -153,57 +161,55 @@
     </div>
 
     <div class="max-w-7xl mx-auto px-4 pt-16 md:pt-24 pb-14">
-      <div class="grid md:grid-cols-2 gap-10 items-center">
-        <div class="space-y-6">
-          <h1 class="text-4xl sm:text-5xl font-bold tracking-tight">Accept Payments Anywhere—<span class="grad-text-static">Fast, Secure, and Flexible.</span></h1>
-          <p class="text-lg text-slate-600 dark:text-slate-300">Easily set up your business payment profile and start accepting cards, ACH, and payment links—whether online or in-store.</p>
-          <div class="flex flex-col sm:flex-row gap-3">
-            <button class="js-cta px-5 py-3 rounded-xl bg-brand-600 text-white text-sm font-medium hover:bg-brand-700">Get Started</button>
-            <button class="js-cta px-5 py-3 rounded-xl border border-slate-300 dark:border-slate-700 text-sm font-medium hover:bg-slate-50 dark:hover:bg-slate-900">Request a Demo</button>
-          </div>
+        <div class="grid md:grid-cols-2 gap-10 items-center">
+            <div class="space-y-6 text-center md:text-left">
+                <h1 class="text-4xl sm:text-5xl font-bold tracking-tight">Accept Payments Anywhere—<span class="grad-text-static">Fast, Secure, and Flexible.</span></h1>
+                <p class="text-lg text-slate-600 dark:text-slate-300">Easily set up your business payment profile and start accepting cards, ACH, and payment links—whether online or in-store.</p>
+            </div>
+            <div class="w-full">
+                <div class="relative">
+                    <input type="text" id="faq-question" placeholder="Ask about pricing, features..." class="field w-full p-4 pr-12 text-lg rounded-full bg-white/70 dark:bg-slate-900/70 border border-slate-300 dark:border-slate-700 focus:ring-2 focus:ring-brand-400 focus:border-transparent transition-all">
+                    <button id="ask-faq" class="absolute top-1/2 right-2 -translate-y-1/2 p-2 rounded-full bg-brand-600 text-white hover:bg-brand-700 transition-colors">
+                        <i data-lucide="arrow-up" class="h-5 w-5"></i>
+                    </button>
+                </div>
+                <div id="hero-actions" class="mt-6 flex flex-wrap justify-center items-center gap-3">
+                    <button class="js-cta bg-brand-600 text-white px-4 py-2 rounded-full text-sm font-medium hover:bg-brand-700 transition-colors">Get Started</button>
+                    <div id="animated-features-container" class="relative flex items-center justify-center min-w-[150px] h-[38px] mx-2"></div>
+                    <button class="js-support bg-slate-100 dark:bg-slate-800 px-4 py-2 rounded-full text-sm font-medium hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors">Contact Support</button>
+                </div>
+                <div id="faq-answer" class="mt-6 p-4 text-left rounded-lg bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 hidden"></div>
+            </div>
         </div>
-        <ul class="grid grid-cols-2 gap-4 text-sm">
-            <li class="p-4 rounded-2xl border border-slate-200 dark:border-slate-800 bg-white/50 dark:bg-slate-900/50">Online, in‑store & mobile</li>
-            <li class="p-4 rounded-2xl border border-slate-200 dark:border-slate-800 bg-white/50 dark:bg-slate-900/50">Cards, ACH, Apple Pay & Google Pay</li>
-            <li class="p-4 rounded-2xl border border-slate-200 dark:border-slate-800 bg-white/50 dark:bg-slate-900/50">Smart routing & fraud prevention</li>
-            <li class="p-4 rounded-2xl border border-slate-200 dark:border-slate-800 bg-white/50 dark:bg-slate-900/50">Simple dashboards & reports</li>
-        </ul>
-      </div>
     </div>
   </section>
 
   <!-- Payment Services -->
-  <section id="payments" class="py-16 md:py-24 bg-slate-50 dark:bg-slate-900/40 border-y border-slate-200/70 dark:border-slate-800">
-    <div class="max-w-5xl mx-auto px-4">
-      <h2 class="text-3xl font-bold mb-3 text-center">Payment Services Built for You</h2>
-      <p class="text-gray-600 dark:text-slate-300 mb-8 text-center">Everything you need to accept payments and manage your business, all in one place.</p>
-      <ul class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 text-sm leading-6">
-        <li class="p-4 rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-950"><strong>Accept Payments Anywhere</strong> – Online, in‑store, or on the go—supports cards, ACH/eCheck, and mobile wallets (Apple Pay, Google Pay).</li>
-        <li class="p-4 rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-950"><strong>Smart Processing & Routing</strong> – Route transactions efficiently to reduce costs and minimize fraud.</li>
-        <li class="p-4 rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-950"><strong>Payment Links & Invoicing</strong> – Send customers secure pay‑by‑link options when you’re not online.</li>
-        <li class="p-4 rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-950"><strong>Recurring Billing & Subscriptions</strong> – Automated plans, proration, and payment reminders made simple.</li>
-        <li class="p-4 rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-950"><strong>Secure Tokenization & Data Vault</strong> – Protect customer info safely, without handling sensitive data directly.</li>
-        <li class="p-4 rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-950"><strong>Detailed Dashboard & Reporting</strong> – Track settlements, analytics, and transaction insights with ease.</li>
-        <li class="p-4 rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-950"><strong>Integration & Automation</strong> – APIs, webhooks, and workflow tools to connect your systems seamlessly.</li>
-        <li class="p-4 rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-950"><strong>Bank Payments & ACH Support</strong> – Lower‑cost transfers directly to your account.</li>
-        <li class="p-4 rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-950"><strong>Fraud Prevention & Verification Tools</strong> – Built‑in safeguards to keep your business secure.</li>
-      </ul>
+  <section id="payments" class="py-8 md:py-12 bg-slate-50 dark:bg-slate-900/40 border-y border-slate-200/70 dark:border-slate-800">
+    <div class="max-w-5xl mx-auto px-4 text-center">
+      <h2 class="text-3xl font-bold mb-3">Payment Services Built for You</h2>
+      <p class="text-gray-600 dark:text-slate-300 mb-10">Everything you need to accept payments and manage your business, all in one place.</p>
+    </div>
+    <div class="relative w-full overflow-hidden group [mask-image:_linear-gradient(to_right,transparent_0,_black_128px,_black_calc(100%-128px),transparent_100%)]">
+        <div class="flex animate-scroll group-hover:[animation-play-state:paused]">
+            <div class="flex-shrink-0 flex items-center space-x-8" id="services-container-1"></div>
+            <div class="flex-shrink-0 flex items-center space-x-8" id="services-container-2" aria-hidden="true"></div>
+        </div>
     </div>
   </section>
 
   <!-- Integrations Section -->
-  <section id="integrations" class="py-16 md:py-24">
+  <section id="integrations" class="py-8 md:py-12">
     <div class="max-w-5xl mx-auto px-4 text-center">
       <h2 class="text-3xl font-bold mb-3">Integrate with Your Favorite Tools</h2>
-      <p class="text-gray-600 dark:text-slate-300 mb-10">Connect MerchantHaus with the platforms you already use to streamline your workflow.</p>
+      <p class="text-gray-600 dark:text-slate-300 mb-10">Connect MerchantHaus with the platforms you already use.</p>
       <div class="flex justify-center items-center gap-8 md:gap-16">
         <a href="#" class="block hover:scale-105 transition-transform duration-300">
-          <!-- Shopify Logos for Light/Dark Theme -->
           <img src="shopifylight.png" alt="Shopify Logo" class="h-12 md:h-14 block dark:hidden">
           <img src="shopifydark.png" alt="Shopify Logo" class="h-12 md:h-14 hidden dark:block">
         </a>
         <a href="#" class="block hover:scale-105 transition-transform duration-300">
-          <img src="gohighlevellight.png" alt="GoHighLevel Logo" class="h-12 md:h-14 block dark:hidden integration-logo-blend">
+          <img src="gohighlevellight.png" alt="GoHighLevel Logo" class="h-12 md:h-14 block dark:hidden">
           <img src="gohighleveldark.png" alt="GoHighLevel Logo" class="h-12 md:h-14 hidden dark:block">
         </a>
       </div>
@@ -211,38 +217,19 @@
   </section>
 
     <!-- Setup Checklist -->
-    <section id="checklist" class="py-16 md:py-24 bg-slate-50 dark:bg-slate-900/40 border-y border-slate-200/70 dark:border-slate-800">
+    <section id="checklist" class="py-8 md:py-12 bg-slate-50 dark:bg-slate-900/40 border-y border-slate-200/70 dark:border-slate-800">
         <div class="max-w-3xl mx-auto px-4">
-            <h2 class="text-3xl font-bold mb-3 text-center">Setup Checklist: What You’ll Need to Begin</h2>
-            <p class="text-gray-600 dark:text-slate-300 mb-6 text-center">Here’s everything we’ll ask for during setup—business details, security info, documentation. We’ll guide you step‑by‑step.</p>
+            <h2 class="text-3xl font-bold mb-3 text-center">What You’ll Need to Begin</h2>
+            <p class="text-gray-600 dark:text-slate-300 mb-6 text-center">Here’s what we’ll ask for during setup. We’ll guide you step‑by‑step.</p>
             <ul class="list-disc pl-5 space-y-2 text-sm max-w-md mx-auto">
                 <li>Business information (name, address, industry)</li>
                 <li>Owner/representative info (name, contact, ID)</li>
                 <li>Bank account for payouts</li>
-                <li>Verification documents (e.g. photo ID, business registration)—upload when prompted</li>
-                <li>Basic fraud and security setup (required for processing)</li>
+                <li>Verification documents (e.g. photo ID, business registration)</li>
             </ul>
-            <div class="mt-8 flex justify-center gap-3">
-                <button class="js-cta px-5 py-3 rounded-xl bg-brand-600 text-white text-sm font-medium hover:bg-brand-700">Get Started</button>
-            </div>
         </div>
     </section>
     
-    <!-- AI-Powered FAQ Section -->
-    <section id="ai-faq" class="py-16 md:py-24">
-        <div class="max-w-3xl mx-auto px-4">
-            <h2 class="text-3xl font-bold mb-3 text-center">✨ AI-Powered FAQ</h2>
-            <p class="text-gray-600 dark:text-slate-300 mb-8 text-center">Have a question about our services? Ask our AI assistant for an instant answer.</p>
-            
-            <div class="flex gap-2">
-                <input id="faq-question" type="text" placeholder="e.g., What are your transaction fees?" class="field w-full rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-900 p-3">
-                <button id="ask-faq" class="px-5 py-3 rounded-lg bg-brand-600 text-white font-semibold hover:bg-brand-700 w-28 text-center">Ask</button>
-            </div>
-
-            <div id="faq-answer" class="mt-6 p-4 rounded-lg bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 hidden"></div>
-        </div>
-    </section>
-
   <!-- Footer -->
   <footer class="border-t border-slate-200 dark:border-slate-800 py-10">
     <div class="max-w-7xl mx-auto px-4 grid sm:grid-cols-2 lg:grid-cols-4 gap-8 text-sm">
@@ -251,19 +238,18 @@
             <img src="shield/shield.png" alt="MerchantHaus Logo" class="h-9 w-9">
             <span class="text-2xl font-extrabold tracking-wide grad-text">MerchantHaus</span>
         </a>
-        <p class="text-gray-600 dark:text-slate-300">Merchant Haus – Payments made simple.</p>
+        <p class="text-gray-600 dark:text-slate-300">Payments made simple.</p>
       </div>
       <nav class="space-y-2">
         <h3 class="font-semibold">Product</h3>
         <a href="#payments" class="block hover:underline">Payment Services</a>
         <a href="#integrations" class="block hover:underline">Integrations</a>
         <a href="#checklist" class="block hover:underline">Setup Checklist</a>
-        <a href="#ai-faq" class="block hover:underline">FAQ</a>
       </nav>
       <nav class="space-y-2">
         <h3 class="font-semibold">Support</h3>
-        <a href="#" class="js-cta block hover:underline">Contact Support</a>
-        <a href="#ai-faq" class="block hover:underline">FAQs</a>
+        <a href="#" class="js-support block hover:underline">Contact Support</a>
+        <a href="#faq-question" class="block hover:underline">FAQs</a>
       </nav>
       <nav class="space-y-2">
         <h3 class="font-semibold">Legal</h3>
@@ -274,42 +260,109 @@
     <div class="text-center text-xs text-gray-500 pt-8 mt-8 border-t border-slate-200 dark:border-slate-800">© <span id="year"></span> Merchant Haus. All rights reserved.</div>
   </footer>
 
-  <!-- Booking Modal (shared across site) -->
-  <div id="book-modal" class="fixed inset-0 z-[70] hidden">
+  <!-- Support Modal -->
+  <div id="support-modal" class="fixed inset-0 z-[70] hidden">
     <div class="absolute inset-0 bg-black/60" data-close></div>
     <div class="mx-auto mt-[10vh] w-[min(560px,92vw)] rounded-2xl bg-white dark:bg-slate-900 p-6 border border-slate-200 dark:border-slate-800 shadow-2xl">
       <div class="flex items-center justify-between">
-        <h3 class="text-xl font-extrabold">Book a 20-minute consultation</h3>
+        <h3 class="text-xl font-extrabold">Contact Support</h3>
         <button class="p-2 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800" data-close aria-label="Close">
           <i data-lucide="x" class="h-5 w-5"></i>
         </button>
       </div>
-      <p class="mt-1 text-sm text-slate-600 dark:text-slate-300">Tell us a bit about you and we’ll send a private booking link immediately.</p>
-
-      <form id="book-form" class="mt-4 grid gap-3">
+      <p class="mt-1 text-sm text-slate-600 dark:text-slate-300">Have a question? Fill out the form below and we'll get back to you.</p>
+      <form id="support-form" class="mt-4 grid gap-3">
         <input name="name" placeholder="Your name" class="field rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-950 px-3 py-2" required>
         <input name="email" type="email" placeholder="Work email" class="field rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-950 px-3 py-2" required>
-        <input name="company" placeholder="Company" class="field rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-950 px-3 py-2">
-        <input name="phone" placeholder="Phone (optional)" class="field rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-950 px-3 py-2">
-        <textarea name="notes" placeholder="Anything specific you want to cover?" rows="3" class="field rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-950 px-3 py-2"></textarea>
-        <input type="text" name="hp" class="hidden" tabindex="-1" autocomplete="off">
-        <button class="rounded-lg bg-brand-600 text-white font-semibold px-4 py-2 hover:bg-brand-700" type="submit">Send me the booking link</button>
-        <p id="book-out" class="text-xs text-slate-500"></p>
+        <textarea name="message" placeholder="Your message..." rows="4" class="field rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-950 px-3 py-2" required></textarea>
+        <button class="rounded-lg bg-brand-600 text-white font-semibold px-4 py-2 hover:bg-brand-700" type="submit">Send Message</button>
+        <p id="support-out" class="text-xs text-slate-500"></p>
       </form>
     </div>
   </div>
 
+  <!-- Floating Action Buttons -->
+  <div id="floating-actions" class="fixed bottom-6 right-6 z-40 flex flex-col gap-3 items-end transition-all duration-300 transform translate-y-20 opacity-0">
+    <button class="js-support bg-white dark:bg-slate-800 px-4 py-2 rounded-full text-sm font-semibold shadow-lg hover:shadow-xl transition-shadow flex items-center gap-2">
+        <i data-lucide="message-circle" class="h-4 w-4"></i> Contact Support
+    </button>
+    <button class="js-cta bg-brand-600 text-white px-4 py-2 rounded-full text-sm font-semibold shadow-lg hover:shadow-xl transition-shadow flex items-center gap-2">
+        <i data-lucide="arrow-right" class="h-4 w-4"></i> Get Started
+    </button>
+  </div>
+
+
   <!-- Scripts -->
   <script>
-    // --- CORE UI & EVENT LISTENERS ---
+    document.addEventListener('DOMContentLoaded', () => { 
+        if (window.lucide) lucide.createIcons(); 
+        
+        const features = ["Omnichannel", "Multi-Processor", "Virtual Terminal", "ACH & eCheck", "Recurring Billing", "Tokenization", "Fraud Tools", "Chargeback Help", "Dual Pricing", "White-Label", "API-Driven", "Invoicing & Pay Links", "POS Integration", "Real-Time Reporting", "Custom Fields", "PCI Compliant", "Sandbox Access", "Subscription Plans", "AI Anti Fraud Systems", "AI Consulting", "Biller Genie", "Collect Checkout", "Shopify"];
+        let currentFeatureIndex = 0;
+        const animatedFeaturesContainer = document.getElementById('animated-features-container');
+        const displayNextFeature = () => {
+            if (!animatedFeaturesContainer) return;
+            animatedFeaturesContainer.innerHTML = '';
+            const featureText = features[currentFeatureIndex];
+            const featureElement = document.createElement('div');
+            featureElement.className = 'feature-display';
+            featureElement.textContent = featureText;
+            animatedFeaturesContainer.appendChild(featureElement);
+            setTimeout(() => { featureElement.classList.add('active'); }, 50);
+            setTimeout(() => {
+                featureElement.classList.remove('active'); featureElement.classList.add('exiting');
+                setTimeout(() => { 
+                    currentFeatureIndex = (currentFeatureIndex + 1) % features.length; 
+                    displayNextFeature(); 
+                }, 500);
+            }, 3000);
+        };
+        displayNextFeature();
 
-    // Set current year in footer
+        const services = [
+            { title: "Accept Payments Anywhere", description: "Online, in‑store, or on the go." },
+            { title: "Smart Processing & Routing", description: "Reduce costs and minimize fraud." },
+            { title: "Payment Links & Invoicing", description: "Send secure pay‑by‑link options." },
+            { title: "Recurring Billing", description: "Automated plans and reminders." },
+            { title: "Secure Tokenization", description: "Protect customer info safely." },
+            { title: "Detailed Reporting", description: "Track settlements and insights." },
+            { title: "Integration & Automation", description: "APIs and webhooks to connect systems." },
+            { title: "Bank Payments & ACH", description: "Lower-cost direct transfers." }
+        ];
+        const container1 = document.getElementById('services-container-1');
+        const container2 = document.getElementById('services-container-2');
+        if(container1 && container2) {
+            const renderServices = (container) => {
+                services.forEach(service => {
+                    const serviceEl = document.createElement('div');
+                    serviceEl.className = 'p-4 w-64 flex-shrink-0 text-left rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-950';
+                    serviceEl.innerHTML = `<h3 class="font-bold text-sm">${service.title}</h3><p class="text-sm text-slate-600 dark:text-slate-400">${service.description}</p>`;
+                    container.appendChild(serviceEl);
+                });
+            }
+            renderServices(container1);
+            renderServices(container2);
+        }
+    });
+
     document.getElementById('year').textContent = new Date().getFullYear();
+    const openPanel = (overlayId, panelId) => {
+        const overlay = document.getElementById(overlayId);
+        const panel = document.getElementById(panelId);
+        if (!overlay || !panel) return;
+        overlay.classList.remove('invisible', 'opacity-0');
+        panel.classList.remove('translate-x-full', 'scale-95', 'opacity-0');
+    };
+    const closePanel = (overlayId, panelId, classList) => {
+        const overlay = document.getElementById(overlayId);
+        const panel = document.getElementById(panelId);
+        if (!overlay || !panel) return;
+        panel.classList.add(...classList);
+        setTimeout(() => {
+            overlay.classList.add('invisible', 'opacity-0');
+        }, 300);
+    };
 
-    // Icons
-    document.addEventListener('DOMContentLoaded', () => { if (window.lucide) lucide.createIcons(); });
-
-    // Theme toggle with preference memory
     const themeToggle = document.getElementById('themeToggle');
     function applyTheme() {
       const saved = localStorage.getItem('theme');
@@ -328,127 +381,83 @@
       applyTheme();
     });
 
-    // Mobile sheet show/hide
-    const mobile = document.getElementById('mobileSheet');
-    document.getElementById('openMobile').addEventListener('click', () => mobile.classList.remove('hidden'));
-    mobile.addEventListener('click', (e) => { if (e.target.dataset.close !== undefined) mobile.classList.add('hidden'); });
-
-    // Modal handlers
-    const bookModal = document.getElementById('book-modal');
-    const bookForm = document.getElementById('book-form');
-    const bookOut = document.getElementById('book-out');
-
-    document.querySelectorAll('.js-cta').forEach(el => {
-      el.addEventListener('click', (e) => {
-        e.preventDefault();
-        bookModal.classList.remove('hidden');
-      });
+    const menuOverlay = document.getElementById('menu-panel-overlay');
+    document.getElementById('open-menu-btn').addEventListener('click', () => openPanel('menu-panel-overlay', 'menu-panel'));
+    document.getElementById('close-menu-btn').addEventListener('click', () => closePanel('menu-panel-overlay', 'menu-panel', ['translate-x-full']));
+    menuOverlay.addEventListener('click', (e) => { 
+        if (e.target.id === 'menu-panel-overlay' || e.target.dataset.close !== undefined) {
+            closePanel('menu-panel-overlay', 'menu-panel', ['translate-x-full']);
+        }
     });
 
-    bookModal.addEventListener('click', (e) => {
-      if (e.target.dataset.close !== undefined) {
-        bookModal.classList.add('hidden');
-      }
+    const supportModal = document.getElementById('support-modal');
+    const supportForm = document.getElementById('support-form');
+    const supportOut = document.getElementById('support-out');
+    document.querySelectorAll('.js-support').forEach(el => {
+      el.addEventListener('click', (e) => { e.preventDefault(); supportModal.classList.remove('hidden'); });
     });
-
-    bookForm.addEventListener('submit', (e) => {
+    supportModal.addEventListener('click', (e) => {
+      if (e.target.dataset.close !== undefined) supportModal.classList.add('hidden');
+    });
+    supportForm.addEventListener('submit', (e) => {
       e.preventDefault();
-      // Honeypot check
-      if (bookForm.hp.value) return;
-
-      bookOut.textContent = 'Sending...';
-      // In a real app, you would send this data to a server or service
+      supportOut.textContent = 'Sending message...';
       setTimeout(() => {
-        bookOut.textContent = 'Success! Check your email for the booking link.';
-        bookForm.reset();
+        supportOut.textContent = 'Success! We have received your message and will get back to you shortly.';
+        supportForm.reset();
       }, 1000);
     });
 
-    // --- HEADER ANIMATION ---
     const logoContainer = document.getElementById('logo-container');
     const animatedTagline = document.getElementById('animated-tagline');
     const logoText = "MerchantHaus";
     const taglineText = "safe . smart . secure";
-    
     function typeWriter(element, text, speed, callback) {
-        let i = 0;
-        element.innerHTML = '';
+        let i = 0; element.innerHTML = '';
         const typingInterval = setInterval(() => {
             if (i < text.length) {
-                element.innerHTML = text.substring(0, i + 1) + '<span class="cursor"></span>';
-                i++;
+                element.innerHTML = text.substring(0, i + 1) + '<span class="cursor"></span>'; i++;
             } else {
-                clearInterval(typingInterval);
-                element.innerHTML = text; // Remove cursor at the end
+                clearInterval(typingInterval); element.innerHTML = text;
                 if (callback) callback();
             }
         }, speed);
     }
-
     document.addEventListener('DOMContentLoaded', () => {
         typeWriter(logoContainer, logoText, 120, () => {
-            setTimeout(() => {
-                typeWriter(animatedTagline, taglineText, 100);
-            }, 500);
+            setTimeout(() => { typeWriter(animatedTagline, taglineText, 100); }, 500);
         });
     });
 
-    // --- AI-POWERED FAQ ---
     const askFaqBtn = document.getElementById('ask-faq');
     const faqQuestionInput = document.getElementById('faq-question');
     const faqAnswerContainer = document.getElementById('faq-answer');
-
-    // Function to get the page content for context
     const getPageContext = () => {
         let context = "Page Content:\n\n";
-        document.querySelectorAll('h1, h2, h3, p, li').forEach(el => {
-            context += el.textContent.trim() + "\n";
-        });
+        document.querySelectorAll('h1, h2, h3, p, li').forEach(el => { context += el.textContent.trim() + "\n"; });
         return context;
     };
-
     const handleFaqSubmit = async () => {
         const question = faqQuestionInput.value.trim();
         if (!question) return;
-
         faqAnswerContainer.classList.remove('hidden');
         askFaqBtn.disabled = true;
         askFaqBtn.innerHTML = '<span class="loader"></span>';
         faqAnswerContainer.innerHTML = 'Thinking...';
-
         const pageContext = getPageContext();
         const prompt = `You are a helpful assistant for MerchantHaus, a payment processing company. A user has a question: "${question}". Based *only* on the following context from the MerchantHaus website, provide a clear and concise answer. If the answer is not in the context, say "I'm sorry, I can't find information about that on this page. Please contact support for more details."\n\nContext:\n${pageContext}`;
-
         try {
-            let chatHistory = [{ role: "user", parts: [{ text: prompt }] }];
-            const payload = { contents: chatHistory };
-            const apiKey = ""; // API key will be injected in a production environment
+            const payload = { contents: [{ role: "user", parts: [{ text: prompt }] }] };
+            const apiKey = "";
             const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-05-20:generateContent?key=${apiKey}`;
-            
-            const response = await fetch(apiUrl, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(payload)
-            });
-
-            if (!response.ok) {
-                throw new Error(`API request failed with status ${response.status}`);
-            }
-
+            const response = await fetch(apiUrl, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) });
+            if (!response.ok) throw new Error(`API request failed with status ${response.status}`);
             const result = await response.json();
-            
-            if (result.candidates && result.candidates.length > 0 &&
-                result.candidates[0].content && result.candidates[0].content.parts &&
-                result.candidates[0].content.parts.length > 0) {
+            if (result.candidates?.[0]?.content?.parts?.[0]?.text) {
                 const text = result.candidates[0].content.parts[0].text;
-                let html = text.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
-                html = html.replace(/^\* (.*$)/gm, '<li>$1</li>');
-                html = html.replace(/<\/li><li>/g, '</li><li>');
-                if (html.includes('<li>')) {
-                    html = `<ul class="list-disc pl-5 space-y-2">${html}</ul>`;
-                }
+                let html = text.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>').replace(/^\* (.*$)/gm, '<li>$1</li>').replace(/<\/li><li>/g, '</li><li>');
+                if (html.includes('<li>')) html = `<ul class="list-disc pl-5 space-y-2">${html}</ul>`;
                 faqAnswerContainer.innerHTML = html;
-
             } else {
                 faqAnswerContainer.textContent = 'Sorry, I could not find an answer to your question.';
             }
@@ -457,16 +466,31 @@
             faqAnswerContainer.textContent = 'Sorry, something went wrong. Please try again later.';
         } finally {
             askFaqBtn.disabled = false;
-            askFaqBtn.innerHTML = 'Ask';
+            askFaqBtn.innerHTML = '<i data-lucide="arrow-up" class="h-5 w-5"></i>';
+            lucide.createIcons();
         }
     };
-
     askFaqBtn.addEventListener('click', handleFaqSubmit);
-    faqQuestionInput.addEventListener('keypress', (e) => {
-        if (e.key === 'Enter') {
-            handleFaqSubmit();
-        }
-    });
+    faqQuestionInput.addEventListener('keypress', (e) => { if (e.key === 'Enter') handleFaqSubmit(); });
+
+    // --- Floating Action Button Logic ---
+    const heroActions = document.getElementById('hero-actions');
+    const floatingActions = document.getElementById('floating-actions');
+    
+    const observer = new IntersectionObserver(
+        ([entry]) => {
+            if (entry.isIntersecting) {
+                floatingActions.classList.add('translate-y-20', 'opacity-0');
+            } else {
+                floatingActions.classList.remove('translate-y-20', 'opacity-0');
+            }
+        },
+        { threshold: 0.1 }
+    );
+
+    if (heroActions) {
+        observer.observe(heroActions);
+    }
 
   </script>
 </body>
