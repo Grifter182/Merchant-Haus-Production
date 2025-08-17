@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" class="scroll-smooth">
+<html lang="en" class="scroll-smooth dark">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -22,15 +22,25 @@
             brand: { 600:'#dc2743', 700:'#c21b35', 400:'#ef3c5b' }
           },
           keyframes: {
-            shimmer: { 
-              '0%, 33%': { backgroundPosition: '0% 50%' }, /* Hold on red start for 5s */
-              '100%': { backgroundPosition: '100% 50%' } /* Scroll for 10s */
+            shimmer: {
+                '0%, 8%':   { backgroundPosition: '0% 50%' },   /* 3s Hold Core */
+                '16%':      { backgroundPosition: '10% 50%' },  /* 3s to Yellow */
+                '24%':      { backgroundPosition: '20% 50%' },  /* 3s to Core */
+                '32%':      { backgroundPosition: '30% 50%' },  /* 3s to Green */
+                '40%':      { backgroundPosition: '40% 50%' },  /* 3s to Core */
+                '48%':      { backgroundPosition: '50% 50%' },  /* 3s to Cyan */
+                '56%':      { backgroundPosition: '60% 50%' },  /* 3s to Core */
+                '64%':      { backgroundPosition: '70% 50%' },  /* 3s to Purple */
+                '72%':      { backgroundPosition: '80% 50%' },  /* 3s to Core */
+                '80%':      { backgroundPosition: '90% 50%' },  /* 3s to Orange */
+                '87%':      { backgroundPosition: '100% 50%' }, /* 3s to Core */
+                '100%':     { backgroundPosition: '100% 50%' }  /* 5s Hold Core */
             },
             floaty: { '0%,100%': { transform: 'translateY(0)' }, '50%': { transform: 'translateY(-6px)' } },
             scroll: { '0%': { transform: 'translateX(0)' }, '100%': { transform: 'translateX(-100%)' } }
           },
-          animation: { 
-            shimmer: 'shimmer 15s linear infinite', 
+          animation: {  
+            shimmer: 'shimmer 38s ease-in-out infinite',  
             floaty: 'floaty 6s ease-in-out infinite',
             scroll: 'scroll 40s linear infinite'
           }
@@ -46,18 +56,25 @@
   <style>
     :root { color-scheme: light dark; }
     body { font-family: 'Montserrat', sans-serif; }
-    /* Re-engineered gradient for a seamless loop */
-    .grad-text { 
-      background: linear-gradient(90deg, 
-        /* Start of Pattern */
-        #ef3c5b, #c21b35, #ef3c5b, #c21b35, #FFD700, #39FF14, #08D9D6, #A020F0, #CC5500,
-        /* Repeat of Pattern for seamless loop */
-        #ef3c5b, #c21b35, #ef3c5b, #c21b35, #FFD700, #39FF14, #08D9D6, #A020F0, #CC5500
-      ); 
-      -webkit-background-clip:text; 
-      background-clip:text; 
-      color: transparent; 
-      background-size: 200% auto; 
+    
+    .grad-text {
+        background: linear-gradient(90deg,
+            /* Core */ #c21b35, #ef3c5b,
+            /* Yellow */ #FFD700,
+            /* Core */ #c21b35, #ef3c5b,
+            /* Green */ #39FF14,
+            /* Core */ #c21b35, #ef3c5b,
+            /* Cyan */ #08D9D6,
+            /* Core */ #c21b35, #ef3c5b,
+            /* Purple */ #A020F0,
+            /* Core */ #c21b35, #ef3c5b,
+            /* Orange */ #CC5500,
+            /* Core */ #c21b35, #ef3c5b
+        );
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+        background-size: 1100% auto;
     }
     .grad-text-static { background: linear-gradient(90deg, #c21b35, #ef3c5b, #ff9aa8, #ef3c5b, #c21b35); -webkit-background-clip:text; background-clip:text; color: transparent; background-size: 300% 100%; }
     .field:focus { outline: none; box-shadow: 0 0 0 3px rgba(239,60,91,.35); }
@@ -99,12 +116,20 @@
         font-size: 0.875rem; font-weight: 500; transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
         opacity: 0; transform: translateX(-50%) translateY(10px); position: absolute; left: 50%; white-space: nowrap;
     }
-    .dark .feature-display { 
+    .dark .feature-display {  
         background-color: #1f2937;
         color: #f9fafb;
     }
     .feature-display.active { opacity: 1; transform: translateX(-50%) translateY(0); }
     .feature-display.exiting { opacity: 0; transform: translateX(-50%) translateY(-10px); }
+    
+    .service-cell {
+        opacity: 0;
+        transition: opacity 0.5s ease-in-out;
+    }
+    .service-cell.is-visible {
+        opacity: 1;
+    }
 
   </style>
 
@@ -118,21 +143,17 @@
 
 <body class="bg-white text-slate-900 dark:bg-slate-950 dark:text-slate-100">
   <!-- Header -->
-  <header class="sticky top-0 z-50 bg-white/75 dark:bg-slate-950/60 backdrop-blur border-b border-slate-200/70 dark:border-slate-800">
+  <header class="sticky top-0 z-50 bg-white dark:bg-slate-950 border-b border-slate-200/70 dark:border-slate-800">
     <div class="max-w-7xl mx-auto px-4 py-4 flex items-center justify-between">
       <a href="#" class="flex items-center gap-3 group">
         <img src="shield/shield.png" alt="MerchantHaus Logo" class="h-10 w-10">
         <div>
-            <!-- Added animate-shimmer class -->
-            <div id="logo-container" class="text-xl md:text-2xl font-extrabold tracking-wide grad-text animate-shimmer"></div>
-            <p id="animated-tagline" class="text-xs text-slate-500 dark:text-slate-400 h-4"></p>
+          <div id="logo-container" class="text-xl md:text-2xl font-extrabold tracking-wide grad-text animate-shimmer"></div>
+          <p id="animated-tagline" class="text-xs text-slate-500 dark:text-slate-400 h-4"></p>
         </div>
       </a>
       <div class="flex items-center gap-2">
-        <button id="themeToggle" class="p-2 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800" aria-label="Toggle theme"><i data-lucide="moon" class="h-5 w-5"></i></button>
         <a href="#" class="hidden sm:block px-4 py-2 text-sm font-semibold rounded-lg border border-slate-300 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-900">Login</a>
-        <button class="js-support hidden sm:block px-4 py-2 text-sm font-semibold rounded-lg bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700">Support</button>
-        <button class="js-cta hidden sm:block px-4 py-2 text-sm font-semibold rounded-lg bg-brand-600 text-white hover:bg-brand-700">Get Started</button>
         <button id="open-menu-btn" class="p-2 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800" aria-label="Open menu"><i data-lucide="menu" class="h-5 w-5"></i></button>
       </div>
     </div>
@@ -167,8 +188,10 @@
     <div class="max-w-7xl mx-auto px-4 pt-16 md:pt-24 pb-14">
         <div class="grid md:grid-cols-2 gap-10 items-center">
             <div class="space-y-6 text-center md:text-left">
-                <!-- Updated Headline -->
-                <h1 class="text-4xl sm:text-5xl font-bold tracking-tight">Payments Everywhere—<span class="grad-text-static">Built for Speed, Security, and Scale.</span></h1>
+                <h1 class="text-3xl sm:text-4xl font-extrabold tracking-tight leading-tight">
+                    <span class="uppercase">PAYMENTS EVERYWHERE</span>
+                    <span id="animated-headline-sub" class="grad-text-static text-2xl sm:text-3xl font-bold block sm:inline-block mt-2 sm:mt-0 h-10 sm:h-auto"></span>
+                </h1>
                 <p class="text-lg text-slate-600 dark:text-slate-300">Easily set up your business payment profile and start accepting cards, ACH, and payment links—whether online or in-store.</p>
             </div>
             <div class="w-full">
@@ -192,13 +215,13 @@
   <!-- Payment Services -->
   <section id="payments" class="py-8 md:py-12 bg-slate-50 dark:bg-slate-900/40 border-y border-slate-200/70 dark:border-slate-800">
     <div class="max-w-5xl mx-auto px-4 text-center">
-      <h2 class="text-3xl font-bold mb-3">Payment Services Built for You</h2>
+      <h2 class="text-3xl font-bold mb-3 animate-on-scroll"></h2>
       <p class="text-gray-600 dark:text-slate-300 mb-10">Everything you need to accept payments and manage your business, all in one place.</p>
     </div>
     <div class="relative w-full overflow-hidden group [mask-image:_linear-gradient(to_right,transparent_0,_black_128px,_black_calc(100%-128px),transparent_100%)]">
         <div class="flex animate-scroll group-hover:[animation-play-state:paused]">
-            <div class="flex-shrink-0 flex items-center space-x-8" id="services-container-1"></div>
-            <div class="flex-shrink-0 flex items-center space-x-8" id="services-container-2" aria-hidden="true"></div>
+            <div class="flex-shrink-0 flex items-center space-x-4" id="services-container-1"></div>
+            <div class="flex-shrink-0 flex items-center space-x-4" id="services-container-2" aria-hidden="true"></div>
         </div>
     </div>
   </section>
@@ -206,7 +229,7 @@
   <!-- Integrations Section -->
   <section id="integrations" class="py-8 md:py-12">
     <div class="max-w-5xl mx-auto px-4 text-center">
-      <h2 class="text-3xl font-bold mb-3">Integrate with Your Favorite Tools</h2>
+      <h2 class="text-3xl font-bold mb-3 animate-on-scroll"></h2>
       <p class="text-gray-600 dark:text-slate-300 mb-10">Connect MerchantHaus with the platforms you already use.</p>
       <div class="flex justify-center items-center gap-8 md:gap-16">
         <a href="#" class="block hover:scale-105 transition-transform duration-300">
@@ -224,7 +247,7 @@
     <!-- Setup Checklist -->
     <section id="checklist" class="py-8 md:py-12 bg-slate-50 dark:bg-slate-900/40 border-y border-slate-200/70 dark:border-slate-800">
         <div class="max-w-3xl mx-auto px-4">
-            <h2 class="text-3xl font-bold mb-3 text-center">What You’ll Need to Begin</h2>
+            <h2 class="text-3xl font-bold mb-3 text-center animate-on-scroll"></h2>
             <p class="text-gray-600 dark:text-slate-300 mb-6 text-center">Here’s what we’ll ask for during setup. We’ll guide you step‑by‑step.</p>
             <ul class="list-disc pl-5 space-y-2 text-sm max-w-md mx-auto">
                 <li>Business information (name, address, industry)</li>
@@ -241,7 +264,6 @@
       <div class="space-y-3">
         <a href="#" class="flex items-center gap-3">
             <img src="shield/shield.png" alt="MerchantHaus Logo" class="h-9 w-9">
-            <!-- Added animate-shimmer class -->
             <span class="text-2xl font-extrabold tracking-wide grad-text animate-shimmer">MerchantHaus</span>
         </a>
         <p class="text-gray-600 dark:text-slate-300">Payments made simple.</p>
@@ -301,8 +323,8 @@
 
   <!-- Scripts -->
   <script>
-    document.addEventListener('DOMContentLoaded', () => { 
-        if (window.lucide) lucide.createIcons(); 
+    document.addEventListener('DOMContentLoaded', () => {  
+        if (window.lucide) lucide.createIcons();  
         
         const features = ["Omnichannel", "Multi-Processor", "Virtual Terminal", "ACH & eCheck", "Recurring Billing", "Tokenization", "Fraud Tools", "Chargeback Help", "Dual Pricing", "White-Label", "API-Driven", "Invoicing & Pay Links", "POS Integration", "Real-Time Reporting", "Custom Fields", "PCI Compliant", "Sandbox Access", "Subscription Plans", "AI Anti Fraud Systems", "AI Consulting", "Biller Genie", "Collect Checkout", "Shopify"];
         let currentFeatureIndex = 0;
@@ -318,23 +340,23 @@
             setTimeout(() => { featureElement.classList.add('active'); }, 50);
             setTimeout(() => {
                 featureElement.classList.remove('active'); featureElement.classList.add('exiting');
-                setTimeout(() => { 
-                    currentFeatureIndex = (currentFeatureIndex + 1) % features.length; 
-                    displayNextFeature(); 
+                setTimeout(() => {  
+                    currentFeatureIndex = (currentFeatureIndex + 1) % features.length;  
+                    displayNextFeature();  
                 }, 500);
             }, 3000);
         };
         displayNextFeature();
 
         const services = [
-            { title: "Accept Payments Anywhere", description: "Online, in‑store, or on the go." },
-            { title: "Smart Processing & Routing", description: "Reduce costs and minimize fraud." },
-            { title: "Payment Links & Invoicing", description: "Send secure pay‑by‑link options." },
-            { title: "Recurring Billing", description: "Automated plans and reminders." },
-            { title: "Secure Tokenization", description: "Protect customer info safely." },
-            { title: "Detailed Reporting", description: "Track settlements and insights." },
-            { title: "Integration & Automation", description: "APIs and webhooks to connect systems." },
-            { title: "Bank Payments & ACH", description: "Lower-cost direct transfers." }
+            { icon: "smartphone", title: "Accept Payments Anywhere", description: "Online, in‑store, or on the go." },
+            { icon: "git-pull-request-arrow", title: "Smart Processing & Routing", description: "Reduce costs and minimize fraud." },
+            { icon: "link", title: "Payment Links & Invoicing", description: "Send secure pay‑by‑link options." },
+            { icon: "repeat", title: "Recurring Billing", description: "Automated plans and reminders." },
+            { icon: "lock", title: "Secure Tokenization", description: "Protect customer info safely." },
+            { icon: "bar-chart-2", title: "Detailed Reporting", description: "Track settlements and insights." },
+            { icon: "settings-2", title: "Integration & Automation", description: "APIs and webhooks to connect systems." },
+            { icon: "banknote", title: "Bank Payments & ACH", description: "Lower-cost direct transfers." }
         ];
         const container1 = document.getElementById('services-container-1');
         const container2 = document.getElementById('services-container-2');
@@ -342,13 +364,24 @@
             const renderServices = (container) => {
                 services.forEach(service => {
                     const serviceEl = document.createElement('div');
-                    serviceEl.className = 'p-4 w-64 flex-shrink-0 text-left rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-950';
-                    serviceEl.innerHTML = `<h3 class="font-bold text-sm">${service.title}</h3><p class="text-sm text-slate-600 dark:text-slate-400">${service.description}</p>`;
+                    serviceEl.className = 'service-cell p-4 w-auto flex-shrink-0 rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-950 flex items-center gap-4 transform hover:-translate-y-1 transition-transform duration-300';
+                    serviceEl.innerHTML = `
+                        <div class="w-10 h-10 rounded-full bg-brand-600/10 dark:bg-brand-400/10 flex-shrink-0 flex items-center justify-center text-brand-600 dark:text-brand-400">
+                            <i data-lucide="${service.icon}" class="w-5 h-5"></i>
+                        </div>
+                        <div class="text-left">
+                            <h3 class="font-bold text-sm" data-text="${service.title}"></h3>
+                            <p class="text-xs text-slate-600 dark:text-slate-400" data-text="${service.description}"></p>
+                        </div>
+                    `;
                     container.appendChild(serviceEl);
                 });
             }
             renderServices(container1);
             renderServices(container2);
+            if (window.lucide) {
+                lucide.createIcons();
+            }
         }
     });
 
@@ -370,28 +403,10 @@
         }, 300);
     };
 
-    const themeToggle = document.getElementById('themeToggle');
-    function applyTheme() {
-      const saved = localStorage.getItem('theme');
-      const systemDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-      const isDark = saved ? saved === 'dark' : systemDark;
-      document.documentElement.classList.toggle('dark', isDark);
-      if (window.lucide) {
-        themeToggle.innerHTML = isDark ? '<i data-lucide="sun" class="h-5 w-5"></i>' : '<i data-lucide="moon" class="h-5 w-5"></i>';
-        lucide.createIcons();
-      }
-    }
-    applyTheme();
-    themeToggle.addEventListener('click', () => {
-      const isDark = document.documentElement.classList.toggle('dark');
-      localStorage.setItem('theme', isDark ? 'dark' : 'light');
-      applyTheme();
-    });
-
     const menuOverlay = document.getElementById('menu-panel-overlay');
     document.getElementById('open-menu-btn').addEventListener('click', () => openPanel('menu-panel-overlay', 'menu-panel'));
     document.getElementById('close-menu-btn').addEventListener('click', () => closePanel('menu-panel-overlay', 'menu-panel', ['translate-x-full']));
-    menuOverlay.addEventListener('click', (e) => { 
+    menuOverlay.addEventListener('click', (e) => {  
         if (e.target.id === 'menu-panel-overlay' || e.target.dataset.close !== undefined) {
             closePanel('menu-panel-overlay', 'menu-panel', ['translate-x-full']);
         }
@@ -417,23 +432,95 @@
 
     const logoContainer = document.getElementById('logo-container');
     const animatedTagline = document.getElementById('animated-tagline');
+    const animatedHeadlineSub = document.getElementById('animated-headline-sub');
     const logoText = "MerchantHaus";
     const taglineText = "safe . smart . secure";
+    const headlineSubText = "Built for Speed, Security, and Scale.";
+
     function typeWriter(element, text, speed, callback) {
-        let i = 0; element.innerHTML = '';
+        let i = 0; 
+        if (!element) return;
+        element.innerHTML = '';
         const typingInterval = setInterval(() => {
             if (i < text.length) {
                 element.innerHTML = text.substring(0, i + 1) + '<span class="cursor"></span>'; i++;
             } else {
-                clearInterval(typingInterval); element.innerHTML = text;
+                clearInterval(typingInterval); 
+                element.innerHTML = text;
                 if (callback) callback();
             }
         }, speed);
     }
+    
     document.addEventListener('DOMContentLoaded', () => {
         typeWriter(logoContainer, logoText, 120, () => {
-            setTimeout(() => { typeWriter(animatedTagline, taglineText, 100); }, 500);
+            setTimeout(() => { 
+                typeWriter(animatedTagline, taglineText, 100, () => {
+                    setTimeout(() => {
+                        typeWriter(animatedHeadlineSub, headlineSubText, 75);
+                    }, 500);
+                }); 
+            }, 500);
         });
+
+        const headingTexts = {
+            "payments": "Payment Services Built for You",
+            "integrations": "Integrate with Your Favorite Tools",
+            "checklist": "What You’ll Need to Begin"
+        };
+
+        const headingObserver = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const heading = entry.target;
+                    const sectionId = heading.closest('section').id;
+                    const text = headingTexts[sectionId];
+                    if (text) {
+                        typeWriter(heading, text, 50);
+                        observer.unobserve(heading);
+                    }
+                }
+            });
+        }, { threshold: 0.8 });
+
+        document.querySelectorAll('.animate-on-scroll').forEach(el => {
+            headingObserver.observe(el);
+        });
+
+        // CHANGE: Simplified the cell observer logic
+        const cellObserver = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const cell = entry.target;
+                    cell.classList.add('is-visible');
+                    const titleEl = cell.querySelector('h3');
+                    const descEl = cell.querySelector('p');
+                    
+                    // Animate only if it hasn't been animated before
+                    if (titleEl && !titleEl.dataset.animated) {
+                         titleEl.dataset.animated = 'true'; // Mark as animated
+                         setTimeout(() => {
+                            typeWriter(titleEl, titleEl.dataset.text, 50, () => {
+                                if(descEl) typeWriter(descEl, descEl.dataset.text, 30);
+                            });
+                         }, 500); // Delay to sync with fade-in
+                    }
+                    // We don't unobserve, but the animated flag prevents re-triggering
+                } else {
+                    // This part is removed to prevent glitchy resetting
+                    // entry.target.classList.remove('is-visible');
+                }
+            });
+        }, { 
+            root: null, // viewport
+            threshold: 0.5 // Trigger when 50% of the item is visible
+        });
+
+        setTimeout(() => {
+            document.querySelectorAll('.service-cell').forEach(cell => {
+                cellObserver.observe(cell);
+            });
+        }, 500);
     });
 
     const askFaqBtn = document.getElementById('ask-faq');
