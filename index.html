@@ -26,8 +26,8 @@
           },
           keyframes: {
             flashBlue:{
-              '0%,90%,100%':{ backgroundImage: 'linear-gradient(90deg, #c21b35, #ef3c5b, #111111)' },
-              '45%,55%':{ backgroundImage: 'linear-gradient(90deg, #08D9D6, #08D9D6)' }
+                '0%, 100%': { backgroundPosition: '100% 50%' },
+                '45%, 55%': { backgroundPosition: '0% 50%' }
             },
             floaty: { '0%,100%': { transform: 'translateY(0)' }, '50%': { transform: 'translateY(-6px)' } },
             scroll: { '0%': { transform: 'translateX(0)' }, '100%': { transform: 'translateX(-100%)' } }
@@ -115,14 +115,14 @@
     /* Wordmark + accent animation */
     .grad-text{
       display:inline-block;
-      background-image: linear-gradient(90deg, #c21b35, #ef3c5b, #111111);
-      background-size:300% 100%;
+      background-image: linear-gradient(90deg, #08D9D6, #08D9D6, #c21b35, #ef3c5b, #c21b35);
+      background-size: 250% 100%;
       background-repeat:no-repeat;
       -webkit-background-clip:text;
       background-clip:text;
       color:transparent;
       -webkit-text-fill-color:transparent; /* Safari */
-      animation: flashBlue 12s ease-in-out infinite; /* pulse every ~12s */
+      animation: flashBlue 12s ease-in-out infinite;
     }
     .grad-text-static{
       background: linear-gradient(90deg,#c21b35,#ef3c5b,#c21b35);
@@ -132,8 +132,8 @@
     }
     /* Brief solid electric blue, then return to corporate gradient */
     @keyframes flashBlue{
-      0%,90%,100%{ background-image: linear-gradient(90deg, #c21b35, #ef3c5b, #111111); }
-      45%,55%   { background-image: linear-gradient(90deg, #08D9D6, #08D9D6); }
+      0%, 100% { background-position: 100% 50%; }
+      45%, 55% { background-position: 0% 50%; }
     }
 
     /* Prefer dark grey globally */
@@ -146,22 +146,61 @@
 
     /* Persistent bottom-left brand badge */
     #brand-badge{
-      position:fixed; left:1.5rem; bottom:1.5rem; z-index:60;
-      width:56px; height:56px; border-radius:9999px;
-      display:flex; align-items:center; justify-content:center;
-      background:rgba(255,255,255,.95); backdrop-filter: blur(6px);
-      border:1px solid rgba(15,23,42,.08); box-shadow:0 10px 25px rgba(0,0,0,.2);
-      cursor:pointer; transition:transform .2s, box-shadow .2s;
+      position:fixed; left:1rem; bottom:1rem; z-index:60;
+      width:64px; height:64px;
+      cursor:pointer; transition:transform .2s, filter .2s;
+      filter: drop-shadow(0 5px 15px rgba(0,0,0,.2));
     }
-    .dark #brand-badge{ background:rgba(26,26,26,.92); border-color:#2a2a2a; }
-    #brand-badge:hover{ transform: translateY(-2px) scale(1.03); box-shadow:0 14px 30px rgba(0,0,0,.28); }
-    #brand-badge img{ width:30px; height:30px; object-fit:contain; }
-    #brand-badge .hint{
-      position:absolute; left:72px; bottom:50%; transform: translateY(50%);
-      background:#111; color:#fff; font-size:.75rem; padding:.35rem .6rem; border-radius:.5rem;
-      opacity:0; pointer-events:none; white-space:nowrap; transition:opacity .2s, transform .2s;
+    #brand-badge:hover{ 
+      transform: translateY(-2px) scale(1.05); 
+      filter: drop-shadow(0 8px 20px rgba(0,0,0,.3));
     }
-    #brand-badge:hover .hint{ opacity:1; transform: translateY(50%) translateX(.1rem); }
+    #brand-badge img{ width:100%; height:100%; object-fit:contain; }
+
+    /* Footer Styling */
+    footer {
+        position: relative;
+        background-image: url('/assets/email.jpg');
+        background-size: cover;
+        background-position: center;
+        color: white;
+    }
+
+    footer::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: rgba(0, 0, 0, 0.6);
+        z-index: 1;
+    }
+
+    footer > div {
+        position: relative;
+        z-index: 2;
+    }
+
+    footer .text-gray-600, footer .dark\:text-slate-300, footer p {
+        color: #d1d5db !important;
+    }
+    footer .text-gray-500 {
+        color: #9ca3af !important;
+    }
+    footer a {
+        color: #f9fafb !important;
+    }
+    footer a:hover {
+        text-decoration: underline;
+    }
+    footer h3 {
+        color: #f9fafb !important;
+    }
+    footer .border-slate-200, footer .dark\:border-slate-800 {
+        border-color: rgba(255, 255, 255, 0.2) !important;
+    }
+    .panel-overlay, .panel-container { transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
   </style>
 
   <!-- Favicons -->
@@ -184,6 +223,7 @@
         </div>
       </a>
       <div class="flex items-center gap-2">
+        <a href="#" class="js-cta bg-brand-600 text-white px-4 py-2 rounded-full text-sm font-semibold shadow-lg hover:shadow-xl transition-shadow flex items-center gap-2">Get Started</a>
         <a href="#" class="hidden sm:block px-4 py-2 text-sm font-semibold rounded-lg border border-slate-300 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-900">Login</a>
         <button id="open-menu-btn" class="p-2 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800" aria-label="Open menu"><i data-lucide="menu" class="h-5 w-5"></i></button>
       </div>
@@ -226,16 +266,16 @@
                   Enjoy lower costs, fast onboarding, real-time reporting, and tools to reduce fraud and chargebacks.
                 </p>
             </div>
-            <div class="w-full">
+            <div class="w-full space-y-4">
                 <div class="relative">
                     <input type="text" id="faq-question" placeholder="Ask about pricing, features..." class="field w-full p-4 pr-12 text-lg rounded-full bg-white/70 dark:bg-slate-900/70 border border-slate-300 dark:border-slate-700 focus:ring-2 focus:ring-brand-400 focus:border-transparent transition-all">
                     <button id="ask-faq" class="absolute top-1/2 right-2 -translate-y-1/2 p-2 rounded-full bg-brand-600 text-white hover:bg-brand-700 transition-colors">
                         <i data-lucide="arrow-up" class="h-5 w-5"></i>
                     </button>
                 </div>
-                <div id="hero-actions" class="mt-6 flex flex-wrap justify-center items-center gap-3">
+                <div id="hero-actions" class="flex flex-wrap justify-center items-center gap-3">
                     <button class="js-cta bg-brand-600 text-white px-4 py-2 rounded-full text-sm font-medium hover:bg-brand-700 transition-colors">Get Started</button>
-                    <div id="animated-features-container" class="relative flex items-center justify-center min-w-[150px] h-[38px] mx-2"></div>
+                    <button class="bg-slate-100 dark:bg-slate-800 px-4 py-2 rounded-full text-sm font-medium hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors">Chargeback Help</button>
                     <button class="js-support bg-slate-100 dark:bg-slate-800 px-4 py-2 rounded-full text-sm font-medium hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors">Contact Support</button>
                 </div>
                 <div id="faq-answer" class="mt-6 p-4 text-left rounded-lg bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 hidden"></div>
@@ -245,25 +285,25 @@
   </section>
 
   <!-- Payment Services -->
-  <section id="payments" class="py-8 md:py-12 bg-slate-50 dark:bg-slate-900/40 border-y border-slate-200/70 dark:border-slate-800">
-    <div class="max-w-5xl mx-auto px-4 text-center">
-      <h2 class="text-3xl font-bold mb-3 animate-on-scroll font-ubuntu"></h2>
-      <p class="text-gray-600 dark:text-slate-300 mb-10">Everything you need to accept payments and manage your business, all in one place.</p>
+  <section id="payments" class="py-12">
+    <div class="max-w-5xl mx-auto px-4 text-right">
+      <h2 class="text-4xl font-bold mb-4 animate-on-scroll font-ubuntu"></h2>
+      <p class="text-lg text-gray-600 dark:text-slate-300 mb-12">Everything you need to accept payments and manage your business, all in one place.</p>
     </div>
     <div class="relative w-full overflow-hidden group [mask-image:_linear-gradient(to_right,transparent_0,_black_128px,_black_calc(100%-128px),transparent_100%)]">
         <div class="flex animate-scroll group-hover:[animation-play-state:paused]">
-            <div class="flex-shrink-0 flex items-center space-x-4" id="services-container-1"></div>
-            <div class="flex-shrink-0 flex items-center space-x-4" id="services-container-2" aria-hidden="true"></div>
+            <div class="flex-shrink-0 flex items-center space-x-8" id="services-container-1"></div>
+            <div class="flex-shrink-0 flex items-center space-x-8" id="services-container-2" aria-hidden="true"></div>
         </div>
     </div>
   </section>
 
   <!-- Integrations Section -->
   <section id="integrations" class="py-8 md:py-12">
-    <div class="max-w-5xl mx-auto px-4 text-center">
-      <h2 class="text-3xl font-bold mb-3 animate-on-scroll font-ubuntu"></h2>
-      <p class="text-gray-600 dark:text-slate-300 mb-10">Connect MerchantHaus with the platforms you already use.</p>
-      <div class="flex justify-center items-center gap-8 md:gap-16">
+    <div class="max-w-5xl mx-auto px-4 text-left">
+      <h2 class="text-4xl font-bold mb-4 animate-on-scroll font-ubuntu"></h2>
+      <p class="text-lg text-gray-600 dark:text-slate-300 mb-12">Connect MerchantHaus with the platforms you already use.</p>
+      <div class="flex justify-start items-center gap-8 md:gap-16">
         <a href="#" class="block hover:scale-105 transition-transform duration-300">
           <img src="shopifylight.png" alt="Shopify Logo" class="h-12 md:h-14 block dark:hidden">
           <img src="shopifydark.png" alt="Shopify Logo" class="h-12 md:h-14 hidden dark:block">
@@ -276,6 +316,62 @@
     </div>
   </section>
     
+  <!-- Setup Checklist -->
+  <section id="checklist" class="py-16 bg-slate-50 dark:bg-slate-900/40 border-y border-slate-200/70 dark:border-slate-800">
+    <div class="max-w-7xl mx-auto px-4 text-center">
+      <h2 class="text-3xl font-ubuntu font-bold animate-on-scroll">Setup Checklist: What You’ll Need to Begin</h2>
+      <p class="mt-4 max-w-3xl mx-auto text-slate-600 dark:text-slate-300">
+        Here’s everything we’ll ask for during setup—business details, security info, documentation. We’ll guide you step‑by‑step.
+      </p>
+      <div class="grid md:grid-cols-3 gap-8 mt-12 text-left">
+        <!-- Card 1: Business Information -->
+        <div class="bg-white dark:bg-slate-950 p-6 rounded-xl border border-slate-200 dark:border-slate-800 space-y-4">
+          <div class="flex items-center gap-4">
+            <div class="w-12 h-12 rounded-full bg-brand-600/10 dark:bg-brand-400/10 flex-shrink-0 flex items-center justify-center text-brand-600 dark:text-brand-400">
+              <i data-lucide="briefcase" class="w-6 h-6"></i>
+            </div>
+            <h3 class="text-xl font-ubuntu font-bold">Business Information</h3>
+          </div>
+          <ul class="list-disc pl-5 space-y-2 text-sm text-slate-600 dark:text-slate-400">
+            <li>Business information (name, address, industry)</li>
+            <li>Owner/representative info (name, contact, ID)</li>
+            <li>Bank account for payouts</li>
+            <li>Verification documents (e.g. photo ID, business registration)—upload when prompted</li>
+          </ul>
+        </div>
+        <!-- Card 2: Security & Compliance -->
+        <div class="bg-white dark:bg-slate-950 p-6 rounded-xl border border-slate-200 dark:border-slate-800 space-y-4">
+          <div class="flex items-center gap-4">
+            <div class="w-12 h-12 rounded-full bg-brand-600/10 dark:bg-brand-400/10 flex-shrink-0 flex items-center justify-center text-brand-600 dark:text-brand-400">
+              <i data-lucide="shield-check" class="w-6 h-6"></i>
+            </div>
+            <h3 class="text-xl font-ubuntu font-bold">Security & Compliance</h3>
+          </div>
+          <ul class="list-disc pl-5 space-y-2 text-sm text-slate-600 dark:text-slate-400">
+            <li>Basic fraud and security setup (required for processing)</li>
+            <li>Evidence of PCI DSS certification or self-assessment</li>
+            <li>Use of PCI-compliant POS systems or software</li>
+            <li>Merchant attestation of cardholder data handling policies</li>
+          </ul>
+        </div>
+        <!-- Card 3: Platform Readiness -->
+        <div class="bg-white dark:bg-slate-950 p-6 rounded-xl border border-slate-200 dark:border-slate-800 space-y-4">
+          <div class="flex items-center gap-4">
+            <div class="w-12 h-12 rounded-full bg-brand-600/10 dark:bg-brand-400/10 flex-shrink-0 flex items-center justify-center text-brand-600 dark:text-brand-400">
+              <i data-lucide="rocket" class="w-6 h-6"></i>
+            </div>
+            <h3 class="text-xl font-ubuntu font-bold">Platform Readiness</h3>
+          </div>
+          <ul class="list-disc pl-5 space-y-2 text-sm text-slate-600 dark:text-slate-400">
+            <li>User account creation and login testing</li>
+            <li>Review of available transaction and reconciliation tools</li>
+            <li>Setup of reporting email or dashboard notifications</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- Footer -->
   <footer class="border-t border-slate-200 dark:border-slate-800 py-10">
     <div class="max-w-7xl mx-auto px-4 grid sm:grid-cols-2 lg:grid-cols-4 gap-8 text-sm">
@@ -284,43 +380,64 @@
             <img src="shield/shield.png" alt="MerchantHaus Logo" class="h-9 w-9">
             <span class="text-2xl font-ubuntu font-bold tracking-wide grad-text">MerchantHaus</span>
         </a>
-        <p class="text-gray-600 dark:text-slate-300">Payments made simple.</p>
+        <p>Payments made simple.</p>
       </div>
       <nav class="space-y-2">
         <h3 class="font-semibold font-ubuntu">Product</h3>
-        <a href="#payments" class="block hover:underline">Payment Services</a>
-        <a href="#integrations" class="block hover:underline">Integrations</a>
-        <a href="#checklist" class="block hover:underline">Setup Checklist</a>
-        <a href="compliance.html" class="block hover:underline">Compliance</a>
+        <a href="#payments" class="block">Payment Services</a>
+        <a href="#integrations" class="block">Integrations</a>
+        <a href="#checklist" class="block">Setup Checklist</a>
+        <a href="compliance.html" class="block">Compliance</a>
       </nav>
       <nav class="space-y-2">
         <h3 class="font-semibold font-ubuntu">Support</h3>
-        <a href="#" class="js-support block hover:underline">Contact Support</a>
-        <a href="#faq-question" class="block hover:underline">FAQs</a>
+        <a href="#" class="js-support block">Contact Support</a>
+        <a href="#faq-question" class="block">FAQs</a>
       </nav>
       <nav class="space-y-2">
         <h3 class="font-semibold font-ubuntu">Legal</h3>
-        <a href="Privacy_policy.html" class="block hover:underline">Privacy Policy</a>
-        <a href="terms.html" class="block hover:underline">Terms & Conditions</a>
+        <a href="Privacy_policy.html" class="block">Privacy Policy</a>
+        <a href="terms.html" class="block">Terms & Conditions</a>
       </nav>
     </div>
-    <div class="text-center text-xs text-gray-500 pt-8 mt-8 border-t border-slate-200 dark:border-slate-800">© <span id="year"></span> Merchant Haus. All rights reserved.</div>
+    <div class="text-center text-xs pt-8 mt-8 border-t">© <span id="year"></span> Merchant Haus. All rights reserved.</div>
   </footer>
-
-  <!-- Minimal target so the CTA always does something -->
-  <section id="checklist" class="py-16">
-    <div class="max-w-5xl mx-auto px-4 text-center">
-      <h2 class="text-2xl font-ubuntu font-bold">Setup Checklist</h2>
-      <p class="mt-2 font-lexend" style="font-weight:100">
-        We’ll guide you step-by-step through business details, owner verification, and payout info so you can start processing quickly.
-      </p>
-    </div>
-  </section>
 
   <!-- Persistent bottom-left brand badge -->
   <div id="brand-badge">
-    <img src="/assets/goldshield.png" alt="Brand Badge">
-    <div class="hint">Get Started</div>
+    <img src="shield/shield.png" alt="Brand Badge">
+  </div>
+
+  <!-- Slide-in Sign-up Form -->
+  <div id="signup-panel-overlay" class="panel-overlay fixed inset-0 bg-black/60 z-50 opacity-0 invisible">
+    <div id="signup-panel" class="panel-container fixed top-0 right-0 h-full w-full max-w-2xl bg-white dark:bg-slate-900 shadow-2xl transform translate-x-full flex flex-col">
+        <div class="p-6 sm:p-8 relative flex-shrink-0">
+            <button id="close-signup-panel-btn" class="absolute top-4 right-4 text-slate-500 hover:text-slate-800 dark:hover:text-slate-200"><i data-lucide="x" class="h-6 w-6"></i></button>
+            <div class="mb-6">
+                <div class="flex justify-between mb-2 text-sm font-semibold text-slate-800 dark:text-slate-200">
+                    <p>Step <span id="current-step-text">1</span> of 3</p>
+                    <p id="step-name">Account Details</p>
+                </div>
+                <div class="w-full bg-slate-200 dark:bg-slate-700 rounded-full h-2.5 overflow-hidden">
+                    <div id="progress-bar" class="bg-brand-600 h-full rounded-full" style="width: 33%"></div>
+                </div>
+            </div>
+        </div>
+        <div class="px-6 sm:px-8 pb-4 flex-grow overflow-y-auto">
+            <form id="signup-form" novalidate></form>
+            <div id="form-message" class="mt-4 text-center text-sm"></div>
+        </div>
+        <div class="p-6 sm:p-8 mt-auto pt-6 border-t border-slate-200 dark:border-slate-800 flex justify-between items-center flex-shrink-0">
+            <button type="button" id="help-btn" class="text-slate-500 font-semibold hover:text-brand-600 dark:hover:text-brand-400 transition-colors flex items-center gap-1">
+                <i data-lucide="help-circle" class="h-4 w-4"></i> Need Help?
+            </button>
+            <div class="flex items-center gap-4">
+                <button type="button" id="prev-btn" class="bg-slate-200 text-slate-800 dark:bg-slate-700 dark:text-slate-200 px-6 py-2.5 rounded-lg font-semibold hover:bg-slate-300 dark:hover:bg-slate-600 transition-all invisible">Previous</button>
+                <button type="button" id="next-btn" class="bg-brand-600 text-white px-6 py-2.5 rounded-lg font-semibold hover:bg-brand-700 transition-all shadow-sm hover:shadow-md">Next</button>
+                <button type="submit" id="submit-btn" form="signup-form" class="bg-brand-600 text-white px-6 py-2.5 rounded-lg font-bold hover:bg-brand-700 transition-all shadow-sm hover:shadow-md hidden">Create Account</button>
+            </div>
+        </div>
+    </div>
   </div>
 
   <!-- Support Modal -->
@@ -344,44 +461,12 @@
     </div>
   </div>
 
-  <!-- Floating Action Buttons -->
-  <div id="floating-actions" class="fixed bottom-6 right-6 z-40 flex flex-col gap-3 items-end transition-all duration-300 transform translate-y-20 opacity-0">
-    <button class="js-support bg-white dark:bg-slate-800 px-4 py-2 rounded-full text-sm font-semibold shadow-lg hover:shadow-xl transition-shadow flex items-center gap-2">
-      <i data-lucide="message-circle" class="h-4 w-4"></i> Contact Support
-    </button>
-    <button class="js-cta bg-brand-600 text-white px-4 py-2 rounded-full text-sm font-semibold shadow-lg hover:shadow-xl transition-shadow flex items-center gap-2">
-      <i data-lucide="arrow-right" class="h-4 w-4"></i> Get Started
-    </button>
-  </div>
-
 
   <!-- Scripts -->
   <script>
     document.addEventListener('DOMContentLoaded', () => {  
         if (window.lucide) lucide.createIcons();  
         
-        const features = ["Omnichannel", "Multi-Processor", "Virtual Terminal", "ACH & eCheck", "Recurring Billing", "Tokenization", "Fraud Tools", "Chargeback Help", "Dual Pricing", "White-Label", "API-Driven", "Invoicing & Pay Links", "POS Integration", "Real-Time Reporting", "Custom Fields", "PCI Compliant", "Sandbox Access", "Subscription Plans", "AI Anti Fraud Systems", "AI Consulting", "Biller Genie", "Collect Checkout", "Shopify"];
-        let currentFeatureIndex = 0;
-        const animatedFeaturesContainer = document.getElementById('animated-features-container');
-        const displayNextFeature = () => {
-            if (!animatedFeaturesContainer) return;
-            animatedFeaturesContainer.innerHTML = '';
-            const featureText = features[currentFeatureIndex];
-            const featureElement = document.createElement('div');
-            featureElement.className = 'feature-display';
-            featureElement.textContent = featureText;
-            animatedFeaturesContainer.appendChild(featureElement);
-            setTimeout(() => { featureElement.classList.add('active'); }, 50);
-            setTimeout(() => {
-                featureElement.classList.remove('active'); featureElement.classList.add('exiting');
-                setTimeout(() => {  
-                    currentFeatureIndex = (currentFeatureIndex + 1) % features.length;  
-                    displayNextFeature();  
-                }, 500);
-            }, 3000);
-        };
-        displayNextFeature();
-
         const services = [
             { icon: "smartphone", title: "Accept Payments Anywhere", description: "Online, in‑store, or on the go." },
             { icon: "git-pull-request-arrow", title: "Smart Processing & Routing", description: "Reduce costs and minimize fraud." },
@@ -398,14 +483,14 @@
             const renderServices = (container) => {
                 services.forEach(service => {
                     const serviceEl = document.createElement('div');
-                    serviceEl.className = 'service-cell p-4 w-auto flex-shrink-0 rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-950 flex items-center gap-4 transform hover:-translate-y-1 transition-transform duration-300';
+                    serviceEl.className = 'service-cell p-4 w-auto flex-shrink-0 flex items-center gap-4';
                     serviceEl.innerHTML = `
                         <div class="w-10 h-10 rounded-full bg-brand-600/10 dark:bg-brand-400/10 flex-shrink-0 flex items-center justify-center text-brand-600 dark:text-brand-400">
                             <i data-lucide="${service.icon}" class="w-5 h-5"></i>
                         </div>
                         <div class="text-left">
-                            <h3 class="font-bold text-sm font-ubuntu" data-text="${service.title}"></h3>
-                            <p class="text-xs text-slate-600 dark:text-slate-400" data-text="${service.description}"></p>
+                            <h3 class="font-bold text-base font-ubuntu" data-text="${service.title}"></h3>
+                            <p class="text-sm text-slate-600 dark:text-slate-400" data-text="${service.description}"></p>
                         </div>
                     `;
                     container.appendChild(serviceEl);
@@ -461,24 +546,50 @@
         });
     }
 
+    const openPanel = (overlayId, panelId) => {
+        document.getElementById(overlayId).classList.remove('invisible', 'opacity-0');
+        document.getElementById(panelId).classList.remove('translate-x-full');
+    };
+    const closePanel = (overlayId, panelId) => {
+        document.getElementById(panelId).classList.add('translate-x-full');
+        setTimeout(() => {
+            document.getElementById(overlayId).classList.add('invisible', 'opacity-0');
+        }, 300);
+    };
+
+    // Signup Panel Logic
+    const signupOverlay = document.getElementById('signup-panel-overlay');
+    const signupPanel = document.getElementById('signup-panel');
+    const closeSignupBtn = document.getElementById('close-signup-panel-btn');
+
+    document.querySelectorAll('.js-cta, #brand-badge').forEach(el => {
+        el.addEventListener('click', (e) => {
+            e.preventDefault();
+            openPanel('signup-panel-overlay', 'signup-panel');
+            initializeForm();
+        });
+    });
+
+    if (closeSignupBtn) {
+        closeSignupBtn.addEventListener('click', () => closePanel('signup-panel-overlay', 'signup-panel'));
+    }
+    if (signupOverlay) {
+        signupOverlay.addEventListener('click', (e) => {
+            if (e.target.id === 'signup-panel-overlay') {
+                closePanel('signup-panel-overlay', 'signup-panel');
+            }
+        });
+    }
+
 
     const supportModal = document.getElementById('support-modal');
-    const supportForm = document.getElementById('support-form');
-    const supportOut = document.getElementById('support-out');
     document.querySelectorAll('.js-support').forEach(el => {
       el.addEventListener('click', (e) => { e.preventDefault(); supportModal.classList.remove('hidden'); });
     });
     supportModal.addEventListener('click', (e) => {
       if (e.target.dataset.close !== undefined) supportModal.classList.add('hidden');
     });
-    supportForm.addEventListener('submit', (e) => {
-      e.preventDefault();
-      supportOut.textContent = 'Sending message...';
-      setTimeout(() => {
-        supportOut.textContent = 'Success! We have received your message and will get back to you shortly.';
-        supportForm.reset();
-      }, 1000);
-    });
+    
 
     const animatedTagline = document.getElementById('animated-tagline');
     const taglineText = "safe . smart . secure";
@@ -505,7 +616,8 @@
 
         const headingTexts = {
             "payments": "Payment Services Built for You",
-            "integrations": "Integrate with Your Favorite Tools"
+            "integrations": "Integrate with Your Favorite Tools",
+            "checklist": "Setup Checklist: What You’ll Need to Begin"
         };
 
         const headingObserver = new IntersectionObserver((entries, observer) => {
@@ -516,7 +628,7 @@
                     const text = headingTexts[sectionId];
                     if (text && !heading.dataset.animated) {
                         heading.dataset.animated = 'true';
-                        typeWriter(heading, text, 50);
+                        typeWriter(heading, text, 75);
                         observer.unobserve(heading);
                     }
                 }
@@ -601,34 +713,106 @@
     askFaqBtn.addEventListener('click', handleFaqSubmit);
     faqQuestionInput.addEventListener('keypress', (e) => { if (e.key === 'Enter') handleFaqSubmit(); });
 
-    const heroActions = document.getElementById('hero-actions');
-    const floatingActions = document.getElementById('floating-actions');
-    
-    const observer = new IntersectionObserver(
-        ([entry]) => {
-            if (!floatingActions) return;
-            if (entry.isIntersecting) {
-                floatingActions.classList.add('translate-y-20', 'opacity-0');
-            } else {
-                floatingActions.classList.remove('translate-y-20', 'opacity-0');
+    // Multi-step form logic
+    let currentStep = 0;
+    const stepNames = ["Account Details", "Company Information", "Finalize Account"];
+
+    function initializeForm() {
+        const form = document.getElementById('signup-form');
+        if (!form) return;
+        form.innerHTML = `
+            <!-- Step 1: Account Details -->
+            <div id="step-1" class="form-step">
+                <h2 class="text-2xl font-bold mb-2">Primary Contact Information</h2>
+                <p class="text-sm text-slate-500 mb-6">This person will be the primary user on the account.</p>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                        <label for="firstName" class="block text-sm font-semibold mb-1">First Name*</label>
+                        <input type="text" id="firstName" name="firstName" class="w-full p-3 rounded-lg bg-slate-100 dark:bg-slate-800" required>
+                    </div>
+                    <div>
+                        <label for="lastName" class="block text-sm font-semibold mb-1">Last Name*</label>
+                        <input type="text" id="lastName" name="lastName" class="w-full p-3 rounded-lg bg-slate-100 dark:bg-slate-800" required>
+                    </div>
+                    <div class="md:col-span-2">
+                        <label for="email" class="block text-sm font-semibold mb-1">Email Address*</label>
+                        <input type="email" id="email" name="email" class="w-full p-3 rounded-lg bg-slate-100 dark:bg-slate-800" required>
+                    </div>
+                    <div>
+                        <label for="phone" class="block text-sm font-semibold mb-1">Phone Number*</label>
+                        <input type="tel" id="phone" name="phone" class="w-full p-3 rounded-lg bg-slate-100 dark:bg-slate-800" required>
+                    </div>
+                    <div>
+                        <label for="password" class="block text-sm font-semibold mb-1">Password*</label>
+                        <input type="password" id="password" name="password" class="w-full p-3 rounded-lg bg-slate-100 dark:bg-slate-800" required>
+                    </div>
+                </div>
+            </div>
+            <!-- Step 2: Business Information -->
+            <div id="step-2" class="form-step hidden">
+                <h2 class="text-2xl font-bold mb-6">Company Information</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div class="md:col-span-2">
+                        <label for="companyName" class="block text-sm font-semibold mb-1">Company Name*</label>
+                        <input type="text" id="companyName" name="companyName" class="w-full p-3 rounded-lg bg-slate-100 dark:bg-slate-800" required>
+                    </div>
+                </div>
+            </div>
+            <!-- Step 3: Final Details -->
+            <div id="step-3" class="form-step hidden">
+                <h2 class="text-2xl font-bold mb-2">Finalize Your Account</h2>
+                <p class="text-sm text-slate-500 mb-6">Create a username for logging into the gateway and accept the terms.</p>
+                <div class="space-y-4">
+                    <div>
+                        <label for="username" class="block text-sm font-semibold mb-1">Primary Username*</label>
+                        <input type="text" id="username" name="username" class="w-full p-3 rounded-lg bg-slate-100 dark:bg-slate-800" required>
+                    </div>
+                    <div class="flex items-start pt-4">
+                        <div class="flex items-center h-5">
+                            <input id="terms" name="terms" type="checkbox" class="focus:ring-brand-600 h-4 w-4 text-brand-600 rounded" required>
+                        </div>
+                        <div class="ml-3 text-sm">
+                            <label for="terms">I agree to the <a href="#" class="font-semibold text-brand-600 hover:underline">Terms and Conditions</a>*</label>
+                        </div>
+                    </div>
+                </div>
+            </div>`;
+        
+        const steps = form.querySelectorAll('.form-step');
+        const prevBtn = document.getElementById('prev-btn');
+        const nextBtn = document.getElementById('next-btn');
+        const submitBtn = document.getElementById('submit-btn');
+        const progressBar = document.getElementById('progress-bar');
+        const currentStepText = document.getElementById('current-step-text');
+        const stepNameEl = document.getElementById('step-name');
+
+        function updateFormStep() {
+            steps.forEach((step, index) => {
+                step.classList.toggle('hidden', index !== currentStep);
+            });
+            progressBar.style.width = `${((currentStep + 1) / steps.length) * 100}%`;
+            currentStepText.textContent = currentStep + 1;
+            stepNameEl.textContent = stepNames[currentStep];
+            prevBtn.classList.toggle('invisible', currentStep === 0);
+            nextBtn.classList.toggle('hidden', currentStep === steps.length - 1);
+            submitBtn.classList.toggle('hidden', currentStep !== steps.length - 1);
+        }
+
+        nextBtn.addEventListener('click', () => {
+            if (currentStep < steps.length - 1) {
+                currentStep++;
+                updateFormStep();
             }
-        },
-        { threshold: 0.1 }
-    );
+        });
+        prevBtn.addEventListener('click', () => {
+            if (currentStep > 0) {
+                currentStep--;
+                updateFormStep();
+            }
+        });
 
-    if (heroActions) {
-        observer.observe(heroActions);
+        updateFormStep();
     }
-
-    function runCTA() {
-      const target = document.getElementById('checklist');
-      if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    }
-    document.addEventListener('DOMContentLoaded', () => {
-      document.querySelectorAll('#brand-badge, .js-cta').forEach(el => {
-        el.addEventListener('click', (e) => { e.preventDefault(); runCTA(); });
-      });
-    });
   </script>
 </body>
 </html>
