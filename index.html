@@ -30,14 +30,14 @@
             scroll: { '0%': { transform: 'translateX(0)' }, '100%': { transform: 'translateX(-100%)' } },
             fadeIn: { '0%': { opacity: '0' }, '100%': { opacity: '1' } },
             kenBurns: {
-              '0%': { backgroundSize: '100%', backgroundPosition: 'center' },
-              '100%': { backgroundSize: '110%', backgroundPosition: 'top left' }
+              '0%': { transform: 'scale(1) rotate(0deg)', backgroundPosition: 'center' },
+              '100%': { transform: 'scale(1.1) rotate(1deg)', backgroundPosition: 'top left' }
             }
           },
           animation: {  
             floaty: 'floaty 6s ease-in-out infinite',
             scroll: 'scroll 40s linear infinite',
-            fadeIn: 'fadeIn 1.5s ease-in-out',
+            fadeIn: 'fadeIn 1.5s ease-in-out forwards',
             kenBurns: 'kenBurns 20s ease-in-out infinite alternate'
           }
         }
@@ -130,10 +130,17 @@
         transition-delay: 0.3s;
     }
 
-    .animate-fadeIn {
-      animation-fill-mode: forwards;
+    .hero-bg-container::before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background-image: url('hero.jpg');
+        background-size: 100%;
+        background-position: center;
+        background-repeat: no-repeat;
+        animation: kenBurns 20s ease-in-out infinite alternate;
+        z-index: -20;
     }
-
 
     /* Wordmark + accent animation */
     .grad-text, .grad-text-static {
@@ -245,8 +252,7 @@
 
   <!-- Hero -->
   <div class="relative">
-    <section class="relative overflow-hidden animate-fadeIn">
-        <div class="absolute inset-0 bg-cover bg-center -z-20 animate-kenBurns" style="background-image: url('hero.jpg');"></div>
+    <section class="relative overflow-hidden animate-fadeIn hero-bg-container">
         <div class="absolute inset-0 bg-black/50 -z-10"></div>
 
       <div class="max-w-7xl mx-auto px-4 pt-16 md:pt-24 pb-28">
