@@ -254,7 +254,7 @@
                 </p>
             </div>
             <div class="relative rounded-xl overflow-hidden p-4">
-                <video autoplay loop muted playsinline class="absolute top-0 left-0 w-full h-full object-cover -z-10">
+                <video autoplay loop muted playsinline class="absolute top-0 left-0 w-full h-full object-cover -z-10" poster="https://placehold.co/600x400/000000/FFFFFF?text=Video+Loading...">
                     <source src="assets/video.mp4" type="video/mp4">
                     Your browser does not support the video tag.
                 </video>
@@ -279,10 +279,10 @@
   </section>
 
   <!-- Payment Services -->
-  <section id="payments" class="py-12">
+  <section id="payments" class="py-12" style="background-color: #ccf3ca;">
     <div class="max-w-5xl mx-auto px-4 text-right">
-      <h2 class="text-4xl font-bold mb-4 animate-on-scroll font-ubuntu"></h2>
-      <p class="text-lg text-gray-600 dark:text-slate-300 mb-12">Everything you need to accept payments and manage your business, all in one place.</p>
+      <h2 class="text-4xl font-bold mb-4 animate-on-scroll font-ubuntu" style="color: #524848;"></h2>
+      <p class="text-lg mb-12" style="color: #524848;">Everything you need to accept payments and manage your business, all in one place.</p>
     </div>
     <div class="relative w-full overflow-hidden group [mask-image:_linear_gradient(to_right,transparent_0,_black_128px,_black_calc(100%-128px),transparent_100%)]">
         <div class="flex animate-scroll group-hover:[animation-play-state:paused]">
@@ -479,12 +479,12 @@
                     const serviceEl = document.createElement('div');
                     serviceEl.className = 'service-cell p-4 w-auto flex-shrink-0 flex items-center gap-4';
                     serviceEl.innerHTML = `
-                        <div class="w-10 h-10 rounded-full bg-brand-600/10 dark:bg-brand-400/10 flex-shrink-0 flex items-center justify-center text-brand-600 dark:text-brand-400">
+                        <div class="w-10 h-10 rounded-full flex-shrink-0 flex items-center justify-center" style="background-color: rgba(82, 72, 72, 0.1); color: #524848;">
                             <i data-lucide="${service.icon}" class="w-5 h-5"></i>
                         </div>
                         <div class="text-left">
-                            <h3 class="font-bold text-base font-ubuntu">${service.title}</h3>
-                            <p class="text-sm text-slate-600 dark:text-slate-400">${service.description}</p>
+                            <h3 class="font-bold text-base font-ubuntu" style="color: #524848;">${service.title}</h3>
+                            <p class="text-sm" style="color: #524848;">${service.description}</p>
                         </div>
                     `;
                     container.appendChild(serviceEl);
