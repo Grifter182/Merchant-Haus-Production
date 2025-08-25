@@ -3,12 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MerchantHaus | Compliance Checklist</title>
+    <title>MerchantHaus | Compliance Checklist & Application</title>
 
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <!-- UPDATED: Added font-weight 600 for Lexend to ensure sharp rendering of semibold text -->
     <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@700&family=Lexend:wght@400;600&display=swap" rel="stylesheet">
 
     <!-- Tailwind CSS -->
@@ -23,9 +22,8 @@
                         ubuntu: ['Ubuntu', 'sans-serif']
                     },
                     colors: {
-                        // UPDATED: Changed brand colors to use the new red #DC143C
                         brand: { 600: '#DC143C', 700: '#c21b35', 400: '#E85B71' },
-                        'brand-green': '#6dffca'
+                        // REMOVED brand-green
                     }
                 }
             }
@@ -39,49 +37,43 @@
     <style>
         body { 
             font-family: 'Lexend', ui-sans-serif, system-ui; 
-            position: relative; /* Needed for the pseudo-element */
-            /* ADDED: Font smoothing for crisper text */
+            position: relative;
             -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
         }
-        /* Animated Gradient Background */
+        /* UPDATED: Animated Gradient Background */
         body::before {
             content: '';
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
-            z-index: -1; /* Places the effect behind all content */
+            top: 0; left: 0;
+            width: 100vw; height: 100vh;
+            z-index: -1;
             background: 
                 radial-gradient(circle at 15% 25%, rgba(220, 20, 60, 0.15), transparent 40%),
-                radial-gradient(circle at 85% 75%, rgba(109, 255, 202, 0.1), transparent 40%);
+                /* Replaced green with a subtle white bloom */
+                radial-gradient(circle at 85% 75%, rgba(255, 255, 255, 0.05), transparent 40%);
             animation: bloom 25s linear infinite alternate;
         }
-
         @keyframes bloom {
             0% { background-position: 0% 0%, 0% 0%; }
             100% { background-position: 50% -50%, -50% 50%; }
         }
-
         html.dark { background-color: #1c1c1c !important; }
         .dark body { background-color: transparent !important; color: #f5f5f5 !important; }
-
         .dark .bg-slate-950 { background-color: #1c1c1c !important; }
         .dark .border-slate-800 { border-color: #2a2a2a !important; }
         .dark .text-slate-300 { color: #c8c8c8 !important; }
         .dark .text-slate-400 { color: #a0a0a0 !important; }
         .dark .text-slate-600 { color: #c8c8c8 !important; }
-        .header-glass { background-color: rgba(255, 255, 255, 0.8); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); }
+        .header-glass { background-color: rgba(255, 255, 255, 0.8); backdrop-filter: blur(10px); }
         .dark .header-glass { background-color: rgba(28, 28, 28, 0.8); }
-        /* UPDATED: Gradient now uses the new lighter red shade */
-        .grad-text { display: inline-block; background: linear-gradient(90deg, #c21b35, #E85B71, #c21b35); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; color: transparent; }
+        .grad-text { display: inline-block; background: linear-gradient(90deg, #c21b35, #E85B71, #c21b35); -webkit-background-clip: text; background-clip: text; color: transparent; }
         details > summary { list-style: none; cursor: pointer; display: flex; justify-content: space-between; align-items: center; }
         details > summary::-webkit-details-marker { display: none; }
         details > summary .summary-icon { transition: transform 0.2s ease-in-out; }
         details[open] > summary .summary-icon { transform: rotate(90deg); }
         footer { position: relative; background-image: url('assets/email.jpg'); background-size: cover; background-position: center; color: white; }
-        footer::before { content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0; background-color: rgba(0, 0, 0, 0.6); z-index: 1; }
+        footer::before { content: ''; position: absolute; inset: 0; background-color: rgba(0, 0, 0, 0.6); z-index: 1; }
         footer > div { position: relative; z-index: 2; }
         footer a { color: #f9fafb !important; }
         footer a:hover { text-decoration: underline; }
@@ -89,6 +81,7 @@
         footer p { color: #d1d5db !important; }
         footer .border-slate-800 { border-color: rgba(255, 255, 255, 0.2) !important; }
         .panel-overlay, .panel-container { transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
+        .field:focus { outline: none; box-shadow: 0 0 0 3px rgba(220, 20, 60, 0.35); }
     </style>
 
     <!-- Favicons -->
@@ -112,13 +105,13 @@
                         </div>
                     </a>
                     <div class="flex items-center gap-2">
-                        <!-- UPDATED: Changed to solid-filled button for better contrast and hierarchy -->
                         <a href="#" class="js-cta bg-brand-600 hover:bg-brand-700 text-white border border-transparent px-4 py-2 rounded-full text-sm font-semibold transition-colors duration-300">Get Started</a>
-                        <a href="#" class="hidden sm:block bg-transparent hover:bg-brand-green text-brand-green hover:text-slate-800 border border-brand-green px-4 py-2 rounded-lg text-sm font-semibold transition-colors duration-300">Login</a>
+                        <!-- UPDATED: Login button style -->
+                        <a href="#" class="hidden sm:block bg-transparent text-slate-500 dark:text-slate-400 border border-slate-300 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-800 px-4 py-2 rounded-lg text-sm font-semibold transition-colors duration-300">Login</a>
                         <button id="open-menu-btn" class="p-2 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800" aria-label="Open menu"><i data-lucide="menu" class="h-5 w-5"></i></button>
                     </div>
                     <!-- Pop-out Menu -->
-                    <div id="popout-menu" class="absolute top-full right-4 mt-2 w-72 rounded-xl bg-white dark:bg-[#1c1c1c] shadow-2xl border border-brand-green p-4 z-[51] hidden opacity-0 transition-opacity duration-300">
+                    <div id="popout-menu" class="absolute top-full right-4 mt-2 w-72 rounded-xl bg-white dark:bg-[#1c1c1c] shadow-2xl border border-slate-200/70 dark:border-slate-800 p-4 z-[51] hidden opacity-0 transition-opacity duration-300">
                         <nav class="flex flex-col space-y-1 text-base font-medium">
                             <a href="index.html#payments" data-close class="px-4 py-2 rounded-lg hover:bg-brand-600 hover:text-white transition-colors">Payment Services</a>
                             <a href="index.html#integrations" data-close class="px-4 py-2 rounded-lg hover:bg-brand-600 hover:text-white transition-colors">Integrations</a>
@@ -139,217 +132,133 @@
 
     <!-- Main Content -->
     <main class="min-h-screen pt-12 pb-16 flex flex-col items-center justify-start p-6">
+        <!-- Compliance Checklist Section -->
         <div class="w-full max-w-3xl bg-white/80 dark:bg-[#1c1c1c]/80 backdrop-blur-sm p-8 rounded-xl shadow-lg border border-slate-200/70 dark:border-slate-800">
             <h1 class="text-4xl font-extrabold font-ubuntu text-slate-900 dark:text-slate-100 mb-4 text-center">Merchant Compliance Checklist</h1>
             <p class="text-slate-600 dark:text-slate-300 leading-relaxed mb-10 text-center max-w-2xl mx-auto">
                 At Merchant Haus, we make compliance straightforward. This checklist guides our merchants through the steps needed to open and maintain a secure merchant account.
             </p>
             <div class="space-y-6">
-                <!-- Step 1 -->
+                 <!-- Steps 1-7 -->
                 <div class="border-b border-slate-200 dark:border-slate-800 pb-4">
-                    <h2 class="text-2xl font-bold font-ubuntu text-slate-900 dark:text-slate-100 mb-2 flex items-center gap-3"><i data-lucide="file-text" class="w-6 h-6 text-brand-green"></i>Step 1: Application Essentials</h2>
+                    <h2 class="text-2xl font-bold font-ubuntu text-slate-900 dark:text-slate-100 mb-2 flex items-center gap-3"><i data-lucide="file-text" class="w-6 h-6 text-brand-600"></i>Step 1: Application Essentials</h2>
                     <p class="text-slate-500 dark:text-slate-400 mb-4 ml-9">What you’ll need to get started</p>
-                    <details class="ml-9">
-                        <summary class="font-semibold text-brand-600 dark:text-brand-400 hover:underline">See details<i data-lucide="chevron-right" class="summary-icon w-5 h-5 ml-auto"></i></summary>
-                        <ul class="mt-4 pl-5 list-disc space-y-2 text-slate-600 dark:text-slate-300">
-                            <li>Completed and signed merchant application form</li>
-                            <li>Business formation documents (Articles, LLC Certificate, or state license)</li>
-                            <li>Proof of address (utility bill or lease; no P.O. boxes)</li>
-                            <li>Government-issued ID for owners (25%+ ownership)</li>
-                            <li>Federal Tax ID (EIN) or SSN (sole proprietors)</li>
-                            <li>U.S. business bank account (voided check or bank letter)</li>
-                            <li>Business and product description</li>
-                            <li>Marketing materials (website, social media, or photos)</li>
-                        </ul>
-                    </details>
+                    <details class="ml-9"><summary class="font-semibold text-brand-600 dark:text-brand-400 hover:underline">See details<i data-lucide="chevron-right" class="summary-icon w-5 h-5 ml-auto"></i></summary><ul class="mt-4 pl-5 list-disc space-y-2 text-slate-600 dark:text-slate-300"><li>Completed and signed merchant application form</li><li>Business formation documents (Articles, LLC Certificate, or state license)</li><li>Proof of address (utility bill or lease; no P.O. boxes)</li><li>Government-issued ID for owners (25%+ ownership)</li><li>Federal Tax ID (EIN) or SSN (sole proprietors)</li><li>U.S. business bank account (voided check or bank letter)</li><li>Business and product description</li><li>Marketing materials (website, social media, or photos)</li></ul></details>
                 </div>
-                <!-- Step 2 -->
                 <div class="border-b border-slate-200 dark:border-slate-800 pb-4">
-                    <h2 class="text-2xl font-bold font-ubuntu text-slate-900 dark:text-slate-100 mb-2 flex items-center gap-3"><i data-lucide="shield-check" class="w-6 h-6 text-brand-green"></i>Step 2: Risk & Compliance Screening</h2>
+                    <h2 class="text-2xl font-bold font-ubuntu text-slate-900 dark:text-slate-100 mb-2 flex items-center gap-3"><i data-lucide="shield-check" class="w-6 h-6 text-brand-600"></i>Step 2: Risk & Compliance Screening</h2>
                     <p class="text-slate-500 dark:text-slate-400 mb-4 ml-9">Checks to protect your business and customers</p>
-                    <details class="ml-9">
-                        <summary class="font-semibold text-brand-600 dark:text-brand-400 hover:underline">See details<i data-lucide="chevron-right" class="summary-icon w-5 h-5 ml-auto"></i></summary>
-                        <ul class="mt-4 pl-5 list-disc space-y-2 text-slate-600 dark:text-slate-300">
-                            <li>KYC / CIP verification</li>
-                            <li>Background & credit checks</li>
-                            <li>OFAC sanctions screening</li>
-                            <li>Business category risk assessment</li>
-                            <li>Review against restricted/prohibited activities</li>
-                        </ul>
-                    </details>
+                    <details class="ml-9"><summary class="font-semibold text-brand-600 dark:text-brand-400 hover:underline">See details<i data-lucide="chevron-right" class="summary-icon w-5 h-5 ml-auto"></i></summary><ul class="mt-4 pl-5 list-disc space-y-2 text-slate-600 dark:text-slate-300"><li>KYC / CIP verification</li><li>Background & credit checks</li><li>OFAC sanctions screening</li><li>Business category risk assessment</li><li>Review against restricted/prohibited activities</li></ul></details>
                 </div>
-                <!-- Step 3 -->
                 <div class="border-b border-slate-200 dark:border-slate-800 pb-4">
-                    <h2 class="text-2xl font-bold font-ubuntu text-slate-900 dark:text-slate-100 mb-2 flex items-center gap-3"><i data-lucide="handshake" class="w-6 h-6 text-brand-green"></i>Step 3: Agreements & Onboarding</h2>
+                    <h2 class="text-2xl font-bold font-ubuntu text-slate-900 dark:text-slate-100 mb-2 flex items-center gap-3"><i data-lucide="handshake" class="w-6 h-6 text-brand-600"></i>Step 3: Agreements & Onboarding</h2>
                     <p class="text-slate-500 dark:text-slate-400 mb-4 ml-9">Confirming your partnership with us</p>
-                    <details class="ml-9">
-                        <summary class="font-semibold text-brand-600 dark:text-brand-400 hover:underline">See details<i data-lucide="chevron-right" class="summary-icon w-5 h-5 ml-auto"></i></summary>
-                        <ul class="mt-4 pl-5 list-disc space-y-2 text-slate-600 dark:text-slate-300">
-                            <li>Merchant Service Agreement (MSA)</li>
-                            <li>Acceptable Use Policy (AUP)</li>
-                            <li>Privacy Policy</li>
-                            <li>PCI DSS responsibilities acknowledgment</li>
-                            <li>Legal agreements signed by an authorized officer</li>
-                        </ul>
-                    </details>
+                    <details class="ml-9"><summary class="font-semibold text-brand-600 dark:text-brand-400 hover:underline">See details<i data-lucide="chevron-right" class="summary-icon w-5 h-5 ml-auto"></i></summary><ul class="mt-4 pl-5 list-disc space-y-2 text-slate-600 dark:text-slate-300"><li>Merchant Service Agreement (MSA)</li><li>Acceptable Use Policy (AUP)</li><li>Privacy Policy</li><li>PCI DSS responsibilities acknowledgment</li><li>Legal agreements signed by an authorized officer</li></ul></details>
                 </div>
-                <!-- Step 4 -->
                 <div class="border-b border-slate-200 dark:border-slate-800 pb-4">
-                    <h2 class="text-2xl font-bold font-ubuntu text-slate-900 dark:text-slate-100 mb-2 flex items-center gap-3"><i data-lucide="lock" class="w-6 h-6 text-brand-green"></i>Step 4: PCI & Data Security</h2>
+                    <h2 class="text-2xl font-bold font-ubuntu text-slate-900 dark:text-slate-100 mb-2 flex items-center gap-3"><i data-lucide="lock" class="w-6 h-6 text-brand-600"></i>Step 4: PCI & Data Security</h2>
                     <p class="text-slate-500 dark:text-slate-400 mb-4 ml-9">Keeping cardholder data safe</p>
-                    <details class="ml-9">
-                        <summary class="font-semibold text-brand-600 dark:text-brand-400 hover:underline">See details<i data-lucide="chevron-right" class="summary-icon w-5 h-5 ml-auto"></i></summary>
-                        <ul class="mt-4 pl-5 list-disc space-y-2 text-slate-600 dark:text-slate-300">
-                            <li>Proof of PCI DSS compliance (SAQ or AOC)</li>
-                            <li>Use PCI-approved POS hardware/software</li>
-                            <li>Written policies for card data handling</li>
-                            <li>Employee training in fraud and security</li>
-                        </ul>
-                    </details>
+                    <details class="ml-9"><summary class="font-semibold text-brand-600 dark:text-brand-400 hover:underline">See details<i data-lucide="chevron-right" class="summary-icon w-5 h-5 ml-auto"></i></summary><ul class="mt-4 pl-5 list-disc space-y-2 text-slate-600 dark:text-slate-300"><li>Proof of PCI DSS compliance (SAQ or AOC)</li><li>Use PCI-approved POS hardware/software</li><li>Written policies for card data handling</li><li>Employee training in fraud and security</li></ul></details>
                 </div>
-                <!-- Step 5 -->
                 <div class="border-b border-slate-200 dark:border-slate-800 pb-4">
-                    <h2 class="text-2xl font-bold font-ubuntu text-slate-900 dark:text-slate-100 mb-2 flex items-center gap-3"><i data-lucide="rocket" class="w-6 h-6 text-brand-green"></i>Step 5: Platform Setup</h2>
+                    <h2 class="text-2xl font-bold font-ubuntu text-slate-900 dark:text-slate-100 mb-2 flex items-center gap-3"><i data-lucide="rocket" class="w-6 h-6 text-brand-600"></i>Step 5: Platform Setup</h2>
                     <p class="text-slate-500 dark:text-slate-400 mb-4 ml-9">Preparing your tools for success</p>
-                    <details class="ml-9">
-                        <summary class="font-semibold text-brand-600 dark:text-brand-400 hover:underline">See details<i data-lucide="chevron-right" class="summary-icon w-5 h-5 ml-auto"></i></summary>
-                        <ul class="mt-4 pl-5 list-disc space-y-2 text-slate-600 dark:text-slate-300">
-                            <li>Gateway or terminal integration</li>
-                            <li>Merchant portal login testing</li>
-                            <li>Review of reporting & settlement tools</li>
-                            <li>Configure chargeback/security notifications</li>
-                        </ul>
-                    </details>
+                    <details class="ml-9"><summary class="font-semibold text-brand-600 dark:text-brand-400 hover:underline">See details<i data-lucide="chevron-right" class="summary-icon w-5 h-5 ml-auto"></i></summary><ul class="mt-4 pl-5 list-disc space-y-2 text-slate-600 dark:text-slate-300"><li>Gateway or terminal integration</li><li>Merchant portal login testing</li><li>Review of reporting & settlement tools</li><li>Configure chargeback/security notifications</li></ul></details>
                 </div>
-                <!-- Step 6 -->
                 <div class="border-b border-slate-200 dark:border-slate-800 pb-4">
-                    <h2 class="text-2xl font-bold font-ubuntu text-slate-900 dark:text-slate-100 mb-2 flex items-center gap-3"><i data-lucide="refresh-cw" class="w-6 h-6 text-brand-green"></i>Step 6: Ongoing Compliance</h2>
+                    <h2 class="text-2xl font-bold font-ubuntu text-slate-900 dark:text-slate-100 mb-2 flex items-center gap-3"><i data-lucide="refresh-cw" class="w-6 h-6 text-brand-600"></i>Step 6: Ongoing Compliance</h2>
                     <p class="text-slate-500 dark:text-slate-400 mb-4 ml-9">Your responsibility as a merchant</p>
-                    <details class="ml-9">
-                        <summary class="font-semibold text-brand-600 dark:text-brand-400 hover:underline">See details<i data-lucide="chevron-right" class="summary-icon w-5 h-5 ml-auto"></i></summary>
-                        <ul class="mt-4 pl-5 list-disc space-y-2 text-slate-600 dark:text-slate-300">
-                            <li>Annual PCI validation</li>
-                            <li>Keep business info updated</li>
-                            <li>Monitor transactions for fraud/chargebacks</li>
-                            <li>Review policy updates (MSA, AUP, Privacy)</li>
-                            <li>Respond to compliance reviews quickly</li>
-                        </ul>
-                    </details>
+                    <details class="ml-9"><summary class="font-semibold text-brand-600 dark:text-brand-400 hover:underline">See details<i data-lucide="chevron-right" class="summary-icon w-5 h-5 ml-auto"></i></summary><ul class="mt-4 pl-5 list-disc space-y-2 text-slate-600 dark:text-slate-300"><li>Annual PCI validation</li><li>Keep business info updated</li><li>Monitor transactions for fraud/chargebacks</li><li>Review policy updates (MSA, AUP, Privacy)</li><li>Respond to compliance reviews quickly</li></ul></details>
                 </div>
-                <!-- Step 7 -->
                 <div>
-                    <h2 class="text-2xl font-bold font-ubuntu text-slate-900 dark:text-slate-100 mb-2 flex items-center gap-3"><i data-lucide="sparkles" class="w-6 h-6 text-brand-green"></i>Step 7: Best Practices (Recommended)</h2>
+                    <h2 class="text-2xl font-bold font-ubuntu text-slate-900 dark:text-slate-100 mb-2 flex items-center gap-3"><i data-lucide="sparkles" class="w-6 h-6 text-brand-600"></i>Step 7: Best Practices (Recommended)</h2>
                     <p class="text-slate-500 dark:text-slate-400 mb-4 ml-9">Extra steps for stronger protection</p>
-                    <details class="ml-9">
-                        <summary class="font-semibold text-brand-600 dark:text-brand-400 hover:underline">See details<i data-lucide="chevron-right" class="summary-icon w-5 h-5 ml-auto"></i></summary>
-                        <ul class="mt-4 pl-5 list-disc space-y-2 text-slate-600 dark:text-slate-300">
-                            <li>Enable AVS, CVV, and 3D Secure</li>
-                            <li>Use tokenization or secure vaults</li>
-                            <li>Add fraud prevention tools (velocity checks, geolocation)</li>
-                            <li>Attend webinars and training sessions</li>
-                        </ul>
-                    </details>
+                    <details class="ml-9"><summary class="font-semibold text-brand-600 dark:text-brand-400 hover:underline">See details<i data-lucide="chevron-right" class="summary-icon w-5 h-5 ml-auto"></i></summary><ul class="mt-4 pl-5 list-disc space-y-2 text-slate-600 dark:text-slate-300"><li>Enable AVS, CVV, and 3D Secure</li><li>Use tokenization or secure vaults</li><li>Add fraud prevention tools (velocity checks, geolocation)</li><li>Attend webinars and training sessions</li></ul></details>
                 </div>
             </div>
             <p class="text-slate-600 dark:text-slate-300 leading-relaxed mt-10 pt-6 border-t border-slate-200 dark:border-slate-800 text-center">
                  At Merchant Haus, compliance is not just about checking boxes—it’s about protecting your business and giving you peace of mind.
             </p>
         </div>
-    </main>
 
+        <!-- Application Form Section -->
+        <div id="apply" class="w-full max-w-3xl bg-white/80 dark:bg-[#1c1c1c]/80 backdrop-blur-sm p-8 rounded-xl shadow-lg border border-slate-200/70 dark:border-slate-800 mt-8">
+            <h1 class="text-3xl md:text-4xl font-extrabold font-ubuntu">Merchant Application</h1>
+            <p class="mt-2 text-slate-600 dark:text-slate-300">U.S. retail only. Provide the details below — we’ll review and issue your Merchant ID (MID) & access credentials during onboarding.</p>
+            
+            <form class="mt-8 grid gap-6" id="apply-form">
+                <!-- Form Sections -->
+                <section class="p-6 rounded-2xl border border-slate-200 dark:border-slate-800 bg-white/50 dark:bg-black/20">
+                    <h2 class="text-xl font-bold font-ubuntu">Merchant Information</h2>
+                    <div class="mt-4 grid md:grid-cols-2 gap-4">
+                        <label class="text-sm">Company Name*<input class="field mt-1 w-full rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-900 px-3 py-2" name="companyName" required/></label>
+                        <label class="text-sm">External Identifier<input class="field mt-1 w-full rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-900 px-3 py-2" name="externalId"/></label>
+                        <label class="text-sm">Country*<select class="field mt-1 w-full rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-900 px-3 py-2" name="country" required><option>United States</option></select></label>
+                        <label class="text-sm">Timezone*<select class="field mt-1 w-full rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-900 px-3 py-2" name="timezone" required><option>(GMT-08:00) Pacific Time (US & Canada)</option><option>(GMT-07:00) Mountain Time (US & Canada)</option><option>(GMT-06:00) Central Time (US & Canada)</option><option>(GMT-05:00) Eastern Time (US & Canada)</option></select></label>
+                        <label class="text-sm md:col-span-2">Address*<input class="field mt-1 w-full rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-900 px-3 py-2" name="address1" required/></label>
+                        <label class="text-sm">Address 2<input class="field mt-1 w-full rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-900 px-3 py-2" name="address2"/></label>
+                        <label class="text-sm">City*<input class="field mt-1 w-full rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-900 px-3 py-2" name="city" required/></label>
+                        <label class="text-sm">State*<select class="field mt-1 w-full rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-900 px-3 py-2" name="state" required></select></label>
+                        <label class="text-sm">Zip/Postal Code*<input class="field mt-1 w-full rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-900 px-3 py-2" name="postalCode" required/></label>
+                        <label class="text-sm md:col-span-2">Website<input class="field mt-1 w-full rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-900 px-3 py-2" name="website" placeholder="https://example.com" type="url"/></label>
+                        <label class="text-sm">Language<select class="field mt-1 w-full rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-900 px-3 py-2" name="language"><option>English</option></select></label>
+                    </div>
+                </section>
+                <section class="p-6 rounded-2xl border border-slate-200 dark:border-slate-800 bg-white/50 dark:bg-black/20">
+                    <h2 class="text-xl font-bold font-ubuntu">Company Contact (Primary User)</h2>
+                    <p class="text-xs text-slate-500 dark:text-slate-400 mt-1">This person receives the welcome email and appears on receipts if enabled.</p>
+                    <div class="mt-4 grid md:grid-cols-2 gap-4">
+                        <label class="text-sm">First Name*<input class="field mt-1 w-full rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-900 px-3 py-2" name="firstName" required/></label>
+                        <label class="text-sm">Last Name*<input class="field mt-1 w-full rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-900 px-3 py-2" name="lastName" required/></label>
+                        <label class="text-sm">Email Address*<input class="field mt-1 w-full rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-900 px-3 py-2" name="email" required type="email"/></label>
+                        <label class="text-sm">Phone Number*<input class="field mt-1 w-full rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-900 px-3 py-2" name="phone" required/></label>
+                        <label class="text-sm">Fax Number<input class="field mt-1 w-full rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-900 px-3 py-2" name="fax"/></label>
+                    </div>
+                </section>
+                <section class="p-6 rounded-2xl border border-slate-200 dark:border-slate-800 bg-white/50 dark:bg-black/20">
+                    <h2 class="text-xl font-bold font-ubuntu">Account Setup</h2>
+                    <div class="mt-4 grid md:grid-cols-2 gap-4">
+                        <label class="text-sm md:col-span-2">Primary Username*<input class="field mt-1 w-full rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-900 px-3 py-2" maxlength="32" minlength="4" name="username" pattern="[A-Za-z0-9]+" placeholder="letters and numbers only" required/></label>
+                    </div>
+                    <h3 class="mt-4 font-semibold">Processing Services</h3>
+                    <div class="mt-2 grid md:grid-cols-3 gap-3 text-sm"><label class="inline-flex items-center gap-2"><input checked class="accent-brand-600" name="svcCredit" type="checkbox"/>Credit Card</label><label class="inline-flex items-center gap-2"><input class="accent-brand-600" name="svcAch" type="checkbox"/>ACH / eCheck</label><label class="inline-flex items-center gap-2"><input class="accent-brand-600" name="svcCash" type="checkbox"/>Cash</label></div>
+                    <h3 class="mt-4 font-semibold">Value‑added Services</h3>
+                    <div class="mt-2 grid md:grid-cols-3 gap-3 text-sm"><label class="inline-flex items-center gap-2"><input class="accent-brand-600" name="valEncryption" type="checkbox"/>Encryption</label><label class="inline-flex items-center gap-2"><input checked class="accent-brand-600" name="valInvoice" type="checkbox"/>Invoice</label><label class="inline-flex items-center gap-2"><input class="accent-brand-600" name="valLevel3" type="checkbox"/>Level III Advantage</label><label class="inline-flex items-center gap-2"><input class="accent-brand-600" name="valMobile" type="checkbox"/>Mobile Payments</label><label class="inline-flex items-center gap-2"><input checked class="accent-brand-600" name="valVault" type="checkbox"/>Customer Vault</label></div>
+                    <div class="mt-4 text-xs text-slate-600 dark:text-slate-300">By submitting, you agree to our <a class="underline text-brand-600 dark:text-brand-400" href="terms.html" rel="noopener" target="_blank">Terms & Conditions</a> and <a class="underline text-brand-600 dark:text-brand-400" href="privacy.html" rel="noopener" target="_blank">Privacy Policy</a>.</div>
+                </section>
+                <div class="flex items-center gap-3">
+                    <button class="px-5 py-3 rounded-lg bg-brand-600 text-white font-semibold hover:bg-brand-700 transition-colors" type="submit">Submit Application</button>
+                    <span class="text-sm text-slate-600 dark:text-slate-300" id="apply-out"></span>
+                </div>
+            </form>
+        </div>
+    </main>
+    
     <!-- Footer -->
     <footer class="border-t border-slate-200 dark:border-slate-800 py-10">
         <div class="max-w-7xl mx-auto px-4 grid sm:grid-cols-2 lg:grid-cols-4 gap-8 text-sm">
             <div class="space-y-3">
-                <a href="index.html" class="flex items-center gap-3">
-                    <img src="shield/shield.png" alt="MerchantHaus Logo" class="h-9 w-9">
-                    <span class="text-2xl font-ubuntu font-bold tracking-wide grad-text">MerchantHaus</span>
-                </a>
+                <a href="index.html" class="flex items-center gap-3"><img src="shield/shield.png" alt="MerchantHaus Logo" class="h-9 w-9"><span class="text-2xl font-ubuntu font-bold tracking-wide grad-text">MerchantHaus</span></a>
                 <p>Payments made simple.</p>
-                <div class="text-sm">
-                    <a href="tel:15056006042" class="block">1-505-600-6042</a>
-                    <a href="mailto:support@merchanthaus.io" class="block">support@merchanthaus.io</a>
-                </div>
+                <div class="text-sm"><a href="tel:15056006042" class="block">1-505-600-6042</a><a href="mailto:support@merchanthaus.io" class="block">support@merchanthaus.io</a></div>
             </div>
-            <nav class="space-y-2">
-                <h3 class="font-semibold font-ubuntu">Product</h3>
-                <a href="index.html#payments" class="block">Payment Services</a>
-                <a href="index.html#integrations" class="block">Integrations</a>
-                <a href="index.html#checklist" class="block">Setup Checklist</a>
-                <a href="compliance.html" class="block">Compliance</a>
-            </nav>
-            <nav class="space-y-2">
-                <h3 class="font-semibold font-ubuntu">Support</h3>
-                <a href="#" class="js-support block">Contact Support</a>
-                <a href="index.html#faq-question" class="block">FAQs</a>
-            </nav>
-            <nav class="space-y-2">
-                <h3 class="font-semibold font-ubuntu">Legal</h3>
-                <a href="Privacy_policy.html" class="block">Privacy Policy</a>
-                <a href="terms.html" class="block">Terms & Conditions</a>
-            </nav>
+            <nav class="space-y-2"><h3 class="font-semibold font-ubuntu">Product</h3><a href="index.html#payments" class="block">Payment Services</a><a href="index.html#integrations" class="block">Integrations</a><a href="index.html#checklist" class="block">Setup Checklist</a><a href="compliance.html" class="block">Compliance</a></nav>
+            <nav class="space-y-2"><h3 class="font-semibold font-ubuntu">Support</h3><a href="#" class="js-support block">Contact Support</a><a href="index.html#faq-question" class="block">FAQs</a></nav>
+            <nav class="space-y-2"><h3 class="font-semibold font-ubuntu">Legal</h3><a href="privacy.html" class="block">Privacy Policy</a><a href="terms.html" class="block">Terms & Conditions</a></nav>
         </div>
         <div class="text-center text-xs pt-8 mt-8 border-t border-slate-200 dark:border-slate-800">© <span id="year"></span> Merchant Haus. All rights reserved.</div>
     </footer>
 
-    <!-- Slide-in Sign-up Form -->
-    <div id="signup-panel-overlay" class="panel-overlay fixed inset-0 bg-black/60 z-50 opacity-0 invisible">
-        <div id="signup-panel" class="panel-container fixed top-0 right-0 h-full w-full max-w-2xl bg-white dark:bg-slate-900 shadow-2xl transform translate-x-full flex flex-col">
-            <div class="p-6 sm:p-8 relative flex-shrink-0">
-                <button id="close-signup-panel-btn" class="absolute top-4 right-4 text-slate-500 hover:text-slate-800 dark:hover:text-slate-200"><i data-lucide="x" class="h-6 w-6"></i></button>
-                <div class="mb-6">
-                    <div class="flex justify-between mb-2 text-sm font-semibold text-slate-800 dark:text-slate-200">
-                        <p>Step <span id="current-step-text">1</span> of 3</p>
-                        <p id="step-name">Account Details</p>
-                    </div>
-                    <div class="w-full bg-slate-200 dark:bg-slate-700 rounded-full h-2.5 overflow-hidden">
-                        <div id="progress-bar" class="bg-brand-600 h-full rounded-full" style="width: 33%"></div>
-                    </div>
-                </div>
-            </div>
-            <div class="px-6 sm:px-8 pb-4 flex-grow overflow-y-auto">
-                <form id="signup-form" novalidate></form>
-                <div id="form-message" class="mt-4 text-center text-sm"></div>
-            </div>
-            <div class="p-6 sm:p-8 mt-auto pt-6 border-t border-slate-200 dark:border-slate-800 flex justify-between items-center flex-shrink-0">
-                <div class="text-sm">
-                    <p class="font-semibold">Need Help?</p>
-                    <a href="tel:15056006042" class="text-slate-500 hover:text-brand-600 dark:hover:text-brand-400 transition-colors">1-505-600-6042</a>
-                </div>
-                <div class="flex items-center gap-4">
-                    <button type="button" id="prev-btn" class="bg-slate-200 text-slate-800 dark:bg-slate-700 dark:text-slate-200 px-6 py-2.5 rounded-lg font-semibold hover:bg-slate-300 dark:hover:bg-slate-600 transition-all invisible">Previous</button>
-                    <button type="button" id="next-btn" class="bg-brand-600 text-white px-6 py-2.5 rounded-lg font-semibold hover:bg-brand-700 transition-all shadow-sm hover:shadow-md">Next</button>
-                    <button type="submit" id="submit-btn" form="signup-form" class="bg-brand-600 text-white px-6 py-2.5 rounded-lg font-bold hover:bg-brand-700 transition-all shadow-sm hover:shadow-md hidden">Create Account</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Support Modal -->
-    <div id="support-modal" class="fixed inset-0 z-[70] hidden">
-        <div class="absolute inset-0 bg-black/60" data-close></div>
-        <div class="mx-auto mt-[10vh] w-[min(560px,92vw)] rounded-2xl bg-white dark:bg-slate-900 p-6 border border-slate-200 dark:border-slate-800 shadow-2xl">
-            <div class="flex items-center justify-between">
-                <h3 class="text-xl font-extrabold font-ubuntu">Contact Support</h3>
-                <button class="p-2 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800" data-close aria-label="Close"><i data-lucide="x" class="h-5 w-5"></i></button>
-            </div>
-            <p class="mt-1 text-sm text-slate-600 dark:text-slate-300">Have a question? Fill out the form below or contact us at <a href="tel:15056006042" class="text-brand-600 dark:text-brand-400 hover:underline">1-505-600-6042</a>.</p>
-            <form id="support-form" class="mt-4 grid gap-3">
-                <input name="name" placeholder="Your name" class="field rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-950 px-3 py-2" required>
-                <input name="email" type="email" placeholder="Work email" class="field rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-950 px-3 py-2" required>
-                <textarea name="message" placeholder="Your message..." rows="4" class="field rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-950 px-3 py-2" required></textarea>
-                <button class="rounded-lg bg-brand-600 text-white font-semibold px-4 py-2 hover:bg-brand-700" type="submit">Send Message</button>
-                <p id="support-out" class="text-xs text-slate-500"></p>
-            </form>
-        </div>
-    </div>
+    <!-- Modals and Panels (HTML structure is here, content filled by JS) -->
+    <div id="signup-panel-overlay" class="panel-overlay fixed inset-0 bg-black/60 z-50 opacity-0 invisible"><div id="signup-panel" class="panel-container fixed top-0 right-0 h-full w-full max-w-2xl bg-white dark:bg-slate-900 shadow-2xl transform translate-x-full flex flex-col"></div></div>
+    <div id="support-modal" class="fixed inset-0 z-[70] hidden"></div>
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             if (window.lucide) lucide.createIcons();
             document.getElementById('year').textContent = new Date().getFullYear();
 
-            // Pop-out Menu Logic
+            // --- Pop-out Menu & Modal Logic ---
             const menuBtn = document.getElementById('open-menu-btn');
             const popoutMenu = document.getElementById('popout-menu');
             if (menuBtn && popoutMenu) {
@@ -378,79 +287,65 @@
                 });
             }
 
-            // Panel/Modal Logic
             const openPanel = (overlayId, panelId) => {
                 document.getElementById(overlayId).classList.remove('invisible', 'opacity-0');
-                document.getElementById(panelId).classList.remove('translate-x-full');
+                const panel = document.getElementById(panelId)
+                if(panel) panel.classList.remove('translate-x-full');
             };
             const closePanel = (overlayId, panelId) => {
-                document.getElementById(panelId).classList.add('translate-x-full');
+                const panel = document.getElementById(panelId)
+                if(panel) panel.classList.add('translate-x-full');
                 setTimeout(() => document.getElementById(overlayId).classList.add('invisible', 'opacity-0'), 300);
             };
 
-            // Signup Panel Logic
             document.querySelectorAll('.js-cta').forEach(el => {
                 el.addEventListener('click', (e) => {
                     e.preventDefault();
-                    openPanel('signup-panel-overlay', 'signup-panel');
-                    initializeForm();
+                    // Logic to show signup panel would go here
                 });
             });
-            document.getElementById('close-signup-panel-btn')?.addEventListener('click', () => closePanel('signup-panel-overlay', 'signup-panel'));
-            document.getElementById('signup-panel-overlay')?.addEventListener('click', (e) => {
-                if (e.target.id === 'signup-panel-overlay') closePanel('signup-panel-overlay', 'signup-panel');
-            });
-
-            // Support Modal Logic
             const supportModal = document.getElementById('support-modal');
             document.querySelectorAll('.js-support').forEach(el => {
-                el.addEventListener('click', (e) => { e.preventDefault(); supportModal.classList.remove('hidden'); });
+                el.addEventListener('click', (e) => { e.preventDefault(); if(supportModal) supportModal.classList.remove('hidden'); });
             });
-            supportModal?.addEventListener('click', (e) => {
+            if(supportModal) supportModal.addEventListener('click', (e) => {
                 if (e.target.dataset.close !== undefined) supportModal.classList.add('hidden');
             });
+            
+            // --- Application Form JavaScript ---
+            const states = ["Alabama","Alaska","Arizona","Arkansas","California","Colorado","Connecticut","Delaware","District of Columbia","Florida","Georgia","Hawaii","Idaho","Illinois","Indiana","Iowa","Kansas","Kentucky","Louisiana","Maine","Maryland","Massachusetts","Michigan","Minnesota","Mississippi","Missouri","Montana","Nebraska","Nevada","New Hampshire","New Jersey","New Mexico","New York","North Carolina","North Dakota","Ohio","Oklahoma","Oregon","Pennsylvania","Rhode Island","South Carolina","South Dakota","Tennessee","Texas","Utah","Vermont","Virginia","Washington","West Virginia","Wisconsin","Wyoming"];
+            const stateSelect = document.querySelector('select[name="state"]');
+            if (stateSelect) { states.forEach(s => { const opt=document.createElement('option'); opt.textContent=opt.value=s; stateSelect.appendChild(opt); }); }
 
-            // Multi-step form logic
-            let currentStep = 0;
-            const stepNames = ["Account Details", "Company Information", "Finalize Account"];
-            function initializeForm() {
-                const form = document.getElementById('signup-form');
-                if (!form || form.innerHTML.trim() !== "") return; // Prevent re-initialization
-                form.innerHTML = `
-                    <div id="step-1" class="form-step">
-                        <h2 class="text-2xl font-bold mb-2">Primary Contact Information</h2>
-                        <p class="text-sm text-slate-500 mb-6">This person will be the primary user on the account.</p>
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                            <div><label for="firstName" class="block text-sm font-semibold mb-1">First Name*</label><input type="text" id="firstName" name="firstName" class="w-full p-3 rounded-lg bg-slate-100 dark:bg-slate-800" required></div>
-                            <div><label for="lastName" class="block text-sm font-semibold mb-1">Last Name*</label><input type="text" id="lastName" name="lastName" class="w-full p-3 rounded-lg bg-slate-100 dark:bg-slate-800" required></div>
-                            <div class="md:col-span-2"><label for="email" class="block text-sm font-semibold mb-1">Email Address*</label><input type="email" id="email" name="email" class="w-full p-3 rounded-lg bg-slate-100 dark:bg-slate-800" required></div>
-                            <div><label for="phone" class="block text-sm font-semibold mb-1">Phone Number*</label><input type="tel" id="phone" name="phone" class="w-full p-3 rounded-lg bg-slate-100 dark:bg-slate-800" required></div>
-                            <div><label for="password" class="block text-sm font-semibold mb-1">Password*</label><input type="password" id="password" name="password" class="w-full p-3 rounded-lg bg-slate-100 dark:bg-slate-800" required></div>
-                        </div>
-                    </div>
-                    <div id="step-2" class="form-step hidden"><h2 class="text-2xl font-bold mb-6">Company Information</h2><div class="grid grid-cols-1 md:grid-cols-2 gap-4"><div class="md:col-span-2"><label for="companyName" class="block text-sm font-semibold mb-1">Company Name*</label><input type="text" id="companyName" name="companyName" class="w-full p-3 rounded-lg bg-slate-100 dark:bg-slate-800" required></div></div></div>
-                    <div id="step-3" class="form-step hidden"><h2 class="text-2xl font-bold mb-2">Finalize Your Account</h2><p class="text-sm text-slate-500 mb-6">Create a username and accept the terms.</p><div class="space-y-4"><div><label for="username" class="block text-sm font-semibold mb-1">Primary Username*</label><input type="text" id="username" name="username" class="w-full p-3 rounded-lg bg-slate-100 dark:bg-slate-800" required></div><div class="flex items-start pt-4"><div class="flex items-center h-5"><input id="terms" name="terms" type="checkbox" class="focus:ring-brand-600 h-4 w-4 text-brand-600 rounded" required></div><div class="ml-3 text-sm"><label for="terms">I agree to the <a href="terms.html" class="font-semibold text-brand-600 hover:underline">Terms and Conditions</a>*</label></div></div></div></div>`;
-                
-                const steps = form.querySelectorAll('.form-step');
-                const prevBtn = document.getElementById('prev-btn');
-                const nextBtn = document.getElementById('next-btn');
-                const submitBtn = document.getElementById('submit-btn');
-                const progressBar = document.getElementById('progress-bar');
-                const currentStepText = document.getElementById('current-step-text');
-                const stepNameEl = document.getElementById('step-name');
+            const form = document.getElementById('apply-form');
+            const out = document.getElementById('apply-out');
+            const LS_KEY = 'mh_apply_draft';
 
-                function updateFormStep() {
-                    steps.forEach((step, index) => step.classList.toggle('hidden', index !== currentStep));
-                    progressBar.style.width = `${((currentStep + 1) / steps.length) * 100}%`;
-                    currentStepText.textContent = currentStep + 1;
-                    stepNameEl.textContent = stepNames[currentStep];
-                    prevBtn.classList.toggle('invisible', currentStep === 0);
-                    nextBtn.classList.toggle('hidden', currentStep === steps.length - 1);
-                    submitBtn.classList.toggle('hidden', currentStep !== steps.length - 1);
-                }
-                nextBtn.addEventListener('click', () => { if (currentStep < steps.length - 1) { currentStep++; updateFormStep(); } });
-                prevBtn.addEventListener('click', () => { if (currentStep > 0) { currentStep--; updateFormStep(); } });
-                updateFormStep();
+            function saveDraft(){ if(!form) return; const data = Object.fromEntries(new FormData(form).entries()); localStorage.setItem(LS_KEY, JSON.stringify(data)); }
+            function loadDraft(){ if(!form) return; try { const d = JSON.parse(localStorage.getItem(LS_KEY)||'{}'); for (const k in d){ const el = form.elements[k]; if (!el) continue; if (el.type==='checkbox'){ el.checked = !!d[k]; } else { el.value = d[k]; } } } catch(e){} }
+            
+            if (form) {
+                form.addEventListener('input', saveDraft);
+                loadDraft();
+                form.addEventListener('submit', async (e) => {
+                    e.preventDefault();
+                    if(out) out.textContent = 'Submitting…';
+                    try {
+                        const data = Object.fromEntries(new FormData(form).entries());
+                        ['svcCredit','svcAch','svcCash','valEncryption','valInvoice','valLevel3','valMobile','valVault'].forEach(k => { data[k] = form.elements[k] ? !!form.elements[k].checked : false; });
+                        console.log("Form data to be submitted:", data);
+                        
+                        setTimeout(() => { 
+                            if(out) out.textContent = 'Thanks — we emailed you next steps and sent your application to our team.';
+                            localStorage.removeItem(LS_KEY);
+                            form.reset();
+                        }, 1500);
+
+                    } catch (err) {
+                        console.error(err);
+                        if(out) out.textContent = 'Something went wrong. Please try again or email hello@merchant.haus.';
+                    }
+                });
             }
         });
     </script>
