@@ -7,8 +7,8 @@ Static site + Netlify Function that emails a **private** booking link (Google Ca
 1) **Connect GitHub → Netlify** (New site from Git)
 2) Set **Environment variables** in Netlify → Site settings → Environment:
 ```
-BOOKING_URL   = https://calendar.google.com/…(your private link)
-RESEND_API_KEY= (from https://resend.com/)
+BOOKING_URL   = https://calendly.com/merchanthaus
+RESEND_API_KEY= re_bGbMpcNW_93iTgbDbhTwDAuXVQiQzUqyz
 FROM_EMAIL    = no-reply@merchant.haus
 TEAM_EMAIL    = sales@merchant.haus (optional)
 ```
