@@ -1,0 +1,13 @@
+# Allow all web crawlers
+User-agent: *
+Allow: /
+
+# Disallow crawling of specific files and directories that are not useful for SEO
+Disallow: /Privacy.html
+Disallow: /terms.html
+Disallow: /compliance.html
+Disallow: /admin/
+Disallow: /tmp/
+
+# Specify the location of the sitemap
+Sitemap: https://www.merchant.haus/sitemap.xml
