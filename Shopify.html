@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MerchantHaus – Shopify Payment Processing</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@700&family=Lexend:wght@400;600&display=swap" rel="stylesheet">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Lexend', 'ui-sans-serif', 'system-ui'],
+                        ubuntu: ['Ubuntu', 'sans-serif']
+                    },
+                    colors: {
+                        brand: { 600: '#DC143C', 700: '#c21b35', 400: '#E85B71' },
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <!-- Custom Styles -->
+    <style>
+        body { 
+            font-family: 'Lexend', ui-sans-serif, system-ui; 
+            position: relative;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0; left: 0;
+            width: 100vw; height: 100vh;
+            z-index: -1;
+            background: 
+                radial-gradient(circle at 15% 25%, rgba(220, 20, 60, 0.15), transparent 40%),
+                radial-gradient(circle at 85% 75%, rgba(255, 255, 255, 0.05), transparent 40%);
+            animation: bloom 25s linear infinite alternate;
+        }
+        @keyframes bloom {
+            0% { background-position: 0% 0%, 0% 0%; }
+            100% { background-position: 50% -50%, -50% 50%; }
+        }
+        html.dark { background-color: #1c1c1c !important; }
+        .dark body { background-color: transparent !important; color: #f5f5f5 !important; }
+        .dark .bg-slate-950 { background-color: #1c1c1c !important; }
+        .dark .border-slate-800 { border-color: #2a2a2a !important; }
+        .dark .text-slate-300 { color: #c8c8c8 !important; }
+        .dark .text-slate-400 { color: #a0a0a0 !important; }
+        .dark .text-slate-600 { color: #c8c8c8 !important; }
+        .header-glass { background-color: rgba(255, 255, 255, 0.8); backdrop-filter: blur(10px); }
+        .dark .header-glass { background-color: rgba(28, 28, 28, 0.8); }
+        .grad-text { display: inline-block; background: linear-gradient(90deg, #c21b35, #E85B71, #c21b35); -webkit-background-clip: text; background-clip: text; color: transparent; }
+        footer { position: relative; background-image: url('assets/email.jpg'); background-size: cover; background-position: center; color: white; }
+        footer::before { content: ''; position: absolute; inset: 0; background-color: rgba(0, 0, 0, 0.6); z-index: 1; }
+        footer > div { position: relative; z-index: 2; }
+        footer a { color: #f9fafb !important; }
+        footer a:hover { text-decoration: underline; }
+        footer h3 { color: #f9fafb !important; }
+        footer p { color: #d1d5db !important; }
+        footer .border-slate-800 { border-color: rgba(255, 255, 255, 0.2) !important; }
+        .panel-overlay, .panel-container { transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
+    </style>
+
+    <!-- Favicons -->
+    <link rel="apple-touch-icon" sizes="180x180" href="shield/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="shield/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="shield/favicon-16x16.png">
+    <link rel="manifest" href="shield/site.webmanifest">
+</head>
+<body class="bg-white text-slate-900 dark:bg-transparent dark:text-slate-100">
+
+    <!-- Header -->
+    <div class="sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-4">
+            <header class="header-glass border border-slate-200/70 dark:border-slate-800 rounded-xl">
+                <div class="relative max-w-7xl mx-auto px-4 py-4 flex items-center justify-between">
+                    <a href="index.html" class="flex items-center gap-3 group">
+                        <img src="shield/shield.png" alt="MerchantHaus Logo" class="h-10 w-10">
+                        <div>
+                            <div class="text-xl md:text-2xl font-ubuntu font-bold tracking-wide grad-text">MerchantHaus</div>
+                            <p class="text-xs text-slate-500 dark:text-slate-400 h-4">Simple. Safe. Secure.</p>
+                        </div>
+                    </a>
+                    <div class="flex items-center gap-2">
+                        <a href="#" class="js-cta bg-brand-600 hover:bg-brand-700 text-white border border-transparent px-4 py-2 rounded-full text-sm font-semibold transition-colors duration-300">Get Started</a>
+                        <a href="#" class="hidden sm:block bg-transparent text-slate-500 dark:text-slate-400 border border-slate-300 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-800 px-4 py-2 rounded-lg text-sm font-semibold transition-colors duration-300">Login</a>
+                        <button id="open-menu-btn" class="p-2 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800" aria-label="Open menu"><i data-lucide="menu" class="h-5 w-5"></i></button>
+                    </div>
+                    <!-- Pop-out Menu -->
+                    <div id="popout-menu" class="absolute top-full right-4 mt-2 w-72 rounded-xl bg-white dark:bg-[#1c1c1c] shadow-2xl border border-slate-200/70 dark:border-slate-800 p-4 z-[51] hidden opacity-0 transition-opacity duration-300">
+                        <nav class="flex flex-col space-y-1 text-base font-medium">
+                            <a href="index.html#payments" data-close class="px-4 py-2 rounded-lg hover:bg-brand-600 hover:text-white transition-colors">Payment Services</a>
+                            <a href="index.html#integrations" data-close class="px-4 py-2 rounded-lg hover:bg-brand-600 hover:text-white transition-colors">Integrations</a>
+                            <a href="compliance.html" data-close class="px-4 py-2 rounded-lg hover:bg-brand-600 hover:text-white transition-colors">Setup Checklist</a>
+                            <a href="#" data-close class="js-support px-4 py-2 rounded-lg hover:bg-brand-600 hover:text-white transition-colors">Contact Support</a>
+                            <a href="#" data-close class="sm:hidden block px-4 py-2 rounded-lg hover:bg-brand-600 hover:text-white transition-colors mt-2 pt-2 border-t border-slate-200 dark:border-slate-800">Login</a>
+                        </nav>
+                        <div class="mt-4 pt-4 border-t border-slate-200 dark:border-slate-800">
+                            <p class="text-xs text-center text-slate-500 dark:text-slate-400">
+                                Questions? Call <a href="tel:15056006042" class="text-brand-600 dark:text-brand-400 hover:underline">1-505-600-6042</a> or email us at <a href="mailto:support@merchanthaus.io" class="text-brand-600 dark:text-brand-400 hover:underline">support@merchanthaus.io</a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </header>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <main class="min-h-screen pt-12 pb-16 flex flex-col items-center justify-start p-6">
+        <div class="w-full max-w-5xl bg-white/80 dark:bg-[#1c1c1c]/80 backdrop-blur-sm p-8 rounded-xl shadow-lg border border-slate-200/70 dark:border-slate-800">
+            
+            <!-- Hero Section -->
+            <section class="text-center">
+                <div class="flex justify-center items-center gap-4 mb-4">
+                    <img src="shield/shield.png" alt="MerchantHaus Logo" class="h-16 w-16">
+                    <i data-lucide="plus" class="w-8 h-8 text-slate-400"></i>
+                    <img src="https://placehold.co/64x64/1A1A1A/FFFFFF?text=S" alt="Shopify Logo" class="h-16 w-16 rounded-lg">
+                </div>
+                <h1 class="text-4xl md:text-5xl font-extrabold font-ubuntu mb-4">Seamless Payments for Shopify</h1>
+                <p class="text-lg text-slate-600 dark:text-slate-300 max-w-3xl mx-auto">
+                    Integrate MerchantHaus directly with your Shopify store to lower your processing costs, reduce fraud, and simplify your operations. Get the fast, secure, and affordable payment solution your business deserves.
+                </p>
+                <div class="mt-8">
+                    <a href="compliance.html#apply" class="js-cta bg-brand-600 hover:bg-brand-700 text-white border border-transparent px-8 py-3 rounded-full text-lg font-semibold transition-colors duration-300">Get Started Today</a>
+                </div>
+            </section>
+
+            <!-- Benefits Section -->
+            <section class="mt-20">
+                <div class="grid md:grid-cols-3 gap-8 text-center">
+                    <div class="p-6 rounded-lg">
+                        <i data-lucide="trending-down" class="w-12 h-12 text-brand-600 mx-auto mb-4"></i>
+                        <h3 class="text-xl font-bold font-ubuntu">Lower Your Costs</h3>
+                        <p class="text-slate-600 dark:text-slate-400 mt-2">Keep more of your revenue with our competitive, transparent pricing. We help you reduce transaction fees without sacrificing performance.</p>
+                    </div>
+                    <div class="p-6 rounded-lg">
+                        <i data-lucide="shield-check" class="w-12 h-12 text-brand-600 mx-auto mb-4"></i>
+                        <h3 class="text-xl font-bold font-ubuntu">Reduce Fraud & Chargebacks</h3>
+                        <p class="text-slate-600 dark:text-slate-400 mt-2">Our advanced security tools, including AVS, CVV checks, and 3D Secure, protect your business from fraudulent transactions and costly chargebacks.</p>
+                    </div>
+                    <div class="p-6 rounded-lg">
+                        <i data-lucide="zap" class="w-12 h-12 text-brand-600 mx-auto mb-4"></i>
+                        <h3 class="text-xl font-bold font-ubuntu">Streamline Operations</h3>
+                        <p class="text-slate-600 dark:text-slate-400 mt-2">Manage all your payments, view real-time reports, and handle disputes from a single, easy-to-use dashboard. Simple, smart, and secure.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- How It Works Section -->
+            <section class="mt-20 text-center">
+                 <h2 class="text-3xl font-extrabold font-ubuntu mb-4">Simple Setup in 3 Steps</h2>
+                 <p class="text-slate-600 dark:text-slate-300 max-w-2xl mx-auto mb-12">Get up and running with MerchantHaus on your Shopify store in minutes.</p>
+                 <div class="grid md:grid-cols-3 gap-8 relative">
+                     <!-- Dashed line connector for desktop -->
+                     <div class="hidden md:block absolute top-1/2 left-0 w-full h-px bg-transparent">
+                        <svg width="100%" height="2" class="absolute" style="transform: translateY(-1px);">
+                            <line x1="0" y1="1" x2="100%" y2="1" stroke-width="2" class="stroke-current text-slate-300 dark:text-slate-700" stroke-dasharray="8, 8"/>
+                        </svg>
+                     </div>
+
+                     <div class="relative z-10 p-6 rounded-lg bg-white/50 dark:bg-black/20">
+                         <div class="w-12 h-12 bg-brand-600 text-white rounded-full flex items-center justify-center font-bold text-xl mx-auto mb-4">1</div>
+                         <h3 class="text-lg font-bold">Apply for an Account</h3>
+                         <p class="text-slate-600 dark:text-slate-400 mt-2 text-sm">Fill out our simple application form. Our team will review your details and get you approved quickly.</p>
+                     </div>
+                     <div class="relative z-10 p-6 rounded-lg bg-white/50 dark:bg-black/20">
+                         <div class="w-12 h-12 bg-brand-600 text-white rounded-full flex items-center justify-center font-bold text-xl mx-auto mb-4">2</div>
+                         <h3 class="text-lg font-bold">Connect to Shopify</h3>
+                         <p class="text-slate-600 dark:text-slate-400 mt-2 text-sm">Once approved, we'll provide you with API keys to easily connect MerchantHaus as your payment provider in your Shopify admin.</p>
+                     </div>
+                     <div class="relative z-10 p-6 rounded-lg bg-white/50 dark:bg-black/20">
+                         <div class="w-12 h-12 bg-brand-600 text-white rounded-full flex items-center justify-center font-bold text-xl mx-auto mb-4">3</div>
+                         <h3 class="text-lg font-bold">Start Processing</h3>
+                         <p class="text-slate-600 dark:text-slate-400 mt-2 text-sm">That's it! You're ready to accept payments securely and affordably, with all your transaction data synced to your MerchantHaus dashboard.</p>
+                     </div>
+                 </div>
+            </section>
+
+             <!-- Final CTA -->
+            <section class="mt-20 text-center bg-brand-600/10 dark:bg-brand-400/10 p-8 rounded-xl">
+                 <h2 class="text-3xl font-extrabold font-ubuntu mb-4">Ready to Switch and Save?</h2>
+                 <p class="text-slate-600 dark:text-slate-300 max-w-2xl mx-auto mb-8">
+                     Make the smart move. Join hundreds of Shopify merchants who trust MerchantHaus for reliable and cost-effective payment processing.
+                 </p>
+                 <a href="compliance.html#apply" class="js-cta bg-brand-600 hover:bg-brand-700 text-white border border-transparent px-8 py-3 rounded-full text-lg font-semibold transition-colors duration-300">Apply Now</a>
+            </section>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="border-t border-slate-200 dark:border-slate-800 py-10">
+        <div class="max-w-7xl mx-auto px-4 grid sm:grid-cols-2 lg:grid-cols-4 gap-8 text-sm">
+            <div class="space-y-3">
+                <a href="index.html" class="flex items-center gap-3"><img src="shield/shield.png" alt="MerchantHaus Logo" class="h-9 w-9"><span class="text-2xl font-ubuntu font-bold tracking-wide grad-text">MerchantHaus</span></a>
+                <p>Payments made simple.</p>
+                <div class="text-sm"><a href="tel:15056006042" class="block">1-505-600-6042</a><a href="mailto:support@merchanthaus.io" class="block">support@merchanthaus.io</a></div>
+            </div>
+            <nav class="space-y-2"><h3 class="font-semibold font-ubuntu">Product</h3><a href="index.html#payments" class="block">Payment Services</a><a href="index.html#integrations" class="block">Integrations</a><a href="compliance.html" class="block">Setup Checklist</a></nav>
+            <nav class="space-y-2"><h3 class="font-semibold font-ubuntu">Support</h3><a href="#" class="js-support block">Contact Support</a><a href="index.html#faq-question" class="block">FAQs</a></nav>
+            <nav class="space-y-2"><h3 class="font-semibold font-ubuntu">Legal</h3><a href="privacy.html" class="block">Privacy Policy</a><a href="terms.html" class="block">Terms & Conditions</a></nav>
+        </div>
+        <div class="text-center text-xs pt-8 mt-8 border-t border-slate-200 dark:border-slate-800">© <span id="year"></span> Merchant Haus. All rights reserved.</div>
+    </footer>
+
+    <!-- Modals and Panels (structure only) -->
+    <div id="signup-panel-overlay" class="panel-overlay fixed inset-0 bg-black/60 z-50 opacity-0 invisible"><div id="signup-panel" class="panel-container fixed top-0 right-0 h-full w-full max-w-2xl bg-white dark:bg-slate-900 shadow-2xl transform translate-x-full flex flex-col"></div></div>
+    <div id="support-modal" class="fixed inset-0 z-[70] hidden"></div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            if (window.lucide) lucide.createIcons();
+            document.getElementById('year').textContent = new Date().getFullYear();
+
+            // --- Pop-out Menu & Modal Logic ---
+            const menuBtn = document.getElementById('open-menu-btn');
+            const popoutMenu = document.getElementById('popout-menu');
+            if (menuBtn && popoutMenu) {
+                menuBtn.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    popoutMenu.classList.toggle('hidden');
+                    setTimeout(() => popoutMenu.classList.toggle('opacity-0'), 10);
+                });
+                document.addEventListener('click', (e) => {
+                    if (!popoutMenu.classList.contains('hidden') && !popoutMenu.contains(e.target) && !menuBtn.contains(e.target)) {
+                        popoutMenu.classList.add('opacity-0');
+                        setTimeout(() => popoutMenu.classList.add('hidden'), 300);
+                    }
+                });
+                popoutMenu.querySelectorAll('a[data-close]').forEach(link => {
+                    link.addEventListener('click', () => {
+                        popoutMenu.classList.add('opacity-0');
+                        setTimeout(() => popoutMenu.classList.add('hidden'), 300);
+                    });
+                });
+            }
+        });
+    </script>
+</body>
+</html>
