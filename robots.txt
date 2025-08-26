@@ -10,4 +10,4 @@ Disallow: /admin/
 Disallow: /tmp/
 
 # Specify the location of the sitemap
-Sitemap: https://www.merchant.haus/sitemap.xml
+Sitemap: https://merchant.haus/sitemap.xml
