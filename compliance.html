@@ -23,7 +23,6 @@
                     },
                     colors: {
                         brand: { 600: '#DC143C', 700: '#c21b35', 400: '#E85B71' },
-                        // REMOVED brand-green
                     }
                 }
             }
@@ -41,7 +40,6 @@
             -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
         }
-        /* UPDATED: Animated Gradient Background */
         body::before {
             content: '';
             position: fixed;
@@ -50,7 +48,6 @@
             z-index: -1;
             background: 
                 radial-gradient(circle at 15% 25%, rgba(220, 20, 60, 0.15), transparent 40%),
-                /* Replaced green with a subtle white bloom */
                 radial-gradient(circle at 85% 75%, rgba(255, 255, 255, 0.05), transparent 40%);
             animation: bloom 25s linear infinite alternate;
         }
@@ -105,8 +102,8 @@
                         </div>
                     </a>
                     <div class="flex items-center gap-2">
+                        <!-- UPDATED: href changed to # to trigger JS -->
                         <a href="#" class="js-cta bg-brand-600 hover:bg-brand-700 text-white border border-transparent px-4 py-2 rounded-full text-sm font-semibold transition-colors duration-300">Get Started</a>
-                        <!-- UPDATED: Login button style -->
                         <a href="#" class="hidden sm:block bg-transparent text-slate-500 dark:text-slate-400 border border-slate-300 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-800 px-4 py-2 rounded-lg text-sm font-semibold transition-colors duration-300">Login</a>
                         <button id="open-menu-btn" class="p-2 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800" aria-label="Open menu"><i data-lucide="menu" class="h-5 w-5"></i></button>
                     </div>
@@ -131,49 +128,49 @@
     </div>
 
     <!-- Main Content -->
-    <main class="min-h-screen pt-12 pb-16 flex flex-col items-center justify-start p-6">
+    <main class="min-h-screen max-w-7xl mx-auto pt-12 pb-16 grid grid-cols-1 lg:grid-cols-2 gap-8 p-6">
         <!-- Compliance Checklist Section -->
-        <div class="w-full max-w-3xl bg-white/80 dark:bg-[#1c1c1c]/80 backdrop-blur-sm p-8 rounded-xl shadow-lg border border-slate-200/70 dark:border-slate-800">
-            <h1 class="text-4xl font-extrabold font-ubuntu text-slate-900 dark:text-slate-100 mb-4 text-center">Merchant Compliance Checklist</h1>
-            <p class="text-slate-600 dark:text-slate-300 leading-relaxed mb-10 text-center max-w-2xl mx-auto">
+        <div class="w-full bg-white/80 dark:bg-[#1c1c1c]/80 backdrop-blur-sm p-8 rounded-xl shadow-lg border border-slate-200/70 dark:border-slate-800">
+            <h1 class="text-3xl font-extrabold font-ubuntu text-slate-900 dark:text-slate-100 mb-4 text-center">Merchant Compliance Checklist</h1>
+            <p class="text-slate-600 dark:text-slate-300 leading-relaxed mb-10 text-center">
                 At Merchant Haus, we make compliance straightforward. This checklist guides our merchants through the steps needed to open and maintain a secure merchant account.
             </p>
-            <div class="space-y-6">
+            <div class="space-y-4">
                  <!-- Steps 1-7 -->
                 <div class="border-b border-slate-200 dark:border-slate-800 pb-4">
-                    <h2 class="text-2xl font-bold font-ubuntu text-slate-900 dark:text-slate-100 mb-2 flex items-center gap-3"><i data-lucide="file-text" class="w-6 h-6 text-brand-600"></i>Step 1: Application Essentials</h2>
-                    <p class="text-slate-500 dark:text-slate-400 mb-4 ml-9">What you’ll need to get started</p>
-                    <details class="ml-9"><summary class="font-semibold text-brand-600 dark:text-brand-400 hover:underline">See details<i data-lucide="chevron-right" class="summary-icon w-5 h-5 ml-auto"></i></summary><ul class="mt-4 pl-5 list-disc space-y-2 text-slate-600 dark:text-slate-300"><li>Completed and signed merchant application form</li><li>Business formation documents (Articles, LLC Certificate, or state license)</li><li>Proof of address (utility bill or lease; no P.O. boxes)</li><li>Government-issued ID for owners (25%+ ownership)</li><li>Federal Tax ID (EIN) or SSN (sole proprietors)</li><li>U.S. business bank account (voided check or bank letter)</li><li>Business and product description</li><li>Marketing materials (website, social media, or photos)</li></ul></details>
+                    <h2 class="text-xl font-bold font-ubuntu text-slate-900 dark:text-slate-100 mb-2 flex items-center gap-3"><i data-lucide="file-text" class="w-5 h-5 text-brand-600"></i>Step 1: Application Essentials</h2>
+                    <p class="text-sm text-slate-500 dark:text-slate-400 mb-3 ml-8">What you’ll need to get started</p>
+                    <details class="ml-8"><summary class="font-semibold text-sm text-brand-600 dark:text-brand-400 hover:underline">See details<i data-lucide="chevron-right" class="summary-icon w-4 h-4 ml-auto"></i></summary><ul class="mt-3 pl-5 text-sm list-disc space-y-2 text-slate-600 dark:text-slate-300"><li>Completed and signed merchant application form</li><li>Business formation documents (Articles, LLC Certificate, or state license)</li><li>Proof of address (utility bill or lease; no P.O. boxes)</li><li>Government-issued ID for owners (25%+ ownership)</li><li>Federal Tax ID (EIN) or SSN (sole proprietors)</li><li>U.S. business bank account (voided check or bank letter)</li><li>Business and product description</li><li>Marketing materials (website, social media, or photos)</li></ul></details>
                 </div>
                 <div class="border-b border-slate-200 dark:border-slate-800 pb-4">
-                    <h2 class="text-2xl font-bold font-ubuntu text-slate-900 dark:text-slate-100 mb-2 flex items-center gap-3"><i data-lucide="shield-check" class="w-6 h-6 text-brand-600"></i>Step 2: Risk & Compliance Screening</h2>
-                    <p class="text-slate-500 dark:text-slate-400 mb-4 ml-9">Checks to protect your business and customers</p>
-                    <details class="ml-9"><summary class="font-semibold text-brand-600 dark:text-brand-400 hover:underline">See details<i data-lucide="chevron-right" class="summary-icon w-5 h-5 ml-auto"></i></summary><ul class="mt-4 pl-5 list-disc space-y-2 text-slate-600 dark:text-slate-300"><li>KYC / CIP verification</li><li>Background & credit checks</li><li>OFAC sanctions screening</li><li>Business category risk assessment</li><li>Review against restricted/prohibited activities</li></ul></details>
+                    <h2 class="text-xl font-bold font-ubuntu text-slate-900 dark:text-slate-100 mb-2 flex items-center gap-3"><i data-lucide="shield-check" class="w-5 h-5 text-brand-600"></i>Step 2: Risk & Compliance Screening</h2>
+                    <p class="text-sm text-slate-500 dark:text-slate-400 mb-3 ml-8">Checks to protect your business and customers</p>
+                    <details class="ml-8"><summary class="font-semibold text-sm text-brand-600 dark:text-brand-400 hover:underline">See details<i data-lucide="chevron-right" class="summary-icon w-4 h-4 ml-auto"></i></summary><ul class="mt-3 pl-5 text-sm list-disc space-y-2 text-slate-600 dark:text-slate-300"><li>KYC / CIP verification</li><li>Background & credit checks</li><li>OFAC sanctions screening</li><li>Business category risk assessment</li><li>Review against restricted/prohibited activities</li></ul></details>
                 </div>
                 <div class="border-b border-slate-200 dark:border-slate-800 pb-4">
-                    <h2 class="text-2xl font-bold font-ubuntu text-slate-900 dark:text-slate-100 mb-2 flex items-center gap-3"><i data-lucide="handshake" class="w-6 h-6 text-brand-600"></i>Step 3: Agreements & Onboarding</h2>
-                    <p class="text-slate-500 dark:text-slate-400 mb-4 ml-9">Confirming your partnership with us</p>
-                    <details class="ml-9"><summary class="font-semibold text-brand-600 dark:text-brand-400 hover:underline">See details<i data-lucide="chevron-right" class="summary-icon w-5 h-5 ml-auto"></i></summary><ul class="mt-4 pl-5 list-disc space-y-2 text-slate-600 dark:text-slate-300"><li>Merchant Service Agreement (MSA)</li><li>Acceptable Use Policy (AUP)</li><li>Privacy Policy</li><li>PCI DSS responsibilities acknowledgment</li><li>Legal agreements signed by an authorized officer</li></ul></details>
+                    <h2 class="text-xl font-bold font-ubuntu text-slate-900 dark:text-slate-100 mb-2 flex items-center gap-3"><i data-lucide="handshake" class="w-5 h-5 text-brand-600"></i>Step 3: Agreements & Onboarding</h2>
+                    <p class="text-sm text-slate-500 dark:text-slate-400 mb-3 ml-8">Confirming your partnership with us</p>
+                    <details class="ml-8"><summary class="font-semibold text-sm text-brand-600 dark:text-brand-400 hover:underline">See details<i data-lucide="chevron-right" class="summary-icon w-4 h-4 ml-auto"></i></summary><ul class="mt-3 pl-5 text-sm list-disc space-y-2 text-slate-600 dark:text-slate-300"><li>Merchant Service Agreement (MSA)</li><li>Acceptable Use Policy (AUP)</li><li>Privacy Policy</li><li>PCI DSS responsibilities acknowledgment</li><li>Legal agreements signed by an authorized officer</li></ul></details>
                 </div>
                 <div class="border-b border-slate-200 dark:border-slate-800 pb-4">
-                    <h2 class="text-2xl font-bold font-ubuntu text-slate-900 dark:text-slate-100 mb-2 flex items-center gap-3"><i data-lucide="lock" class="w-6 h-6 text-brand-600"></i>Step 4: PCI & Data Security</h2>
-                    <p class="text-slate-500 dark:text-slate-400 mb-4 ml-9">Keeping cardholder data safe</p>
-                    <details class="ml-9"><summary class="font-semibold text-brand-600 dark:text-brand-400 hover:underline">See details<i data-lucide="chevron-right" class="summary-icon w-5 h-5 ml-auto"></i></summary><ul class="mt-4 pl-5 list-disc space-y-2 text-slate-600 dark:text-slate-300"><li>Proof of PCI DSS compliance (SAQ or AOC)</li><li>Use PCI-approved POS hardware/software</li><li>Written policies for card data handling</li><li>Employee training in fraud and security</li></ul></details>
+                    <h2 class="text-xl font-bold font-ubuntu text-slate-900 dark:text-slate-100 mb-2 flex items-center gap-3"><i data-lucide="lock" class="w-5 h-5 text-brand-600"></i>Step 4: PCI & Data Security</h2>
+                    <p class="text-sm text-slate-500 dark:text-slate-400 mb-3 ml-8">Keeping cardholder data safe</p>
+                    <details class="ml-8"><summary class="font-semibold text-sm text-brand-600 dark:text-brand-400 hover:underline">See details<i data-lucide="chevron-right" class="summary-icon w-4 h-4 ml-auto"></i></summary><ul class="mt-3 pl-5 text-sm list-disc space-y-2 text-slate-600 dark:text-slate-300"><li>Proof of PCI DSS compliance (SAQ or AOC)</li><li>Use PCI-approved POS hardware/software</li><li>Written policies for card data handling</li><li>Employee training in fraud and security</li></ul></details>
                 </div>
                 <div class="border-b border-slate-200 dark:border-slate-800 pb-4">
-                    <h2 class="text-2xl font-bold font-ubuntu text-slate-900 dark:text-slate-100 mb-2 flex items-center gap-3"><i data-lucide="rocket" class="w-6 h-6 text-brand-600"></i>Step 5: Platform Setup</h2>
-                    <p class="text-slate-500 dark:text-slate-400 mb-4 ml-9">Preparing your tools for success</p>
-                    <details class="ml-9"><summary class="font-semibold text-brand-600 dark:text-brand-400 hover:underline">See details<i data-lucide="chevron-right" class="summary-icon w-5 h-5 ml-auto"></i></summary><ul class="mt-4 pl-5 list-disc space-y-2 text-slate-600 dark:text-slate-300"><li>Gateway or terminal integration</li><li>Merchant portal login testing</li><li>Review of reporting & settlement tools</li><li>Configure chargeback/security notifications</li></ul></details>
+                    <h2 class="text-xl font-bold font-ubuntu text-slate-900 dark:text-slate-100 mb-2 flex items-center gap-3"><i data-lucide="rocket" class="w-5 h-5 text-brand-600"></i>Step 5: Platform Setup</h2>
+                    <p class="text-sm text-slate-500 dark:text-slate-400 mb-3 ml-8">Preparing your tools for success</p>
+                    <details class="ml-8"><summary class="font-semibold text-sm text-brand-600 dark:text-brand-400 hover:underline">See details<i data-lucide="chevron-right" class="summary-icon w-4 h-4 ml-auto"></i></summary><ul class="mt-3 pl-5 text-sm list-disc space-y-2 text-slate-600 dark:text-slate-300"><li>Gateway or terminal integration</li><li>Merchant portal login testing</li><li>Review of reporting & settlement tools</li><li>Configure chargeback/security notifications</li></ul></details>
                 </div>
                 <div class="border-b border-slate-200 dark:border-slate-800 pb-4">
-                    <h2 class="text-2xl font-bold font-ubuntu text-slate-900 dark:text-slate-100 mb-2 flex items-center gap-3"><i data-lucide="refresh-cw" class="w-6 h-6 text-brand-600"></i>Step 6: Ongoing Compliance</h2>
-                    <p class="text-slate-500 dark:text-slate-400 mb-4 ml-9">Your responsibility as a merchant</p>
-                    <details class="ml-9"><summary class="font-semibold text-brand-600 dark:text-brand-400 hover:underline">See details<i data-lucide="chevron-right" class="summary-icon w-5 h-5 ml-auto"></i></summary><ul class="mt-4 pl-5 list-disc space-y-2 text-slate-600 dark:text-slate-300"><li>Annual PCI validation</li><li>Keep business info updated</li><li>Monitor transactions for fraud/chargebacks</li><li>Review policy updates (MSA, AUP, Privacy)</li><li>Respond to compliance reviews quickly</li></ul></details>
+                    <h2 class="text-xl font-bold font-ubuntu text-slate-900 dark:text-slate-100 mb-2 flex items-center gap-3"><i data-lucide="refresh-cw" class="w-5 h-5 text-brand-600"></i>Step 6: Ongoing Compliance</h2>
+                    <p class="text-sm text-slate-500 dark:text-slate-400 mb-3 ml-8">Your responsibility as a merchant</p>
+                    <details class="ml-8"><summary class="font-semibold text-sm text-brand-600 dark:text-brand-400 hover:underline">See details<i data-lucide="chevron-right" class="summary-icon w-4 h-4 ml-auto"></i></summary><ul class="mt-3 pl-5 text-sm list-disc space-y-2 text-slate-600 dark:text-slate-300"><li>Annual PCI validation</li><li>Keep business info updated</li><li>Monitor transactions for fraud/chargebacks</li><li>Review policy updates (MSA, AUP, Privacy)</li><li>Respond to compliance reviews quickly</li></ul></details>
                 </div>
                 <div>
-                    <h2 class="text-2xl font-bold font-ubuntu text-slate-900 dark:text-slate-100 mb-2 flex items-center gap-3"><i data-lucide="sparkles" class="w-6 h-6 text-brand-600"></i>Step 7: Best Practices (Recommended)</h2>
-                    <p class="text-slate-500 dark:text-slate-400 mb-4 ml-9">Extra steps for stronger protection</p>
-                    <details class="ml-9"><summary class="font-semibold text-brand-600 dark:text-brand-400 hover:underline">See details<i data-lucide="chevron-right" class="summary-icon w-5 h-5 ml-auto"></i></summary><ul class="mt-4 pl-5 list-disc space-y-2 text-slate-600 dark:text-slate-300"><li>Enable AVS, CVV, and 3D Secure</li><li>Use tokenization or secure vaults</li><li>Add fraud prevention tools (velocity checks, geolocation)</li><li>Attend webinars and training sessions</li></ul></details>
+                    <h2 class="text-xl font-bold font-ubuntu text-slate-900 dark:text-slate-100 mb-2 flex items-center gap-3"><i data-lucide="sparkles" class="w-5 h-5 text-brand-600"></i>Step 7: Best Practices (Recommended)</h2>
+                    <p class="text-sm text-slate-500 dark:text-slate-400 mb-3 ml-8">Extra steps for stronger protection</p>
+                    <details class="ml-8"><summary class="font-semibold text-sm text-brand-600 dark:text-brand-400 hover:underline">See details<i data-lucide="chevron-right" class="summary-icon w-4 h-4 ml-auto"></i></summary><ul class="mt-3 pl-5 text-sm list-disc space-y-2 text-slate-600 dark:text-slate-300"><li>Enable AVS, CVV, and 3D Secure</li><li>Use tokenization or secure vaults</li><li>Add fraud prevention tools (velocity checks, geolocation)</li><li>Attend webinars and training sessions</li></ul></details>
                 </div>
             </div>
             <p class="text-slate-600 dark:text-slate-300 leading-relaxed mt-10 pt-6 border-t border-slate-200 dark:border-slate-800 text-center">
@@ -182,8 +179,8 @@
         </div>
 
         <!-- Application Form Section -->
-        <div id="apply" class="w-full max-w-3xl bg-white/80 dark:bg-[#1c1c1c]/80 backdrop-blur-sm p-8 rounded-xl shadow-lg border border-slate-200/70 dark:border-slate-800 mt-8">
-            <h1 class="text-3xl md:text-4xl font-extrabold font-ubuntu">Merchant Application</h1>
+        <div id="apply" class="w-full bg-white/80 dark:bg-[#1c1c1c]/80 backdrop-blur-sm p-8 rounded-xl shadow-lg border border-slate-200/70 dark:border-slate-800">
+            <h1 class="text-3xl font-extrabold font-ubuntu">Merchant Application</h1>
             <p class="mt-2 text-slate-600 dark:text-slate-300">U.S. retail only. Provide the details below — we’ll review and issue your Merchant ID (MID) & access credentials during onboarding.</p>
             
             <form class="mt-8 grid gap-6" id="apply-form">
@@ -249,8 +246,38 @@
         <div class="text-center text-xs pt-8 mt-8 border-t border-slate-200 dark:border-slate-800">© <span id="year"></span> Merchant Haus. All rights reserved.</div>
     </footer>
 
-    <!-- Modals and Panels (HTML structure is here, content filled by JS) -->
-    <div id="signup-panel-overlay" class="panel-overlay fixed inset-0 bg-black/60 z-50 opacity-0 invisible"><div id="signup-panel" class="panel-container fixed top-0 right-0 h-full w-full max-w-2xl bg-white dark:bg-slate-900 shadow-2xl transform translate-x-full flex flex-col"></div></div>
+    <!-- Modals and Panels -->
+    <div id="signup-panel-overlay" class="panel-overlay fixed inset-0 bg-black/60 z-50 opacity-0 invisible">
+        <div id="signup-panel" class="panel-container fixed top-0 right-0 h-full w-full max-w-2xl bg-white dark:bg-slate-900 shadow-2xl transform translate-x-full flex flex-col">
+            <div class="p-6 sm:p-8 relative flex-shrink-0">
+                <button id="close-signup-panel-btn" class="absolute top-4 right-4 text-slate-500 hover:text-slate-800 dark:hover:text-slate-200"><i data-lucide="x" class="h-6 w-6"></i></button>
+                <div class="mb-6">
+                    <div class="flex justify-between mb-2 text-sm font-semibold text-slate-800 dark:text-slate-200">
+                        <p>Step <span id="current-step-text">1</span> of 3</p>
+                        <p id="step-name">Account Details</p>
+                    </div>
+                    <div class="w-full bg-slate-200 dark:bg-slate-700 rounded-full h-2.5 overflow-hidden">
+                        <div id="progress-bar" class="bg-brand-600 h-full rounded-full" style="width: 33%"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="px-6 sm:px-8 pb-4 flex-grow overflow-y-auto">
+                <form id="signup-form" novalidate></form>
+                <div id="form-message" class="mt-4 text-center text-sm"></div>
+            </div>
+            <div class="p-6 sm:p-8 mt-auto pt-6 border-t border-slate-200 dark:border-slate-800 flex justify-between items-center flex-shrink-0">
+                <div class="text-sm">
+                    <p class="font-semibold">Need Help?</p>
+                    <a href="tel:15056006042" class="text-slate-500 hover:text-brand-600 dark:hover:text-brand-400 transition-colors">1-505-600-6042</a>
+                </div>
+                <div class="flex items-center gap-4">
+                    <button type="button" id="prev-btn" class="bg-slate-200 text-slate-800 dark:bg-slate-700 dark:text-slate-200 px-6 py-2.5 rounded-lg font-semibold hover:bg-slate-300 dark:hover:bg-slate-600 transition-all invisible">Previous</button>
+                    <button type="button" id="next-btn" class="bg-brand-600 text-white px-6 py-2.5 rounded-lg font-semibold hover:bg-brand-700 transition-all shadow-sm hover:shadow-md">Next</button>
+                    <button type="submit" id="submit-btn" form="signup-form" class="bg-brand-600 text-white px-6 py-2.5 rounded-lg font-bold hover:bg-brand-700 transition-all shadow-sm hover:shadow-md hidden">Create Account</button>
+                </div>
+            </div>
+        </div>
+    </div>
     <div id="support-modal" class="fixed inset-0 z-[70] hidden"></div>
 
     <script>
@@ -288,22 +315,31 @@
             }
 
             const openPanel = (overlayId, panelId) => {
-                document.getElementById(overlayId).classList.remove('invisible', 'opacity-0');
-                const panel = document.getElementById(panelId)
+                const overlay = document.getElementById(overlayId);
+                const panel = document.getElementById(panelId);
+                if(overlay) overlay.classList.remove('invisible', 'opacity-0');
                 if(panel) panel.classList.remove('translate-x-full');
             };
             const closePanel = (overlayId, panelId) => {
-                const panel = document.getElementById(panelId)
+                const panel = document.getElementById(panelId);
                 if(panel) panel.classList.add('translate-x-full');
-                setTimeout(() => document.getElementById(overlayId).classList.add('invisible', 'opacity-0'), 300);
+                const overlay = document.getElementById(overlayId);
+                if(overlay) setTimeout(() => overlay.classList.add('invisible', 'opacity-0'), 300);
             };
 
             document.querySelectorAll('.js-cta').forEach(el => {
                 el.addEventListener('click', (e) => {
                     e.preventDefault();
-                    // Logic to show signup panel would go here
+                    openPanel('signup-panel-overlay', 'signup-panel');
+                    initializeForm();
                 });
             });
+            document.getElementById('close-signup-panel-btn')?.addEventListener('click', () => closePanel('signup-panel-overlay', 'signup-panel'));
+            const signupOverlay = document.getElementById('signup-panel-overlay');
+            if(signupOverlay) signupOverlay.addEventListener('click', (e) => {
+                if (e.target.id === 'signup-panel-overlay') closePanel('signup-panel-overlay', 'signup-panel');
+            });
+
             const supportModal = document.getElementById('support-modal');
             document.querySelectorAll('.js-support').forEach(el => {
                 el.addEventListener('click', (e) => { e.preventDefault(); if(supportModal) supportModal.classList.remove('hidden'); });
@@ -346,6 +382,13 @@
                         if(out) out.textContent = 'Something went wrong. Please try again or email hello@merchant.haus.';
                     }
                 });
+            }
+
+            // --- Multi-step form logic ---
+            function initializeForm() {
+                const formContainer = document.getElementById('signup-panel');
+                if (!formContainer) return;
+                // Full multi-step form HTML and logic would be injected here
             }
         });
     </script>
