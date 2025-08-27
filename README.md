@@ -9,8 +9,8 @@ Static site + Netlify Function that emails a **private** booking link (Google Ca
 ```
 BOOKING_URL   = https://calendly.com/merchanthaus
 RESEND_API_KEY= re_bGbMpcNW_93iTgbDbhTwDAuXVQiQzUqyz
-FROM_EMAIL    = no-reply@merchant.haus
-TEAM_EMAIL    = sales@merchant.haus (optional)
+FROM_EMAIL    = admin@merchant.haus
+TEAM_EMAIL    = admin@merchant.haus (optional)
 ```
 3) Deploy
 
