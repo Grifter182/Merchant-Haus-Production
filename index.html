@@ -10,6 +10,8 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@700&family=Lexend:wght@100;400&family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <!-- Inter for tagline -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@500;700&display=swap" rel="stylesheet" />
   
   <!-- Tailwind CSS -->
   <script src="https://cdn.tailwindcss.com"></script>
@@ -20,7 +22,8 @@
         extend: {
           fontFamily: { 
             sans: ['Lexend', 'ui-sans-serif', 'system-ui'],
-            ubuntu: ['Ubuntu', 'sans-serif'] 
+            ubuntu: ['Ubuntu', 'sans-serif'],
+            inter: ['Inter','sans-serif']
           },
           colors: {
             brand: { 600:'#dc2743', 700:'#c21b35', 400:'#ef3c5b' },
@@ -143,13 +146,8 @@
         z-index: -20;
     }
 
-    /* Wordmark + accent animation */
-    .grad-text, .grad-text-static {
-      display:inline-block;
-      background: linear-gradient(90deg,#c21b35,#ef3c5b,#c21b35);
-      -webkit-background-clip:text; background-clip:text;
-      -webkit-text-fill-color:transparent; color:transparent;
-    }
+    /* Wordmark helpers (retired for new SVG logo but kept harmless) */
+    .grad-text, .grad-text-static { -webkit-text-fill-color: initial; background: none; color: inherit; }
 
     /* Prefer dark grey globally */
     .dark, .dark body { background-color: #1c1c1c !important; color: #f5f5f5 !important; }
@@ -202,6 +200,9 @@
         border-color: rgba(255, 255, 255, 0.2) !important;
     }
     .panel-overlay, .panel-container { transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
+
+    /* Logo sizing helpers */
+    .mh-logo { display:block; width:100%; height:auto; }
   </style>
 
   <!-- Favicons -->
@@ -219,11 +220,11 @@
       <header class="header-glass border border-slate-200/70 dark:border-slate-800 rounded-xl">
         <div class="relative max-w-7xl mx-auto px-4 py-4 flex items-center justify-between">
           <a href="#" class="flex items-center gap-3 group">
-            <img src="shield/shield.png" alt="MerchantHaus Logo" class="h-10 w-10">
-            <div>
-              <div id="logo-container" class="text-xl md:text-2xl font-ubuntu font-bold tracking-wide grad-text">MerchantHaus</div>
-              <p id="animated-tagline" class="text-xs text-slate-500 dark:text-slate-400 h-4"></p>
-            </div>
+            <!-- UPDATED: reusable SVG logo -->
+            <div class="w-[190px] md:w-[260px]" data-mh-logo></div>
+            <noscript>
+              <img src="shield/shield.png" alt="MerchantHaus" class="h-10" />
+            </noscript>
           </a>
           <div class="flex items-center gap-2">
             <a href="#" class="js-cta bg-transparent hover:bg-brand-600 text-brand-600 hover:text-white border border-brand-600 px-4 py-2 rounded-full text-sm font-semibold transition-colors duration-300">Get Started</a>
@@ -316,7 +317,7 @@
       <h2 class="text-4xl font-bold mb-4 animate-on-scroll font-ubuntu">Integrate with Your Favorite Tools</h2>
       <p class="text-lg text-gray-600 dark:text-slate-300 mb-12">Connect MerchantHaus with the platforms you already use.</p>
       <div class="flex justify-center items-center gap-8 md:gap-16">
-        <a hre<a href="shopify.html" class="block hover:scale-105 transition-transform duration-300"
+        <a href="shopify.html" class="block hover:scale-105 transition-transform duration-300">
           <img src="shopifylight.png" alt="Shopify Logo" class="h-12 md:h-14 block dark:hidden">
           <img src="shopifydark.png" alt="Shopify Logo" class="h-12 md:h-14 hidden dark:block">
         </a>
@@ -395,10 +396,13 @@
     <div class="max-w-7xl mx-auto px-4 grid sm:grid-cols-2 lg:grid-cols-4 gap-8 text-sm">
       <div class="space-y-3">
         <a href="#" class="flex items-center gap-3">
-            <img src="shield/shield.png" alt="MerchantHaus Logo" class="h-9 w-9">
-            <span class="text-2xl font-ubuntu font-bold tracking-wide grad-text">MerchantHaus</span>
+            <!-- UPDATED: reusable SVG logo (smaller) -->
+            <div class="w-[190px]" data-mh-logo></div>
+            <noscript>
+              <img src="shield/shield.png" alt="MerchantHaus" class="h-9" />
+            </noscript>
         </a>
-        <p>Psimple. smart.secure</p>
+        <!-- Old tagline removed (now inside logo) -->
         <div class="text-sm">
             <a href="tel:15056006042" class="block">1-505-600-6042</a>
             <a href="mailto:support@merchanthaus.io" class="block">support@merchanthaus.io</a>
@@ -606,28 +610,7 @@
           if (e.target.dataset.close !== undefined) supportModal.classList.add('hidden');
         });
         
-
-        const animatedTagline = document.getElementById('animated-tagline');
-        const taglineText = "safe . smart . secure";
-
-        function typeWriter(element, text, speed, callback) {
-            let i = 0;  
-            if (!element) return;
-            element.innerHTML = '';
-            const typingInterval = setInterval(() => {
-                if (i < text.length) {
-                    element.innerHTML = text.substring(0, i + 1) + '<span class="cursor"></span>'; i++;
-                } else {
-                    clearInterval(typingInterval);  
-                    element.innerHTML = text;
-                    if (callback) callback();
-                }
-            }, speed);
-        }
-        
-        setTimeout(() => {  
-            typeWriter(animatedTagline, taglineText, 100);
-        }, 500);
+        // Removed old typewriter tagline (now part of logo)
 
         const headingTexts = {
             "integrations": "Integrate with Your Favorite Tools",
@@ -812,7 +795,86 @@
 
             updateFormStep();
         }
+
+        // simple typewriter reused for section headings
+        function typeWriter(element, text, speed, callback) {
+            let i = 0;  
+            if (!element) return;
+            element.innerHTML = '';
+            const typingInterval = setInterval(() => {
+                if (i < text.length) {
+                    element.innerHTML = text.substring(0, i + 1) + '<span class="cursor"></span>'; i++;
+                } else {
+                    clearInterval(typingInterval);  
+                    element.innerHTML = text;
+                    if (callback) callback();
+                }
+            }, speed);
+        }
+
     });
   </script>
+
+  <!-- Reusable MerchantHaus Logo Template -->
+  <template id="MHLogo">
+    <svg class="mh-logo" viewBox="0 0 500 100" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="MerchantHaus — plug. play. grow.">
+      <defs>
+        <!-- One-time shimmer gradient over solid crimson (#DC143C) -->
+        <linearGradient id="mhGradient" gradientUnits="userSpaceOnUse" x1="120" y1="0" x2="420" y2="0">
+          <stop offset="0%" stop-color="#DC143C"/>
+          <stop offset="45%" stop-color="#DC143C">
+            <animate attributeName="stop-color" values="#DC143C; #FFC0CB; #DC143C" keyTimes="0;0.5;1" dur="5s" begin="1.5s" fill="freeze" repeatCount="1"/>
+          </stop>
+          <stop offset="50%" stop-color="#DC143C">
+            <animate attributeName="stop-color" values="#DC143C; #FFFFFF; #DC143C" keyTimes="0;0.5;1" dur="5s" begin="1.5s" fill="freeze" repeatCount="1"/>
+          </stop>
+          <stop offset="55%" stop-color="#DC143C">
+            <animate attributeName="stop-color" values="#DC143C; #FFC0CB; #DC143C" keyTimes="0;0.5;1" dur="5s" begin="1.5s" fill="freeze" repeatCount="1"/>
+          </stop>
+          <stop offset="100%" stop-color="#DC143C"/>
+          <animateTransform attributeName="transform" type="translate" from="-450 0" to="450 0" dur="5s" begin="1.5s" fill="freeze" repeatCount="1"/>
+        </linearGradient>
+
+        <style>
+          .mh-wordmark { font-family: 'Ubuntu', sans-serif; font-size: 50px; font-weight: 700; }
+          .mh-tagline  { font-family: 'Inter',  sans-serif; font-size: 18px; font-weight: 500; fill: #A9A9A9; letter-spacing: 4px; }
+          @media (prefers-color-scheme: dark) { .mh-tagline { fill:#A9A9A9; } }
+        </style>
+      </defs>
+
+      <!-- Shield image -->
+      <image href="shield/shield.png" x="10" y="10" height="80" width="80" />
+
+      <!-- Wordmark using gradient fill -->
+      <g class="mh-wordmark" fill="url(#mhGradient)" shape-rendering="geometricPrecision" text-rendering="optimizeLegibility">
+        <text x="120" y="45">MerchantHaus</text>
+      </g>
+
+      <!-- Cyber teal underline (#00CEDB) -->
+      <line x1="170" x2="390" y1="68" y2="68" stroke="#00CEDB" stroke-width="2" opacity="0">
+        <animate attributeName="opacity" from="0" to="1" dur="1s" begin="1.5s" fill="freeze" />
+      </line>
+
+      <!-- Tagline in Inter -->
+      <text x="280" y="88" class="mh-tagline" text-anchor="middle" opacity="0">
+        <animate attributeName="opacity" from="0" to="1" dur="1s" begin="2s" fill="freeze" />
+        plug. play. grow.
+      </text>
+    </svg>
+  </template>
+
+  <script>
+    // Mount the logo wherever [data-mh-logo] exists
+    function mountMHLogo(target){
+      const tpl = document.getElementById('MHLogo');
+      if(!tpl || !target) return;
+      const node = tpl.content.firstElementChild.cloneNode(true);
+      target.replaceChildren(node);
+    }
+    document.addEventListener('DOMContentLoaded', () => {
+      document.querySelectorAll('[data-mh-logo]').forEach(mountMHLogo);
+    });
+  </script>
+
 </body>
 </html>
