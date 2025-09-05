@@ -670,7 +670,7 @@
             const prompt = `You are a helpful assistant for MerchantHaus, a payment processing company. A user has a question: "${question}". Based *only* on the following context from the MerchantHaus website, provide a clear and concise answer. If the answer is not in the context, say "I'm sorry, I can't find information about that on this page. Please contact support for more details."\n\nContext:\n${pageContext}`;
             try {
                 const payload = { contents: [{ role: "user", parts: [{ text: prompt }] }] };
-                const apiKey = "";
+                const apiKey = "AIzaSyB0xUJnDijM_1mpBBuhrWHY5AWmffaxxog";
                 const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-05-20:generateContent?key=${apiKey}`;
                 const response = await fetch(apiUrl, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) });
                 if (!response.ok) throw new Error(`API request failed with status ${response.status}`);
