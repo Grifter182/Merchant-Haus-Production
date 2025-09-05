@@ -6,14 +6,11 @@
   <title>MerchantHaus – ISO Solutions for U.S. Retail</title>
   <meta name="theme-color" content="#1c1c1c">
 
-  <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@700&family=Lexend:wght@100;400&family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
-  <!-- Inter for tagline -->
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@500;700&display=swap" rel="stylesheet" />
   
-  <!-- Tailwind CSS -->
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
     tailwind.config = {
@@ -49,10 +46,8 @@
     }
   </script>
   
-  <!-- Lucide Icons -->
   <script src="https://unpkg.com/lucide@latest"></script>
 
-  <!-- Custom Styles -->
   <style>
     :root { color-scheme: light dark; }
     body { font-family: 'Lexend', ui-sans-serif, system-ui; }
@@ -205,7 +200,6 @@
     .mh-logo { display:block; width:100%; height:auto; }
   </style>
 
-  <!-- Favicons -->
   <link rel="apple-touch-icon" sizes="180x180" href="shield/apple-touch-icon.png">
   <link rel="icon" type="image/png" sizes="32x32" href="shield/favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="shield/favicon-16x16.png">
@@ -220,10 +214,9 @@
       <header class="header-glass border border-slate-200/70 dark:border-slate-800 rounded-xl">
         <div class="relative max-w-7xl mx-auto px-4 py-4 flex items-center justify-between">
           <a href="#" class="flex items-center gap-3 group">
-            <!-- UPDATED: reusable SVG logo -->
             <div class="w-[190px] md:w-[260px]" data-mh-logo></div>
             <noscript>
-              <img src="shield/shield.png" alt="MerchantHaus" class="h-10" />
+              <img src="Shield/Shield.png" alt="MerchantHaus" class="h-10" />
             </noscript>
           </a>
           <div class="flex items-center gap-2">
@@ -231,12 +224,11 @@
             <a href="https://retailmanager.merchant.haus" class="hidden sm:block bg-transparent hover:bg-brand-green text-brand-green hover:text-slate-800 border border-brand-green px-4 py-2 rounded-lg text-sm font-semibold transition-colors duration-300">Login</a>
             <button id="open-menu-btn" class="p-2 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800" aria-label="Open menu"><i data-lucide="menu" class="h-5 w-5"></i></button>
           </div>
-           <!-- Pop-out Menu -->
            <div id="popout-menu" class="absolute top-full right-4 mt-2 w-72 rounded-xl bg-white dark:bg-[#1c1c1c] shadow-2xl border border-brand-green p-4 z-[51] hidden opacity-0 transition-opacity duration-300">
             <nav class="flex flex-col space-y-1 text-base font-medium">
                 <a href="#payments" data-close class="px-4 py-2 rounded-lg hover:bg-brand-600 hover:text-white transition-colors">Payment Services</a>
                 <a href="#integrations" data-close class="px-4 py-2 rounded-lg hover:bg-brand-600 hover:text-white transition-colors">Integrations</a>
-                <a href="shopify.html" data-close class="px-4 py-2 rounded-lg hover:bg-brand-600 hover:text-white transition-colors">Shopify</a>
+                <a href="Shopify.html" data-close class="px-4 py-2 rounded-lg hover:bg-brand-600 hover:text-white transition-colors">Shopify</a>
                 <a href="#checklist" data-close class="px-4 py-2 rounded-lg hover:bg-brand-600 hover:text-white transition-colors">Setup Checklist</a>
                 <a href="#" data-close class="js-support px-4 py-2 rounded-lg hover:bg-brand-600 hover:text-white transition-colors">Contact Support</a>
                 <a href="https://retailmanager.merchant.haus" data-close class="sm:hidden block px-4 py-2 rounded-lg hover:bg-brand-600 hover:text-white transition-colors mt-2 pt-2 border-t border-slate-200 dark:border-slate-800">Login</a>
@@ -252,7 +244,6 @@
     </div>
 
 
-  <!-- Hero -->
   <div class="relative">
     <section class="relative overflow-hidden animate-fadeIn hero-bg-container">
         <div class="absolute inset-0 bg-black/50 -z-10"></div>
@@ -298,7 +289,6 @@
     </div>
   </div>
 
-  <!-- Payment Services -->
   <section id="payments" class="pt-28 pb-12" style="background-color: #6dffca;">
     <div class="max-w-5xl mx-auto px-4 text-right">
       <p class="text-2xl sm:text-3xl font-lexend mb-12" style="color: #524848;">Your complete toolkit for accepting payments and managing your business.</p>
@@ -311,7 +301,6 @@
     </div>
   </section>
 
-  <!-- Integrations Section -->
   <section id="integrations" class="py-8 md:py-12">
     <div class="max-w-5xl mx-auto px-4 text-center">
       <h2 class="text-4xl font-bold mb-4 animate-on-scroll font-ubuntu">Integrate with Your Favorite Tools</h2>
@@ -329,7 +318,6 @@
     </div>
   </section>
     
-  <!-- Setup Checklist -->
   <div class="relative">
     <section id="checklist" class="pt-28 pb-16 bg-slate-50 dark:bg-slate-900/40 border-y border-slate-200/70 dark:border-slate-800">
       <div class="max-w-7xl mx-auto px-4 text-center">
@@ -337,7 +325,6 @@
           Here’s everything we’ll ask for during setup—business details, security info, documentation. We’ll guide you step‑by‑step.
         </p>
         <div class="grid md:grid-cols-3 gap-8 mt-12 text-left">
-          <!-- Card 1: Business Information -->
           <div class="bg-white dark:bg-slate-950 p-6 rounded-xl border border-slate-200 dark:border-slate-800 space-y-4">
             <div class="flex items-center gap-4">
               <div class="w-12 h-12 rounded-full bg-brand-600/10 dark:bg-brand-400/10 flex-shrink-0 flex items-center justify-center text-brand-600 dark:text-brand-400">
@@ -352,7 +339,6 @@
               <li>Verification documents (e.g. photo ID, business registration)—upload when prompted</li>
             </ul>
           </div>
-          <!-- Card 2: Security & Compliance -->
           <div class="bg-white dark:bg-slate-950 p-6 rounded-xl border border-slate-200 dark:border-slate-800 space-y-4">
             <div class="flex items-center gap-4">
               <div class="w-12 h-12 rounded-full bg-brand-600/10 dark:bg-brand-400/10 flex-shrink-0 flex items-center justify-center text-brand-600 dark:text-brand-400">
@@ -367,7 +353,6 @@
               <li>Merchant attestation of cardholder data handling policies</li>
             </ul>
           </div>
-          <!-- Card 3: Platform Readiness -->
           <div class="bg-white dark:bg-slate-950 p-6 rounded-xl border border-slate-200 dark:border-slate-800 space-y-4">
             <div class="flex items-center gap-4">
               <div class="w-12 h-12 rounded-full bg-brand-600/10 dark:bg-brand-400/10 flex-shrink-0 flex items-center justify-center text-brand-600 dark:text-brand-400">
@@ -391,18 +376,15 @@
     </div>
   </div>
 
-  <!-- Footer -->
   <footer class="border-t border-slate-200 dark:border-slate-800 py-10">
     <div class="max-w-7xl mx-auto px-4 grid sm:grid-cols-2 lg:grid-cols-4 gap-8 text-sm">
       <div class="space-y-3">
         <a href="#" class="flex items-center gap-3">
-            <!-- UPDATED: reusable SVG logo (smaller) -->
             <div class="w-[190px]" data-mh-logo></div>
             <noscript>
-              <img src="shield/shield.png" alt="MerchantHaus" class="h-9" />
+              <img src="Shield/Shield.png" alt="MerchantHaus" class="h-9" />
             </noscript>
         </a>
-        <!-- Old tagline removed (now inside logo) -->
         <div class="text-sm">
             <a href="tel:15056006042" class="block">1-505-600-6042</a>
             <a href="mailto:support@merchanthaus.io" class="block">support@merchanthaus.io</a>
@@ -412,7 +394,7 @@
         <h3 class="font-semibold font-ubuntu">Product</h3>
         <a href="#payments" class="block">Payment Services</a>
         <a href="#integrations" class="block">Integrations</a>
-        <a href="shopify.html" data-close class="px-4 py-2 rounded-lg hover:bg-brand-600 hover:text-white transition-colors">Shopify</a>
+        <a href="Shopify.html" data-close class="px-4 py-2 rounded-lg hover:bg-brand-600 hover:text-white transition-colors">Shopify</a>
         <a href="#checklist" class="block">Setup Checklist</a>
         <a href="compliance.html" class="block">Compliance</a>
       </nav>
@@ -430,7 +412,6 @@
     <div class="text-center text-xs pt-8 mt-8 border-t">© <span id="year"></span> Merchant Haus. All rights reserved.</div>
   </footer>
 
-  <!-- Slide-in Sign-up Form -->
   <div id="signup-panel-overlay" class="panel-overlay fixed inset-0 bg-black/60 z-50 opacity-0 invisible">
     <div id="signup-panel" class="panel-container fixed top-0 right-0 h-full w-full max-w-2xl bg-white dark:bg-slate-900 shadow-2xl transform translate-x-full flex flex-col">
         <div class="p-6 sm:p-8 relative flex-shrink-0">
@@ -463,7 +444,6 @@
     </div>
   </div>
 
-  <!-- Support Modal -->
   <div id="support-modal" class="fixed inset-0 z-[70] hidden">
     <div class="absolute inset-0 bg-black/60" data-close></div>
     <div class="mx-auto mt-[10vh] w-[min(560px,92vw)] rounded-2xl bg-white dark:bg-slate-900 p-6 border border-slate-200 dark:border-slate-800 shadow-2xl">
@@ -485,7 +465,6 @@
   </div>
 
 
-  <!-- Scripts -->
   <script>
     document.addEventListener('DOMContentLoaded', () => {  
         if (window.lucide) lucide.createIcons();  
@@ -654,63 +633,56 @@
         const askFaqBtn = document.getElementById('ask-faq');
         const faqQuestionInput = document.getElementById('faq-question');
         const faqAnswerContainer = document.getElementById('faq-answer');
-        const getPageContext = () => {
-            let context = "Page Content:\n\n";
-            document.querySelectorAll('h1, h2, h3, p, li').forEach(el => { context += el.textContent.trim() + "\n"; });
-            return context;
-        };
-       const handleFaqSubmit = async () => {
-    const question = faqQuestionInput.value.trim();
-    if (!question) return;
-    faqAnswerContainer.classList.remove('hidden');
-    askFaqBtn.disabled = true;
-    askFaqBtn.innerHTML = '<span class="loader"></span>';
-    faqAnswerContainer.innerHTML = 'Oiling the cogs...';
 
-    try {
-        // This is the corrected API path to your Netlify function
-        const apiUrl = '/.netlify/functions/gemini-chat';
+        const handleFaqSubmit = async () => {
+            const question = faqQuestionInput.value.trim();
+            if (!question) return;
+            faqAnswerContainer.classList.remove('hidden');
+            askFaqBtn.disabled = true;
+            askFaqBtn.innerHTML = '<span class="loader"></span>';
+            faqAnswerContainer.innerHTML = 'Thinking...';
+            
+            try {
+                const apiUrl = '/.netlify/functions/gemini-chat';
+                const payload = {
+                    prompt: question,
+                    history: [] 
+                };
 
-        const payload = {
-            prompt: question,
-            // You can optionally include history if you build a chat interface
-            history: [] 
-        };
+                const response = await fetch(apiUrl, { 
+                    method: 'POST', 
+                    headers: { 'Content-Type': 'application/json' }, 
+                    body: JSON.stringify(payload) 
+                });
 
-        const response = await fetch(apiUrl, { 
-            method: 'POST', 
-            headers: { 'Content-Type': 'application/json' }, 
-            body: JSON.stringify(payload) 
-        });
+                if (!response.ok) {
+                    throw new Error(`API request failed with status ${response.status}`);
+                }
 
-        if (!response.ok) {
-            throw new Error(`API request failed with status ${response.status}`);
-        }
+                const result = await response.json();
 
-        const result = await response.json();
-
-        if (result.reply) {
-            // Sanitize and format the response text as HTML
-            let html = result.reply
-                .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
-                .replace(/^\* (.*$)/gm, '<li>$1</li>')
-                .replace(/<\/li><li>/g, '</li><li>');
-            if (html.includes('<li>')) {
-                html = `<ul class="list-disc pl-5 space-y-2">${html}</ul>`;
+                if (result.reply) {
+                    let html = result.reply
+                        .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+                        .replace(/^\* (.*$)/gm, '<li>$1</li>')
+                        .replace(/<\/li><li>/g, '</li><li>');
+                    if (html.includes('<li>')) {
+                        html = `<ul class="list-disc pl-5 space-y-2">${html}</ul>`;
+                    }
+                    faqAnswerContainer.innerHTML = html;
+                } else {
+                    faqAnswerContainer.textContent = 'Sorry, I could not find an answer to your question.';
+                }
+            } catch (error) {
+                console.error('Error fetching AI response:', error);
+                faqAnswerContainer.textContent = 'Sorry, something went wrong. Please try again later.';
+            } finally {
+                askFaqBtn.disabled = false;
+                askFaqBtn.innerHTML = '<i data-lucide="arrow-up" class="h-5 w-5"></i>';
+                if(window.lucide) lucide.createIcons();
             }
-            faqAnswerContainer.innerHTML = html;
-        } else {
-            faqAnswerContainer.textContent = 'Sorry, I could not find an answer to your question.';
-        }
-    } catch (error) {
-        console.error('Error fetching AI response:', error);
-        faqAnswerContainer.textContent = 'Sorry, something went wrong. Please try again later.';
-    } finally {
-        askFaqBtn.disabled = false;
-        askFaqBtn.innerHTML = '<i data-lucide="arrow-up" class="h-5 w-5"></i>';
-        if(window.lucide) lucide.createIcons();
-    }
-};
+        };
+
         askFaqBtn.addEventListener('click', handleFaqSubmit);
         faqQuestionInput.addEventListener('keypress', (e) => { if (e.key === 'Enter') handleFaqSubmit(); });
 
@@ -722,7 +694,6 @@
             const form = document.getElementById('signup-form');
             if (!form) return;
             form.innerHTML = `
-                <!-- Step 1: Account Details -->
                 <div id="step-1" class="form-step">
                     <h2 class="text-2xl font-bold mb-2">Primary Contact Information</h2>
                     <p class="text-sm text-slate-500 mb-6">This person will be the primary user on the account.</p>
@@ -749,7 +720,6 @@
                         </div>
                     </div>
                 </div>
-                <!-- Step 2: Business Information -->
                 <div id="step-2" class="form-step hidden">
                     <h2 class="text-2xl font-bold mb-6">Company Information</h2>
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -759,7 +729,6 @@
                         </div>
                     </div>
                 </div>
-                <!-- Step 3: Final Details -->
                 <div id="step-3" class="form-step hidden">
                     <h2 class="text-2xl font-bold mb-2">Finalize Your Account</h2>
                     <p class="text-sm text-slate-500 mb-6">Create a username for logging into the gateway and accept the terms.</p>
@@ -834,11 +803,9 @@
     });
   </script>
 
-  <!-- Reusable MerchantHaus Logo Template -->
   <template id="MHLogo">
     <svg class="mh-logo" viewBox="0 0 500 100" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="MerchantHaus — plug. play. grow.">
       <defs>
-        <!-- One-time shimmer gradient over solid crimson (#DC143C) -->
         <linearGradient id="mhGradient" gradientUnits="userSpaceOnUse" x1="120" y1="0" x2="420" y2="0">
           <stop offset="0%" stop-color="#DC143C"/>
           <stop offset="45%" stop-color="#DC143C">
@@ -861,20 +828,16 @@
         </style>
       </defs>
 
-      <!-- Shield image -->
-      <image href="shield/shield.png" x="10" y="10" height="80" width="80" />
+      <image href="Shield/Shield.png" x="10" y="10" height="80" width="80" />
 
-      <!-- Wordmark using gradient fill -->
       <g class="mh-wordmark" fill="url(#mhGradient)" shape-rendering="geometricPrecision" text-rendering="optimizeLegibility">
         <text x="120" y="45">MerchantHaus</text>
       </g>
 
-      <!-- Cyber teal underline (#00CEDB) -->
       <line x1="170" x2="390" y1="68" y2="68" stroke="#00CEDB" stroke-width="2" opacity="0">
         <animate attributeName="opacity" from="0" to="1" dur="1s" begin="1.5s" fill="freeze" />
       </line>
 
-      <!-- Tagline in Inter -->
       <text x="280" y="88" class="mh-tagline" text-anchor="middle" opacity="0">
         <animate attributeName="opacity" from="0" to="1" dur="1s" begin="2s" fill="freeze" />
         plug. play. grow.
