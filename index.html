@@ -659,39 +659,58 @@
             document.querySelectorAll('h1, h2, h3, p, li').forEach(el => { context += el.textContent.trim() + "\n"; });
             return context;
         };
-        const handleFaqSubmit = async () => {
-            const question = faqQuestionInput.value.trim();
-            if (!question) return;
-            faqAnswerContainer.classList.remove('hidden');
-            askFaqBtn.disabled = true;
-            askFaqBtn.innerHTML = '<span class="loader"></span>';
-            faqAnswerContainer.innerHTML = 'Thinking...';
-            const pageContext = getPageContext();
-            const prompt = `You are a helpful assistant for MerchantHaus, a payment processing company. A user has a question: "${question}". Based *only* on the following context from the MerchantHaus website, provide a clear and concise answer. If the answer is not in the context, say "I'm sorry, I can't find information about that on this page. Please contact support for more details."\n\nContext:\n${pageContext}`;
-            try {
-                const payload = { contents: [{ role: "user", parts: [{ text: prompt }] }] };
-                const apiKey = "AIzaSyB0xUJnDijM_1mpBBuhrWHY5AWmffaxxog";
-                const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-05-20:generateContent?key=${apiKey}`;
-                const response = await fetch(apiUrl, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) });
-                if (!response.ok) throw new Error(`API request failed with status ${response.status}`);
-                const result = await response.json();
-                if (result.candidates?.[0]?.content?.parts?.[0]?.text) {
-                    const text = result.candidates[0].content.parts[0].text;
-                    let html = text.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>').replace(/^\* (.*$)/gm, '<li>$1</li>').replace(/<\/li><li>/g, '</li><li>');
-                    if (html.includes('<li>')) html = `<ul class="list-disc pl-5 space-y-2">${html}</ul>`;
-                    faqAnswerContainer.innerHTML = html;
-                } else {
-                    faqAnswerContainer.textContent = 'Sorry, I could not find an answer to your question.';
-                }
-            } catch (error) {
-                console.error('Error fetching AI response:', error);
-                faqAnswerContainer.textContent = 'Sorry, something went wrong. Please try again later.';
-            } finally {
-                askFaqBtn.disabled = false;
-                askFaqBtn.innerHTML = '<i data-lucide="arrow-up" class="h-5 w-5"></i>';
-                if(window.lucide) lucide.createIcons();
-            }
+       const handleFaqSubmit = async () => {
+    const question = faqQuestionInput.value.trim();
+    if (!question) return;
+    faqAnswerContainer.classList.remove('hidden');
+    askFaqBtn.disabled = true;
+    askFaqBtn.innerHTML = '<span class="loader"></span>';
+    faqAnswerContainer.innerHTML = 'Thinking...';
+
+    try {
+        // This is the corrected API path to your Netlify function
+        const apiUrl = '/.netlify/functions/gemini-chat';
+
+        const payload = {
+            prompt: question,
+            // You can optionally include history if you build a chat interface
+            history: [] 
         };
+
+        const response = await fetch(apiUrl, { 
+            method: 'POST', 
+            headers: { 'Content-Type': 'application/json' }, 
+            body: JSON.stringify(payload) 
+        });
+
+        if (!response.ok) {
+            throw new Error(`API request failed with status ${response.status}`);
+        }
+
+        const result = await response.json();
+
+        if (result.reply) {
+            // Sanitize and format the response text as HTML
+            let html = result.reply
+                .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+                .replace(/^\* (.*$)/gm, '<li>$1</li>')
+                .replace(/<\/li><li>/g, '</li><li>');
+            if (html.includes('<li>')) {
+                html = `<ul class="list-disc pl-5 space-y-2">${html}</ul>`;
+            }
+            faqAnswerContainer.innerHTML = html;
+        } else {
+            faqAnswerContainer.textContent = 'Sorry, I could not find an answer to your question.';
+        }
+    } catch (error) {
+        console.error('Error fetching AI response:', error);
+        faqAnswerContainer.textContent = 'Sorry, something went wrong. Please try again later.';
+    } finally {
+        askFaqBtn.disabled = false;
+        askFaqBtn.innerHTML = '<i data-lucide="arrow-up" class="h-5 w-5"></i>';
+        if(window.lucide) lucide.createIcons();
+    }
+};
         askFaqBtn.addEventListener('click', handleFaqSubmit);
         faqQuestionInput.addEventListener('keypress', (e) => { if (e.key === 'Enter') handleFaqSubmit(); });
 
