@@ -8,7 +8,7 @@
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@700&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800&family=Ubuntu:wght@600;700&display=swap" rel="stylesheet">
 
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -22,12 +22,11 @@
                         ubuntu: ['Ubuntu', 'sans-serif']
                     },
                     colors: {
-                        'crimson': '#DC143C',
-                        'brand': { 600: '#DC143C', 700: '#c21b35' }, // Kept for compatibility
-                        'cyber-teal': '#00CEDB',
-                        'silver-grey': '#A9A9A9',
-                        'neutral-dark': '#1A1A1A',
-                        'neutral-light': '#F8F9FA',
+                        'brand-crimson': '#DC143C',
+                        'brand-teal': '#00CEDB',
+                        'brand-silver': '#A9A9A9',
+                        'brand-dark': '#1A1A1A',
+                        'brand-light': '#F8F9FA',
                     }
                 }
             }
@@ -40,10 +39,11 @@
     <!-- Custom Styles -->
     <style>
         body {
-            font-family: 'Inter', ui-sans-serif, system-ui;
+            font-family: 'Inter', sans-serif;
             position: relative;
             -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
+            background-color: #f8f9fa;
         }
         body::before {
             content: '';
@@ -52,8 +52,8 @@
             width: 100vw; height: 100vh;
             z-index: -1;
             background:
-                radial-gradient(circle at 15% 25%, rgba(220, 20, 60, 0.15), transparent 40%),
-                radial-gradient(circle at 85% 75%, rgba(0, 206, 219, 0.1), transparent 40%);
+                radial-gradient(circle at 15% 25%, rgba(220, 20, 60, 0.1), transparent 40%),
+                radial-gradient(circle at 85% 75%, rgba(0, 206, 219, 0.08), transparent 40%);
             animation: bloom 25s linear infinite alternate;
         }
         @keyframes bloom {
@@ -67,78 +67,105 @@
         .dark .text-slate-300 { color: #c8c8c8 !important; }
         .dark .text-slate-400 { color: #a0a0a0 !important; }
         .dark .text-slate-600 { color: #c8c8c8 !important; }
-        .header-glass { background-color: rgba(255, 255, 255, 0.8); backdrop-filter: blur(10px); }
+        .header-glass { background-color: rgba(248, 249, 250, 0.8); backdrop-filter: blur(10px); }
         .dark .header-glass { background-color: rgba(26, 26, 26, 0.8); }
-        .grad-text { display: inline-block; background: linear-gradient(90deg, #DC143C, #E85B71, #DC143C); -webkit-background-clip: text; background-clip: text; color: transparent; }
         
-        /* Updated Footer styles */
-        footer { 
-            position: relative; 
-            background-color: #1A1A1A; /* Fallback background */
-            color: white; 
+        /* Text Scroll Animation */
+        .scrolling-words-container {
+            height: 4rem; /* Adjust based on font size */
+            overflow: hidden;
+            position: relative;
+            display: inline-block;
+            vertical-align: bottom;
         }
-        footer::before { 
-            content: ''; 
-            position: absolute; 
-            inset: 0; 
-            background-color: rgba(0, 0, 0, 0.6); 
-            z-index: 1; 
+        .scrolling-words-box {
+            display: inline-block;
+            animation: spin-words 10s infinite;
         }
-        footer > div { position: relative; z-index: 2; }
-        footer a { color: #f9fafb !important; }
-        footer a:hover { text-decoration: underline; }
-        footer h3 { color: #f9fafb !important; }
-        footer p { color: #d1d5db !important; }
-        footer .border-slate-800 { border-color: rgba(255, 255, 255, 0.2) !important; }
+        .scrolling-words-box li {
+            display: block;
+            height: 4rem;
+            line-height: 4rem;
+        }
+        @keyframes spin-words {
+            0%, 20% { transform: translateY(0); }
+            25%, 45% { transform: translateY(-4rem); }
+            50%, 70% { transform: translateY(-8rem); }
+            75%, 95% { transform: translateY(-12rem); }
+            100% { transform: translateY(-16rem); }
+        }
+
+        /* Typewriter effect */
+        .typewriter-text {
+            display: inline-block;
+            border-right: .15em solid #00CEDB; /* The cursor */
+            white-space: pre-wrap; /* Allows wrapping */
+            word-wrap: break-word; /* Breaks long words */
+            width: 0;
+            overflow: hidden;
+            animation: typing 3.5s steps(60, end) forwards, blink-caret .75s step-end infinite;
+        }
         
-        .panel-overlay, .panel-container { transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
+        @keyframes typing {
+            from { width: 0 }
+            to { width: 100% }
+        }
+
+        @keyframes blink-caret {
+            from, to { border-color: transparent }
+            50% { border-color: #00CEDB; }
+        }
+        .animate-on-scroll {
+            opacity: 0;
+            transition: opacity 0.7s ease-out, transform 0.7s ease-out;
+        }
+        .fade-in {
+            opacity: 1;
+        }
+        .card-hover-effect {
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+        }
+        .card-hover-effect:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+        .dark .card-hover-effect:hover {
+             box-shadow: 0 10px 20px rgba(0, 206, 219, 0.1);
+        }
     </style>
-
-    <!-- Favicons -->
-    <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
-    <link rel="manifest" href="site.webmanifest">
-
 </head>
-<body class="bg-white text-slate-900 dark:bg-transparent dark:text-slate-100">
+<body class="bg-brand-light text-brand-dark dark:bg-transparent dark:text-slate-100">
 
+    <!-- Back to Top Button -->
+    <button id="back-to-top" class="fixed bottom-6 right-6 bg-brand-crimson text-white p-3 rounded-full shadow-lg hidden z-50 hover:bg-opacity-90 transition-opacity duration-300">
+        <i data-lucide="arrow-up" class="h-6 w-6"></i>
+    </button>
+    
     <!-- Header -->
-    <div class="sticky top-0 z-50">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-4">
+    <div class="sticky top-0 z-40">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pt-4">
             <header class="header-glass border border-slate-200/70 dark:border-slate-800 rounded-xl">
-                <div class="relative max-w-7xl mx-auto px-4 py-4 flex items-center justify-between">
-                    <a href="#" class="flex items-center gap-3 group">
-                        <div class="flex items-center">
-                           <svg viewBox="0 0 430 100" xmlns="http://www.w3.org/2000/svg" class="h-10 w-auto">
-                                <image href="Shield.png" x="10" y="10" height="80" width="80" />
-                                <g shape-rendering="geometricPrecision" text-rendering="optimizeLegibility" fill="#DC143C" style="font-family: 'Ubuntu', sans-serif; font-size: 50px; font-weight: 700;">
-                                    <text y="25" x="120" opacity="0">M<animate attributeName="opacity" from="0" to="1" dur="0.2s" begin="0s" fill="freeze"/><animate attributeName="y" from="25" to="65" dur="0.2s" begin="0s" fill="freeze" calcMode="discrete"/></text>
-                                    <text y="25" x="160" opacity="0">e<animate attributeName="opacity" from="0" to="1" dur="0.2s" begin="0.1s" fill="freeze"/><animate attributeName="y" from="25" to="65" dur="0.2s" begin="0.1s" fill="freeze" calcMode="discrete"/></text>
-                                    <text y="25" x="185" opacity="0">r<animate attributeName="opacity" from="0" to="1" dur="0.2s" begin="0.2s" fill="freeze"/><animate attributeName="y" from="25" to="65" dur="0.2s" begin="0.2s" fill="freeze" calcMode="discrete"/></text>
-                                    <text y="25" x="205" opacity="0">c<animate attributeName="opacity" from="0" to="1" dur="0.2s" begin="0.3s" fill="freeze"/><animate attributeName="y" from="25" to="65" dur="0.2s" begin="0.3s" fill="freeze" calcMode="discrete"/></text>
-                                    <text y="25" x="225" opacity="0">h<animate attributeName="opacity" from="0" to="1" dur="0.2s" begin="0.4s" fill="freeze"/><animate attributeName="y" from="25" to="65" dur="0.2s" begin="0.4s" fill="freeze" calcMode="discrete"/></text>
-                                    <text y="25" x="250" opacity="0">a<animate attributeName="opacity" from="0" to="1" dur="0.2s" begin="0.5s" fill="freeze"/><animate attributeName="y" from="25" to="65" dur="0.2s" begin="0.5s" fill="freeze" calcMode="discrete"/></text>
-                                    <text y="25" x="275" opacity="0">n<animate attributeName="opacity" from="0" to="1" dur="0.2s" begin="0.6s" fill="freeze"/><animate attributeName="y" from="25" to="65" dur="0.2s" begin="0.6s" fill="freeze" calcMode="discrete"/></text>
-                                    <text y="25" x="300" opacity="0">t<animate attributeName="opacity" from="0" to="1" dur="0.2s" begin="0.7s" fill="freeze"/><animate attributeName="y" from="25" to="65" dur="0.2s" begin="0.7s" fill="freeze" calcMode="discrete"/></text>
-                                    <text y="25" x="318" opacity="0">H<animate attributeName="opacity" from="0" to="1" dur="0.2s" begin="0.8s" fill="freeze"/><animate attributeName="y" from="25" to="65" dur="0.2s" begin="0.8s" fill="freeze" calcMode="discrete"/></text>
-                                    <text y="25" x="348" opacity="0">a<animate attributeName="opacity" from="0" to="1" dur="0.2s" begin="0.9s" fill="freeze"/><animate attributeName="y" from="25" to="65" dur="0.2s" begin="0.9s" fill="freeze" calcMode="discrete"/></text>
-                                    <text y="25" x="373" opacity="0">u<animate attributeName="opacity" from="0" to="1" dur="0.2s" begin="1.0s" fill="freeze"/><animate attributeName="y" from="25" to="65" dur="0.2s" begin="1.0s" fill="freeze" calcMode="discrete"/></text>
-                                    <text y="25" x="398" opacity="0">s<animate attributeName="opacity" from="0" to="1" dur="0.2s" begin="1.1s" fill="freeze"/><animate attributeName="y" from="25" to="65" dur="0.2s" begin="1.1s" fill="freeze" calcMode="discrete"/></text>
-                                </g>
-                            </svg>
-                        </div>
-                        <div class="-ml-2">
-                             <div class="text-xl md:text-2xl font-ubuntu font-bold tracking-wide text-slate-900 dark:text-slate-100 sr-only">MerchantHaus</div>
-                            <p class="text-xs text-slate-500 dark:text-slate-400 h-4 tracking-widest uppercase">plug. play. grow.</p>
-                        </div>
+                <div class="relative max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
+                    <a href="#" class="flex items-center gap-3 group scroll-link">
+                        <svg width="250" height="50" viewBox="0 0 250 50" xmlns="http://www.w3.org/2000/svg">
+                            <defs>
+                                <linearGradient id="headerGradient" gradientUnits="userSpaceOnUse" x1="55" y1="0" x2="250" y2="0">
+                                    <stop offset="0%" stop-color="#DC143C" />
+                                    <stop offset="45%" stop-color="#DC143C"><animate attributeName="stop-color" values="#DC143C; #FFC0CB; #DC143C" dur="3s" repeatCount="indefinite"/></stop>
+                                    <stop offset="55%" stop-color="#DC143C"><animate attributeName="stop-color" values="#DC143C; #FFC0CB; #DC143C" dur="3s" repeatCount="indefinite"/></stop>
+                                    <stop offset="100%" stop-color="#DC143C" />
+                                </linearGradient>
+                            </defs>
+                            <image href="Shield.png" x="0" y="5" height="40" width="40" />
+                            <g fill="url(#headerGradient)" style="font-family: 'Ubuntu', sans-serif; font-size: 25px; font-weight: 600;">
+                                <text x="55" y="32">MerchantHaus</text>
+                            </g>
+                        </svg>
                     </a>
                     <div class="flex items-center gap-2">
-                        <a href="#" class="js-cta bg-brand-600 hover:bg-brand-700 text-white border border-transparent px-4 py-2 rounded-full text-sm font-semibold transition-colors duration-300">Get Started</a>
-                        <a href="#" class="hidden sm:block bg-transparent hover:bg-cyber-teal/20 text-cyber-teal hover:text-neutral-dark border border-cyber-teal px-4 py-2 rounded-lg text-sm font-semibold transition-colors duration-300">Login</a>
-                        <button id="open-menu-btn" class="p-2 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800" aria-label="Open menu"><i data-lucide="menu" class="h-5 w-5"></i></button>
+                        <a href="#application-form" class="js-cta bg-brand-crimson hover:bg-opacity-90 text-white border border-transparent px-4 py-2 rounded-full text-sm font-semibold transition-colors duration-300 scroll-link">Get Started</a>
+                        <a href="#" class="hidden sm:block bg-transparent hover:bg-brand-teal text-brand-teal hover:text-white border border-brand-teal px-4 py-2 rounded-lg text-sm font-semibold transition-colors duration-300">Login</a>
                     </div>
-                    <!-- Pop-out Menu -->
                 </div>
             </header>
         </div>
@@ -146,350 +173,243 @@
 
     <!-- Main Content -->
     <main class="min-h-screen pt-12 pb-16 flex flex-col items-center justify-start p-6">
-        <div id="main-content-wrapper" class="w-full max-w-5xl bg-white/80 dark:bg-[#1c1c1c]/80 backdrop-blur-sm p-8 rounded-xl shadow-lg border border-slate-200/70 dark:border-slate-800">
-            
+        <!-- Cell 1: Hero and Benefits -->
+        <div class="w-full max-w-6xl bg-white/80 dark:bg-brand-dark/80 backdrop-blur-sm p-8 rounded-xl shadow-lg border border-slate-200/70 dark:border-slate-800 mb-8">
+            <img src="benner1.png" alt="Seamless Shopify Integration Banner" class="w-full rounded-lg mb-12 shadow-md" onerror="this.style.display='none'">
+
             <!-- Hero Section -->
-            <section class="text-center">
-                <div class="flex justify-center items-center gap-4 mb-6">
-                     <svg viewBox="0 0 500 100" xmlns="http://www.w3.org/2000/svg" class="h-20 md:h-24 w-auto">
-                        <defs>
-                            <linearGradient id="animatedGradient-hero" gradientUnits="userSpaceOnUse" x1="120" y1="0" x2="420" y2="0">
-                                <stop offset="0%" stop-color="#DC143C" />
-                                <stop offset="45%" stop-color="#DC143C"><animate attributeName="stop-color" values="#DC143C; #FFC0CB; #DC143C" keyTimes="0; 0.5; 1" dur="5s" begin="1.5s" fill="freeze" repeatCount="1"/></stop>
-                                <stop offset="50%" stop-color="#DC143C"><animate attributeName="stop-color" values="#DC143C; #FFFFFF; #DC143C" keyTimes="0; 0.5; 1" dur="5s" begin="1.5s" fill="freeze" repeatCount="1"/></stop>
-                                <stop offset="55%" stop-color="#DC143C"><animate attributeName="stop-color" values="#DC143C; #FFC0CB; #DC143C" keyTimes="0; 0.5; 1" dur="5s" begin="1.5s" fill="freeze" repeatCount="1"/></stop>
-                                <stop offset="100%" stop-color="#DC143C" />
-                                <animateTransform attributeName="transform" type="translate" from="-450 0" to="450 0" dur="5s" begin="1.5s" fill="freeze" repeatCount="1"/>
-                            </linearGradient>
-                        </defs>
-                        <image href="Shield.png" x="10" y="10" height="80" width="80" />
-                        <g shape-rendering="geometricPrecision" text-rendering="optimizeLegibility" fill="url(#animatedGradient-hero)" style="font-family: 'Ubuntu', sans-serif; font-size: 50px; font-weight: 600;">
-                            <text y="25" x="120" opacity="0">M<animate attributeName="opacity" from="0" to="1" dur="0.2s" begin="0s" fill="freeze"/><animate attributeName="y" from="25" to="65" dur="0.2s" begin="0s" fill="freeze" calcMode="discrete"/></text>
-                            <text y="25" x="160" opacity="0">e<animate attributeName="opacity" from="0" to="1" dur="0.2s" begin="0.1s" fill="freeze"/><animate attributeName="y" from="25" to="65" dur="0.2s" begin="0.1s" fill="freeze" calcMode="discrete"/></text>
-                            <text y="25" x="185" opacity="0">r<animate attributeName="opacity" from="0" to="1" dur="0.2s" begin="0.2s" fill="freeze"/><animate attributeName="y" from="25" to="65" dur="0.2s" begin="0.2s" fill="freeze" calcMode="discrete"/></text>
-                            <text y="25" x="205" opacity="0">c<animate attributeName="opacity" from="0" to="1" dur="0.2s" begin="0.3s" fill="freeze"/><animate attributeName="y" from="25" to="65" dur="0.2s" begin="0.3s" fill="freeze" calcMode="discrete"/></text>
-                            <text y="25" x="225" opacity="0">h<animate attributeName="opacity" from="0" to="1" dur="0.2s" begin="0.4s" fill="freeze"/><animate attributeName="y" from="25" to="65" dur="0.2s" begin="0.4s" fill="freeze" calcMode="discrete"/></text>
-                            <text y="25" x="250" opacity="0">a<animate attributeName="opacity" from="0" to="1" dur="0.2s" begin="0.5s" fill="freeze"/><animate attributeName="y" from="25" to="65" dur="0.2s" begin="0.5s" fill="freeze" calcMode="discrete"/></text>
-                            <text y="25" x="275" opacity="0">n<animate attributeName="opacity" from="0" to="1" dur="0.2s" begin="0.6s" fill="freeze"/><animate attributeName="y" from="25" to="65" dur="0.2s" begin="0.6s" fill="freeze" calcMode="discrete"/></text>
-                            <text y="25" x="300" opacity="0">t<animate attributeName="opacity" from="0" to="1" dur="0.2s" begin="0.7s" fill="freeze"/><animate attributeName="y" from="25" to="65" dur="0.2s" begin="0.7s" fill="freeze" calcMode="discrete"/></text>
-                            <text y="25" x="318" opacity="0">H<animate attributeName="opacity" from="0" to="1" dur="0.2s" begin="0.8s" fill="freeze"/><animate attributeName="y" from="25" to="65" dur="0.2s" begin="0.8s" fill="freeze" calcMode="discrete"/></text>
-                            <text y="25" x="348" opacity="0">a<animate attributeName="opacity" from="0" to="1" dur="0.2s" begin="0.9s" fill="freeze"/><animate attributeName="y" from="25" to="65" dur="0.2s" begin="0.9s" fill="freeze" calcMode="discrete"/></text>
-                            <text y="25" x="373" opacity="0">u<animate attributeName="opacity" from="0" to="1" dur="0.2s" begin="1.0s" fill="freeze"/><animate attributeName="y" from="25" to="65" dur="0.2s" begin="1.0s" fill="freeze" calcMode="discrete"/></text>
-                            <text y="25" x="398" opacity="0">s<animate attributeName="opacity" from="0" to="1" dur="0.2s" begin="1.1s" fill="freeze"/><animate attributeName="y" from="25" to="65" dur="0.2s" begin="1.1s" fill="freeze" calcMode="discrete"/></text>
-                        </g>
-                        <line x1="170" x2="390" y1="78" y2="78" stroke="#00CEDB" stroke-width="2" opacity="0"><animate attributeName="opacity" from="0" to="1" dur="1s" begin="1.5s" fill="freeze" /></line>
-                        <text x="280" y="95" opacity="0" style="font-family: 'Inter', sans-serif; font-size: 18px; font-weight: 500; fill: #A9A9A9; text-anchor: middle; letter-spacing: 4px;"><animate attributeName="opacity" from="0" to="1" dur="1s" begin="2s" fill="freeze" />plug. play. grow.</text>
-                    </svg>
-                    <i data-lucide="plus" class="w-8 h-8 text-slate-400"></i>
-                    <img src="shopifydark.png" alt="Shopify Logo" class="h-16 rounded-lg">
+            <section class="text-center py-16">
+                 <div class="grid md:grid-cols-2 items-center gap-8 mb-8">
+                     <div class="flex justify-center md:justify-end">
+                        <svg width="400" height="100" viewBox="0 0 400 100" xmlns="http://www.w3.org/2000/svg">
+                           <image href="Shield.png" x="10" y="10" height="80" width="80" />
+                           <g fill="#DC143C" style="font-family: 'Ubuntu', sans-serif; font-size: 50px; font-weight: 600;">
+                              <text y="60" x="120">MerchantHaus</text>
+                           </g>
+                        </svg>
+                     </div>
+                     <div class="flex justify-center md:justify-start">
+                        <img src="shopifylight.png" alt="Shopify Logo" class="h-16 rounded-lg block dark:hidden">
+                        <img src="shopifydark.png" alt="Shopify Logo" class="h-16 rounded-lg hidden dark:block">
+                     </div>
                 </div>
-                <h1 class="text-4xl md:text-5xl font-extrabold font-ubuntu mb-4">Seamless Payments for Shopify</h1>
+
+                <h1 class="text-4xl md:text-5xl font-extrabold font-ubuntu mb-4">
+                    Seamless 
+                    <div class="scrolling-words-container">
+                        <ul class="scrolling-words-box text-brand-teal">
+                            <li>Payments</li>
+                            <li>Integration</li>
+                            <li>Processing</li>
+                            <li>Security</li>
+                            <li>Payments</li> <!-- Loop back to start -->
+                        </ul>
+                    </div>
+                     for Shopify
+                </h1>
                 <p class="text-lg text-slate-600 dark:text-slate-300 max-w-3xl mx-auto">
-                    Integrate MerchantHaus directly with your Shopify store to lower your processing costs, reduce fraud, and simplify your operations. Get the fast, secure, and affordable payment solution your business deserves.
+                     Integrate MerchantHaus directly with your Shopify store to lower your processing costs, reduce fraud, and simplify your operations. Get the no-code, fast, secure, and affordable payment solution your business deserves.
                 </p>
                 <div class="mt-8">
-                    <a href="#" class="js-cta bg-brand-600 hover:bg-brand-700 text-white border border-transparent px-8 py-3 rounded-full text-lg font-semibold transition-colors duration-300">Get Started Today</a>
+                    <a href="#application-form" class="js-cta bg-brand-crimson hover:bg-opacity-90 text-white border border-transparent px-8 py-3 rounded-full text-lg font-semibold transition-colors duration-300 scroll-link">Get Started Today</a>
                 </div>
             </section>
 
             <!-- Benefits Section -->
-            <section id="payments" class="mt-20">
-                <div class="grid md:grid-cols-3 gap-8 text-center">
-                    <div class="p-6 rounded-lg">
-                        <i data-lucide="trending-down" class="w-12 h-12 text-brand-600 mx-auto mb-4"></i>
-                        <h3 class="text-xl font-bold font-ubuntu">Lower Your Costs</h3>
-                        <p class="text-slate-600 dark:text-slate-400 mt-2">Keep more of your revenue with our competitive, transparent pricing. We help you reduce transaction fees withoutsacrificing performance.</p>
-                    </div>
-                    <div class="p-6 rounded-lg">
-                        <i data-lucide="shield-check" class="w-12 h-12 text-brand-600 mx-auto mb-4"></i>
-                        <h3 class="text-xl font-bold font-ubuntu">Reduce Fraud & Chargebacks</h3>
-                        <p class="text-slate-600 dark:text-slate-400 mt-2">Our advanced security tools, including AVS, CVV checks, and 3D Secure, protect your business from fraudulent transactions and costly chargebacks.</p>
-                    </div>
-                    <div class="p-6 rounded-lg">
-                        <i data-lucide="zap" class="w-12 h-12 text-brand-600 mx-auto mb-4"></i>
-                        <h3 class="text-xl font-bold font-ubuntu">Streamline Operations</h3>
-                        <p class="text-slate-600 dark:text-slate-400 mt-2">Manage all your payments, view real-time reports, and handle disputes from a single, easy-to-use dashboard. Simple, smart, and secure.</p>
-                    </div>
+            <section class="mt-20 text-left">
+                <div class="grid md:grid-cols-3 gap-12">
+                     <div class="flex items-start gap-4 p-6 rounded-lg card-hover-effect">
+                         <i data-lucide="trending-down" class="w-12 h-12 text-brand-teal flex-shrink-0 mt-1"></i>
+                         <div>
+                            <h3 class="text-xl font-bold font-ubuntu">Lower Your Costs</h3>
+                            <p class="text-slate-600 dark:text-slate-400 mt-2">Keep more of your revenue with our competitive, transparent pricing. We help you reduce transaction fees without sacrificing performance.</p>
+                         </div>
+                     </div>
+                     <div class="flex items-start gap-4 p-6 rounded-lg card-hover-effect">
+                         <i data-lucide="shield-check" class="w-12 h-12 text-brand-teal flex-shrink-0 mt-1"></i>
+                         <div>
+                            <h3 class="text-xl font-bold font-ubuntu">Reduce Fraud & Chargebacks</h3>
+                            <p class="text-slate-600 dark:text-slate-400 mt-2">Our advanced security tools, including AVS, CVV checks, and 3D Secure, protect your business from fraudulent transactions and costly chargebacks.</p>
+                         </div>
+                     </div>
+                     <div class="flex items-start gap-4 p-6 rounded-lg card-hover-effect">
+                         <i data-lucide="zap" class="w-12 h-12 text-brand-teal flex-shrink-0 mt-1"></i>
+                         <div>
+                            <h3 class="text-xl font-bold font-ubuntu">Streamline Operations</h3>
+                            <p class="text-slate-600 dark:text-slate-400 mt-2">Manage all your payments, view real-time reports, and handle disputes from a single, easy-to-use dashboard. Simple, smart, and secure.</p>
+                         </div>
+                     </div>
                 </div>
             </section>
+        </div>
 
+        <!-- Cell 2: How It Works, CTA, NMI -->
+        <div class="w-full max-w-6xl bg-white/80 dark:bg-brand-dark/80 backdrop-blur-sm p-8 rounded-xl shadow-lg border border-slate-200/70 dark:border-slate-800">
             <!-- How It Works Section -->
-            <section id="apply" class="mt-20 text-center">
+            <section class="mt-20 text-center">
                  <h2 class="text-3xl font-extrabold font-ubuntu mb-4">Simple Setup in 3 Steps</h2>
                  <p class="text-slate-600 dark:text-slate-300 max-w-2xl mx-auto mb-12">Get up and running with MerchantHaus on your Shopify store in minutes.</p>
-                 <div class="grid md:grid-cols-3 gap-8 relative">
-                       <!-- Dashed line connector for desktop -->
-                       <div class="hidden md:block absolute top-12 left-0 w-full h-px -translate-y-1/2">
-                         <svg width="100%" height="2" class="absolute">
-                             <line x1="0" y1="1" x2="100%" y2="1" stroke-width="2" class="stroke-current text-slate-300 dark:text-slate-700" stroke-dasharray="8, 8"/>
-                         </svg>
-                       </div>
-
-                       <div class="relative z-10 p-6 rounded-lg bg-white/50 dark:bg-black/20">
-                           <div class="w-12 h-12 bg-brand-600 text-white rounded-full flex items-center justify-center font-bold text-xl mx-auto mb-4">1</div>
-                           <h3 class="text-lg font-bold">Apply for an Account</h3>
-                           <p class="text-slate-600 dark:text-slate-400 mt-2 text-sm">Fill out our simple application form. Our team will review your details and get you approved quickly.</p>
-                       </div>
-                       <div class="relative z-10 p-6 rounded-lg bg-white/50 dark:bg-black/20">
-                           <div class="w-12 h-12 bg-brand-600 text-white rounded-full flex items-center justify-center font-bold text-xl mx-auto mb-4">2</div>
-                           <h3 class="text-lg font-bold">Connect to Shopify</h3>
-                           <p class="text-slate-600 dark:text-slate-400 mt-2 text-sm">Once approved, we'll provide you with API keys to easily connect MerchantHaus as your payment provider in your Shopify admin.</p>
-                       </div>
-                       <div class="relative z-10 p-6 rounded-lg bg-white/50 dark:bg-black/20">
-                           <div class="w-12 h-12 bg-brand-600 text-white rounded-full flex items-center justify-center font-bold text-xl mx-auto mb-4">3</div>
-                           <h3 class="text-lg font-bold">Start Processing</h3>
-                           <p class="text-slate-600 dark:text-slate-400 mt-2 text-sm">That's it! You're ready to accept payments securely and affordably, with all your transaction data synced to your MerchantHaus dashboard.</p>
-                       </div>
+                 <div class="grid md:grid-cols-3 gap-8">
+                     <div class="p-6 rounded-lg bg-white/50 dark:bg-black/20 card-hover-effect text-left">
+                         <div id="step-1-number" class="w-12 h-12 bg-brand-crimson text-white rounded-full flex items-center justify-center font-bold text-xl mx-auto mb-4 animate-on-scroll">1</div>
+                         <h3 class="text-lg font-bold text-center">Apply for an Account</h3>
+                         <p id="step-1-text" class="text-slate-600 dark:text-slate-400 mt-2 text-sm min-h-[100px]"></p>
+                     </div>
+                     <div class="p-6 rounded-lg bg-white/50 dark:bg-black/20 card-hover-effect text-left">
+                         <div id="step-2-number" class="w-12 h-12 bg-brand-teal text-white rounded-full flex items-center justify-center font-bold text-xl mx-auto mb-4 animate-on-scroll">2</div>
+                         <h3 class="text-lg font-bold text-center">Connect to Shopify</h3>
+                         <p id="step-2-text" class="text-slate-600 dark:text-slate-400 mt-2 text-sm min-h-[100px]"></p>
+                     </div>
+                     <div class="p-6 rounded-lg bg-white/50 dark:bg-black/20 card-hover-effect text-left">
+                         <div id="step-3-number" class="w-12 h-12 bg-brand-silver text-white rounded-full flex items-center justify-center font-bold text-xl mx-auto mb-4 animate-on-scroll">3</div>
+                         <h3 class="text-lg font-bold text-center">Start Processing</h3>
+                         <p id="step-3-text" class="text-slate-600 dark:text-slate-400 mt-2 text-sm min-h-[100px]"></p>
+                     </div>
                  </div>
             </section>
 
              <!-- Final CTA -->
-            <section id="integrations" class="mt-20 text-center bg-brand-600/10 dark:bg-brand-400/10 p-8 rounded-xl">
-                 <h2 class="text-3xl font-extrabold font-ubuntu mb-4">Ready to Switch and Save?</h2>
-                 <p class="text-slate-600 dark:text-slate-300 max-w-2xl mx-auto mb-8">
-                      Make the smart move. Join hundreds of Shopify merchants who trust MerchantHaus for reliable and cost-effective payment processing.
+            <section id="application-form" class="mt-20 text-center bg-brand-crimson/10 dark:bg-brand-teal/10 p-8 rounded-xl">
+                 <h2 class="text-3xl font-extrabold font-ubuntu mb-4">Why Wait? Start Processing Today</h2>
+                 <p class="text-slate-600 dark:text-slate-300 max-w-3xl mx-auto mb-8">
+                     Make the smart move and join hundreds of Shopify merchants who use MerchantHaus, powered by the might of the NMI Gateway, for their payment processing needs.
                  </p>
-                 <a href="#" class="js-cta bg-brand-600 hover:bg-brand-700 text-white border border-transparent px-8 py-3 rounded-full text-lg font-semibold transition-colors duration-300">Apply Now</a>
+                 <a href="#application-form" class="js-cta bg-brand-crimson hover:bg-opacity-90 text-white border border-transparent px-8 py-3 rounded-full text-lg font-semibold transition-colors duration-300 scroll-link">Apply Now</a>
             </section>
 
-            <!-- Powered by NMI -->
+             <!-- Powered By NMI -->
             <section class="mt-16 text-center">
-                <p class="text-slate-500 dark:text-slate-400 text-sm font-medium mb-2 tracking-wider">POWERED BY</p>
-                <a href="https://www.nmi.com/" target="_blank" rel="noopener noreferrer" aria-label="Powered by NMI">
-                     <img src="nmi.png" alt="NMI Logo" class="h-10 mx-auto">
-                </a>
+                 <p class="text-gray-500 text-sm font-medium mb-2 tracking-wider">POWERED BY</p>
+                 <a href="https://www.nmi.com/" target="_blank" rel="noopener noreferrer">
+                    <img src="nmi.png" alt="NMI Logo" class="h-10 mx-auto">
+                 </a>
             </section>
         </div>
     </main>
 
     <!-- Footer -->
-    <footer class="border-t border-slate-200 dark:border-slate-800 py-10">
+    <footer class="bg-brand-dark text-brand-light border-t border-slate-800 py-10">
         <div class="max-w-7xl mx-auto px-4 grid sm:grid-cols-2 lg:grid-cols-4 gap-8 text-sm">
-            <div class="space-y-3">
-                <a href="#" class="flex items-center gap-3">
-                     <svg viewBox="0 0 430 100" xmlns="http://www.w3.org/2000/svg" class="h-9 w-auto">
-                        <defs>
-                            <linearGradient id="animatedGradient-footer" gradientUnits="userSpaceOnUse" x1="120" y1="0" x2="420" y2="0">
-                                <stop offset="0%" stop-color="#DC143C" />
-                                <stop offset="100%" stop-color="#DC143C" />
-                            </linearGradient>
-                        </defs>
-                        <image href="Shield.png" x="10" y="10" height="80" width="80" />
-                        <g shape-rendering="geometricPrecision" text-rendering="optimizeLegibility" fill="url(#animatedGradient-footer)" class="grad-text" style="font-family: 'Ubuntu', sans-serif; font-size: 50px; font-weight: 600;">
-                            <text y="65" x="120">MerchantHaus</text>
+            <div class="space-y-4">
+                <a href="#" class="flex items-center gap-3 scroll-link">
+                    <svg width="250" height="50" viewBox="0 0 250 50" xmlns="http://www.w3.org/2000/svg">
+                        <image href="Shield.png" x="0" y="5" height="40" width="40" />
+                        <g fill="#DC143C" style="font-family: 'Ubuntu', sans-serif; font-size: 25px; font-weight: 600;">
+                            <text x="55" y="32">MerchantHaus</text>
                         </g>
                     </svg>
                 </a>
-                <p class="tracking-widest uppercase text-xs text-silver-grey">plug. play. grow.</p>
-                <div class="text-sm"><a href="tel:15056006042" class="block">1-505-600-6042</a><a href="mailto:support@merchanthaus.io" class="block">support@merchanthaus.io</a></div>
+                <p class="text-brand-silver">plug. play. grow.</p>
+                <div class="text-sm">
+                    <a href="tel:15056006042" class="block hover:text-brand-teal">1-505-600-6042</a>
+                    <a href="mailto:support@merchanthaus.io" class="block hover:text-brand-teal">support@merchanthaus.io</a>
+                </div>
             </div>
-            <nav class="space-y-2"><h3 class="font-semibold font-ubuntu">Product</h3><a href="#payments" class="block">Payment Services</a><a href="#integrations" class="block">Integrations</a><a href="#" class="block">Shopify Integration</a><a href="#apply" class="block">Setup Checklist</a></nav>
-            <nav class="space-y-2"><h3 class="font-semibold font-ubuntu">Support</h3><a href="#" class="js-support block">Contact Support</a><a href="#" class="block">FAQs</a></nav>
-            <nav class="space-y-2"><h3 class="font-semibold font-ubuntu">Legal</h3><a href="#" class="block">Privacy Policy</a><a href="#" class="block">Terms & Conditions</a></nav>
+            <nav class="space-y-2"><h3 class="font-semibold font-ubuntu text-white">Product</h3><a href="#" class="block hover:text-brand-teal">Payment Services</a><a href="#" class="block hover:text-brand-teal">Integrations</a><a href="#" class="block hover:text-brand-teal">Shopify Integration</a><a href="#" class="block hover:text-brand-teal">Setup Checklist</a></nav>
+            <nav class="space-y-2"><h3 class="font-semibold font-ubuntu text-white">Support</h3><a href="#" class="block hover:text-brand-teal">Contact Support</a><a href="#" class="block hover:text-brand-teal">FAQs</a></nav>
+            <nav class="space-y-2"><h3 class="font-semibold font-ubuntu text-white">Legal</h3><a href="#" class="block hover:text-brand-teal">Privacy Policy</a><a href="#" class="block hover:text-brand-teal">Terms & Conditions</a></nav>
         </div>
-        <div class="text-center text-xs pt-8 mt-8 border-t border-slate-200 dark:border-slate-800 text-slate-400">© <span id="year"></span> Merchant Haus. All rights reserved.</div>
+        <div class="text-center text-xs pt-8 mt-8 border-t border-slate-800/50 text-brand-silver">© <span id="year"></span> MerchantHaus. All rights reserved.</div>
     </footer>
-
-    <!-- Modals and Panels -->
-    <div id="mobile-nav-overlay" class="panel-overlay fixed inset-0 bg-black/60 z-[60] opacity-0 invisible">
-        <div id="mobile-nav-panel" class="panel-container fixed top-0 right-0 h-full w-full max-w-sm bg-white dark:bg-slate-950 shadow-2xl transform translate-x-full flex flex-col"></div>
-    </div>
-
-    <div id="signup-panel-overlay" class="panel-overlay fixed inset-0 bg-black/60 z-[60] opacity-0 invisible"><div id="signup-panel" class="panel-container fixed top-0 right-0 h-full w-full max-w-2xl bg-white dark:bg-slate-950 shadow-2xl transform translate-x-full flex flex-col"></div></div>
-    <div id="support-modal-overlay" class="fixed inset-0 bg-black/60 z-[80] opacity-0 invisible transition-opacity duration-300 flex items-center justify-center p-4">
-        <div id="support-modal-content" class="bg-white dark:bg-slate-900 rounded-xl shadow-2xl p-8 w-full max-w-md transform scale-95 opacity-0 transition-all duration-300"></div>
-    </div>
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             if (window.lucide) lucide.createIcons();
             document.getElementById('year').textContent = new Date().getFullYear();
 
-            // --- Panel & Modal Content ---
-            const mobileNavContent = `
-                <div class="flex-shrink-0 flex items-center justify-between p-4 border-b border-slate-200 dark:border-slate-800">
-                    <h2 class="text-xl font-bold font-ubuntu">Menu</h2>
-                    <button class="js-close-mobile-nav p-2 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800"><i data-lucide="x" class="h-6 w-6"></i></button>
-                </div>
-                <div class="flex-grow p-4 overflow-y-auto">
-                    <nav class="flex flex-col space-y-1 text-base font-medium">
-                        <a href="#payments" data-close class="px-4 py-3 rounded-lg hover:bg-brand-600 hover:text-white transition-colors">Payment Services</a>
-                        <a href="#integrations" data-close class="px-4 py-3 rounded-lg hover:bg-brand-600 hover:text-white transition-colors">Integrations</a>
-                        <a href="#" data-close class="px-4 py-3 rounded-lg hover:bg-brand-600 hover:text-white transition-colors">Shopify</a>
-                        <a href="#apply" data-close class="px-4 py-3 rounded-lg hover:bg-brand-600 hover:text-white transition-colors">Setup Checklist</a>
-                        <a href="#" data-close class="js-support px-4 py-3 rounded-lg hover:bg-brand-600 hover:text-white transition-colors">Contact Support</a>
-                        <a href="#" data-close class="sm:hidden block px-4 py-3 rounded-lg hover:bg-brand-600 hover:text-white transition-colors mt-2 pt-3 border-t border-slate-200 dark:border-slate-800">Login</a>
-                    </nav>
-                </div>
-                <div class="flex-shrink-0 p-4 mt-4 border-t border-slate-200 dark:border-slate-800">
-                     <p class="text-xs text-center text-slate-500 dark:text-slate-400">
-                         Questions? Call <a href="tel:15056006042" class="text-brand-600 dark:text-brand-400 hover:underline">1-505-600-6042</a> or email us at <a href="mailto:support@merchanthaus.io" class="text-brand-600 dark:text-brand-400 hover:underline">support@merchanthaus.io</a>
-                     </p>
-                </div>
-            `;
-
-            const signupPanelContent = `
-                <div class="flex-shrink-0 flex items-center justify-between p-4 border-b border-slate-200 dark:border-slate-800">
-                    <h2 class="text-xl font-bold font-ubuntu">Get Started with MerchantHaus</h2>
-                    <button class="js-close-panel p-2 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800"><i data-lucide="x" class="h-6 w-6"></i></button>
-                </div>
-                <div class="flex-grow p-8 overflow-y-auto">
-                    <p class="mb-6 text-slate-600 dark:text-slate-400">Complete the form below to begin your application. Our team will get back to you within one business day to finalize your account setup.</p>
-                    <form class="space-y-6">
-                        <div>
-                            <label for="name" class="block text-sm font-medium text-slate-700 dark:text-slate-300">Full Name</label>
-                            <input type="text" id="name" class="mt-1 block w-full px-3 py-2 bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-700 rounded-md shadow-sm focus:outline-none focus:ring-brand-600 focus:border-brand-600 sm:text-sm">
-                        </div>
-                        <div>
-                            <label for="email" class="block text-sm font-medium text-slate-700 dark:text-slate-300">Email Address</label>
-                            <input type="email" id="email" class="mt-1 block w-full px-3 py-2 bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-700 rounded-md shadow-sm focus:outline-none focus:ring-brand-600 focus:border-brand-600 sm:text-sm">
-                        </div>
-                        <div>
-                            <label for="company" class="block text-sm font-medium text-slate-700 dark:text-slate-300">Company Name</label>
-                            <input type="text" id="company" class="mt-1 block w-full px-3 py-2 bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-700 rounded-md shadow-sm focus:outline-none focus:ring-brand-600 focus:border-brand-600 sm:text-sm">
-                        </div>
-                         <div>
-                            <label for="phone" class="block text-sm font-medium text-slate-700 dark:text-slate-300">Phone Number</label>
-                            <input type="tel" id="phone" class="mt-1 block w-full px-3 py-2 bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-700 rounded-md shadow-sm focus:outline-none focus:ring-brand-600 focus:border-brand-600 sm:text-sm">
-                        </div>
-                        <div class="pt-4">
-                            <button type="submit" class="w-full bg-brand-600 hover:bg-brand-700 text-white font-bold py-3 px-4 rounded-lg transition-colors duration-300">Submit Application</button>
-                        </div>
-                    </form>
-                </div>`;
-
-            const supportModalContent = `
-                <div class="flex items-center justify-between mb-6">
-                     <h2 class="text-xl font-bold font-ubuntu">Contact Support</h2>
-                     <button class="js-close-support-modal p-2 rounded-full hover:bg-slate-100 dark:hover:bg-slate-800 -mr-2"><i data-lucide="x" class="h-6 w-6"></i></button>
-                </div>
-                <p class="mb-6 text-slate-600 dark:text-slate-400">Our team is here to help. Reach out to us via phone or email for assistance.</p>
-                <div class="space-y-4">
-                    <a href="tel:15056006042" class="flex items-center gap-4 p-4 border border-slate-200 dark:border-slate-800 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-800/50">
-                        <i data-lucide="phone" class="w-6 h-6 text-brand-600"></i>
-                        <div>
-                            <div class="font-semibold">Phone Support</div>
-                            <div class="text-slate-500 dark:text-slate-400 text-sm">1-505-600-6042</div>
-                        </div>
-                    </a>
-                    <a href="mailto:support@merchanthaus.io" class="flex items-center gap-4 p-4 border border-slate-200 dark:border-slate-800 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-800/50">
-                        <i data-lucide="mail" class="w-6 h-6 text-brand-600"></i>
-                        <div>
-                            <div class="font-semibold">Email Support</div>
-                            <div class="text-slate-500 dark:text-slate-400 text-sm">support@merchanthaus.io</div>
-                        </div>
-                    </a>
-                </div>`;
-
-            // --- Mobile Nav Panel Logic ---
-            const menuBtn = document.getElementById('open-menu-btn');
-            const mobileNavOverlay = document.getElementById('mobile-nav-overlay');
-            const mobileNavPanel = document.getElementById('mobile-nav-panel');
-
-            function openMobileNav() {
-                mobileNavPanel.innerHTML = mobileNavContent;
-                mobileNavOverlay.classList.remove('invisible', 'opacity-0');
-                mobileNavPanel.classList.remove('translate-x-full');
-                if (window.lucide) lucide.createIcons();
-
-                mobileNavPanel.querySelector('.js-close-mobile-nav').addEventListener('click', closeMobileNav);
-                mobileNavOverlay.addEventListener('click', closeMobileNav);
-                mobileNavPanel.addEventListener('click', e => e.stopPropagation());
-                mobileNavPanel.querySelectorAll('a[data-close]').forEach(link => {
-                    link.addEventListener('click', () => {
-                        // Let the global .js-support listener handle opening the modal
-                        if (!link.classList.contains('js-support')) {
-                           closeMobileNav();
-                        }
-                    });
+            // Smooth scrolling for anchor links
+            document.querySelectorAll('a.scroll-link').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const targetId = this.getAttribute('href');
+                    const targetElement = document.querySelector(targetId);
+                    if (targetElement) {
+                        targetElement.scrollIntoView({
+                            behavior: 'smooth'
+                        });
+                    }
                 });
-            }
+            });
 
-            function closeMobileNav() {
-                mobileNavOverlay.classList.add('opacity-0');
-                mobileNavPanel.classList.add('translate-x-full');
-                setTimeout(() => {
-                    mobileNavOverlay.classList.add('invisible');
-                    mobileNavPanel.innerHTML = '';
-                }, 300);
-            }
-            
-            menuBtn.addEventListener('click', e => {
-                e.preventDefault();
-                e.stopPropagation();
-                openMobileNav();
+            // Back to Top button logic
+            const backToTopButton = document.getElementById('back-to-top');
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 300) {
+                    backToTopButton.classList.remove('hidden');
+                } else {
+                    backToTopButton.classList.add('hidden');
+                }
+            });
+            backToTopButton.addEventListener('click', () => {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
             });
 
 
-            // --- Signup Panel Logic ---
-            const signupOverlay = document.getElementById('signup-panel-overlay');
-            const signupPanel = document.getElementById('signup-panel');
+            // Sequential Typewriter Animation
+            const steps = [
+                { number: 'step-1-number', textEl: 'step-1-text', text: "Fill out our simple application form. Our team will review your details and get you approved quickly." },
+                { number: 'step-2-number', textEl: 'step-2-text', text: "Once approved, we'll provide you with API keys to easily connect MerchantHaus as your payment provider in your Shopify admin." },
+                { number: 'step-3-number', textEl: 'step-3-text', text: "That's it! You're ready to accept payments securely and affordably, with all your transaction data synced to your MerchantHaus dashboard." }
+            ];
 
-            function openSignupPanel() {
-                signupPanel.innerHTML = signupPanelContent;
-                signupOverlay.classList.remove('invisible');
-                signupOverlay.classList.remove('opacity-0');
-                signupPanel.classList.remove('translate-x-full');
-                if (window.lucide) lucide.createIcons();
-                signupPanel.querySelector('.js-close-panel').addEventListener('click', closeSignupPanel);
-                signupOverlay.addEventListener('click', closeSignupPanel);
-                signupPanel.addEventListener('click', e => e.stopPropagation());
-            }
-
-            function closeSignupPanel() {
-                signupOverlay.classList.add('opacity-0');
-                signupPanel.classList.add('translate-x-full');
-                setTimeout(() => signupOverlay.classList.add('invisible'), 300);
-            }
-
-            document.querySelectorAll('.js-cta').forEach(btn => btn.addEventListener('click', e => {
-                e.preventDefault();
-                openSignupPanel();
-            }));
+            const observerOptions = {
+                root: null,
+                rootMargin: '0px',
+                threshold: 0.4 
+            };
             
-            // --- Support Modal Logic ---
-            const supportOverlay = document.getElementById('support-modal-overlay');
-            const supportContent = document.getElementById('support-modal-content');
+            let animationQueue = Promise.resolve();
 
-            function openSupportModal() {
-                supportContent.innerHTML = supportModalContent;
-                supportOverlay.classList.remove('invisible');
-                supportOverlay.classList.remove('opacity-0');
-                supportContent.classList.remove('scale-95', 'opacity-0');
-                if (window.lucide) lucide.createIcons();
-                supportContent.querySelector('.js-close-support-modal').addEventListener('click', closeSupportModal);
-                supportOverlay.addEventListener('click', closeSupportModal);
-                supportContent.addEventListener('click', e => e.stopPropagation());
-            }
+            const typewriter = (element, text, duration) => {
+                return new Promise(resolve => {
+                    let i = 0;
+                    element.innerHTML = "";
+                    element.style.opacity = '1';
+                    element.classList.add('typewriter-text');
+                    
+                    function type() {
+                        if (i < text.length) {
+                            element.innerHTML += text.charAt(i);
+                            i++;
+                            setTimeout(type, duration / text.length);
+                        } else {
+                           element.style.width = '100%';
+                           element.style.borderRight = 'none'; // Remove cursor at the end
+                           resolve();
+                        }
+                    }
+                    type();
+                });
+            };
 
-            function closeSupportModal() {
-                supportOverlay.classList.add('opacity-0');
-                supportContent.classList.add('scale-95', 'opacity-0');
-                setTimeout(() => supportOverlay.classList.add('invisible'), 300);
-            }
-
-            document.querySelectorAll('.js-support').forEach(btn => btn.addEventListener('click', e => {
-                 e.preventDefault();
-                 // If the mobile nav is open, close it first, then open the modal
-                 if (!mobileNavPanel.classList.contains('translate-x-full')) {
-                    closeMobileNav();
-                    setTimeout(openSupportModal, 300); // Wait for transition
-                 } else {
-                    openSupportModal();
-                 }
-            }));
-
-            // Close modals with Escape key
-            document.addEventListener('keydown', (e) => {
-                if (e.key === 'Escape') {
-                    closeMobileNav();
-                    closeSignupPanel();
-                    closeSupportModal();
+            const animateStep = (entry, observer) => {
+                if (entry.isIntersecting) {
+                    const stepIndex = steps.findIndex(s => s.number === entry.target.id);
+                    if (stepIndex !== -1 && !entry.target.dataset.animated) {
+                        entry.target.dataset.animated = true; // Mark as animated
+                        
+                        animationQueue = animationQueue.then(() => {
+                           entry.target.classList.add('fade-in');
+                           const step = steps[stepIndex];
+                           const textElement = document.getElementById(step.textEl);
+                           return typewriter(textElement, step.text, 4000);
+                        });
+                        
+                        observer.unobserve(entry.target);
+                    }
                 }
+            };
+            
+            const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => animateStep(entry, observer));
+            }, observerOptions);
+
+            steps.forEach(step => {
+                const el = document.getElementById(step.number);
+                if (el) observer.observe(el);
             });
         });
     </script>
 </body>
 </html>
-
 
