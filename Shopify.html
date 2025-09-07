@@ -8,7 +8,7 @@
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@700&family=Lexend:wght@400;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@700&family=Inter:wght@400;600&display=swap" rel="stylesheet">
 
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -18,12 +18,16 @@
             theme: {
                 extend: {
                     fontFamily: {
-                        sans: ['Lexend', 'ui-sans-serif', 'system-ui'],
+                        sans: ['Inter', 'ui-sans-serif', 'system-ui'],
                         ubuntu: ['Ubuntu', 'sans-serif']
                     },
                     colors: {
-                        brand: { 600: '#DC143C', 700: '#c21b35', 400: '#E85B71' },
-                        'brand-green': '#6dffca'
+                        'crimson': '#DC143C',
+                        'brand': { 600: '#DC143C', 700: '#c21b35' }, // Kept for compatibility
+                        'cyber-teal': '#00CEDB',
+                        'silver-grey': '#A9A9A9',
+                        'neutral-dark': '#1A1A1A',
+                        'neutral-light': '#F8F9FA',
                     }
                 }
             }
@@ -56,21 +60,21 @@
             0% { background-position: 0% 0%, 0% 0%; }
             100% { background-position: 50% -50%, -50% 50%; }
         }
-        html.dark { background-color: #1c1c1c !important; }
+        html.dark { background-color: #1A1A1A !important; }
         .dark body { background-color: transparent !important; color: #f5f5f5 !important; }
-        .dark .bg-slate-950 { background-color: #1c1c1c !important; }
+        .dark .bg-slate-950 { background-color: #1A1A1A !important; }
         .dark .border-slate-800 { border-color: #2a2a2a !important; }
         .dark .text-slate-300 { color: #c8c8c8 !important; }
         .dark .text-slate-400 { color: #a0a0a0 !important; }
         .dark .text-slate-600 { color: #c8c8c8 !important; }
         .header-glass { background-color: rgba(255, 255, 255, 0.8); backdrop-filter: blur(10px); }
-        .dark .header-glass { background-color: rgba(28, 28, 28, 0.8); }
-        .grad-text { display: inline-block; background: linear-gradient(90deg, #c21b35, #E85B71, #c21b35); -webkit-background-clip: text; background-clip: text; color: transparent; }
+        .dark .header-glass { background-color: rgba(26, 26, 26, 0.8); }
+        .grad-text { display: inline-block; background: linear-gradient(90deg, #DC143C, #E85B71, #DC143C); -webkit-background-clip: text; background-clip: text; color: transparent; }
         
         /* Updated Footer styles */
         footer { 
             position: relative; 
-            background-color: #111827; /* Fallback background */
+            background-color: #1A1A1A; /* Fallback background */
             color: white; 
         }
         footer::before { 
@@ -90,6 +94,12 @@
         .panel-overlay, .panel-container { transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
     </style>
 
+    <!-- Favicons -->
+    <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+    <link rel="manifest" href="site.webmanifest">
+
 </head>
 <body class="bg-white text-slate-900 dark:bg-transparent dark:text-slate-100">
 
@@ -99,16 +109,15 @@
             <header class="header-glass border border-slate-200/70 dark:border-slate-800 rounded-xl">
                 <div class="relative max-w-7xl mx-auto px-4 py-4 flex items-center justify-between">
                     <a href="#" class="flex items-center gap-3 group">
-                         <!-- Inlined SVG Logo -->
-                        <svg class="h-10 w-10 text-brand-600" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M12 2L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-3zm0 10.99h7c-.53 4.12-3.28 7.79-7 8.94V13H5V6.3l7-3.11v9.8z"/></svg>
+                        <img src="Shield.png" alt="MerchantHaus Logo" class="h-10 w-10">
                         <div>
                             <div class="text-xl md:text-2xl font-ubuntu font-bold tracking-wide text-slate-900 dark:text-slate-100">MerchantHaus</div>
-                            <p class="text-xs text-slate-500 dark:text-slate-400 h-4">Simple. Safe. Secure.</p>
+                            <p class="text-xs text-slate-500 dark:text-slate-400 h-4 tracking-widest uppercase">plug. play. grow.</p>
                         </div>
                     </a>
                     <div class="flex items-center gap-2">
                         <a href="#" class="js-cta bg-brand-600 hover:bg-brand-700 text-white border border-transparent px-4 py-2 rounded-full text-sm font-semibold transition-colors duration-300">Get Started</a>
-                        <a href="#" class="hidden sm:block bg-transparent hover:bg-brand-green text-brand-green hover:text-slate-800 border border-brand-green px-4 py-2 rounded-lg text-sm font-semibold transition-colors duration-300">Login</a>
+                        <a href="#" class="hidden sm:block bg-transparent hover:bg-cyber-teal/20 text-cyber-teal hover:text-neutral-dark border border-cyber-teal px-4 py-2 rounded-lg text-sm font-semibold transition-colors duration-300">Login</a>
                         <button id="open-menu-btn" class="p-2 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800" aria-label="Open menu"><i data-lucide="menu" class="h-5 w-5"></i></button>
                     </div>
                     <!-- Pop-out Menu -->
@@ -125,12 +134,12 @@
             <section class="text-center">
                 <div class="flex justify-center items-center gap-4 mb-4">
                     <div class="flex items-center gap-3">
-                        <svg class="h-16 w-16 text-brand-600" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M12 2L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-3zm0 10.99h7c-.53 4.12-3.28 7.79-7 8.94V13H5V6.3l7-3.11v9.8z"/></svg>
+                        <img src="Shield.png" alt="MerchantHaus Logo" class="h-16 w-16">
                         <span class="text-3xl font-ubuntu font-bold tracking-wide text-slate-900 dark:text-slate-100">MerchantHaus</span>
                     </div>
                     <i data-lucide="plus" class="w-8 h-8 text-slate-400"></i>
                     <!-- Inlined Shopify SVG Logo -->
-                    <svg class="h-16 rounded-lg fill-current text-slate-800 dark:text-white" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024"><path d="M718.2 596.1c-33.3 0-63.7-9.4-89.9-26.1-26.1-16.7-46-40.6-58.4-69.2-11.3-25.8-17.2-54.8-17.2-85.1 0-30.8 5.8-59.5 17.2-85.1 12.4-28.6 32.3-52.5 58.4-69.2 26.1-16.7 56.5-26.1 89.9-26.1 27.6 0 53 6.9 75.4 20.3 22.1 13.4 39.5 32 51.3 54.5l-69 41.1c-5-9.4-12.7-17.1-22.1-22.7-9.4-5.8-20.3-8.8-32.3-8.8-14.8 0-28.3 4.4-40.1 12.7-11.8 8.5-21.2 19.4-27.6 32.3-6.4 12.9-9.7 27.8-9.7 43.6s3.3 30.8 9.7 43.6c6.4 12.9 15.8 23.8 27.6 32.3 11.8 8.5 25.3 12.7 40.1 12.7 11.8 0 22.7-3 32.3-8.8 9.4-5.8 17.1-13.4 22.1-22.7l69 41.1c-11.8 22.4-29.2 41.1-51.3 54.5-22.4 13.4-47.8 20.3-75.4 20.3zM494.6 235.3h-85.7v156.9c0 28-6.1 50.1-18.3 65.4-12.1 15.3-29.8 23.1-52.7 23.1-22.9 0-40.8-7.8-53.3-23.1-12.4-15.3-18.6-37.5-18.6-65.4V235.3h-85.7v162.1c0 40.8 10 74.5 30.1 100.4 20.1 25.8 47.5 39 81.5 39s61.4-13.1 81.5-39c20.1-25.8 30.1-59.5 30.1-100.4V235.3zM896 235.3v360.8H235.3V235.3H896zM128 128v768h768V128H128z"/></svg>
+                    <img src="shopify.png" alt="Shopify Logo" class="h-16 rounded-lg">
                 </div>
                 <h1 class="text-4xl md:text-5xl font-extrabold font-ubuntu mb-4">Seamless Payments for Shopify</h1>
                 <p class="text-lg text-slate-600 dark:text-slate-300 max-w-3xl mx-auto">
@@ -205,8 +214,8 @@
             <section class="mt-16 text-center">
                 <p class="text-slate-500 dark:text-slate-400 text-sm font-medium mb-2 tracking-wider">POWERED BY</p>
                 <a href="https://www.nmi.com/" target="_blank" rel="noopener noreferrer" aria-label="Powered by NMI">
-                     <img src="https://assets.website-files.com/6274435b34a34351b8022224/6274437a34a3432a2f02235c_nmi-logo-dark.svg" alt="NMI Logo" class="h-10 mx-auto block dark:hidden">
-                     <img src="https://assets.website-files.com/6274435b34a34351b8022224/6274437f8433315a818c1605_nmi-logo-light.svg" alt="NMI Logo" class="h-10 mx-auto hidden dark:block">
+                     <img src="https://www.nmi.com/wp-content/uploads/2021/07/nmi-logo-dark.png" alt="NMI Logo" class="h-10 mx-auto block dark:hidden">
+                     <img src="https://www.nmi.com/wp-content/uploads/2021/07/nmi-logo-light.png" alt="NMI Logo" class="h-10 mx-auto hidden dark:block">
                 </a>
             </section>
         </div>
@@ -217,10 +226,10 @@
         <div class="max-w-7xl mx-auto px-4 grid sm:grid-cols-2 lg:grid-cols-4 gap-8 text-sm">
             <div class="space-y-3">
                 <a href="#" class="flex items-center gap-3">
-                    <svg class="h-9 w-9 text-brand-400" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M12 2L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-3zm0 10.99h7c-.53 4.12-3.28 7.79-7 8.94V13H5V6.3l7-3.11v9.8z"/></svg>
-                    <span class="text-2xl font-ubuntu font-bold tracking-wide text-white">MerchantHaus</span>
+                    <img src="Shield.png" alt="MerchantHaus Logo" class="h-9 w-9">
+                    <span class="text-2xl font-ubuntu font-bold tracking-wide grad-text">MerchantHaus</span>
                 </a>
-                <p>Payments made simple.</p>
+                <p class="tracking-widest uppercase text-xs text-silver-grey">plug. play. grow.</p>
                 <div class="text-sm"><a href="tel:15056006042" class="block">1-505-600-6042</a><a href="mailto:support@merchanthaus.io" class="block">support@merchanthaus.io</a></div>
             </div>
             <nav class="space-y-2"><h3 class="font-semibold font-ubuntu">Product</h3><a href="#payments" class="block">Payment Services</a><a href="#integrations" class="block">Integrations</a><a href="#" class="block">Shopify Integration</a><a href="#apply" class="block">Setup Checklist</a></nav>
@@ -431,5 +440,9 @@
     </script>
 </body>
 </html>
+
+
+
+
 
 
