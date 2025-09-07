@@ -35,8 +35,8 @@
 
     <!-- Custom Styles -->
     <style>
-        body { 
-            font-family: 'Lexend', ui-sans-serif, system-ui; 
+        body {
+            font-family: 'Lexend', ui-sans-serif, system-ui;
             position: relative;
             -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
@@ -47,7 +47,7 @@
             top: 0; left: 0;
             width: 100vw; height: 100vh;
             z-index: -1;
-            background: 
+            background:
                 radial-gradient(circle at 15% 25%, rgba(220, 20, 60, 0.15), transparent 40%),
                 radial-gradient(circle at 85% 75%, rgba(109, 255, 202, 0.1), transparent 40%);
             animation: bloom 25s linear infinite alternate;
@@ -66,22 +66,30 @@
         .header-glass { background-color: rgba(255, 255, 255, 0.8); backdrop-filter: blur(10px); }
         .dark .header-glass { background-color: rgba(28, 28, 28, 0.8); }
         .grad-text { display: inline-block; background: linear-gradient(90deg, #c21b35, #E85B71, #c21b35); -webkit-background-clip: text; background-clip: text; color: transparent; }
-        footer { position: relative; background-image: url('assets/email.jpg'); background-size: cover; background-position: center; color: white; }
-        footer::before { content: ''; position: absolute; inset: 0; background-color: rgba(0, 0, 0, 0.6); z-index: 1; }
+        
+        /* Updated Footer styles */
+        footer { 
+            position: relative; 
+            background-color: #111827; /* Fallback background */
+            color: white; 
+        }
+        footer::before { 
+            content: ''; 
+            position: absolute; 
+            inset: 0; 
+            background-color: rgba(0, 0, 0, 0.6); 
+            z-index: 1; 
+        }
         footer > div { position: relative; z-index: 2; }
         footer a { color: #f9fafb !important; }
         footer a:hover { text-decoration: underline; }
         footer h3 { color: #f9fafb !important; }
         footer p { color: #d1d5db !important; }
         footer .border-slate-800 { border-color: rgba(255, 255, 255, 0.2) !important; }
+        
         .panel-overlay, .panel-container { transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
     </style>
 
-    <!-- Favicons -->
-    <link rel="apple-touch-icon" sizes="180x180" href="shield/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="shield/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="shield/favicon-16x16.png">
-    <link rel="manifest" href="shield/site.webmanifest">
 </head>
 <body class="bg-white text-slate-900 dark:bg-transparent dark:text-slate-100">
 
@@ -90,8 +98,9 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-4">
             <header class="header-glass border border-slate-200/70 dark:border-slate-800 rounded-xl">
                 <div class="relative max-w-7xl mx-auto px-4 py-4 flex items-center justify-between">
-                    <a href="index.html" class="flex items-center gap-3 group">
-                        <img src="shield/shield.png" alt="MerchantHaus Logo" class="h-10 w-10">
+                    <a href="#" class="flex items-center gap-3 group">
+                         <!-- Inlined SVG Logo -->
+                        <svg class="h-10 w-10 text-brand-600" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M12 2L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-3zm0 10.99h7c-.53 4.12-3.28 7.79-7 8.94V13H5V6.3l7-3.11v9.8z"/></svg>
                         <div>
                             <div class="text-xl md:text-2xl font-ubuntu font-bold tracking-wide text-slate-900 dark:text-slate-100">MerchantHaus</div>
                             <p class="text-xs text-slate-500 dark:text-slate-400 h-4">Simple. Safe. Secure.</p>
@@ -103,21 +112,6 @@
                         <button id="open-menu-btn" class="p-2 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800" aria-label="Open menu"><i data-lucide="menu" class="h-5 w-5"></i></button>
                     </div>
                     <!-- Pop-out Menu -->
-                    <div id="popout-menu" class="absolute top-full right-4 mt-2 w-72 rounded-xl bg-white dark:bg-[#1c1c1c] shadow-2xl border border-brand-green p-4 z-[51] hidden opacity-0 transition-opacity duration-300">
-                        <nav class="flex flex-col space-y-1 text-base font-medium">
-                            <a href="index.html#payments" data-close class="px-4 py-2 rounded-lg hover:bg-brand-600 hover:text-white transition-colors">Payment Services</a>
-                            <a href="index.html#integrations" data-close class="px-4 py-2 rounded-lg hover:bg-brand-600 hover:text-white transition-colors">Integrations</a>
-                            <a href="shopify.html" data-close class="px-4 py-2 rounded-lg hover:bg-brand-600 hover:text-white transition-colors">Shopify</a>
-                            <a href="compliance.html" data-close class="px-4 py-2 rounded-lg hover:bg-brand-600 hover:text-white transition-colors">Setup Checklist</a>
-                            <a href="#" data-close class="js-support px-4 py-2 rounded-lg hover:bg-brand-600 hover:text-white transition-colors">Contact Support</a>
-                            <a href="#" data-close class="sm:hidden block px-4 py-2 rounded-lg hover:bg-brand-600 hover:text-white transition-colors mt-2 pt-2 border-t border-slate-200 dark:border-slate-800">Login</a>
-                        </nav>
-                        <div class="mt-4 pt-4 border-t border-slate-200 dark:border-slate-800">
-                            <p class="text-xs text-center text-slate-500 dark:text-slate-400">
-                                Questions? Call <a href="tel:15056006042" class="text-brand-600 dark:text-brand-400 hover:underline">1-505-600-6042</a> or email us at <a href="mailto:support@merchanthaus.io" class="text-brand-600 dark:text-brand-400 hover:underline">support@merchanthaus.io</a>
-                            </p>
-                        </div>
-                    </div>
                 </div>
             </header>
         </div>
@@ -125,30 +119,30 @@
 
     <!-- Main Content -->
     <main class="min-h-screen pt-12 pb-16 flex flex-col items-center justify-start p-6">
-        <div class="w-full max-w-5xl bg-white/80 dark:bg-[#1c1c1c]/80 backdrop-blur-sm p-8 rounded-xl shadow-lg border border-slate-200/70 dark:border-slate-800">
+        <div id="main-content-wrapper" class="w-full max-w-5xl bg-white/80 dark:bg-[#1c1c1c]/80 backdrop-blur-sm p-8 rounded-xl shadow-lg border border-slate-200/70 dark:border-slate-800">
             
             <!-- Hero Section -->
             <section class="text-center">
                 <div class="flex justify-center items-center gap-4 mb-4">
                     <div class="flex items-center gap-3">
-                        <img src="shield/shield.png" alt="MerchantHaus Logo" class="h-16 w-16">
+                        <svg class="h-16 w-16 text-brand-600" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M12 2L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-3zm0 10.99h7c-.53 4.12-3.28 7.79-7 8.94V13H5V6.3l7-3.11v9.8z"/></svg>
                         <span class="text-3xl font-ubuntu font-bold tracking-wide text-slate-900 dark:text-slate-100">MerchantHaus</span>
                     </div>
                     <i data-lucide="plus" class="w-8 h-8 text-slate-400"></i>
-                    <img src="shopifylight.png" alt="Shopify Logo" class="h-16 rounded-lg block dark:hidden">
-                    <img src="shopifydark.png" alt="Shopify Logo" class="h-16 rounded-lg hidden dark:block">
+                    <!-- Inlined Shopify SVG Logo -->
+                    <svg class="h-16 rounded-lg fill-current text-slate-800 dark:text-white" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024"><path d="M718.2 596.1c-33.3 0-63.7-9.4-89.9-26.1-26.1-16.7-46-40.6-58.4-69.2-11.3-25.8-17.2-54.8-17.2-85.1 0-30.8 5.8-59.5 17.2-85.1 12.4-28.6 32.3-52.5 58.4-69.2 26.1-16.7 56.5-26.1 89.9-26.1 27.6 0 53 6.9 75.4 20.3 22.1 13.4 39.5 32 51.3 54.5l-69 41.1c-5-9.4-12.7-17.1-22.1-22.7-9.4-5.8-20.3-8.8-32.3-8.8-14.8 0-28.3 4.4-40.1 12.7-11.8 8.5-21.2 19.4-27.6 32.3-6.4 12.9-9.7 27.8-9.7 43.6s3.3 30.8 9.7 43.6c6.4 12.9 15.8 23.8 27.6 32.3 11.8 8.5 25.3 12.7 40.1 12.7 11.8 0 22.7-3 32.3-8.8 9.4-5.8 17.1-13.4 22.1-22.7l69 41.1c-11.8 22.4-29.2 41.1-51.3 54.5-22.4 13.4-47.8 20.3-75.4 20.3zM494.6 235.3h-85.7v156.9c0 28-6.1 50.1-18.3 65.4-12.1 15.3-29.8 23.1-52.7 23.1-22.9 0-40.8-7.8-53.3-23.1-12.4-15.3-18.6-37.5-18.6-65.4V235.3h-85.7v162.1c0 40.8 10 74.5 30.1 100.4 20.1 25.8 47.5 39 81.5 39s61.4-13.1 81.5-39c20.1-25.8 30.1-59.5 30.1-100.4V235.3zM896 235.3v360.8H235.3V235.3H896zM128 128v768h768V128H128z"/></svg>
                 </div>
                 <h1 class="text-4xl md:text-5xl font-extrabold font-ubuntu mb-4">Seamless Payments for Shopify</h1>
                 <p class="text-lg text-slate-600 dark:text-slate-300 max-w-3xl mx-auto">
                     Integrate MerchantHaus directly with your Shopify store to lower your processing costs, reduce fraud, and simplify your operations. Get the fast, secure, and affordable payment solution your business deserves.
                 </p>
                 <div class="mt-8">
-                    <a href="compliance.html#apply" class="js-cta bg-brand-600 hover:bg-brand-700 text-white border border-transparent px-8 py-3 rounded-full text-lg font-semibold transition-colors duration-300">Get Started Today</a>
+                    <a href="#" class="js-cta bg-brand-600 hover:bg-brand-700 text-white border border-transparent px-8 py-3 rounded-full text-lg font-semibold transition-colors duration-300">Get Started Today</a>
                 </div>
             </section>
 
             <!-- Benefits Section -->
-            <section class="mt-20">
+            <section id="payments" class="mt-20">
                 <div class="grid md:grid-cols-3 gap-8 text-center">
                     <div class="p-6 rounded-lg">
                         <i data-lucide="trending-down" class="w-12 h-12 text-brand-600 mx-auto mb-4"></i>
@@ -169,42 +163,51 @@
             </section>
 
             <!-- How It Works Section -->
-            <section class="mt-20 text-center">
+            <section id="apply" class="mt-20 text-center">
                  <h2 class="text-3xl font-extrabold font-ubuntu mb-4">Simple Setup in 3 Steps</h2>
                  <p class="text-slate-600 dark:text-slate-300 max-w-2xl mx-auto mb-12">Get up and running with MerchantHaus on your Shopify store in minutes.</p>
                  <div class="grid md:grid-cols-3 gap-8 relative">
-                     <!-- Dashed line connector for desktop -->
-                     <div class="hidden md:block absolute top-1/2 left-0 w-full h-px bg-transparent">
-                        <svg width="100%" height="2" class="absolute" style="transform: translateY(-1px);">
-                            <line x1="0" y1="1" x2="100%" y2="1" stroke-width="2" class="stroke-current text-slate-300 dark:text-slate-700" stroke-dasharray="8, 8"/>
-                        </svg>
-                     </div>
+                       <!-- Dashed line connector for desktop -->
+                       <div class="hidden md:block absolute top-12 left-0 w-full h-px -translate-y-1/2">
+                         <svg width="100%" height="2" class="absolute">
+                             <line x1="0" y1="1" x2="100%" y2="1" stroke-width="2" class="stroke-current text-slate-300 dark:text-slate-700" stroke-dasharray="8, 8"/>
+                         </svg>
+                       </div>
 
-                     <div class="relative z-10 p-6 rounded-lg bg-white/50 dark:bg-black/20">
-                         <div class="w-12 h-12 bg-brand-600 text-white rounded-full flex items-center justify-center font-bold text-xl mx-auto mb-4">1</div>
-                         <h3 class="text-lg font-bold">Apply for an Account</h3>
-                         <p class="text-slate-600 dark:text-slate-400 mt-2 text-sm">Fill out our simple application form. Our team will review your details and get you approved quickly.</p>
-                     </div>
-                     <div class="relative z-10 p-6 rounded-lg bg-white/50 dark:bg-black/20">
-                         <div class="w-12 h-12 bg-brand-600 text-white rounded-full flex items-center justify-center font-bold text-xl mx-auto mb-4">2</div>
-                         <h3 class="text-lg font-bold">Connect to Shopify</h3>
-                         <p class="text-slate-600 dark:text-slate-400 mt-2 text-sm">Once approved, we'll provide you with API keys to easily connect MerchantHaus as your payment provider in your Shopify admin.</p>
-                     </div>
-                     <div class="relative z-10 p-6 rounded-lg bg-white/50 dark:bg-black/20">
-                         <div class="w-12 h-12 bg-brand-600 text-white rounded-full flex items-center justify-center font-bold text-xl mx-auto mb-4">3</div>
-                         <h3 class="text-lg font-bold">Start Processing</h3>
-                         <p class="text-slate-600 dark:text-slate-400 mt-2 text-sm">That's it! You're ready to accept payments securely and affordably, with all your transaction data synced to your MerchantHaus dashboard.</p>
-                     </div>
+                       <div class="relative z-10 p-6 rounded-lg bg-white/50 dark:bg-black/20">
+                           <div class="w-12 h-12 bg-brand-600 text-white rounded-full flex items-center justify-center font-bold text-xl mx-auto mb-4">1</div>
+                           <h3 class="text-lg font-bold">Apply for an Account</h3>
+                           <p class="text-slate-600 dark:text-slate-400 mt-2 text-sm">Fill out our simple application form. Our team will review your details and get you approved quickly.</p>
+                       </div>
+                       <div class="relative z-10 p-6 rounded-lg bg-white/50 dark:bg-black/20">
+                           <div class="w-12 h-12 bg-brand-600 text-white rounded-full flex items-center justify-center font-bold text-xl mx-auto mb-4">2</div>
+                           <h3 class="text-lg font-bold">Connect to Shopify</h3>
+                           <p class="text-slate-600 dark:text-slate-400 mt-2 text-sm">Once approved, we'll provide you with API keys to easily connect MerchantHaus as your payment provider in your Shopify admin.</p>
+                       </div>
+                       <div class="relative z-10 p-6 rounded-lg bg-white/50 dark:bg-black/20">
+                           <div class="w-12 h-12 bg-brand-600 text-white rounded-full flex items-center justify-center font-bold text-xl mx-auto mb-4">3</div>
+                           <h3 class="text-lg font-bold">Start Processing</h3>
+                           <p class="text-slate-600 dark:text-slate-400 mt-2 text-sm">That's it! You're ready to accept payments securely and affordably, with all your transaction data synced to your MerchantHaus dashboard.</p>
+                       </div>
                  </div>
             </section>
 
              <!-- Final CTA -->
-            <section class="mt-20 text-center bg-brand-600/10 dark:bg-brand-400/10 p-8 rounded-xl">
+            <section id="integrations" class="mt-20 text-center bg-brand-600/10 dark:bg-brand-400/10 p-8 rounded-xl">
                  <h2 class="text-3xl font-extrabold font-ubuntu mb-4">Ready to Switch and Save?</h2>
                  <p class="text-slate-600 dark:text-slate-300 max-w-2xl mx-auto mb-8">
-                     Make the smart move. Join hundreds of Shopify merchants who trust MerchantHaus for reliable and cost-effective payment processing.
+                      Make the smart move. Join hundreds of Shopify merchants who trust MerchantHaus for reliable and cost-effective payment processing.
                  </p>
-                 <a href="compliance.html#apply" class="js-cta bg-brand-600 hover:bg-brand-700 text-white border border-transparent px-8 py-3 rounded-full text-lg font-semibold transition-colors duration-300">Apply Now</a>
+                 <a href="#" class="js-cta bg-brand-600 hover:bg-brand-700 text-white border border-transparent px-8 py-3 rounded-full text-lg font-semibold transition-colors duration-300">Apply Now</a>
+            </section>
+
+            <!-- Powered by NMI -->
+            <section class="mt-16 text-center">
+                <p class="text-slate-500 dark:text-slate-400 text-sm font-medium mb-2 tracking-wider">POWERED BY</p>
+                <a href="https://www.nmi.com/" target="_blank" rel="noopener noreferrer" aria-label="Powered by NMI">
+                     <img src="https://assets.website-files.com/6274435b34a34351b8022224/6274437a34a3432a2f02235c_nmi-logo-dark.svg" alt="NMI Logo" class="h-10 mx-auto block dark:hidden">
+                     <img src="https://assets.website-files.com/6274435b34a34351b8022224/6274437f8433315a818c1605_nmi-logo-light.svg" alt="NMI Logo" class="h-10 mx-auto hidden dark:block">
+                </a>
             </section>
         </div>
     </main>
@@ -213,49 +216,220 @@
     <footer class="border-t border-slate-200 dark:border-slate-800 py-10">
         <div class="max-w-7xl mx-auto px-4 grid sm:grid-cols-2 lg:grid-cols-4 gap-8 text-sm">
             <div class="space-y-3">
-                <a href="index.html" class="flex items-center gap-3"><img src="shield/shield.png" alt="MerchantHaus Logo" class="h-9 w-9"><span class="text-2xl font-ubuntu font-bold tracking-wide grad-text">MerchantHaus</span></a>
+                <a href="#" class="flex items-center gap-3">
+                    <svg class="h-9 w-9 text-brand-400" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M12 2L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-3zm0 10.99h7c-.53 4.12-3.28 7.79-7 8.94V13H5V6.3l7-3.11v9.8z"/></svg>
+                    <span class="text-2xl font-ubuntu font-bold tracking-wide text-white">MerchantHaus</span>
+                </a>
                 <p>Payments made simple.</p>
                 <div class="text-sm"><a href="tel:15056006042" class="block">1-505-600-6042</a><a href="mailto:support@merchanthaus.io" class="block">support@merchanthaus.io</a></div>
             </div>
-            <nav class="space-y-2"><h3 class="font-semibold font-ubuntu">Product</h3><a href="index.html#payments" class="block">Payment Services</a><a href="index.html#integrations" class="block">Integrations</a><a href="shopify.html" class="block">Shopify Integration</a><a href="compliance.html" class="block">Setup Checklist</a></nav>
-            <nav class="space-y-2"><h3 class="font-semibold font-ubuntu">Support</h3><a href="#" class="js-support block">Contact Support</a><a href="index.html#faq-question" class="block">FAQs</a></nav>
-            <nav class="space-y-2"><h3 class="font-semibold font-ubuntu">Legal</h3><a href="privacy.html" class="block">Privacy Policy</a><a href="terms.html" class="block">Terms & Conditions</a></nav>
+            <nav class="space-y-2"><h3 class="font-semibold font-ubuntu">Product</h3><a href="#payments" class="block">Payment Services</a><a href="#integrations" class="block">Integrations</a><a href="#" class="block">Shopify Integration</a><a href="#apply" class="block">Setup Checklist</a></nav>
+            <nav class="space-y-2"><h3 class="font-semibold font-ubuntu">Support</h3><a href="#" class="js-support block">Contact Support</a><a href="#" class="block">FAQs</a></nav>
+            <nav class="space-y-2"><h3 class="font-semibold font-ubuntu">Legal</h3><a href="#" class="block">Privacy Policy</a><a href="#" class="block">Terms & Conditions</a></nav>
         </div>
-        <div class="text-center text-xs pt-8 mt-8 border-t border-slate-200 dark:border-slate-800">© <span id="year"></span> Merchant Haus. All rights reserved.</div>
+        <div class="text-center text-xs pt-8 mt-8 border-t border-slate-200 dark:border-slate-800 text-slate-400">© <span id="year"></span> Merchant Haus. All rights reserved.</div>
     </footer>
 
-    <!-- Modals and Panels (structure only) -->
-    <div id="signup-panel-overlay" class="panel-overlay fixed inset-0 bg-black/60 z-50 opacity-0 invisible"><div id="signup-panel" class="panel-container fixed top-0 right-0 h-full w-full max-w-2xl bg-white dark:bg-slate-900 shadow-2xl transform translate-x-full flex flex-col"></div></div>
-    <div id="support-modal" class="fixed inset-0 z-[70] hidden"></div>
+    <!-- Modals and Panels -->
+    <div id="mobile-nav-overlay" class="panel-overlay fixed inset-0 bg-black/60 z-[60] opacity-0 invisible">
+        <div id="mobile-nav-panel" class="panel-container fixed top-0 right-0 h-full w-full max-w-sm bg-white dark:bg-slate-950 shadow-2xl transform translate-x-full flex flex-col"></div>
+    </div>
+
+    <div id="signup-panel-overlay" class="panel-overlay fixed inset-0 bg-black/60 z-[60] opacity-0 invisible"><div id="signup-panel" class="panel-container fixed top-0 right-0 h-full w-full max-w-2xl bg-white dark:bg-slate-950 shadow-2xl transform translate-x-full flex flex-col"></div></div>
+    <div id="support-modal-overlay" class="fixed inset-0 bg-black/60 z-[80] opacity-0 invisible transition-opacity duration-300 flex items-center justify-center p-4">
+        <div id="support-modal-content" class="bg-white dark:bg-slate-900 rounded-xl shadow-2xl p-8 w-full max-w-md transform scale-95 opacity-0 transition-all duration-300"></div>
+    </div>
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             if (window.lucide) lucide.createIcons();
             document.getElementById('year').textContent = new Date().getFullYear();
 
-            // --- Pop-out Menu & Modal Logic ---
+            // --- Panel & Modal Content ---
+            const mobileNavContent = `
+                <div class="flex-shrink-0 flex items-center justify-between p-4 border-b border-slate-200 dark:border-slate-800">
+                    <h2 class="text-xl font-bold font-ubuntu">Menu</h2>
+                    <button class="js-close-mobile-nav p-2 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800"><i data-lucide="x" class="h-6 w-6"></i></button>
+                </div>
+                <div class="flex-grow p-4 overflow-y-auto">
+                    <nav class="flex flex-col space-y-1 text-base font-medium">
+                        <a href="#payments" data-close class="px-4 py-3 rounded-lg hover:bg-brand-600 hover:text-white transition-colors">Payment Services</a>
+                        <a href="#integrations" data-close class="px-4 py-3 rounded-lg hover:bg-brand-600 hover:text-white transition-colors">Integrations</a>
+                        <a href="#" data-close class="px-4 py-3 rounded-lg hover:bg-brand-600 hover:text-white transition-colors">Shopify</a>
+                        <a href="#apply" data-close class="px-4 py-3 rounded-lg hover:bg-brand-600 hover:text-white transition-colors">Setup Checklist</a>
+                        <a href="#" data-close class="js-support px-4 py-3 rounded-lg hover:bg-brand-600 hover:text-white transition-colors">Contact Support</a>
+                        <a href="#" data-close class="sm:hidden block px-4 py-3 rounded-lg hover:bg-brand-600 hover:text-white transition-colors mt-2 pt-3 border-t border-slate-200 dark:border-slate-800">Login</a>
+                    </nav>
+                </div>
+                <div class="flex-shrink-0 p-4 mt-4 border-t border-slate-200 dark:border-slate-800">
+                     <p class="text-xs text-center text-slate-500 dark:text-slate-400">
+                         Questions? Call <a href="tel:15056006042" class="text-brand-600 dark:text-brand-400 hover:underline">1-505-600-6042</a> or email us at <a href="mailto:support@merchanthaus.io" class="text-brand-600 dark:text-brand-400 hover:underline">support@merchanthaus.io</a>
+                     </p>
+                </div>
+            `;
+
+            const signupPanelContent = `
+                <div class="flex-shrink-0 flex items-center justify-between p-4 border-b border-slate-200 dark:border-slate-800">
+                    <h2 class="text-xl font-bold font-ubuntu">Get Started with MerchantHaus</h2>
+                    <button class="js-close-panel p-2 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800"><i data-lucide="x" class="h-6 w-6"></i></button>
+                </div>
+                <div class="flex-grow p-8 overflow-y-auto">
+                    <p class="mb-6 text-slate-600 dark:text-slate-400">Complete the form below to begin your application. Our team will get back to you within one business day to finalize your account setup.</p>
+                    <form class="space-y-6">
+                        <div>
+                            <label for="name" class="block text-sm font-medium text-slate-700 dark:text-slate-300">Full Name</label>
+                            <input type="text" id="name" class="mt-1 block w-full px-3 py-2 bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-700 rounded-md shadow-sm focus:outline-none focus:ring-brand-600 focus:border-brand-600 sm:text-sm">
+                        </div>
+                        <div>
+                            <label for="email" class="block text-sm font-medium text-slate-700 dark:text-slate-300">Email Address</label>
+                            <input type="email" id="email" class="mt-1 block w-full px-3 py-2 bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-700 rounded-md shadow-sm focus:outline-none focus:ring-brand-600 focus:border-brand-600 sm:text-sm">
+                        </div>
+                        <div>
+                            <label for="company" class="block text-sm font-medium text-slate-700 dark:text-slate-300">Company Name</label>
+                            <input type="text" id="company" class="mt-1 block w-full px-3 py-2 bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-700 rounded-md shadow-sm focus:outline-none focus:ring-brand-600 focus:border-brand-600 sm:text-sm">
+                        </div>
+                         <div>
+                            <label for="phone" class="block text-sm font-medium text-slate-700 dark:text-slate-300">Phone Number</label>
+                            <input type="tel" id="phone" class="mt-1 block w-full px-3 py-2 bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-700 rounded-md shadow-sm focus:outline-none focus:ring-brand-600 focus:border-brand-600 sm:text-sm">
+                        </div>
+                        <div class="pt-4">
+                            <button type="submit" class="w-full bg-brand-600 hover:bg-brand-700 text-white font-bold py-3 px-4 rounded-lg transition-colors duration-300">Submit Application</button>
+                        </div>
+                    </form>
+                </div>`;
+
+            const supportModalContent = `
+                <div class="flex items-center justify-between mb-6">
+                     <h2 class="text-xl font-bold font-ubuntu">Contact Support</h2>
+                     <button class="js-close-support-modal p-2 rounded-full hover:bg-slate-100 dark:hover:bg-slate-800 -mr-2"><i data-lucide="x" class="h-6 w-6"></i></button>
+                </div>
+                <p class="mb-6 text-slate-600 dark:text-slate-400">Our team is here to help. Reach out to us via phone or email for assistance.</p>
+                <div class="space-y-4">
+                    <a href="tel:15056006042" class="flex items-center gap-4 p-4 border border-slate-200 dark:border-slate-800 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-800/50">
+                        <i data-lucide="phone" class="w-6 h-6 text-brand-600"></i>
+                        <div>
+                            <div class="font-semibold">Phone Support</div>
+                            <div class="text-slate-500 dark:text-slate-400 text-sm">1-505-600-6042</div>
+                        </div>
+                    </a>
+                    <a href="mailto:support@merchanthaus.io" class="flex items-center gap-4 p-4 border border-slate-200 dark:border-slate-800 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-800/50">
+                        <i data-lucide="mail" class="w-6 h-6 text-brand-600"></i>
+                        <div>
+                            <div class="font-semibold">Email Support</div>
+                            <div class="text-slate-500 dark:text-slate-400 text-sm">support@merchanthaus.io</div>
+                        </div>
+                    </a>
+                </div>`;
+
+            // --- Mobile Nav Panel Logic ---
             const menuBtn = document.getElementById('open-menu-btn');
-            const popoutMenu = document.getElementById('popout-menu');
-            if (menuBtn && popoutMenu) {
-                menuBtn.addEventListener('click', (e) => {
-                    e.stopPropagation();
-                    popoutMenu.classList.toggle('hidden');
-                    setTimeout(() => popoutMenu.classList.toggle('opacity-0'), 10);
-                });
-                document.addEventListener('click', (e) => {
-                    if (!popoutMenu.classList.contains('hidden') && !popoutMenu.contains(e.target) && !menuBtn.contains(e.target)) {
-                        popoutMenu.classList.add('opacity-0');
-                        setTimeout(() => popoutMenu.classList.add('hidden'), 300);
-                    }
-                });
-                popoutMenu.querySelectorAll('a[data-close]').forEach(link => {
+            const mobileNavOverlay = document.getElementById('mobile-nav-overlay');
+            const mobileNavPanel = document.getElementById('mobile-nav-panel');
+
+            function openMobileNav() {
+                mobileNavPanel.innerHTML = mobileNavContent;
+                mobileNavOverlay.classList.remove('invisible', 'opacity-0');
+                mobileNavPanel.classList.remove('translate-x-full');
+                if (window.lucide) lucide.createIcons();
+
+                mobileNavPanel.querySelector('.js-close-mobile-nav').addEventListener('click', closeMobileNav);
+                mobileNavOverlay.addEventListener('click', closeMobileNav);
+                mobileNavPanel.addEventListener('click', e => e.stopPropagation());
+                mobileNavPanel.querySelectorAll('a[data-close]').forEach(link => {
                     link.addEventListener('click', () => {
-                        popoutMenu.classList.add('opacity-0');
-                        setTimeout(() => popoutMenu.classList.add('hidden'), 300);
+                        // Let the global .js-support listener handle opening the modal
+                        if (!link.classList.contains('js-support')) {
+                           closeMobileNav();
+                        }
                     });
                 });
             }
+
+            function closeMobileNav() {
+                mobileNavOverlay.classList.add('opacity-0');
+                mobileNavPanel.classList.add('translate-x-full');
+                setTimeout(() => {
+                    mobileNavOverlay.classList.add('invisible');
+                    mobileNavPanel.innerHTML = '';
+                }, 300);
+            }
+            
+            menuBtn.addEventListener('click', e => {
+                e.preventDefault();
+                e.stopPropagation();
+                openMobileNav();
+            });
+
+
+            // --- Signup Panel Logic ---
+            const signupOverlay = document.getElementById('signup-panel-overlay');
+            const signupPanel = document.getElementById('signup-panel');
+
+            function openSignupPanel() {
+                signupPanel.innerHTML = signupPanelContent;
+                signupOverlay.classList.remove('invisible');
+                signupOverlay.classList.remove('opacity-0');
+                signupPanel.classList.remove('translate-x-full');
+                if (window.lucide) lucide.createIcons();
+                signupPanel.querySelector('.js-close-panel').addEventListener('click', closeSignupPanel);
+                signupOverlay.addEventListener('click', closeSignupPanel);
+                signupPanel.addEventListener('click', e => e.stopPropagation());
+            }
+
+            function closeSignupPanel() {
+                signupOverlay.classList.add('opacity-0');
+                signupPanel.classList.add('translate-x-full');
+                setTimeout(() => signupOverlay.classList.add('invisible'), 300);
+            }
+
+            document.querySelectorAll('.js-cta').forEach(btn => btn.addEventListener('click', e => {
+                e.preventDefault();
+                openSignupPanel();
+            }));
+            
+            // --- Support Modal Logic ---
+            const supportOverlay = document.getElementById('support-modal-overlay');
+            const supportContent = document.getElementById('support-modal-content');
+
+            function openSupportModal() {
+                supportContent.innerHTML = supportModalContent;
+                supportOverlay.classList.remove('invisible');
+                supportOverlay.classList.remove('opacity-0');
+                supportContent.classList.remove('scale-95', 'opacity-0');
+                if (window.lucide) lucide.createIcons();
+                supportContent.querySelector('.js-close-support-modal').addEventListener('click', closeSupportModal);
+                supportOverlay.addEventListener('click', closeSupportModal);
+                supportContent.addEventListener('click', e => e.stopPropagation());
+            }
+
+            function closeSupportModal() {
+                supportOverlay.classList.add('opacity-0');
+                supportContent.classList.add('scale-95', 'opacity-0');
+                setTimeout(() => supportOverlay.classList.add('invisible'), 300);
+            }
+
+            document.querySelectorAll('.js-support').forEach(btn => btn.addEventListener('click', e => {
+                 e.preventDefault();
+                 // If the mobile nav is open, close it first, then open the modal
+                 if (!mobileNavPanel.classList.contains('translate-x-full')) {
+                    closeMobileNav();
+                    setTimeout(openSupportModal, 300); // Wait for transition
+                 } else {
+                    openSupportModal();
+                 }
+            }));
+
+            // Close modals with Escape key
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape') {
+                    closeMobileNav();
+                    closeSignupPanel();
+                    closeSupportModal();
+                }
+            });
         });
     </script>
 </body>
 </html>
+
+
