@@ -40,7 +40,7 @@
     <!-- Custom Styles -->
     <style>
         body {
-            font-family: 'Lexend', ui-sans-serif, system-ui;
+            font-family: 'Inter', ui-sans-serif, system-ui;
             position: relative;
             -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
@@ -53,7 +53,7 @@
             z-index: -1;
             background:
                 radial-gradient(circle at 15% 25%, rgba(220, 20, 60, 0.15), transparent 40%),
-                radial-gradient(circle at 85% 75%, rgba(109, 255, 202, 0.1), transparent 40%);
+                radial-gradient(circle at 85% 75%, rgba(0, 206, 219, 0.1), transparent 40%);
             animation: bloom 25s linear infinite alternate;
         }
         @keyframes bloom {
@@ -109,9 +109,27 @@
             <header class="header-glass border border-slate-200/70 dark:border-slate-800 rounded-xl">
                 <div class="relative max-w-7xl mx-auto px-4 py-4 flex items-center justify-between">
                     <a href="#" class="flex items-center gap-3 group">
-                        <img src="Shield.png" alt="MerchantHaus Logo" class="h-10 w-10">
-                        <div>
-                            <div class="text-xl md:text-2xl font-ubuntu font-bold tracking-wide text-slate-900 dark:text-slate-100">MerchantHaus</div>
+                        <div class="flex items-center">
+                           <svg viewBox="0 0 430 100" xmlns="http://www.w3.org/2000/svg" class="h-10 w-auto">
+                                <image href="Shield.png" x="10" y="10" height="80" width="80" />
+                                <g shape-rendering="geometricPrecision" text-rendering="optimizeLegibility" fill="#DC143C" style="font-family: 'Ubuntu', sans-serif; font-size: 50px; font-weight: 700;">
+                                    <text y="25" x="120" opacity="0">M<animate attributeName="opacity" from="0" to="1" dur="0.2s" begin="0s" fill="freeze"/><animate attributeName="y" from="25" to="65" dur="0.2s" begin="0s" fill="freeze" calcMode="discrete"/></text>
+                                    <text y="25" x="160" opacity="0">e<animate attributeName="opacity" from="0" to="1" dur="0.2s" begin="0.1s" fill="freeze"/><animate attributeName="y" from="25" to="65" dur="0.2s" begin="0.1s" fill="freeze" calcMode="discrete"/></text>
+                                    <text y="25" x="185" opacity="0">r<animate attributeName="opacity" from="0" to="1" dur="0.2s" begin="0.2s" fill="freeze"/><animate attributeName="y" from="25" to="65" dur="0.2s" begin="0.2s" fill="freeze" calcMode="discrete"/></text>
+                                    <text y="25" x="205" opacity="0">c<animate attributeName="opacity" from="0" to="1" dur="0.2s" begin="0.3s" fill="freeze"/><animate attributeName="y" from="25" to="65" dur="0.2s" begin="0.3s" fill="freeze" calcMode="discrete"/></text>
+                                    <text y="25" x="225" opacity="0">h<animate attributeName="opacity" from="0" to="1" dur="0.2s" begin="0.4s" fill="freeze"/><animate attributeName="y" from="25" to="65" dur="0.2s" begin="0.4s" fill="freeze" calcMode="discrete"/></text>
+                                    <text y="25" x="250" opacity="0">a<animate attributeName="opacity" from="0" to="1" dur="0.2s" begin="0.5s" fill="freeze"/><animate attributeName="y" from="25" to="65" dur="0.2s" begin="0.5s" fill="freeze" calcMode="discrete"/></text>
+                                    <text y="25" x="275" opacity="0">n<animate attributeName="opacity" from="0" to="1" dur="0.2s" begin="0.6s" fill="freeze"/><animate attributeName="y" from="25" to="65" dur="0.2s" begin="0.6s" fill="freeze" calcMode="discrete"/></text>
+                                    <text y="25" x="300" opacity="0">t<animate attributeName="opacity" from="0" to="1" dur="0.2s" begin="0.7s" fill="freeze"/><animate attributeName="y" from="25" to="65" dur="0.2s" begin="0.7s" fill="freeze" calcMode="discrete"/></text>
+                                    <text y="25" x="318" opacity="0">H<animate attributeName="opacity" from="0" to="1" dur="0.2s" begin="0.8s" fill="freeze"/><animate attributeName="y" from="25" to="65" dur="0.2s" begin="0.8s" fill="freeze" calcMode="discrete"/></text>
+                                    <text y="25" x="348" opacity="0">a<animate attributeName="opacity" from="0" to="1" dur="0.2s" begin="0.9s" fill="freeze"/><animate attributeName="y" from="25" to="65" dur="0.2s" begin="0.9s" fill="freeze" calcMode="discrete"/></text>
+                                    <text y="25" x="373" opacity="0">u<animate attributeName="opacity" from="0" to="1" dur="0.2s" begin="1.0s" fill="freeze"/><animate attributeName="y" from="25" to="65" dur="0.2s" begin="1.0s" fill="freeze" calcMode="discrete"/></text>
+                                    <text y="25" x="398" opacity="0">s<animate attributeName="opacity" from="0" to="1" dur="0.2s" begin="1.1s" fill="freeze"/><animate attributeName="y" from="25" to="65" dur="0.2s" begin="1.1s" fill="freeze" calcMode="discrete"/></text>
+                                </g>
+                            </svg>
+                        </div>
+                        <div class="-ml-2">
+                             <div class="text-xl md:text-2xl font-ubuntu font-bold tracking-wide text-slate-900 dark:text-slate-100 sr-only">MerchantHaus</div>
                             <p class="text-xs text-slate-500 dark:text-slate-400 h-4 tracking-widest uppercase">plug. play. grow.</p>
                         </div>
                     </a>
@@ -132,14 +150,38 @@
             
             <!-- Hero Section -->
             <section class="text-center">
-                <div class="flex justify-center items-center gap-4 mb-4">
-                    <div class="flex items-center gap-3">
-                        <img src="Shield.png" alt="MerchantHaus Logo" class="h-16 w-16">
-                        <span class="text-3xl font-ubuntu font-bold tracking-wide text-slate-900 dark:text-slate-100">MerchantHaus</span>
-                    </div>
+                <div class="flex justify-center items-center gap-4 mb-6">
+                     <svg viewBox="0 0 500 100" xmlns="http://www.w3.org/2000/svg" class="h-20 md:h-24 w-auto">
+                        <defs>
+                            <linearGradient id="animatedGradient-hero" gradientUnits="userSpaceOnUse" x1="120" y1="0" x2="420" y2="0">
+                                <stop offset="0%" stop-color="#DC143C" />
+                                <stop offset="45%" stop-color="#DC143C"><animate attributeName="stop-color" values="#DC143C; #FFC0CB; #DC143C" keyTimes="0; 0.5; 1" dur="5s" begin="1.5s" fill="freeze" repeatCount="1"/></stop>
+                                <stop offset="50%" stop-color="#DC143C"><animate attributeName="stop-color" values="#DC143C; #FFFFFF; #DC143C" keyTimes="0; 0.5; 1" dur="5s" begin="1.5s" fill="freeze" repeatCount="1"/></stop>
+                                <stop offset="55%" stop-color="#DC143C"><animate attributeName="stop-color" values="#DC143C; #FFC0CB; #DC143C" keyTimes="0; 0.5; 1" dur="5s" begin="1.5s" fill="freeze" repeatCount="1"/></stop>
+                                <stop offset="100%" stop-color="#DC143C" />
+                                <animateTransform attributeName="transform" type="translate" from="-450 0" to="450 0" dur="5s" begin="1.5s" fill="freeze" repeatCount="1"/>
+                            </linearGradient>
+                        </defs>
+                        <image href="Shield.png" x="10" y="10" height="80" width="80" />
+                        <g shape-rendering="geometricPrecision" text-rendering="optimizeLegibility" fill="url(#animatedGradient-hero)" style="font-family: 'Ubuntu', sans-serif; font-size: 50px; font-weight: 600;">
+                            <text y="25" x="120" opacity="0">M<animate attributeName="opacity" from="0" to="1" dur="0.2s" begin="0s" fill="freeze"/><animate attributeName="y" from="25" to="65" dur="0.2s" begin="0s" fill="freeze" calcMode="discrete"/></text>
+                            <text y="25" x="160" opacity="0">e<animate attributeName="opacity" from="0" to="1" dur="0.2s" begin="0.1s" fill="freeze"/><animate attributeName="y" from="25" to="65" dur="0.2s" begin="0.1s" fill="freeze" calcMode="discrete"/></text>
+                            <text y="25" x="185" opacity="0">r<animate attributeName="opacity" from="0" to="1" dur="0.2s" begin="0.2s" fill="freeze"/><animate attributeName="y" from="25" to="65" dur="0.2s" begin="0.2s" fill="freeze" calcMode="discrete"/></text>
+                            <text y="25" x="205" opacity="0">c<animate attributeName="opacity" from="0" to="1" dur="0.2s" begin="0.3s" fill="freeze"/><animate attributeName="y" from="25" to="65" dur="0.2s" begin="0.3s" fill="freeze" calcMode="discrete"/></text>
+                            <text y="25" x="225" opacity="0">h<animate attributeName="opacity" from="0" to="1" dur="0.2s" begin="0.4s" fill="freeze"/><animate attributeName="y" from="25" to="65" dur="0.2s" begin="0.4s" fill="freeze" calcMode="discrete"/></text>
+                            <text y="25" x="250" opacity="0">a<animate attributeName="opacity" from="0" to="1" dur="0.2s" begin="0.5s" fill="freeze"/><animate attributeName="y" from="25" to="65" dur="0.2s" begin="0.5s" fill="freeze" calcMode="discrete"/></text>
+                            <text y="25" x="275" opacity="0">n<animate attributeName="opacity" from="0" to="1" dur="0.2s" begin="0.6s" fill="freeze"/><animate attributeName="y" from="25" to="65" dur="0.2s" begin="0.6s" fill="freeze" calcMode="discrete"/></text>
+                            <text y="25" x="300" opacity="0">t<animate attributeName="opacity" from="0" to="1" dur="0.2s" begin="0.7s" fill="freeze"/><animate attributeName="y" from="25" to="65" dur="0.2s" begin="0.7s" fill="freeze" calcMode="discrete"/></text>
+                            <text y="25" x="318" opacity="0">H<animate attributeName="opacity" from="0" to="1" dur="0.2s" begin="0.8s" fill="freeze"/><animate attributeName="y" from="25" to="65" dur="0.2s" begin="0.8s" fill="freeze" calcMode="discrete"/></text>
+                            <text y="25" x="348" opacity="0">a<animate attributeName="opacity" from="0" to="1" dur="0.2s" begin="0.9s" fill="freeze"/><animate attributeName="y" from="25" to="65" dur="0.2s" begin="0.9s" fill="freeze" calcMode="discrete"/></text>
+                            <text y="25" x="373" opacity="0">u<animate attributeName="opacity" from="0" to="1" dur="0.2s" begin="1.0s" fill="freeze"/><animate attributeName="y" from="25" to="65" dur="0.2s" begin="1.0s" fill="freeze" calcMode="discrete"/></text>
+                            <text y="25" x="398" opacity="0">s<animate attributeName="opacity" from="0" to="1" dur="0.2s" begin="1.1s" fill="freeze"/><animate attributeName="y" from="25" to="65" dur="0.2s" begin="1.1s" fill="freeze" calcMode="discrete"/></text>
+                        </g>
+                        <line x1="170" x2="390" y1="78" y2="78" stroke="#00CEDB" stroke-width="2" opacity="0"><animate attributeName="opacity" from="0" to="1" dur="1s" begin="1.5s" fill="freeze" /></line>
+                        <text x="280" y="95" opacity="0" style="font-family: 'Inter', sans-serif; font-size: 18px; font-weight: 500; fill: #A9A9A9; text-anchor: middle; letter-spacing: 4px;"><animate attributeName="opacity" from="0" to="1" dur="1s" begin="2s" fill="freeze" />plug. play. grow.</text>
+                    </svg>
                     <i data-lucide="plus" class="w-8 h-8 text-slate-400"></i>
-                    <!-- Inlined Shopify SVG Logo -->
-                    <img src="shopifydark.png" alt="Shopify Logo" class="h-16 rounded-lg">
+                    <img src="shopify.png" alt="Shopify Logo" class="h-16 rounded-lg">
                 </div>
                 <h1 class="text-4xl md:text-5xl font-extrabold font-ubuntu mb-4">Seamless Payments for Shopify</h1>
                 <p class="text-lg text-slate-600 dark:text-slate-300 max-w-3xl mx-auto">
@@ -156,7 +198,7 @@
                     <div class="p-6 rounded-lg">
                         <i data-lucide="trending-down" class="w-12 h-12 text-brand-600 mx-auto mb-4"></i>
                         <h3 class="text-xl font-bold font-ubuntu">Lower Your Costs</h3>
-                        <p class="text-slate-600 dark:text-slate-400 mt-2">Keep more of your revenue with our competitive, transparent pricing. We help you reduce transaction fees without sacrificing performance.</p>
+                        <p class="text-slate-600 dark:text-slate-400 mt-2">Keep more of your revenue with our competitive, transparent pricing. We help you reduce transaction fees withoutsacrificing performance.</p>
                     </div>
                     <div class="p-6 rounded-lg">
                         <i data-lucide="shield-check" class="w-12 h-12 text-brand-600 mx-auto mb-4"></i>
@@ -214,8 +256,7 @@
             <section class="mt-16 text-center">
                 <p class="text-slate-500 dark:text-slate-400 text-sm font-medium mb-2 tracking-wider">POWERED BY</p>
                 <a href="https://www.nmi.com/" target="_blank" rel="noopener noreferrer" aria-label="Powered by NMI">
-                     <img src="https://www.nmi.com/wp-content/uploads/2021/07/nmi.png" alt="NMI Logo" class="h-10 mx-auto block dark:hidden">
-                     <img src="https://www.nmi.com/wp-content/uploads/2021/07/nmi-logo-light.png" alt="NMI Logo" class="h-10 mx-auto hidden dark:block">
+                     <img src="nmi.png" alt="NMI Logo" class="h-10 mx-auto">
                 </a>
             </section>
         </div>
@@ -226,8 +267,18 @@
         <div class="max-w-7xl mx-auto px-4 grid sm:grid-cols-2 lg:grid-cols-4 gap-8 text-sm">
             <div class="space-y-3">
                 <a href="#" class="flex items-center gap-3">
-                    <img src="Shield.png" alt="MerchantHaus Logo" class="h-9 w-9">
-                    <span class="text-2xl font-ubuntu font-bold tracking-wide grad-text">MerchantHaus</span>
+                     <svg viewBox="0 0 430 100" xmlns="http://www.w3.org/2000/svg" class="h-9 w-auto">
+                        <defs>
+                            <linearGradient id="animatedGradient-footer" gradientUnits="userSpaceOnUse" x1="120" y1="0" x2="420" y2="0">
+                                <stop offset="0%" stop-color="#DC143C" />
+                                <stop offset="100%" stop-color="#DC143C" />
+                            </linearGradient>
+                        </defs>
+                        <image href="Shield.png" x="10" y="10" height="80" width="80" />
+                        <g shape-rendering="geometricPrecision" text-rendering="optimizeLegibility" fill="url(#animatedGradient-footer)" class="grad-text" style="font-family: 'Ubuntu', sans-serif; font-size: 50px; font-weight: 600;">
+                            <text y="65" x="120">MerchantHaus</text>
+                        </g>
+                    </svg>
                 </a>
                 <p class="tracking-widest uppercase text-xs text-silver-grey">plug. play. grow.</p>
                 <div class="text-sm"><a href="tel:15056006042" class="block">1-505-600-6042</a><a href="mailto:support@merchanthaus.io" class="block">support@merchanthaus.io</a></div>
@@ -440,9 +491,5 @@
     </script>
 </body>
 </html>
-
-
-
-
 
 
