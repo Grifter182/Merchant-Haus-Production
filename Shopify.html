@@ -174,74 +174,75 @@
     <!-- Main Content -->
     <main class="min-h-screen pt-12 pb-16 flex flex-col items-center justify-start p-6">
         <!-- Cell 1: Hero and Benefits -->
-        <div class="w-full max-w-6xl bg-white/80 dark:bg-brand-dark/80 backdrop-blur-sm p-8 rounded-xl shadow-lg border border-slate-200/70 dark:border-slate-800 mb-8">
-            <img src="banner1.png" alt="Seamless Shopify Integration Banner" class="w-full rounded-lg mb-12 shadow-md" onerror="this.style.display='none'">
-
-            <!-- Hero Section -->
-            <section class="text-center py-16">
-                 <div class="grid md:grid-cols-2 items-center gap-8 mb-8">
-                     <div class="flex justify-center md:justify-end">
-                        <svg width="500" height="100" viewBox="0 0 500 100" xmlns="http://www.w3.org/2000/svg">
-                           <image href="Shield.png" x="10" y="10" height="80" width="80" />
-                           <g fill="#DC143C" style="font-family: 'Ubuntu', sans-serif; font-size: 50px; font-weight: 600;">
-                              <text y="60" x="120">MerchantHaus</text>
-                           </g>
-                        </svg>
-                     </div>
-                     <div class="flex justify-center md:justify-start">
-                        <img src="shopifylight.png" alt="Shopify Logo" class="h-16 rounded-lg block dark:hidden">
-                        <img src="shopifydark.png" alt="Shopify Logo" class="h-16 rounded-lg hidden dark:block">
-                     </div>
-                </div>
-
-                <h1 class="text-4xl md:text-5xl font-extrabold font-ubuntu mb-4">
-                    Seamless 
-                    <div class="scrolling-words-container">
-                        <ul class="scrolling-words-box text-brand-teal">
-                            <li>Payments</li>
-                            <li>Integration</li>
-                            <li>Processing</li>
-                            <li>Security</li>
-                            <li>Payments</li> <!-- Loop back to start -->
-                        </ul>
+        <div class="relative w-full max-w-6xl rounded-xl shadow-lg border border-slate-200/70 dark:border-slate-800 mb-8 overflow-hidden" style="background-image: url('banner1.png'); background-size: cover; background-position: center;">
+            <div class="bg-white/80 dark:bg-brand-dark/80 backdrop-blur-sm p-8">
+                <!-- Hero Section -->
+                <section class="text-center py-16">
+                     <div class="grid md:grid-cols-2 items-center gap-8 mb-8">
+                         <div class="flex justify-center md:justify-end">
+                            <svg width="500" height="100" viewBox="0 0 500 100" xmlns="http://www.w3.org/2000/svg">
+                               <image href="Shield.png" x="10" y="10" height="80" width="80" />
+                               <g fill="#DC143C" style="font-family: 'Ubuntu', sans-serif; font-size: 50px; font-weight: 600;">
+                                  <text y="60" x="120">MerchantHaus</text>
+                               </g>
+                            </svg>
+                         </div>
+                         <div class="flex justify-center md:justify-start">
+                            <img src="shopifylight.png" alt="Shopify Logo" class="h-16 rounded-lg block dark:hidden">
+                            <img src="shopifydark.png" alt="Shopify Logo" class="h-16 rounded-lg hidden dark:block">
+                         </div>
                     </div>
-                     for Shopify
-                </h1>
-                <p class="text-lg text-slate-600 dark:text-slate-300 max-w-3xl mx-auto">
-                     Integrate MerchantHaus directly with your Shopify store to lower your processing costs, reduce fraud, and simplify your operations. Get the no-code, fast, secure, and affordable payment solution your business deserves.
-                </p>
-                <div class="mt-8">
-                    <a href="#application-form" class="js-cta bg-brand-crimson hover:bg-opacity-90 text-white border border-transparent px-8 py-3 rounded-full text-lg font-semibold transition-colors duration-300 scroll-link">Get Started Today</a>
-                </div>
-            </section>
 
-            <!-- Benefits Section -->
-            <section class="mt-20 text-left">
-                <div class="grid md:grid-cols-3 gap-12">
-                     <div class="flex items-start gap-4 p-6 rounded-lg card-hover-effect">
-                         <i data-lucide="trending-down" class="w-12 h-12 text-brand-teal flex-shrink-0 mt-1"></i>
-                         <div>
-                            <h3 class="text-xl font-bold font-ubuntu">Lower Your Costs</h3>
-                            <p class="text-slate-600 dark:text-slate-400 mt-2">Keep more of your revenue with our competitive, transparent pricing. We help you reduce transaction fees without sacrificing performance.</p>
+                    <h1 class="text-4xl md:text-5xl font-extrabold font-ubuntu mb-4">
+                        Seamless 
+                        <div class="scrolling-words-container">
+                            <ul class="scrolling-words-box text-brand-teal">
+                                <li>Payments</li>
+                                <li>Integration</li>
+                                <li>Processing</li>
+                                <li>Security</li>
+                                <li>Payments</li> <!-- Loop back to start -->
+                            </ul>
+                        </div>
+                         for Shopify
+                    </h1>
+                    <p class="text-lg text-slate-600 dark:text-slate-300 max-w-3xl mx-auto">
+                         Integrate MerchantHaus directly with your Shopify store to lower your processing costs, reduce fraud, and simplify your operations. Get the no-code, fast, secure, and affordable payment solution your business deserves.
+                    </p>
+                    <div class="mt-8">
+                        <a href="#application-form" class="js-cta bg-brand-crimson hover:bg-opacity-90 text-white border border-transparent px-8 py-3 rounded-full text-lg font-semibold transition-colors duration-300 scroll-link">Get Started Today</a>
+                    </div>
+                </section>
+
+                <!-- Benefits Section -->
+                <section class="mt-20 text-left">
+                    <div class="grid md:grid-cols-3 gap-12">
+                         <div class="flex items-start gap-4 p-6 rounded-lg card-hover-effect">
+                             <i data-lucide="trending-down" class="w-12 h-12 text-brand-teal flex-shrink-0 mt-1"></i>
+                             <div>
+                                <h3 class="text-xl font-bold font-ubuntu">Lower Your Costs</h3>
+                                <p class="text-slate-600 dark:text-slate-400 mt-2">Keep more of your revenue with our competitive, transparent pricing. We help you reduce transaction fees without sacrificing performance.</p>
+                             </div>
                          </div>
-                     </div>
-                     <div class="flex items-start gap-4 p-6 rounded-lg card-hover-effect">
-                         <i data-lucide="shield-check" class="w-12 h-12 text-brand-teal flex-shrink-0 mt-1"></i>
-                         <div>
-                            <h3 class="text-xl font-bold font-ubuntu">Reduce Fraud & Chargebacks</h3>
-                            <p class="text-slate-600 dark:text-slate-400 mt-2">Our advanced security tools, including AVS, CVV checks, and 3D Secure, protect your business from fraudulent transactions and costly chargebacks.</p>
+                         <div class="flex items-start gap-4 p-6 rounded-lg card-hover-effect">
+                             <i data-lucide="shield-check" class="w-12 h-12 text-brand-teal flex-shrink-0 mt-1"></i>
+                             <div>
+                                <h3 class="text-xl font-bold font-ubuntu">Reduce Fraud & Chargebacks</h3>
+                                <p class="text-slate-600 dark:text-slate-400 mt-2">Our advanced security tools, including AVS, CVV checks, and 3D Secure, protect your business from fraudulent transactions and costly chargebacks.</p>
+                             </div>
                          </div>
-                     </div>
-                     <div class="flex items-start gap-4 p-6 rounded-lg card-hover-effect">
-                         <i data-lucide="zap" class="w-12 h-12 text-brand-teal flex-shrink-0 mt-1"></i>
-                         <div>
-                            <h3 class="text-xl font-bold font-ubuntu">Streamline Operations</h3>
-                            <p class="text-slate-600 dark:text-slate-400 mt-2">Manage all your payments, view real-time reports, and handle disputes from a single, easy-to-use dashboard. Simple, smart, and secure.</p>
+                         <div class="flex items-start gap-4 p-6 rounded-lg card-hover-effect">
+                             <i data-lucide="zap" class="w-12 h-12 text-brand-teal flex-shrink-0 mt-1"></i>
+                             <div>
+                                <h3 class="text-xl font-bold font-ubuntu">Streamline Operations</h3>
+                                <p class="text-slate-600 dark:text-slate-400 mt-2">Manage all your payments, view real-time reports, and handle disputes from a single, easy-to-use dashboard. Simple, smart, and secure.</p>
+                             </div>
                          </div>
-                     </div>
-                </div>
-            </section>
+                    </div>
+                </section>
+            </div>
         </div>
+
 
         <!-- Cell 2: How It Works, CTA, NMI -->
         <div class="w-full max-w-6xl bg-white/80 dark:bg-brand-dark/80 backdrop-blur-sm p-8 rounded-xl shadow-lg border border-slate-200/70 dark:border-slate-800">
@@ -412,5 +413,4 @@
     </script>
 </body>
 </html>
-
 
