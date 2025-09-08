@@ -24,7 +24,7 @@
                     colors: {
                         'brand-crimson': '#DC143C',
                         'brand-teal': '#00CEDB',
-                        'brand-silver': '#A9A9A9',
+                        'brand-silver': '#A9A9AA',
                         'brand-dark': '#1A1A1A',
                         'brand-light': '#F8F9FA',
                     }
@@ -38,6 +38,9 @@
 
     <!-- Custom Styles -->
     <style>
+        html {
+            scroll-behavior: smooth;
+        }
         body {
             font-family: 'Inter', sans-serif;
             position: relative;
@@ -45,38 +48,21 @@
             -moz-osx-font-smoothing: grayscale;
             background-color: #f8f9fa;
         }
-        body::before {
-            content: '';
-            position: fixed;
-            top: 0; left: 0;
-            width: 100vw; height: 100vh;
-            z-index: -1;
-            background:
-                radial-gradient(circle at 15% 25%, rgba(220, 20, 60, 0.1), transparent 40%),
-                radial-gradient(circle at 85% 75%, rgba(0, 206, 219, 0.08), transparent 40%);
-            animation: bloom 25s linear infinite alternate;
-        }
-        @keyframes bloom {
-            0% { background-position: 0% 0%, 0% 0%; }
-            100% { background-position: 50% -50%, -50% 50%; }
-        }
+        .header-glass { background-color: rgba(248, 249, 250, 0.8); backdrop-filter: blur(10px); }
         html.dark { background-color: #1A1A1A !important; }
-        .dark body { background-color: transparent !important; color: #f5f5f5 !important; }
-        .dark .bg-slate-950 { background-color: #1A1A1A !important; }
-        .dark .border-slate-800 { border-color: #2a2a2a !important; }
+        .dark body { background-color: #1A1A1A !important; color: #f5f5f5 !important; }
+        .dark .header-glass { background-color: rgba(26, 26, 26, 0.8); }
         .dark .text-slate-300 { color: #c8c8c8 !important; }
         .dark .text-slate-400 { color: #a0a0a0 !important; }
         .dark .text-slate-600 { color: #c8c8c8 !important; }
-        .header-glass { background-color: rgba(248, 249, 250, 0.8); backdrop-filter: blur(10px); }
-        .dark .header-glass { background-color: rgba(26, 26, 26, 0.8); }
         
         /* Text Scroll Animation */
         .scrolling-words-container {
-            height: 4rem; /* Adjust based on font size */
+            height: 4rem;
             overflow: hidden;
             position: relative;
             display: inline-block;
-            vertical-align: bottom;
+            /* vertical-align: bottom; -- Removed for flex alignment */
         }
         .scrolling-words-box {
             display: inline-block;
@@ -97,20 +83,12 @@
 
         /* Typewriter effect */
         .typewriter-text {
-            display: inline-block;
-            border-right: .15em solid #00CEDB; /* The cursor */
-            white-space: pre-wrap; /* Allows wrapping */
-            word-wrap: break-word; /* Breaks long words */
-            width: 0;
-            overflow: hidden;
-            animation: typing 3.5s steps(60, end) forwards, blink-caret .75s step-end infinite;
+            /* This span will grow with the text */
+            border-right: .15em solid #00CEDB;
+            white-space: pre-wrap;
+            animation: blink-caret .75s step-end infinite;
         }
         
-        @keyframes typing {
-            from { width: 0 }
-            to { width: 100% }
-        }
-
         @keyframes blink-caret {
             from, to { border-color: transparent }
             50% { border-color: #00CEDB; }
@@ -132,9 +110,40 @@
         .dark .card-hover-effect:hover {
              box-shadow: 0 10px 20px rgba(0, 206, 219, 0.1);
         }
+        
+        /* Aurora Background */
+        .mh-aurora {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+        .mh-aurora__glow {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 200%;
+            padding-bottom: 200%;
+            border-radius: 50%;
+            background-image: radial-gradient(circle, rgba(0, 206, 219, 0.15), transparent 45%),
+                              radial-gradient(circle, rgba(220, 20, 60, 0.15), transparent 45%);
+            transform: translate(-50%, -50%);
+            animation: aurora-glow 20s linear infinite;
+            will-change: transform;
+        }
+        .dark .mh-aurora__glow {
+            background-image: radial-gradient(circle, rgba(0, 206, 219, 0.2), transparent 45%),
+                              radial-gradient(circle, rgba(220, 20, 60, 0.2), transparent 45%);
+        }
+
+        @keyframes aurora-glow {
+            0% { transform: translate(-50%, -50%) rotate(0deg); }
+            100% { transform: translate(-50%, -50%) rotate(360deg); }
+        }
     </style>
 </head>
-<body class="bg-brand-light text-brand-dark dark:bg-transparent dark:text-slate-100">
+<body class="bg-brand-light text-brand-dark dark:bg-brand-dark dark:text-slate-100">
 
     <!-- Back to Top Button -->
     <button id="back-to-top" class="fixed bottom-6 right-6 bg-brand-crimson text-white p-3 rounded-full shadow-lg hidden z-50 hover:bg-opacity-90 transition-opacity duration-300">
@@ -142,11 +151,11 @@
     </button>
     
     <!-- Header -->
-    <div class="sticky top-0 z-30">
+    <div id="home" class="sticky top-0 z-30">
         <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pt-4">
             <header class="header-glass border border-slate-200/70 dark:border-slate-800 rounded-xl">
-                <div class="relative max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
-                    <a href="#" class="flex items-center gap-3 group scroll-link">
+                <div class="relative max-w-7xl mx-auto px-4 py-3 flex items-center justify-between">
+                    <a href="#home" class="flex items-center gap-3 group scroll-link">
                         <svg width="250" height="50" viewBox="0 0 250 50" xmlns="http://www.w3.org/2000/svg">
                             <defs>
                                 <linearGradient id="headerGradient" gradientUnits="userSpaceOnUse" x1="55" y1="0" x2="250" y2="0">
@@ -162,27 +171,56 @@
                             </g>
                         </svg>
                     </a>
-                    <div class="flex items-center gap-2">
+                    <div class="flex items-center gap-6">
+                        <div class="hidden md:flex items-center gap-4 text-sm font-medium text-slate-600 dark:text-slate-300">
+                            <a href="tel:15056006042" class="hover:text-brand-teal">1-505-600-6042</a>
+                            <a href="mailto:support@merchanthaus.io" class="hover:text-brand-teal">support@merchanthaus.io</a>
+                        </div>
                         <a href="#application-form" class="js-cta bg-brand-crimson hover:bg-opacity-90 text-white border border-transparent px-4 py-2 rounded-full text-sm font-semibold transition-colors duration-300 scroll-link">Get Started</a>
-                        <a href="#" class="hidden sm:block bg-transparent hover:bg-brand-teal text-brand-teal hover:text-white border border-brand-teal px-4 py-2 rounded-lg text-sm font-semibold transition-colors duration-300">Login</a>
+                        <a href="https://retailmanager.merchant.haus" class="hidden sm:block bg-transparent hover:bg-brand-teal text-brand-teal hover:text-white border border-brand-teal px-4 py-2 rounded-lg text-sm font-semibold transition-colors duration-300">Login</a>
+                         <button id="mobile-menu-button" class="md:hidden p-2 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800">
+                            <i data-lucide="menu" class="h-6 w-6"></i>
+                        </button>
                     </div>
                 </div>
             </header>
         </div>
     </div>
+    
+    <!-- Mobile Menu Panel -->
+    <div class="relative z-40">
+        <div id="mobile-menu" class="absolute right-4 mt-2 w-72 rounded-xl bg-white dark:bg-[#1c1c1c] shadow-2xl border border-brand-teal p-4 hidden">
+          <nav class="flex flex-col space-y-2 text-base font-medium">
+            <a href="#benefits" class="scroll-link px-4 py-2 rounded-lg hover:bg-brand-crimson hover:text-white">Payment Services</a>
+            <a href="#benefits" class="scroll-link px-4 py-2 rounded-lg hover:bg-brand-crimson hover:text-white">Integrations</a>
+            <a href="#home" class="scroll-link px-4 py-2 rounded-lg hover:bg-brand-crimson hover:text-white">Shopify</a>
+            <a href="#how-it-works" class="scroll-link px-4 py-2 rounded-lg hover:bg-brand-crimson hover:text-white">Setup Checklist</a>
+            <a href="mailto:support@merchanthaus.io" class="px-4 py-2 rounded-lg hover:bg-brand-crimson hover:text-white">Contact Support</a>
+            <a href="https://retailmanager.merchant.haus" class="sm:hidden block px-4 py-2 rounded-lg hover:bg-brand-crimson hover:text-white mt-2 pt-2 border-t border-slate-200 dark:border-slate-800">Login</a>
+          </nav>
+        </div>
+    </div>
+
 
     <!-- Main Content -->
-    <main class="min-h-screen pt-12 pb-16 flex flex-col items-center justify-start p-6">
+    <main class="min-h-screen flex flex-col items-center justify-start">
         <!-- Cell 1: Hero and Benefits -->
-        <div class="relative w-full max-w-6xl rounded-xl shadow-lg border border-slate-200/70 dark:border-slate-800 mb-8 overflow-hidden" style="background-image: url('banner1.png'); background-size: cover; background-position: center;">
-            <div class="bg-white/80 dark:bg-brand-dark/80 backdrop-blur-sm p-8">
-                <!-- Hero Section -->
-                <section class="text-center py-16">
+        <section class="relative overflow-hidden w-full">
+            <!-- AURORA BG -->
+            <div class="mh-aurora pointer-events-none" aria-hidden="true">
+                <canvas id="mh-stars" class="absolute inset-0 w-full h-full"></canvas>
+                <div class="mh-aurora__glow"></div>
+            </div>
+
+            <!-- Hero Content -->
+            <div class="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+                 <!-- Hero Section -->
+                <section class="text-center pt-16 md:pt-24 pb-20">
                      <div class="grid md:grid-cols-2 items-center gap-8 mb-8">
                          <div class="flex justify-center md:justify-end">
                             <svg width="500" height="100" viewBox="0 0 500 100" xmlns="http://www.w3.org/2000/svg">
                                <image href="Shield.png" x="10" y="10" height="80" width="80" />
-                               <g fill="#DC143C" style="font-family: 'Ubuntu', sans-serif; font-size: 50px; font-weight: 600;">
+                               <g fill="#DC143C" class="dark:fill-white" style="font-family: 'Ubuntu', sans-serif; font-size: 50px; font-weight: 600;">
                                   <text y="60" x="120">MerchantHaus</text>
                                </g>
                             </svg>
@@ -193,8 +231,8 @@
                          </div>
                     </div>
 
-                    <h1 class="text-4xl md:text-5xl font-extrabold font-ubuntu mb-4">
-                        Seamless 
+                    <h1 class="text-4xl md:text-5xl font-extrabold font-ubuntu mb-4 flex items-center justify-center flex-wrap gap-x-3">
+                        <span>Seamless</span>
                         <div class="scrolling-words-container">
                             <ul class="scrolling-words-box text-brand-teal">
                                 <li>Payments</li>
@@ -204,7 +242,7 @@
                                 <li>Payments</li> <!-- Loop back to start -->
                             </ul>
                         </div>
-                         for Shopify
+                        <span>for Shopify</span>
                     </h1>
                     <p class="text-lg text-slate-600 dark:text-slate-300 max-w-3xl mx-auto">
                          Integrate MerchantHaus directly with your Shopify store to lower your processing costs, reduce fraud, and simplify your operations. Get the no-code, fast, secure, and affordable payment solution your business deserves.
@@ -215,23 +253,23 @@
                 </section>
 
                 <!-- Benefits Section -->
-                <section class="mt-20 text-left">
+                <section id="benefits" class="pb-28 text-left">
                     <div class="grid md:grid-cols-3 gap-12">
-                         <div class="flex items-start gap-4 p-6 rounded-lg card-hover-effect">
+                         <div class="flex items-start gap-4 p-6 rounded-lg card-hover-effect bg-white/5 dark:bg-black/10 backdrop-blur-sm">
                              <i data-lucide="trending-down" class="w-12 h-12 text-brand-teal flex-shrink-0 mt-1"></i>
                              <div>
                                 <h3 class="text-xl font-bold font-ubuntu">Lower Your Costs</h3>
                                 <p class="text-slate-600 dark:text-slate-400 mt-2">Keep more of your revenue with our competitive, transparent pricing. We help you reduce transaction fees without sacrificing performance.</p>
                              </div>
                          </div>
-                         <div class="flex items-start gap-4 p-6 rounded-lg card-hover-effect">
+                         <div class="flex items-start gap-4 p-6 rounded-lg card-hover-effect bg-white/5 dark:bg-black/10 backdrop-blur-sm">
                              <i data-lucide="shield-check" class="w-12 h-12 text-brand-teal flex-shrink-0 mt-1"></i>
                              <div>
                                 <h3 class="text-xl font-bold font-ubuntu">Reduce Fraud & Chargebacks</h3>
                                 <p class="text-slate-600 dark:text-slate-400 mt-2">Our advanced security tools, including AVS, CVV checks, and 3D Secure, protect your business from fraudulent transactions and costly chargebacks.</p>
                              </div>
                          </div>
-                         <div class="flex items-start gap-4 p-6 rounded-lg card-hover-effect">
+                         <div class="flex items-start gap-4 p-6 rounded-lg card-hover-effect bg-white/5 dark:bg-black/10 backdrop-blur-sm">
                              <i data-lucide="zap" class="w-12 h-12 text-brand-teal flex-shrink-0 mt-1"></i>
                              <div>
                                 <h3 class="text-xl font-bold font-ubuntu">Streamline Operations</h3>
@@ -241,50 +279,53 @@
                     </div>
                 </section>
             </div>
-        </div>
+        </section>
 
 
         <!-- Cell 2: How It Works, CTA, NMI -->
-        <div class="w-full max-w-6xl bg-white/80 dark:bg-brand-dark/80 backdrop-blur-sm p-8 rounded-xl shadow-lg border border-slate-200/70 dark:border-slate-800">
-            <!-- How It Works Section -->
-            <section class="mt-20 text-center">
-                 <h2 class="text-3xl font-extrabold font-ubuntu mb-4">Simple Setup in 3 Steps</h2>
-                 <p class="text-slate-600 dark:text-slate-300 max-w-2xl mx-auto mb-12">Get up and running with MerchantHaus on your Shopify store in minutes.</p>
-                 <div class="grid md:grid-cols-3 gap-8">
-                     <div class="p-6 rounded-lg bg-white/50 dark:bg-black/20 card-hover-effect text-left">
-                         <div id="step-1-number" class="w-12 h-12 bg-brand-crimson text-white rounded-full flex items-center justify-center font-bold text-xl mx-auto mb-4 animate-on-scroll">1</div>
-                         <h3 class="text-lg font-bold text-center">Apply for an Account</h3>
-                         <p id="step-1-text" class="text-slate-600 dark:text-slate-400 mt-2 text-sm min-h-[100px]"></p>
+        <div class="relative w-full max-w-6xl rounded-xl shadow-lg -mt-16 z-10 mb-16 overflow-hidden border border-slate-200/70 dark:border-slate-800"
+             style="background-image: url('banner1.png'); background-size: cover; background-position: center;">
+            <div class="bg-brand-light/80 dark:bg-brand-dark/80 backdrop-blur-sm p-6 sm:p-8">
+                <!-- How It Works Section -->
+                <section id="how-it-works" class="pt-10 text-center">
+                     <h2 class="text-3xl font-extrabold font-ubuntu mb-4">Simple Setup in 3 Steps</h2>
+                     <p class="text-slate-600 dark:text-slate-300 max-w-2xl mx-auto mb-12">Get up and running with MerchantHaus on your Shopify store in minutes.</p>
+                     <div class="grid md:grid-cols-3 gap-8">
+                         <div class="p-6 rounded-lg bg-white/50 dark:bg-black/20 card-hover-effect text-left">
+                             <div id="step-1-number" class="w-12 h-12 bg-brand-crimson text-white rounded-full flex items-center justify-center font-bold text-xl mx-auto mb-4 animate-on-scroll">1</div>
+                             <h3 class="text-lg font-bold text-center">Apply for an Account</h3>
+                             <p id="step-1-text" class="text-slate-600 dark:text-slate-400 mt-2 text-sm min-h-[100px]"></p>
+                         </div>
+                         <div class="p-6 rounded-lg bg-white/50 dark:bg-black/20 card-hover-effect text-left">
+                             <div id="step-2-number" class="w-12 h-12 bg-brand-teal text-white rounded-full flex items-center justify-center font-bold text-xl mx-auto mb-4 animate-on-scroll">2</div>
+                             <h3 class="text-lg font-bold text-center">Connect to Shopify</h3>
+                             <p id="step-2-text" class="text-slate-600 dark:text-slate-400 mt-2 text-sm min-h-[100px]"></p>
+                         </div>
+                         <div class="p-6 rounded-lg bg-white/50 dark:bg-black/20 card-hover-effect text-left">
+                             <div id="step-3-number" class="w-12 h-12 bg-brand-silver text-white rounded-full flex items-center justify-center font-bold text-xl mx-auto mb-4 animate-on-scroll">3</div>
+                             <h3 class="text-lg font-bold text-center">Start Processing</h3>
+                             <p id="step-3-text" class="text-slate-600 dark:text-slate-400 mt-2 text-sm min-h-[100px]"></p>
+                         </div>
                      </div>
-                     <div class="p-6 rounded-lg bg-white/50 dark:bg-black/20 card-hover-effect text-left">
-                         <div id="step-2-number" class="w-12 h-12 bg-brand-teal text-white rounded-full flex items-center justify-center font-bold text-xl mx-auto mb-4 animate-on-scroll">2</div>
-                         <h3 class="text-lg font-bold text-center">Connect to Shopify</h3>
-                         <p id="step-2-text" class="text-slate-600 dark:text-slate-400 mt-2 text-sm min-h-[100px]"></p>
-                     </div>
-                     <div class="p-6 rounded-lg bg-white/50 dark:bg-black/20 card-hover-effect text-left">
-                         <div id="step-3-number" class="w-12 h-12 bg-brand-silver text-white rounded-full flex items-center justify-center font-bold text-xl mx-auto mb-4 animate-on-scroll">3</div>
-                         <h3 class="text-lg font-bold text-center">Start Processing</h3>
-                         <p id="step-3-text" class="text-slate-600 dark:text-slate-400 mt-2 text-sm min-h-[100px]"></p>
-                     </div>
-                 </div>
-            </section>
+                </section>
 
-             <!-- Final CTA -->
-            <section id="application-form" class="mt-20 text-center bg-brand-crimson/10 dark:bg-brand-teal/10 p-8 rounded-xl">
-                 <h2 class="text-3xl font-extrabold font-ubuntu mb-4">Why Wait? Start Processing Today</h2>
-                 <p class="text-slate-600 dark:text-slate-300 max-w-3xl mx-auto mb-8">
-                     Make the smart move and join hundreds of Shopify merchants who use MerchantHaus, powered by the might of the NMI Gateway, for their payment processing needs.
-                 </p>
-                 <a href="#application-form" class="js-cta bg-brand-crimson hover:bg-opacity-90 text-white border border-transparent px-8 py-3 rounded-full text-lg font-semibold transition-colors duration-300 scroll-link">Apply Now</a>
-            </section>
+                 <!-- Final CTA -->
+                <section id="application-form" class="mt-20 text-center bg-brand-crimson/10 dark:bg-brand-teal/10 p-8 rounded-xl">
+                     <h2 class="text-3xl font-extrabold font-ubuntu mb-4">Why Wait? Start Processing Today</h2>
+                     <p class="text-slate-600 dark:text-slate-300 max-w-3xl mx-auto mb-8">
+                         Make the smart move and join hundreds of Shopify merchants who use MerchantHaus, powered by the might of the NMI Gateway, for their payment processing needs.
+                     </p>
+                     <a href="#application-form" class="js-cta bg-brand-crimson hover:bg-opacity-90 text-white border border-transparent px-8 py-3 rounded-full text-lg font-semibold transition-colors duration-300 scroll-link">Apply Now</a>
+                </section>
 
-             <!-- Powered By NMI -->
-            <section class="mt-16 text-center">
-                 <p class="text-gray-500 text-sm font-medium mb-2 tracking-wider">POWERED BY</p>
-                 <a href="https://www.nmi.com/" target="_blank" rel="noopener noreferrer">
-                    <img src="nmi.png" alt="NMI Logo" class="h-10 mx-auto">
-                 </a>
-            </section>
+                 <!-- Powered By NMI -->
+                <section class="mt-16 text-center">
+                     <p class="text-gray-500 text-sm font-medium mb-2 tracking-wider">POWERED BY</p>
+                     <a href="https://www.nmi.com/" target="_blank" rel="noopener noreferrer">
+                        <img src="nmi.png" alt="NMI Logo" class="h-10 mx-auto">
+                     </a>
+                </section>
+            </div>
         </div>
     </main>
 
@@ -292,7 +333,7 @@
     <footer class="bg-brand-dark text-brand-light border-t border-slate-800 py-10">
         <div class="max-w-7xl mx-auto px-4 grid sm:grid-cols-2 lg:grid-cols-4 gap-8 text-sm">
             <div class="space-y-4">
-                <a href="#" class="flex items-center gap-3 scroll-link">
+                <a href="#home" class="flex items-center gap-3 scroll-link">
                     <svg width="250" height="50" viewBox="0 0 250 50" xmlns="http://www.w3.org/2000/svg">
                         <image href="Shield.png" x="0" y="5" height="40" width="40" />
                         <g fill="#DC143C" style="font-family: 'Ubuntu', sans-serif; font-size: 25px; font-weight: 600;">
@@ -306,9 +347,9 @@
                     <a href="mailto:support@merchanthaus.io" class="block hover:text-brand-teal">support@merchanthaus.io</a>
                 </div>
             </div>
-            <nav class="space-y-2"><h3 class="font-semibold font-ubuntu text-white">Product</h3><a href="#" class="block hover:text-brand-teal">Payment Services</a><a href="#" class="block hover:text-brand-teal">Integrations</a><a href="#" class="block hover:text-brand-teal">Shopify Integration</a><a href="#" class="block hover:text-brand-teal">Setup Checklist</a></nav>
-            <nav class="space-y-2"><h3 class="font-semibold font-ubuntu text-white">Support</h3><a href="#" class="block hover:text-brand-teal">Contact Support</a><a href="#" class="block hover:text-brand-teal">FAQs</a></nav>
-            <nav class="space-y-2"><h3 class="font-semibold font-ubuntu text-white">Legal</h3><a href="#" class="block hover:text-brand-teal">Privacy Policy</a><a href="#" class="block hover:text-brand-teal">Terms & Conditions</a></nav>
+            <nav class="space-y-2"><h3 class="font-semibold font-ubuntu text-white">Product</h3><a href="#benefits" class="block hover:text-brand-teal scroll-link">Payment Services</a><a href="#benefits" class="block hover:text-brand-teal scroll-link">Integrations</a><a href="#home" class="block hover:text-brand-teal scroll-link">Shopify Integration</a><a href="#how-it-works" class="block hover:text-brand-teal scroll-link">Setup Checklist</a></nav>
+            <nav class="space-y-2"><h3 class="font-semibold font-ubuntu text-white">Support</h3><a href="mailto:support@merchanthaus.io" class="block hover:text-brand-teal">Contact Support</a><a href="/faq.html" class="block hover:text-brand-teal">FAQs</a></nav>
+            <nav class="space-y-2"><h3 class="font-semibold font-ubuntu text-white">Legal</h3><a href="/privacy.html" class="block hover:text-brand-teal">Privacy Policy</a><a href="/terms.html" class="block hover:text-brand-teal">Terms & Conditions</a></nav>
         </div>
         <div class="text-center text-xs pt-8 mt-8 border-t border-slate-800/50 text-brand-silver">© <span id="year"></span> MerchantHaus. All rights reserved.</div>
     </footer>
@@ -325,6 +366,10 @@
                     const targetId = this.getAttribute('href');
                     const targetElement = document.querySelector(targetId);
                     if (targetElement) {
+                        const mobileMenu = document.getElementById('mobile-menu');
+                        if(mobileMenu && !mobileMenu.classList.contains('hidden')) {
+                            mobileMenu.classList.add('hidden');
+                        }
                         targetElement.scrollIntoView({
                             behavior: 'smooth'
                         });
@@ -344,6 +389,80 @@
             backToTopButton.addEventListener('click', () => {
                 window.scrollTo({ top: 0, behavior: 'smooth' });
             });
+            
+            // --- Mobile Menu Logic ---
+            const mobileMenuButton = document.getElementById('mobile-menu-button');
+            const mobileMenu = document.getElementById('mobile-menu');
+            
+            if (mobileMenuButton && mobileMenu) {
+                mobileMenuButton.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    mobileMenu.classList.toggle('hidden');
+                });
+
+                document.addEventListener('click', (e) => {
+                    if (!mobileMenu.classList.contains('hidden') && !mobileMenu.contains(e.target) && !mobileMenuButton.contains(e.target)) {
+                        mobileMenu.classList.add('hidden');
+                    }
+                });
+            }
+            
+            // --- Stars Canvas Logic ---
+            const canvas = document.getElementById('mh-stars');
+            if (canvas) {
+                const ctx = canvas.getContext('2d');
+                let stars;
+                let animationFrameId;
+
+                const setupStars = () => {
+                    const parent = canvas.parentElement;
+                    canvas.width = parent.offsetWidth;
+                    canvas.height = parent.offsetHeight;
+                    stars = [];
+                    const numStars = Math.floor((canvas.width * canvas.height) / 10000);
+                    for (let i = 0; i < numStars; i++) {
+                        stars.push({
+                            x: Math.random() * canvas.width,
+                            y: Math.random() * canvas.height,
+                            radius: Math.random() * 1.2 + 0.3,
+                            alpha: Math.random(),
+                            dAlpha: Math.random() * 0.02 - 0.01
+                        });
+                    }
+                };
+
+                const drawStars = () => {
+                    if(!ctx) return;
+                    ctx.clearRect(0, 0, canvas.width, canvas.height);
+                    stars.forEach(star => {
+                        ctx.beginPath();
+                        ctx.arc(star.x, star.y, star.radius, 0, Math.PI * 2);
+                        ctx.fillStyle = `rgba(255, 255, 255, ${star.alpha})`;
+                        ctx.fill();
+
+                        star.alpha += star.dAlpha;
+                        if (star.alpha <= 0.1 || star.alpha >= 1) {
+                            star.dAlpha *= -1;
+                        }
+                    });
+                    animationFrameId = requestAnimationFrame(drawStars);
+                };
+                
+                let resizeTimeout;
+                const initCanvas = () => {
+                    if (animationFrameId) {
+                        cancelAnimationFrame(animationFrameId);
+                    }
+                    clearTimeout(resizeTimeout);
+                    resizeTimeout = setTimeout(() => {
+                       setupStars();
+                       drawStars();
+                    }, 250);
+                };
+
+                initCanvas();
+                window.addEventListener('resize', initCanvas);
+            }
 
 
             // Sequential Typewriter Animation
@@ -364,18 +483,17 @@
             const typewriter = (element, text, duration) => {
                 return new Promise(resolve => {
                     let i = 0;
-                    element.innerHTML = "";
+                    element.innerHTML = '<span class="typewriter-text"></span>';
+                    const span = element.querySelector('.typewriter-text');
                     element.style.opacity = '1';
-                    element.classList.add('typewriter-text');
                     
                     function type() {
                         if (i < text.length) {
-                            element.innerHTML += text.charAt(i);
+                            span.innerHTML += text.charAt(i);
                             i++;
                             setTimeout(type, duration / text.length);
                         } else {
-                           element.style.width = '100%';
-                           element.style.borderRight = 'none'; // Remove cursor at the end
+                           span.style.borderRight = 'none'; // Remove cursor at the end
                            resolve();
                         }
                     }
@@ -413,4 +531,6 @@
     </script>
 </body>
 </html>
+
+
 
