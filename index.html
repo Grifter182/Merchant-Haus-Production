@@ -151,7 +151,7 @@
     .dark .border-slate-800, .dark .border-slate-700 { border-color:#2a2a2a !important; }
     .dark .text-slate-400, .dark .text-slate-300, .dark .text-slate-100 { color:#c8c8c8 !important; }
 
-    /* Footer Styling */
+    /* Footer Styling */pppppppppppppppp
     footer {
         position: relative;
         background-image: url('assets/email.jpg');
@@ -643,7 +643,11 @@
             faqAnswerContainer.innerHTML = 'Thinking...';
             
             try {
-                const apiUrl = '/.netlify/functions/gemini-chat';
+                // --- THIS IS THE PART TO UPDATE ---
+                // The URL must match the name of your function file.
+                // If your file is at /netlify/functions/generate.js, the URL is '/.netlify/functions/generate'.
+                // I've updated it from 'gemini-chat' to 'generate' to match our previous steps.
+                const apiUrl = '/.netlify/functions/generate'; 
                 const payload = {
                     prompt: question,
                     history: [] 
@@ -661,8 +665,11 @@
 
                 const result = await response.json();
 
-                if (result.reply) {
-                    let html = result.reply
+                // In your original code, you checked for 'reply'. 
+                // The Gemini API and our function returns 'candidates'. I've updated this logic.
+                if (result.candidates && result.candidates[0].content.parts[0].text) {
+                    let text = result.candidates[0].content.parts[0].text;
+                    let html = text
                         .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
                         .replace(/^\* (.*$)/gm, '<li>$1</li>')
                         .replace(/<\/li><li>/g, '</li><li>');
