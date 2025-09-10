@@ -2,15 +2,26 @@
   "name": "merchanthaus",
   "version": "1.0.0",
   "private": true,
-  "description": "MerchantHaus Merchant Services – static site with Netlify function for private demo booking.",
+  "description": "MerchantHaus - Merchant Services",
   "scripts": {
     "dev": "netlify dev",
-    "start": "netlify dev"
+    "start": "netlify dev",
+    "lint": "eslint .",
+    "format": "prettier --write .",
+    "typecheck": "tsc --noEmit"
   },
   "engines": {
     "node": ">=18"
   },
   "dependencies": {
     "@google/generative-ai": "^0.21.0"
+  },
+  "devDependencies": {
+    "eslint": "^9.9.0",
+    "eslint-config-prettier": "^9.1.0",
+    "eslint-plugin-import": "^2.29.0",
+    "prettier": "^3.3.0",
+    "typescript": "^5.5.0",
+    "@types/node": "^20.14.0"
   }
 }
