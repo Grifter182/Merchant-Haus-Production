@@ -210,7 +210,7 @@
 <body class="bg-white text-slate-900 dark:bg-slate-950 dark:text-slate-100">
   
   <div class="sticky top-0 z-50">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-4">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-4 pb-4">
       <header class="header-glass border border-slate-200/70 dark:border-slate-800 rounded-xl">
         <div class="relative max-w-7xl mx-auto px-4 py-4 flex items-center justify-between">
           <a href="#" class="flex items-center gap-3 group">
@@ -643,17 +643,15 @@
             faqAnswerContainer.innerHTML = 'Thinking...';
             
             try {
-                // --- THIS IS THE PART TO UPDATE ---
-                // The URL must match the name of your function file.
-                // If your file is at /netlify/functions/generate.js, the URL is '/.netlify/functions/generate'.
-                // I've updated it from 'gemini-chat' to 'generate' to match our previous steps.
-                const apiUrl = '/.functions/generate'; 
+                // FIX: Construct a full URL to prevent parsing errors.
+                const functionUrl = new URL('/.netlify/functions/generate', window.location.origin);
+
                 const payload = {
                     prompt: question,
                     history: [] 
                 };
 
-                const response = await fetch(apiUrl, { 
+                const response = await fetch(functionUrl, { 
                     method: 'POST', 
                     headers: { 'Content-Type': 'application/json' }, 
                     body: JSON.stringify(payload) 
@@ -867,4 +865,5 @@
 
 </body>
 </html>
+
 
