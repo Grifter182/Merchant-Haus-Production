@@ -1,8 +1,8 @@
 {
-  "name": "merchanthaus-us-iso-site",
+  "name": "merchanthaus",
   "version": "1.0.0",
   "private": true,
-  "description": "MerchantHaus ISO for U.S. retail \u2013 static site with Netlify function for private demo booking.",
+  "description": "MerchantHaus Merchant Services \u2013 static site with Netlify function for private demo booking.",
   "scripts": {
     "dev": "netlify dev",
     "start": "netlify dev"
@@ -10,4 +10,10 @@
   "engines": {
     "node": ">=18"
   }
+{
+  "dependencies": {
+    "@google/generative-ai": "^0.21.0"
+  }
+}
+
 }
