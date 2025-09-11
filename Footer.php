@@ -1,6 +1,6 @@
     <!-- Footer -->
     <footer class="border-t border-slate-800 py-10 mt-16">
-        <div class="max-w-7xl mx-auto px-4 grid sm:grid-cols-2 lg:grid-cols-4 gap-8 text-sm">
+        <div class="max-w-7xl mx-auto px-4 grid sm:grid-cols-2 lg:grid-cols-4 gap-8 text-sm" >
             <div class="space-y-4">
                 <a href="index.php" class="flex items-center gap-3">
                     <div class="w-[220px]" data-mh-logo-footer></div>
