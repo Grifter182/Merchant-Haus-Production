@@ -1,11 +1,9 @@
 [build]
   publish = "."
-  functions = "functions"
+  functions = "functions"   # keep just this reference
 
 [functions]
-  directory = "functions"
   node_bundler = "esbuild"
-
 
 [[headers]]
   for = "/*"
@@ -19,3 +17,11 @@
   from = "/integrations"
   to = "/#platforms"
   status = 301
+
+[[headers]]
+  for = "/.netlify/functions/*"
+  [headers.values]
+    Access-Control-Allow-Origin = "*"           # tighten to your domain in prod
+    Access-Control-Allow-Methods = "POST, OPTIONS"
+    Access-Control-Allow-Headers = "Content-Type, Authorization"
+
