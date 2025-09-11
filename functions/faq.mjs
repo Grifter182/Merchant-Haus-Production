@@ -1,8 +1,8 @@
-// netlify/functions/faq.mjs
+// functions/faq.mjs
 import { GoogleGenerativeAI } from "@google/generative-ai";
 
 const corsHeaders = {
-  "Access-Control-Allow-Origin": "*",           // tighten to your domain in prod
+  "Access-Control-Allow-Origin": "*", // tighten to your domain in prod
   "Access-Control-Allow-Methods": "POST, OPTIONS",
   "Access-Control-Allow-Headers": "Content-Type, Authorization",
 };
@@ -37,7 +37,6 @@ export async function handler(event) {
     const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
     const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
 
-    // Simple FAQ prompt; inject your site FAQ content into `context`
     const prompt = `
 You are a concise FAQ assistant. Answer from the provided FAQ context only.
 If the answer isn't present, say you don't know and suggest contacting support.
@@ -49,7 +48,7 @@ Question: ${question}
     `.trim();
 
     const result = await model.generateContent(prompt);
-    const text = result.response.text();
+    const text = result.response.text(); // fixed: direct call
 
     return {
       statusCode: 200,
@@ -57,7 +56,6 @@ Question: ${question}
       body: JSON.stringify({ answer: text }),
     };
   } catch (err) {
-    // Surface useful logs in Netlify UI
     console.error("FAQ function error:", err);
     return {
       statusCode: 500,
