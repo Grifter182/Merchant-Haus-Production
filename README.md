@@ -49,6 +49,6 @@ This runs the static site and the function at `/.netlify/functions/request-demo`
 
 ## Merchant Application
 - Page: `/apply.html`
-- Function: `/.netlify/functions/submit-application` (uses Resend to email the team + the applicant)
+- Function: `/functions/submit-application` (uses Resend to email the team + the applicant)
 - Env vars needed: `RESEND_API_KEY`, `FROM_EMAIL`, `TEAM_EMAIL` (required), `BACKOFFICE_WEBHOOK` (optional to post JSON to your custom dashboard)
 
