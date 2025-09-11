@@ -49,7 +49,7 @@ Question: ${question}
     `.trim();
 
     const result = await model.generateContent(prompt);
-    const text = result?.response?.text?.() ?? "No response.";
+    const text = result.response.text();
 
     return {
       statusCode: 200,
