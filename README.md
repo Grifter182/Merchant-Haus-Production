@@ -1,4 +1,4 @@
-# MerchantHaus — simple.smart.secure
+# MerchantHaus — Plug.Play.Grow
 
 Static site + Netlify Function that emails a **private** booking link (Google Calendar) to prospects — the calendar URL is never exposed in the frontend.
 
