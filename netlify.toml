@@ -1,6 +1,10 @@
 [build]
-  publish = "."
+  command = "npm run lint && npm test && npm run build"
+  publish = "dist"
   functions = "functions"   # points to the root-level functions folder
+
+[build.environment]
+  NODE_VERSION = "18"
 
 [functions]
   node_bundler = "esbuild"
