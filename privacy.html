@@ -83,44 +83,6 @@
     <link rel="manifest" href="shield/site.webmanifest">
 </head>
 <body class="bg-white text-slate-900 dark:bg-transparent dark:text-slate-100">
-
-    <!-- Header -->
-    <div class="sticky top-0 z-50">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-4">
-            <header class="header-glass border border-slate-200/70 dark:border-slate-800 rounded-xl">
-                <div class="relative max-w-7xl mx-auto px-4 py-4 flex items-center justify-between">
-                    <a href="index.html" class="flex items-center gap-3 group">
-                        <img src="shield/shield.png" alt="MerchantHaus Logo" class="h-10 w-10">
-                        <div>
-                            <div class="text-xl md:text-2xl font-ubuntu font-bold tracking-wide grad-text">MerchantHaus</div>
-                            <p class="text-xs text-slate-500 dark:text-slate-400 h-4">Simple. Safe. Secure.</p>
-                        </div>
-                    </a>
-                    <div class="flex items-center gap-2">
-                        <a href="#" class="js-cta bg-brand-600 hover:bg-brand-700 text-white border border-transparent px-4 py-2 rounded-full text-sm font-semibold transition-colors duration-300">Get Started</a>
-                        <a href="#" class="hidden sm:block bg-transparent text-slate-500 dark:text-slate-400 border border-slate-300 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-800 px-4 py-2 rounded-lg text-sm font-semibold transition-colors duration-300">Login</a>
-                        <button id="open-menu-btn" class="p-2 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800" aria-label="Open menu"><i data-lucide="menu" class="h-5 w-5"></i></button>
-                    </div>
-                    <!-- Pop-out Menu -->
-                    <div id="popout-menu" class="absolute top-full right-4 mt-2 w-72 rounded-xl bg-white dark:bg-[#1c1c1c] shadow-2xl border border-slate-200/70 dark:border-slate-800 p-4 z-[51] hidden opacity-0 transition-opacity duration-300">
-                        <nav class="flex flex-col space-y-1 text-base font-medium">
-                            <a href="index.html#payments" data-close class="px-4 py-2 rounded-lg hover:bg-brand-600 hover:text-white transition-colors">Payment Services</a>
-                            <a href="index.html#integrations" data-close class="px-4 py-2 rounded-lg hover:bg-brand-600 hover:text-white transition-colors">Integrations</a>
-                            <a href="index.html#checklist" data-close class="px-4 py-2 rounded-lg hover:bg-brand-600 hover:text-white transition-colors">Setup Checklist</a>
-                            <a href="#" data-close class="js-support px-4 py-2 rounded-lg hover:bg-brand-600 hover:text-white transition-colors">Contact Support</a>
-                            <a href="#" data-close class="sm:hidden block px-4 py-2 rounded-lg hover:bg-brand-600 hover:text-white transition-colors mt-2 pt-2 border-t border-slate-200 dark:border-slate-800">Login</a>
-                        </nav>
-                        <div class="mt-4 pt-4 border-t border-slate-200 dark:border-slate-800">
-                            <p class="text-xs text-center text-slate-500 dark:text-slate-400">
-                                Questions? Call <a href="tel:15056006042" class="text-brand-600 dark:text-brand-400 hover:underline">1-505-600-6042</a> or email us at <a href="mailto:support@merchanthaus.io" class="text-brand-600 dark:text-brand-400 hover:underline">support@merchanthaus.io</a>
-                            </p>
-                        </div>
-                    </div>
-                </div>
-            </header>
-        </div>
-    </div>
-
     <!-- Main Content -->
     <main class="min-h-screen pt-12 pb-16 flex flex-col items-center justify-start p-6">
         <div class="w-full max-w-3xl bg-white/80 dark:bg-[#1c1c1c]/80 backdrop-blur-sm p-8 rounded-xl shadow-lg border border-slate-200/70 dark:border-slate-800">
@@ -216,51 +178,16 @@
     </main>
 
     <!-- Footer -->
-    <footer class="border-t border-slate-200 dark:border-slate-800 py-10">
-        <div class="max-w-7xl mx-auto px-4 grid sm:grid-cols-2 lg:grid-cols-4 gap-8 text-sm">
-            <div class="space-y-3">
-                <a href="index.html" class="flex items-center gap-3"><img src="shield/shield.png" alt="MerchantHaus Logo" class="h-9 w-9"><span class="text-2xl font-ubuntu font-bold tracking-wide grad-text">MerchantHaus</span></a>
-                <p>Payments made simple.</p>
-                <div class="text-sm"><a href="tel:15056006042" class="block">1-505-600-6042</a><a href="mailto:support@merchanthaus.io" class="block">support@merchanthaus.io</a></div>
-            </div>
-            <nav class="space-y-2"><h3 class="font-semibold font-ubuntu">Product</h3><a href="index.html#payments" class="block">Payment Services</a><a href="index.html#integrations" class="block">Integrations</a><a href="index.html#checklist" class="block">Setup Checklist</a><a href="compliance.html" class="block">Compliance</a></nav>
-            <nav class="space-y-2"><h3 class="font-semibold font-ubuntu">Support</h3><a href="#" class="js-support block">Contact Support</a><a href="index.html#faq-question" class="block">FAQs</a></nav>
-            <nav class="space-y-2"><h3 class="font-semibold font-ubuntu">Legal</h3><a href="privacy.html" class="block">Privacy Policy</a><a href="terms.html" class="block">Terms & Conditions</a></nav>
-        </div>
-        <div class="text-center text-xs pt-8 mt-8 border-t border-slate-200 dark:border-slate-800">© <span id="year"></span> Merchant Haus. All rights reserved.</div>
-    </footer>
 
     <!-- Modals and Panels (structure only) -->
     <div id="signup-panel-overlay" class="panel-overlay fixed inset-0 bg-black/60 z-50 opacity-0 invisible"><div id="signup-panel" class="panel-container fixed top-0 right-0 h-full w-full max-w-2xl bg-white dark:bg-slate-900 shadow-2xl transform translate-x-full flex flex-col"></div></div>
     <div id="support-modal" class="fixed inset-0 z-[70] hidden"></div>
 
+    <script src="assets/headerFooter.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             if (window.lucide) lucide.createIcons();
-            document.getElementById('year').textContent = new Date().getFullYear();
 
-            // --- Pop-out Menu & Modal Logic ---
-            const menuBtn = document.getElementById('open-menu-btn');
-            const popoutMenu = document.getElementById('popout-menu');
-            if (menuBtn && popoutMenu) {
-                menuBtn.addEventListener('click', (e) => {
-                    e.stopPropagation();
-                    popoutMenu.classList.toggle('hidden');
-                    setTimeout(() => popoutMenu.classList.toggle('opacity-0'), 10);
-                });
-                document.addEventListener('click', (e) => {
-                    if (!popoutMenu.classList.contains('hidden') && !popoutMenu.contains(e.target) && !menuBtn.contains(e.target)) {
-                        popoutMenu.classList.add('opacity-0');
-                        setTimeout(() => popoutMenu.classList.add('hidden'), 300);
-                    }
-                });
-                popoutMenu.querySelectorAll('a[data-close]').forEach(link => {
-                    link.addEventListener('click', () => {
-                        popoutMenu.classList.add('opacity-0');
-                        setTimeout(() => popoutMenu.classList.add('hidden'), 300);
-                    });
-                });
-            }
         });
     </script>
 </body>
