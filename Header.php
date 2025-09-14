@@ -162,7 +162,7 @@
                              <a href="tel:15056006042" class="hover:text-brand-teal transition-colors">1-505-600-6042</a>
                              <a href="mailto:support@merchanthaus.io" class="hover:text-brand-teal transition-colors">support@merchanthaus.io</a>
                          </div>
-                         <a href="/#application-form" class="js-cta bg-brand-crimson hover:bg-opacity-90 text-white border border-transparent px-4 py-2 rounded-full text-sm font-semibold font-inter transition-colors duration-300">Get Started</a>
+                         <a href="/#checklist" class="js-cta bg-brand-crimson hover:bg-opacity-90 text-white border border-transparent px-4 py-2 rounded-full text-sm font-semibold font-inter transition-colors duration-300">Get Started</a>
                          <a href="https://retailmanager.merchant.haus" class="hidden sm:block bg-transparent hover:bg-brand-teal text-brand-teal hover:text-white border border-brand-teal px-4 py-2 rounded-lg text-sm font-semibold font-inter transition-colors duration-300">Login</a>
                          <button id="mobile-menu-button" class="md:hidden p-2 rounded-lg hover:bg-slate-800">
                              <i data-lucide="menu" class="h-6 w-6"></i>
@@ -172,10 +172,10 @@
             </header>
             <div id="mobile-menu" class="absolute right-4 mt-2 w-72 rounded-xl bg-[#1c1c1c] shadow-2xl border border-brand-teal p-4 z-40 hidden">
                  <nav class="flex flex-col space-y-2 text-base font-medium font-inter">
-                     <a href="/#benefits" class="px-4 py-2 rounded-lg hover:bg-brand-crimson hover:text-white">Payment Services</a>
+                     <a href="/#payments" class="px-4 py-2 rounded-lg hover:bg-brand-crimson hover:text-white">Payment Services</a>
                      <a href="/#integrations" class="px-4 py-2 rounded-lg hover:bg-brand-crimson hover:text-white">Integrations</a>
                     <a href="Shopify.html" class="px-4 py-2 rounded-lg hover:bg-brand-crimson hover:text-white">Shopify</a>
-                     <a href="/#how-it-works" class="px-4 py-2 rounded-lg hover:bg-brand-crimson hover:text-white">Setup Checklist</a>
+                     <a href="/#checklist" class="px-4 py-2 rounded-lg hover:bg-brand-crimson hover:text-white">Setup Checklist</a>
                     <a href="compliance.html" class="px-4 py-2 rounded-lg hover:bg-brand-crimson hover:text-white">Compliance</a>
                      <a href="mailto:support@merchanthaus.io" class="px-4 py-2 rounded-lg hover:bg-brand-crimson hover:text-white">Contact Support</a>
                      <a href="https://retailmanager.merchant.haus" class="sm:hidden block px-4 py-2 rounded-lg hover:bg-brand-crimson hover:text-white mt-2 pt-2 border-t border-slate-800">Login</a>
