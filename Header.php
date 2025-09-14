@@ -175,6 +175,7 @@
                      <a href="/#benefits" class="px-4 py-2 rounded-lg hover:bg-brand-crimson hover:text-white">Payment Services</a>
                      <a href="/#integrations" class="px-4 py-2 rounded-lg hover:bg-brand-crimson hover:text-white">Integrations</a>
                      <a href="shopify.php" class="px-4 py-2 rounded-lg hover:bg-brand-crimson hover:text-white">Shopify</a>
+                     <a href="gohighlevel.php" class="px-4 py-2 rounded-lg hover:bg-brand-crimson hover:text-white">GoHighLevel</a>
                      <a href="/#how-it-works" class="px-4 py-2 rounded-lg hover:bg-brand-crimson hover:text-white">Setup Checklist</a>
                      <a href="compliance.php" class="px-4 py-2 rounded-lg hover:bg-brand-crimson hover:text-white">Compliance</a>
                      <a href="mailto:support@merchanthaus.io" class="px-4 py-2 rounded-lg hover:bg-brand-crimson hover:text-white">Contact Support</a>
