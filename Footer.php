@@ -21,6 +21,7 @@
             <nav class="space-y-2">
                 <h3 class="font-semibold font-ubuntu text-white">Support</h3>
                 <a href="mailto:support@merchanthaus.io" class="block text-slate-300 hover:text-brand-teal">Contact Support</a>
+                <a href="/faq.php" class="block text-slate-300 hover:text-brand-teal">FAQ</a>
             </nav>
             <nav class="space-y-2">
                 <h3 class="font-semibold font-ubuntu text-white">Legal</h3>
