@@ -1,134 +1,10 @@
-<!DOCTYPE html>
-<html lang="en" class="dark">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MerchantHaus | Compliance Checklist & Application</title>
+<?php
+    $pageTitle = 'MerchantHaus | Compliance Checklist & Application';
+    $pageDescription = 'Compliance resources and application checklist for MerchantHaus.';
+    include __DIR__ . '/Header.php';
+?>
 
-    <!-- Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@700&family=Lexend:wght@400;600&display=swap" rel="stylesheet">
-
-    <!-- Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-        tailwind.config = {
-            darkMode: 'class',
-            theme: {
-                extend: {
-                    fontFamily: {
-                        sans: ['Lexend', 'ui-sans-serif', 'system-ui'],
-                        ubuntu: ['Ubuntu', 'sans-serif']
-                    },
-                    colors: {
-                        brand: { 600: '#DC143C', 700: '#c21b35', 400: '#E85B71' },
-                    }
-                }
-            }
-        }
-    </script>
-
-    <!-- Lucide Icons -->
-    <script src="https://unpkg.com/lucide@latest"></script>
-
-    <!-- Custom Styles -->
-    <style>
-        body { 
-            font-family: 'Lexend', ui-sans-serif, system-ui; 
-            position: relative;
-            -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
-        }
-        body::before {
-            content: '';
-            position: fixed;
-            top: 0; left: 0;
-            width: 100vw; height: 100vh;
-            z-index: -1;
-            background: 
-                radial-gradient(circle at 15% 25%, rgba(220, 20, 60, 0.15), transparent 40%),
-                radial-gradient(circle at 85% 75%, rgba(255, 255, 255, 0.05), transparent 40%);
-            animation: bloom 25s linear infinite alternate;
-        }
-        @keyframes bloom {
-            0% { background-position: 0% 0%, 0% 0%; }
-            100% { background-position: 50% -50%, -50% 50%; }
-        }
-        html.dark { background-color: #1c1c1c !important; }
-        .dark body { background-color: transparent !important; color: #f5f5f5 !important; }
-        .dark .bg-slate-950 { background-color: #1c1c1c !important; }
-        .dark .border-slate-800 { border-color: #2a2a2a !important; }
-        .dark .text-slate-300 { color: #c8c8c8 !important; }
-        .dark .text-slate-400 { color: #a0a0a0 !important; }
-        .dark .text-slate-600 { color: #c8c8c8 !important; }
-        .header-glass { background-color: rgba(255, 255, 255, 0.8); backdrop-filter: blur(10px); }
-        .dark .header-glass { background-color: rgba(28, 28, 28, 0.8); }
-        .grad-text { display: inline-block; background: linear-gradient(90deg, #c21b35, #E85B71, #c21b35); -webkit-background-clip: text; background-clip: text; color: transparent; }
-        details > summary { list-style: none; cursor: pointer; display: flex; justify-content: space-between; align-items: center; }
-        details > summary::-webkit-details-marker { display: none; }
-        details > summary .summary-icon { transition: transform 0.2s ease-in-out; }
-        details[open] > summary .summary-icon { transform: rotate(90deg); }
-        footer { position: relative; background-image: url('assets/email.jpg'); background-size: cover; background-position: center; color: white; }
-        footer::before { content: ''; position: absolute; inset: 0; background-color: rgba(0, 0, 0, 0.6); z-index: 1; }
-        footer > div { position: relative; z-index: 2; }
-        footer a { color: #f9fafb !important; }
-        footer a:hover { text-decoration: underline; }
-        footer h3 { color: #f9fafb !important; }
-        footer p { color: #d1d5db !important; }
-        footer .border-slate-800 { border-color: rgba(255, 255, 255, 0.2) !important; }
-        .panel-overlay, .panel-container { transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
-        .field:focus { outline: none; box-shadow: 0 0 0 3px rgba(220, 20, 60, 0.35); }
-    </style>
-
-    <!-- Favicons -->
-    <link rel="apple-touch-icon" sizes="180x180" href="shield/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="shield/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="shield/favicon-16x16.png">
-    <link rel="manifest" href="shield/site.webmanifest">
-</head>
-<body class="bg-white text-slate-900 dark:bg-transparent dark:text-slate-100">
-
-    <!-- Header -->
-    <div class="sticky top-0 z-50">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-4">
-            <header class="header-glass border border-slate-200/70 dark:border-slate-800 rounded-xl">
-                <div class="relative max-w-7xl mx-auto px-4 py-4 flex items-center justify-between">
-                    <a href="index.html" class="flex items-center gap-3 group">
-                        <img src="shield/shield.png" alt="MerchantHaus Logo" class="h-10 w-10">
-                        <div>
-                            <div class="text-xl md:text-2xl font-ubuntu font-bold tracking-wide grad-text">MerchantHaus</div>
-                            <p class="text-xs text-slate-500 dark:text-slate-400 h-4">Simple. Safe. Secure.</p>
-                        </div>
-                    </a>
-                    <div class="flex items-center gap-2">
-                        <!-- UPDATED: href changed to # to trigger JS -->
-                        <a href="#" class="js-cta bg-brand-600 hover:bg-brand-700 text-white border border-transparent px-4 py-2 rounded-full text-sm font-semibold transition-colors duration-300">Get Started</a>
-                        <a href="#" class="hidden sm:block bg-transparent text-slate-500 dark:text-slate-400 border border-slate-300 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-800 px-4 py-2 rounded-lg text-sm font-semibold transition-colors duration-300">Login</a>
-                        <button id="open-menu-btn" class="p-2 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800" aria-label="Open menu"><i data-lucide="menu" class="h-5 w-5"></i></button>
-                    </div>
-                    <!-- Pop-out Menu -->
-                    <div id="popout-menu" class="absolute top-full right-4 mt-2 w-72 rounded-xl bg-white dark:bg-[#1c1c1c] shadow-2xl border border-slate-200/70 dark:border-slate-800 p-4 z-[51] hidden opacity-0 transition-opacity duration-300">
-                        <nav class="flex flex-col space-y-1 text-base font-medium">
-                            <a href="index.html#payments" data-close class="px-4 py-2 rounded-lg hover:bg-brand-600 hover:text-white transition-colors">Payment Services</a>
-                            <a href="index.html#integrations" data-close class="px-4 py-2 rounded-lg hover:bg-brand-600 hover:text-white transition-colors">Integrations</a>
-                            <a href="index.html#checklist" data-close class="px-4 py-2 rounded-lg hover:bg-brand-600 hover:text-white transition-colors">Setup Checklist</a>
-                            <a href="#" data-close class="js-support px-4 py-2 rounded-lg hover:bg-brand-600 hover:text-white transition-colors">Contact Support</a>
-                            <a href="#" data-close class="sm:hidden block px-4 py-2 rounded-lg hover:bg-brand-600 hover:text-white transition-colors mt-2 pt-2 border-t border-slate-200 dark:border-slate-800">Login</a>
-                        </nav>
-                        <div class="mt-4 pt-4 border-t border-slate-200 dark:border-slate-800">
-                            <p class="text-xs text-center text-slate-500 dark:text-slate-400">
-                                Questions? Call <a href="tel:15056006042" class="text-brand-600 dark:text-brand-400 hover:underline">1-505-600-6042</a> or email us at <a href="mailto:support@merchanthaus.io" class="text-brand-600 dark:text-brand-400 hover:underline">support@merchanthaus.io</a>
-                            </p>
-                        </div>
-                    </div>
-                </div>
-            </header>
-        </div>
-    </div>
-
-    <!-- Main Content -->
-    <main class="min-h-screen max-w-7xl mx-auto pt-12 pb-16 grid grid-cols-1 lg:grid-cols-2 gap-8 p-6">
+<main class="min-h-screen max-w-7xl mx-auto pt-12 pb-16 grid grid-cols-1 lg:grid-cols-2 gap-8 p-6">
         <!-- Compliance Checklist Section -->
         <div class="w-full bg-white/80 dark:bg-[#1c1c1c]/80 backdrop-blur-sm p-8 rounded-xl shadow-lg border border-slate-200/70 dark:border-slate-800">
             <h1 class="text-3xl font-extrabold font-ubuntu text-slate-900 dark:text-slate-100 mb-4 text-center">Merchant Compliance Checklist</h1>
@@ -221,7 +97,7 @@
                     <div class="mt-2 grid md:grid-cols-3 gap-3 text-sm"><label class="inline-flex items-center gap-2"><input checked class="accent-brand-600" name="svcCredit" type="checkbox"/>Credit Card</label><label class="inline-flex items-center gap-2"><input class="accent-brand-600" name="svcAch" type="checkbox"/>ACH / eCheck</label><label class="inline-flex items-center gap-2"><input class="accent-brand-600" name="svcCash" type="checkbox"/>Cash</label></div>
                     <h3 class="mt-4 font-semibold">Value‑added Services</h3>
                     <div class="mt-2 grid md:grid-cols-3 gap-3 text-sm"><label class="inline-flex items-center gap-2"><input class="accent-brand-600" name="valEncryption" type="checkbox"/>Encryption</label><label class="inline-flex items-center gap-2"><input checked class="accent-brand-600" name="valInvoice" type="checkbox"/>Invoice</label><label class="inline-flex items-center gap-2"><input class="accent-brand-600" name="valLevel3" type="checkbox"/>Level III Advantage</label><label class="inline-flex items-center gap-2"><input class="accent-brand-600" name="valMobile" type="checkbox"/>Mobile Payments</label><label class="inline-flex items-center gap-2"><input checked class="accent-brand-600" name="valVault" type="checkbox"/>Customer Vault</label></div>
-                    <div class="mt-4 text-xs text-slate-600 dark:text-slate-300">By submitting, you agree to our <a class="underline text-brand-600 dark:text-brand-400" href="terms.html" rel="noopener" target="_blank">Terms & Conditions</a> and <a class="underline text-brand-600 dark:text-brand-400" href="privacy.html" rel="noopener" target="_blank">Privacy Policy</a>.</div>
+                    <div class="mt-4 text-xs text-slate-600 dark:text-slate-300">By submitting, you agree to our <a class="underline text-brand-600 dark:text-brand-400" href="terms.php" rel="noopener" target="_blank">Terms & Conditions</a> and <a class="underline text-brand-600 dark:text-brand-400" href="privacy.php" rel="noopener" target="_blank">Privacy Policy</a>.</div>
                 </section>
                 <div class="flex items-center gap-3">
                     <button class="px-5 py-3 rounded-lg bg-brand-600 text-white font-semibold hover:bg-brand-700 transition-colors" type="submit">Submit Application</button>
@@ -235,52 +111,7 @@
     <footer class="border-t border-slate-200 dark:border-slate-800 py-10">
         <div class="max-w-7xl mx-auto px-4 grid sm:grid-cols-2 lg:grid-cols-4 gap-8 text-sm">
             <div class="space-y-3">
-                <a href="index.html" class="flex items-center gap-3"><img src="shield/shield.png" alt="MerchantHaus Logo" class="h-9 w-9"><span class="text-2xl font-ubuntu font-bold tracking-wide grad-text">MerchantHaus</span></a>
-                <p>Payments made simple.</p>
-                <div class="text-sm"><a href="tel:15056006042" class="block">1-505-600-6042</a><a href="mailto:support@merchanthaus.io" class="block">support@merchanthaus.io</a></div>
-            </div>
-            <nav class="space-y-2"><h3 class="font-semibold font-ubuntu">Product</h3><a href="index.html#payments" class="block">Payment Services</a><a href="index.html#integrations" class="block">Integrations</a><a href="index.html#checklist" class="block">Setup Checklist</a><a href="compliance.html" class="block">Compliance</a></nav>
-            <nav class="space-y-2"><h3 class="font-semibold font-ubuntu">Support</h3><a href="#" class="js-support block">Contact Support</a><a href="index.html#faq-question" class="block">FAQs</a></nav>
-            <nav class="space-y-2"><h3 class="font-semibold font-ubuntu">Legal</h3><a href="privacy.html" class="block">Privacy Policy</a><a href="terms.html" class="block">Terms & Conditions</a></nav>
-        </div>
-        <div class="text-center text-xs pt-8 mt-8 border-t border-slate-200 dark:border-slate-800">© <span id="year"></span> Merchant Haus. All rights reserved.</div>
-    </footer>
-
-    <!-- Modals and Panels -->
-    <div id="signup-panel-overlay" class="panel-overlay fixed inset-0 bg-black/60 z-50 opacity-0 invisible">
-        <div id="signup-panel" class="panel-container fixed top-0 right-0 h-full w-full max-w-2xl bg-white dark:bg-slate-900 shadow-2xl transform translate-x-full flex flex-col">
-            <div class="p-6 sm:p-8 relative flex-shrink-0">
-                <button id="close-signup-panel-btn" class="absolute top-4 right-4 text-slate-500 hover:text-slate-800 dark:hover:text-slate-200"><i data-lucide="x" class="h-6 w-6"></i></button>
-                <div class="mb-6">
-                    <div class="flex justify-between mb-2 text-sm font-semibold text-slate-800 dark:text-slate-200">
-                        <p>Step <span id="current-step-text">1</span> of 3</p>
-                        <p id="step-name">Account Details</p>
-                    </div>
-                    <div class="w-full bg-slate-200 dark:bg-slate-700 rounded-full h-2.5 overflow-hidden">
-                        <div id="progress-bar" class="bg-brand-600 h-full rounded-full" style="width: 33%"></div>
-                    </div>
-                </div>
-            </div>
-            <div class="px-6 sm:px-8 pb-4 flex-grow overflow-y-auto">
-                <form id="signup-form" novalidate></form>
-                <div id="form-message" class="mt-4 text-center text-sm"></div>
-            </div>
-            <div class="p-6 sm:p-8 mt-auto pt-6 border-t border-slate-200 dark:border-slate-800 flex justify-between items-center flex-shrink-0">
-                <div class="text-sm">
-                    <p class="font-semibold">Need Help?</p>
-                    <a href="tel:15056006042" class="text-slate-500 hover:text-brand-600 dark:hover:text-brand-400 transition-colors">1-505-600-6042</a>
-                </div>
-                <div class="flex items-center gap-4">
-                    <button type="button" id="prev-btn" class="bg-slate-200 text-slate-800 dark:bg-slate-700 dark:text-slate-200 px-6 py-2.5 rounded-lg font-semibold hover:bg-slate-300 dark:hover:bg-slate-600 transition-all invisible">Previous</button>
-                    <button type="button" id="next-btn" class="bg-brand-600 text-white px-6 py-2.5 rounded-lg font-semibold hover:bg-brand-700 transition-all shadow-sm hover:shadow-md">Next</button>
-                    <button type="submit" id="submit-btn" form="signup-form" class="bg-brand-600 text-white px-6 py-2.5 rounded-lg font-bold hover:bg-brand-700 transition-all shadow-sm hover:shadow-md hidden">Create Account</button>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div id="support-modal" class="fixed inset-0 z-[70] hidden"></div>
-
-    <script>
+<script>
         document.addEventListener('DOMContentLoaded', () => {
             if (window.lucide) lucide.createIcons();
             document.getElementById('year').textContent = new Date().getFullYear();
@@ -392,5 +223,5 @@
             }
         });
     </script>
-</body>
-</html>
+
+<?php include __DIR__ . '/Footer.php'; ?>

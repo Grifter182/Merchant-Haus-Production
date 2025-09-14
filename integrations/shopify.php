@@ -1,15 +1,9 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="utf-8"/><meta content="width=device-width,initial-scale=1" name="viewport"/>
-<title>MerchantHaus × Shopify — Retail Payments</title>
-<link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800&amp;display=swap" rel="stylesheet"/>
-<script src="https://cdn.tailwindcss.com"></script><script src="https://unpkg.com/lucide@latest"></script>
-<style>body{font-family:Montserrat,system-ui,sans-serif}</style>
-<link href="/shield.ico" rel="icon" type="image/x-icon"/>
-<link href="/shield.ico" rel="shortcut icon" type="image/x-icon"/><link href="/shield.png" rel="apple-touch-icon"/></head>
-<body class="bg-white text-slate-900 dark:bg-slate-950 dark:text-slate-100">
+<?php
+    $pageTitle = 'MerchantHaus × Shopify — Retail Payments';
+    $pageDescription = 'Boost approvals and reduce fraud while selling on Shopify.';
+    include __DIR__ . '/../Header.php';
+?>
+
 <main class="max-w-5xl mx-auto px-4 py-12">
 <a class="text-sm text-brand-600" href="/">← Back to MerchantHaus</a>
 <header class="mt-4 flex items-center gap-4">
@@ -67,5 +61,5 @@
 </div>
 </div>
 <script src="/assets/app.js"></script>
-<footer><div><ul><li><a href="/services">Payment Services</a></li><li><a href="/pricing">Plans &amp; Pricing</a></li><li><a href="/setup-checklist">Setup Checklist</a></li><li><a href="/contact">Contact Support</a></li><li><a href="/faqs">FAQs</a></li><li><a href="/privacy">Privacy Policy</a></li><li><a href="/terms">Terms &amp; Conditions</a></li></ul></div><p>Merchant Haus – Payments made simple.</p></footer></body>
-</html>
+
+<?php include __DIR__ . '/../Footer.php'; ?>
