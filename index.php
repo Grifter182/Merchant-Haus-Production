@@ -63,7 +63,7 @@
   </div>
 </div>
 
-<section id="benefits" class="pt-28 pb-12" style="background-color: #6dffca;">
+<section id="payments" class="pt-28 pb-12" style="background-color: #6dffca;">
   <div class="max-w-5xl mx-auto px-4 text-right">
     <p class="text-2xl sm:text-3xl font-ubuntu mb-12" style="color: #524848;">Your complete toolkit for accepting payments and managing your business.</p>
   </div>
@@ -93,7 +93,7 @@
 </section>
 
 <div class="relative">
-  <section id="how-it-works" class="pt-28 pb-16 bg-slate-50 dark:bg-slate-900/40 border-y border-slate-200/70 dark:border-slate-800">
+  <section id="checklist" class="pt-28 pb-16 bg-slate-50 dark:bg-slate-900/40 border-y border-slate-200/70 dark:border-slate-800">
     <div class="max-w-7xl mx-auto px-4 text-center">
       <p class="mt-4 max-w-3xl mx-auto text-slate-600 dark:text-slate-300">Here’s everything we’ll ask for during setup—business details, security info, documentation. We’ll guide you step‑by‑step.</p>
       <div class="grid md:grid-cols-3 gap-8 mt-12 text-left">

@@ -13,10 +13,10 @@
             </div>
             <nav class="space-y-2">
                 <h3 class="font-semibold font-ubuntu text-white">Product</h3>
-                <a href="/#benefits" class="block text-slate-300 hover:text-brand-teal">Payment Services</a>
+                <a href="/#payments" class="block text-slate-300 hover:text-brand-teal">Payment Services</a>
                 <a href="/#integrations" class="block text-slate-300 hover:text-brand-teal">Integrations</a>
                 <a href="Shopify.html" class="block text-slate-300 hover:text-brand-teal">Shopify Integration</a>
-                <a href="/#how-it-works" class="block text-slate-300 hover:text-brand-teal">Setup Checklist</a>
+                <a href="/#checklist" class="block text-slate-300 hover:text-brand-teal">Setup Checklist</a>
             </nav>
             <nav class="space-y-2">
                 <h3 class="font-semibold font-ubuntu text-white">Support</h3>
