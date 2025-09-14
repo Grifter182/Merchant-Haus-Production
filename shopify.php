@@ -1,209 +1,10 @@
-<!DOCTYPE html>
-<html lang="en" class="dark">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MerchantHaus – Shopify Payment Processing</title>
+<?php
+    $pageTitle = 'MerchantHaus – Shopify Payment Processing';
+    $pageDescription = 'Seamless Shopify integration with MerchantHaus payments.';
+    include __DIR__ . '/Header.php';
+?>
 
-    <!-- Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800&family=Ubuntu:wght@600;700&display=swap" rel="stylesheet">
-
-    <!-- Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-        tailwind.config = {
-            darkMode: 'class',
-            theme: {
-                extend: {
-                    fontFamily: {
-                        sans: ['Inter', 'ui-sans-serif', 'system-ui'],
-                        ubuntu: ['Ubuntu', 'sans-serif']
-                    },
-                    colors: {
-                        'brand-crimson': '#DC143C',
-                        'brand-teal': '#00CEDB',
-                        'brand-silver': '#A9A9AA',
-                        'brand-dark': '#1A1A1A',
-                        'brand-light': '#F8F9FA',
-                    }
-                }
-            }
-        }
-    </script>
-
-    <!-- Lucide Icons -->
-    <script src="https://unpkg.com/lucide@latest"></script>
-
-    <!-- Custom Styles -->
-    <style>
-        html {
-            scroll-behavior: smooth;
-        }
-        body {
-            font-family: 'Inter', sans-serif;
-            position: relative;
-            -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
-            background-color: #f8f9fa;
-        }
-        .header-glass { background-color: rgba(248, 249, 250, 0.8); backdrop-filter: blur(10px); }
-        html.dark { background-color: #1A1A1A !important; }
-        .dark body { background-color: #1A1A1A !important; color: #f5f5f5 !important; }
-        .dark .header-glass { background-color: rgba(26, 26, 26, 0.8); }
-        .dark .text-slate-300 { color: #c8c8c8 !important; }
-        .dark .text-slate-400 { color: #a0a0a0 !important; }
-        .dark .text-slate-600 { color: #c8c8c8 !important; }
-        
-        /* Text Scroll Animation */
-        .scrolling-words-container {
-            height: 4rem;
-            overflow: hidden;
-            position: relative;
-            display: inline-block;
-            /* vertical-align: bottom; -- Removed for flex alignment */
-        }
-        .scrolling-words-box {
-            display: inline-block;
-            animation: spin-words 10s infinite;
-        }
-        .scrolling-words-box li {
-            display: block;
-            height: 4rem;
-            line-height: 4rem;
-        }
-        @keyframes spin-words {
-            0%, 20% { transform: translateY(0); }
-            25%, 45% { transform: translateY(-4rem); }
-            50%, 70% { transform: translateY(-8rem); }
-            75%, 95% { transform: translateY(-12rem); }
-            100% { transform: translateY(-16rem); }
-        }
-
-        /* Typewriter effect */
-        .typewriter-text {
-            /* This span will grow with the text */
-            border-right: .15em solid #00CEDB;
-            white-space: pre-wrap;
-            animation: blink-caret .75s step-end infinite;
-        }
-        
-        @keyframes blink-caret {
-            from, to { border-color: transparent }
-            50% { border-color: #00CEDB; }
-        }
-        .animate-on-scroll {
-            opacity: 0;
-            transition: opacity 0.7s ease-out, transform 0.7s ease-out;
-        }
-        .fade-in {
-            opacity: 1;
-        }
-        .card-hover-effect {
-            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
-        }
-        .card-hover-effect:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
-        }
-        .dark .card-hover-effect:hover {
-             box-shadow: 0 10px 20px rgba(0, 206, 219, 0.1);
-        }
-        
-        /* Aurora Background */
-        .mh-aurora {
-            position: absolute;
-            inset: 0;
-            width: 100%;
-            height: 100%;
-            overflow: hidden;
-        }
-        .mh-aurora__glow {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 200%;
-            padding-bottom: 200%;
-            border-radius: 50%;
-            background-image: radial-gradient(circle, rgba(0, 206, 219, 0.15), transparent 45%),
-                              radial-gradient(circle, rgba(220, 20, 60, 0.15), transparent 45%);
-            transform: translate(-50%, -50%);
-            animation: aurora-glow 20s linear infinite;
-            will-change: transform;
-        }
-        .dark .mh-aurora__glow {
-            background-image: radial-gradient(circle, rgba(0, 206, 219, 0.2), transparent 45%),
-                              radial-gradient(circle, rgba(220, 20, 60, 0.2), transparent 45%);
-        }
-
-        @keyframes aurora-glow {
-            0% { transform: translate(-50%, -50%) rotate(0deg); }
-            100% { transform: translate(-50%, -50%) rotate(360deg); }
-        }
-    </style>
-</head>
-<body class="bg-brand-light text-brand-dark dark:bg-brand-dark dark:text-slate-100">
-
-    <!-- Back to Top Button -->
-    <button id="back-to-top" class="fixed bottom-6 right-6 bg-brand-crimson text-white p-3 rounded-full shadow-lg hidden z-50 hover:bg-opacity-90 transition-opacity duration-300">
-        <i data-lucide="arrow-up" class="h-6 w-6"></i>
-    </button>
-    
-    <!-- Header -->
-    <div id="home" class="sticky top-0 z-30">
-        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pt-4">
-            <header class="header-glass border border-slate-200/70 dark:border-slate-800 rounded-xl">
-                <div class="relative max-w-7xl mx-auto px-4 py-3 flex items-center justify-between">
-                    <a href="#home" class="flex items-center gap-3 group scroll-link">
-                        <svg width="250" height="50" viewBox="0 0 250 50" xmlns="http://www.w3.org/2000/svg">
-                            <defs>
-                                <linearGradient id="headerGradient" gradientUnits="userSpaceOnUse" x1="55" y1="0" x2="250" y2="0">
-                                    <stop offset="0%" stop-color="#DC143C" />
-                                    <stop offset="45%" stop-color="#DC143C"><animate attributeName="stop-color" values="#DC143C; #FFC0CB; #DC143C" dur="3s" repeatCount="indefinite"/></stop>
-                                    <stop offset="55%" stop-color="#DC143C"><animate attributeName="stop-color" values="#DC143C; #FFC0CB; #DC143C" dur="3s" repeatCount="indefinite"/></stop>
-                                    <stop offset="100%" stop-color="#DC143C" />
-                                </linearGradient>
-                            </defs>
-                            <image href="Shield.png" x="0" y="5" height="40" width="40" />
-                            <g fill="url(#headerGradient)" style="font-family: 'Ubuntu', sans-serif; font-size: 25px; font-weight: 600;">
-                                <text x="55" y="32">MerchantHaus</text>
-                            </g>
-                        </svg>
-                    </a>
-                    <div class="flex items-center gap-6">
-                        <div class="hidden md:flex items-center gap-4 text-sm font-medium text-slate-600 dark:text-slate-300">
-                            <a href="tel:15056006042" class="hover:text-brand-teal">1-505-600-6042</a>
-                            <a href="mailto:support@merchanthaus.io" class="hover:text-brand-teal">support@merchanthaus.io</a>
-                        </div>
-                        <a href="#application-form" class="js-cta bg-brand-crimson hover:bg-opacity-90 text-white border border-transparent px-4 py-2 rounded-full text-sm font-semibold transition-colors duration-300 scroll-link">Get Started</a>
-                        <a href="https://retailmanager.merchant.haus" class="hidden sm:block bg-transparent hover:bg-brand-teal text-brand-teal hover:text-white border border-brand-teal px-4 py-2 rounded-lg text-sm font-semibold transition-colors duration-300">Login</a>
-                         <button id="mobile-menu-button" class="md:hidden p-2 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800">
-                            <i data-lucide="menu" class="h-6 w-6"></i>
-                        </button>
-                    </div>
-                </div>
-            </header>
-        </div>
-    </div>
-    
-    <!-- Mobile Menu Panel -->
-    <div class="relative z-40">
-        <div id="mobile-menu" class="absolute right-4 mt-2 w-72 rounded-xl bg-white dark:bg-[#1c1c1c] shadow-2xl border border-brand-teal p-4 hidden">
-          <nav class="flex flex-col space-y-2 text-base font-medium">
-            <a href="#benefits" class="scroll-link px-4 py-2 rounded-lg hover:bg-brand-crimson hover:text-white">Payment Services</a>
-            <a href="#benefits" class="scroll-link px-4 py-2 rounded-lg hover:bg-brand-crimson hover:text-white">Integrations</a>
-            <a href="#home" class="scroll-link px-4 py-2 rounded-lg hover:bg-brand-crimson hover:text-white">Shopify</a>
-            <a href="#how-it-works" class="scroll-link px-4 py-2 rounded-lg hover:bg-brand-crimson hover:text-white">Setup Checklist</a>
-            <a href="mailto:support@merchanthaus.io" class="px-4 py-2 rounded-lg hover:bg-brand-crimson hover:text-white">Contact Support</a>
-            <a href="https://retailmanager.merchant.haus" class="sm:hidden block px-4 py-2 rounded-lg hover:bg-brand-crimson hover:text-white mt-2 pt-2 border-t border-slate-200 dark:border-slate-800">Login</a>
-          </nav>
-        </div>
-    </div>
-
-
-    <!-- Main Content -->
-    <main class="min-h-screen flex flex-col items-center justify-start">
+<main class="min-h-screen flex flex-col items-center justify-start">
         <!-- Cell 1: Hero and Benefits -->
         <section class="relative overflow-hidden w-full">
             <!-- AURORA BG -->
@@ -330,29 +131,7 @@
     </main>
 
     <!-- Footer -->
-    <footer class="bg-brand-dark text-brand-light border-t border-slate-800 py-10">
-        <div class="max-w-7xl mx-auto px-4 grid sm:grid-cols-2 lg:grid-cols-4 gap-8 text-sm">
-            <div class="space-y-4">
-                <a href="#home" class="flex items-center gap-3 scroll-link">
-                    <svg width="250" height="50" viewBox="0 0 250 50" xmlns="http://www.w3.org/2000/svg">
-                        <image href="Shield.png" x="0" y="5" height="40" width="40" />
-                        <g fill="#DC143C" style="font-family: 'Ubuntu', sans-serif; font-size: 25px; font-weight: 600;">
-                            <text x="55" y="32">MerchantHaus</text>
-                        </g>
-                    </svg>
-                </a>
-                <p class="text-brand-silver">plug. play. grow.</p>
-                <div class="text-sm">
-                    <a href="tel:15056006042" class="block hover:text-brand-teal">1-505-600-6042</a>
-                    <a href="mailto:support@merchanthaus.io" class="block hover:text-brand-teal">support@merchanthaus.io</a>
-                </div>
-            </div>
-            <nav class="space-y-2"><h3 class="font-semibold font-ubuntu text-white">Product</h3><a href="#benefits" class="block hover:text-brand-teal scroll-link">Payment Services</a><a href="#benefits" class="block hover:text-brand-teal scroll-link">Integrations</a><a href="#home" class="block hover:text-brand-teal scroll-link">Shopify Integration</a><a href="#how-it-works" class="block hover:text-brand-teal scroll-link">Setup Checklist</a></nav>
-            <nav class="space-y-2"><h3 class="font-semibold font-ubuntu text-white">Support</h3><a href="mailto:support@merchanthaus.io" class="block hover:text-brand-teal">Contact Support</a><a href="/faq.html" class="block hover:text-brand-teal">FAQs</a></nav>
-            <nav class="space-y-2"><h3 class="font-semibold font-ubuntu text-white">Legal</h3><a href="/privacy.html" class="block hover:text-brand-teal">Privacy Policy</a><a href="/terms.html" class="block hover:text-brand-teal">Terms & Conditions</a></nav>
-        </div>
-        <div class="text-center text-xs pt-8 mt-8 border-t border-slate-800/50 text-brand-silver">© <span id="year"></span> MerchantHaus. All rights reserved.</div>
-    </footer>
+    
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
@@ -529,8 +308,8 @@
             });
         });
     </script>
-</body>
-</html>
+
+<?php include __DIR__ . '/Footer.php'; ?>
 
 
 

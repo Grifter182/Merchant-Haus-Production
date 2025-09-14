@@ -1,250 +1,10 @@
-<!DOCTYPE html>
-<html lang="en" class="scroll-smooth dark">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>MerchantHaus – ISO Solutions for U.S. Retail</title>
-  <meta name="theme-color" content="#1c1c1c">
+<?php
+    $pageTitle = 'MerchantHaus – ISO Solutions for U.S. Retail';
+    $pageDescription = 'Secure and reliable payment processing solutions.';
+    include __DIR__ . '/Header.php';
+?>
 
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@700&family=Lexend:wght@100;400&family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@500;700&display=swap" rel="stylesheet" />
-  
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script>
-    tailwind.config = {
-      darkMode: 'class',
-      theme: {
-        extend: {
-          fontFamily: { 
-            sans: ['Lexend', 'ui-sans-serif', 'system-ui'],
-            ubuntu: ['Ubuntu', 'sans-serif'],
-            inter: ['Inter','sans-serif']
-          },
-          colors: {
-            brand: { 600:'#dc2743', 700:'#c21b35', 400:'#ef3c5b' },
-            'brand-green': '#6dffca'
-          },
-          keyframes: {
-            floaty: { '0%,100%': { transform: 'translateY(0)' }, '50%': { transform: 'translateY(-6px)' } },
-            scroll: { '0%': { transform: 'translateX(0)' }, '100%': { transform: 'translateX(-100%)' } },
-            fadeIn: { '0%': { opacity: '0' }, '100%': { opacity: '1' } },
-            kenBurns: {
-              '0%': { transform: 'scale(1) rotate(0deg)', backgroundPosition: 'center' },
-              '100%': { transform: 'scale(1.1) rotate(1deg)', backgroundPosition: 'top left' }
-            }
-          },
-          animation: {  
-            floaty: 'floaty 6s ease-in-out infinite',
-            scroll: 'scroll 40s linear infinite',
-            fadeIn: 'fadeIn 1.5s ease-in-out forwards',
-            kenBurns: 'kenBurns 20s ease-in-out infinite alternate'
-          }
-        }
-      }
-    }
-  </script>
-  
-  <script src="https://unpkg.com/lucide@latest"></script>
-
-  <style>
-    :root { color-scheme: light dark; }
-    body { font-family: 'Lexend', ui-sans-serif, system-ui; }
-
-    .header-glass {
-      background-color: rgba(255, 255, 255, 0.8);
-      backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
-    }
-    .dark .header-glass {
-      background-color: rgba(28, 28, 28, 0.8);
-    }
-    
-    .field:focus { outline: none; box-shadow: 0 0 0 3px rgba(239,60,91,.35); }
-    .cursor {
-      display: inline-block;
-      width: 3px;
-      height: 1em;
-      background-color: #dc2743;
-      animation: blink-caret .75s step-end infinite;
-      vertical-align: bottom;
-    }
-    @keyframes blink-caret {
-      from, to { background-color: transparent; }
-      50% { background-color: #dc2743; }
-    }
-    .loader {
-        width: 16px;
-        height: 16px;
-        border: 2px solid #FFF;
-        border-bottom-color: transparent;
-        border-radius: 50%;
-        display: inline-block;
-        box-sizing: border-box;
-        animation: rotation 1s linear infinite;
-        vertical-align: middle;
-        margin-right: 8px;
-    }
-    @keyframes rotation {
-        0% { transform: rotate(0deg); }
-        100% { transform: rotate(360deg); }
-    }
-    
-    .feature-display {
-        display: flex; align-items: center; justify-content: center;
-        min-width: 150px; height: 38px; padding: 0 16px; border-radius: 9999px;
-        background-color: #F3F4F6;
-        color: #111827;
-        font-size: 0.875rem; font-weight: 500; transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
-        opacity: 0; transform: translateX(-50%) translateY(10px); position: absolute; left: 50%; white-space: nowrap;
-    }
-    .dark .feature-display {  
-        background-color: #1f2937;
-        color: #f9fafb;
-    }
-    .feature-display.active { opacity: 1; transform: translateX(-50%) translateY(0); }
-    .feature-display.exiting { opacity: 0; transform: translateX(-50%) translateY(-10px); }
-    
-    .service-cell {
-        opacity: 0;
-        transition: opacity 0.5s ease-in-out;
-    }
-    .service-cell.is-visible {
-        opacity: 1;
-    }
-    .service-cell h3, .service-cell p {
-        opacity: 0;
-        transform: translateY(10px);
-        transition: opacity 0.4s ease-out, transform 0.4s ease-out;
-    }
-    .service-cell.is-visible h3 {
-        opacity: 1;
-        transform: translateY(0);
-        transition-delay: 0.2s;
-    }
-    .service-cell.is-visible p {
-        opacity: 1;
-        transform: translateY(0);
-        transition-delay: 0.3s;
-    }
-
-    .hero-bg-container::before {
-        content: '';
-        position: absolute;
-        inset: 0;
-        background-image: url('hero.png');
-        background-size: 100%;
-        background-position: center;
-        background-repeat: no-repeat;
-        animation: kenBurns 20s ease-in-out infinite alternate;
-        z-index: -20;
-    }
-
-    /* Wordmark helpers (retired for new SVG logo but kept harmless) */
-    .grad-text, .grad-text-static { -webkit-text-fill-color: initial; background: none; color: inherit; }
-
-    /* Prefer dark grey globally */
-    .dark, .dark body { background-color: #1c1c1c !important; color: #f5f5f5 !important; }
-    /* Common slate utilities coerced to dark grey */
-    .dark .bg-slate-950, .dark .bg-slate-900, .dark .bg-slate-800 { background-color:#1c1c1c !important; }
-    .dark .border-slate-800, .dark .border-slate-700 { border-color:#2a2a2a !important; }
-    .dark .text-slate-400, .dark .text-slate-300, .dark .text-slate-100 { color:#c8c8c8 !important; }
-
-    /* Footer Styling */
-    footer {
-        position: relative;
-        background-image: url('assets/email.jpg');
-        background-size: cover;
-        background-position: center;
-        color: white;
-    }
-
-    footer::before {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        background-color: rgba(0, 0, 0, 0.6);
-        z-index: 1;
-    }
-
-    footer > div {
-        position: relative;
-        z-index: 2;
-    }
-
-    footer .text-gray-600, footer .dark\:text-slate-300, footer p {
-        color: #d1d5db !important;
-    }
-    footer .text-gray-500 {
-        color: #9ca3af !important;
-    }
-    footer a {
-        color: #f9fafb !important;
-    }
-    footer a:hover {
-        text-decoration: underline;
-    }
-    footer h3 {
-        color: #f9fafb !important;
-    }
-    footer .border-slate-200, footer .dark\:border-slate-800 {
-        border-color: rgba(255, 255, 255, 0.2) !important;
-    }
-    .panel-overlay, .panel-container { transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
-
-    /* Logo sizing helpers */
-    .mh-logo { display:block; width:100%; height:auto; }
-  </style>
-
-  <link rel="apple-touch-icon" sizes="180x180" href="shield/apple-touch-icon.png">
-  <link rel="icon" type="image/png" sizes="32x32" href="shield/favicon-32x32.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="shield/favicon-16x16.png">
-  <link rel="manifest" href="shield/site.webmanifest">
-
-</head>
-
-<body class="bg-white text-slate-900 dark:bg-slate-950 dark:text-slate-100">
-  
-  <div class="sticky top-0 z-50">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-4 pb-4">
-      <header class="header-glass border border-slate-200/70 dark:border-slate-800 rounded-xl">
-        <div class="relative max-w-7xl mx-auto px-4 py-4 flex items-center justify-between">
-          <a href="#" class="flex items-center gap-3 group">
-            <div class="w-[190px] md:w-[260px]" data-mh-logo></div>
-            <noscript>
-              <img src="Shield/Shield.png" alt="MerchantHaus" class="h-10" />
-            </noscript>
-          </a>
-          <div class="flex items-center gap-2">
-            <a href="#" class="js-cta bg-transparent hover:bg-brand-600 text-brand-600 hover:text-white border border-brand-600 px-4 py-2 rounded-full text-sm font-semibold transition-colors duration-300">Get Started</a>
-            <a href="https://retailmanager.merchant.haus" class="hidden sm:block bg-transparent hover:bg-brand-green text-brand-green hover:text-slate-800 border border-brand-green px-4 py-2 rounded-lg text-sm font-semibold transition-colors duration-300">Login</a>
-            <button id="open-menu-btn" class="p-2 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800" aria-label="Open menu"><i data-lucide="menu" class="h-5 w-5"></i></button>
-          </div>
-           <div id="popout-menu" class="absolute top-full right-4 mt-2 w-72 rounded-xl bg-white dark:bg-[#1c1c1c] shadow-2xl border border-brand-green p-4 z-[51] hidden opacity-0 transition-opacity duration-300">
-            <nav class="flex flex-col space-y-1 text-base font-medium">
-                <a href="#payments" data-close class="px-4 py-2 rounded-lg hover:bg-brand-600 hover:text-white transition-colors">Payment Services</a>
-                <a href="#integrations" data-close class="px-4 py-2 rounded-lg hover:bg-brand-600 hover:text-white transition-colors">Integrations</a>
-                <a href="Shopify.html" data-close class="px-4 py-2 rounded-lg hover:bg-brand-600 hover:text-white transition-colors">Shopify</a>
-                <a href="#checklist" data-close class="px-4 py-2 rounded-lg hover:bg-brand-600 hover:text-white transition-colors">Setup Checklist</a>
-                <a href="#" data-close class="js-support px-4 py-2 rounded-lg hover:bg-brand-600 hover:text-white transition-colors">Contact Support</a>
-                <a href="https://retailmanager.merchant.haus" data-close class="sm:hidden block px-4 py-2 rounded-lg hover:bg-brand-600 hover:text-white transition-colors mt-2 pt-2 border-t border-slate-200 dark:border-slate-800">Login</a>
-            </nav>
-            <div class="mt-4 pt-4 border-t border-slate-200 dark:border-slate-800">
-                <p class="text-xs text-center text-slate-500 dark:text-slate-400">
-                    Questions? Call <a href="tel:15056006042" class="text-brand-600 dark:text-brand-400 hover:underline">1-505-600-6042</a> or email us at <a href="mailto:support@merchanthaus.io" class="text-brand-600 dark:text-brand-400 hover:underline">support@merchanthaus.io</a>
-                </p>
-            </div>
-          </div>
-        </div>
-      </header>
-    </div>
-
-
-  <div class="relative">
+<div class="relative">
     <section class="relative overflow-hidden animate-fadeIn hero-bg-container">
         <div class="absolute inset-0 bg-black/50 -z-10"></div>
 
@@ -306,7 +66,7 @@
       <h2 class="text-4xl font-bold mb-4 animate-on-scroll font-ubuntu">Integrate with Your Favorite Tools</h2>
       <p class="text-lg text-gray-600 dark:text-slate-300 mb-12">Connect MerchantHaus with the platforms you already use.</p>
       <div class="flex justify-center items-center gap-8 md:gap-16">
-        <a href="shopify.html" class="block hover:scale-105 transition-transform duration-300">
+        <a href="shopify.php" class="block hover:scale-105 transition-transform duration-300">
           <img src="shopifylight.png" alt="Shopify Logo" class="h-12 md:h-14 block dark:hidden">
           <img src="shopifydark.png" alt="Shopify Logo" class="h-12 md:h-14 hidden dark:block">
         </a>
@@ -394,9 +154,9 @@
         <h3 class="font-semibold font-ubuntu">Product</h3>
         <a href="#payments" class="block">Payment Services</a>
         <a href="#integrations" class="block">Integrations</a>
-        <a href="Shopify.html" data-close class="px-4 py-2 rounded-lg hover:bg-brand-600 hover:text-white transition-colors">Shopify</a>
+        <a href="shopify.php" data-close class="px-4 py-2 rounded-lg hover:bg-brand-600 hover:text-white transition-colors">Shopify</a>
         <a href="#checklist" class="block">Setup Checklist</a>
-        <a href="compliance.html" class="block">Compliance</a>
+        <a href="compliance.php" class="block">Compliance</a>
       </nav>
       <nav class="space-y-2">
         <h3 class="font-semibold font-ubuntu">Support</h3>
@@ -405,8 +165,8 @@
       </nav>
       <nav class="space-y-2">
         <h3 class="font-semibold font-ubuntu">Legal</h3>
-        <a href="Privacy.html" class="block">Privacy Policy</a>
-        <a href="terms.html" class="block">Terms & Conditions</a>
+        <a href="privacy.php" class="block">Privacy Policy</a>
+        <a href="terms.php" class="block">Terms & Conditions</a>
       </nav>
     </div>
     <div class="text-center text-xs pt-8 mt-8 border-t">© <span id="year"></span> Merchant Haus. All rights reserved.</div>
@@ -808,6 +568,7 @@
     });
   </script>
 
+<?php include __DIR__ . '/Footer.php'; ?>
   <template id="MHLogo">
     <svg class="mh-logo" viewBox="0 0 500 100" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="MerchantHaus — plug. play. grow.">
       <defs>
@@ -859,11 +620,8 @@
       target.replaceChildren(node);
     }
     document.addEventListener('DOMContentLoaded', () => {
-      document.querySelectorAll('[data-mh-logo]').forEach(mountMHLogo);
+  document.querySelectorAll('[data-mh-logo]').forEach(mountMHLogo);
     });
   </script>
 
-</body>
-</html>
-
-
+<?php include __DIR__ . '/Footer.php'; ?>
