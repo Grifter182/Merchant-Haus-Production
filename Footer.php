@@ -2,7 +2,7 @@
     <footer class="border-t border-slate-800 py-10 mt-16">
         <div class="max-w-7xl mx-auto px-4 grid sm:grid-cols-2 lg:grid-cols-4 gap-8 text-sm" >
             <div class="space-y-4">
-                <a href="index.php" class="flex items-center gap-3">
+                <a href="index.html" class="flex items-center gap-3">
                     <div class="w-[220px]" data-mh-logo-footer></div>
                      <span class="sr-only">MerchantHaus Homepage</span>
                 </a>
@@ -15,19 +15,19 @@
                 <h3 class="font-semibold font-ubuntu text-white">Product</h3>
                 <a href="/#payments" class="block text-slate-300 hover:text-brand-teal">Payment Services</a>
                 <a href="/#integrations" class="block text-slate-300 hover:text-brand-teal">Integrations</a>
-                <a href="shopify.php" class="block text-slate-300 hover:text-brand-teal">Shopify Integration</a>
-                <a href="gohighlevel.php" class="block text-slate-300 hover:text-brand-teal">GoHighLevel Integration</a>
+                <a href="shopify.html" class="block text-slate-300 hover:text-brand-teal">Shopify Integration</a>
+                <a href="gohighlevel.html" class="block text-slate-300 hover:text-brand-teal">GoHighLevel Integration</a>
                 <a href="/#checklist" class="block text-slate-300 hover:text-brand-teal">Setup Checklist</a>
             </nav>
             <nav class="space-y-2">
                 <h3 class="font-semibold font-ubuntu text-white">Support</h3>
                 <a href="mailto:support@merchanthaus.io" class="block text-slate-300 hover:text-brand-teal">Contact Support</a>
-                <a href="/faq.php" class="block text-slate-300 hover:text-brand-teal">FAQ</a>
+                <a href="/faq.html" class="block text-slate-300 hover:text-brand-teal">FAQ</a>
             </nav>
             <nav class="space-y-2">
                 <h3 class="font-semibold font-ubuntu text-white">Legal</h3>
-                <a href="/privacy.php" class="block text-slate-300 hover:text-brand-teal">Privacy Policy</a>
-                <a href="/terms.php" class="block text-slate-300 hover:text-brand-teal">Terms & Conditions</a>
+                <a href="/privacy.html" class="block text-slate-300 hover:text-brand-teal">Privacy Policy</a>
+                <a href="/terms.html" class="block text-slate-300 hover:text-brand-teal">Terms & Conditions</a>
             </nav>
         </div>
         <div class="text-center text-xs pt-8 mt-8 border-t border-slate-800 text-slate-500 font-inter">
