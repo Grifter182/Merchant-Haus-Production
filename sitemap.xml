@@ -17,16 +17,26 @@
   <lastmod>2025-08-26T23:47:37+00:00</lastmod>
   <priority>0.80</priority>
 </url>
-<url>
-  <loc>https://merchant.haus/shopify.php</loc>
-  <lastmod>2025-08-26T23:47:37+00:00</lastmod>
-  <priority>0.80</priority>
-</url>
-<url>
-  <loc>https://merchant.haus/compliance</loc>
-  <lastmod>2025-08-26T23:47:37+00:00</lastmod>
-  <priority>0.80</priority>
-</url>
+  <url>
+    <loc>https://merchant.haus/shopify.php</loc>
+    <lastmod>2025-08-26T23:47:37+00:00</lastmod>
+    <priority>0.80</priority>
+  </url>
+  <url>
+    <loc>https://merchant.haus/gohighlevel</loc>
+    <lastmod>2025-08-26T23:47:37+00:00</lastmod>
+    <priority>0.80</priority>
+  </url>
+  <url>
+    <loc>https://merchant.haus/gohighlevel.php</loc>
+    <lastmod>2025-08-26T23:47:37+00:00</lastmod>
+    <priority>0.80</priority>
+  </url>
+  <url>
+    <loc>https://merchant.haus/compliance</loc>
+    <lastmod>2025-08-26T23:47:37+00:00</lastmod>
+    <priority>0.80</priority>
+  </url>
 <url>
   <loc>https://merchant.haus/privacy</loc>
   <lastmod>2025-08-26T23:47:37+00:00</lastmod>
