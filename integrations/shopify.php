@@ -9,7 +9,7 @@
 <header class="mt-4 flex items-center gap-4">
 <img alt="Shopify" class="h-10 w-auto" src="/shield.png"/>
 <h1 class="text-3xl font-extrabold">MerchantHaus for Shopify</h1>
-<nav><a href="/services">Payment Services</a><a href="/pricing">Plans &amp; Pricing</a><a href="/contact">Contact Us</a><a href="/setup-checklist">Setup Checklist</a><a href="/privacy">Privacy Policy</a><a href="/terms">Terms &amp; Conditions</a></nav></header>
+<nav><a href="mailto:support@merchanthaus.io">Contact Us</a><a href="/privacy">Privacy Policy</a><a href="/terms">Terms &amp; Conditions</a></nav></header>
 <p class="mt-3 text-slate-600 dark:text-slate-300">Boost approvals, reduce fraud, and keep processor flexibility while selling on Shopify.</p>
 <section class="mt-8 grid md:grid-cols-2 gap-6">
 <div class="p-6 rounded-2xl border border-slate-200 dark:border-slate-800">
