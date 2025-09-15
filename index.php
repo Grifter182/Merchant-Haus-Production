@@ -80,11 +80,11 @@
     <h2 class="text-4xl font-bold mb-4 animate-on-scroll font-ubuntu">Integrate with Your Favorite Tools</h2>
     <p class="text-lg text-gray-600 dark:text-slate-300 mb-12">Connect MerchantHaus with the platforms you already use.</p>
     <div class="flex justify-center items-center gap-8 md:gap-16">
-      <a href="shopify.php" class="block hover:scale-105 transition-transform duration-300">
+      <a href="shopify.html" class="block hover:scale-105 transition-transform duration-300">
         <img src="public/assets/images/shopifylight.png" alt="Shopify Logo" class="h-12 md:h-14 block dark:hidden">
         <img src="public/assets/images/shopifydark.png" alt="Shopify Logo" class="h-12 md:h-14 hidden dark:block">
       </a>
-      <a href="gohighlevel.php" class="block hover:scale-105 transition-transform duration-300">
+      <a href="gohighlevel.html" class="block hover:scale-105 transition-transform duration-300">
         <img src="public/assets/images/gohighlevellight.png" alt="GoHighLevel Logo" class="h-12 md:h-14 block dark:hidden">
         <img src="public/assets/images/gohighleveldark.png" alt="GoHighLevel Logo" class="h-12 md:h-14 hidden dark:block">
       </a>
@@ -404,7 +404,7 @@ document.addEventListener('DOMContentLoaded', () => {
     submitBtn.innerHTML = '<span class="loader"></span> Sending...';
     supportOut.textContent = '';
     try {
-      const response = await fetch('support.php', { method: 'POST', body: formData });
+      const response = await fetch('support.html', { method: 'POST', body: formData });
       if (!response.ok) throw new Error('Network response was not ok');
       const result = await response.json();
       if (result.success) {

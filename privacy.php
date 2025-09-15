@@ -92,7 +92,7 @@
                 </section>
             </div>
             <div class="mt-12 text-center">
-                <a href="index.php" class="px-5 py-3 rounded-xl border border-slate-300 dark:border-slate-700 text-sm font-medium hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors">Back to Home</a>
+                <a href="index.html" class="px-5 py-3 rounded-xl border border-slate-300 dark:border-slate-700 text-sm font-medium hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors">Back to Home</a>
             </div>
         </div>
     </main>
