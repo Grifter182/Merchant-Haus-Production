@@ -11,7 +11,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?php echo htmlspecialchars($pageTitle); ?> – MerchantHaus</title>
     <meta name="description" content="<?php echo htmlspecialchars($pageDescription); ?>">
-    <link rel="preload" as="image" href="banner1.png">
+    <link rel="preload" as="image" href="public/assets/images/banner1.png">
 
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
