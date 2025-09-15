@@ -153,7 +153,7 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-4">
              <header class="header-glass border border-slate-200/70 dark:border-slate-800 rounded-xl">
                  <div class="relative max-w-7xl mx-auto px-4 py-3 flex items-center justify-between">
-                    <a href="index.html" class="flex items-center gap-3 group">
+                    <a href="index.php" class="flex items-center gap-3 group">
                          <div class="w-[190px] md:w-[260px]" data-mh-logo-header></div>
                          <span class="sr-only">MerchantHaus Homepage</span>
                      </a>
@@ -174,10 +174,10 @@
                  <nav class="flex flex-col space-y-2 text-base font-medium font-inter">
                      <a href="/#payments" class="px-4 py-2 rounded-lg hover:bg-brand-crimson hover:text-white">Payment Services</a>
                      <a href="/#integrations" class="px-4 py-2 rounded-lg hover:bg-brand-crimson hover:text-white">Integrations</a>
-                    <a href="Shopify.html" class="px-4 py-2 rounded-lg hover:bg-brand-crimson hover:text-white">Shopify</a>
+                    <a href="shopify.php" class="px-4 py-2 rounded-lg hover:bg-brand-crimson hover:text-white">Shopify</a>
                     <a href="gohighlevel.php" class="px-4 py-2 rounded-lg hover:bg-brand-crimson hover:text-white">GoHighLevel</a>
                      <a href="/#checklist" class="px-4 py-2 rounded-lg hover:bg-brand-crimson hover:text-white">Setup Checklist</a>
-                    <a href="compliance.html" class="px-4 py-2 rounded-lg hover:bg-brand-crimson hover:text-white">Compliance</a>
+                    <a href="compliance.php" class="px-4 py-2 rounded-lg hover:bg-brand-crimson hover:text-white">Compliance</a>
                      <a href="mailto:support@merchanthaus.io" class="px-4 py-2 rounded-lg hover:bg-brand-crimson hover:text-white">Contact Support</a>
                      <a href="https://retailmanager.merchant.haus" class="sm:hidden block px-4 py-2 rounded-lg hover:bg-brand-crimson hover:text-white mt-2 pt-2 border-t border-slate-800">Login</a>
                  </nav>
