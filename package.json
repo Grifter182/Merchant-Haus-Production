@@ -10,7 +10,7 @@
     "format": "prettier --write .",
     "typecheck": "tsc --noEmit",
     "test": "jest --passWithNoTests",
-    "build": "mkdir -p dist && echo \"Build step not configured\" > dist/README.md"
+    "build": "rm -rf dist && mkdir dist && rsync -av --exclude='dist' --exclude='node_modules' --exclude='.git' --exclude='package.json' --exclude='package-lock.json' --exclude='README.md' --exclude='netlify.toml' --exclude='eslint.config.mjs' --exclude='jest.config.js' ./ dist && php index.php > dist/index.html"
   },
   "engines": {
     "node": ">=18"
