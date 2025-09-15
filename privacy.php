@@ -1,7 +1,7 @@
 <?php
     $pageTitle = 'MerchantHaus – Privacy Policy';
     $pageDescription = 'Privacy practices and policies for MerchantHaus.';
-    include __DIR__ . '/Header.php';
+    require_once __DIR__ . '/src/includes/header.php';
 ?>
 
 <main class="min-h-screen pt-12 pb-16 flex flex-col items-center justify-start p-6">
@@ -126,5 +126,5 @@
         });
     </script>
 
-<?php include __DIR__ . '/Footer.php'; ?>
+<?php require_once __DIR__ . '/src/includes/footer.php'; ?>
 

@@ -1,7 +1,7 @@
 <?php
     $pageTitle = 'Apply — MerchantHaus (U.S. Retail ISO)';
     $pageDescription = 'Merchant application for U.S. retail merchants.';
-    include __DIR__ . '/Header.php';
+    require_once __DIR__ . '/src/includes/header.php';
 ?>
 
 <main class="max-w-5xl mx-auto px-4 py-10">
@@ -113,5 +113,5 @@
   });
 </script>
 
-<?php include __DIR__ . '/Footer.php'; ?>
+<?php require_once __DIR__ . '/src/includes/footer.php'; ?>
 
