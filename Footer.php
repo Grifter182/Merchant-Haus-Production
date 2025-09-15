@@ -78,7 +78,7 @@
                             .mh-tagline-${id} { font-family: 'Inter', sans-serif; font-size: 18px; font-weight: 500; fill: #A9A9A9; text-anchor: middle; letter-spacing: 4px; }
                         </style>
                     </defs>
-                    <image href="Shield.png" x="10" y="10" height="80" width="80" />
+                    <image href="public/assets/images/Shield.png" x="10" y="10" height="80" width="80" />
                     <text class="mh-text-${id}" y="60" x="110">${letterTags}</text>
                     ${tagline ? `
                         <line x1="160" x2="400" y1="72" y2="72" stroke="#00CEDB" stroke-width="2" opacity="0">

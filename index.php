@@ -19,7 +19,7 @@
 .service-cell h3, .service-cell p { opacity: 0; transform: translateY(10px); transition: opacity 0.4s ease-out, transform 0.4s ease-out; }
 .service-cell.is-visible h3 { opacity: 1; transform: translateY(0); transition-delay: 0.2s; }
 .service-cell.is-visible p { opacity: 1; transform: translateY(0); transition-delay: 0.3s; }
-.hero-bg-container::before { content: ''; position: absolute; inset: 0; background-image: url('hero.png'); background-size: 100%; background-position: center; background-repeat: no-repeat; animation: kenBurns 20s ease-in-out infinite alternate; z-index: -20; }
+.hero-bg-container::before { content: ''; position: absolute; inset: 0; background-image: url('public/assets/images/hero.png'); background-size: 100%; background-position: center; background-repeat: no-repeat; animation: kenBurns 20s ease-in-out infinite alternate; z-index: -20; }
 @keyframes kenBurns { 0% { transform: scale(1) rotate(0deg); background-position: center; } 100% { transform: scale(1.1) rotate(1deg); background-position: top left; } }
 .panel-overlay, .panel-container { transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
 </style>
@@ -81,12 +81,12 @@
     <p class="text-lg text-gray-600 dark:text-slate-300 mb-12">Connect MerchantHaus with the platforms you already use.</p>
     <div class="flex justify-center items-center gap-8 md:gap-16">
       <a href="shopify.php" class="block hover:scale-105 transition-transform duration-300">
-        <img src="shopifylight.png" alt="Shopify Logo" class="h-12 md:h-14 block dark:hidden">
-        <img src="shopifydark.png" alt="Shopify Logo" class="h-12 md:h-14 hidden dark:block">
+        <img src="public/assets/images/shopifylight.png" alt="Shopify Logo" class="h-12 md:h-14 block dark:hidden">
+        <img src="public/assets/images/shopifydark.png" alt="Shopify Logo" class="h-12 md:h-14 hidden dark:block">
       </a>
       <a href="gohighlevel.php" class="block hover:scale-105 transition-transform duration-300">
-        <img src="gohighlevellight.png" alt="GoHighLevel Logo" class="h-12 md:h-14 block dark:hidden">
-        <img src="gohighleveldark.png" alt="GoHighLevel Logo" class="h-12 md:h-14 hidden dark:block">
+        <img src="public/assets/images/gohighlevellight.png" alt="GoHighLevel Logo" class="h-12 md:h-14 block dark:hidden">
+        <img src="public/assets/images/gohighleveldark.png" alt="GoHighLevel Logo" class="h-12 md:h-14 hidden dark:block">
       </a>
     </div>
   </div>

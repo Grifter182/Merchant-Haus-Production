@@ -20,15 +20,15 @@
                      <div class="grid md:grid-cols-2 items-center gap-8 mb-8">
                          <div class="flex justify-center md:justify-end">
                             <svg width="500" height="100" viewBox="0 0 500 100" xmlns="http://www.w3.org/2000/svg">
-                               <image href="Shield.png" x="10" y="10" height="80" width="80" />
+                               <image href="public/assets/images/Shield.png" x="10" y="10" height="80" width="80" />
                                <g fill="#DC143C" class="dark:fill-white" style="font-family: 'Ubuntu', sans-serif; font-size: 50px; font-weight: 600;">
                                   <text y="60" x="120">MerchantHaus</text>
                                </g>
                             </svg>
                          </div>
                          <div class="flex justify-center md:justify-start">
-                            <img src="shopifylight.png" alt="Shopify Logo" class="h-16 rounded-lg block dark:hidden">
-                            <img src="shopifydark.png" alt="Shopify Logo" class="h-16 rounded-lg hidden dark:block">
+                            <img src="public/assets/images/shopifylight.png" alt="Shopify Logo" class="h-16 rounded-lg block dark:hidden">
+                            <img src="public/assets/images/shopifydark.png" alt="Shopify Logo" class="h-16 rounded-lg hidden dark:block">
                          </div>
                     </div>
 
@@ -85,7 +85,7 @@
 
         <!-- Cell 2: How It Works, CTA, NMI -->
         <div class="relative w-full max-w-6xl rounded-xl shadow-lg -mt-16 z-10 mb-16 overflow-hidden border border-slate-200/70 dark:border-slate-800"
-             style="background-image: url('banner1.png'); background-size: cover; background-position: center;">
+            style="background-image: url('public/assets/images/banner1.png'); background-size: cover; background-position: center;">
             <div class="bg-brand-light/80 dark:bg-brand-dark/80 backdrop-blur-sm p-6 sm:p-8">
                 <!-- How It Works Section -->
                 <section id="how-it-works" class="pt-10 text-center">
@@ -123,7 +123,7 @@
                 <section class="mt-16 text-center">
                      <p class="text-gray-500 text-sm font-medium mb-2 tracking-wider">POWERED BY</p>
                      <a href="https://www.nmi.com/" target="_blank" rel="noopener noreferrer">
-                        <img src="nmi.png" alt="NMI Logo" class="h-10 mx-auto">
+                        <img src="public/assets/images/nmi.png" alt="NMI Logo" class="h-10 mx-auto">
                      </a>
                 </section>
             </div>
