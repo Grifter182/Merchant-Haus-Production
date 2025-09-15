@@ -1,0 +1,11 @@
+{
+    "name": "merchanthaus/production",
+    "description": "MerchantHaus Production site",
+    "type": "project",
+    "autoload": {
+        "psr-4": {
+            "MerchantHaus\\": "src/"
+        }
+    },
+    "require": {}
+}

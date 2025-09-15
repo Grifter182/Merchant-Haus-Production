@@ -1,7 +1,8 @@
 <?php
     $pageTitle = 'MerchantHaus – Terms & Conditions';
     $pageDescription = 'Terms and conditions for using MerchantHaus services.';
-    include __DIR__ . '/Header.php';
+    require_once __DIR__ . '/bootstrap.php';
+    Renderer::header($pageTitle, $pageDescription);
 ?>
 
 <main class="min-h-screen pt-12 pb-16 flex flex-col items-center justify-start p-6">
@@ -139,5 +140,5 @@
         });
     </script>
 
-<?php include __DIR__ . '/Footer.php'; ?>
+<?php Renderer::footer(); ?>
 
