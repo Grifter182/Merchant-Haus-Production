@@ -1,4 +1,4 @@
-// functions/gemini-chat.js
+// netlify/functions/gemini-chat.js
 exports.handler = async (event) => {
   if (event.httpMethod === "OPTIONS") {
     return { statusCode: 204, headers: {
