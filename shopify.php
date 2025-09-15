@@ -1,7 +1,7 @@
 <?php
     $pageTitle = 'MerchantHaus – Shopify Payment Processing';
     $pageDescription = 'Seamless Shopify integration with MerchantHaus payments.';
-    include __DIR__ . '/Header.php';
+    require_once __DIR__ . '/src/includes/header.php';
 ?>
 
 <main class="min-h-screen flex flex-col items-center justify-start">
@@ -309,7 +309,7 @@
         });
     </script>
 
-<?php include __DIR__ . '/Footer.php'; ?>
+<?php require_once __DIR__ . '/src/includes/footer.php'; ?>
 
 
 

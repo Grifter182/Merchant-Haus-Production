@@ -1,7 +1,7 @@
 <?php
     $pageTitle = 'MerchantHaus – ISO Solutions for U.S. Retail';
     $pageDescription = 'Effortlessly set up your business profile and start taking payments in minutes—cards, ACH, and secure pay links—online, in-store, or on the go.';
-    include __DIR__ . '/Header.php';
+    require_once __DIR__ . '/src/includes/header.php';
 ?>
 
 <style>
@@ -441,4 +441,4 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 </script>
 
-<?php include __DIR__ . '/Footer.php'; ?>
+<?php require_once __DIR__ . '/src/includes/footer.php'; ?>

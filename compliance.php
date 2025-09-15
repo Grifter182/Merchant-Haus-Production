@@ -1,7 +1,7 @@
 <?php
     $pageTitle = 'MerchantHaus | Compliance Checklist & Application';
     $pageDescription = 'Compliance resources and application checklist for MerchantHaus.';
-    include __DIR__ . '/Header.php';
+    require_once __DIR__ . '/src/includes/header.php';
 ?>
 
 <main class="min-h-screen max-w-7xl mx-auto pt-12 pb-16 grid grid-cols-1 lg:grid-cols-2 gap-8 p-6">
@@ -224,4 +224,4 @@
         });
     </script>
 
-<?php include __DIR__ . '/Footer.php'; ?>
+<?php require_once __DIR__ . '/src/includes/footer.php'; ?>

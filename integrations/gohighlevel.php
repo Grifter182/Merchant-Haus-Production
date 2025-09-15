@@ -1,7 +1,7 @@
 <?php
     $pageTitle = 'MerchantHaus × GoHighLevel — Retail Payments';
     $pageDescription = 'Accept payments in GoHighLevel with MerchantHaus.';
-    include __DIR__ . '/../Header.php';
+    require_once __DIR__ . '/../src/includes/header.php';
 ?>
 
 <main class="max-w-5xl mx-auto px-4 py-12">
@@ -62,4 +62,4 @@
 </div>
 <script src="/assets/app.js"></script>
 
-<?php include __DIR__ . '/../Footer.php'; ?>
+<?php require_once __DIR__ . '/../src/includes/footer.php'; ?>
