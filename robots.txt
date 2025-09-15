@@ -3,9 +3,9 @@ User-agent: *
 Allow: /
 
 # Disallow crawling of specific files and directories that are not useful for SEO
-Disallow: /privacy.php
-Disallow: /terms.php
-Disallow: /compliance.php
+Disallow: /privacy.html
+Disallow: /terms.html
+Disallow: /compliance.html
 Disallow: /admin/
 Disallow: /tmp/
 
