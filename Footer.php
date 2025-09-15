@@ -16,6 +16,7 @@
                 <a href="/#payments" class="block text-slate-300 hover:text-brand-teal">Payment Services</a>
                 <a href="/#integrations" class="block text-slate-300 hover:text-brand-teal">Integrations</a>
                 <a href="Shopify.html" class="block text-slate-300 hover:text-brand-teal">Shopify Integration</a>
+                <a href="gohighlevel.php" class="block text-slate-300 hover:text-brand-teal">GoHighLevel Integration</a>
                 <a href="/#checklist" class="block text-slate-300 hover:text-brand-teal">Setup Checklist</a>
             </nav>
             <nav class="space-y-2">

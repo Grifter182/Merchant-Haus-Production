@@ -84,7 +84,7 @@
         <img src="shopifylight.png" alt="Shopify Logo" class="h-12 md:h-14 block dark:hidden">
         <img src="shopifydark.png" alt="Shopify Logo" class="h-12 md:h-14 hidden dark:block">
       </a>
-      <a href="#" class="block hover:scale-105 transition-transform duration-300">
+      <a href="gohighlevel.php" class="block hover:scale-105 transition-transform duration-300">
         <img src="gohighlevellight.png" alt="GoHighLevel Logo" class="h-12 md:h-14 block dark:hidden">
         <img src="gohighleveldark.png" alt="GoHighLevel Logo" class="h-12 md:h-14 hidden dark:block">
       </a>
