@@ -404,7 +404,7 @@ document.addEventListener('DOMContentLoaded', () => {
     submitBtn.innerHTML = '<span class="loader"></span> Sending...';
     supportOut.textContent = '';
     try {
-      const response = await fetch('api.php?action=support', { method: 'POST', body: formData });
+      const response = await fetch('support.php', { method: 'POST', body: formData });
       if (!response.ok) throw new Error('Network response was not ok');
       const result = await response.json();
       if (result.success) {
