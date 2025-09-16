@@ -21,3 +21,63 @@
   from = "/integrations"
   to = "/#integrations"
   status = 301
+
+[[redirects]]
+  from = "/index.php"
+  to = "/index.html"
+  status = 301
+
+[[redirects]]
+  from = "/shopify.php"
+  to = "/shopify.html"
+  status = 301
+
+[[redirects]]
+  from = "/gohighlevel.php"
+  to = "/gohighlevel.html"
+  status = 301
+
+[[redirects]]
+  from = "/faq.php"
+  to = "/faq.html"
+  status = 301
+
+[[redirects]]
+  from = "/apply.php"
+  to = "/apply.html"
+  status = 301
+
+[[redirects]]
+  from = "/compliance.php"
+  to = "/compliance.html"
+  status = 301
+
+[[redirects]]
+  from = "/privacy.php"
+  to = "/privacy.html"
+  status = 301
+
+[[redirects]]
+  from = "/terms.php"
+  to = "/terms.html"
+  status = 301
+
+[[redirects]]
+  from = "/support.php"
+  to = "/support.html"
+  status = 301
+
+[[redirects]]
+  from = "/signup.php"
+  to = "/signup.html"
+  status = 301
+
+[[redirects]]
+  from = "/integrations/shopify.php"
+  to = "/integrations/shopify.html"
+  status = 301
+
+[[redirects]]
+  from = "/integrations/gohighlevel.php"
+  to = "/integrations/gohighlevel.html"
+  status = 301
