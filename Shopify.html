@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>MerchantHaus – Shopify Payment Processing</title>
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800&amp;family=Ubuntu:wght@600;700&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'ui-sans-serif', 'system-ui'],
+                        ubuntu: ['Ubuntu', 'sans-serif']
+                    },
+                    colors: {
+                        'brand-crimson': '#DC143C',
+                        'brand-teal': '#00CEDB',
+                        'brand-silver': '#A9A9AA',
+                        'brand-dark': '#1A1A1A',
+                        'brand-light': '#F8F9FA',
+                    }
+                }
+            }
+        }
+    </script>
+<!-- Lucide Icons -->
+<script src="https://unpkg.com/lucide@latest"></script>
+<!-- Custom Styles -->
+<style>
+        html {
+            scroll-behavior: smooth;
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            position: relative;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            background-color: #f8f9fa;
+        }
+        .header-glass { background-color: rgba(248, 249, 250, 0.8); backdrop-filter: blur(10px); }
+        html.dark { background-color: #1A1A1A !important; }
+        .dark body { background-color: #1A1A1A !important; color: #f5f5f5 !important; }
+        .dark .header-glass { background-color: rgba(26, 26, 26, 0.8); }
+        .dark .text-slate-300 { color: #c8c8c8 !important; }
+        .dark .text-slate-400 { color: #a0a0a0 !important; }
+        .dark .text-slate-600 { color: #c8c8c8 !important; }
+        
+        /* Text Scroll Animation */
+        .scrolling-words-container {
+            height: 4rem;
+            overflow: hidden;
+            position: relative;
+            display: inline-block;
+            /* vertical-align: bottom; -- Removed for flex alignment */
+        }
+        .scrolling-words-box {
+            display: inline-block;
+            animation: spin-words 10s infinite;
+        }
+        .scrolling-words-box li {
+            display: block;
+            height: 4rem;
+            line-height: 4rem;
+        }
+        @keyframes spin-words {
+            0%, 20% { transform: translateY(0); }
+            25%, 45% { transform: translateY(-4rem); }
+            50%, 70% { transform: translateY(-8rem); }
+            75%, 95% { transform: translateY(-12rem); }
+            100% { transform: translateY(-16rem); }
+        }
+
+        /* Typewriter effect */
+        .typewriter-text {
+            /* This span will grow with the text */
+            border-right: .15em solid #00CEDB;
+            white-space: pre-wrap;
+            animation: blink-caret .75s step-end infinite;
+        }
+        
+        @keyframes blink-caret {
+            from, to { border-color: transparent }
+            50% { border-color: #00CEDB; }
+        }
+        .animate-on-scroll {
+            opacity: 0;
+            transition: opacity 0.7s ease-out, transform 0.7s ease-out;
+        }
+        .fade-in {
+            opacity: 1;
+        }
+        .card-hover-effect {
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+        }
+        .card-hover-effect:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+        .dark .card-hover-effect:hover {
+             box-shadow: 0 10px 20px rgba(0, 206, 219, 0.1);
+        }
+        
+        /* Aurora Background */
+        .mh-aurora {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+        .mh-aurora__glow {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 200%;
+            padding-bottom: 200%;
+            border-radius: 50%;
+            background-image: radial-gradient(circle, rgba(0, 206, 219, 0.15), transparent 45%),
+                              radial-gradient(circle, rgba(220, 20, 60, 0.15), transparent 45%);
+            transform: translate(-50%, -50%);
+            animation: aurora-glow 20s linear infinite;
+            will-change: transform;
+        }
+        .dark .mh-aurora__glow {
+            background-image: radial-gradient(circle, rgba(0, 206, 219, 0.2), transparent 45%),
+                              radial-gradient(circle, rgba(220, 20, 60, 0.2), transparent 45%);
+        }
+
+        @keyframes aurora-glow {
+            0% { transform: translate(-50%, -50%) rotate(0deg); }
+            100% { transform: translate(-50%, -50%) rotate(360deg); }
+        }
+    </style>
+
+<style>
+.menu-toggle{position:fixed;top:1rem;right:1rem;z-index:10001;border:0;background:transparent;font-size:2rem;line-height:1;cursor:pointer}
+#site-nav{z-index:10000}
+#site-nav.open{display:block}
+@media (max-width: 900px){
+  #site-nav{display:none;position:fixed;top:0;right:0;bottom:0;width:75vw;max-width:360px;background:#fff;overflow:auto;box-shadow:-2px 0 16px rgba(0,0,0,.2);padding:1rem}
+}
+</style>
+</head>
+<body class="bg-brand-light text-brand-dark dark:bg-brand-dark dark:text-slate-100">
+<!-- Back to Top Button -->
+<button class="fixed bottom-6 right-6 bg-brand-crimson text-white p-3 rounded-full shadow-lg hidden z-50 hover:bg-opacity-90 transition-opacity duration-300" id="back-to-top">
+<i class="h-6 w-6" data-lucide="arrow-up"></i>
+</button>
+<!-- Header -->
+<div class="sticky top-0 z-30" id="home">
+<div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pt-4">
+<header class="header-glass border border-slate-200/70 dark:border-slate-800 rounded-xl">
+<div class="relative max-w-7xl mx-auto px-4 py-3 flex items-center justify-between">
+<a class="flex items-center gap-3 group scroll-link" href="#home">
+<svg height="50" viewbox="0 0 250 50" width="250" xmlns="http://www.w3.org/2000/svg">
+<defs>
+<lineargradient gradientunits="userSpaceOnUse" id="headerGradient" x1="55" x2="250" y1="0" y2="0">
+<stop offset="0%" stop-color="#DC143C"></stop>
+<stop offset="45%" stop-color="#DC143C"><animate attributename="stop-color" dur="3s" repeatcount="indefinite" values="#DC143C; #FFC0CB; #DC143C"></animate></stop>
+<stop offset="55%" stop-color="#DC143C"><animate attributename="stop-color" dur="3s" repeatcount="indefinite" values="#DC143C; #FFC0CB; #DC143C"></animate></stop>
+<stop offset="100%" stop-color="#DC143C"></stop>
+</lineargradient>
+</defs>
+<image height="40" href="Shield.png" width="40" x="0" y="5"/>
+<g fill="url(#headerGradient)" style="font-family: 'Ubuntu', sans-serif; font-size: 25px; font-weight: 600;">
+<text x="55" y="32">MerchantHaus</text>
+</g>
+</svg>
+</a>
+<div class="flex items-center gap-6">
+<div class="hidden md:flex items-center gap-4 text-sm font-medium text-slate-600 dark:text-slate-300">
+<a class="hover:text-brand-teal" href="tel:15056006042">1-505-600-6042</a>
+<a class="hover:text-brand-teal" href="mailto:support@merchanthaus.io">support@merchanthaus.io</a>
+</div>
+<a class="js-cta bg-brand-crimson hover:bg-opacity-90 text-white border border-transparent px-4 py-2 rounded-full text-sm font-semibold transition-colors duration-300 scroll-link" href="#application-form">Get Started</a>
+<a class="hidden sm:block bg-transparent hover:bg-brand-teal text-brand-teal hover:text-white border border-brand-teal px-4 py-2 rounded-lg text-sm font-semibold transition-colors duration-300" href="https://retailmanager.merchant.haus">Login</a>
+<button class="md:hidden p-2 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800" id="mobile-menu-button">
+<i class="h-6 w-6" data-lucide="menu"></i>
+</button>
+</div>
+</div>
+</header>
+</div>
+</div>
+<!-- Mobile Menu Panel -->
+<div class="relative z-40">
+<div class="absolute right-4 mt-2 w-72 rounded-xl bg-white dark:bg-[#1c1c1c] shadow-2xl border border-brand-teal p-4 hidden" id="mobile-menu">
+<nav class="flex flex-col space-y-2 text-base font-medium" id="site-nav">
+<a class="scroll-link px-4 py-2 rounded-lg hover:bg-brand-crimson hover:text-white" href="#benefits">Payment Services</a>
+<a class="scroll-link px-4 py-2 rounded-lg hover:bg-brand-crimson hover:text-white" href="#benefits">Integrations</a>
+<a class="scroll-link px-4 py-2 rounded-lg hover:bg-brand-crimson hover:text-white" href="#home">Shopify</a>
+<a class="scroll-link px-4 py-2 rounded-lg hover:bg-brand-crimson hover:text-white" href="#how-it-works">Setup Checklist</a>
+<a class="px-4 py-2 rounded-lg hover:bg-brand-crimson hover:text-white" href="mailto:support@merchanthaus.io">Contact Support</a>
+<a class="sm:hidden block px-4 py-2 rounded-lg hover:bg-brand-crimson hover:text-white mt-2 pt-2 border-t border-slate-200 dark:border-slate-800" href="https://retailmanager.merchant.haus">Login</a>
+</nav>
+</div>
+</div>
+<!-- Main Content -->
+<main class="min-h-screen flex flex-col items-center justify-start">
+<!-- Cell 1: Hero and Benefits -->
+<section class="relative overflow-hidden w-full">
+<!-- AURORA BG -->
+<div aria-hidden="true" class="mh-aurora pointer-events-none">
+<canvas class="absolute inset-0 w-full h-full" id="mh-stars"></canvas>
+<div class="mh-aurora__glow"></div>
+</div>
+<!-- Hero Content -->
+<div class="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+<!-- Hero Section -->
+<section class="text-center pt-16 md:pt-24 pb-20">
+<div class="grid md:grid-cols-2 items-center gap-8 mb-8">
+<div class="flex justify-center md:justify-end">
+<svg height="100" viewbox="0 0 500 100" width="500" xmlns="http://www.w3.org/2000/svg">
+<image height="80" href="Shield.png" width="80" x="10" y="10"/>
+<g class="dark:fill-white" fill="#DC143C" style="font-family: 'Ubuntu', sans-serif; font-size: 50px; font-weight: 600;">
+<text x="120" y="60">MerchantHaus</text>
+</g>
+</svg>
+</div>
+<div class="flex justify-center md:justify-start">
+<img alt="Shopify Logo" class="h-16 rounded-lg block dark:hidden" src="shopifylight.png"/>
+<img alt="Shopify Logo" class="h-16 rounded-lg hidden dark:block" src="shopifydark.png"/>
+</div>
+</div>
+<h1 class="text-4xl md:text-5xl font-extrabold font-ubuntu mb-4 flex items-center justify-center flex-wrap gap-x-3">
+<span>Seamless</span>
+<div class="scrolling-words-container">
+<ul class="scrolling-words-box text-brand-teal">
+<li>Payments</li>
+<li>Integration</li>
+<li>Processing</li>
+<li>Security</li>
+<li>Payments</li> <!-- Loop back to start -->
+</ul>
+</div>
+<span>for Shopify</span>
+</h1>
+<p class="text-lg text-slate-600 dark:text-slate-300 max-w-3xl mx-auto">
+                         Integrate MerchantHaus directly with your Shopify store to lower your processing costs, reduce fraud, and simplify your operations. Get the no-code, fast, secure, and affordable payment solution your business deserves.
+                    </p>
+<div class="mt-8">
+<a class="js-cta bg-brand-crimson hover:bg-opacity-90 text-white border border-transparent px-8 py-3 rounded-full text-lg font-semibold transition-colors duration-300 scroll-link" href="#application-form">Get Started Today</a>
+</div>
+</section>
+<!-- Benefits Section -->
+<section class="pb-28 text-left" id="benefits">
+<div class="grid md:grid-cols-3 gap-12">
+<div class="flex items-start gap-4 p-6 rounded-lg card-hover-effect bg-white/5 dark:bg-black/10 backdrop-blur-sm">
+<i class="w-12 h-12 text-brand-teal flex-shrink-0 mt-1" data-lucide="trending-down"></i>
+<div>
+<h3 class="text-xl font-bold font-ubuntu">Lower Your Costs</h3>
+<p class="text-slate-600 dark:text-slate-400 mt-2">Keep more of your revenue with our competitive, transparent pricing. We help you reduce transaction fees without sacrificing performance.</p>
+</div>
+</div>
+<div class="flex items-start gap-4 p-6 rounded-lg card-hover-effect bg-white/5 dark:bg-black/10 backdrop-blur-sm">
+<i class="w-12 h-12 text-brand-teal flex-shrink-0 mt-1" data-lucide="shield-check"></i>
+<div>
+<h3 class="text-xl font-bold font-ubuntu">Reduce Fraud &amp; Chargebacks</h3>
+<p class="text-slate-600 dark:text-slate-400 mt-2">Our advanced security tools, including AVS, CVV checks, and 3D Secure, protect your business from fraudulent transactions and costly chargebacks.</p>
+</div>
+</div>
+<div class="flex items-start gap-4 p-6 rounded-lg card-hover-effect bg-white/5 dark:bg-black/10 backdrop-blur-sm">
+<i class="w-12 h-12 text-brand-teal flex-shrink-0 mt-1" data-lucide="zap"></i>
+<div>
+<h3 class="text-xl font-bold font-ubuntu">Streamline Operations</h3>
+<p class="text-slate-600 dark:text-slate-400 mt-2">Manage all your payments, view real-time reports, and handle disputes from a single, easy-to-use dashboard. Simple, smart, and secure.</p>
+</div>
+</div>
+</div>
+</section>
+</div>
+</section>
+<!-- Cell 2: How It Works, CTA, NMI -->
+<div class="relative w-full max-w-6xl rounded-xl shadow-lg -mt-16 z-10 mb-16 overflow-hidden border border-slate-200/70 dark:border-slate-800" style="background-image: url('banner1.png'); background-size: cover; background-position: center;">
+<div class="bg-brand-light/80 dark:bg-brand-dark/80 backdrop-blur-sm p-6 sm:p-8">
+<!-- How It Works Section -->
+<section class="pt-10 text-center" id="how-it-works">
+<h2 class="text-3xl font-extrabold font-ubuntu mb-4">Simple Setup in 3 Steps</h2>
+<p class="text-slate-600 dark:text-slate-300 max-w-2xl mx-auto mb-12">Get up and running with MerchantHaus on your Shopify store in minutes.</p>
+<div class="grid md:grid-cols-3 gap-8">
+<div class="p-6 rounded-lg bg-white/50 dark:bg-black/20 card-hover-effect text-left">
+<div class="w-12 h-12 bg-brand-crimson text-white rounded-full flex items-center justify-center font-bold text-xl mx-auto mb-4 animate-on-scroll" id="step-1-number">1</div>
+<h3 class="text-lg font-bold text-center">Apply for an Account</h3>
+<p class="text-slate-600 dark:text-slate-400 mt-2 text-sm min-h-[100px]" id="step-1-text"></p>
+</div>
+<div class="p-6 rounded-lg bg-white/50 dark:bg-black/20 card-hover-effect text-left">
+<div class="w-12 h-12 bg-brand-teal text-white rounded-full flex items-center justify-center font-bold text-xl mx-auto mb-4 animate-on-scroll" id="step-2-number">2</div>
+<h3 class="text-lg font-bold text-center">Connect to Shopify</h3>
+<p class="text-slate-600 dark:text-slate-400 mt-2 text-sm min-h-[100px]" id="step-2-text"></p>
+</div>
+<div class="p-6 rounded-lg bg-white/50 dark:bg-black/20 card-hover-effect text-left">
+<div class="w-12 h-12 bg-brand-silver text-white rounded-full flex items-center justify-center font-bold text-xl mx-auto mb-4 animate-on-scroll" id="step-3-number">3</div>
+<h3 class="text-lg font-bold text-center">Start Processing</h3>
+<p class="text-slate-600 dark:text-slate-400 mt-2 text-sm min-h-[100px]" id="step-3-text"></p>
+</div>
+</div>
+</section>
+<!-- Final CTA -->
+<section class="mt-20 text-center bg-brand-crimson/10 dark:bg-brand-teal/10 p-8 rounded-xl" id="application-form">
+<h2 class="text-3xl font-extrabold font-ubuntu mb-4">Why Wait? Start Processing Today</h2>
+<p class="text-slate-600 dark:text-slate-300 max-w-3xl mx-auto mb-8">
+                         Make the smart move and join hundreds of Shopify merchants who use MerchantHaus, powered by the might of the NMI Gateway, for their payment processing needs.
+                     </p>
+<a class="js-cta bg-brand-crimson hover:bg-opacity-90 text-white border border-transparent px-8 py-3 rounded-full text-lg font-semibold transition-colors duration-300 scroll-link" href="#application-form">Apply Now</a>
+</section>
+<!-- Powered By NMI -->
+<section class="mt-16 text-center">
+<p class="text-gray-500 text-sm font-medium mb-2 tracking-wider">POWERED BY</p>
+<a href="https://www.nmi.com/" rel="noopener noreferrer" target="_blank">
+<img alt="NMI Logo" class="h-10 mx-auto" src="nmi.png"/>
+</a>
+</section>
+</div>
+</div>
+</main>
+<!-- Footer -->
+<footer class="bg-brand-dark text-brand-light border-t border-slate-800 py-10">
+<div class="max-w-7xl mx-auto px-4 grid sm:grid-cols-2 lg:grid-cols-4 gap-8 text-sm">
+<div class="space-y-4">
+<a class="flex items-center gap-3 scroll-link" href="#home">
+<svg height="50" viewbox="0 0 250 50" width="250" xmlns="http://www.w3.org/2000/svg">
+<image height="40" href="Shield.png" width="40" x="0" y="5"/>
+<g fill="#DC143C" style="font-family: 'Ubuntu', sans-serif; font-size: 25px; font-weight: 600;">
+<text x="55" y="32">MerchantHaus</text>
+</g>
+</svg>
+</a>
+<p class="text-brand-silver">plug. play. grow.</p>
+<div class="text-sm">
+<a class="block hover:text-brand-teal" href="tel:15056006042">1-505-600-6042</a>
+<a class="block hover:text-brand-teal" href="mailto:support@merchanthaus.io">support@merchanthaus.io</a>
+</div>
+</div>
+<nav class="space-y-2"><h3 class="font-semibold font-ubuntu text-white">Product</h3><a class="block hover:text-brand-teal scroll-link" href="#benefits">Payment Services</a><a class="block hover:text-brand-teal scroll-link" href="#benefits">Integrations</a><a class="block hover:text-brand-teal scroll-link" href="#home">Shopify Integration</a><a class="block hover:text-brand-teal scroll-link" href="#how-it-works">Setup Checklist</a></nav>
+<nav class="space-y-2"><h3 class="font-semibold font-ubuntu text-white">Support</h3><a class="block hover:text-brand-teal" href="mailto:support@merchanthaus.io">Contact Support</a><a class="block hover:text-brand-teal" href="/faq.html">FAQs</a></nav>
+<nav class="space-y-2"><h3 class="font-semibold font-ubuntu text-white">Legal</h3><a class="block hover:text-brand-teal" href="/privacy.html">Privacy Policy</a><a class="block hover:text-brand-teal" href="/terms.html">Terms &amp; Conditions</a></nav>
+</div>
+<div class="text-center text-xs pt-8 mt-8 border-t border-slate-800/50 text-brand-silver">© <span id="year"></span> MerchantHaus. All rights reserved.</div>
+</footer>
+<script>
+        document.addEventListener('DOMContentLoaded', () => {
+            if (window.lucide) lucide.createIcons();
+            document.getElementById('year').textContent = new Date().getFullYear();
+
+            // Smooth scrolling for anchor links
+            document.querySelectorAll('a.scroll-link').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const targetId = this.getAttribute('href');
+                    const targetElement = document.querySelector(targetId);
+                    if (targetElement) {
+                        const mobileMenu = document.getElementById('mobile-menu');
+                        if(mobileMenu && !mobileMenu.classList.contains('hidden')) {
+                            mobileMenu.classList.add('hidden');
+                        }
+                        targetElement.scrollIntoView({
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+
+            // Back to Top button logic
+            const backToTopButton = document.getElementById('back-to-top');
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 300) {
+                    backToTopButton.classList.remove('hidden');
+                } else {
+                    backToTopButton.classList.add('hidden');
+                }
+            });
+            backToTopButton.addEventListener('click', () => {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            });
+            
+            // --- Mobile Menu Logic ---
+            const mobileMenuButton = document.getElementById('mobile-menu-button');
+            const mobileMenu = document.getElementById('mobile-menu');
+            
+            if (mobileMenuButton && mobileMenu) {
+                mobileMenuButton.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    mobileMenu.classList.toggle('hidden');
+                });
+
+                document.addEventListener('click', (e) => {
+                    if (!mobileMenu.classList.contains('hidden') && !mobileMenu.contains(e.target) && !mobileMenuButton.contains(e.target)) {
+                        mobileMenu.classList.add('hidden');
+                    }
+                });
+            }
+            
+            // --- Stars Canvas Logic ---
+            const canvas = document.getElementById('mh-stars');
+            if (canvas) {
+                const ctx = canvas.getContext('2d');
+                let stars;
+                let animationFrameId;
+
+                const setupStars = () => {
+                    const parent = canvas.parentElement;
+                    canvas.width = parent.offsetWidth;
+                    canvas.height = parent.offsetHeight;
+                    stars = [];
+                    const numStars = Math.floor((canvas.width * canvas.height) / 10000);
+                    for (let i = 0; i < numStars; i++) {
+                        stars.push({
+                            x: Math.random() * canvas.width,
+                            y: Math.random() * canvas.height,
+                            radius: Math.random() * 1.2 + 0.3,
+                            alpha: Math.random(),
+                            dAlpha: Math.random() * 0.02 - 0.01
+                        });
+                    }
+                };
+
+                const drawStars = () => {
+                    if(!ctx) return;
+                    ctx.clearRect(0, 0, canvas.width, canvas.height);
+                    stars.forEach(star => {
+                        ctx.beginPath();
+                        ctx.arc(star.x, star.y, star.radius, 0, Math.PI * 2);
+                        ctx.fillStyle = `rgba(255, 255, 255, ${star.alpha})`;
+                        ctx.fill();
+
+                        star.alpha += star.dAlpha;
+                        if (star.alpha <= 0.1 || star.alpha >= 1) {
+                            star.dAlpha *= -1;
+                        }
+                    });
+                    animationFrameId = requestAnimationFrame(drawStars);
+                };
+                
+                let resizeTimeout;
+                const initCanvas = () => {
+                    if (animationFrameId) {
+                        cancelAnimationFrame(animationFrameId);
+                    }
+                    clearTimeout(resizeTimeout);
+                    resizeTimeout = setTimeout(() => {
+                       setupStars();
+                       drawStars();
+                    }, 250);
+                };
+
+                initCanvas();
+                window.addEventListener('resize', initCanvas);
+            }
+
+
+            // Sequential Typewriter Animation
+            const steps = [
+                { number: 'step-1-number', textEl: 'step-1-text', text: "Fill out our simple application form. Our team will review your details and get you approved quickly." },
+                { number: 'step-2-number', textEl: 'step-2-text', text: "Once approved, we'll provide you with API keys to easily connect MerchantHaus as your payment provider in your Shopify admin." },
+                { number: 'step-3-number', textEl: 'step-3-text', text: "That's it! You're ready to accept payments securely and affordably, with all your transaction data synced to your MerchantHaus dashboard." }
+            ];
+
+            const observerOptions = {
+                root: null,
+                rootMargin: '0px',
+                threshold: 0.4 
+            };
+            
+            let animationQueue = Promise.resolve();
+
+            const typewriter = (element, text, duration) => {
+                return new Promise(resolve => {
+                    let i = 0;
+                    element.innerHTML = '<span class="typewriter-text"></span>';
+                    const span = element.querySelector('.typewriter-text');
+                    element.style.opacity = '1';
+                    
+                    function type() {
+                        if (i < text.length) {
+                            span.innerHTML += text.charAt(i);
+                            i++;
+                            setTimeout(type, duration / text.length);
+                        } else {
+                           span.style.borderRight = 'none'; // Remove cursor at the end
+                           resolve();
+                        }
+                    }
+                    type();
+                });
+            };
+
+            const animateStep = (entry, observer) => {
+                if (entry.isIntersecting) {
+                    const stepIndex = steps.findIndex(s => s.number === entry.target.id);
+                    if (stepIndex !== -1 && !entry.target.dataset.animated) {
+                        entry.target.dataset.animated = true; // Mark as animated
+                        
+                        animationQueue = animationQueue.then(() => {
+                           entry.target.classList.add('fade-in');
+                           const step = steps[stepIndex];
+                           const textElement = document.getElementById(step.textEl);
+                           return typewriter(textElement, step.text, 4000);
+                        });
+                        
+                        observer.unobserve(entry.target);
+                    }
+                }
+            };
+            
+            const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => animateStep(entry, observer));
+            }, observerOptions);
+
+            steps.forEach(step => {
+                const el = document.getElementById(step.number);
+                if (el) observer.observe(el);
+            });
+        });
+    </script>
+<script>
+document.addEventListener('DOMContentLoaded', function(){
+  var btn = document.querySelector('.menu-toggle');
+  var nav = document.getElementById('site-nav');
+  if(!btn || !nav) return;
+  btn.addEventListener('click', function(){
+    var open = btn.getAttribute('aria-expanded') === 'true';
+    btn.setAttribute('aria-expanded', String(!open));
+    nav.classList.toggle('open');
+  });
+});
+</script></body>
+</html>
