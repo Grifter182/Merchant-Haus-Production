@@ -195,15 +195,42 @@
                  </div>
             </header>
             <div id="mobile-menu" class="absolute right-4 mt-2 w-72 rounded-xl bg-[#1c1c1c] shadow-2xl border border-brand-teal p-4 z-40 hidden">
-                 <nav class="flex flex-col space-y-2 text-base font-medium font-inter">
-                     <a href="/#payments" class="px-4 py-2 rounded-lg hover:bg-brand-crimson hover:text-white">Payment Services</a>
-                     <a href="/#integrations" class="px-4 py-2 rounded-lg hover:bg-brand-crimson hover:text-white">Integrations</a>
-                    <a href="shopify.html" class="px-4 py-2 rounded-lg hover:bg-brand-crimson hover:text-white">Shopify</a>
-                    <a href="gohighlevel.html" class="px-4 py-2 rounded-lg hover:bg-brand-crimson hover:text-white">GoHighLevel</a>
-                     <a href="/#checklist" class="px-4 py-2 rounded-lg hover:bg-brand-crimson hover:text-white">Setup Checklist</a>
-                    <a href="compliance.html" class="px-4 py-2 rounded-lg hover:bg-brand-crimson hover:text-white">Compliance</a>
-                     <a href="mailto:support@merchanthaus.io" class="px-4 py-2 rounded-lg hover:bg-brand-crimson hover:text-white">Contact Support</a>
-                     <a href="https://retailmanager.merchant.haus" class="sm:hidden block px-4 py-2 rounded-lg hover:bg-brand-crimson hover:text-white mt-2 pt-2 border-t border-slate-800">Login</a>
+                 <nav class="flex flex-col space-y-6 text-base font-medium font-inter">
+                     <div class="space-y-2">
+                         <h4 class="text-sm font-semibold text-brand-teal uppercase tracking-[0.2em]">Product</h4>
+                         <a href="/#payments" class="block w-full px-4 py-2 text-left rounded-full border border-brand-teal bg-[#262626] text-white transition-colors duration-200 hover:bg-brand-teal">Payment Services</a>
+                         <button
+                             type="button"
+                             id="mobile-integrations-toggle"
+                             aria-expanded="false"
+                             aria-controls="mobile-integrations-menu"
+                             class="flex items-center justify-between w-full px-4 py-2 text-left rounded-full border border-brand-teal bg-[#262626] text-white transition-colors duration-200 hover:bg-brand-teal"
+                         >
+                             <span>Integrations</span>
+                             <span class="ml-2 text-brand-teal">
+                                 <svg data-collapsible-icon class="w-4 h-4 transition-transform" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                     <polyline points="6 9 12 15 18 9" />
+                                 </svg>
+                             </span>
+                         </button>
+                         <div id="mobile-integrations-menu" class="mt-2 space-y-2 pl-3 hidden">
+                             <a href="shopify.html" class="block w-full px-4 py-2 text-left rounded-full border border-brand-teal bg-[#1f1f1f] text-white transition-colors duration-200 hover:bg-brand-teal">Shopify Integration</a>
+                             <a href="gohighlevel.html" class="block w-full px-4 py-2 text-left rounded-full border border-brand-teal bg-[#1f1f1f] text-white transition-colors duration-200 hover:bg-brand-teal">GoHighLevel Integration</a>
+                         </div>
+                         <a href="/#checklist" class="block w-full px-4 py-2 text-left rounded-full border border-brand-teal bg-[#262626] text-white transition-colors duration-200 hover:bg-brand-teal">Setup Checklist</a>
+                     </div>
+                     <div class="space-y-2">
+                         <h4 class="text-sm font-semibold text-brand-teal uppercase tracking-[0.2em]">Support</h4>
+                         <a href="mailto:support@merchanthaus.io" class="block w-full px-4 py-2 text-left rounded-full border border-brand-teal bg-[#262626] text-white transition-colors duration-200 hover:bg-brand-teal">Contact Support</a>
+                         <a href="/faq.html" class="block w-full px-4 py-2 text-left rounded-full border border-brand-teal bg-[#262626] text-white transition-colors duration-200 hover:bg-brand-teal">FAQ</a>
+                     </div>
+                     <div class="space-y-2">
+                         <h4 class="text-sm font-semibold text-brand-teal uppercase tracking-[0.2em]">Legal</h4>
+                         <a href="/privacy.html" class="block w-full px-4 py-2 text-left rounded-full border border-brand-teal bg-[#262626] text-white transition-colors duration-200 hover:bg-brand-teal">Privacy Policy</a>
+                         <a href="/terms.html" class="block w-full px-4 py-2 text-left rounded-full border border-brand-teal bg-[#262626] text-white transition-colors duration-200 hover:bg-brand-teal">Terms &amp; Conditions</a>
+                         <a href="compliance.html" class="block w-full px-4 py-2 text-left rounded-full border border-brand-teal bg-[#262626] text-white transition-colors duration-200 hover:bg-brand-teal">Compliance</a>
+                     </div>
+                     <a href="https://retailmanager.merchant.haus" class="sm:hidden block w-full px-4 py-2 text-center rounded-full border border-brand-teal bg-[#262626] text-white transition-colors duration-200 hover:bg-brand-teal">Login</a>
                  </nav>
             </div>
         </div>

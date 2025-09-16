@@ -14,9 +14,24 @@
             <nav class="space-y-2">
                 <h3 class="font-semibold font-ubuntu text-white">Product</h3>
                 <a href="/#payments" class="block text-slate-300 hover:text-brand-teal">Payment Services</a>
-                <a href="/#integrations" class="block text-slate-300 hover:text-brand-teal">Integrations</a>
-                <a href="shopify.html" class="block text-slate-300 hover:text-brand-teal">Shopify Integration</a>
-                <a href="gohighlevel.html" class="block text-slate-300 hover:text-brand-teal">GoHighLevel Integration</a>
+                <button
+                    type="button"
+                    id="footer-integrations-toggle"
+                    aria-expanded="false"
+                    aria-controls="footer-integrations-menu"
+                    class="flex items-center justify-between w-full text-left text-slate-300 hover:text-brand-teal transition-colors"
+                >
+                    <span>Integrations</span>
+                    <span class="ml-2 text-slate-400">
+                        <svg data-collapsible-icon class="w-4 h-4 transition-transform" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <polyline points="6 9 12 15 18 9" />
+                        </svg>
+                    </span>
+                </button>
+                <div id="footer-integrations-menu" class="mt-2 space-y-2 pl-4 hidden">
+                    <a href="shopify.html" class="block text-slate-400 hover:text-brand-teal">Shopify Integration</a>
+                    <a href="gohighlevel.html" class="block text-slate-400 hover:text-brand-teal">GoHighLevel Integration</a>
+                </div>
                 <a href="/#checklist" class="block text-slate-300 hover:text-brand-teal">Setup Checklist</a>
             </nav>
             <nav class="space-y-2">
@@ -102,6 +117,49 @@
             if (document.querySelector('[data-mh-logo-footer]')) {
                  document.querySelector('[data-mh-logo-footer]').innerHTML = logoSVG('footer', true, false);
             }
+
+
+            const setupCollapsibleMenu = (toggleId, menuId) => {
+                const toggle = document.getElementById(toggleId);
+                const menu = document.getElementById(menuId);
+                if (!toggle || !menu) return;
+
+                const icon = toggle.querySelector('[data-collapsible-icon]');
+
+                const openMenu = () => {
+                    menu.classList.remove('hidden');
+                    toggle.setAttribute('aria-expanded', 'true');
+                    if (icon) icon.classList.add('rotate-180');
+                };
+
+                const closeMenu = () => {
+                    menu.classList.add('hidden');
+                    toggle.setAttribute('aria-expanded', 'false');
+                    if (icon) icon.classList.remove('rotate-180');
+                };
+
+                toggle.addEventListener('click', (event) => {
+                    event.preventDefault();
+                    if (menu.classList.contains('hidden')) {
+                        openMenu();
+                    } else {
+                        closeMenu();
+                    }
+                });
+
+                document.addEventListener('click', (event) => {
+                    if (!menu.classList.contains('hidden') && !menu.contains(event.target) && !toggle.contains(event.target)) {
+                        closeMenu();
+                    }
+                });
+
+                menu.querySelectorAll('a').forEach(link => {
+                    link.addEventListener('click', closeMenu);
+                });
+            };
+
+            setupCollapsibleMenu('footer-integrations-toggle', 'footer-integrations-menu');
+            setupCollapsibleMenu('mobile-integrations-toggle', 'mobile-integrations-menu');
 
 
             // --- Mobile Menu ---
