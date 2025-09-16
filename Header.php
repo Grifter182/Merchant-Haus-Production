@@ -3,6 +3,30 @@
     // Set these on each page before including the header
     $pageTitle = isset($pageTitle) ? $pageTitle : 'MerchantHaus';
     $pageDescription = isset($pageDescription) ? $pageDescription : 'Secure and reliable payment processing solutions.';
+
+    // Determine the base path for assets so images work from any directory depth
+    $documentRoot = isset($_SERVER['DOCUMENT_ROOT']) ? str_replace('\\', '/', rtrim($_SERVER['DOCUMENT_ROOT'], '/')) : '';
+    $projectRoot = str_replace('\\', '/', rtrim(__DIR__, '/'));
+    $mhBasePath = '';
+
+    if ($documentRoot && strpos($projectRoot, $documentRoot) === 0) {
+        $mhBasePath = trim(substr($projectRoot, strlen($documentRoot)), '/');
+    }
+
+    if (!function_exists('mh_asset')) {
+        function mh_asset(string $path): string
+        {
+            global $mhBasePath;
+
+            $normalized = '/' . ltrim($path, '/');
+
+            if (!empty($mhBasePath)) {
+                return '/' . $mhBasePath . $normalized;
+            }
+
+            return $normalized;
+        }
+    }
 ?>
 <!DOCTYPE html>
 <html lang="en" class="dark">
@@ -11,7 +35,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?php echo htmlspecialchars($pageTitle); ?> – MerchantHaus</title>
     <meta name="description" content="<?php echo htmlspecialchars($pageDescription); ?>">
-    <link rel="preload" as="image" href="public/assets/images/banner1.png">
+    <link rel="preload" as="image" href="<?php echo htmlspecialchars(mh_asset('public/assets/images/banner1.png')); ?>">
 
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -141,10 +165,10 @@
     </style>
 
     <!-- Favicons -->
-    <link rel="apple-touch-icon" sizes="180x180" href="Shield/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="Shield/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="Shield/favicon-16x16.png">
-    <link rel="manifest" href="Shield/site.webmanifest">
+    <link rel="apple-touch-icon" sizes="180x180" href="<?php echo htmlspecialchars(mh_asset('Shield/apple-touch-icon.png')); ?>">
+    <link rel="icon" type="image/png" sizes="32x32" href="<?php echo htmlspecialchars(mh_asset('Shield/favicon-32x32.png')); ?>">
+    <link rel="icon" type="image/png" sizes="16x16" href="<?php echo htmlspecialchars(mh_asset('Shield/favicon-16x16.png')); ?>">
+    <link rel="manifest" href="<?php echo htmlspecialchars(mh_asset('Shield/site.webmanifest')); ?>">
 </head>
 <body class="text-slate-100">
 

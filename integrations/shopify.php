@@ -7,7 +7,7 @@
 <main class="max-w-5xl mx-auto px-4 py-12">
 <a class="text-sm text-brand-600" href="/">← Back to MerchantHaus</a>
 <header class="mt-4 flex items-center gap-4">
-<img alt="Shopify" class="h-10 w-auto" src="/shield.png"/>
+<img alt="Shopify" class="h-10 w-auto" src="<?php echo htmlspecialchars(mh_asset('public/assets/images/Shield.png')); ?>"/>
 <h1 class="text-3xl font-extrabold">MerchantHaus for Shopify</h1>
 <nav><a href="mailto:support@merchanthaus.io">Contact Us</a><a href="/privacy">Privacy Policy</a><a href="/terms">Terms &amp; Conditions</a></nav></header>
 <p class="mt-3 text-slate-600 dark:text-slate-300">Boost approvals, reduce fraud, and keep processor flexibility while selling on Shopify.</p>
@@ -60,6 +60,6 @@
 </form>
 </div>
 </div>
-<script src="/assets/app.js"></script>
+<script src="<?php echo htmlspecialchars(mh_asset('assets/app.js')); ?>"></script>
 
 <?php include __DIR__ . '/../Footer.php'; ?>
