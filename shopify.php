@@ -4,6 +4,120 @@
     include __DIR__ . '/Header.php';
 ?>
 
+<style>
+    .scrolling-words-container {
+        height: 4rem;
+        overflow: hidden;
+        position: relative;
+        display: inline-block;
+    }
+
+    .scrolling-words-box {
+        display: inline-block;
+        animation: spin-words 10s infinite;
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+
+    .scrolling-words-box li {
+        display: block;
+        height: 4rem;
+        line-height: 4rem;
+    }
+
+    @keyframes spin-words {
+        0%, 20% {
+            transform: translateY(0);
+        }
+        25%, 45% {
+            transform: translateY(-4rem);
+        }
+        50%, 70% {
+            transform: translateY(-8rem);
+        }
+        75%, 95% {
+            transform: translateY(-12rem);
+        }
+        100% {
+            transform: translateY(-16rem);
+        }
+    }
+
+    .typewriter-text {
+        border-right: .15em solid #00CEDB;
+        white-space: pre-wrap;
+        animation: blink-caret .75s step-end infinite;
+    }
+
+    @keyframes blink-caret {
+        from, to {
+            border-color: transparent;
+        }
+        50% {
+            border-color: #00CEDB;
+        }
+    }
+
+    .animate-on-scroll {
+        opacity: 0;
+        transition: opacity 0.7s ease-out, transform 0.7s ease-out;
+    }
+
+    .fade-in {
+        opacity: 1;
+    }
+
+    .card-hover-effect {
+        transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+    }
+
+    .card-hover-effect:hover {
+        transform: translateY(-8px);
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    }
+
+    .dark .card-hover-effect:hover {
+        box-shadow: 0 10px 20px rgba(0, 206, 219, 0.1);
+    }
+
+    .mh-aurora {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+    }
+
+    .mh-aurora__glow {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 200%;
+        padding-bottom: 200%;
+        border-radius: 50%;
+        background-image: radial-gradient(circle, rgba(0, 206, 219, 0.15), transparent 45%),
+                          radial-gradient(circle, rgba(220, 20, 60, 0.15), transparent 45%);
+        transform: translate(-50%, -50%);
+        animation: aurora-glow 20s linear infinite;
+        will-change: transform;
+    }
+
+    .dark .mh-aurora__glow {
+        background-image: radial-gradient(circle, rgba(0, 206, 219, 0.2), transparent 45%),
+                          radial-gradient(circle, rgba(220, 20, 60, 0.2), transparent 45%);
+    }
+
+    @keyframes aurora-glow {
+        0% {
+            transform: translate(-50%, -50%) rotate(0deg);
+        }
+        100% {
+            transform: translate(-50%, -50%) rotate(360deg);
+        }
+    }
+</style>
+
 <main class="min-h-screen flex flex-col items-center justify-start">
         <!-- Cell 1: Hero and Benefits -->
         <section class="relative overflow-hidden w-full">
@@ -136,7 +250,11 @@
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             if (window.lucide) lucide.createIcons();
-            document.getElementById('year').textContent = new Date().getFullYear();
+
+            const yearEl = document.getElementById('year');
+            if (yearEl) {
+                yearEl.textContent = new Date().getFullYear();
+            }
 
             // Smooth scrolling for anchor links
             document.querySelectorAll('a.scroll-link').forEach(anchor => {
@@ -158,16 +276,19 @@
 
             // Back to Top button logic
             const backToTopButton = document.getElementById('back-to-top');
-            window.addEventListener('scroll', () => {
-                if (window.scrollY > 300) {
-                    backToTopButton.classList.remove('hidden');
-                } else {
-                    backToTopButton.classList.add('hidden');
-                }
-            });
-            backToTopButton.addEventListener('click', () => {
-                window.scrollTo({ top: 0, behavior: 'smooth' });
-            });
+            if (backToTopButton) {
+                window.addEventListener('scroll', () => {
+                    if (window.scrollY > 300) {
+                        backToTopButton.classList.remove('hidden');
+                    } else {
+                        backToTopButton.classList.add('hidden');
+                    }
+                });
+
+                backToTopButton.addEventListener('click', () => {
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                });
+            }
             
             // --- Mobile Menu Logic ---
             const mobileMenuButton = document.getElementById('mobile-menu-button');
