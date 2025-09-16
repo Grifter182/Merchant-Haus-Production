@@ -7,7 +7,7 @@
 <main class="max-w-5xl mx-auto px-4 py-12">
 <a class="text-sm text-brand-600" href="/">← Back to MerchantHaus</a>
 <header class="mt-4 flex items-center gap-4">
-<img alt="GoHighLevel" class="h-10 w-auto" src="<?php echo htmlspecialchars(mh_asset('public/assets/images/Shield.png')); ?>"/>
+<img alt="GoHighLevel" class="h-10 w-auto" src="<?php echo htmlspecialchars(mh_asset('public/assets/images/gohighleveldark.png')); ?>"/>
 <h1 class="text-3xl font-extrabold">MerchantHaus for GoHighLevel</h1>
 <nav><a href="mailto:support@merchanthaus.io">Contact Us</a><a href="/privacy">Privacy Policy</a><a href="/terms">Terms &amp; Conditions</a></nav></header>
 <p class="mt-3 text-slate-600 dark:text-slate-300">Accept payments in GHL funnels &amp; snapshots, with routing freedom and merchant‑friendly controls.</p>
