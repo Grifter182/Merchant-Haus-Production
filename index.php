@@ -79,6 +79,15 @@
       <div class="flex-shrink-0 flex items-center space-x-8" id="services-container-2" aria-hidden="true"></div>
     </div>
   </div>
+  <div class="mt-8 sm:mt-10 flex justify-center px-4">
+    <button
+      type="button"
+      class="js-cta inline-flex items-center justify-center rounded-full px-8 py-3 text-lg font-semibold text-white shadow-lg transition-all duration-300 hover:-translate-y-0.5 hover:shadow-xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-crimson focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:focus-visible:ring-offset-slate-900"
+      style="background-image: linear-gradient(135deg, #dc143c 0%, #f43f5e 50%, #ff758c 100%);"
+    >
+      Start accepting payments today
+    </button>
+  </div>
 </section>
 
 <section id="integrations" class="py-8 md:py-12">
