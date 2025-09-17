@@ -14,6 +14,7 @@
 .dark .feature-display { background-color: #1f2937; color: #f9fafb; }
 .feature-display.active { opacity: 1; transform: translateX(-50%) translateY(0); }
 .feature-display.exiting { opacity: 0; transform: translateX(-50%) translateY(-10px); }
+.animate-scroll { animation: mh-services-marquee 45s linear infinite; }
 .service-cell { opacity: 0; transition: opacity 0.5s ease-in-out; }
 .service-cell.is-visible { opacity: 1; }
 .service-cell h3, .service-cell p { opacity: 0; transform: translateY(10px); transition: opacity 0.4s ease-out, transform 0.4s ease-out; }
@@ -24,6 +25,8 @@
 #faq-answer ul { margin: 0; }
 .hero-bg-container::before { content: ''; position: absolute; inset: 0; background-image: url('<?php echo htmlspecialchars(mh_asset("public/assets/images/hero.png")); ?>'); background-size: 100%; background-position: center; background-repeat: no-repeat; animation: kenBurns 20s ease-in-out infinite alternate; z-index: -20; }
 @keyframes kenBurns { 0% { transform: scale(1) rotate(0deg); background-position: center; } 100% { transform: scale(1.1) rotate(1deg); background-position: top left; } }
+@keyframes mh-services-marquee { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+@media (prefers-reduced-motion: reduce) { .animate-scroll { animation: none; } }
 .panel-overlay, .panel-container { transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
 </style>
 
