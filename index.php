@@ -99,6 +99,9 @@
         <img src="<?php echo htmlspecialchars(mh_asset('public/assets/images/shopifylight.png')); ?>" alt="Shopify Logo" class="h-12 md:h-14 block dark:hidden">
         <img src="<?php echo htmlspecialchars(mh_asset('public/assets/images/shopifydark.png')); ?>" alt="Shopify Logo" class="h-12 md:h-14 hidden dark:block">
       </a>
+      <a href="https://quickbooks.intuit.com/" class="block hover:scale-105 transition-transform duration-300" target="_blank" rel="noopener">
+        <img src="<?php echo htmlspecialchars(mh_asset('public/assets/images/quickbooks.svg')); ?>" alt="QuickBooks SyncPay Logo" class="h-12 md:h-14 block">
+      </a>
       <a href="gohighlevel.html" class="block hover:scale-105 transition-transform duration-300">
         <img src="<?php echo htmlspecialchars(mh_asset('public/assets/images/gohighlevellight.png')); ?>" alt="GoHighLevel Logo" class="h-12 md:h-14 block dark:hidden">
         <img src="<?php echo htmlspecialchars(mh_asset('public/assets/images/gohighleveldark.png')); ?>" alt="GoHighLevel Logo" class="h-12 md:h-14 hidden dark:block">
