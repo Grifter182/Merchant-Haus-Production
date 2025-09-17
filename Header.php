@@ -174,9 +174,9 @@
 
     <!-- Header -->
     <div class="sticky top-0 z-50">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-4">
-             <header class="header-glass border border-slate-200/70 dark:border-slate-800 rounded-xl">
-                 <div class="relative max-w-7xl mx-auto px-4 py-3 flex items-center justify-between">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-4 pb-6">
+             <header class="header-glass border border-slate-200/70 dark:border-slate-800 rounded-full shadow-lg">
+                 <div class="relative max-w-7xl mx-auto px-6 py-3 flex items-center justify-between">
                     <a href="index.html" class="flex items-center gap-3 group">
                          <div class="w-[190px] md:w-[260px]" data-mh-logo-header></div>
                          <span class="sr-only">MerchantHaus Homepage</span>
