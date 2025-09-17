@@ -51,7 +51,7 @@
               </button>
             </div>
             <div id="hero-actions" class="flex flex-wrap justify-center items-center gap-3">
-              <button class="js-cta bg-transparent hover:bg-brand-crimson text-brand-crimson hover:text-white border border-brand-crimson px-4 py-2 rounded-full text-sm font-semibold transition-colors duration-300">Get Started</button>
+              <button class="js-signup-cta bg-transparent hover:bg-brand-crimson text-brand-crimson hover:text-white border border-brand-crimson px-4 py-2 rounded-full text-sm font-semibold transition-colors duration-300">Get Started</button>
               <button class="bg-slate-100/20 dark:bg-slate-800/30 text-white px-4 py-2 rounded-full text-sm font-medium hover:bg-slate-200/30 dark:hover:bg-slate-700/40 transition-colors">Chargeback Help</button>
               <button class="js-support bg-slate-100/20 dark:bg-slate-800/30 text-white px-4 py-2 rounded-full text-sm font-medium hover:bg-slate-200/30 dark:hover:bg-slate-700/40 transition-colors">Contact Support</button>
             </div>
@@ -82,7 +82,7 @@
   <div class="mt-8 sm:mt-10 flex justify-center px-4">
     <button
       type="button"
-      class="js-cta inline-flex items-center justify-center rounded-full px-8 py-3 text-lg font-semibold text-white shadow-lg transition-all duration-300 hover:-translate-y-0.5 hover:shadow-xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-crimson focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:focus-visible:ring-offset-slate-900"
+      class="js-signup-cta inline-flex items-center justify-center rounded-full px-8 py-3 text-lg font-semibold text-white shadow-lg transition-all duration-300 hover:-translate-y-0.5 hover:shadow-xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-crimson focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:focus-visible:ring-offset-slate-900"
       style="background-image: linear-gradient(135deg, #dc143c 0%, #f43f5e 50%, #ff758c 100%);"
     >
       Start accepting payments today
@@ -219,38 +219,6 @@
   </div>
 </div>
 
-<div id="signup-panel-overlay" class="panel-overlay fixed inset-0 bg-black/60 z-50 opacity-0 invisible">
-  <div id="signup-panel" class="panel-container fixed top-0 right-0 h-full w-full max-w-2xl bg-white dark:bg-slate-900 shadow-2xl transform translate-x-full flex flex-col">
-    <div class="p-6 sm:p-8 relative flex-shrink-0">
-      <button id="close-signup-panel-btn" class="absolute top-4 right-4 text-slate-500 hover:text-slate-800 dark:hover:text-slate-200"><i data-lucide="x" class="h-6 w-6"></i></button>
-      <div class="mb-6">
-        <div class="flex justify-between mb-2 text-sm font-semibold text-slate-800 dark:text-slate-200">
-          <p>Step <span id="current-step-text">1</span> of 3</p>
-          <p id="step-name">Account Details</p>
-        </div>
-        <div class="w-full bg-slate-200 dark:bg-slate-700 rounded-full h-2.5 overflow-hidden">
-          <div id="progress-bar" class="bg-brand-crimson h-full rounded-full" style="width: 33%"></div>
-        </div>
-      </div>
-    </div>
-    <div class="px-6 sm:px-8 pb-4 flex-grow overflow-y-auto">
-      <form id="signup-form" novalidate></form>
-      <div id="form-message" class="mt-4 text-center text-sm"></div>
-    </div>
-    <div class="p-6 sm:p-8 mt-auto pt-6 border-t border-slate-200 dark:border-slate-800 flex justify-between items-center flex-shrink-0">
-      <div class="text-sm">
-        <p class="font-semibold">Need Help?</p>
-        <a href="tel:15056006042" class="text-slate-500 hover:text-brand-crimson dark:hover:text-brand-teal transition-colors">1-505-600-6042</a>
-      </div>
-      <div class="flex items-center gap-4">
-        <button type="button" id="prev-btn" class="bg-slate-200 text-slate-800 dark:bg-slate-700 dark:text-slate-200 px-6 py-2.5 rounded-lg font-semibold hover:bg-slate-300 dark:hover:bg-slate-600 transition-all invisible">Previous</button>
-        <button type="button" id="next-btn" class="bg-brand-crimson text-white px-6 py-2.5 rounded-lg font-semibold hover:bg-brand-crimson transition-all shadow-sm hover:shadow-md">Next</button>
-        <button type="submit" id="submit-btn" form="signup-form" class="bg-brand-crimson text-white px-6 py-2.5 rounded-lg font-bold hover:bg-brand-crimson transition-all shadow-sm hover:shadow-md hidden">Create Account</button>
-      </div>
-    </div>
-  </div>
-</div>
-
 <div id="support-modal" class="fixed inset-0 z-[70] hidden">
   <div class="absolute inset-0 bg-black/60" data-close></div>
   <div class="mx-auto mt-[10vh] w-[min(560px,92vw)] rounded-2xl bg-white dark:bg-slate-900 p-6 border border-slate-200 dark:border-slate-800 shadow-2xl">
@@ -302,30 +270,6 @@ document.addEventListener('DOMContentLoaded', () => {
     renderServices(container2);
     if (window.lucide) lucide.createIcons();
   }
-
-  const openPanel = (overlayId, panelId) => {
-    document.getElementById(overlayId).classList.remove('invisible', 'opacity-0');
-    document.getElementById(panelId).classList.remove('translate-x-full');
-  };
-  const closePanel = (overlayId, panelId) => {
-    document.getElementById(panelId).classList.add('translate-x-full');
-    setTimeout(() => {
-      document.getElementById(overlayId).classList.add('invisible', 'opacity-0');
-    }, 300);
-  };
-
-  document.querySelectorAll('.js-cta').forEach(el => {
-    el.addEventListener('click', (e) => {
-      e.preventDefault();
-      openPanel('signup-panel-overlay', 'signup-panel');
-      initializeForm();
-    });
-  });
-
-  document.getElementById('close-signup-panel-btn').addEventListener('click', () => closePanel('signup-panel-overlay', 'signup-panel'));
-  document.getElementById('signup-panel-overlay').addEventListener('click', (e) => {
-    if (e.target.id === 'signup-panel-overlay') closePanel('signup-panel-overlay', 'signup-panel');
-  });
 
   const supportModal = document.getElementById('support-modal');
   document.querySelectorAll('.js-support').forEach(el => {
@@ -473,65 +417,6 @@ document.addEventListener('DOMContentLoaded', () => {
   };
   askFaqBtn.addEventListener('click', handleFaqSubmit);
   faqQuestionInput.addEventListener('keypress', (e) => { if (e.key === 'Enter') handleFaqSubmit(); });
-
-  let currentStep = 0;
-  const stepNames = ["Account Details", "Company Information", "Finalize Account"];
-
-  function initializeForm() {
-    const form = document.getElementById('signup-form');
-    if (!form) return;
-    form.innerHTML = `
-      <div id="step-1" class="form-step">
-        <h2 class="text-2xl font-bold mb-2">Primary Contact Information</h2>
-        <p class="text-sm text-slate-500 mb-6">This person will be the primary user on the account.</p>
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <div><label for="firstName" class="block text-sm font-semibold mb-1">First Name*</label><input type="text" id="firstName" name="firstName" class="w-full p-3 rounded-lg bg-slate-100 dark:bg-slate-800" required></div>
-          <div><label for="lastName" class="block text-sm font-semibold mb-1">Last Name*</label><input type="text" id="lastName" name="lastName" class="w-full p-3 rounded-lg bg-slate-100 dark:bg-slate-800" required></div>
-          <div class="md:col-span-2"><label for="email" class="block text-sm font-semibold mb-1">Email Address*</label><input type="email" id="email" name="email" class="w-full p-3 rounded-lg bg-slate-100 dark:bg-slate-800" required></div>
-          <div><label for="phone" class="block text-sm font-semibold mb-1">Phone Number*</label><input type="tel" id="phone" name="phone" class="w-full p-3 rounded-lg bg-slate-100 dark:bg-slate-800" required></div>
-          <div><label for="password" class="block text-sm font-semibold mb-1">Password*</label><input type="password" id="password" name="password" class="w-full p-3 rounded-lg bg-slate-100 dark:bg-slate-800" required></div>
-        </div>
-      </div>
-      <div id="step-2" class="form-step hidden">
-        <h2 class="text-2xl font-bold mb-6">Company Information</h2>
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <div class="md:col-span-2"><label for="companyName" class="block text-sm font-semibold mb-1">Company Name*</label><input type="text" id="companyName" name="companyName" class="w-full p-3 rounded-lg bg-slate-100 dark:bg-slate-800" required></div>
-        </div>
-      </div>
-      <div id="step-3" class="form-step hidden">
-        <h2 class="text-2xl font-bold mb-2">Finalize Your Account</h2>
-        <p class="text-sm text-slate-500 mb-6">Create a username for logging into the gateway and accept the terms.</p>
-        <div class="space-y-4">
-          <div><label for="username" class="block text-sm font-semibold mb-1">Primary Username*</label><input type="text" id="username" name="username" class="w-full p-3 rounded-lg bg-slate-100 dark:bg-slate-800" required></div>
-          <div class="flex items-start pt-4">
-            <div class="flex items-center h-5"><input id="terms" name="terms" type="checkbox" class="focus:ring-brand-crimson h-4 w-4 text-brand-crimson rounded" required></div>
-            <div class="ml-3 text-sm"><label for="terms">I agree to the <a href="#" class="font-semibold text-brand-crimson hover:underline">Terms and Conditions</a>*</label></div>
-          </div>
-        </div>
-      </div>`;
-    const steps = form.querySelectorAll('.form-step');
-    const prevBtn = document.getElementById('prev-btn');
-    const nextBtn = document.getElementById('next-btn');
-    const submitBtn = document.getElementById('submit-btn');
-    const progressBar = document.getElementById('progress-bar');
-    const currentStepText = document.getElementById('current-step-text');
-    const stepNameEl = document.getElementById('step-name');
-
-    function updateFormStep() {
-      steps.forEach((step, index) => {
-        step.classList.toggle('hidden', index !== currentStep);
-      });
-      progressBar.style.width = `${((currentStep + 1) / steps.length) * 100}%`;
-      currentStepText.textContent = currentStep + 1;
-      stepNameEl.textContent = stepNames[currentStep];
-      prevBtn.classList.toggle('invisible', currentStep === 0);
-      nextBtn.classList.toggle('hidden', currentStep === steps.length - 1);
-      submitBtn.classList.toggle('hidden', currentStep !== steps.length - 1);
-    }
-    nextBtn.addEventListener('click', () => { if (currentStep < steps.length - 1) { currentStep++; updateFormStep(); } });
-    prevBtn.addEventListener('click', () => { if (currentStep > 0) { currentStep--; updateFormStep(); } });
-    updateFormStep();
-  }
 
   const supportForm = document.getElementById('support-form');
   const supportOut = document.getElementById('support-out');

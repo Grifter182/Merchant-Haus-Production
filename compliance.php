@@ -145,32 +145,6 @@
                 });
             }
 
-            const openPanel = (overlayId, panelId) => {
-                const overlay = document.getElementById(overlayId);
-                const panel = document.getElementById(panelId);
-                if(overlay) overlay.classList.remove('invisible', 'opacity-0');
-                if(panel) panel.classList.remove('translate-x-full');
-            };
-            const closePanel = (overlayId, panelId) => {
-                const panel = document.getElementById(panelId);
-                if(panel) panel.classList.add('translate-x-full');
-                const overlay = document.getElementById(overlayId);
-                if(overlay) setTimeout(() => overlay.classList.add('invisible', 'opacity-0'), 300);
-            };
-
-            document.querySelectorAll('.js-cta').forEach(el => {
-                el.addEventListener('click', (e) => {
-                    e.preventDefault();
-                    openPanel('signup-panel-overlay', 'signup-panel');
-                    initializeForm();
-                });
-            });
-            document.getElementById('close-signup-panel-btn')?.addEventListener('click', () => closePanel('signup-panel-overlay', 'signup-panel'));
-            const signupOverlay = document.getElementById('signup-panel-overlay');
-            if(signupOverlay) signupOverlay.addEventListener('click', (e) => {
-                if (e.target.id === 'signup-panel-overlay') closePanel('signup-panel-overlay', 'signup-panel');
-            });
-
             const supportModal = document.getElementById('support-modal');
             document.querySelectorAll('.js-support').forEach(el => {
                 el.addEventListener('click', (e) => { e.preventDefault(); if(supportModal) supportModal.classList.remove('hidden'); });
@@ -215,12 +189,6 @@
                 });
             }
 
-            // --- Multi-step form logic ---
-            function initializeForm() {
-                const formContainer = document.getElementById('signup-panel');
-                if (!formContainer) return;
-                // Full multi-step form HTML and logic would be injected here
-            }
         });
     </script>
 

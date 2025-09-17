@@ -57,6 +57,8 @@
     </button>
 
 
+    <script src="<?php echo htmlspecialchars(mh_asset('assets/signup-panel.js')); ?>" defer></script>
+    
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             if (window.lucide) lucide.createIcons();
