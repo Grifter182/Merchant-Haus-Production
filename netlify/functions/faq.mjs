@@ -1,4 +1,4 @@
-// functions/faq.mjs
+// netlify/functions/faq.mjs
 import { GoogleGenerativeAI } from "@google/generative-ai";
 
 const corsHeaders = {
