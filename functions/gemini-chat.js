@@ -18,7 +18,8 @@ exports.handler = async (event) => {
     // Use ESM import with CommonJS wrapper
     const { GoogleGenerativeAI } = await import("@google/generative-ai");
     const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
-    const model = genAI.getGenerativeModel({ model: "gemini-2.5-flash" });
+    const modelName = process.env.GEMINI_MODEL || "gemini-1.5-flash";
+    const model = genAI.getGenerativeModel({ model: modelName });
 
     const chat = model.startChat({
       history: history.map(m => ({
