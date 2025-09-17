@@ -11,6 +11,8 @@ BOOKING_URL   = https://calendly.com/merchanthaus
 RESEND_API_KEY= re_bGbMpcNW_93iTgbDbhTwDAuXVQiQzUqyz
 FROM_EMAIL    = admin@merchant.haus
 TEAM_EMAIL    = admin@merchant.haus (optional)
+GEMINI_API_KEY= <your-google-generative-ai-key>
+GEMINI_MODEL  = gemini-1.5-flash (optional override)
 ```
 3) Deploy
 
