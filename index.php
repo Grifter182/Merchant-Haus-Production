@@ -19,6 +19,9 @@
 .service-cell h3, .service-cell p { opacity: 0; transform: translateY(10px); transition: opacity 0.4s ease-out, transform 0.4s ease-out; }
 .service-cell.is-visible h3 { opacity: 1; transform: translateY(0); transition-delay: 0.2s; }
 .service-cell.is-visible p { opacity: 1; transform: translateY(0); transition-delay: 0.3s; }
+#faq-answer p { margin: 0 0 0.75rem; }
+#faq-answer p:last-child { margin-bottom: 0; }
+#faq-answer ul { margin: 0; }
 .hero-bg-container::before { content: ''; position: absolute; inset: 0; background-image: url('<?php echo htmlspecialchars(mh_asset("public/assets/images/hero.png")); ?>'); background-size: 100%; background-position: center; background-repeat: no-repeat; animation: kenBurns 20s ease-in-out infinite alternate; z-index: -20; }
 @keyframes kenBurns { 0% { transform: scale(1) rotate(0deg); background-position: center; } 100% { transform: scale(1.1) rotate(1deg); background-position: top left; } }
 .panel-overlay, .panel-container { transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
@@ -295,13 +298,84 @@ document.addEventListener('DOMContentLoaded', () => {
   const faqQuestionInput = document.getElementById('faq-question');
   const faqAnswerContainer = document.getElementById('faq-answer');
 
+  const createFaqInlineNodes = (text) => {
+    const fragment = document.createDocumentFragment();
+    if (!text) return fragment;
+    const boldRegex = /\*\*(.*?)\*\*/g;
+    let lastIndex = 0;
+    let match;
+    while ((match = boldRegex.exec(text)) !== null) {
+      if (match.index > lastIndex) {
+        fragment.appendChild(document.createTextNode(text.slice(lastIndex, match.index)));
+      }
+      const strong = document.createElement('strong');
+      strong.textContent = match[1];
+      fragment.appendChild(strong);
+      lastIndex = boldRegex.lastIndex;
+    }
+    if (lastIndex < text.length) {
+      fragment.appendChild(document.createTextNode(text.slice(lastIndex)));
+    }
+    return fragment;
+  };
+
+  const sanitizeFaqReply = (reply) => {
+    if (typeof reply !== 'string') return [];
+    const lines = reply.split(/\r?\n/);
+    const nodes = [];
+    let listEl = null;
+    let paragraphBuffer = [];
+
+    const flushList = () => {
+      if (listEl) {
+        nodes.push(listEl);
+        listEl = null;
+      }
+    };
+
+    const flushParagraph = () => {
+      if (!paragraphBuffer.length) return;
+      const paragraph = document.createElement('p');
+      paragraph.appendChild(createFaqInlineNodes(paragraphBuffer.join(' ')));
+      nodes.push(paragraph);
+      paragraphBuffer = [];
+    };
+
+    lines.forEach((line) => {
+      const trimmed = line.trim();
+      if (!trimmed) {
+        flushParagraph();
+        flushList();
+        return;
+      }
+      const bulletMatch = trimmed.match(/^[-*] (.+)$/);
+      if (bulletMatch) {
+        flushParagraph();
+        if (!listEl) {
+          listEl = document.createElement('ul');
+          listEl.className = 'list-disc pl-5 space-y-2';
+        }
+        const li = document.createElement('li');
+        li.appendChild(createFaqInlineNodes(bulletMatch[1].trim()));
+        listEl.appendChild(li);
+      } else {
+        flushList();
+        paragraphBuffer.push(line.trim());
+      }
+    });
+
+    flushParagraph();
+    flushList();
+    return nodes;
+  };
+
   const handleFaqSubmit = async () => {
     const question = faqQuestionInput.value.trim();
     if (!question) return;
     faqAnswerContainer.classList.remove('hidden');
     askFaqBtn.disabled = true;
     askFaqBtn.innerHTML = '<span class="loader"></span>';
-    faqAnswerContainer.innerHTML = 'Thinking...';
+    faqAnswerContainer.textContent = 'Thinking...';
     try {
       const response = await fetch('/.netlify/functions/gemini-chat', {
         method: 'POST',
@@ -311,14 +385,12 @@ document.addEventListener('DOMContentLoaded', () => {
       if (!response.ok) throw new Error('API request failed');
       const result = await response.json();
       if (result.reply) {
-        let html = result.reply
-          .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
-          .replace(/^\* (.*$)/gm, '<li>$1</li>')
-          .replace(/<\/li><li>/g, '</li><li>');
-        if (html.includes('<li>')) {
-          html = `<ul class="list-disc pl-5 space-y-2">${html}</ul>`;
+        const sanitizedNodes = sanitizeFaqReply(result.reply);
+        if (sanitizedNodes.length) {
+          faqAnswerContainer.replaceChildren(...sanitizedNodes);
+        } else {
+          faqAnswerContainer.textContent = 'Sorry, I could not find an answer to your question.';
         }
-        faqAnswerContainer.innerHTML = html;
       } else {
         faqAnswerContainer.textContent = 'Sorry, I could not find an answer to your question.';
       }
