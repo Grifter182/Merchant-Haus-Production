@@ -94,18 +94,53 @@
   <div class="max-w-5xl mx-auto px-4 text-center">
     <h2 class="text-4xl font-bold mb-4 animate-on-scroll font-ubuntu">Integrate with Your Favorite Tools</h2>
     <p class="text-lg text-gray-600 dark:text-slate-300 mb-12">Connect MerchantHaus with the platforms you already use.</p>
+    <?php
+      $integrationTiles = [
+        [
+          'name' => 'Shopify',
+          'href' => 'shopify.html',
+          'logos' => [
+            'light' => mh_asset('public/assets/images/shopifylight.png'),
+            'dark' => mh_asset('public/assets/images/shopifydark.png'),
+          ],
+        ],
+        [
+          'name' => 'QuickBooks SyncPay',
+          'href' => 'https://quickbooks.intuit.com/',
+          'target' => '_blank',
+          'rel' => 'noopener',
+          'logos' => [
+            'default' => mh_asset('public/assets/images/quickbooks.svg'),
+          ],
+        ],
+        [
+          'name' => 'GoHighLevel',
+          'href' => 'gohighlevel.html',
+          'logos' => [
+            'light' => mh_asset('public/assets/images/gohighlevellight.png'),
+            'dark' => mh_asset('public/assets/images/gohighleveldark.png'),
+          ],
+        ],
+      ];
+    ?>
     <div class="flex justify-center items-center gap-8 md:gap-16">
-      <a href="shopify.html" class="block hover:scale-105 transition-transform duration-300">
-        <img src="<?php echo htmlspecialchars(mh_asset('public/assets/images/shopifylight.png')); ?>" alt="Shopify Logo" class="h-12 md:h-14 block dark:hidden">
-        <img src="<?php echo htmlspecialchars(mh_asset('public/assets/images/shopifydark.png')); ?>" alt="Shopify Logo" class="h-12 md:h-14 hidden dark:block">
-      </a>
-      <a href="https://quickbooks.intuit.com/" class="block hover:scale-105 transition-transform duration-300" target="_blank" rel="noopener">
-        <img src="<?php echo htmlspecialchars(mh_asset('public/assets/images/quickbooks.svg')); ?>" alt="QuickBooks SyncPay Logo" class="h-12 md:h-14 block">
-      </a>
-      <a href="gohighlevel.html" class="block hover:scale-105 transition-transform duration-300">
-        <img src="<?php echo htmlspecialchars(mh_asset('public/assets/images/gohighlevellight.png')); ?>" alt="GoHighLevel Logo" class="h-12 md:h-14 block dark:hidden">
-        <img src="<?php echo htmlspecialchars(mh_asset('public/assets/images/gohighleveldark.png')); ?>" alt="GoHighLevel Logo" class="h-12 md:h-14 hidden dark:block">
-      </a>
+      <?php foreach ($integrationTiles as $integration) : ?>
+        <?php
+          $href = $integration['href'] ?? '#';
+          $logos = $integration['logos'] ?? [];
+          $logoSrc = $logos['light'] ?? $logos['dark'] ?? ($logos['default'] ?? ($integration['logo'] ?? null));
+          if (!$logoSrc) {
+            continue;
+          }
+          $tileClass = $integration['class'] ?? 'block hover:scale-105 transition-transform duration-300';
+          $altText = $integration['alt'] ?? (($integration['name'] ?? 'Integration') . ' Logo');
+          $targetAttr = isset($integration['target']) ? ' target="' . htmlspecialchars($integration['target']) . '"' : '';
+          $relAttr = isset($integration['rel']) ? ' rel="' . htmlspecialchars($integration['rel']) . '"' : '';
+        ?>
+        <a href="<?php echo htmlspecialchars($href); ?>" class="<?php echo htmlspecialchars($tileClass); ?>"<?php echo $targetAttr . $relAttr; ?>>
+          <img src="<?php echo htmlspecialchars($logoSrc); ?>" alt="<?php echo htmlspecialchars($altText); ?>" class="h-12 md:h-14 block">
+        </a>
+      <?php endforeach; ?>
     </div>
   </div>
 </section>
