@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="200" height="40" viewBox="0 0 200 40" role="img" aria-labelledby="title desc">
+  <title id="title">WordPress logo</title>
+  <desc id="desc">WordPress wordmark with white lettering for dark backgrounds</desc>
+  <rect width="200" height="40" fill="none"/>
+  <text x="0" y="28" fill="#ffffff" font-family="'Inter', 'Helvetica Neue', Arial, sans-serif" font-size="26" font-weight="600" letter-spacing="0.5">WordPress</text>
+</svg>

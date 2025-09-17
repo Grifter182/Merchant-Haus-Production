@@ -114,6 +114,26 @@
           ],
         ],
         [
+          'name' => 'Squarespace',
+          'href' => 'https://www.squarespace.com/',
+          'target' => '_blank',
+          'rel' => 'noopener',
+          'logos' => [
+            'light' => mh_asset('public/assets/images/squarespace-light.svg'),
+            'dark' => mh_asset('public/assets/images/squarespace-dark.svg'),
+          ],
+        ],
+        [
+          'name' => 'WordPress',
+          'href' => 'https://wordpress.org/',
+          'target' => '_blank',
+          'rel' => 'noopener',
+          'logos' => [
+            'light' => mh_asset('public/assets/images/wordpress-light.svg'),
+            'dark' => mh_asset('public/assets/images/wordpress-dark.svg'),
+          ],
+        ],
+        [
           'name' => 'GoHighLevel',
           'href' => 'gohighlevel.html',
           'logos' => [
