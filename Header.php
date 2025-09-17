@@ -186,7 +186,7 @@
                              <a href="tel:15056006042" class="hover:text-brand-teal transition-colors">1-505-600-6042</a>
                              <a href="mailto:support@merchanthaus.io" class="hover:text-brand-teal transition-colors">support@merchanthaus.io</a>
                          </div>
-                         <a href="/#checklist" class="js-cta bg-brand-crimson hover:bg-opacity-90 text-white border border-transparent px-4 py-2 rounded-full text-sm font-semibold font-inter transition-colors duration-300">Get Started</a>
+                         <button type="button" class="js-signup-cta bg-brand-crimson hover:bg-opacity-90 text-white border border-transparent px-4 py-2 rounded-full text-sm font-semibold font-inter transition-colors duration-300">Get Started</button>
                          <a href="https://retailmanager.merchant.haus" class="hidden sm:block bg-transparent hover:bg-brand-teal text-brand-teal hover:text-white border border-brand-teal px-4 py-2 rounded-lg text-sm font-semibold font-inter transition-colors duration-300">Login</a>
                          <button id="mobile-menu-button" class="md:hidden p-2 rounded-lg hover:bg-slate-800">
                              <i data-lucide="menu" class="h-6 w-6"></i>
@@ -232,6 +232,40 @@
                      </div>
                      <a href="https://retailmanager.merchant.haus" class="sm:hidden block w-full px-4 py-2 text-center rounded-full border border-brand-teal bg-[#262626] text-white transition-colors duration-200 hover:bg-brand-teal">Login</a>
                  </nav>
+            </div>
+        </div>
+    </div>
+
+    <div id="signup-panel-overlay" class="panel-overlay fixed inset-0 bg-black/60 z-50 opacity-0 invisible">
+        <div id="signup-panel" class="panel-container fixed top-0 right-0 h-full w-full max-w-2xl bg-white dark:bg-slate-900 shadow-2xl transform translate-x-full flex flex-col">
+            <div class="p-6 sm:p-8 relative flex-shrink-0">
+                <button id="close-signup-panel-btn" class="absolute top-4 right-4 text-slate-500 hover:text-slate-800 dark:hover:text-slate-200">
+                    <i data-lucide="x" class="h-6 w-6"></i>
+                </button>
+                <div class="mb-6">
+                    <div class="flex justify-between mb-2 text-sm font-semibold text-slate-800 dark:text-slate-200">
+                        <p>Step <span id="current-step-text">1</span> of 3</p>
+                        <p id="step-name">Account Details</p>
+                    </div>
+                    <div class="w-full bg-slate-200 dark:bg-slate-700 rounded-full h-2.5 overflow-hidden">
+                        <div id="progress-bar" class="bg-brand-crimson h-full rounded-full" style="width: 33%"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="px-6 sm:px-8 pb-4 flex-grow overflow-y-auto">
+                <form id="signup-form" novalidate></form>
+                <div id="form-message" class="mt-4 text-center text-sm"></div>
+            </div>
+            <div class="p-6 sm:p-8 mt-auto pt-6 border-t border-slate-200 dark:border-slate-800 flex justify-between items-center flex-shrink-0">
+                <div class="text-sm">
+                    <p class="font-semibold">Need Help?</p>
+                    <a href="tel:15056006042" class="text-slate-500 hover:text-brand-crimson dark:hover:text-brand-teal transition-colors">1-505-600-6042</a>
+                </div>
+                <div class="flex items-center gap-4">
+                    <button type="button" id="prev-btn" class="bg-slate-200 text-slate-800 dark:bg-slate-700 dark:text-slate-200 px-6 py-2.5 rounded-lg font-semibold hover:bg-slate-300 dark:hover:bg-slate-600 transition-all invisible">Previous</button>
+                    <button type="button" id="next-btn" class="bg-brand-crimson text-white px-6 py-2.5 rounded-lg font-semibold hover:bg-brand-crimson transition-all shadow-sm hover:shadow-md">Next</button>
+                    <button type="submit" id="submit-btn" form="signup-form" class="bg-brand-crimson text-white px-6 py-2.5 rounded-lg font-bold hover:bg-brand-crimson transition-all shadow-sm hover:shadow-md hidden">Create Account</button>
+                </div>
             </div>
         </div>
     </div>
