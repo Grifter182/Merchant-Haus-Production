@@ -1,7 +1,7 @@
 <?php
-    $pageTitle = 'MerchantHaus – ISO Solutions for U.S. Retail';
-    $pageDescription = 'Effortlessly set up your business profile and start taking payments in minutes—cards, ACH, and secure pay links—online, in-store, or on the go.';
-    include __DIR__ . '/Header.php';
+    $pageTitle = 'MerchantHaus – ISO Solutions for U.S. Retail';
+    $pageDescription = 'Effortlessly set up your business profile and start taking payments in minutes—cards, ACH, and secure pay links—online, in-store, or on the go.';
+    include __DIR__ . '/Header.php';
 ?>
 
 <style>
@@ -28,441 +28,448 @@
 @keyframes mh-services-marquee { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
 @media (prefers-reduced-motion: reduce) { .animate-scroll { animation: none; } }
 .panel-overlay, .panel-container { transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
+.integration-logo { height: 40px; max-width: none; margin: 0 32px; flex-shrink: 0; filter: grayscale(1); opacity: 0.7; transition: filter 0.3s ease, opacity 0.3s ease; vertical-align: middle; }
+.dark .integration-logo { filter: grayscale(1) invert(1) brightness(1.5); opacity: 0.5; }
+.group:hover .integration-logo { filter: grayscale(0); opacity: 1; }
+.dark .group:hover .integration-logo { filter: grayscale(0) invert(0) brightness(1); }
 </style>
 
 <div class="relative">
-  <section class="relative overflow-hidden animate-fadeIn hero-bg-container">
-    <div class="absolute inset-0 bg-black/50 -z-10"></div>
-    <div class="max-w-7xl mx-auto px-4 pt-16 md:pt-24 pb-28">
-      <div class="grid md:grid-cols-2 gap-10 items-center">
-        <div class="space-y-6 text-center md:text-left">
-          <h1 class="text-3xl sm:text-4xl tracking-tight leading-tight text-white">
-            <span class="uppercase font-ubuntu">PAYMENTS EVERYWHERE</span>
-            <span id="animated-headline-sub" class="grad-text-static text-2xl sm:text-3xl font-ubuntu block sm:inline-block mt-2 sm:mt-0 h-10 sm:h-auto">Built for Speed, Security, and Scale.</span>
-          </h1>
-          <p class="text-lg text-gray-200 dark:text-slate-300 font-inter" style="font-weight:100">Effortlessly set up your business profile and start taking payments in minutes—cards, ACH, and secure pay links—online, in-store, or on the go. Enjoy lower costs, fast onboarding, real-time reporting, and tools to reduce fraud and chargebacks.</p>
-        </div>
-        <div class="relative p-4">
-          <div class="w-full space-y-4 relative z-10">
-            <div class="relative">
-              <input type="text" id="faq-question" placeholder="Ask about pricing, features..." class="field w-full p-4 pr-12 text-lg rounded-full bg-white/20 dark:bg-slate-900/30 border border-slate-300/50 dark:border-slate-700/50 text-white placeholder-slate-300 focus:ring-2 focus:ring-brand-crimson focus:border-transparent transition-all">
-              <button id="ask-faq" class="absolute top-1/2 right-2 -translate-y-1/2 p-2 rounded-full bg-brand-crimson text-white hover:bg-brand-crimson transition-colors">
-                <i data-lucide="arrow-up" class="h-5 w-5"></i>
-              </button>
-            </div>
-            <div id="hero-actions" class="flex flex-wrap justify-center items-center gap-3">
-              <button class="js-signup-cta bg-transparent hover:bg-brand-crimson text-brand-crimson hover:text-white border border-brand-crimson px-4 py-2 rounded-full text-sm font-semibold transition-colors duration-300">Get Started</button>
-              <button class="bg-slate-100/20 dark:bg-slate-800/30 text-white px-4 py-2 rounded-full text-sm font-medium hover:bg-slate-200/30 dark:hover:bg-slate-700/40 transition-colors">Chargeback Help</button>
-              <button class="js-support bg-slate-100/20 dark:bg-slate-800/30 text-white px-4 py-2 rounded-full text-sm font-medium hover:bg-slate-200/30 dark:hover:bg-slate-700/40 transition-colors">Contact Support</button>
-            </div>
-            <div id="faq-answer" class="mt-6 p-4 text-left rounded-lg bg-white/90 dark:bg-slate-900/90 border border-slate-200 dark:border-slate-800 hidden text-slate-800 dark:text-slate-200"></div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
+  <section class="relative overflow-hidden animate-fadeIn hero-bg-container">
+    <div class="absolute inset-0 bg-black/50 -z-10"></div>
+    <div class="max-w-7xl mx-auto px-4 pt-16 md:pt-24 pb-28">
+      <div class="grid md:grid-cols-2 gap-10 items-center">
+        <div class="space-y-6 text-center md:text-left">
+          <h1 class="text-3xl sm:text-4xl tracking-tight leading-tight text-white">
+            <span class="uppercase font-ubuntu">PAYMENTS EVERYWHERE</span>
+            <span id="animated-headline-sub" class="grad-text-static text-2xl sm:text-3xl font-ubuntu block sm:inline-block mt-2 sm:mt-0 h-10 sm:h-auto">Built for Speed, Security, and Scale.</span>
+          </h1>
+          <p class="text-lg text-gray-200 dark:text-slate-300 font-inter" style="font-weight:100">Effortlessly set up your business profile and start taking payments in minutes—cards, ACH, and secure pay links—online, in-store, or on the go. Enjoy lower costs, fast onboarding, real-time reporting, and tools to reduce fraud and chargebacks.</p>
+        </div>
+        <div class="relative p-4">
+          <div class="w-full space-y-4 relative z-10">
+            <div class="relative">
+              <input type="text" id="faq-question" placeholder="Ask about pricing, features..." class="field w-full p-4 pr-12 text-lg rounded-full bg-white/20 dark:bg-slate-900/30 border border-slate-300/50 dark:border-slate-700/50 text-white placeholder-slate-300 focus:ring-2 focus:ring-brand-crimson focus:border-transparent transition-all">
+              <button id="ask-faq" class="absolute top-1/2 right-2 -translate-y-1/2 p-2 rounded-full bg-brand-crimson text-white hover:bg-brand-crimson transition-colors">
+                <i data-lucide="arrow-up" class="h-5 w-5"></i>
+              </button>
+            </div>
+            <div id="hero-actions" class="flex flex-wrap justify-center items-center gap-3">
+              <button class="js-signup-cta bg-transparent hover:bg-brand-crimson text-brand-crimson hover:text-white border border-brand-crimson px-4 py-2 rounded-full text-sm font-semibold transition-colors duration-300">Get Started</button>
+              <button class="bg-slate-100/20 dark:bg-slate-800/30 text-white px-4 py-2 rounded-full text-sm font-medium hover:bg-slate-200/30 dark:hover:bg-slate-700/40 transition-colors">Chargeback Help</button>
+              <button class="js-support bg-slate-100/20 dark:bg-slate-800/30 text-white px-4 py-2 rounded-full text-sm font-medium hover:bg-slate-200/30 dark:hover:bg-slate-700/40 transition-colors">Contact Support</button>
+            </div>
+            <div id="faq-answer" class="mt-6 p-4 text-left rounded-lg bg-white/90 dark:bg-slate-900/90 border border-slate-200 dark:border-slate-800 hidden text-slate-800 dark:text-slate-200"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 
-  <div class="absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-1/2 z-10 w-full max-w-5xl px-4">
-    <div class="bg-white dark:bg-[#1c1c1c] text-slate-800 dark:text-slate-200 px-8 py-4 rounded-xl border-2 border-brand-crimson shadow-lg text-center">
-      <h2 class="text-3xl font-ubuntu font-bold">Payment Services Built for You</h2>
-    </div>
-  </div>
+  <div class="absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-1/2 z-10 w-full max-w-5xl px-4">
+    <div class="bg-white dark:bg-[#1c1c1c] text-slate-800 dark:text-slate-200 px-8 py-4 rounded-xl border-2 border-brand-crimson shadow-lg text-center">
+      <h2 class="text-3xl font-ubuntu font-bold">Payment Services Built for You</h2>
+    </div>
+  </div>
 </div>
 
 <section id="payments" class="pt-28 pb-12" style="background-color: #6dffca;">
-  <div class="max-w-5xl mx-auto px-4 text-right">
-    <p class="text-2xl sm:text-3xl font-ubuntu mb-12" style="color: #524848;">Your complete toolkit for accepting payments and managing your business.</p>
-  </div>
-  <div class="relative w-full overflow-hidden group [mask-image:_linear_gradient(to_right,transparent_0,_black_128px,_black_calc(100%-128px),transparent_100%)]">
-    <div class="flex animate-scroll group-hover:[animation-play-state:paused]">
-      <div class="flex-shrink-0 flex items-center space-x-8" id="services-container-1"></div>
-      <div class="flex-shrink-0 flex items-center space-x-8" id="services-container-2" aria-hidden="true"></div>
-    </div>
-  </div>
-  <div class="mt-8 sm:mt-10 flex justify-center px-4">
-    <button
-      type="button"
-      class="js-signup-cta inline-flex items-center justify-center rounded-full px-8 py-3 text-lg font-semibold text-white shadow-lg transition-all duration-300 hover:-translate-y-0.5 hover:shadow-xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-crimson focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:focus-visible:ring-offset-slate-900"
-      style="background-image: linear-gradient(135deg, #dc143c 0%, #f43f5e 50%, #ff758c 100%);"
-    >
-      Start accepting payments today
-    </button>
-  </div>
+  <div class="max-w-5xl mx-auto px-4 text-right">
+    <p class="text-2xl sm:text-3xl font-ubuntu mb-12" style="color: #524848;">Your complete toolkit for accepting payments and managing your business.</p>
+  </div>
+  <div class="relative w-full overflow-hidden group [mask-image:_linear_gradient(to_right,transparent_0,_black_128px,_black_calc(100%-128px),transparent_100%)]">
+    <div class="flex animate-scroll group-hover:[animation-play-state:paused]">
+      <div class="flex-shrink-0 flex items-center space-x-8" id="services-container-1"></div>
+      <div class="flex-shrink-0 flex items-center space-x-8" id="services-container-2" aria-hidden="true"></div>
+    </div>
+  </div>
+  <div class="mt-8 sm:mt-10 flex justify-center px-4">
+    <button
+      type="button"
+      class="js-signup-cta inline-flex items-center justify-center rounded-full px-8 py-3 text-lg font-semibold text-white shadow-lg transition-all duration-300 hover:-translate-y-0.5 hover:shadow-xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-crimson focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:focus-visible:ring-offset-slate-900"
+      style="background-image: linear-gradient(135deg, #dc143c 0%, #f43f5e 50%, #ff758c 100%);"
+    >
+      Start accepting payments today
+    </button>
+  </div>
 </section>
 
-<section id="integrations" class="py-8 md:py-12">
-  <div class="max-w-5xl mx-auto px-4 text-center">
-    <h2 class="text-4xl font-bold mb-4 animate-on-scroll font-ubuntu">Integrate with Your Favorite Tools</h2>
-    <p class="text-lg text-gray-600 dark:text-slate-300 mb-12">Connect MerchantHaus with the platforms you already use.</p>
+<section id="integrations" class="py-8 md:py-12 overflow-hidden">
+  <div class="max-w-7xl mx-auto px-4 text-center">
     <?php
-      $integrationTiles = [
-        [
-          'name' => 'Shopify',
-          'href' => 'shopify.html',
-          'logos' => [
-            'light' => mh_asset('public/assets/images/shopifylight.png'),
-            'dark' => mh_asset('public/assets/images/shopifydark.png'),
-          ],
-        ],
-        [
-          'name' => 'QuickBooks SyncPay',
-          'href' => 'https://quickbooks.intuit.com/',
-          'target' => '_blank',
-          'rel' => 'noopener',
-          'logos' => [
-            'default' => mh_asset('public/assets/images/quickbooks.svg'),
-          ],
-        ],
-        [
-          'name' => 'Squarespace',
-          'href' => 'https://www.squarespace.com/',
-          'target' => '_blank',
-          'rel' => 'noopener',
-          'logos' => [
-            'light' => mh_asset('public/assets/images/squarespace-light.svg'),
-            'dark' => mh_asset('public/assets/images/squarespace-dark.svg'),
-          ],
-        ],
-        [
-          'name' => 'GoHighLevel',
-          'href' => 'gohighlevel.html',
-          'logos' => [
-            'light' => mh_asset('public/assets/images/gohighlevellight.png'),
-            'dark' => mh_asset('public/assets/images/gohighleveldark.png'),
-          ],
-        ],
-      ];
+        // Data for logos flanking the title
+        $shopifyData = [
+            'name' => 'Shopify', 'href' => 'shopify.html',
+            'logos' => [
+                'light' => 'public/assets/images/shopifylight.png',
+                'dark' => 'public/assets/images/shopifydark.png',
+            ],
+        ];
+        $goHighLevelData = [
+            'name' => 'GoHighLevel', 'href' => 'gohighlevel.html',
+            'logos' => [
+                'light' => 'public/assets/images/gohighlevellight.png',
+                'dark' => 'public/assets/images/gohighleveldark.png',
+            ],
+        ];
+        // Data for scrolling logos
+        $scrollerIntegrations = [
+            ['name' => 'Salesforce', 'logo' => 'https://upload.wikimedia.org/wikipedia/commons/thumb/5/59/Salesforce.com_logo.svg/512px-Salesforce.com_logo.svg.png'],
+            ['name' => 'QuickBooks', 'logo' => 'https://upload.wikimedia.org/wikipedia/commons/thumb/3/3d/QuickBooks_logo.svg/512px-QuickBooks_logo.svg.png'],
+            ['name' => 'HubSpot', 'logo' => 'https://upload.wikimedia.org/wikipedia/commons/thumb/9/9e/HubSpot_Logo.svg/512px-HubSpot_Logo.svg.png'],
+            ['name' => 'Vend', 'logo' => 'https://upload.wikimedia.org/wikipedia/commons/thumb/7/79/Vend-logo.svg/512px-Vend-logo.svg.png'],
+            ['name' => 'Squarespace', 'logo' => 'https://download.logo.wine/logo/Squarespace/Squarespace-Logo.wine.png'],
+            ['name' => 'MemberPress', 'logo' => 'https://seeklogo.com/images/M/memberpress-logo-3F5D57372A-seeklogo.com.png'],
+            ['name' => 'WooCommerce', 'logo' => 'https://upload.wikimedia.org/wikipedia/commons/thumb/2/2a/WooCommerce_logo.svg/512px-WooCommerce_logo.svg.png'],
+            ['name' => 'Zoho CRM', 'logo' => 'https://upload.wikimedia.org/wikipedia/commons/thumb/0/08/Zoho-logo.svg/512px-Zoho-logo.svg.png'],
+            ['name' => 'Lightspeed', 'logo' => 'https://upload.wikimedia.org/wikipedia/commons/thumb/d/d0/Lightspeed_POS_logo.svg/512px-Lightspeed_POS_logo.svg.png'],
+            ['name' => 'Wix', 'logo' => 'https://www.logo.wine/a/logo/Wix.com/Wix.com-Logo.wine.svg'],
+            ['name' => 'Keap/Infusionsoft', 'logo' => 'https://seeklogo.com/images/I/infusionsoft-logo-0724711B19-seeklogo.com.png'],
+            ['name' => 'Clover', 'logo' => 'https://upload.wikimedia.org/wikipedia/commons/thumb/c/cf/Clover_logo.svg/512px-Clover_logo.svg.png'],
+            ['name' => 'FreshBooks', 'logo' => 'https://seeklogo.com/images/F/freshbooks-logo-7D2B6C3999-seeklogo.com.png'],
+            ['name' => 'Magento', 'logo' => 'https://upload.wikimedia.org/wikipedia/commons/thumb/5/55/Magento_Logo.svg/512px-Magento_Logo.svg.png'],
+            ['name' => 'BigCommerce', 'logo' => 'https://download.logo.wine/logo/BigCommerce/BigCommerce-Logo.wine.png'],
+            ['name' => 'NCR', 'logo' => 'https://upload.wikimedia.org/wikipedia/commons/thumb/6/62/NCR_logo.svg/512px-NCR_logo.svg.png'],
+        ];
+        $scrollerCount = count($scrollerIntegrations);
+        $scroller1 = array_slice($scrollerIntegrations, 0, (int)($scrollerCount / 2));
+        $scroller2 = array_slice($scrollerIntegrations, (int)($scrollerCount / 2));
     ?>
-    <div class="flex justify-center items-center gap-8 md:gap-16">
-      <?php foreach ($integrationTiles as $integration) : ?>
-        <?php
-          $href = $integration['href'] ?? '#';
-          $logos = $integration['logos'] ?? [];
-          $lightLogo = $logos['light'] ?? null;
-          $darkLogo = $logos['dark'] ?? null;
-          $defaultLogo = $logos['default'] ?? ($integration['logo'] ?? null);
-          if (!$lightLogo && !$darkLogo && !$defaultLogo) {
-            continue;
-          }
-          $tileClass = $integration['class'] ?? 'block hover:scale-105 transition-transform duration-300';
-          $altText = $integration['alt'] ?? (($integration['name'] ?? 'Integration') . ' Logo');
-          $targetAttr = isset($integration['target']) ? ' target="' . htmlspecialchars($integration['target']) . '"' : '';
-          $relAttr = isset($integration['rel']) ? ' rel="' . htmlspecialchars($integration['rel']) . '"' : '';
-        ?>
-        <a href="<?php echo htmlspecialchars($href); ?>" class="<?php echo htmlspecialchars($tileClass); ?>"<?php echo $targetAttr . $relAttr; ?>>
-          <?php if ($lightLogo && $darkLogo) : ?>
-            <img src="<?php echo htmlspecialchars($lightLogo); ?>" alt="<?php echo htmlspecialchars($altText); ?>" class="h-12 md:h-14 block dark:hidden">
-            <img src="<?php echo htmlspecialchars($darkLogo); ?>" alt="<?php echo htmlspecialchars($altText); ?>" class="h-12 md:h-14 hidden dark:block">
-          <?php else : ?>
-            <?php $singleLogo = $lightLogo ?? $darkLogo ?? $defaultLogo; ?>
-            <img src="<?php echo htmlspecialchars($singleLogo); ?>" alt="<?php echo htmlspecialchars($altText); ?>" class="h-12 md:h-14 block">
-          <?php endif; ?>
+    <div class="flex justify-center items-center gap-4 md:gap-8 mb-4">
+        <a href="<?php echo htmlspecialchars($shopifyData['href']); ?>" class="block hover:scale-105 transition-transform duration-300">
+            <img src="<?php echo htmlspecialchars($shopifyData['logos']['light']); ?>" alt="<?php echo htmlspecialchars($shopifyData['name']); ?> Logo" class="h-12 md:h-14 block dark:hidden">
+            <img src="<?php echo htmlspecialchars($shopifyData['logos']['dark']); ?>" alt="<?php echo htmlspecialchars($shopifyData['name']); ?> Logo" class="h-12 md:h-14 hidden dark:block">
         </a>
-      <?php endforeach; ?>
+        <h2 class="text-3xl md:text-4xl font-bold whitespace-nowrap animate-on-scroll font-ubuntu">Integrate with Your Favorite Tools</h2>
+        <a href="<?php echo htmlspecialchars($goHighLevelData['href']); ?>" class="block hover:scale-105 transition-transform duration-300">
+            <img src="<?php echo htmlspecialchars($goHighLevelData['logos']['light']); ?>" alt="<?php echo htmlspecialchars($goHighLevelData['name']); ?> Logo" class="h-12 md:h-14 block dark:hidden">
+            <img src="<?php echo htmlspecialchars($goHighLevelData['logos']['dark']); ?>" alt="<?php echo htmlspecialchars($goHighLevelData['name']); ?> Logo" class="h-12 md:h-14 hidden dark:block">
+        </a>
     </div>
-  </div>
+
+    <p class="text-lg text-gray-600 dark:text-slate-300 mb-12">Connect MerchantHaus with the platforms you already use.</p>
+
+    <div class="space-y-8">
+        <!-- Scroller 1 -->
+        <div class="relative w-full group [mask-image:_linear_gradient(to_right,transparent_0,_black_48px,_black_calc(100%-48px),transparent_100%)]">
+            <div class="flex animate-scroll group-hover:[animation-play-state:paused]" style="animation-duration: 80s;">
+                <?php foreach (array_merge($scroller1, $scroller1) as $integration) : ?>
+                <img src="<?php echo htmlspecialchars($integration['logo']); ?>" alt="<?php echo htmlspecialchars($integration['name']); ?> Logo" class="integration-logo">
+                <?php endforeach; ?>
+            </div>
+        </div>
+        <!-- Scroller 2 -->
+        <div class="relative w-full group [mask-image:_linear_gradient(to_right,transparent_0,_black_48px,_black_calc(100%-48px),transparent_100%)]">
+            <div class="flex animate-scroll group-hover:[animation-play-state:paused]" style="animation-duration: 80s; animation-direction: reverse;">
+                <?php foreach (array_merge($scroller2, $scroller2) as $integration) : ?>
+                <img src="<?php echo htmlspecialchars($integration['logo']); ?>" alt="<?php echo htmlspecialchars($integration['name']); ?> Logo" class="integration-logo">
+                <?php endforeach; ?>
+            </div>
+        </div>
+    </div>
+  </div>
 </section>
 
 <div class="relative">
-  <section id="checklist" class="pt-28 pb-16 bg-slate-50 dark:bg-slate-900/40 border-y border-slate-200/70 dark:border-slate-800">
-    <div class="max-w-7xl mx-auto px-4 text-center">
-      <p class="mt-4 max-w-3xl mx-auto text-slate-600 dark:text-slate-300">Here’s everything we’ll ask for during setup—business details, security info, documentation. We’ll guide you step‑by‑step.</p>
-      <div class="grid md:grid-cols-3 gap-8 mt-12 text-left">
-        <div class="bg-white dark:bg-slate-950 p-6 rounded-xl border border-slate-200 dark:border-slate-800 space-y-4">
-          <div class="flex items-center gap-4">
-            <div class="w-12 h-12 rounded-full bg-brand-crimson/10 dark:bg-brand-teal/10 flex-shrink-0 flex items-center justify-center text-brand-crimson dark:text-brand-teal">
-              <i data-lucide="briefcase" class="w-6 h-6"></i>
-            </div>
-            <h3 class="text-xl font-ubuntu font-bold">Business Information</h3>
-          </div>
-          <ul class="list-disc pl-5 space-y-2 text-sm text-slate-600 dark:text-slate-400">
-            <li>Business information (name, address, industry)</li>
-            <li>Owner/representative info (name, contact, ID)</li>
-            <li>Bank account for payouts</li>
-            <li>Verification documents (e.g. photo ID, business registration)—upload when prompted</li>
-          </ul>
-        </div>
-        <div class="bg-white dark:bg-slate-950 p-6 rounded-xl border border-slate-200 dark:border-slate-800 space-y-4">
-          <div class="flex items-center gap-4">
-            <div class="w-12 h-12 rounded-full bg-brand-crimson/10 dark:bg-brand-teal/10 flex-shrink-0 flex items-center justify-center text-brand-crimson dark:text-brand-teal">
-              <i data-lucide="shield-check" class="w-6 h-6"></i>
-            </div>
-            <h3 class="text-xl font-ubuntu font-bold">Security & Compliance</h3>
-          </div>
-          <ul class="list-disc pl-5 space-y-2 text-sm text-slate-600 dark:text-slate-400">
-            <li>Basic fraud and security setup (required for processing)</li>
-            <li>Evidence of PCI DSS certification or self-assessment</li>
-            <li>Use of PCI-compliant POS systems or software</li>
-            <li>Merchant attestation of cardholder data handling policies</li>
-          </ul>
-        </div>
-        <div class="bg-white dark:bg-slate-950 p-6 rounded-xl border border-slate-200 dark:border-slate-800 space-y-4">
-          <div class="flex items-center gap-4">
-            <div class="w-12 h-12 rounded-full bg-brand-crimson/10 dark:bg-brand-teal/10 flex-shrink-0 flex items-center justify-center text-brand-crimson dark:text-brand-teal">
-              <i data-lucide="rocket" class="w-6 h-6"></i>
-            </div>
-            <h3 class="text-xl font-ubuntu font-bold">Platform Readiness</h3>
-          </div>
-          <ul class="list-disc pl-5 space-y-2 text-sm text-slate-600 dark:text-slate-400">
-            <li>User account creation and login testing</li>
-            <li>Review of available transaction and reconciliation tools</li>
-            <li>Setup of reporting email or dashboard notifications</li>
-          </ul>
-        </div>
-      </div>
-    </div>
-  </section>
-  <div class="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 z-10 w-full max-w-5xl px-4">
-    <div class="bg-brand-teal px-8 py-4 rounded-xl shadow-lg text-center">
-      <h2 class="text-3xl font-ubuntu font-bold" style="color: #524848;">Setup Checklist: What You’ll Need to Begin</h2>
-    </div>
-  </div>
+  <section id="checklist" class="pt-28 pb-16 bg-slate-50 dark:bg-slate-900/40 border-y border-slate-200/70 dark:border-slate-800">
+    <div class="max-w-7xl mx-auto px-4 text-center">
+      <p class="mt-4 max-w-3xl mx-auto text-slate-600 dark:text-slate-300">Here’s everything we’ll ask for during setup—business details, security info, documentation. We’ll guide you step‑by‑step.</p>
+      <div class="grid md:grid-cols-3 gap-8 mt-12 text-left">
+        <div class="bg-white dark:bg-slate-950 p-6 rounded-xl border border-slate-200 dark:border-slate-800 space-y-4">
+          <div class="flex items-center gap-4">
+            <div class="w-12 h-12 rounded-full bg-brand-crimson/10 dark:bg-brand-teal/10 flex-shrink-0 flex items-center justify-center text-brand-crimson dark:text-brand-teal">
+              <i data-lucide="briefcase" class="w-6 h-6"></i>
+            </div>
+            <h3 class="text-xl font-ubuntu font-bold">Business Information</h3>
+          </div>
+          <ul class="list-disc pl-5 space-y-2 text-sm text-slate-600 dark:text-slate-400">
+            <li>Business information (name, address, industry)</li>
+            <li>Owner/representative info (name, contact, ID)</li>
+            <li>Bank account for payouts</li>
+            <li>Verification documents (e.g. photo ID, business registration)—upload when prompted</li>
+          </ul>
+        </div>
+        <div class="bg-white dark:bg-slate-950 p-6 rounded-xl border border-slate-200 dark:border-slate-800 space-y-4">
+          <div class="flex items-center gap-4">
+            <div class="w-12 h-12 rounded-full bg-brand-crimson/10 dark:bg-brand-teal/10 flex-shrink-0 flex items-center justify-center text-brand-crimson dark:text-brand-teal">
+              <i data-lucide="shield-check" class="w-6 h-6"></i>
+            </div>
+            <h3 class="text-xl font-ubuntu font-bold">Security & Compliance</h3>
+          </div>
+          <ul class="list-disc pl-5 space-y-2 text-sm text-slate-600 dark:text-slate-400">
+            <li>Basic fraud and security setup (required for processing)</li>
+            <li>Evidence of PCI DSS certification or self-assessment</li>
+            <li>Use of PCI-compliant POS systems or software</li>
+            <li>Merchant attestation of cardholder data handling policies</li>
+          </ul>
+        </div>
+        <div class="bg-white dark:bg-slate-950 p-6 rounded-xl border border-slate-200 dark:border-slate-800 space-y-4">
+          <div class="flex items-center gap-4">
+            <div class="w-12 h-12 rounded-full bg-brand-crimson/10 dark:bg-brand-teal/10 flex-shrink-0 flex items-center justify-center text-brand-crimson dark:text-brand-teal">
+              <i data-lucide="rocket" class="w-6 h-6"></i>
+            </div>
+            <h3 class="text-xl font-ubuntu font-bold">Platform Readiness</h3>
+          </div>
+          <ul class="list-disc pl-5 space-y-2 text-sm text-slate-600 dark:text-slate-400">
+            <li>User account creation and login testing</li>
+            <li>Review of available transaction and reconciliation tools</li>
+            <li>Setup of reporting email or dashboard notifications</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+  <div class="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 z-10 w-full max-w-5xl px-4">
+    <div class="bg-brand-teal px-8 py-4 rounded-xl shadow-lg text-center">
+      <h2 class="text-3xl font-ubuntu font-bold" style="color: #524848;">Setup Checklist: What You’ll Need to Begin</h2>
+    </div>
+  </div>
 </div>
 
 <div id="support-modal" class="fixed inset-0 z-[70] hidden">
-  <div class="absolute inset-0 bg-black/60" data-close></div>
-  <div class="mx-auto mt-[10vh] w-[min(560px,92vw)] rounded-2xl bg-white dark:bg-slate-900 p-6 border border-slate-200 dark:border-slate-800 shadow-2xl">
-    <div class="flex items-center justify-between">
-      <h3 class="text-xl font-extrabold font-ubuntu">Contact Support</h3>
-      <button class="p-2 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800" data-close aria-label="Close"><i data-lucide="x" class="h-5 w-5"></i></button>
-    </div>
-    <p class="mt-1 text-sm text-slate-600 dark:text-slate-300">Have a question? Fill out the form below or contact us at <a href="tel:15056006042" class="text-brand-crimson dark:text-brand-teal hover:underline">1-505-600-6042</a>.</p>
-    <form id="support-form" class="mt-4 grid gap-3">
-      <input name="name" placeholder="Your name" class="field rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-950 px-3 py-2" required>
-      <input name="email" type="email" placeholder="Work email" class="field rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-950 px-3 py-2" required>
-      <textarea name="message" placeholder="Your message..." rows="4" class="field rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-950 px-3 py-2" required></textarea>
-      <button class="rounded-lg bg-brand-crimson text-white font-semibold px-4 py-2 hover:bg-brand-crimson" type="submit">Send Message</button>
-      <p id="support-out" class="text-xs text-slate-500"></p>
-    </form>
-  </div>
+  <div class="absolute inset-0 bg-black/60" data-close></div>
+  <div class="mx-auto mt-[10vh] w-[min(560px,92vw)] rounded-2xl bg-white dark:bg-slate-900 p-6 border border-slate-200 dark:border-slate-800 shadow-2xl">
+    <div class="flex items-center justify-between">
+      <h3 class="text-xl font-extrabold font-ubuntu">Contact Support</h3>
+      <button class="p-2 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800" data-close aria-label="Close"><i data-lucide="x" class="h-5 w-5"></i></button>
+    </div>
+    <p class="mt-1 text-sm text-slate-600 dark:text-slate-300">Have a question? Fill out the form below or contact us at <a href="tel:15056006042" class="text-brand-crimson dark:text-brand-teal hover:underline">1-505-600-6042</a>.</p>
+    <form id="support-form" class="mt-4 grid gap-3">
+      <input name="name" placeholder="Your name" class="field rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-950 px-3 py-2" required>
+      <input name="email" type="email" placeholder="Work email" class="field rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-950 px-3 py-2" required>
+      <textarea name="message" placeholder="Your message..." rows="4" class="field rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-950 px-3 py-2" required></textarea>
+      <button class="rounded-lg bg-brand-crimson text-white font-semibold px-4 py-2 hover:bg-brand-crimson" type="submit">Send Message</button>
+      <p id="support-out" class="text-xs text-slate-500"></p>
+    </form>
+  </div>
 </div>
 
 <script>
 document.addEventListener('DOMContentLoaded', () => {
-  if (window.lucide) lucide.createIcons();
+  if (window.lucide) lucide.createIcons();
 
-  const services = [
-    { icon: "smartphone", title: "Accept Payments Anywhere", description: "Online, in‑store, or on the go." },
-    { icon: "git-pull-request-arrow", title: "Smart Processing & Routing", description: "Reduce costs and minimize fraud." },
-    { icon: "link", title: "Payment Links & Invoicing", description: "Send secure pay‑by‑link options." },
-    { icon: "repeat", title: "Recurring Billing", description: "Automated plans and reminders." },
-    { icon: "lock", title: "Secure Tokenization", description: "Protect customer info safely." },
-    { icon: "bar-chart-2", title: "Detailed Reporting", description: "Track settlements and insights." },
-    { icon: "settings-2", title: "Integration & Automation", description: "APIs and webhooks to connect systems." },
-    { icon: "banknote", title: "Bank Payments & ACH", description: "Lower-cost direct transfers." }
-  ];
-  const container1 = document.getElementById('services-container-1');
-  const container2 = document.getElementById('services-container-2');
-  if (container1 && container2) {
-    const renderServices = (container) => {
-      services.forEach(service => {
-        const serviceEl = document.createElement('div');
-        serviceEl.className = 'service-cell p-4 w-auto flex-shrink-0 flex items-center gap-4';
-        serviceEl.innerHTML = `<i data-lucide="${service.icon}" class="w-8 h-8 text-brand-crimson"></i>
-          <div class="text-left">
-            <h3 class="font-bold text-lg font-ubuntu" style="color: #524848;">${service.title}</h3>
-            <p class="text-base" style="color: #524848;">${service.description}</p>
-          </div>`;
-        container.appendChild(serviceEl);
-      });
-    };
-    renderServices(container1);
-    renderServices(container2);
-    if (window.lucide) lucide.createIcons();
-  }
+  const services = [
+    { icon: "smartphone", title: "Accept Payments Anywhere", description: "Online, in‑store, or on the go." },
+    { icon: "git-pull-request-arrow", title: "Smart Processing & Routing", description: "Reduce costs and minimize fraud." },
+    { icon: "link", title: "Payment Links & Invoicing", description: "Send secure pay‑by‑link options." },
+    { icon: "repeat", title: "Recurring Billing", description: "Automated plans and reminders." },
+    { icon: "lock", title: "Secure Tokenization", description: "Protect customer info safely." },
+    { icon: "bar-chart-2", title: "Detailed Reporting", description: "Track settlements and insights." },
+    { icon: "settings-2", title: "Integration & Automation", description: "APIs and webhooks to connect systems." },
+    { icon: "banknote", title: "Bank Payments & ACH", description: "Lower-cost direct transfers." }
+  ];
+  const container1 = document.getElementById('services-container-1');
+  const container2 = document.getElementById('services-container-2');
+  if (container1 && container2) {
+    const renderServices = (container) => {
+      services.forEach(service => {
+        const serviceEl = document.createElement('div');
+        serviceEl.className = 'service-cell p-4 w-auto flex-shrink-0 flex items-center gap-4';
+        serviceEl.innerHTML = `<i data-lucide="${service.icon}" class="w-8 h-8 text-brand-crimson"></i>
+          <div class="text-left">
+            <h3 class="font-bold text-lg font-ubuntu" style="color: #524848;">${service.title}</h3>
+            <p class="text-base" style="color: #524848;">${service.description}</p>
+          </div>`;
+        container.appendChild(serviceEl);
+      });
+    };
+    renderServices(container1);
+    renderServices(container2);
+    if (window.lucide) lucide.createIcons();
+  }
 
-  const supportModal = document.getElementById('support-modal');
-  document.querySelectorAll('.js-support').forEach(el => {
-    el.addEventListener('click', (e) => { e.preventDefault(); supportModal.classList.remove('hidden'); });
-  });
-  supportModal.addEventListener('click', (e) => {
-    if (e.target.dataset.close !== undefined) supportModal.classList.add('hidden');
-  });
+  const supportModal = document.getElementById('support-modal');
+  document.querySelectorAll('.js-support').forEach(el => {
+    el.addEventListener('click', (e) => { e.preventDefault(); supportModal.classList.remove('hidden'); });
+  });
+  supportModal.addEventListener('click', (e) => {
+    if (e.target.dataset.close !== undefined) supportModal.classList.add('hidden');
+  });
 
-  const headingTexts = { "integrations": "Integrate with Your Favorite Tools" };
-  const headingObserver = new IntersectionObserver((entries, observer) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        const heading = entry.target;
-        const sectionId = heading.closest('section').id;
-        const text = headingTexts[sectionId];
-        if (text && !heading.dataset.animated) {
-          heading.dataset.animated = 'true';
-          typeWriter(heading, text, 75);
-          observer.unobserve(heading);
-        }
-      }
-    });
-  }, { threshold: 0.8 });
-  document.querySelectorAll('.animate-on-scroll').forEach(el => headingObserver.observe(el));
+  const headingTexts = { "integrations": "Integrate with Your Favorite Tools" };
+  const headingObserver = new IntersectionObserver((entries, observer) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const heading = entry.target;
+        const sectionId = heading.closest('section').id;
+        const text = headingTexts[sectionId];
+        if (text && !heading.dataset.animated) {
+          heading.dataset.animated = 'true';
+          typeWriter(heading, text, 75);
+          observer.unobserve(heading);
+        }
+      }
+    });
+  }, { threshold: 0.8 });
+  document.querySelectorAll('.animate-on-scroll').forEach(el => headingObserver.observe(el));
 
-  const cellObserver = new IntersectionObserver((entries, observer) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('is-visible');
-        observer.unobserve(entry.target);
-      }
-    });
-  }, { threshold: 0.5 });
-  document.querySelectorAll('.service-cell').forEach(cell => cellObserver.observe(cell));
+  const cellObserver = new IntersectionObserver((entries, observer) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('is-visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.5 });
+  document.querySelectorAll('.service-cell').forEach(cell => cellObserver.observe(cell));
 
-  const askFaqBtn = document.getElementById('ask-faq');
-  const faqQuestionInput = document.getElementById('faq-question');
-  const faqAnswerContainer = document.getElementById('faq-answer');
+  const askFaqBtn = document.getElementById('ask-faq');
+  const faqQuestionInput = document.getElementById('faq-question');
+  const faqAnswerContainer = document.getElementById('faq-answer');
 
-  const createFaqInlineNodes = (text) => {
-    const fragment = document.createDocumentFragment();
-    if (!text) return fragment;
-    const boldRegex = /\*\*(.*?)\*\*/g;
-    let lastIndex = 0;
-    let match;
-    while ((match = boldRegex.exec(text)) !== null) {
-      if (match.index > lastIndex) {
-        fragment.appendChild(document.createTextNode(text.slice(lastIndex, match.index)));
-      }
-      const strong = document.createElement('strong');
-      strong.textContent = match[1];
-      fragment.appendChild(strong);
-      lastIndex = boldRegex.lastIndex;
-    }
-    if (lastIndex < text.length) {
-      fragment.appendChild(document.createTextNode(text.slice(lastIndex)));
-    }
-    return fragment;
-  };
+  const createFaqInlineNodes = (text) => {
+    const fragment = document.createDocumentFragment();
+    if (!text) return fragment;
+    const boldRegex = /\*\*(.*?)\*\*/g;
+    let lastIndex = 0;
+    let match;
+    while ((match = boldRegex.exec(text)) !== null) {
+      if (match.index > lastIndex) {
+        fragment.appendChild(document.createTextNode(text.slice(lastIndex, match.index)));
+      }
+      const strong = document.createElement('strong');
+      strong.textContent = match[1];
+      fragment.appendChild(strong);
+      lastIndex = boldRegex.lastIndex;
+    }
+    if (lastIndex < text.length) {
+      fragment.appendChild(document.createTextNode(text.slice(lastIndex)));
+    }
+    return fragment;
+  };
 
-  const sanitizeFaqReply = (reply) => {
-    if (typeof reply !== 'string') return [];
-    const lines = reply.split(/\r?\n/);
-    const nodes = [];
-    let listEl = null;
-    let paragraphBuffer = [];
+  const sanitizeFaqReply = (reply) => {
+    if (typeof reply !== 'string') return [];
+    const lines = reply.split(/\r?\n/);
+    const nodes = [];
+    let listEl = null;
+    let paragraphBuffer = [];
 
-    const flushList = () => {
-      if (listEl) {
-        nodes.push(listEl);
-        listEl = null;
-      }
-    };
+    const flushList = () => {
+      if (listEl) {
+        nodes.push(listEl);
+        listEl = null;
+      }
+    };
 
-    const flushParagraph = () => {
-      if (!paragraphBuffer.length) return;
-      const paragraph = document.createElement('p');
-      paragraph.appendChild(createFaqInlineNodes(paragraphBuffer.join(' ')));
-      nodes.push(paragraph);
-      paragraphBuffer = [];
-    };
+    const flushParagraph = () => {
+      if (!paragraphBuffer.length) return;
+      const paragraph = document.createElement('p');
+      paragraph.appendChild(createFaqInlineNodes(paragraphBuffer.join(' ')));
+      nodes.push(paragraph);
+      paragraphBuffer = [];
+    };
 
-    lines.forEach((line) => {
-      const trimmed = line.trim();
-      if (!trimmed) {
-        flushParagraph();
-        flushList();
-        return;
-      }
-      const bulletMatch = trimmed.match(/^[-*] (.+)$/);
-      if (bulletMatch) {
-        flushParagraph();
-        if (!listEl) {
-          listEl = document.createElement('ul');
-          listEl.className = 'list-disc pl-5 space-y-2';
-        }
-        const li = document.createElement('li');
-        li.appendChild(createFaqInlineNodes(bulletMatch[1].trim()));
-        listEl.appendChild(li);
-      } else {
-        flushList();
-        paragraphBuffer.push(line.trim());
-      }
-    });
+    lines.forEach((line) => {
+      const trimmed = line.trim();
+      if (!trimmed) {
+        flushParagraph();
+        flushList();
+        return;
+      }
+      const bulletMatch = trimmed.match(/^[-*] (.+)$/);
+      if (bulletMatch) {
+        flushParagraph();
+        if (!listEl) {
+          listEl = document.createElement('ul');
+          listEl.className = 'list-disc pl-5 space-y-2';
+        }
+        const li = document.createElement('li');
+        li.appendChild(createFaqInlineNodes(bulletMatch[1].trim()));
+        listEl.appendChild(li);
+      } else {
+        flushList();
+        paragraphBuffer.push(line.trim());
+      }
+    });
 
-    flushParagraph();
-    flushList();
-    return nodes;
-  };
+    flushParagraph();
+    flushList();
+    return nodes;
+  };
 
-  const handleFaqSubmit = async () => {
-    const question = faqQuestionInput.value.trim();
-    if (!question) return;
-    faqAnswerContainer.classList.remove('hidden');
-    askFaqBtn.disabled = true;
-    askFaqBtn.innerHTML = '<span class="loader"></span>';
-    faqAnswerContainer.textContent = 'Thinking...';
-    try {
-      const response = await fetch('/.netlify/functions/gemini-chat', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ prompt: question, history: [] })
-      });
-      if (!response.ok) throw new Error('API request failed');
-      const result = await response.json();
-      if (result.reply) {
-        const sanitizedNodes = sanitizeFaqReply(result.reply);
-        if (sanitizedNodes.length) {
-          faqAnswerContainer.replaceChildren(...sanitizedNodes);
-        } else {
-          faqAnswerContainer.textContent = 'Sorry, I could not find an answer to your question.';
-        }
-      } else {
-        faqAnswerContainer.textContent = 'Sorry, I could not find an answer to your question.';
-      }
-    } catch (err) {
-      console.error('Error fetching AI response:', err);
-      faqAnswerContainer.textContent = 'Sorry, something went wrong. Please try again later.';
-    } finally {
-      askFaqBtn.disabled = false;
-      askFaqBtn.innerHTML = '<i data-lucide="arrow-up" class="h-5 w-5"></i>';
-      if (window.lucide) lucide.createIcons();
-    }
-  };
-  askFaqBtn.addEventListener('click', handleFaqSubmit);
-  faqQuestionInput.addEventListener('keypress', (e) => { if (e.key === 'Enter') handleFaqSubmit(); });
+  const handleFaqSubmit = async () => {
+    const question = faqQuestionInput.value.trim();
+    if (!question) return;
+    faqAnswerContainer.classList.remove('hidden');
+    askFaqBtn.disabled = true;
+    askFaqBtn.innerHTML = '<span class="loader"></span>';
+    faqAnswerContainer.textContent = 'Thinking...';
+    try {
+      const response = await fetch('/.netlify/functions/gemini-chat', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ prompt: question, history: [] })
+      });
+      if (!response.ok) throw new Error('API request failed');
+      const result = await response.json();
+      if (result.reply) {
+        const sanitizedNodes = sanitizeFaqReply(result.reply);
+        if (sanitizedNodes.length) {
+          faqAnswerContainer.replaceChildren(...sanitizedNodes);
+        } else {
+          faqAnswerContainer.textContent = 'Sorry, I could not find an answer to your question.';
+        }
+      } else {
+        faqAnswerContainer.textContent = 'Sorry, I could not find an answer to your question.';
+      }
+    } catch (err) {
+      console.error('Error fetching AI response:', err);
+      faqAnswerContainer.textContent = 'Sorry, something went wrong. Please try again later.';
+    } finally {
+      askFaqBtn.disabled = false;
+      askFaqBtn.innerHTML = '<i data-lucide="arrow-up" class="h-5 w-5"></i>';
+      if (window.lucide) lucide.createIcons();
+    }
+  };
+  askFaqBtn.addEventListener('click', handleFaqSubmit);
+  faqQuestionInput.addEventListener('keypress', (e) => { if (e.key === 'Enter') handleFaqSubmit(); });
 
-  const supportForm = document.getElementById('support-form');
-  const supportOut = document.getElementById('support-out');
-  supportForm.addEventListener('submit', async (e) => {
-    e.preventDefault();
-    const formData = new FormData(supportForm);
-    const submitBtn = supportForm.querySelector('button[type="submit"]');
-    const originalBtnText = submitBtn.innerHTML;
-    submitBtn.disabled = true;
-    submitBtn.innerHTML = '<span class="loader"></span> Sending...';
-    supportOut.textContent = '';
-    try {
-      const response = await fetch('support.html', { method: 'POST', body: formData });
-      if (!response.ok) throw new Error('Network response was not ok');
-      const result = await response.json();
-      if (result.success) {
-        supportOut.style.color = 'green';
-        supportOut.textContent = 'Message sent successfully!';
-        supportForm.reset();
-      } else {
-        throw new Error(result.message || 'An unknown error occurred.');
-      }
-    } catch (error) {
-      supportOut.style.color = 'red';
-      supportOut.textContent = `Error: ${error.message}`;
-    } finally {
-      submitBtn.disabled = false;
-      submitBtn.innerHTML = originalBtnText;
-    }
-  });
+  const supportForm = document.getElementById('support-form');
+  const supportOut = document.getElementById('support-out');
+  supportForm.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const formData = new FormData(supportForm);
+    const submitBtn = supportForm.querySelector('button[type="submit"]');
+    const originalBtnText = submitBtn.innerHTML;
+    submitBtn.disabled = true;
+    submitBtn.innerHTML = '<span class="loader"></span> Sending...';
+    supportOut.textContent = '';
+    try {
+      const response = await fetch('support.html', { method: 'POST', body: formData });
+      if (!response.ok) throw new Error('Network response was not ok');
+      const result = await response.json();
+      if (result.success) {
+        supportOut.style.color = 'green';
+        supportOut.textContent = 'Message sent successfully!';
+        supportForm.reset();
+      } else {
+        throw new Error(result.message || 'An unknown error occurred.');
+      }
+    } catch (error) {
+      supportOut.style.color = 'red';
+      supportOut.textContent = `Error: ${error.message}`;
+    } finally {
+      submitBtn.disabled = false;
+      submitBtn.innerHTML = originalBtnText;
+    }
+  });
 
-  function typeWriter(element, text, speed, callback) {
-    let i = 0;
-    if (!element) return;
-    element.innerHTML = '';
-    const typingInterval = setInterval(() => {
-      if (i < text.length) {
-        element.innerHTML = text.substring(0, i + 1) + '<span class="cursor"></span>';
-        i++;
-      } else {
-        clearInterval(typingInterval);
-        element.innerHTML = text;
-        if (callback) callback();
-      }
-    }, speed);
-  }
+  function typeWriter(element, text, speed, callback) {
+    let i = 0;
+    if (!element) return;
+    element.innerHTML = '';
+    const typingInterval = setInterval(() => {
+      if (i < text.length) {
+        element.innerHTML = text.substring(0, i + 1) + '<span class="cursor"></span>';
+        i++;
+      } else {
+        clearInterval(typingInterval);
+        element.innerHTML = text;
+        if (callback) callback();
+      }
+    }, speed);
+  }
 });
 </script>
 
