@@ -138,8 +138,10 @@
         <?php
           $href = $integration['href'] ?? '#';
           $logos = $integration['logos'] ?? [];
-          $logoSrc = $logos['light'] ?? $logos['dark'] ?? ($logos['default'] ?? ($integration['logo'] ?? null));
-          if (!$logoSrc) {
+          $lightLogo = $logos['light'] ?? null;
+          $darkLogo = $logos['dark'] ?? null;
+          $defaultLogo = $logos['default'] ?? ($integration['logo'] ?? null);
+          if (!$lightLogo && !$darkLogo && !$defaultLogo) {
             continue;
           }
           $tileClass = $integration['class'] ?? 'block hover:scale-105 transition-transform duration-300';
@@ -148,7 +150,13 @@
           $relAttr = isset($integration['rel']) ? ' rel="' . htmlspecialchars($integration['rel']) . '"' : '';
         ?>
         <a href="<?php echo htmlspecialchars($href); ?>" class="<?php echo htmlspecialchars($tileClass); ?>"<?php echo $targetAttr . $relAttr; ?>>
-          <img src="<?php echo htmlspecialchars($logoSrc); ?>" alt="<?php echo htmlspecialchars($altText); ?>" class="h-12 md:h-14 block">
+          <?php if ($lightLogo && $darkLogo) : ?>
+            <img src="<?php echo htmlspecialchars($lightLogo); ?>" alt="<?php echo htmlspecialchars($altText); ?>" class="h-12 md:h-14 block dark:hidden">
+            <img src="<?php echo htmlspecialchars($darkLogo); ?>" alt="<?php echo htmlspecialchars($altText); ?>" class="h-12 md:h-14 hidden dark:block">
+          <?php else : ?>
+            <?php $singleLogo = $lightLogo ?? $darkLogo ?? $defaultLogo; ?>
+            <img src="<?php echo htmlspecialchars($singleLogo); ?>" alt="<?php echo htmlspecialchars($altText); ?>" class="h-12 md:h-14 block">
+          <?php endif; ?>
         </a>
       <?php endforeach; ?>
     </div>
