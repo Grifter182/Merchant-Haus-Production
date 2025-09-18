@@ -14,7 +14,17 @@
 .dark .feature-display { background-color: #1f2937; color: #f9fafb; }
 .feature-display.active { opacity: 1; transform: translateX(-50%) translateY(0); }
 .feature-display.exiting { opacity: 0; transform: translateX(-50%) translateY(-10px); }
-.animate-scroll { animation: mh-services-marquee 45s linear infinite; }
+.marquee-wrapper {
+  --marquee-fade: clamp(96px, 8vw, 128px);
+  -webkit-mask-image: linear-gradient(to right, transparent 0, #000 var(--marquee-fade), #000 calc(100% - var(--marquee-fade)), transparent 100%);
+          mask-image: linear-gradient(to right, transparent 0, #000 var(--marquee-fade), #000 calc(100% - var(--marquee-fade)), transparent 100%);
+}
+.marquee-track {
+  animation: marquee-slide-left 45s linear infinite;
+  will-change: transform;
+}
+.marquee-track--reverse { animation-name: marquee-slide-right; }
+.marquee-wrapper:hover .marquee-track { animation-play-state: paused; }
 .service-cell { opacity: 0; transition: opacity 0.5s ease-in-out; }
 .service-cell.is-visible { opacity: 1; }
 .service-cell h3, .service-cell p { opacity: 0; transform: translateY(10px); transition: opacity 0.4s ease-out, transform 0.4s ease-out; }
@@ -25,9 +35,31 @@
 #faq-answer ul { margin: 0; }
 .hero-bg-container::before { content: ''; position: absolute; inset: 0; background-image: url('<?php echo htmlspecialchars(mh_asset("public/assets/images/hero.png")); ?>'); background-size: 100%; background-position: center; background-repeat: no-repeat; animation: kenBurns 20s ease-in-out infinite alternate; z-index: -20; }
 @keyframes kenBurns { 0% { transform: scale(1) rotate(0deg); background-position: center; } 100% { transform: scale(1.1) rotate(1deg); background-position: top left; } }
-@keyframes mh-services-marquee { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
-@media (prefers-reduced-motion: reduce) { .animate-scroll { animation: none; } }
+@keyframes marquee-slide-left { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+@keyframes marquee-slide-right { 0% { transform: translateX(-50%); } 100% { transform: translateX(0); } }
+@media (prefers-reduced-motion: reduce) { .marquee-track { animation: none !important; } }
 .panel-overlay, .panel-container { transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
+#integrations a .integration-logo {
+  filter: grayscale(100%) saturate(0) brightness(0.85);
+  opacity: 0.6;
+  transition: filter 0.4s ease, opacity 0.4s ease;
+}
+#integrations a:hover .integration-logo,
+#integrations a:focus-visible .integration-logo {
+  filter: none;
+  opacity: 1;
+}
+.dark #integrations a .integration-logo {
+  filter: grayscale(100%) saturate(0.4) brightness(1.35) contrast(0.9);
+  opacity: 0.7;
+  mix-blend-mode: screen;
+}
+.dark #integrations a:hover .integration-logo,
+.dark #integrations a:focus-visible .integration-logo {
+  filter: none;
+  opacity: 1;
+  mix-blend-mode: normal;
+}
 </style>
 
 <div class="relative">
@@ -73,8 +105,8 @@
   <div class="max-w-5xl mx-auto px-4 text-right">
     <p class="text-2xl sm:text-3xl font-ubuntu mb-12" style="color: #524848;">Your complete toolkit for accepting payments and managing your business.</p>
   </div>
-  <div class="relative w-full overflow-hidden group [mask-image:_linear_gradient(to_right,transparent_0,_black_128px,_black_calc(100%-128px),transparent_100%)]">
-    <div class="flex animate-scroll group-hover:[animation-play-state:paused]">
+  <div class="marquee-wrapper relative w-full overflow-hidden">
+    <div class="marquee-track flex">
       <div class="flex-shrink-0 flex items-center space-x-8" id="services-container-1"></div>
       <div class="flex-shrink-0 flex items-center space-x-8" id="services-container-2" aria-hidden="true"></div>
     </div>
@@ -151,11 +183,11 @@
         ?>
         <a href="<?php echo htmlspecialchars($href); ?>" class="<?php echo htmlspecialchars($tileClass); ?>"<?php echo $targetAttr . $relAttr; ?>>
           <?php if ($lightLogo && $darkLogo) : ?>
-            <img src="<?php echo htmlspecialchars($lightLogo); ?>" alt="<?php echo htmlspecialchars($altText); ?>" class="h-12 md:h-14 block dark:hidden">
-            <img src="<?php echo htmlspecialchars($darkLogo); ?>" alt="<?php echo htmlspecialchars($altText); ?>" class="h-12 md:h-14 hidden dark:block">
+            <img src="<?php echo htmlspecialchars($lightLogo); ?>" alt="<?php echo htmlspecialchars($altText); ?>" class="integration-logo h-12 md:h-14 block dark:hidden">
+            <img src="<?php echo htmlspecialchars($darkLogo); ?>" alt="<?php echo htmlspecialchars($altText); ?>" class="integration-logo h-12 md:h-14 hidden dark:block">
           <?php else : ?>
             <?php $singleLogo = $lightLogo ?? $darkLogo ?? $defaultLogo; ?>
-            <img src="<?php echo htmlspecialchars($singleLogo); ?>" alt="<?php echo htmlspecialchars($altText); ?>" class="h-12 md:h-14 block">
+            <img src="<?php echo htmlspecialchars($singleLogo); ?>" alt="<?php echo htmlspecialchars($altText); ?>" class="integration-logo h-12 md:h-14 block">
           <?php endif; ?>
         </a>
       <?php endforeach; ?>
