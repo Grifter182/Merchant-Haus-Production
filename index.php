@@ -127,15 +127,17 @@
     <h2 class="text-4xl font-bold mb-4 animate-on-scroll font-ubuntu">Integrate with Your Favorite Tools</h2>
     <p class="text-lg text-gray-600 dark:text-slate-300 mb-12">Connect MerchantHaus with the platforms you already use.</p>
     <?php
-      $integrationTiles = [
-        [
-          'name' => 'Shopify',
-          'href' => 'Shopify.html',
-          'logos' => [
-            'light' => mh_asset('public/assets/images/shopifylight.png'),
-            'dark' => mh_asset('public/assets/images/shopifydark.png'),
-          ],
+      $shopifyIntegration = [
+        'name' => 'Shopify',
+        'href' => 'Shopify.html',
+        'logos' => [
+          'light' => mh_asset('public/assets/images/shopifylight.png'),
+          'dark' => mh_asset('public/assets/images/shopifydark.png'),
         ],
+      ];
+
+      $integrationTiles = [
+        $shopifyIntegration,
         [
           'name' => 'QuickBooks SyncPay',
           'href' => 'https://quickbooks.intuit.com/',
