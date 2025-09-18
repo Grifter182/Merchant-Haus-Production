@@ -28,10 +28,6 @@
 @keyframes mh-services-marquee { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
 @media (prefers-reduced-motion: reduce) { .animate-scroll { animation: none; } }
 .panel-overlay, .panel-container { transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
-.integration-logo { height: 40px; max-width: none; margin: 0 32px; flex-shrink: 0; filter: grayscale(1); opacity: 0.7; transition: filter 0.3s ease, opacity 0.3s ease; vertical-align: middle; }
-.dark .integration-logo { filter: grayscale(1) invert(1) brightness(1.5); opacity: 0.5; }
-.group:hover .integration-logo { filter: grayscale(0); opacity: 1; }
-.dark .group:hover .integration-logo { filter: grayscale(0) invert(0) brightness(1); }
 </style>
 
 <div class="relative">
@@ -94,79 +90,76 @@
   </div>
 </section>
 
-<section id="integrations" class="py-8 md:py-12 overflow-hidden">
-  <div class="max-w-7xl mx-auto px-4 text-center">
-    <?php
-        // Data for logos flanking the title
-        $shopifyData = [
-            'name' => 'Shopify', 'href' => 'shopify.html',
-            'logos' => [
-                'light' => 'public/assets/images/shopifylight.png',
-                'dark' => 'public/assets/images/shopifydark.png',
-            ],
-        ];
-        $goHighLevelData = [
-            'name' => 'GoHighLevel', 'href' => 'gohighlevel.html',
-            'logos' => [
-                'light' => 'public/assets/images/gohighlevellight.png',
-                'dark' => 'public/assets/images/gohighleveldark.png',
-            ],
-        ];
-        // Data for scrolling logos
-        $scrollerIntegrations = [
-            ['name' => 'Salesforce', 'logo' => 'https://upload.wikimedia.org/wikipedia/commons/thumb/5/59/Salesforce.com_logo.svg/512px-Salesforce.com_logo.svg.png'],
-            ['name' => 'QuickBooks', 'logo' => 'https://upload.wikimedia.org/wikipedia/commons/thumb/3/3d/QuickBooks_logo.svg/512px-QuickBooks_logo.svg.png'],
-            ['name' => 'HubSpot', 'logo' => 'https://upload.wikimedia.org/wikipedia/commons/thumb/9/9e/HubSpot_Logo.svg/512px-HubSpot_Logo.svg.png'],
-            ['name' => 'Vend', 'logo' => 'https://upload.wikimedia.org/wikipedia/commons/thumb/7/79/Vend-logo.svg/512px-Vend-logo.svg.png'],
-            ['name' => 'Squarespace', 'logo' => 'https://download.logo.wine/logo/Squarespace/Squarespace-Logo.wine.png'],
-            ['name' => 'MemberPress', 'logo' => 'https://seeklogo.com/images/M/memberpress-logo-3F5D57372A-seeklogo.com.png'],
-            ['name' => 'WooCommerce', 'logo' => 'https://upload.wikimedia.org/wikipedia/commons/thumb/2/2a/WooCommerce_logo.svg/512px-WooCommerce_logo.svg.png'],
-            ['name' => 'Zoho CRM', 'logo' => 'https://upload.wikimedia.org/wikipedia/commons/thumb/0/08/Zoho-logo.svg/512px-Zoho-logo.svg.png'],
-            ['name' => 'Lightspeed', 'logo' => 'https://upload.wikimedia.org/wikipedia/commons/thumb/d/d0/Lightspeed_POS_logo.svg/512px-Lightspeed_POS_logo.svg.png'],
-            ['name' => 'Wix', 'logo' => 'https://www.logo.wine/a/logo/Wix.com/Wix.com-Logo.wine.svg'],
-            ['name' => 'Keap/Infusionsoft', 'logo' => 'https://seeklogo.com/images/I/infusionsoft-logo-0724711B19-seeklogo.com.png'],
-            ['name' => 'Clover', 'logo' => 'https://upload.wikimedia.org/wikipedia/commons/thumb/c/cf/Clover_logo.svg/512px-Clover_logo.svg.png'],
-            ['name' => 'FreshBooks', 'logo' => 'https://seeklogo.com/images/F/freshbooks-logo-7D2B6C3999-seeklogo.com.png'],
-            ['name' => 'Magento', 'logo' => 'https://upload.wikimedia.org/wikipedia/commons/thumb/5/55/Magento_Logo.svg/512px-Magento_Logo.svg.png'],
-            ['name' => 'BigCommerce', 'logo' => 'https://download.logo.wine/logo/BigCommerce/BigCommerce-Logo.wine.png'],
-            ['name' => 'NCR', 'logo' => 'https://upload.wikimedia.org/wikipedia/commons/thumb/6/62/NCR_logo.svg/512px-NCR_logo.svg.png'],
-        ];
-        $scrollerCount = count($scrollerIntegrations);
-        $scroller1 = array_slice($scrollerIntegrations, 0, (int)($scrollerCount / 2));
-        $scroller2 = array_slice($scrollerIntegrations, (int)($scrollerCount / 2));
-    ?>
-    <div class="flex justify-center items-center gap-4 md:gap-8 mb-4">
-        <a href="<?php echo htmlspecialchars($shopifyData['href']); ?>" class="block hover:scale-105 transition-transform duration-300">
-            <img src="<?php echo htmlspecialchars($shopifyData['logos']['light']); ?>" alt="<?php echo htmlspecialchars($shopifyData['name']); ?> Logo" class="h-12 md:h-14 block dark:hidden">
-            <img src="<?php echo htmlspecialchars($shopifyData['logos']['dark']); ?>" alt="<?php echo htmlspecialchars($shopifyData['name']); ?> Logo" class="h-12 md:h-14 hidden dark:block">
-        </a>
-        <h2 class="text-3xl md:text-4xl font-bold whitespace-nowrap animate-on-scroll font-ubuntu">Integrate with Your Favorite Tools</h2>
-        <a href="<?php echo htmlspecialchars($goHighLevelData['href']); ?>" class="block hover:scale-105 transition-transform duration-300">
-            <img src="<?php echo htmlspecialchars($goHighLevelData['logos']['light']); ?>" alt="<?php echo htmlspecialchars($goHighLevelData['name']); ?> Logo" class="h-12 md:h-14 block dark:hidden">
-            <img src="<?php echo htmlspecialchars($goHighLevelData['logos']['dark']); ?>" alt="<?php echo htmlspecialchars($goHighLevelData['name']); ?> Logo" class="h-12 md:h-14 hidden dark:block">
-        </a>
-    </div>
-
+<section id="integrations" class="py-8 md:py-12">
+  <div class="max-w-5xl mx-auto px-4 text-center">
+    <h2 class="text-4xl font-bold mb-4 animate-on-scroll font-ubuntu">Integrate with Your Favorite Tools</h2>
     <p class="text-lg text-gray-600 dark:text-slate-300 mb-12">Connect MerchantHaus with the platforms you already use.</p>
-
-    <div class="space-y-8">
-        <!-- Scroller 1 -->
-        <div class="relative w-full group [mask-image:_linear_gradient(to_right,transparent_0,_black_48px,_black_calc(100%-48px),transparent_100%)]">
-            <div class="flex animate-scroll group-hover:[animation-play-state:paused]" style="animation-duration: 80s;">
-                <?php foreach (array_merge($scroller1, $scroller1) as $integration) : ?>
-                <img src="<?php echo htmlspecialchars($integration['logo']); ?>" alt="<?php echo htmlspecialchars($integration['name']); ?> Logo" class="integration-logo">
-                <?php endforeach; ?>
-            </div>
-        </div>
-        <!-- Scroller 2 -->
-        <div class="relative w-full group [mask-image:_linear_gradient(to_right,transparent_0,_black_48px,_black_calc(100%-48px),transparent_100%)]">
-            <div class="flex animate-scroll group-hover:[animation-play-state:paused]" style="animation-duration: 80s; animation-direction: reverse;">
-                <?php foreach (array_merge($scroller2, $scroller2) as $integration) : ?>
-                <img src="<?php echo htmlspecialchars($integration['logo']); ?>" alt="<?php echo htmlspecialchars($integration['name']); ?> Logo" class="integration-logo">
-                <?php endforeach; ?>
-            </div>
-        </div>
-    </div>
+    <?php
+      $integrationTiles = [
+        [
+          'name' => 'Shopify',
+          'href' => 'shopify.html',
+          'logos' => [
+            'light' => mh_asset('public/assets/images/shopifylight.png'),
+            'dark' => mh_asset('public/assets/images/shopifydark.png'),
+          ],
+        ],
+        [
+          'name' => 'QuickBooks SyncPay',
+          'href' => 'https://quickbooks.intuit.com/',
+          'target' => '_blank',
+          'rel' => 'noopener',
+          'logos' => [
+            'default' => mh_asset('public/assets/images/quickbooks.svg'),
+          ],
+        ],
+        [
+          'name' => 'Squarespace',
+          'href' => 'https://www.squarespace.com/',
+          'target' => '_blank',
+          'rel' => 'noopener',
+          'logos' => [
+            'light' => mh_asset('public/assets/images/squarespace-light.svg'),
+            'dark' => mh_asset('public/assets/images/squarespace-dark.svg'),
+          ],
+        ],
+        [
+          'name' => 'GoHighLevel',
+          'href' => 'gohighlevel.html',
+          'logos' => [
+            'light' => mh_asset('public/assets/images/gohighlevellight.png'),
+            'dark' => mh_asset('public/assets/images/gohighleveldark.png'),
+          ],
+        ],
+      ];
+    ?>
+    <div class="flex justify-center items-center gap-8 md:gap-16">
+      <?php foreach ($integrationTiles as $integration) : ?>
+        <?php
+          $href = $integration['href'] ?? '#';
+          $logos = $integration['logos'] ?? [];
+          $lightLogo = $logos['light'] ?? null;
+          $darkLogo = $logos['dark'] ?? null;
+          $defaultLogo = $logos['default'] ?? ($integration['logo'] ?? null);
+          if (!$lightLogo && !$darkLogo && !$defaultLogo) {
+            continue;
+          }
+          $tileClass = $integration['class'] ?? 'block hover:scale-105 transition-transform duration-300';
+          $altText = $integration['alt'] ?? (($integration['name'] ?? 'Integration') . ' Logo');
+          $targetAttr = isset($integration['target']) ? ' target="' . htmlspecialchars($integration['target']) . '"' : '';
+          $relAttr = isset($integration['rel']) ? ' rel="' . htmlspecialchars($integration['rel']) . '"' : '';
+        ?>
+        <a href="<?php echo htmlspecialchars($href); ?>" class="<?php echo htmlspecialchars($tileClass); ?>"<?php echo $targetAttr . $relAttr; ?>>
+          <?php if ($lightLogo && $darkLogo) : ?>
+            <img src="<?php echo htmlspecialchars($lightLogo); ?>" alt="<?php echo htmlspecialchars($altText); ?>" class="h-12 md:h-14 block dark:hidden">
+            <img src="<?php echo htmlspecialchars($darkLogo); ?>" alt="<?php echo htmlspecialchars($altText); ?>" class="h-12 md:h-14 hidden dark:block">
+          <?php else : ?>
+            <?php $singleLogo = $lightLogo ?? $darkLogo ?? $defaultLogo; ?>
+            <img src="<?php echo htmlspecialchars($singleLogo); ?>" alt="<?php echo htmlspecialchars($altText); ?>" class="h-12 md:h-14 block">
+          <?php endif; ?>
+        </a>
+      <?php endforeach; ?>
+    </div>
   </div>
 </section>
 
@@ -474,3 +467,4 @@ document.addEventListener('DOMContentLoaded', () => {
 </script>
 
 <?php include __DIR__ . '/Footer.php'; ?>
+
