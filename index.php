@@ -55,6 +55,42 @@
   justify-content: center;
   padding: 0.5rem 0.75rem;
 }
+#integrations .integration-highlight {
+  display: grid;
+  gap: clamp(1.5rem, 4vw, 3rem);
+  align-items: center;
+  justify-items: center;
+}
+@media (min-width: 768px) {
+  #integrations .integration-highlight {
+    grid-template-columns: auto 1fr auto;
+  }
+}
+#integrations .integration-highlight .integration-item {
+  padding: 0.75rem 1.5rem;
+}
+#integrations .integration-heading {
+  display: grid;
+  gap: 0.25rem;
+  text-align: center;
+}
+#integrations .integration-heading .integration-eyebrow {
+  font-size: 0.875rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: #4b5563;
+}
+.dark #integrations .integration-heading .integration-eyebrow {
+  color: #94a3b8;
+}
+#integrations .integration-heading .integration-title {
+  font-size: clamp(1.75rem, 4vw, 2.5rem);
+  font-weight: 700;
+  color: #111827;
+}
+.dark #integrations .integration-heading .integration-title {
+  color: #f8fafc;
+}
 #integrations .integration-logo {
   display: block;
   opacity: 0.95;
@@ -136,7 +172,7 @@
       'name' => 'Shopify',
       'href' => 'Shopify.html',
       'logos' => [
-        'light' => mh_asset('public/assets/images/shopifylight.png'),
+        'light' => mh_asset('public/assets/images/shopify-green.png'),
         'dark' => mh_asset('public/assets/images/shopifydark.png'),
       ],
     ];
@@ -145,10 +181,13 @@
       'name' => 'GoHighLevel',
       'href' => 'gohighlevel.php',
       'logos' => [
-        'light' => mh_asset('public/assets/images/gohighlevellight.png'),
+        'light' => mh_asset('public/assets/images/gohighleveldark.png'),
         'dark' => mh_asset('public/assets/images/gohighleveldark.png'),
       ],
     ];
+
+    $hasShopifyDarkLogo = !empty($shopifyIntegration['logos']['dark']) && $shopifyIntegration['logos']['dark'] !== $shopifyIntegration['logos']['light'];
+    $hasHighLevelDarkLogo = !empty($goHighLevelIntegration['logos']['dark']) && $goHighLevelIntegration['logos']['dark'] !== $goHighLevelIntegration['logos']['light'];
 
     $integrationLogoGroups = [
       'top' => [
@@ -261,16 +300,23 @@
         <?php endforeach; ?>
       </div>
     </div>
-    <div class="space-y-4">
-      <div class="flex flex-wrap items-center justify-center gap-4 md:gap-6">
+    <div class="space-y-6">
+      <div class="integration-highlight">
         <a href="<?php echo htmlspecialchars($shopifyIntegration['href']); ?>" class="integration-item">
-          <img src="<?php echo htmlspecialchars($shopifyIntegration['logos']['light']); ?>" alt="<?php echo htmlspecialchars($shopifyIntegration['name'] . ' Logo'); ?>" class="integration-logo h-10 sm:h-12 block dark:hidden">
-          <img src="<?php echo htmlspecialchars($shopifyIntegration['logos']['dark']); ?>" alt="<?php echo htmlspecialchars($shopifyIntegration['name'] . ' Logo'); ?>" class="integration-logo h-10 sm:h-12 hidden dark:block">
+          <img src="<?php echo htmlspecialchars($shopifyIntegration['logos']['light']); ?>" alt="<?php echo htmlspecialchars($shopifyIntegration['name'] . ' Logo'); ?>" class="integration-logo h-14 sm:h-16 object-contain<?php echo $hasShopifyDarkLogo ? ' block dark:hidden' : ' block'; ?>">
+          <?php if ($hasShopifyDarkLogo) : ?>
+            <img src="<?php echo htmlspecialchars($shopifyIntegration['logos']['dark']); ?>" alt="<?php echo htmlspecialchars($shopifyIntegration['name'] . ' Logo'); ?>" class="integration-logo h-14 sm:h-16 object-contain hidden dark:block">
+          <?php endif; ?>
         </a>
-        <h2 class="text-4xl font-bold animate-on-scroll font-ubuntu">Integrate with Your Favorite Tools</h2>
+        <div class="integration-heading">
+          <span class="integration-eyebrow font-semibold">Integrate with</span>
+          <h2 class="integration-title font-ubuntu font-bold animate-on-scroll">Your Favorite Tools</h2>
+        </div>
         <a href="<?php echo htmlspecialchars($goHighLevelIntegration['href']); ?>" class="integration-item">
-          <img src="<?php echo htmlspecialchars($goHighLevelIntegration['logos']['light']); ?>" alt="<?php echo htmlspecialchars($goHighLevelIntegration['name'] . ' Logo'); ?>" class="integration-logo h-10 sm:h-12 block dark:hidden">
-          <img src="<?php echo htmlspecialchars($goHighLevelIntegration['logos']['dark']); ?>" alt="<?php echo htmlspecialchars($goHighLevelIntegration['name'] . ' Logo'); ?>" class="integration-logo h-10 sm:h-12 hidden dark:block">
+          <img src="<?php echo htmlspecialchars($goHighLevelIntegration['logos']['light']); ?>" alt="<?php echo htmlspecialchars($goHighLevelIntegration['name'] . ' Logo'); ?>" class="integration-logo h-14 sm:h-16 object-contain<?php echo $hasHighLevelDarkLogo ? ' block dark:hidden' : ' block'; ?>">
+          <?php if ($hasHighLevelDarkLogo) : ?>
+            <img src="<?php echo htmlspecialchars($goHighLevelIntegration['logos']['dark']); ?>" alt="<?php echo htmlspecialchars($goHighLevelIntegration['name'] . ' Logo'); ?>" class="integration-logo h-14 sm:h-16 object-contain hidden dark:block">
+          <?php endif; ?>
         </a>
       </div>
       <p class="text-lg text-gray-600 dark:text-slate-300">Connect MerchantHaus with the platforms you already use.</p>
