@@ -29,12 +29,12 @@
 
 [[redirects]]
   from = "/shopify.php"
-  to = "/shopify.html"
+  to = "/Shopify.html"
   status = 301
 
 [[redirects]]
-  from = "/gohighlevel.php"
-  to = "/gohighlevel.html"
+  from = "/gohighlevel.html"
+  to = "/gohighlevel.php"
   status = 301
 
 [[redirects]]
@@ -73,11 +73,11 @@
   status = 301
 
 [[redirects]]
-  from = "/integrations/shopify.php"
-  to = "/integrations/shopify.html"
+  from = "/integrations/shopify.html"
+  to = "/integrations/shopify.php"
   status = 301
 
 [[redirects]]
-  from = "/integrations/gohighlevel.php"
-  to = "/integrations/gohighlevel.html"
+  from = "/integrations/gohighlevel.html"
+  to = "/integrations/gohighlevel.php"
   status = 301

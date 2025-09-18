@@ -130,7 +130,7 @@
       $integrationTiles = [
         [
           'name' => 'Shopify',
-          'href' => 'shopify.html',
+          'href' => 'Shopify.html',
           'logos' => [
             'light' => mh_asset('public/assets/images/shopifylight.png'),
             'dark' => mh_asset('public/assets/images/shopifydark.png'),
@@ -157,7 +157,7 @@
         ],
         [
           'name' => 'GoHighLevel',
-          'href' => 'gohighlevel.html',
+          'href' => 'gohighlevel.php',
           'logos' => [
             'light' => mh_asset('public/assets/images/gohighlevellight.png'),
             'dark' => mh_asset('public/assets/images/gohighleveldark.png'),
