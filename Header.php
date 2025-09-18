@@ -27,6 +27,18 @@
             return $normalized;
         }
     }
+
+    if (!function_exists('mh_page_link')) {
+        function mh_page_link(string $page): string
+        {
+            $hasLeadingSlash = isset($page[0]) && $page[0] === '/';
+            $normalized = ltrim($page, '/');
+            $normalized = preg_replace('/\.(html|php)$/', '', $normalized);
+            $extension = PHP_SAPI === 'cli' ? 'html' : 'php';
+
+            return ($hasLeadingSlash ? '/' : '') . $normalized . '.' . $extension;
+        }
+    }
 ?>
 <!DOCTYPE html>
 <html lang="en" class="dark">
@@ -177,7 +189,7 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-4 pb-6">
              <header class="header-glass border border-slate-200/70 dark:border-slate-800 rounded-full shadow-lg">
                  <div class="relative max-w-7xl mx-auto px-6 py-3 flex items-center justify-between">
-                    <a href="index.html" class="flex items-center gap-3 group">
+                    <a href="<?php echo htmlspecialchars(mh_page_link('index')); ?>" class="flex items-center gap-3 group">
                          <div class="w-[190px] md:w-[260px]" data-mh-logo-header></div>
                          <span class="sr-only">MerchantHaus Homepage</span>
                      </a>
