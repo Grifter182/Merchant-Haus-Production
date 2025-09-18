@@ -39,26 +39,34 @@
 @keyframes marquee-slide-right { 0% { transform: translateX(-50%); } 100% { transform: translateX(0); } }
 @media (prefers-reduced-motion: reduce) { .marquee-track { animation: none !important; } }
 .panel-overlay, .panel-container { transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
-#integrations a .integration-logo {
-  filter: grayscale(100%) saturate(0) brightness(0.85);
-  opacity: 0.6;
-  transition: filter 0.4s ease, opacity 0.4s ease;
+#integrations .integration-marquee {
+  margin-left: auto;
+  margin-right: auto;
+}
+#integrations .integration-track {
+  display: flex;
+  align-items: center;
+  gap: clamp(2.5rem, 8vw, 4.5rem);
+  padding: 0 1rem;
+}
+#integrations .integration-item {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.5rem 0.75rem;
+}
+#integrations .integration-logo {
+  display: block;
+  opacity: 0.95;
+  transition: transform 0.3s ease, filter 0.3s ease, opacity 0.3s ease;
 }
 #integrations a:hover .integration-logo,
 #integrations a:focus-visible .integration-logo {
-  filter: none;
+  transform: scale(1.1);
   opacity: 1;
 }
-.dark #integrations a .integration-logo {
-  filter: grayscale(100%) saturate(0.4) brightness(1.35) contrast(0.9);
-  opacity: 0.7;
-  mix-blend-mode: screen;
-}
-.dark #integrations a:hover .integration-logo,
-.dark #integrations a:focus-visible .integration-logo {
-  filter: none;
-  opacity: 1;
-  mix-blend-mode: normal;
+.dark #integrations .integration-logo--marquee {
+  filter: brightness(1.15) contrast(1.05);
 }
 </style>
 
@@ -123,76 +131,171 @@
 </section>
 
 <section id="integrations" class="py-8 md:py-12">
-  <div class="max-w-5xl mx-auto px-4 text-center">
-    <h2 class="text-4xl font-bold mb-4 animate-on-scroll font-ubuntu">Integrate with Your Favorite Tools</h2>
-    <p class="text-lg text-gray-600 dark:text-slate-300 mb-12">Connect MerchantHaus with the platforms you already use.</p>
-    <?php
-      $goHighLevelIntegration = [
-        'name' => 'GoHighLevel',
-        'href' => 'gohighlevel.php',
-        'logos' => [
-          'light' => mh_asset('public/assets/images/gohighlevellight.png'),
-          'dark' => mh_asset('public/assets/images/gohighleveldark.png'),
-        ],
-      ];
+  <?php
+    $shopifyIntegration = [
+      'name' => 'Shopify',
+      'href' => 'Shopify.html',
+      'logos' => [
+        'light' => mh_asset('public/assets/images/shopifylight.png'),
+        'dark' => mh_asset('public/assets/images/shopifydark.png'),
+      ],
+    ];
 
-      $integrationTiles = [
+    $goHighLevelIntegration = [
+      'name' => 'GoHighLevel',
+      'href' => 'gohighlevel.php',
+      'logos' => [
+        'light' => mh_asset('public/assets/images/gohighlevellight.png'),
+        'dark' => mh_asset('public/assets/images/gohighleveldark.png'),
+      ],
+    ];
+
+    $integrationLogoGroups = [
+      'top' => [
         [
-          'name' => 'Shopify',
-          'href' => 'Shopify.html',
-          'logos' => [
-            'light' => mh_asset('public/assets/images/shopifylight.png'),
-            'dark' => mh_asset('public/assets/images/shopifydark.png'),
-          ],
+          'name' => 'Salesforce',
+          'href' => 'https://www.salesforce.com/',
+          'logo' => 'https://upload.wikimedia.org/wikipedia/commons/thumb/5/59/Salesforce.com_logo.svg/512px-Salesforce.com_logo.svg.png',
         ],
         [
-          'name' => 'QuickBooks SyncPay',
+          'name' => 'QuickBooks',
           'href' => 'https://quickbooks.intuit.com/',
-          'target' => '_blank',
-          'rel' => 'noopener',
-          'logos' => [
-            'default' => mh_asset('public/assets/images/quickbooks.svg'),
-          ],
+          'logo' => 'https://upload.wikimedia.org/wikipedia/commons/thumb/3/3d/QuickBooks_logo.svg/512px-QuickBooks_logo.svg.png',
+        ],
+        [
+          'name' => 'HubSpot',
+          'href' => 'https://www.hubspot.com/',
+          'logo' => 'https://upload.wikimedia.org/wikipedia/commons/thumb/9/9e/HubSpot_Logo.svg/512px-HubSpot_Logo.svg.png',
+        ],
+        [
+          'name' => 'Vend',
+          'href' => 'https://www.vendhq.com/',
+          'logo' => 'https://upload.wikimedia.org/wikipedia/commons/thumb/7/79/Vend-logo.svg/512px-Vend-logo.svg.png',
         ],
         [
           'name' => 'Squarespace',
           'href' => 'https://www.squarespace.com/',
-          'target' => '_blank',
-          'rel' => 'noopener',
-          'logos' => [
-            'light' => mh_asset('public/assets/images/squarespace-light.svg'),
-            'dark' => mh_asset('public/assets/images/squarespace-dark.svg'),
-          ],
+          'logo' => 'https://download.logo.wine/logo/Squarespace/Squarespace-Logo.wine.png',
         ],
-        $goHighLevelIntegration,
-      ];
-    ?>
-    <div class="flex justify-center items-center gap-8 md:gap-16">
-      <?php foreach ($integrationTiles as $integration) : ?>
+        [
+          'name' => 'MemberPress',
+          'href' => 'https://memberpress.com/',
+          'logo' => 'https://seeklogo.com/images/M/memberpress-logo-3F5D57372A-seeklogo.com.png',
+        ],
+        [
+          'name' => 'WooCommerce',
+          'href' => 'https://woocommerce.com/',
+          'logo' => 'https://upload.wikimedia.org/wikipedia/commons/thumb/2/2a/WooCommerce_logo.svg/512px-WooCommerce_logo.svg.png',
+        ],
+        [
+          'name' => 'Zoho CRM',
+          'href' => 'https://www.zoho.com/crm/',
+          'logo' => 'https://upload.wikimedia.org/wikipedia/commons/thumb/0/08/Zoho-logo.svg/512px-Zoho-logo.svg.png',
+        ],
+      ],
+      'bottom' => [
+        [
+          'name' => 'Lightspeed',
+          'href' => 'https://www.lightspeedhq.com/',
+          'logo' => 'https://upload.wikimedia.org/wikipedia/commons/thumb/d/d0/Lightspeed_POS_logo.svg/512px-Lightspeed_POS_logo.svg.png',
+        ],
+        [
+          'name' => 'Wix',
+          'href' => 'https://www.wix.com/',
+          'logo' => 'https://www.logo.wine/a/logo/Wix.com/Wix.com-Logo.wine.svg',
+        ],
+        [
+          'name' => 'Keap / Infusionsoft',
+          'href' => 'https://keap.com/',
+          'logo' => 'https://seeklogo.com/images/I/infusionsoft-logo-0724711B19-seeklogo.com.png',
+        ],
+        [
+          'name' => 'Clover',
+          'href' => 'https://www.clover.com/',
+          'logo' => 'https://upload.wikimedia.org/wikipedia/commons/thumb/c/cf/Clover_logo.svg/512px-Clover_logo.svg.png',
+        ],
+        [
+          'name' => 'FreshBooks',
+          'href' => 'https://www.freshbooks.com/',
+          'logo' => 'https://seeklogo.com/images/F/freshbooks-logo-7D2B6C3999-seeklogo.com.png',
+        ],
+        [
+          'name' => 'Magento',
+          'href' => 'https://magento.com/',
+          'logo' => 'https://upload.wikimedia.org/wikipedia/commons/thumb/5/55/Magento_Logo.svg/512px-Magento_Logo.svg.png',
+        ],
+        [
+          'name' => 'BigCommerce',
+          'href' => 'https://www.bigcommerce.com/',
+          'logo' => 'https://download.logo.wine/logo/BigCommerce/BigCommerce-Logo.wine.png',
+        ],
+        [
+          'name' => 'NCR',
+          'href' => 'https://www.ncr.com/',
+          'logo' => 'https://upload.wikimedia.org/wikipedia/commons/thumb/6/62/NCR_logo.svg/512px-NCR_logo.svg.png',
+        ],
+      ],
+    ];
+
+  ?>
+  <div class="max-w-5xl mx-auto px-4 text-center space-y-10">
+    <div class="integration-marquee marquee-wrapper">
+      <div class="marquee-track integration-track">
         <?php
-          $href = $integration['href'] ?? '#';
-          $logos = $integration['logos'] ?? [];
-          $lightLogo = $logos['light'] ?? null;
-          $darkLogo = $logos['dark'] ?? null;
-          $defaultLogo = $logos['default'] ?? ($integration['logo'] ?? null);
-          if (!$lightLogo && !$darkLogo && !$defaultLogo) {
-            continue;
-          }
-          $tileClass = $integration['class'] ?? 'block hover:scale-105 transition-transform duration-300';
-          $altText = $integration['alt'] ?? (($integration['name'] ?? 'Integration') . ' Logo');
-          $targetAttr = isset($integration['target']) ? ' target="' . htmlspecialchars($integration['target']) . '"' : '';
-          $relAttr = isset($integration['rel']) ? ' rel="' . htmlspecialchars($integration['rel']) . '"' : '';
+          $topMarqueeLogos = array_merge($integrationLogoGroups['top'], $integrationLogoGroups['top']);
+          foreach ($topMarqueeLogos as $logo) :
+            $href = $logo['href'] ?? '#';
+            $logoSrc = $logo['logo'] ?? null;
+            if (!$logoSrc) {
+              continue;
+            }
+            $name = $logo['name'] ?? 'Integration';
+            $target = $logo['target'] ?? '_blank';
+            $rel = $logo['rel'] ?? ($target === '_blank' ? 'noopener' : null);
+            $targetAttr = $target ? ' target="' . htmlspecialchars($target) . '"' : '';
+            $relAttr = $rel ? ' rel="' . htmlspecialchars($rel) . '"' : '';
         ?>
-        <a href="<?php echo htmlspecialchars($href); ?>" class="<?php echo htmlspecialchars($tileClass); ?>"<?php echo $targetAttr . $relAttr; ?>>
-          <?php if ($lightLogo && $darkLogo) : ?>
-            <img src="<?php echo htmlspecialchars($lightLogo); ?>" alt="<?php echo htmlspecialchars($altText); ?>" class="integration-logo h-12 md:h-14 block dark:hidden">
-            <img src="<?php echo htmlspecialchars($darkLogo); ?>" alt="<?php echo htmlspecialchars($altText); ?>" class="integration-logo h-12 md:h-14 hidden dark:block">
-          <?php else : ?>
-            <?php $singleLogo = $lightLogo ?? $darkLogo ?? $defaultLogo; ?>
-            <img src="<?php echo htmlspecialchars($singleLogo); ?>" alt="<?php echo htmlspecialchars($altText); ?>" class="integration-logo h-12 md:h-14 block">
-          <?php endif; ?>
+          <a href="<?php echo htmlspecialchars($href); ?>" class="integration-item"<?php echo $targetAttr . $relAttr; ?>>
+            <img src="<?php echo htmlspecialchars($logoSrc); ?>" alt="<?php echo htmlspecialchars($name . ' Logo'); ?>" class="integration-logo integration-logo--marquee h-10 sm:h-12 object-contain">
+          </a>
+        <?php endforeach; ?>
+      </div>
+    </div>
+    <div class="space-y-4">
+      <div class="flex flex-wrap items-center justify-center gap-4 md:gap-6">
+        <a href="<?php echo htmlspecialchars($shopifyIntegration['href']); ?>" class="integration-item">
+          <img src="<?php echo htmlspecialchars($shopifyIntegration['logos']['light']); ?>" alt="<?php echo htmlspecialchars($shopifyIntegration['name'] . ' Logo'); ?>" class="integration-logo h-10 sm:h-12 block dark:hidden">
+          <img src="<?php echo htmlspecialchars($shopifyIntegration['logos']['dark']); ?>" alt="<?php echo htmlspecialchars($shopifyIntegration['name'] . ' Logo'); ?>" class="integration-logo h-10 sm:h-12 hidden dark:block">
         </a>
-      <?php endforeach; ?>
+        <h2 class="text-4xl font-bold animate-on-scroll font-ubuntu">Integrate with Your Favorite Tools</h2>
+        <a href="<?php echo htmlspecialchars($goHighLevelIntegration['href']); ?>" class="integration-item">
+          <img src="<?php echo htmlspecialchars($goHighLevelIntegration['logos']['light']); ?>" alt="<?php echo htmlspecialchars($goHighLevelIntegration['name'] . ' Logo'); ?>" class="integration-logo h-10 sm:h-12 block dark:hidden">
+          <img src="<?php echo htmlspecialchars($goHighLevelIntegration['logos']['dark']); ?>" alt="<?php echo htmlspecialchars($goHighLevelIntegration['name'] . ' Logo'); ?>" class="integration-logo h-10 sm:h-12 hidden dark:block">
+        </a>
+      </div>
+      <p class="text-lg text-gray-600 dark:text-slate-300">Connect MerchantHaus with the platforms you already use.</p>
+    </div>
+    <div class="integration-marquee marquee-wrapper">
+      <div class="marquee-track marquee-track--reverse integration-track">
+        <?php
+          $bottomMarqueeLogos = array_merge($integrationLogoGroups['bottom'], $integrationLogoGroups['bottom']);
+          foreach ($bottomMarqueeLogos as $logo) :
+            $href = $logo['href'] ?? '#';
+            $logoSrc = $logo['logo'] ?? null;
+            if (!$logoSrc) {
+              continue;
+            }
+            $name = $logo['name'] ?? 'Integration';
+            $target = $logo['target'] ?? '_blank';
+            $rel = $logo['rel'] ?? ($target === '_blank' ? 'noopener' : null);
+            $targetAttr = $target ? ' target="' . htmlspecialchars($target) . '"' : '';
+            $relAttr = $rel ? ' rel="' . htmlspecialchars($rel) . '"' : '';
+        ?>
+          <a href="<?php echo htmlspecialchars($href); ?>" class="integration-item"<?php echo $targetAttr . $relAttr; ?>>
+            <img src="<?php echo htmlspecialchars($logoSrc); ?>" alt="<?php echo htmlspecialchars($name . ' Logo'); ?>" class="integration-logo integration-logo--marquee h-10 sm:h-12 object-contain">
+          </a>
+        <?php endforeach; ?>
+      </div>
     </div>
   </div>
 </section>
