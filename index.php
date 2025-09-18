@@ -127,6 +127,15 @@
     <h2 class="text-4xl font-bold mb-4 animate-on-scroll font-ubuntu">Integrate with Your Favorite Tools</h2>
     <p class="text-lg text-gray-600 dark:text-slate-300 mb-12">Connect MerchantHaus with the platforms you already use.</p>
     <?php
+      $goHighLevelIntegration = [
+        'name' => 'GoHighLevel',
+        'href' => 'gohighlevel.php',
+        'logos' => [
+          'light' => mh_asset('public/assets/images/gohighlevellight.png'),
+          'dark' => mh_asset('public/assets/images/gohighleveldark.png'),
+        ],
+      ];
+
       $integrationTiles = [
         [
           'name' => 'Shopify',
@@ -155,14 +164,7 @@
             'dark' => mh_asset('public/assets/images/squarespace-dark.svg'),
           ],
         ],
-        [
-          'name' => 'GoHighLevel',
-          'href' => 'gohighlevel.php',
-          'logos' => [
-            'light' => mh_asset('public/assets/images/gohighlevellight.png'),
-            'dark' => mh_asset('public/assets/images/gohighleveldark.png'),
-          ],
-        ],
+        $goHighLevelIntegration,
       ];
     ?>
     <div class="flex justify-center items-center gap-8 md:gap-16">
