@@ -15,6 +15,8 @@
 .feature-display.active { opacity: 1; transform: translateX(-50%) translateY(0); }
 .feature-display.exiting { opacity: 0; transform: translateX(-50%) translateY(-10px); }
 .animate-scroll { animation: mh-services-marquee 45s linear infinite; }
+.mh-integrations-track { animation: mh-integrations-marquee 50s linear infinite; }
+.mh-integrations-track-reverse { animation: mh-integrations-marquee 55s linear infinite reverse; }
 .service-cell { opacity: 0; transition: opacity 0.5s ease-in-out; }
 .service-cell.is-visible { opacity: 1; }
 .service-cell h3, .service-cell p { opacity: 0; transform: translateY(10px); transition: opacity 0.4s ease-out, transform 0.4s ease-out; }
@@ -26,7 +28,8 @@
 .hero-bg-container::before { content: ''; position: absolute; inset: 0; background-image: url('<?php echo htmlspecialchars(mh_asset("public/assets/images/hero.png")); ?>'); background-size: 100%; background-position: center; background-repeat: no-repeat; animation: kenBurns 20s ease-in-out infinite alternate; z-index: -20; }
 @keyframes kenBurns { 0% { transform: scale(1) rotate(0deg); background-position: center; } 100% { transform: scale(1.1) rotate(1deg); background-position: top left; } }
 @keyframes mh-services-marquee { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
-@media (prefers-reduced-motion: reduce) { .animate-scroll { animation: none; } }
+@keyframes mh-integrations-marquee { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+@media (prefers-reduced-motion: reduce) { .animate-scroll, .mh-integrations-track, .mh-integrations-track-reverse { animation: none; } }
 .panel-overlay, .panel-container { transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
 </style>
 
@@ -91,73 +94,165 @@
 </section>
 
 <section id="integrations" class="py-8 md:py-12">
-  <div class="max-w-5xl mx-auto px-4 text-center">
-    <h2 class="text-4xl font-bold mb-4 animate-on-scroll font-ubuntu">Integrate with Your Favorite Tools</h2>
-    <p class="text-lg text-gray-600 dark:text-slate-300 mb-12">Connect MerchantHaus with the platforms you already use.</p>
+  <div class="max-w-5xl mx-auto px-4">
     <?php
-      $integrationTiles = [
+      $shopifyIntegration = [
+        'label' => 'Shopify',
+        'href' => 'shopify.html',
+        'light' => mh_asset('public/assets/images/shopifylight.png'),
+        'dark' => mh_asset('public/assets/images/shopifydark.png'),
+        'alt' => 'Shopify integration logo',
+      ];
+
+      $goHighLevelIntegration = [
+        'label' => 'GoHighLevel',
+        'href' => 'gohighlevel.html',
+        'light' => mh_asset('public/assets/images/gohighlevellight.png'),
+        'dark' => mh_asset('public/assets/images/gohighleveldark.png'),
+        'alt' => 'GoHighLevel integration logo',
+      ];
+
+      $quickBooksIntegration = [
+        'label' => 'QuickBooks SyncPay',
+        'href' => 'https://quickbooks.intuit.com/',
+        'target' => '_blank',
+        'rel' => 'noopener',
+        'default' => mh_asset('public/assets/images/quickbooks.svg'),
+        'alt' => 'QuickBooks SyncPay integration logo',
+      ];
+
+      $squarespaceIntegration = [
+        'label' => 'Squarespace',
+        'href' => 'https://www.squarespace.com/',
+        'target' => '_blank',
+        'rel' => 'noopener',
+        'light' => mh_asset('public/assets/images/squarespace-light.svg'),
+        'dark' => mh_asset('public/assets/images/squarespace-dark.svg'),
+        'alt' => 'Squarespace integration logo',
+      ];
+
+      $nmiIntegration = [
+        'label' => 'NMI Gateway',
+        'href' => 'https://www.nmi.com/',
+        'target' => '_blank',
+        'rel' => 'noopener',
+        'default' => mh_asset('public/assets/images/nmi.png'),
+        'alt' => 'NMI gateway integration logo',
+      ];
+
+      $cloverIntegration = [
+        'label' => 'Clover',
+        'href' => 'https://www.clover.com/',
+        'target' => '_blank',
+        'rel' => 'noopener',
+        'light' => mh_asset('public/assets/images/clover-light.svg'),
+        'dark' => mh_asset('public/assets/images/clover-dark.svg'),
+        'alt' => 'Clover point of sale integration logo',
+      ];
+
+      $wooCommerceIntegration = [
+        'label' => 'WooCommerce',
+        'href' => 'https://woocommerce.com/',
+        'target' => '_blank',
+        'rel' => 'noopener',
+        'light' => mh_asset('public/assets/images/woocommerce-light.svg'),
+        'dark' => mh_asset('public/assets/images/woocommerce-dark.svg'),
+        'alt' => 'WooCommerce integration logo',
+      ];
+
+      $hubSpotIntegration = [
+        'label' => 'HubSpot',
+        'href' => 'https://www.hubspot.com/',
+        'target' => '_blank',
+        'rel' => 'noopener',
+        'light' => mh_asset('public/assets/images/hubspot-light.svg'),
+        'dark' => mh_asset('public/assets/images/hubspot-dark.svg'),
+        'alt' => 'HubSpot CRM integration logo',
+      ];
+
+      $marqueeOneLogos = [
+        $shopifyIntegration,
+        $quickBooksIntegration,
+        $squarespaceIntegration,
+        $goHighLevelIntegration,
+        $nmiIntegration,
+        $cloverIntegration,
+        $wooCommerceIntegration,
+        $hubSpotIntegration,
+      ];
+
+      $marqueeTwoLogos = [
+        $goHighLevelIntegration,
+        $squarespaceIntegration,
+        $shopifyIntegration,
+        $quickBooksIntegration,
+        $hubSpotIntegration,
+        $wooCommerceIntegration,
+        $cloverIntegration,
+        $nmiIntegration,
+      ];
+
+      $integrationMarquees = [
         [
-          'name' => 'Shopify',
-          'href' => 'shopify.html',
-          'logos' => [
-            'light' => mh_asset('public/assets/images/shopifylight.png'),
-            'dark' => mh_asset('public/assets/images/shopifydark.png'),
-          ],
+          'items' => $marqueeOneLogos,
+          'trackClass' => 'mh-integrations-track',
         ],
         [
-          'name' => 'QuickBooks SyncPay',
-          'href' => 'https://quickbooks.intuit.com/',
-          'target' => '_blank',
-          'rel' => 'noopener',
-          'logos' => [
-            'default' => mh_asset('public/assets/images/quickbooks.svg'),
-          ],
-        ],
-        [
-          'name' => 'Squarespace',
-          'href' => 'https://www.squarespace.com/',
-          'target' => '_blank',
-          'rel' => 'noopener',
-          'logos' => [
-            'light' => mh_asset('public/assets/images/squarespace-light.svg'),
-            'dark' => mh_asset('public/assets/images/squarespace-dark.svg'),
-          ],
-        ],
-        [
-          'name' => 'GoHighLevel',
-          'href' => 'gohighlevel.html',
-          'logos' => [
-            'light' => mh_asset('public/assets/images/gohighlevellight.png'),
-            'dark' => mh_asset('public/assets/images/gohighleveldark.png'),
-          ],
+          'items' => $marqueeTwoLogos,
+          'trackClass' => 'mh-integrations-track-reverse',
         ],
       ];
     ?>
-    <div class="flex justify-center items-center gap-8 md:gap-16">
-      <?php foreach ($integrationTiles as $integration) : ?>
+    <div class="flex flex-col items-center text-center gap-6">
+      <div class="flex w-full flex-col items-center gap-6 sm:flex-row sm:justify-between">
         <?php
-          $href = $integration['href'] ?? '#';
-          $logos = $integration['logos'] ?? [];
-          $lightLogo = $logos['light'] ?? null;
-          $darkLogo = $logos['dark'] ?? null;
-          $defaultLogo = $logos['default'] ?? ($integration['logo'] ?? null);
-          if (!$lightLogo && !$darkLogo && !$defaultLogo) {
-            continue;
-          }
-          $tileClass = $integration['class'] ?? 'block hover:scale-105 transition-transform duration-300';
-          $altText = $integration['alt'] ?? (($integration['name'] ?? 'Integration') . ' Logo');
-          $targetAttr = isset($integration['target']) ? ' target="' . htmlspecialchars($integration['target']) . '"' : '';
-          $relAttr = isset($integration['rel']) ? ' rel="' . htmlspecialchars($integration['rel']) . '"' : '';
+          $shopifyTargetAttr = isset($shopifyIntegration['target']) ? ' target="' . htmlspecialchars($shopifyIntegration['target']) . '"' : '';
+          $shopifyRelAttr = isset($shopifyIntegration['rel']) ? ' rel="' . htmlspecialchars($shopifyIntegration['rel']) . '"' : '';
         ?>
-        <a href="<?php echo htmlspecialchars($href); ?>" class="<?php echo htmlspecialchars($tileClass); ?>"<?php echo $targetAttr . $relAttr; ?>>
-          <?php if ($lightLogo && $darkLogo) : ?>
-            <img src="<?php echo htmlspecialchars($lightLogo); ?>" alt="<?php echo htmlspecialchars($altText); ?>" class="h-12 md:h-14 block dark:hidden">
-            <img src="<?php echo htmlspecialchars($darkLogo); ?>" alt="<?php echo htmlspecialchars($altText); ?>" class="h-12 md:h-14 hidden dark:block">
-          <?php else : ?>
-            <?php $singleLogo = $lightLogo ?? $darkLogo ?? $defaultLogo; ?>
-            <img src="<?php echo htmlspecialchars($singleLogo); ?>" alt="<?php echo htmlspecialchars($altText); ?>" class="h-12 md:h-14 block">
-          <?php endif; ?>
+        <a href="<?php echo htmlspecialchars($shopifyIntegration['href']); ?>" class="flex-shrink-0 inline-flex transition-transform duration-300 hover:-translate-y-1"<?php echo $shopifyTargetAttr . $shopifyRelAttr; ?>>
+          <img src="<?php echo htmlspecialchars($shopifyIntegration['light']); ?>" alt="<?php echo htmlspecialchars($shopifyIntegration['alt']); ?>" class="h-12 w-auto block dark:hidden">
+          <img src="<?php echo htmlspecialchars($shopifyIntegration['dark']); ?>" alt="<?php echo htmlspecialchars($shopifyIntegration['alt']); ?>" class="h-12 w-auto hidden dark:block">
         </a>
+        <h2 class="text-4xl font-bold animate-on-scroll font-ubuntu">Integrate with Your Favorite Tools</h2>
+        <?php
+          $ghlTargetAttr = isset($goHighLevelIntegration['target']) ? ' target="' . htmlspecialchars($goHighLevelIntegration['target']) . '"' : '';
+          $ghlRelAttr = isset($goHighLevelIntegration['rel']) ? ' rel="' . htmlspecialchars($goHighLevelIntegration['rel']) . '"' : '';
+        ?>
+        <a href="<?php echo htmlspecialchars($goHighLevelIntegration['href']); ?>" class="flex-shrink-0 inline-flex transition-transform duration-300 hover:-translate-y-1"<?php echo $ghlTargetAttr . $ghlRelAttr; ?>>
+          <img src="<?php echo htmlspecialchars($goHighLevelIntegration['light']); ?>" alt="<?php echo htmlspecialchars($goHighLevelIntegration['alt']); ?>" class="h-12 w-auto block dark:hidden">
+          <img src="<?php echo htmlspecialchars($goHighLevelIntegration['dark']); ?>" alt="<?php echo htmlspecialchars($goHighLevelIntegration['alt']); ?>" class="h-12 w-auto hidden dark:block">
+        </a>
+      </div>
+      <p class="text-lg text-gray-600 dark:text-slate-300">Connect MerchantHaus with the platforms you already use.</p>
+    </div>
+    <div class="mt-10 space-y-8">
+      <?php foreach ($integrationMarquees as $marquee) : ?>
+        <div class="relative w-full overflow-hidden group">
+          <div class="flex items-center gap-12 <?php echo htmlspecialchars($marquee['trackClass']); ?> group-hover:[animation-play-state:paused]">
+            <?php foreach ([false, true] as $isDuplicate) : ?>
+              <?php foreach ($marquee['items'] as $integration) : ?>
+                <?php
+                  $href = $integration['href'] ?? '#';
+                  $targetAttr = isset($integration['target']) ? ' target="' . htmlspecialchars($integration['target']) . '"' : '';
+                  $relAttr = isset($integration['rel']) ? ' rel="' . htmlspecialchars($integration['rel']) . '"' : '';
+                  $lightLogo = $integration['light'] ?? null;
+                  $darkLogo = $integration['dark'] ?? null;
+                  $defaultLogo = $integration['default'] ?? null;
+                  $altText = $integration['alt'] ?? (($integration['label'] ?? 'Integration') . ' logo');
+                  $duplicateAttr = $isDuplicate ? ' aria-hidden="true" tabindex="-1"' : '';
+                ?>
+                <a href="<?php echo htmlspecialchars($href); ?>" class="flex-shrink-0 inline-flex items-center justify-center px-4 py-2 opacity-80 transition-transform duration-300 hover:-translate-y-1 hover:opacity-100"<?php echo $targetAttr . $relAttr . $duplicateAttr; ?>>
+                  <?php if ($lightLogo && $darkLogo) : ?>
+                    <img src="<?php echo htmlspecialchars($lightLogo); ?>" alt="<?php echo htmlspecialchars($altText); ?>" class="h-12 w-auto block dark:hidden">
+                    <img src="<?php echo htmlspecialchars($darkLogo); ?>" alt="<?php echo htmlspecialchars($altText); ?>" class="h-12 w-auto hidden dark:block">
+                  <?php elseif ($defaultLogo) : ?>
+                    <img src="<?php echo htmlspecialchars($defaultLogo); ?>" alt="<?php echo htmlspecialchars($altText); ?>" class="h-12 w-auto block">
+                  <?php endif; ?>
+                </a>
+              <?php endforeach; ?>
+            <?php endforeach; ?>
+          </div>
+        </div>
       <?php endforeach; ?>
     </div>
   </div>

@@ -1,0 +1,11 @@
+<svg width="160" height="48" viewBox="0 0 160 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="160" height="48" rx="12" fill="#FFFFFF"/>
+  <g transform="translate(20 10)">
+    <circle cx="12" cy="12" r="8" fill="#23B26D"/>
+    <circle cx="24" cy="12" r="8" fill="#23B26D"/>
+    <circle cx="18" cy="4" r="8" fill="#23B26D"/>
+    <circle cx="18" cy="20" r="8" fill="#23B26D"/>
+    <path d="M18 20C18 24 20 26 22.5 28.5" stroke="#169B62" stroke-width="3" stroke-linecap="round"/>
+  </g>
+  <text x="58" y="30" fill="#169B62" font-family="'Segoe UI', Arial, sans-serif" font-size="20" font-weight="600">Clover</text>
+</svg>

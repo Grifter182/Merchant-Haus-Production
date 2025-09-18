@@ -1,0 +1,6 @@
+<svg width="180" height="48" viewBox="0 0 180 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect x="0.5" y="0.5" width="179" height="47" rx="12" fill="#FFFFFF" stroke="#7F54B3"/>
+  <path d="M24 16C24 13.7909 25.7909 12 28 12H56C58.2091 12 60 13.7909 60 16V30C60 32.2091 58.2091 34 56 34H28C25.7909 34 24 32.2091 24 30V16Z" fill="#7F54B3"/>
+  <text x="32" y="31" fill="#FFFFFF" font-family="'Segoe UI', Arial, sans-serif" font-size="16" font-weight="600">Woo</text>
+  <text x="72" y="30" fill="#4A1D79" font-family="'Segoe UI', Arial, sans-serif" font-size="20" font-weight="600">Commerce</text>
+</svg>
