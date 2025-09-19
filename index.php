@@ -194,17 +194,17 @@
         [
           'name' => 'Salesforce',
           'href' => 'https://www.salesforce.com/',
-          'logo' => 'https://upload.wikimedia.org/wikipedia/commons/thumb/5/59/Salesforce.com_logo.svg/512px-Salesforce.com_logo.svg.png',
+          'logo' => 'https://www.salesforce.com/content/dam/sfdc-docs/www/logos/logo-salesforce.svg',
         ],
         [
           'name' => 'QuickBooks',
           'href' => 'https://quickbooks.intuit.com/',
-          'logo' => 'https://upload.wikimedia.org/wikipedia/commons/thumb/3/3d/QuickBooks_logo.svg/512px-QuickBooks_logo.svg.png',
+          'logo' => 'https://upload.wikimedia.org/wikipedia/commons/7/79/Intuit_QuickBooks_logo.svg',
         ],
         [
           'name' => 'HubSpot',
           'href' => 'https://www.hubspot.com/',
-          'logo' => 'https://upload.wikimedia.org/wikipedia/commons/thumb/9/9e/HubSpot_Logo.svg/512px-HubSpot_Logo.svg.png',
+          'logo' => 'https://upload.wikimedia.org/wikipedia/commons/3/3f/HubSpot_Logo.svg',
         ],
         [
           'name' => 'Vend',
@@ -214,12 +214,12 @@
         [
           'name' => 'Squarespace',
           'href' => 'https://www.squarespace.com/',
-          'logo' => 'https://download.logo.wine/logo/Squarespace/Squarespace-Logo.wine.png',
+          'logo' => 'https://upload.wikimedia.org/wikipedia/en/5/53/Squarespace_Logo.svg',
         ],
         [
           'name' => 'MemberPress',
           'href' => 'https://memberpress.com/',
-          'logo' => 'https://seeklogo.com/images/M/memberpress-logo-3F5D57372A-seeklogo.com.png',
+          'logo' => 'https://memberpress.com/wp-content/uploads/2023/07/memberpress-by-awesome-motive-logo-flame-blue-rgb.svg',
         ],
         [
           'name' => 'WooCommerce',
@@ -229,24 +229,24 @@
         [
           'name' => 'Zoho CRM',
           'href' => 'https://www.zoho.com/crm/',
-          'logo' => 'https://upload.wikimedia.org/wikipedia/commons/thumb/0/08/Zoho-logo.svg/512px-Zoho-logo.svg.png',
+          'logo' => 'https://upload.wikimedia.org/wikipedia/commons/3/30/ZOHO_logo_2023.svg',
         ],
       ],
       'bottom' => [
         [
           'name' => 'Lightspeed',
           'href' => 'https://www.lightspeedhq.com/',
-          'logo' => 'https://upload.wikimedia.org/wikipedia/commons/thumb/d/d0/Lightspeed_POS_logo.svg/512px-Lightspeed_POS_logo.svg.png',
+          'logo' => 'https://upload.wikimedia.org/wikipedia/commons/3/38/Lightspeed_-_logo.png',
         ],
         [
           'name' => 'Wix',
           'href' => 'https://www.wix.com/',
-          'logo' => 'https://www.logo.wine/a/logo/Wix.com/Wix.com-Logo.wine.svg',
+          'logo' => 'https://static.wixstatic.com/media/de991a_321c4356214644169542e724ef57529b~mv2.png',
         ],
         [
-          'name' => 'Keap / Infusionsoft',
+          'name' => 'Keap',
           'href' => 'https://keap.com/',
-          'logo' => 'https://seeklogo.com/images/I/infusionsoft-logo-0724711B19-seeklogo.com.png',
+          'logo' => 'https://upload.wikimedia.org/wikipedia/commons/e/e0/Logo_of_Keap_Company.svg',
         ],
         [
           'name' => 'Clover',
@@ -256,7 +256,7 @@
         [
           'name' => 'FreshBooks',
           'href' => 'https://www.freshbooks.com/',
-          'logo' => 'https://seeklogo.com/images/F/freshbooks-logo-7D2B6C3999-seeklogo.com.png',
+          'logo' => 'https://upload.wikimedia.org/wikipedia/commons/1/17/FreshBooks_logo_%282020%29.svg',
         ],
         [
           'name' => 'Magento',
@@ -266,12 +266,22 @@
         [
           'name' => 'BigCommerce',
           'href' => 'https://www.bigcommerce.com/',
-          'logo' => 'https://download.logo.wine/logo/BigCommerce/BigCommerce-Logo.wine.png',
+          'logo' => 'https://upload.wikimedia.org/wikipedia/commons/c/c4/Bc-logo-dark.svg',
         ],
         [
           'name' => 'NCR',
           'href' => 'https://www.ncr.com/',
-          'logo' => 'https://upload.wikimedia.org/wikipedia/commons/thumb/6/62/NCR_logo.svg/512px-NCR_logo.svg.png',
+          'logo' => 'https://upload.wikimedia.org/wikipedia/commons/9/92/NCR_logo_color.svg',
+        ],
+        [
+          'name' => 'Visa',
+          'href' => 'https://www.visa.com/',
+          'logo' => 'https://upload.wikimedia.org/wikipedia/commons/4/41/Visa_2021.svg',
+        ],
+        [
+          'name' => 'Mastercard',
+          'href' => 'https://www.mastercard.us/',
+          'logo' => 'https://upload.wikimedia.org/wikipedia/commons/a/a4/Mastercard_2019_logo.svg',
         ],
       ],
     ];
