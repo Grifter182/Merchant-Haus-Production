@@ -29,6 +29,7 @@
                     </span>
                 </button>
                 <div id="footer-integrations-menu" class="mt-2 space-y-2 pl-4 hidden">
+                    <a href="<?php echo htmlspecialchars(mh_page_link('integrations')); ?>" class="block text-slate-400 hover:text-brand-teal">Integrations Directory</a>
                     <a href="Shopify.html" class="block text-slate-400 hover:text-brand-teal">Shopify Integration</a>
                     <a href="gohighlevel.php" class="block text-slate-400 hover:text-brand-teal">GoHighLevel Integration</a>
                 </div>
