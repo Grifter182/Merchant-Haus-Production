@@ -292,34 +292,33 @@
       <div class="marquee-track integration-track">
         <?php
           $integrationShowcase = [
-            [ 'name' => 'Salesforce', 'href' => 'https://www.salesforce.com/', 'logo' => 'https://www.salesforce.com/content/dam/sfdc-docs/www/logos/logo-salesforce.svg' ],
-            [ 'name' => 'QuickBooks', 'href' => 'https://quickbooks.intuit.com/', 'logo' => 'https://upload.wikimedia.org/wikipedia/commons/7/79/Intuit_QuickBooks_logo.svg' ],
-            [ 'name' => 'HubSpot', 'href' => 'https://www.hubspot.com/', 'logo' => 'https://upload.wikimedia.org/wikipedia/commons/3/3f/HubSpot_Logo.svg' ],
-            [ 'name' => 'Vend', 'href' => 'https://www.vendhq.com/', 'logo' => 'https://upload.wikimedia.org/wikipedia/commons/thumb/7/79/Vend-logo.svg/512px-Vend-logo.svg.png' ],
-            [ 'name' => 'Squarespace', 'href' => 'https://www.squarespace.com/', 'logo' => 'https://upload.wikimedia.org/wikipedia/en/5/53/Squarespace_Logo.svg' ],
-            [ 'name' => 'MemberPress', 'href' => 'https://memberpress.com/', 'logo' => 'https://memberpress.com/wp-content/uploads/2023/07/memberpress-by-awesome-motive-logo-flame-blue-rgb.svg' ],
-            [ 'name' => 'WooCommerce', 'href' => 'https://woocommerce.com/', 'logo' => 'https://upload.wikimedia.org/wikipedia/commons/thumb/2/2a/WooCommerce_logo.svg/512px-WooCommerce_logo.svg.png' ],
-            [ 'name' => 'Zoho CRM', 'href' => 'https://www.zoho.com/crm/', 'logo' => 'https://upload.wikimedia.org/wikipedia/commons/3/30/ZOHO_logo_2023.svg' ],
-            [ 'name' => 'Lightspeed', 'href' => 'https://www.lightspeedhq.com/', 'logo' => 'https://upload.wikimedia.org/wikipedia/commons/3/38/Lightspeed_-_logo.png' ],
-            [ 'name' => 'Wix', 'href' => 'https://www.wix.com/', 'logo' => 'https://static.wixstatic.com/media/de991a_321c4356214644169542e724ef57529b~mv2.png' ],
-            [ 'name' => 'Keap', 'href' => 'https://keap.com/', 'logo' => 'https://upload.wikimedia.org/wikipedia/commons/e/e0/Logo_of_Keap_Company.svg' ],
-            [ 'name' => 'Clover', 'href' => 'https://www.clover.com/', 'logo' => 'https://upload.wikimedia.org/wikipedia/commons/thumb/c/cf/Clover_logo.svg/512px-Clover_logo.svg.png' ],
-            [ 'name' => 'FreshBooks', 'href' => 'https://www.freshbooks.com/', 'logo' => 'https://upload.wikimedia.org/wikipedia/commons/1/17/FreshBooks_logo_%282020%29.svg' ],
-            [ 'name' => 'Magento', 'href' => 'https://magento.com/', 'logo' => 'https://upload.wikimedia.org/wikipedia/commons/thumb/5/55/Magento_Logo.svg/512px-Magento_Logo.svg.png' ],
-            [ 'name' => 'BigCommerce', 'href' => 'https://www.bigcommerce.com/', 'logo' => 'https://upload.wikimedia.org/wikipedia/commons/c/c4/Bc-logo-dark.svg' ],
-            [ 'name' => 'NCR', 'href' => 'https://www.ncr.com/', 'logo' => 'https://upload.wikimedia.org/wikipedia/commons/9/92/NCR_logo_color.svg' ],
-            [ 'name' => 'Visa', 'href' => 'https://www.visa.com/', 'logo' => 'https://upload.wikimedia.org/wikipedia/commons/4/41/Visa_2021.svg' ],
-            [ 'name' => 'Mastercard', 'href' => 'https://www.mastercard.us/', 'logo' => 'https://upload.wikimedia.org/wikipedia/commons/a/a4/Mastercard_2019_logo.svg' ],
+            [ 'name' => 'Salesforce', 'logo' => 'https://www.salesforce.com/content/dam/sfdc-docs/www/logos/logo-salesforce.svg' ],
+            [ 'name' => 'QuickBooks', 'logo' => 'https://upload.wikimedia.org/wikipedia/commons/7/79/Intuit_QuickBooks_logo.svg' ],
+            [ 'name' => 'HubSpot', 'logo' => 'https://upload.wikimedia.org/wikipedia/commons/3/3f/HubSpot_Logo.svg' ],
+            [ 'name' => 'Vend', 'logo' => 'https://upload.wikimedia.org/wikipedia/commons/thumb/7/79/Vend-logo.svg/512px-Vend-logo.svg.png' ],
+            [ 'name' => 'Squarespace', 'logo' => 'https://upload.wikimedia.org/wikipedia/en/5/53/Squarespace_Logo.svg' ],
+            [ 'name' => 'MemberPress', 'logo' => 'https://memberpress.com/wp-content/uploads/2023/07/memberpress-by-awesome-motive-logo-flame-blue-rgb.svg' ],
+            [ 'name' => 'WooCommerce', 'logo' => 'https://upload.wikimedia.org/wikipedia/commons/thumb/2/2a/WooCommerce_logo.svg/512px-WooCommerce_logo.svg.png' ],
+            [ 'name' => 'Zoho CRM', 'logo' => 'https://upload.wikimedia.org/wikipedia/commons/3/30/ZOHO_logo_2023.svg' ],
+            [ 'name' => 'Lightspeed', 'logo' => 'https://upload.wikimedia.org/wikipedia/commons/3/38/Lightspeed_-_logo.png' ],
+            [ 'name' => 'Wix', 'logo' => 'https://static.wixstatic.com/media/de991a_321c4356214644169542e724ef57529b~mv2.png' ],
+            [ 'name' => 'Keap', 'logo' => 'https://upload.wikimedia.org/wikipedia/commons/e/e0/Logo_of_Keap_Company.svg' ],
+            [ 'name' => 'Clover', 'logo' => 'https://upload.wikimedia.org/wikipedia/commons/thumb/c/cf/Clover_logo.svg/512px-Clover_logo.svg.png' ],
+            [ 'name' => 'FreshBooks', 'logo' => 'https://upload.wikimedia.org/wikipedia/commons/1/17/FreshBooks_logo_%282020%29.svg' ],
+            [ 'name' => 'Magento', 'logo' => 'https://upload.wikimedia.org/wikipedia/commons/thumb/5/55/Magento_Logo.svg/512px-Magento_Logo.svg.png' ],
+            [ 'name' => 'BigCommerce', 'logo' => 'https://upload.wikimedia.org/wikipedia/commons/c/c4/Bc-logo-dark.svg' ],
+            [ 'name' => 'NCR', 'logo' => 'https://upload.wikimedia.org/wikipedia/commons/9/92/NCR_logo_color.svg' ],
+            [ 'name' => 'Visa', 'logo' => 'https://upload.wikimedia.org/wikipedia/commons/4/41/Visa_2021.svg' ],
+            [ 'name' => 'Mastercard', 'logo' => 'https://upload.wikimedia.org/wikipedia/commons/a/a4/Mastercard_2019_logo.svg' ],
           ];
           foreach (array_merge($integrationShowcase, $integrationShowcase) as $integration) :
-            $href = $integration['href'] ?? '#';
             $logoSrc = $integration['logo'] ?? null;
             if (!$logoSrc) { continue; }
             $name = $integration['name'] ?? 'Integration';
         ?>
-          <a href="<?php echo htmlspecialchars($href); ?>" class="integration-item" target="_blank" rel="noopener">
+          <span class="integration-item">
             <img src="<?php echo htmlspecialchars($logoSrc); ?>" alt="<?php echo htmlspecialchars($name . ' Logo'); ?>" class="integration-logo integration-logo--marquee h-10 sm:h-12 object-contain">
-          </a>
+          </span>
         <?php endforeach; ?>
       </div>
     </div>
