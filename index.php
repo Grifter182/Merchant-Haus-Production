@@ -291,33 +291,34 @@
     <div class="integration-marquee marquee-wrapper">
       <div class="marquee-track integration-track">
         <?php
-          $integrationShowcase = [
-            [ 'name' => 'Salesforce', 'logo' => 'https://www.salesforce.com/content/dam/sfdc-docs/www/logos/logo-salesforce.svg' ],
-            [ 'name' => 'QuickBooks', 'logo' => 'https://upload.wikimedia.org/wikipedia/commons/7/79/Intuit_QuickBooks_logo.svg' ],
-            [ 'name' => 'HubSpot', 'logo' => 'https://upload.wikimedia.org/wikipedia/commons/3/3f/HubSpot_Logo.svg' ],
-            [ 'name' => 'Vend', 'logo' => 'https://upload.wikimedia.org/wikipedia/commons/thumb/7/79/Vend-logo.svg/512px-Vend-logo.svg.png' ],
-            [ 'name' => 'Squarespace', 'logo' => 'https://upload.wikimedia.org/wikipedia/en/5/53/Squarespace_Logo.svg' ],
-            [ 'name' => 'MemberPress', 'logo' => 'https://memberpress.com/wp-content/uploads/2023/07/memberpress-by-awesome-motive-logo-flame-blue-rgb.svg' ],
-            [ 'name' => 'WooCommerce', 'logo' => 'https://upload.wikimedia.org/wikipedia/commons/thumb/2/2a/WooCommerce_logo.svg/512px-WooCommerce_logo.svg.png' ],
-            [ 'name' => 'Zoho CRM', 'logo' => 'https://upload.wikimedia.org/wikipedia/commons/3/30/ZOHO_logo_2023.svg' ],
-            [ 'name' => 'Lightspeed', 'logo' => 'https://upload.wikimedia.org/wikipedia/commons/3/38/Lightspeed_-_logo.png' ],
-            [ 'name' => 'Wix', 'logo' => 'https://static.wixstatic.com/media/de991a_321c4356214644169542e724ef57529b~mv2.png' ],
-            [ 'name' => 'Keap', 'logo' => 'https://upload.wikimedia.org/wikipedia/commons/e/e0/Logo_of_Keap_Company.svg' ],
-            [ 'name' => 'Clover', 'logo' => 'https://upload.wikimedia.org/wikipedia/commons/thumb/c/cf/Clover_logo.svg/512px-Clover_logo.svg.png' ],
-            [ 'name' => 'FreshBooks', 'logo' => 'https://upload.wikimedia.org/wikipedia/commons/1/17/FreshBooks_logo_%282020%29.svg' ],
-            [ 'name' => 'Magento', 'logo' => 'https://upload.wikimedia.org/wikipedia/commons/thumb/5/55/Magento_Logo.svg/512px-Magento_Logo.svg.png' ],
-            [ 'name' => 'BigCommerce', 'logo' => 'https://upload.wikimedia.org/wikipedia/commons/c/c4/Bc-logo-dark.svg' ],
-            [ 'name' => 'NCR', 'logo' => 'https://upload.wikimedia.org/wikipedia/commons/9/92/NCR_logo_color.svg' ],
-            [ 'name' => 'Visa', 'logo' => 'https://upload.wikimedia.org/wikipedia/commons/4/41/Visa_2021.svg' ],
-            [ 'name' => 'Mastercard', 'logo' => 'https://upload.wikimedia.org/wikipedia/commons/a/a4/Mastercard_2019_logo.svg' ],
+          $logoFiles = [
+            'bigcommerce.webp',
+            'clover-logo.5637c88fda21055b797e300e16140c95.svg',
+            'clover.webp',
+            'freshbooks.webp',
+            'gohighlevel.svg',
+            'hubspot.webp',
+            'keap-infusionsoft.webp',
+            'lightspeed.webp',
+            'magento.webp',
+            'memberpress-logo-color.svg',
+            'memberpress.webp',
+            'ncr.webp',
+            'quickbooks.webp',
+            'salesforce.webp',
+            'shopify.svg',
+            'squarespace.webp',
+            'vend.webp',
+            'wix.webp',
+            'woocommerce.webp',
+            'zoho-crm.webp',
           ];
-          foreach (array_merge($integrationShowcase, $integrationShowcase) as $integration) :
-            $logoSrc = $integration['logo'] ?? null;
-            if (!$logoSrc) { continue; }
-            $name = $integration['name'] ?? 'Integration';
+          foreach (array_merge($logoFiles, $logoFiles) as $logoFile) :
+            $logoSrc = mh_asset('assets/logos/' . $logoFile);
+            $name = pathinfo($logoFile, PATHINFO_FILENAME);
         ?>
           <span class="integration-item">
-            <img src="<?php echo htmlspecialchars($logoSrc); ?>" alt="<?php echo htmlspecialchars($name . ' Logo'); ?>" class="integration-logo integration-logo--marquee h-10 sm:h-12 object-contain">
+            <img src="<?php echo htmlspecialchars($logoSrc); ?>" alt="<?php echo htmlspecialchars(ucwords(str_replace(['-', '_'], ' ', $name)) . ' Logo'); ?>" class="integration-logo integration-logo--marquee h-10 sm:h-12 object-contain">
           </span>
         <?php endforeach; ?>
       </div>
