@@ -182,10 +182,11 @@
     </style>
 
     <!-- Favicons -->
-    <link rel="apple-touch-icon" sizes="180x180" href="<?php echo htmlspecialchars(mh_asset('Shield/apple-touch-icon.png')); ?>">
-    <link rel="icon" type="image/png" sizes="32x32" href="<?php echo htmlspecialchars(mh_asset('Shield/favicon-32x32.png')); ?>">
-    <link rel="icon" type="image/png" sizes="16x16" href="<?php echo htmlspecialchars(mh_asset('Shield/favicon-16x16.png')); ?>">
-    <link rel="manifest" href="<?php echo htmlspecialchars(mh_asset('Shield/site.webmanifest')); ?>">
+    <link rel="apple-touch-icon" sizes="180x180" href="<?php echo htmlspecialchars(mh_asset('favicons/apple-touch-icon.png')); ?>">
+    <link rel="icon" type="image/png" sizes="192x192" href="<?php echo htmlspecialchars(mh_asset('favicons/android-chrome-192x192.png')); ?>">
+    <link rel="icon" type="image/png" sizes="512x512" href="<?php echo htmlspecialchars(mh_asset('favicons/android-chrome-512x512.png')); ?>">
+    <link rel="icon" type="image/x-icon" href="<?php echo htmlspecialchars(mh_asset('favicon.ico')); ?>">
+    <link rel="manifest" href="<?php echo htmlspecialchars(mh_asset('site.webmanifest')); ?>">
 </head>
 <body class="text-slate-100">
 
