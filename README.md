@@ -27,15 +27,25 @@ This runs the static site and the function at `/.netlify/functions/request-demo`
 /
 ├─ netlify.toml
 ├─ package.json
-├─ index.php
+├─ index.html
+├─ apply.html
+├─ compliance.html
+├─ faq.html
+├─ gohighlevel.html
+├─ integrations.html
+├─ shopify.html
+├─ signup.php            # JSON API used by the signup drawer
+├─ support.php           # JSON API used by the support form
+├─ terms.html
 ├─ /assets/
 │  ├─ app.js                 # modal + booking logic (shared)
 │  └─ /logos/                # placeholder SVGs
 │     ├─ shopify.svg
 │     └─ gohighlevel.svg
 ├─ /integrations/
-│  ├─ shopify.php
-│  └─ gohighlevel.php
+│  ├─ index.html
+│  ├─ shopify.html
+│  └─ gohighlevel.html
 └─ /functions/
    └─ request-demo.js        # Netlify Function (CJS) — emails private booking link
 ```
@@ -50,7 +60,7 @@ This runs the static site and the function at `/.netlify/functions/request-demo`
 
 
 ## Merchant Application
-- Page: `/apply.php`
+- Page: `/apply.html`
 - Function: `/functions/submit-application` (uses Resend to email the team + the applicant)
 - Env vars needed: `RESEND_API_KEY`, `FROM_EMAIL`, `TEAM_EMAIL` (required), `BACKOFFICE_WEBHOOK` (optional to post JSON to your custom dashboard)
 

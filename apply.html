@@ -1,0 +1,685 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Apply — MerchantHaus (U.S. Retail ISO) – MerchantHaus</title>
+    <meta name="description" content="Merchant application for U.S. retail merchants.">
+    <meta name="theme-color" content="#E63946">
+    <meta name="theme-color" media="(prefers-color-scheme: light)" content="#E63946">
+    <meta name="theme-color" media="(prefers-color-scheme: dark)" content="linear-gradient(#1B1B1B, #E63946)">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="msapplication-navbutton-color" content="#E63946">
+    <link rel="preload" as="image" href="/public/assets/images/banner1.png">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@700&family=Vollkorn:wght@400&family=Inter:wght@500&display=swap" rel="stylesheet">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Vollkorn', 'serif'],
+                        ubuntu: ['Ubuntu', 'sans-serif'],
+                        inter: ['Inter', 'sans-serif']
+                    },
+                    colors: {
+                        'brand-crimson': '#DC143C',
+                        'brand-teal': '#00CEDB',
+                        'brand-silver': '#A9A9A9',
+                        'brand-dark': '#1A1A1A',
+                        'brand-light': '#F8F9FA',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <!-- Custom Styles -->
+    <style>
+        html {
+            scroll-behavior: smooth;
+        }
+        body {
+            font-family: 'Vollkorn', serif;
+            position: relative;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            background-color: #1c1c1c;
+            color: #f5f5f5;
+        }
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0; left: 0;
+            width: 100vw; height: 100vh;
+            z-index: -1;
+            background: 
+                radial-gradient(circle at 15% 25%, rgba(220, 20, 60, 0.25), transparent 40%),
+                radial-gradient(circle at 85% 75%, rgba(0, 206, 219, 0.2), transparent 40%);
+            animation: bloom 25s linear infinite alternate;
+        }
+        @keyframes bloom {
+            0% { background-position: 0% 0%, 0% 0%; }
+            100% { background-position: 50% -50%, -50% 50%; }
+        }
+        .header-glass {
+            background-color: rgba(28, 28, 28, 0.8);
+            backdrop-filter: blur(10px);
+        }
+        .dark .border-slate-800 { border-color: #2a2a2a !important; }
+
+        /* Headline scroller */
+        .scrolling-words-container {
+            height: 4.5rem; 
+            line-height: 4.5rem;
+            overflow: hidden;
+            position: relative;
+            display: inline-block;
+        }
+        @media (min-width: 768px) {
+            .scrolling-words-container {
+                height: 3.75rem;
+                line-height: 3.75rem;
+            }
+        }
+        .scrolling-words-box {
+            display: inline-block;
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            animation: spin-words 10s ease-in-out infinite;
+        }
+        @keyframes spin-words {
+            0%, 20% { transform: translateY(0); }
+            25%, 45% { transform: translateY(-4.5rem); }
+            50%, 70% { transform: translateY(-9rem); }
+            75%, 95% { transform: translateY(-13.5rem); }
+            100% { transform: translateY(-18rem); }
+        }
+        @media (min-width: 768px) {
+           @keyframes spin-words {
+                0%, 20% { transform: translateY(0); }
+                25%, 45% { transform: translateY(-3.75rem); }
+                50%, 70% { transform: translateY(-7.5rem); }
+                75%, 95% { transform: translateY(-11.25rem); }
+                100% { transform: translateY(-15rem); }
+            }
+        }
+
+        /* Typewriter effect */
+        .typewriter-text {
+            border-right: .15em solid #00CEDB;
+            white-space: pre-wrap;
+            animation: blink-caret .75s step-end infinite;
+        }
+        @keyframes blink-caret {
+            from, to { border-color: transparent }
+            50% { border-color: #00CEDB; }
+        }
+
+        .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0,0,0,0);
+            border: 0;
+        }
+    </style>
+
+    <!-- Favicons -->
+    <link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="/favicons/android-chrome-192x192.png">
+    <link rel="icon" type="image/png" sizes="512x512" href="/favicons/android-chrome-512x512.png">
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <link rel="manifest" href="/site.webmanifest">
+</head>
+<body class="text-slate-100">
+
+    <!-- Header -->
+    <div class="sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-4 pb-6">
+             <header class="header-glass border border-slate-200/70 dark:border-slate-800 rounded-full shadow-lg">
+                 <div class="relative max-w-7xl mx-auto px-6 py-3 flex items-center justify-between">
+                    <a href="/index.html" class="flex items-center gap-3 group">
+                         <div class="w-[190px] md:w-[260px]" data-mh-logo-header></div>
+                         <span class="sr-only">MerchantHaus Homepage</span>
+                     </a>
+                     <div class="flex items-center gap-6">
+                         <div class="hidden md:flex items-center gap-4 text-sm font-sans">
+                             <a href="tel:15056006042" class="hover:text-brand-teal transition-colors">1-505-600-6042</a>
+                             <a href="mailto:support@merchanthaus.io" class="hover:text-brand-teal transition-colors">support@merchanthaus.io</a>
+                         </div>
+                         <button type="button" class="js-signup-cta bg-brand-crimson hover:bg-opacity-90 text-white border border-transparent px-4 py-2 rounded-full text-sm font-semibold font-inter transition-colors duration-300">Get Started</button>
+                         <a href="https://retailmanager.merchant.haus" class="hidden sm:block bg-transparent hover:bg-brand-teal text-brand-teal hover:text-white border border-brand-teal px-4 py-2 rounded-lg text-sm font-semibold font-inter transition-colors duration-300">Login</a>
+                         <button id="mobile-menu-button" class="md:hidden p-2 rounded-lg hover:bg-slate-800">
+                             <i data-lucide="menu" class="h-6 w-6"></i>
+                         </button>
+                     </div>
+                 </div>
+            </header>
+            <div id="mobile-menu" class="absolute right-4 mt-2 w-72 rounded-xl bg-[#1c1c1c] shadow-2xl border border-brand-teal p-4 z-40 hidden">
+                 <nav class="flex flex-col space-y-6 text-base font-medium font-inter">
+                     <div class="space-y-2">
+                         <h4 class="text-sm font-semibold text-brand-teal uppercase tracking-[0.2em]">Product</h4>
+                         <a href="/#payments" class="block w-full px-4 py-2 text-left rounded-full border border-brand-teal bg-[#262626] text-white transition-colors duration-200 hover:bg-brand-teal">Payment Services</a>
+                         <button
+                             type="button"
+                             id="mobile-integrations-toggle"
+                             aria-expanded="false"
+                             aria-controls="mobile-integrations-menu"
+                             class="flex items-center justify-between w-full px-4 py-2 text-left rounded-full border border-brand-teal bg-[#262626] text-white transition-colors duration-200 hover:bg-brand-teal"
+                         >
+                             <span>Integrations</span>
+                             <span class="ml-2 text-brand-teal">
+                                 <svg data-collapsible-icon class="w-4 h-4 transition-transform" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                     <polyline points="6 9 12 15 18 9" />
+                                 </svg>
+                             </span>
+                         </button>
+                        <div id="mobile-integrations-menu" class="mt-2 space-y-2 pl-3 hidden">
+                            <a href="/integrations.html" class="block w-full px-4 py-2 text-left rounded-full border border-brand-teal bg-[#1f1f1f] text-white transition-colors duration-200 hover:bg-brand-teal">Integrations Directory</a>
+                            <a href="/shopify.html" class="block w-full px-4 py-2 text-left rounded-full border border-brand-teal bg-[#1f1f1f] text-white transition-colors duration-200 hover:bg-brand-teal">Shopify Integration</a>
+                            <a href="/gohighlevel.html" class="block w-full px-4 py-2 text-left rounded-full border border-brand-teal bg-[#1f1f1f] text-white transition-colors duration-200 hover:bg-brand-teal">GoHighLevel Integration</a>
+                        </div>
+                         <a href="/#checklist" class="block w-full px-4 py-2 text-left rounded-full border border-brand-teal bg-[#262626] text-white transition-colors duration-200 hover:bg-brand-teal">Setup Checklist</a>
+                     </div>
+                     <div class="space-y-2">
+                         <h4 class="text-sm font-semibold text-brand-teal uppercase tracking-[0.2em]">Support</h4>
+                         <a href="mailto:support@merchanthaus.io" class="block w-full px-4 py-2 text-left rounded-full border border-brand-teal bg-[#262626] text-white transition-colors duration-200 hover:bg-brand-teal">Contact Support</a>
+                         <a href="/faq.html" class="block w-full px-4 py-2 text-left rounded-full border border-brand-teal bg-[#262626] text-white transition-colors duration-200 hover:bg-brand-teal">FAQ</a>
+                     </div>
+                     <div class="space-y-2">
+                         <h4 class="text-sm font-semibold text-brand-teal uppercase tracking-[0.2em]">Legal</h4>
+                         <a href="/privacy.html" class="block w-full px-4 py-2 text-left rounded-full border border-brand-teal bg-[#262626] text-white transition-colors duration-200 hover:bg-brand-teal">Privacy Policy</a>
+                         <a href="/terms.html" class="block w-full px-4 py-2 text-left rounded-full border border-brand-teal bg-[#262626] text-white transition-colors duration-200 hover:bg-brand-teal">Terms &amp; Conditions</a>
+                         <a href="/compliance.html" class="block w-full px-4 py-2 text-left rounded-full border border-brand-teal bg-[#262626] text-white transition-colors duration-200 hover:bg-brand-teal">Compliance</a>
+                     </div>
+                     <a href="https://retailmanager.merchant.haus" class="sm:hidden block w-full px-4 py-2 text-center rounded-full border border-brand-teal bg-[#262626] text-white transition-colors duration-200 hover:bg-brand-teal">Login</a>
+                 </nav>
+            </div>
+        </div>
+    </div>
+
+    <div id="signup-panel-overlay" class="panel-overlay fixed inset-0 bg-black/60 z-50 opacity-0 invisible">
+        <div id="signup-panel" class="panel-container fixed top-0 right-0 h-full w-full max-w-2xl bg-white dark:bg-slate-900 shadow-2xl transform translate-x-full flex flex-col">
+            <div class="p-6 sm:p-8 relative flex-shrink-0">
+                <button id="close-signup-panel-btn" class="absolute top-4 right-4 text-slate-500 hover:text-slate-800 dark:hover:text-slate-200">
+                    <i data-lucide="x" class="h-6 w-6"></i>
+                </button>
+                <div class="mb-6">
+                    <div class="flex justify-between mb-2 text-sm font-semibold text-slate-800 dark:text-slate-200">
+                        <p>Step <span id="current-step-text">1</span> of 3</p>
+                        <p id="step-name">Account Details</p>
+                    </div>
+                    <div class="w-full bg-slate-200 dark:bg-slate-700 rounded-full h-2.5 overflow-hidden">
+                        <div id="progress-bar" class="bg-brand-crimson h-full rounded-full" style="width: 33%"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="px-6 sm:px-8 pb-4 flex-grow overflow-y-auto">
+                <form id="signup-form" novalidate></form>
+                <div id="form-message" class="mt-4 text-center text-sm"></div>
+            </div>
+            <div class="p-6 sm:p-8 mt-auto pt-6 border-t border-slate-200 dark:border-slate-800 flex justify-between items-center flex-shrink-0">
+                <div class="text-sm">
+                    <p class="font-semibold">Need Help?</p>
+                    <a href="tel:15056006042" class="text-slate-500 hover:text-brand-crimson dark:hover:text-brand-teal transition-colors">1-505-600-6042</a>
+                </div>
+                <div class="flex items-center gap-4">
+                    <button type="button" id="prev-btn" class="bg-slate-200 text-slate-800 dark:bg-slate-700 dark:text-slate-200 px-6 py-2.5 rounded-lg font-semibold hover:bg-slate-300 dark:hover:bg-slate-600 transition-all invisible">Previous</button>
+                    <button type="button" id="next-btn" class="bg-brand-crimson text-white px-6 py-2.5 rounded-lg font-semibold hover:bg-brand-crimson transition-all shadow-sm hover:shadow-md">Next</button>
+                    <button type="submit" id="submit-btn" form="signup-form" class="bg-brand-crimson text-white px-6 py-2.5 rounded-lg font-bold hover:bg-brand-crimson transition-all shadow-sm hover:shadow-md hidden">Create Account</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+<main class="max-w-5xl mx-auto px-4 py-10">
+    <h1 class="text-3xl md:text-4xl font-extrabold">Merchant Application</h1>
+    <p class="mt-2 text-slate-600 dark:text-slate-300">U.S. retail only. Provide the details below — we’ll review and issue your Merchant ID (MID) &amp; access credentials during onboarding.</p>
+
+    <form class="mt-8 grid gap-6" id="apply-form">
+        <!-- Merchant Information -->
+        <section class="p-6 rounded-2xl border border-slate-200 dark:border-slate-800">
+            <h2 class="text-xl font-bold">Merchant Information</h2>
+            <div class="mt-4 grid md:grid-cols-2 gap-4">
+                <label class="text-sm">Company Name*<input class="field mt-1 w-full rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-900 px-3 py-2" name="companyName" required /></label>
+                <label class="text-sm">External Identifier<input class="field mt-1 w-full rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-900 px-3 py-2" name="externalId" /></label>
+                <label class="text-sm">Country*<select class="field mt-1 w-full rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-900 px-3 py-2" name="country" required><option>United States</option></select></label>
+                <label class="text-sm">Timezone*<select class="field mt-1 w-full rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-900 px-3 py-2" name="timezone" required>
+                    <option>(GMT-08:00) Pacific Time (US &amp; Canada)</option>
+                    <option>(GMT-07:00) Mountain Time (US &amp; Canada)</option>
+                    <option>(GMT-06:00) Central Time (US &amp; Canada)</option>
+                    <option>(GMT-05:00) Eastern Time (US &amp; Canada)</option>
+                </select></label>
+                <label class="text-sm md:col-span-2">Address*<input class="field mt-1 w-full rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-900 px-3 py-2" name="address1" required /></label>
+                <label class="text-sm">Address 2<input class="field mt-1 w-full rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-900 px-3 py-2" name="address2" /></label>
+                <label class="text-sm">City*<input class="field mt-1 w-full rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-900 px-3 py-2" name="city" required /></label>
+                <label class="text-sm">State*<select class="field mt-1 w-full rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-900 px-3 py-2" name="state" required></select></label>
+                <label class="text-sm">Zip/Postal Code*<input class="field mt-1 w-full rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-900 px-3 py-2" name="postalCode" required /></label>
+                <label class="text-sm md:col-span-2">Website<input class="field mt-1 w-full rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-900 px-3 py-2" name="website" placeholder="https://example.com" type="url" /></label>
+                <label class="text-sm">Language<select class="field mt-1 w-full rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-900 px-3 py-2" name="language"><option>English</option></select></label>
+            </div>
+        </section>
+
+        <!-- Company Contact -->
+        <section class="p-6 rounded-2xl border border-slate-200 dark:border-slate-800">
+            <h2 class="text-xl font-bold">Company Contact (Primary User)</h2>
+            <p class="text-xs text-slate-500 mt-1">This person receives the welcome email and appears on receipts if enabled.</p>
+            <div class="mt-4 grid md:grid-cols-2 gap-4">
+                <label class="text-sm">First Name*<input class="field mt-1 w-full rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-900 px-3 py-2" name="firstName" required /></label>
+                <label class="text-sm">Last Name*<input class="field mt-1 w-full rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-900 px-3 py-2" name="lastName" required /></label>
+                <label class="text-sm">Email Address*<input class="field mt-1 w-full rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-900 px-3 py-2" name="email" required type="email" /></label>
+                <label class="text-sm">Phone Number*<input class="field mt-1 w-full rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-900 px-3 py-2" name="phone" required /></label>
+                <label class="text-sm">Fax Number<input class="field mt-1 w-full rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-900 px-3 py-2" name="fax" /></label>
+            </div>
+        </section>
+
+        <!-- Account Setup & Services -->
+        <section class="p-6 rounded-2xl border border-slate-200 dark:border-slate-800">
+            <h2 class="text-xl font-bold">Account Setup</h2>
+            <div class="mt-4 grid md:grid-cols-2 gap-4">
+                <label class="text-sm md:col-span-2">Primary Username*<input class="field mt-1 w-full rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-900 px-3 py-2" maxlength="32" minlength="4" name="username" pattern="[A-Za-z0-9]+" placeholder="letters and numbers only" required /></label>
+            </div>
+            <h3 class="mt-4 font-semibold">Processing Services</h3>
+            <div class="mt-2 grid md:grid-cols-3 gap-3 text-sm">
+                <label class="inline-flex items-center gap-2"><input checked class="accent-red-600" name="svcCredit" type="checkbox" />Credit Card</label>
+                <label class="inline-flex items-center gap-2"><input class="accent-red-600" name="svcAch" type="checkbox" />ACH / eCheck</label>
+                <label class="inline-flex items-center gap-2"><input class="accent-red-600" name="svcCash" type="checkbox" />Cash</label>
+            </div>
+            <h3 class="mt-4 font-semibold">Value‑added Services</h3>
+            <div class="mt-2 grid md:grid-cols-3 gap-3 text-sm">
+                <label class="inline-flex items-center gap-2"><input class="accent-red-600" name="valEncryption" type="checkbox" />Encryption (Encrypted Devices)</label>
+                <label class="inline-flex items-center gap-2"><input checked class="accent-red-600" name="valInvoice" type="checkbox" />Invoice</label>
+                <label class="inline-flex items-center gap-2"><input class="accent-red-600" name="valLevel3" type="checkbox" />Level III Advantage</label>
+            </div>
+            <div class="mt-2 grid md:grid-cols-3 gap-3 text-sm">
+                <label class="inline-flex items-center gap-2"><input class="accent-red-600" name="valMobile" type="checkbox" />Mobile Reader</label>
+                <label class="inline-flex items-center gap-2"><input class="accent-red-600" name="valVault" type="checkbox" />Vault Storage</label>
+            </div>
+        </section>
+
+        <button class="mt-6 bg-brand-crimson text-white px-4 py-2 rounded-lg" type="submit">Submit Application</button>
+        <p id="apply-out" class="mt-2 text-sm"></p>
+    </form>
+</main>
+
+<script>
+  const form = document.getElementById('apply-form');
+  const out = document.getElementById('apply-out');
+
+  const LS_KEY = 'mh_apply_draft';
+  function saveDraft(){ const data = Object.fromEntries(new FormData(form).entries()); localStorage.setItem(LS_KEY, JSON.stringify(data)); }
+  function loadDraft(){ try { const d = JSON.parse(localStorage.getItem(LS_KEY)||'{}'); for (const k in d){ const el = form.elements[k]; if (!el) continue; if (el.type==='checkbox'){ el.checked = !!d[k]; } else { el.value = d[k]; } } } catch(e){} }
+  form.addEventListener('input', saveDraft);
+  loadDraft();
+
+  function getUTM(){
+    const p = new URLSearchParams(location.search);
+    return {source:p.get('utm_source')||'',medium:p.get('utm_medium')||'',campaign:p.get('utm_campaign')||'',term:p.get('utm_term')||'',content:p.get('utm_content')||'',ref:document.referrer||''};
+  }
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    out.textContent = 'Submitting…';
+    try {
+      const data = Object.fromEntries(new FormData(form).entries());
+      ['svcCredit','svcAch','svcCash','valEncryption','valInvoice','valLevel3','valMobile','valVault'].forEach(k => { data[k] = !!form.elements[k].checked; });
+      data.utm = getUTM();
+
+      const res = await fetch('/.netlify/functions/submit-application', {
+        method: 'POST',
+        headers: {'Content-Type':'application/json'},
+        body: JSON.stringify(data)
+      });
+      if (!res.ok) throw new Error('Request failed');
+      out.textContent = 'Thanks — we emailed you next steps and sent your application to our team.';
+      localStorage.removeItem(LS_KEY);
+      form.reset();
+    } catch (err) {
+      console.error(err);
+      out.textContent = 'Something went wrong. Please try again or email hello@merchant.haus.';
+    }
+  });
+</script>
+
+    <!-- Footer -->
+    <footer class="border-t border-slate-800 py-10 mt-16">
+        <div class="max-w-7xl mx-auto px-4 grid sm:grid-cols-2 lg:grid-cols-4 gap-8 text-sm" >
+            <div class="space-y-4">
+                <a href="/index.html" class="flex items-center gap-3">
+                    <div class="w-[220px]" data-mh-logo-footer></div>
+                     <span class="sr-only">MerchantHaus Homepage</span>
+                </a>
+                <div class="text-sm">
+                    <a href="tel:15056006042" class="block text-slate-300 hover:text-brand-teal">1-505-600-6042</a>
+                    <a href="mailto:support@merchanthaus.io" class="block text-slate-300 hover:text-brand-teal">support@merchanthaus.io</a>
+                </div>
+            </div>
+            <nav class="space-y-2">
+                <h3 class="font-semibold font-ubuntu text-white">Product</h3>
+                <a href="/#payments" class="block text-slate-300 hover:text-brand-teal">Payment Services</a>
+                <button
+                    type="button"
+                    id="footer-integrations-toggle"
+                    aria-expanded="false"
+                    aria-controls="footer-integrations-menu"
+                    class="flex items-center justify-between w-full text-left text-slate-300 hover:text-brand-teal transition-colors"
+                >
+                    <span>Integrations</span>
+                    <span class="ml-2 text-slate-400">
+                        <svg data-collapsible-icon class="w-4 h-4 transition-transform" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <polyline points="6 9 12 15 18 9" />
+                        </svg>
+                    </span>
+                </button>
+                <div id="footer-integrations-menu" class="mt-2 space-y-2 pl-4 hidden">
+                    <a href="/integrations.html" class="block text-slate-400 hover:text-brand-teal">Integrations Directory</a>
+                    <a href="/shopify.html" class="block text-slate-400 hover:text-brand-teal">Shopify Integration</a>
+                    <a href="/gohighlevel.html" class="block text-slate-400 hover:text-brand-teal">GoHighLevel Integration</a>
+                </div>
+                <a href="/#checklist" class="block text-slate-300 hover:text-brand-teal">Setup Checklist</a>
+            </nav>
+            <nav class="space-y-2">
+                <h3 class="font-semibold font-ubuntu text-white">Support</h3>
+                <a href="mailto:support@merchanthaus.io" class="block text-slate-300 hover:text-brand-teal">Contact Support</a>
+                <a href="/faq.html" class="block text-slate-300 hover:text-brand-teal">FAQ</a>
+            </nav>
+            <nav class="space-y-2">
+                <h3 class="font-semibold font-ubuntu text-white">Legal</h3>
+                <a href="/privacy.html" class="block text-slate-300 hover:text-brand-teal">Privacy Policy</a>
+                <a href="/terms.html" class="block text-slate-300 hover:text-brand-teal">Terms & Conditions</a>
+            </nav>
+        </div>
+        <div class="text-center text-xs pt-8 mt-8 border-t border-slate-800 text-slate-500 font-inter">
+            © <span id="year"></span> Merchant Haus. All rights reserved.
+        </div>
+    </footer>
+    
+    <!-- Back to Top Button -->
+    <button id="back-to-top" class="fixed bottom-6 right-6 bg-brand-crimson text-white p-3 rounded-full shadow-lg opacity-0 invisible transition-all duration-300 z-50 hover:bg-opacity-90">
+        <i data-lucide="arrow-up" class="h-6 w-6"></i>
+        <span class="sr-only">Back to top</span>
+    </button>
+
+
+    <script src="/assets/signup-panel.js" defer></script>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            if (window.lucide) lucide.createIcons();
+            document.getElementById('year').textContent = new Date().getFullYear();
+
+            const logoImagePath = "\/public\/assets\/images\/Shield.png";
+            // --- Animated Logo Injection ---
+            const logoSVG = (id, tagline = true, shimmer = true) => {
+                const letters = ['M','e','r','c','h','a','n','t','H','a','u','s'];
+                let letterTags = '';
+                letters.forEach((letter, index) => {
+                    const delay = index * 0.1;
+                    letterTags += `<tspan opacity="0" dy="-20">${letter}<animate attributeName="opacity" from="0" to="1" dur="0.2s" begin="${delay}s" fill="freeze"/><animate attributeName="dy" from="-20" to="0" dur="0.2s" begin="${delay}s" fill="freeze" calcMode="discrete"/></tspan>`;
+                });
+
+                return `
+                <svg viewBox="0 0 450 100" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%">
+                    <defs>
+                        <linearGradient id="shimmer-${id}" gradientUnits="userSpaceOnUse" x1="120" y1="0" x2="420" y2="0">
+                            <stop offset="0%" stop-color="#DC143C" />
+                            <stop offset="45%" stop-color="#DC143C">
+                                ${shimmer ? `<animate attributeName="stop-color" values="#DC143C; #FFC0CB; #DC143C" keyTimes="0; 0.5; 1" dur="2s" begin="1.5s" fill="freeze" repeatCount="1"/>` : ''}
+                            </stop>
+                            <stop offset="50%" stop-color="#DC143C">
+                                ${shimmer ? `<animate attributeName="stop-color" values="#DC143C; #FFFFFF; #DC143C" keyTimes="0; 0.5; 1" dur="2s" begin="1.5s" fill="freeze" repeatCount="1"/>` : ''}
+                            </stop>
+                            <stop offset="55%" stop-color="#DC143C">
+                                ${shimmer ? `<animate attributeName="stop-color" values="#DC143C; #FFC0CB; #DC143C" keyTimes="0; 0.5; 1" dur="2s" begin="1.5s" fill="freeze" repeatCount="1"/>` : ''}
+                            </stop>
+                            <stop offset="100%" stop-color="#DC143C" />
+                            ${shimmer ? `<animateTransform attributeName="transform" type="translate" from="-450 0" to="450 0" dur="2s" begin="1.5s" fill="freeze" repeatCount="1"/>` : ''}
+                        </linearGradient>
+                        <style>
+                            .mh-text-${id} { font-family: 'Ubuntu', sans-serif; font-size: 50px; font-weight: 700; fill: url(#shimmer-${id}); }
+                            .mh-tagline-${id} { font-family: 'Inter', sans-serif; font-size: 18px; font-weight: 500; fill: #A9A9A9; text-anchor: middle; letter-spacing: 4px; }
+                        </style>
+                    </defs>
+                    <image href="${logoImagePath}" x="10" y="10" height="80" width="80" />
+                    <text class="mh-text-${id}" y="60" x="110">${letterTags}</text>
+                    ${tagline ? `
+                        <line x1="160" x2="400" y1="72" y2="72" stroke="#00CEDB" stroke-width="2" opacity="0">
+                            <animate attributeName="opacity" from="0" to="1" dur="1s" begin="1.5s" fill="freeze" />
+                        </line>
+                        <text x="280" y="92" class="mh-tagline-${id}" opacity="0">
+                            <animate attributeName="opacity" from="0" to="1" dur="1s" begin="2s" fill="freeze" />plug. play. grow.
+                        </text>
+                    ` : ''}
+                </svg>`;
+            };
+            
+            // Only select and inject logos if the placeholder exists on the current page
+            if (document.querySelector('[data-mh-logo-header]')) {
+                document.querySelector('[data-mh-logo-header]').innerHTML = logoSVG('header', false, false);
+            }
+            if (document.querySelector('[data-mh-logo-hero]')) {
+                document.querySelector('[data-mh-logo-hero]').innerHTML = logoSVG('hero', true, true);
+            }
+            if (document.querySelector('[data-mh-logo-footer]')) {
+                 document.querySelector('[data-mh-logo-footer]').innerHTML = logoSVG('footer', true, false);
+            }
+
+
+            const setupCollapsibleMenu = (toggleId, menuId) => {
+                const toggle = document.getElementById(toggleId);
+                const menu = document.getElementById(menuId);
+                if (!toggle || !menu) return;
+
+                const icon = toggle.querySelector('[data-collapsible-icon]');
+
+                const openMenu = () => {
+                    menu.classList.remove('hidden');
+                    toggle.setAttribute('aria-expanded', 'true');
+                    if (icon) icon.classList.add('rotate-180');
+                };
+
+                const closeMenu = () => {
+                    menu.classList.add('hidden');
+                    toggle.setAttribute('aria-expanded', 'false');
+                    if (icon) icon.classList.remove('rotate-180');
+                };
+
+                toggle.addEventListener('click', (event) => {
+                    event.preventDefault();
+                    if (menu.classList.contains('hidden')) {
+                        openMenu();
+                    } else {
+                        closeMenu();
+                    }
+                });
+
+                document.addEventListener('click', (event) => {
+                    if (!menu.classList.contains('hidden') && !menu.contains(event.target) && !toggle.contains(event.target)) {
+                        closeMenu();
+                    }
+                });
+
+                menu.querySelectorAll('a').forEach(link => {
+                    link.addEventListener('click', closeMenu);
+                });
+            };
+
+            setupCollapsibleMenu('footer-integrations-toggle', 'footer-integrations-menu');
+            setupCollapsibleMenu('mobile-integrations-toggle', 'mobile-integrations-menu');
+
+
+            // --- Mobile Menu ---
+            const mobileMenuButton = document.getElementById('mobile-menu-button');
+            const mobileMenu = document.getElementById('mobile-menu');
+            if(mobileMenuButton && mobileMenu) {
+                mobileMenuButton.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    mobileMenu.classList.toggle('hidden');
+                });
+                document.addEventListener('click', (e) => {
+                    if (!mobileMenu.classList.contains('hidden') && !mobileMenu.contains(e.target) && !mobileMenuButton.contains(e.target)) {
+                        mobileMenu.classList.add('hidden');
+                    }
+                });
+                mobileMenu.querySelectorAll('a').forEach(link => {
+                    link.addEventListener('click', () => mobileMenu.classList.add('hidden'));
+                });
+            }
+
+            // --- Stars Canvas Logic (if canvas exists) ---
+            const canvas = document.getElementById('mh-stars');
+            if (canvas) {
+                const ctx = canvas.getContext('2d');
+                let stars;
+                let animationFrameId;
+                const starColors = [
+                    'rgba(255, 255, 255,', 'rgba(230, 230, 250,',
+                    'rgba(255, 250, 205,', 'rgba(240, 255, 255,'
+                ];
+
+                const setupStars = () => {
+                    const parent = canvas.parentElement;
+                    canvas.width = parent.offsetWidth;
+                    canvas.height = parent.offsetHeight;
+                    stars = [];
+                    const numStars = Math.floor((canvas.width * canvas.height) / 8000);
+                    for (let i = 0; i < numStars; i++) {
+                        stars.push({
+                            x: Math.random() * canvas.width,
+                            y: Math.random() * canvas.height,
+                            radius: Math.random() * 1.2 + 0.3,
+                            alpha: Math.random(),
+                            dAlpha: Math.random() * 0.02 - 0.01,
+                            color: starColors[Math.floor(Math.random() * starColors.length)],
+                            vx: (Math.random() - 0.5) * 0.1,
+                            vy: (Math.random() - 0.5) * 0.1
+                        });
+                    }
+                };
+
+                const drawStars = () => {
+                    if(!ctx) return;
+                    ctx.clearRect(0, 0, canvas.width, canvas.height);
+                    stars.forEach(star => {
+                        star.x += star.vx;
+                        star.y += star.vy;
+                        if (star.x < 0) star.x = canvas.width;
+                        if (star.x > canvas.width) star.x = 0;
+                        if (star.y < 0) star.y = canvas.height;
+                        if (star.y > canvas.height) star.y = 0;
+
+                        star.alpha += star.dAlpha;
+                        if (star.alpha <= 0.1 || star.alpha >= 1) { star.dAlpha *= -1; }
+                        
+                        ctx.beginPath();
+                        ctx.arc(star.x, star.y, star.radius, 0, Math.PI * 2);
+                        ctx.fillStyle = star.color + star.alpha + ')';
+                        ctx.fill();
+                    });
+                    animationFrameId = requestAnimationFrame(drawStars);
+                };
+                
+                let resizeTimeout;
+                const initCanvas = () => {
+                    cancelAnimationFrame(animationFrameId);
+                    clearTimeout(resizeTimeout);
+                    resizeTimeout = setTimeout(() => {
+                        setupStars();
+                        drawStars();
+                    }, 100);
+                };
+
+                initCanvas();
+                window.addEventListener('resize', initCanvas);
+            }
+
+            // --- Sequential Typewriter Animation on Scroll (if steps exist) ---
+            const steps = [
+                { id: 'step-1', text: "Fill out our simple application form. Our team will review your details and get you approved quickly." },
+                { id: 'step-2', text: "Once approved, we'll provide you with API keys to easily connect MerchantHaus as your payment provider in your Shopify admin." },
+                { id: 'step-3', text: "That's it! You're ready to accept payments securely and affordably, with all your transaction data synced to your MerchantHaus dashboard." }
+            ];
+            
+            const stepElements = document.querySelectorAll('.step-card');
+
+            if(stepElements.length > 0) {
+                let animationQueue = Promise.resolve();
+                let animatedSteps = new Set();
+
+                const typewriter = (element, text, duration) => {
+                    return new Promise(resolve => {
+                        let i = 0;
+                        element.innerHTML = '<span class="typewriter-text"></span>';
+                        const span = element.querySelector('.typewriter-text');
+                        
+                        function type() {
+                            if (i < text.length) {
+                                span.textContent += text.charAt(i);
+                                i++;
+                                setTimeout(type, duration / text.length);
+                            } else {
+                            if (span) span.style.borderRight = 'none';
+                            resolve();
+                            }
+                        }
+                        type();
+                    });
+                };
+
+                const animateStep = (entry) => {
+                    if (entry.isIntersecting && !animatedSteps.has(entry.target.id)) {
+                        const stepConf = steps.find(s => s.id === entry.target.id);
+                        if (stepConf) {
+                            animatedSteps.add(stepConf.id);
+                            const pElement = entry.target.querySelector('p');
+                            entry.target.style.opacity = '1';
+                            entry.target.style.transform = 'translateY(0)';
+                            animationQueue = animationQueue.then(() => typewriter(pElement, stepConf.text, 2000));
+                        }
+                    }
+                };
+                
+                const observer = new IntersectionObserver((entries) => {
+                    entries.forEach(animateStep);
+                }, { threshold: 0.8 });
+
+                steps.forEach(step => {
+                    const el = document.getElementById(step.id);
+                    if (el) observer.observe(el);
+                });
+            }
+
+            // --- Back to Top Button ---
+            const backToTopButton = document.getElementById('back-to-top');
+            if(backToTopButton) {
+                window.addEventListener('scroll', () => {
+                    if (window.scrollY > 300) {
+                        backToTopButton.classList.remove('invisible', 'opacity-0');
+                    } else {
+                        backToTopButton.classList.add('invisible', 'opacity-0');
+                    }
+                });
+                backToTopButton.addEventListener('click', () => {
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                });
+            }
+        });
+    </script>
+</body>
+</html>
+

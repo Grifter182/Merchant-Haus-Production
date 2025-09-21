@@ -10,7 +10,7 @@
     "format": "prettier --write .",
     "typecheck": "tsc --noEmit",
     "test": "jest --passWithNoTests",
-    "build": "rm -rf dist && mkdir -p dist && for f in *.php integrations/*.php; do case \"$(basename \"$f\")\" in Header.php|Footer.php) continue;; esac; out=\"dist/${f%.php}.html\"; mkdir -p \"$(dirname \"$out\")\"; php \"$f\" > \"$out\"; done && cp -a public dist/"
+    "build": "rm -rf dist && mkdir -p dist/integrations && cp -a *.html dist/ && cp -a integrations/*.html dist/integrations/ && cp -a assets dist/ && cp -a public dist/ && cp -a favicons dist/ && cp favicon.ico robots.txt sitemap.xml site.webmanifest dist/"
   },
   "engines": {
     "node": ">=18"
