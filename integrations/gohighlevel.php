@@ -1,21 +1,15 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="utf-8"/><meta content="width=device-width,initial-scale=1" name="viewport"/>
-<title>MerchantHaus × GoHighLevel — Retail Payments</title>
-<link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800&amp;display=swap" rel="stylesheet"/>
-<script src="https://cdn.tailwindcss.com"></script><script src="https://unpkg.com/lucide@latest"></script>
-<style>body{font-family:Montserrat,system-ui,sans-serif}</style>
-<link href="/shield.ico" rel="icon" type="image/x-icon"/>
-<link href="/shield.ico" rel="shortcut icon" type="image/x-icon"/><link href="/shield.png" rel="apple-touch-icon"/></head>
-<body class="bg-white text-slate-900 dark:bg-slate-950 dark:text-slate-100">
+<?php
+    $pageTitle = 'MerchantHaus × GoHighLevel — Retail Payments';
+    $pageDescription = 'Accept payments in GoHighLevel with MerchantHaus.';
+    include __DIR__ . '/../Header.php';
+?>
+
 <main class="max-w-5xl mx-auto px-4 py-12">
 <a class="text-sm text-brand-600" href="/">← Back to MerchantHaus</a>
 <header class="mt-4 flex items-center gap-4">
-<img alt="GoHighLevel" class="h-10 w-auto" src="/shield.png"/>
+<img alt="GoHighLevel" class="h-10 w-auto" src="<?php echo htmlspecialchars(mh_asset('public/assets/images/gohighleveldark.png')); ?>"/>
 <h1 class="text-3xl font-extrabold">MerchantHaus for GoHighLevel</h1>
-<nav><a href="/services">Payment Services</a><a href="/pricing">Plans &amp; Pricing</a><a href="/contact">Contact Us</a><a href="/setup-checklist">Setup Checklist</a><a href="/privacy">Privacy Policy</a><a href="/terms">Terms &amp; Conditions</a></nav></header>
+<nav><a href="mailto:support@merchanthaus.io">Contact Us</a><a href="/privacy">Privacy Policy</a><a href="/terms">Terms &amp; Conditions</a></nav></header>
 <p class="mt-3 text-slate-600 dark:text-slate-300">Accept payments in GHL funnels &amp; snapshots, with routing freedom and merchant‑friendly controls.</p>
 <section class="mt-8 grid md:grid-cols-2 gap-6">
 <div class="p-6 rounded-2xl border border-slate-200 dark:border-slate-800">
@@ -66,6 +60,6 @@
 </form>
 </div>
 </div>
-<script src="/assets/app.js"></script>
-<footer><div><ul><li><a href="/services">Payment Services</a></li><li><a href="/pricing">Plans &amp; Pricing</a></li><li><a href="/setup-checklist">Setup Checklist</a></li><li><a href="/contact">Contact Support</a></li><li><a href="/faqs">FAQs</a></li><li><a href="/privacy">Privacy Policy</a></li><li><a href="/terms">Terms &amp; Conditions</a></li></ul></div><p>Merchant Haus – Payments made simple.</p></footer></body>
-</html>
+<script src="<?php echo htmlspecialchars(mh_asset('assets/app.js')); ?>"></script>
+
+<?php include __DIR__ . '/../Footer.php'; ?>

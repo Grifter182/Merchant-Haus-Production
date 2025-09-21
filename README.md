@@ -1,4 +1,4 @@
-# MerchantHaus — simple.smart.secure
+# MerchantHaus — Plug.Play.Grow
 
 Static site + Netlify Function that emails a **private** booking link (Google Calendar) to prospects — the calendar URL is never exposed in the frontend.
 
@@ -9,8 +9,10 @@ Static site + Netlify Function that emails a **private** booking link (Google Ca
 ```
 BOOKING_URL   = https://calendly.com/merchanthaus
 RESEND_API_KEY= re_bGbMpcNW_93iTgbDbhTwDAuXVQiQzUqyz
-FROM_EMAIL    = no-reply@merchant.haus
-TEAM_EMAIL    = sales@merchant.haus (optional)
+FROM_EMAIL    = admin@merchant.haus
+TEAM_EMAIL    = admin@merchant.haus (optional)
+GEMINI_API_KEY= <your-google-generative-ai-key>
+GEMINI_MODEL  = gemini-1.5-flash (optional override)
 ```
 3) Deploy
 
@@ -25,15 +27,15 @@ This runs the static site and the function at `/.netlify/functions/request-demo`
 /
 ├─ netlify.toml
 ├─ package.json
-├─ index.html
+├─ index.php
 ├─ /assets/
 │  ├─ app.js                 # modal + booking logic (shared)
 │  └─ /logos/                # placeholder SVGs
 │     ├─ shopify.svg
 │     └─ gohighlevel.svg
 ├─ /integrations/
-│  ├─ shopify.html
-│  └─ gohighlevel.html
+│  ├─ shopify.php
+│  └─ gohighlevel.php
 └─ /functions/
    └─ request-demo.js        # Netlify Function (CJS) — emails private booking link
 ```
@@ -48,7 +50,7 @@ This runs the static site and the function at `/.netlify/functions/request-demo`
 
 
 ## Merchant Application
-- Page: `/apply.html`
-- Function: `/.netlify/functions/submit-application` (uses Resend to email the team + the applicant)
+- Page: `/apply.php`
+- Function: `/functions/submit-application` (uses Resend to email the team + the applicant)
 - Env vars needed: `RESEND_API_KEY`, `FROM_EMAIL`, `TEAM_EMAIL` (required), `BACKOFFICE_WEBHOOK` (optional to post JSON to your custom dashboard)
 

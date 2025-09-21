@@ -24,11 +24,38 @@ exports.handler = async (event) => {
   try {
     const body = JSON.parse(event.body || '{}');
 
+    // Trim all string inputs
+    Object.keys(body).forEach(k => {
+      if (typeof body[k] === 'string') {
+        body[k] = body[k].trim();
+      }
+    });
+
+    // Normalize case
+    if (body.email) body.email = body.email.toLowerCase();
+    if (body.username) body.username = body.username.toLowerCase();
+    if (body.phone) body.phone = body.phone.replace(/\s+/g, '');
+
     // Basic required validations
     const required = ['companyName','country','address1','city','state','postalCode','timezone','firstName','lastName','email','phone','username'];
-    const missing = required.filter(k => !body[k] || String(body[k]).trim() === '');
+    const missing = required.filter(k => !body[k]);
     if (missing.length) {
       return { statusCode: 400, body: JSON.stringify({ error: 'Missing required fields', missing }) };
+    }
+
+    // Format validations
+    const emailRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+    const phoneRegex = /^\+?[1-9]\d{9,14}$/; // E.164
+    const usernameRegex = /^[a-zA-Z0-9]+$/;
+
+    if (!emailRegex.test(body.email)) {
+      return { statusCode: 400, body: JSON.stringify({ error: 'Invalid email format' }) };
+    }
+    if (!phoneRegex.test(body.phone)) {
+      return { statusCode: 400, body: JSON.stringify({ error: 'Invalid phone format' }) };
+    }
+    if (!usernameRegex.test(body.username)) {
+      return { statusCode: 400, body: JSON.stringify({ error: 'Invalid username format' }) };
     }
 
     // Construct normalized payload mapped to gateway-style fields

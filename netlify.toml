@@ -1,6 +1,13 @@
 [build]
-  publish = "."
-  functions = "functions"
+  command = "npm run lint && npm test && npm run build"
+  publish = "dist"
+  functions = "functions"   # points to the root-level functions folder
+
+[build.environment]
+  NODE_VERSION = "18"
+
+[functions]
+  node_bundler = "esbuild"
 
 [[headers]]
   for = "/*"
@@ -12,5 +19,65 @@
 
 [[redirects]]
   from = "/integrations"
-  to = "/#platforms"
+  to = "/#integrations"
+  status = 301
+
+[[redirects]]
+  from = "/index.php"
+  to = "/index.html"
+  status = 301
+
+[[redirects]]
+  from = "/shopify.php"
+  to = "/Shopify.html"
+  status = 301
+
+[[redirects]]
+  from = "/gohighlevel.html"
+  to = "/gohighlevel.php"
+  status = 301
+
+[[redirects]]
+  from = "/faq.php"
+  to = "/faq.html"
+  status = 301
+
+[[redirects]]
+  from = "/apply.php"
+  to = "/apply.html"
+  status = 301
+
+[[redirects]]
+  from = "/compliance.php"
+  to = "/compliance.html"
+  status = 301
+
+[[redirects]]
+  from = "/privacy.php"
+  to = "/privacy.html"
+  status = 301
+
+[[redirects]]
+  from = "/terms.php"
+  to = "/terms.html"
+  status = 301
+
+[[redirects]]
+  from = "/support.php"
+  to = "/support.html"
+  status = 301
+
+[[redirects]]
+  from = "/signup.php"
+  to = "/signup.html"
+  status = 301
+
+[[redirects]]
+  from = "/integrations/shopify.html"
+  to = "/integrations/shopify.php"
+  status = 301
+
+[[redirects]]
+  from = "/integrations/gohighlevel.html"
+  to = "/integrations/gohighlevel.php"
   status = 301
