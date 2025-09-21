@@ -324,12 +324,6 @@
     </div>
     <div class="space-y-6">
       <div class="integration-highlight">
-        <a href="<?php echo htmlspecialchars($shopifyIntegration['href']); ?>" class="integration-item">
-          <img src="<?php echo htmlspecialchars($shopifyIntegration['logos']['light']); ?>" alt="<?php echo htmlspecialchars($shopifyIntegration['name'] . ' Logo'); ?>" class="integration-logo h-14 sm:h-16 object-contain<?php echo $hasShopifyDarkLogo ? ' block dark:hidden' : ' block'; ?>">
-          <?php if ($hasShopifyDarkLogo) : ?>
-            <img src="<?php echo htmlspecialchars($shopifyIntegration['logos']['dark']); ?>" alt="<?php echo htmlspecialchars($shopifyIntegration['name'] . ' Logo'); ?>" class="integration-logo h-14 sm:h-16 object-contain hidden dark:block">
-          <?php endif; ?>
-        </a>
         <div class="integration-heading">
           <span class="integration-eyebrow font-semibold">Integrate with</span>
           <h2 class="integration-title font-ubuntu font-bold animate-on-scroll">Your Favorite Tools</h2>
