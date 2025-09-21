@@ -47,6 +47,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?php echo htmlspecialchars($pageTitle); ?> – MerchantHaus</title>
     <meta name="description" content="<?php echo htmlspecialchars($pageDescription); ?>">
+    <meta name="theme-color" content="#E63946">
+    <meta name="theme-color" media="(prefers-color-scheme: light)" content="#E63946">
+    <meta name="theme-color" media="(prefers-color-scheme: dark)" content="linear-gradient(#1B1B1B, #E63946)">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="msapplication-navbutton-color" content="#E63946">
     <link rel="preload" as="image" href="<?php echo htmlspecialchars(mh_asset('public/assets/images/banner1.png')); ?>">
 
     <!-- Google Fonts -->
