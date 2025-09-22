@@ -1,4 +1,16 @@
 exports.handler = async (event) => {
+  // Verification token value
+  const VERIFICATION_TOKEN = '0YA5757hbasBozeVX2';
+
+  // Check for token in header
+  const token = event.headers['x-verification-token'];
+  if (token !== VERIFICATION_TOKEN) {
+    return {
+      statusCode: 403,
+      body: JSON.stringify({ error: 'Forbidden: Invalid verification token' })
+    };
+  }
+
   // Parse incoming data
   let data;
   try {
