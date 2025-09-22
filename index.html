@@ -1252,6 +1252,85 @@ document.addEventListener('DOMContentLoaded', () => {
 </script>
 <noscript>You need to <a href="https://www.chatbot.com/help/chat-widget/enable-javascript-in-your-browser/" rel="noopener nofollow">enable JavaScript</a> in order to use the AI chatbot tool powered by <a href="https://www.chatbot.com/" rel="noopener nofollow" target="_blank">ChatBot</a></noscript>
 <!-- End of ChatBot code -->
+<style>
+  #faq-answer {
+    max-height: 320px;
+    overflow-y: auto;
+    padding: 1rem;
+    background: #f8fafc;
+    border-radius: 0.5rem;
+    margin-bottom: 1rem;
+  }
+  .chat-user {
+    background: #dc143c;
+    color: #fff;
+    padding: 0.5rem 1rem;
+    border-radius: 1rem 1rem 0 1rem;
+    margin: 0.5rem 0 0.5rem auto;
+    max-width: 70%;
+    text-align: right;
+    float: right;
+    clear: both;
+    box-shadow: 0 2px 8px rgba(220,20,60,0.08);
+  }
+  .chat-bot {
+    background: #475569;
+    color: #f1f5f9;
+    padding: 0.5rem 1rem;
+    border-radius: 1rem 1rem 1rem 0;
+    margin: 0.5rem auto 0.5rem 0;
+    max-width: 70%;
+    text-align: left;
+    float: left;
+    clear: both;
+    box-shadow: 0 2px 8px rgba(71,85,105,0.08);
+  }
+</style>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  const input = document.getElementById('faq-question');
+  const sendBtn = document.getElementById('ask-faq');
+  const answerBox = document.getElementById('faq-answer');
+
+  function appendMessage(text, sender) {
+    const div = document.createElement('div');
+    div.className = sender === 'user' ? 'chat-user' : 'chat-bot';
+    div.textContent = text;
+    answerBox.appendChild(div);
+    answerBox.scrollTop = answerBox.scrollHeight;
+  }
+
+  function sendMessage() {
+    const text = input.value.trim();
+    if (!text) return;
+    appendMessage(text, 'user');
+    input.value = '';
+    if (!window.ChatBot || typeof window.ChatBot.call !== 'function') {
+      console.warn('ChatBot.com integration not found.');
+      appendMessage('ChatBot integration not available.', 'bot');
+      return;
+    }
+    window.ChatBot.call('send', { message: text });
+  }
+
+  input.addEventListener('keydown', function(e) {
+    if (e.key === 'Enter') {
+      sendMessage();
+    }
+  });
+  sendBtn.addEventListener('click', sendMessage);
+
+  if (window.ChatBot && typeof window.ChatBot.on === 'function') {
+    window.ChatBot.on('message', function(data) {
+      if (data && data.message) {
+        appendMessage(data.message, 'bot');
+      }
+    });
+  } else {
+    console.warn('ChatBot.com integration not found.');
+  }
+});
+</script>
 </body>
 </html>
 
