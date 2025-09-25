@@ -148,51 +148,9 @@
 </head>
 <body class="text-slate-100">
 
-    <!-- Mobile Menu Button - Pinned -->
-    <button id="mobile-menu-button" class="md:hidden p-3 rounded-full bg-slate-900/50 backdrop-blur-sm text-white fixed top-24 left-6 z-[60] hover:bg-slate-800/70 transition-colors">
-        <i data-lucide="menu" class="h-6 w-6"></i>
-        <span class="sr-only">Open menu</span>
-    </button>
-    
-    <!-- Mobile Menu Panel -->
-    <div id="mobile-menu" class="fixed top-24 left-6 mt-14 w-72 rounded-xl bg-[#1c1c1c] shadow-2xl border border-brand-teal p-4 z-[59] hidden">
-        <nav class="flex flex-col space-y-6 text-base font-medium font-inter">
-             <div class="space-y-2">
-                 <h4 class="text-sm font-semibold text-brand-teal uppercase tracking-[0.2em]">Product</h4>
-                 <a href="/#payments" class="block w-full px-4 py-2 text-left rounded-full border border-brand-teal bg-[#262626] text-white transition-colors duration-200 hover:bg-brand-teal">Payment Services</a>
-                 <button type="button" id="mobile-integrations-toggle" aria-expanded="false" aria-controls="mobile-integrations-menu" class="flex items-center justify-between w-full px-4 py-2 text-left rounded-full border border-brand-teal bg-[#262626] text-white transition-colors duration-200 hover:bg-brand-teal">
-                     <span>Integrations</span>
-                     <span class="ml-2 text-brand-teal">
-                         <svg data-collapsible-icon class="w-4 h-4 transition-transform" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                             <polyline points="6 9 12 15 18 9"></polyline>
-                         </svg>
-                     </span>
-                 </button>
-                <div id="mobile-integrations-menu" class="mt-2 space-y-2 pl-3 hidden">
-                    <a href="/integrations.html" class="block w-full px-4 py-2 text-left rounded-full border border-brand-teal bg-[#1f1f1f] text-white transition-colors duration-200 hover:bg-brand-teal">Integrations Directory</a>
-                    <a href="/.html" class="block w-full px-4 py-2 text-left rounded-full border border-brand-teal bg-[#1f1f1f] text-white transition-colors duration-200 hover:bg-brand-teal">Shopify Integration</a>
-                    <a href="/gohighlevel.html" class="block w-full px-4 py-2 text-left rounded-full border border-brand-teal bg-[#1f1f1f] text-white transition-colors duration-200 hover:bg-brand-teal">GoHighLevel Integration</a>
-                </div>
-                 <a href="/#checklist" class="block w-full px-4 py-2 text-left rounded-full border border-brand-teal bg-[#262626] text-white transition-colors duration-200 hover:bg-brand-teal">Setup Checklist</a>
-             </div>
-             <div class="space-y-2">
-                 <h4 class="text-sm font-semibold text-brand-teal uppercase tracking-[0.2em]">Support</h4>
-                 <a href="mailto:support@merchanthaus.io" class="block w-full px-4 py-2 text-left rounded-full border border-brand-teal bg-[#262626] text-white transition-colors duration-200 hover:bg-brand-teal">Contact Support</a>
-                 <a href="/faq.html" class="block w-full px-4 py-2 text-left rounded-full border border-brand-teal bg-[#262626] text-white transition-colors duration-200 hover:bg-brand-teal">FAQ</a>
-             </div>
-             <div class="space-y-2">
-                 <h4 class="text-sm font-semibold text-brand-teal uppercase tracking-[0.2em]">Legal</h4>
-                 <a href="/privacy.html" class="block w-full px-4 py-2 text-left rounded-full border border-brand-teal bg-[#262626] text-white transition-colors duration-200 hover:bg-brand-teal">Privacy Policy</a>
-                 <a href="/terms.html" class="block w-full px-4 py-2 text-left rounded-full border border-brand-teal bg-[#262626] text-white transition-colors duration-200 hover:bg-brand-teal">Terms &amp; Conditions</a>
-                 <a href="/compliance.html" class="block w-full px-4 py-2 text-left rounded-full border border-brand-teal bg-[#262626] text-white transition-colors duration-200 hover:bg-brand-teal">Compliance</a>
-             </div>
-             <a href="https://retailmanager.merchant.haus" class="sm:hidden block w-full px-4 py-2 text-center rounded-full border border-brand-teal bg-[#262626] text-white transition-colors duration-200 hover:bg-brand-teal">Login</a>
-         </nav>
-    </div>
-
     <!-- Header -->
     <div class="sticky top-0 z-50">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-4 pb-6">
+        <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-4 pb-6">
              <header class="header-glass border border-slate-200/70 dark:border-slate-800 rounded-full shadow-lg">
                  <div class="relative max-w-7xl mx-auto px-6 py-3 flex items-center justify-between">
                     <a href="/index.html" class="flex items-center gap-3 group">
@@ -209,6 +167,44 @@
                      </div>
                  </div>
             </header>
+            <button id="mobile-menu-button" class="md:hidden p-3 rounded-full bg-slate-900/50 backdrop-blur-sm text-white absolute left-6 top-full translate-y-3 z-[60] hover:bg-slate-800/70 transition-colors shadow-lg">
+                <i data-lucide="menu" class="h-6 w-6"></i>
+                <span class="sr-only">Open menu</span>
+            </button>
+            <div id="mobile-menu" class="absolute left-6 top-full mt-16 w-72 rounded-xl bg-[#1c1c1c] shadow-2xl border border-brand-teal p-4 z-[59] hidden">
+                <nav class="flex flex-col space-y-6 text-base font-medium font-inter">
+                    <div class="space-y-2">
+                        <h4 class="text-sm font-semibold text-brand-teal uppercase tracking-[0.2em]">Product</h4>
+                        <a href="/#payments" class="block w-full px-4 py-2 text-left rounded-full border border-brand-teal bg-[#262626] text-white transition-colors duration-200 hover:bg-brand-teal">Payment Services</a>
+                        <button type="button" id="mobile-integrations-toggle" aria-expanded="false" aria-controls="mobile-integrations-menu" class="flex items-center justify-between w-full px-4 py-2 text-left rounded-full border border-brand-teal bg-[#262626] text-white transition-colors duration-200 hover:bg-brand-teal">
+                            <span>Integrations</span>
+                            <span class="ml-2 text-brand-teal">
+                                <svg data-collapsible-icon class="w-4 h-4 transition-transform" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <polyline points="6 9 12 15 18 9"></polyline>
+                                </svg>
+                            </span>
+                        </button>
+                        <div id="mobile-integrations-menu" class="mt-2 space-y-2 pl-3 hidden">
+                            <a href="/integrations.html" class="block w-full px-4 py-2 text-left rounded-full border border-brand-teal bg-[#1f1f1f] text-white transition-colors duration-200 hover:bg-brand-teal">Integrations Directory</a>
+                            <a href="/.html" class="block w-full px-4 py-2 text-left rounded-full border border-brand-teal bg-[#1f1f1f] text-white transition-colors duration-200 hover:bg-brand-teal">Shopify Integration</a>
+                            <a href="/gohighlevel.html" class="block w-full px-4 py-2 text-left rounded-full border border-brand-teal bg-[#1f1f1f] text-white transition-colors duration-200 hover:bg-brand-teal">GoHighLevel Integration</a>
+                        </div>
+                        <a href="/#checklist" class="block w-full px-4 py-2 text-left rounded-full border border-brand-teal bg-[#262626] text-white transition-colors duration-200 hover:bg-brand-teal">Setup Checklist</a>
+                    </div>
+                    <div class="space-y-2">
+                        <h4 class="text-sm font-semibold text-brand-teal uppercase tracking-[0.2em]">Support</h4>
+                        <a href="mailto:support@merchanthaus.io" class="block w-full px-4 py-2 text-left rounded-full border border-brand-teal bg-[#262626] text-white transition-colors duration-200 hover:bg-brand-teal">Contact Support</a>
+                        <a href="/faq.html" class="block w-full px-4 py-2 text-left rounded-full border border-brand-teal bg-[#262626] text-white transition-colors duration-200 hover:bg-brand-teal">FAQ</a>
+                    </div>
+                    <div class="space-y-2">
+                        <h4 class="text-sm font-semibold text-brand-teal uppercase tracking-[0.2em]">Legal</h4>
+                        <a href="/privacy.html" class="block w-full px-4 py-2 text-left rounded-full border border-brand-teal bg-[#262626] text-white transition-colors duration-200 hover:bg-brand-teal">Privacy Policy</a>
+                        <a href="/terms.html" class="block w-full px-4 py-2 text-left rounded-full border border-brand-teal bg-[#262626] text-white transition-colors duration-200 hover:bg-brand-teal">Terms &amp; Conditions</a>
+                        <a href="/compliance.html" class="block w-full px-4 py-2 text-left rounded-full border border-brand-teal bg-[#262626] text-white transition-colors duration-200 hover:bg-brand-teal">Compliance</a>
+                    </div>
+                    <a href="https://retailmanager.merchant.haus" class="sm:hidden block w-full px-4 py-2 text-center rounded-full border border-brand-teal bg-[#262626] text-white transition-colors duration-200 hover:bg-brand-teal">Login</a>
+                </nav>
+            </div>
         </div>
     </div>
 
