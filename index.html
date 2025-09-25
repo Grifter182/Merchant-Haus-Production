@@ -300,6 +300,13 @@
   opacity: 0.95;
   transition: transform 0.3s ease, filter 0.3s ease, opacity 0.3s ease;
 }
+#integrations .integration-hero-logo {
+  width: clamp(14rem, 32vw, 22rem);
+  max-height: clamp(7rem, 20vw, 14rem);
+  min-height: clamp(3.75rem, 8vw, 6.5rem);
+  height: auto;
+  filter: drop-shadow(0 10px 25px rgba(16, 24, 40, 0.3));
+}
 #integrations .integration-item:hover .integration-logo {
   transform: scale(1.1);
   opacity: 1;
@@ -406,9 +413,9 @@
 <section id="integrations" class="py-16 md:py-24">
     <div class="max-w-7xl mx-auto px-4 text-center space-y-12">
         <div class="grid grid-cols-[1fr,auto,1fr] items-center gap-4 md:gap-8 max-w-4xl mx-auto">
-            <img src="public/assets/images/shopifydark.png" alt="Shopify Logo" class="integration-logo h-12 sm:h-16 object-contain justify-self-end">
+            <img src="public/assets/images/shopifydark.png" alt="Shopify Logo" class="integration-logo integration-hero-logo object-contain justify-self-end">
             <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold font-ubuntu uppercase tracking-wide">Integrate With Your Favorite Tools</h2>
-            <img src="public/assets/images/gohighleveldark.png" alt="GoHighLevel Logo" class="integration-logo h-12 sm:h-16 object-contain justify-self-start">
+            <img src="public/assets/images/gohighleveldark.png" alt="GoHighLevel Logo" class="integration-logo integration-hero-logo object-contain justify-self-start">
         </div>
 
         <p class="text-lg text-slate-300 max-w-2xl mx-auto">Connect with your favorite tools and services</p>
