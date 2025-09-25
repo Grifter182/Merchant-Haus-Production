@@ -148,6 +148,48 @@
 </head>
 <body class="text-slate-100">
 
+    <!-- Mobile Menu Button - Pinned -->
+    <button id="mobile-menu-button" class="md:hidden p-3 rounded-full bg-slate-900/50 backdrop-blur-sm text-white fixed top-24 left-6 z-[60] hover:bg-slate-800/70 transition-colors">
+        <i data-lucide="menu" class="h-6 w-6"></i>
+        <span class="sr-only">Open menu</span>
+    </button>
+    
+    <!-- Mobile Menu Panel -->
+    <div id="mobile-menu" class="fixed top-24 left-6 mt-14 w-72 rounded-xl bg-[#1c1c1c] shadow-2xl border border-brand-teal p-4 z-[59] hidden">
+        <nav class="flex flex-col space-y-6 text-base font-medium font-inter">
+             <div class="space-y-2">
+                 <h4 class="text-sm font-semibold text-brand-teal uppercase tracking-[0.2em]">Product</h4>
+                 <a href="/#payments" class="block w-full px-4 py-2 text-left rounded-full border border-brand-teal bg-[#262626] text-white transition-colors duration-200 hover:bg-brand-teal">Payment Services</a>
+                 <button type="button" id="mobile-integrations-toggle" aria-expanded="false" aria-controls="mobile-integrations-menu" class="flex items-center justify-between w-full px-4 py-2 text-left rounded-full border border-brand-teal bg-[#262626] text-white transition-colors duration-200 hover:bg-brand-teal">
+                     <span>Integrations</span>
+                     <span class="ml-2 text-brand-teal">
+                         <svg data-collapsible-icon class="w-4 h-4 transition-transform" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                             <polyline points="6 9 12 15 18 9"></polyline>
+                         </svg>
+                     </span>
+                 </button>
+                <div id="mobile-integrations-menu" class="mt-2 space-y-2 pl-3 hidden">
+                    <a href="/integrations.html" class="block w-full px-4 py-2 text-left rounded-full border border-brand-teal bg-[#1f1f1f] text-white transition-colors duration-200 hover:bg-brand-teal">Integrations Directory</a>
+                    <a href="/shopify.html" class="block w-full px-4 py-2 text-left rounded-full border border-brand-teal bg-[#1f1f1f] text-white transition-colors duration-200 hover:bg-brand-teal">Shopify Integration</a>
+                    <a href="/gohighlevel.html" class="block w-full px-4 py-2 text-left rounded-full border border-brand-teal bg-[#1f1f1f] text-white transition-colors duration-200 hover:bg-brand-teal">GoHighLevel Integration</a>
+                </div>
+                 <a href="/#checklist" class="block w-full px-4 py-2 text-left rounded-full border border-brand-teal bg-[#262626] text-white transition-colors duration-200 hover:bg-brand-teal">Setup Checklist</a>
+             </div>
+             <div class="space-y-2">
+                 <h4 class="text-sm font-semibold text-brand-teal uppercase tracking-[0.2em]">Support</h4>
+                 <a href="mailto:support@merchanthaus.io" class="block w-full px-4 py-2 text-left rounded-full border border-brand-teal bg-[#262626] text-white transition-colors duration-200 hover:bg-brand-teal">Contact Support</a>
+                 <a href="/faq.html" class="block w-full px-4 py-2 text-left rounded-full border border-brand-teal bg-[#262626] text-white transition-colors duration-200 hover:bg-brand-teal">FAQ</a>
+             </div>
+             <div class="space-y-2">
+                 <h4 class="text-sm font-semibold text-brand-teal uppercase tracking-[0.2em]">Legal</h4>
+                 <a href="/privacy.html" class="block w-full px-4 py-2 text-left rounded-full border border-brand-teal bg-[#262626] text-white transition-colors duration-200 hover:bg-brand-teal">Privacy Policy</a>
+                 <a href="/terms.html" class="block w-full px-4 py-2 text-left rounded-full border border-brand-teal bg-[#262626] text-white transition-colors duration-200 hover:bg-brand-teal">Terms &amp; Conditions</a>
+                 <a href="/compliance.html" class="block w-full px-4 py-2 text-left rounded-full border border-brand-teal bg-[#262626] text-white transition-colors duration-200 hover:bg-brand-teal">Compliance</a>
+             </div>
+             <a href="https://retailmanager.merchant.haus" class="sm:hidden block w-full px-4 py-2 text-center rounded-full border border-brand-teal bg-[#262626] text-white transition-colors duration-200 hover:bg-brand-teal">Login</a>
+         </nav>
+    </div>
+
     <!-- Header -->
     <div class="sticky top-0 z-50">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-4 pb-6">
@@ -164,52 +206,9 @@
                          </div>
                          <button type="button" class="js-signup-cta bg-brand-crimson hover:bg-opacity-90 text-white border border-transparent px-4 py-2 rounded-full text-sm font-semibold font-inter transition-colors duration-300">Get Started</button>
                          <a href="https://retailmanager.merchant.haus" class="hidden sm:block bg-transparent hover:bg-brand-teal text-brand-teal hover:text-white border border-brand-teal px-4 py-2 rounded-lg text-sm font-semibold font-inter transition-colors duration-300">Login</a>
-                         <button id="mobile-menu-button" class="md:hidden p-2 rounded-lg hover:bg-slate-800">
-                             <i data-lucide="menu" class="h-6 w-6"></i>
-                         </button>
                      </div>
                  </div>
             </header>
-            <div id="mobile-menu" class="absolute right-4 mt-2 w-72 rounded-xl bg-[#1c1c1c] shadow-2xl border border-brand-teal p-4 z-40 hidden">
-                 <nav class="flex flex-col space-y-6 text-base font-medium font-inter">
-                     <div class="space-y-2">
-                         <h4 class="text-sm font-semibold text-brand-teal uppercase tracking-[0.2em]">Product</h4>
-                         <a href="/#payments" class="block w-full px-4 py-2 text-left rounded-full border border-brand-teal bg-[#262626] text-white transition-colors duration-200 hover:bg-brand-teal">Payment Services</a>
-                         <button
-                             type="button"
-                             id="mobile-integrations-toggle"
-                             aria-expanded="false"
-                             aria-controls="mobile-integrations-menu"
-                             class="flex items-center justify-between w-full px-4 py-2 text-left rounded-full border border-brand-teal bg-[#262626] text-white transition-colors duration-200 hover:bg-brand-teal"
-                         >
-                             <span>Integrations</span>
-                             <span class="ml-2 text-brand-teal">
-                                 <svg data-collapsible-icon class="w-4 h-4 transition-transform" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                     <polyline points="6 9 12 15 18 9" />
-                                 </svg>
-                             </span>
-                         </button>
-                        <div id="mobile-integrations-menu" class="mt-2 space-y-2 pl-3 hidden">
-                            <a href="/integrations.html" class="block w-full px-4 py-2 text-left rounded-full border border-brand-teal bg-[#1f1f1f] text-white transition-colors duration-200 hover:bg-brand-teal">Integrations Directory</a>
-                            <a href="/shopify.html" class="block w-full px-4 py-2 text-left rounded-full border border-brand-teal bg-[#1f1f1f] text-white transition-colors duration-200 hover:bg-brand-teal">Shopify Integration</a>
-                            <a href="/gohighlevel.html" class="block w-full px-4 py-2 text-left rounded-full border border-brand-teal bg-[#1f1f1f] text-white transition-colors duration-200 hover:bg-brand-teal">GoHighLevel Integration</a>
-                        </div>
-                         <a href="/#checklist" class="block w-full px-4 py-2 text-left rounded-full border border-brand-teal bg-[#262626] text-white transition-colors duration-200 hover:bg-brand-teal">Setup Checklist</a>
-                     </div>
-                     <div class="space-y-2">
-                         <h4 class="text-sm font-semibold text-brand-teal uppercase tracking-[0.2em]">Support</h4>
-                         <a href="mailto:support@merchanthaus.io" class="block w-full px-4 py-2 text-left rounded-full border border-brand-teal bg-[#262626] text-white transition-colors duration-200 hover:bg-brand-teal">Contact Support</a>
-                         <a href="/faq.html" class="block w-full px-4 py-2 text-left rounded-full border border-brand-teal bg-[#262626] text-white transition-colors duration-200 hover:bg-brand-teal">FAQ</a>
-                     </div>
-                     <div class="space-y-2">
-                         <h4 class="text-sm font-semibold text-brand-teal uppercase tracking-[0.2em]">Legal</h4>
-                         <a href="/privacy.html" class="block w-full px-4 py-2 text-left rounded-full border border-brand-teal bg-[#262626] text-white transition-colors duration-200 hover:bg-brand-teal">Privacy Policy</a>
-                         <a href="/terms.html" class="block w-full px-4 py-2 text-left rounded-full border border-brand-teal bg-[#262626] text-white transition-colors duration-200 hover:bg-brand-teal">Terms &amp; Conditions</a>
-                         <a href="/compliance.html" class="block w-full px-4 py-2 text-left rounded-full border border-brand-teal bg-[#262626] text-white transition-colors duration-200 hover:bg-brand-teal">Compliance</a>
-                     </div>
-                     <a href="https://retailmanager.merchant.haus" class="sm:hidden block w-full px-4 py-2 text-center rounded-full border border-brand-teal bg-[#262626] text-white transition-colors duration-200 hover:bg-brand-teal">Login</a>
-                 </nav>
-            </div>
         </div>
     </div>
 
@@ -282,10 +281,8 @@
 @keyframes marquee-slide-right { 0% { transform: translateX(-50%); } 100% { transform: translateX(0); } }
 @media (prefers-reduced-motion: reduce) { .marquee-track { animation: none !important; } }
 .panel-overlay, .panel-container { transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
-#integrations .integration-marquee {
-  margin-left: auto;
-  margin-right: auto;
-}
+
+/* Integration Section Styles */
 #integrations .integration-track {
   display: flex;
   align-items: center;
@@ -298,55 +295,52 @@
   justify-content: center;
   padding: 0.5rem 0.75rem;
 }
-#integrations .integration-highlight {
-  display: grid;
-  gap: clamp(1.5rem, 4vw, 3rem);
-  align-items: center;
-  justify-items: center;
-}
-@media (min-width: 768px) {
-  #integrations .integration-highlight {
-    grid-template-columns: auto 1fr auto;
-  }
-}
-#integrations .integration-highlight .integration-item {
-  padding: 0.75rem 1.5rem;
-}
-#integrations .integration-heading {
-  display: grid;
-  gap: 0.25rem;
-  text-align: center;
-}
-#integrations .integration-heading .integration-eyebrow {
-  font-size: 0.875rem;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  color: #4b5563;
-}
-.dark #integrations .integration-heading .integration-eyebrow {
-  color: #94a3b8;
-}
-#integrations .integration-heading .integration-title {
-  font-size: clamp(1.75rem, 4vw, 2.5rem);
-  font-weight: 700;
-  color: #111827;
-}
-.dark #integrations .integration-heading .integration-title {
-  color: #f8fafc;
-}
 #integrations .integration-logo {
   display: block;
   opacity: 0.95;
   transition: transform 0.3s ease, filter 0.3s ease, opacity 0.3s ease;
 }
-#integrations a:hover .integration-logo,
-#integrations a:focus-visible .integration-logo {
+#integrations .integration-item:hover .integration-logo {
   transform: scale(1.1);
   opacity: 1;
 }
-.dark #integrations .integration-logo--marquee {
+.dark #integrations .integration-logo {
   filter: brightness(1.15) contrast(1.05);
 }
+
+
+/* === ADDED STYLES FOR PAYMENTS SECTION === */
+#payments {
+  position: relative;
+  overflow: hidden;
+  background-color: #6dffca;
+}
+#payments::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background-image:
+    repeating-linear-gradient(45deg, transparent, transparent 35px, rgba(255,255,255,0.1) 35px, rgba(255,255,255,0.1) 70px),
+    repeating-linear-gradient(-45deg, transparent, transparent 35px, rgba(0,0,0,0.05) 35px, rgba(0,0,0,0.05) 70px);
+  z-index: 0;
+  animation: fadeInAnimation 4s ease-out forwards, panBackgroundAnimation 80s linear infinite;
+}
+#payments > * {
+  position: relative;
+  z-index: 1;
+}
+@keyframes fadeInAnimation {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+@keyframes panBackgroundAnimation {
+  0% { transform: translate(0, 0); }
+  100% { transform: translate(140px, 140px); }
+}
+/* === END OF ADDED STYLES === */
 </style>
 
 <div class="relative">
@@ -383,14 +377,14 @@
 
   <div class="absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-1/2 z-10 w-full max-w-5xl px-4">
     <div class="bg-white dark:bg-[#1c1c1c] text-slate-800 dark:text-slate-200 px-8 py-4 rounded-xl border-2 border-brand-crimson shadow-lg text-center">
-      <h2 class="text-3xl font-ubuntu font-bold">Payment Services Built for You</h2>
+      <h2 class="text-3xl font-ubuntu font-bold">Payment Services Tailored for You</h2>
     </div>
   </div>
 </div>
 
-<section id="payments" class="pt-28 pb-12" style="background-color: #6dffca;">
-  <div class="max-w-5xl mx-auto px-4 text-right">
-    <p class="text-2xl sm:text-3xl font-ubuntu mb-12" style="color: #524848;">Your complete toolkit for accepting payments and managing your business.</p>
+<section id="payments" class="pt-28 pb-12">
+  <div class="max-w-5xl mx-auto px-4 text-center">
+    <p class="text-2xl sm:text-3xl font-ubuntu mb-12" style="color: #524848;">Your complete business toolkit for accepting and managing payments.</p>
   </div>
   <div class="marquee-wrapper relative w-full overflow-hidden">
     <div class="marquee-track flex">
@@ -409,209 +403,22 @@
   </div>
 </section>
 
-<section id="integrations" class="py-8 md:py-12">
-    <div class="max-w-5xl mx-auto px-4 text-center space-y-10">
-    <div class="integration-marquee marquee-wrapper">
-      <div class="marquee-track integration-track">
-                  <span class="integration-item">
-            <img src="/assets/logos/bigcommerce.webp" alt="Bigcommerce Logo" class="integration-logo integration-logo--marquee h-10 sm:h-12 object-contain">
-          </span>
-                  <span class="integration-item">
-            <img src="/assets/logos/clover-logo.5637c88fda21055b797e300e16140c95.svg" alt="Clover Logo.5637c88fda21055b797e300e16140c95 Logo" class="integration-logo integration-logo--marquee h-10 sm:h-12 object-contain">
-          </span>
-                  <span class="integration-item">
-            <img src="/assets/logos/clover.webp" alt="Clover Logo" class="integration-logo integration-logo--marquee h-10 sm:h-12 object-contain">
-          </span>
-                  <span class="integration-item">
-            <img src="/assets/logos/freshbooks.webp" alt="Freshbooks Logo" class="integration-logo integration-logo--marquee h-10 sm:h-12 object-contain">
-          </span>
-                  <span class="integration-item">
-            <img src="/assets/logos/gohighlevel.svg" alt="Gohighlevel Logo" class="integration-logo integration-logo--marquee h-10 sm:h-12 object-contain">
-          </span>
-                  <span class="integration-item">
-            <img src="/assets/logos/hubspot.webp" alt="Hubspot Logo" class="integration-logo integration-logo--marquee h-10 sm:h-12 object-contain">
-          </span>
-                  <span class="integration-item">
-            <img src="/assets/logos/keap-infusionsoft.webp" alt="Keap Infusionsoft Logo" class="integration-logo integration-logo--marquee h-10 sm:h-12 object-contain">
-          </span>
-                  <span class="integration-item">
-            <img src="/assets/logos/lightspeed.webp" alt="Lightspeed Logo" class="integration-logo integration-logo--marquee h-10 sm:h-12 object-contain">
-          </span>
-                  <span class="integration-item">
-            <img src="/assets/logos/magento.webp" alt="Magento Logo" class="integration-logo integration-logo--marquee h-10 sm:h-12 object-contain">
-          </span>
-                  <span class="integration-item">
-            <img src="/assets/logos/memberpress-logo-color.svg" alt="Memberpress Logo Color Logo" class="integration-logo integration-logo--marquee h-10 sm:h-12 object-contain">
-          </span>
-                  <span class="integration-item">
-            <img src="/assets/logos/memberpress.webp" alt="Memberpress Logo" class="integration-logo integration-logo--marquee h-10 sm:h-12 object-contain">
-          </span>
-                  <span class="integration-item">
-            <img src="/assets/logos/ncr.webp" alt="Ncr Logo" class="integration-logo integration-logo--marquee h-10 sm:h-12 object-contain">
-          </span>
-                  <span class="integration-item">
-            <img src="/assets/logos/quickbooks.webp" alt="Quickbooks Logo" class="integration-logo integration-logo--marquee h-10 sm:h-12 object-contain">
-          </span>
-                  <span class="integration-item">
-            <img src="/assets/logos/salesforce.webp" alt="Salesforce Logo" class="integration-logo integration-logo--marquee h-10 sm:h-12 object-contain">
-          </span>
-                  <span class="integration-item">
-            <img src="/assets/logos/shopify.svg" alt="Shopify Logo" class="integration-logo integration-logo--marquee h-10 sm:h-12 object-contain">
-          </span>
-                  <span class="integration-item">
-            <img src="/assets/logos/squarespace.webp" alt="Squarespace Logo" class="integration-logo integration-logo--marquee h-10 sm:h-12 object-contain">
-          </span>
-                  <span class="integration-item">
-            <img src="/assets/logos/vend.webp" alt="Vend Logo" class="integration-logo integration-logo--marquee h-10 sm:h-12 object-contain">
-          </span>
-                  <span class="integration-item">
-            <img src="/assets/logos/wix.webp" alt="Wix Logo" class="integration-logo integration-logo--marquee h-10 sm:h-12 object-contain">
-          </span>
-                  <span class="integration-item">
-            <img src="/assets/logos/woocommerce.webp" alt="Woocommerce Logo" class="integration-logo integration-logo--marquee h-10 sm:h-12 object-contain">
-          </span>
-                  <span class="integration-item">
-            <img src="/assets/logos/zoho-crm.webp" alt="Zoho Crm Logo" class="integration-logo integration-logo--marquee h-10 sm:h-12 object-contain">
-          </span>
-                  <span class="integration-item">
-            <img src="/assets/logos/bigcommerce.webp" alt="Bigcommerce Logo" class="integration-logo integration-logo--marquee h-10 sm:h-12 object-contain">
-          </span>
-                  <span class="integration-item">
-            <img src="/assets/logos/clover-logo.5637c88fda21055b797e300e16140c95.svg" alt="Clover Logo.5637c88fda21055b797e300e16140c95 Logo" class="integration-logo integration-logo--marquee h-10 sm:h-12 object-contain">
-          </span>
-                  <span class="integration-item">
-            <img src="/assets/logos/clover.webp" alt="Clover Logo" class="integration-logo integration-logo--marquee h-10 sm:h-12 object-contain">
-          </span>
-                  <span class="integration-item">
-            <img src="/assets/logos/freshbooks.webp" alt="Freshbooks Logo" class="integration-logo integration-logo--marquee h-10 sm:h-12 object-contain">
-          </span>
-                  <span class="integration-item">
-            <img src="/assets/logos/gohighlevel.svg" alt="Gohighlevel Logo" class="integration-logo integration-logo--marquee h-10 sm:h-12 object-contain">
-          </span>
-                  <span class="integration-item">
-            <img src="/assets/logos/hubspot.webp" alt="Hubspot Logo" class="integration-logo integration-logo--marquee h-10 sm:h-12 object-contain">
-          </span>
-                  <span class="integration-item">
-            <img src="/assets/logos/keap-infusionsoft.webp" alt="Keap Infusionsoft Logo" class="integration-logo integration-logo--marquee h-10 sm:h-12 object-contain">
-          </span>
-                  <span class="integration-item">
-            <img src="/assets/logos/lightspeed.webp" alt="Lightspeed Logo" class="integration-logo integration-logo--marquee h-10 sm:h-12 object-contain">
-          </span>
-                  <span class="integration-item">
-            <img src="/assets/logos/magento.webp" alt="Magento Logo" class="integration-logo integration-logo--marquee h-10 sm:h-12 object-contain">
-          </span>
-                  <span class="integration-item">
-            <img src="/assets/logos/memberpress-logo-color.svg" alt="Memberpress Logo Color Logo" class="integration-logo integration-logo--marquee h-10 sm:h-12 object-contain">
-          </span>
-                  <span class="integration-item">
-            <img src="/assets/logos/memberpress.webp" alt="Memberpress Logo" class="integration-logo integration-logo--marquee h-10 sm:h-12 object-contain">
-          </span>
-                  <span class="integration-item">
-            <img src="/assets/logos/ncr.webp" alt="Ncr Logo" class="integration-logo integration-logo--marquee h-10 sm:h-12 object-contain">
-          </span>
-                  <span class="integration-item">
-            <img src="/assets/logos/quickbooks.webp" alt="Quickbooks Logo" class="integration-logo integration-logo--marquee h-10 sm:h-12 object-contain">
-          </span>
-                  <span class="integration-item">
-            <img src="/assets/logos/salesforce.webp" alt="Salesforce Logo" class="integration-logo integration-logo--marquee h-10 sm:h-12 object-contain">
-          </span>
-                  <span class="integration-item">
-            <img src="/assets/logos/shopify.svg" alt="Shopify Logo" class="integration-logo integration-logo--marquee h-10 sm:h-12 object-contain">
-          </span>
-                  <span class="integration-item">
-            <img src="/assets/logos/squarespace.webp" alt="Squarespace Logo" class="integration-logo integration-logo--marquee h-10 sm:h-12 object-contain">
-          </span>
-                  <span class="integration-item">
-            <img src="/assets/logos/vend.webp" alt="Vend Logo" class="integration-logo integration-logo--marquee h-10 sm:h-12 object-contain">
-          </span>
-                  <span class="integration-item">
-            <img src="/assets/logos/wix.webp" alt="Wix Logo" class="integration-logo integration-logo--marquee h-10 sm:h-12 object-contain">
-          </span>
-                  <span class="integration-item">
-            <img src="/assets/logos/woocommerce.webp" alt="Woocommerce Logo" class="integration-logo integration-logo--marquee h-10 sm:h-12 object-contain">
-          </span>
-                  <span class="integration-item">
-            <img src="/assets/logos/zoho-crm.webp" alt="Zoho Crm Logo" class="integration-logo integration-logo--marquee h-10 sm:h-12 object-contain">
-          </span>
-              </div>
-    </div>
-    <div class="space-y-6">
-      <div class="integration-highlight">
-        <div class="integration-heading">
-          <span class="integration-eyebrow font-semibold">Integrate with</span>
-          <h2 class="integration-title font-ubuntu font-bold animate-on-scroll">Your Favorite Tools</h2>
+<section id="integrations" class="py-16 md:py-24">
+    <div class="max-w-7xl mx-auto px-4 text-center space-y-12">
+        <div class="grid grid-cols-[1fr,auto,1fr] items-center gap-4 md:gap-8 max-w-4xl mx-auto">
+            <img src="assets/integrations/shopify.svg" alt="Shopify Logo" class="integration-logo h-12 sm:h-16 object-contain justify-self-end">
+            <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold font-ubuntu uppercase tracking-wide">Integrate With Your Favorite Tools</h2>
+            <img src="assets/integrations/gohighlevel.svg" alt="GoHighLevel Logo" class="integration-logo h-12 sm:h-16 object-contain justify-self-start">
         </div>
-        <a href="/gohighlevel.html" class="integration-item">
-          <img src="/public/assets/images/gohighleveldark.png" alt="GoHighLevel Logo" class="integration-logo h-14 sm:h-16 object-contain block">
-                  </a>
-      </div>
-      <p class="text-lg text-gray-600 dark:text-slate-300">Connect MerchantHaus with the platforms you already use.</p>
+
+        <p class="text-lg text-slate-300 max-w-2xl mx-auto">Connect with your favorite tools and services</p>
+
+        <div class="marquee-wrapper">
+            <div id="integrations-track" class="marquee-track integration-track">
+                <!-- Logos will be injected by JS -->
+            </div>
+        </div>
     </div>
-    <div class="integration-marquee marquee-wrapper">
-      <div class="marquee-track marquee-track--reverse integration-track">
-                  <a href="https://www.lightspeedhq.com/" class="integration-item" target="_blank" rel="noopener">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/3/38/Lightspeed_-_logo.png" alt="Lightspeed Logo" class="integration-logo integration-logo--marquee h-10 sm:h-12 object-contain">
-          </a>
-                  <a href="https://www.wix.com/" class="integration-item" target="_blank" rel="noopener">
-            <img src="https://static.wixstatic.com/media/de991a_321c4356214644169542e724ef57529b~mv2.png" alt="Wix Logo" class="integration-logo integration-logo--marquee h-10 sm:h-12 object-contain">
-          </a>
-                  <a href="https://keap.com/" class="integration-item" target="_blank" rel="noopener">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/e/e0/Logo_of_Keap_Company.svg" alt="Keap Logo" class="integration-logo integration-logo--marquee h-10 sm:h-12 object-contain">
-          </a>
-                  <a href="https://www.clover.com/" class="integration-item" target="_blank" rel="noopener">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/cf/Clover_logo.svg/512px-Clover_logo.svg.png" alt="Clover Logo" class="integration-logo integration-logo--marquee h-10 sm:h-12 object-contain">
-          </a>
-                  <a href="https://www.freshbooks.com/" class="integration-item" target="_blank" rel="noopener">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/1/17/FreshBooks_logo_%282020%29.svg" alt="FreshBooks Logo" class="integration-logo integration-logo--marquee h-10 sm:h-12 object-contain">
-          </a>
-                  <a href="https://magento.com/" class="integration-item" target="_blank" rel="noopener">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/55/Magento_Logo.svg/512px-Magento_Logo.svg.png" alt="Magento Logo" class="integration-logo integration-logo--marquee h-10 sm:h-12 object-contain">
-          </a>
-                  <a href="https://www.bigcommerce.com/" class="integration-item" target="_blank" rel="noopener">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/c/c4/Bc-logo-dark.svg" alt="BigCommerce Logo" class="integration-logo integration-logo--marquee h-10 sm:h-12 object-contain">
-          </a>
-                  <a href="https://www.ncr.com/" class="integration-item" target="_blank" rel="noopener">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/9/92/NCR_logo_color.svg" alt="NCR Logo" class="integration-logo integration-logo--marquee h-10 sm:h-12 object-contain">
-          </a>
-                  <a href="https://www.visa.com/" class="integration-item" target="_blank" rel="noopener">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/4/41/Visa_2021.svg" alt="Visa Logo" class="integration-logo integration-logo--marquee h-10 sm:h-12 object-contain">
-          </a>
-                  <a href="https://www.mastercard.us/" class="integration-item" target="_blank" rel="noopener">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/a/a4/Mastercard_2019_logo.svg" alt="Mastercard Logo" class="integration-logo integration-logo--marquee h-10 sm:h-12 object-contain">
-          </a>
-                  <a href="https://www.lightspeedhq.com/" class="integration-item" target="_blank" rel="noopener">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/3/38/Lightspeed_-_logo.png" alt="Lightspeed Logo" class="integration-logo integration-logo--marquee h-10 sm:h-12 object-contain">
-          </a>
-                  <a href="https://www.wix.com/" class="integration-item" target="_blank" rel="noopener">
-            <img src="https://static.wixstatic.com/media/de991a_321c4356214644169542e724ef57529b~mv2.png" alt="Wix Logo" class="integration-logo integration-logo--marquee h-10 sm:h-12 object-contain">
-          </a>
-                  <a href="https://keap.com/" class="integration-item" target="_blank" rel="noopener">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/e/e0/Logo_of_Keap_Company.svg" alt="Keap Logo" class="integration-logo integration-logo--marquee h-10 sm:h-12 object-contain">
-          </a>
-                  <a href="https://www.clover.com/" class="integration-item" target="_blank" rel="noopener">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/cf/Clover_logo.svg/512px-Clover_logo.svg.png" alt="Clover Logo" class="integration-logo integration-logo--marquee h-10 sm:h-12 object-contain">
-          </a>
-                  <a href="https://www.freshbooks.com/" class="integration-item" target="_blank" rel="noopener">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/1/17/FreshBooks_logo_%282020%29.svg" alt="FreshBooks Logo" class="integration-logo integration-logo--marquee h-10 sm:h-12 object-contain">
-          </a>
-                  <a href="https://magento.com/" class="integration-item" target="_blank" rel="noopener">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/55/Magento_Logo.svg/512px-Magento_Logo.svg.png" alt="Magento Logo" class="integration-logo integration-logo--marquee h-10 sm:h-12 object-contain">
-          </a>
-                  <a href="https://www.bigcommerce.com/" class="integration-item" target="_blank" rel="noopener">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/c/c4/Bc-logo-dark.svg" alt="BigCommerce Logo" class="integration-logo integration-logo--marquee h-10 sm:h-12 object-contain">
-          </a>
-                  <a href="https://www.ncr.com/" class="integration-item" target="_blank" rel="noopener">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/9/92/NCR_logo_color.svg" alt="NCR Logo" class="integration-logo integration-logo--marquee h-10 sm:h-12 object-contain">
-          </a>
-                  <a href="https://www.visa.com/" class="integration-item" target="_blank" rel="noopener">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/4/41/Visa_2021.svg" alt="Visa Logo" class="integration-logo integration-logo--marquee h-10 sm:h-12 object-contain">
-          </a>
-                  <a href="https://www.mastercard.us/" class="integration-item" target="_blank" rel="noopener">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/a/a4/Mastercard_2019_logo.svg" alt="Mastercard Logo" class="integration-logo integration-logo--marquee h-10 sm:h-12 object-contain">
-          </a>
-              </div>
-    </div>
-  </div>
 </section>
 
 <div class="relative">
@@ -688,6 +495,76 @@
   </div>
 </div>
 
+<main class="max-w-5xl mx-auto px-4 py-10">
+    <h1 class="text-3xl md:text-4xl font-extrabold">Merchant Application</h1>
+    <p class="mt-2 text-slate-300">U.S. retail only. Provide the details below — we’ll review and issue your Merchant ID (MID) &amp; access credentials during onboarding.</p>
+    <form class="mt-8 grid gap-6" id="apply-form">
+    <!-- Merchant Information -->
+    <section class="p-6 rounded-2xl border border-slate-800">
+    <h2 class="text-xl font-bold">Merchant Information</h2>
+    <div class="mt-4 grid md:grid-cols-2 gap-4">
+    <label class="text-sm">Company Name*<input class="field mt-1 w-full rounded-lg border border-slate-700 bg-slate-900 px-3 py-2" name="companyName" required=""/></label>
+    <label class="text-sm">External Identifier<input class="field mt-1 w-full rounded-lg border border-slate-700 bg-slate-900 px-3 py-2" name="externalId"/></label>
+    <label class="text-sm">Country*<select class="field mt-1 w-full rounded-lg border border-slate-700 bg-slate-900 px-3 py-2" name="country" required=""><option>United States</option></select></label>
+    <label class="text-sm">Timezone*<select class="field mt-1 w-full rounded-lg border border-slate-700 bg-slate-900 px-3 py-2" name="timezone" required="">
+    <option>(GMT-08:00) Pacific Time (US &amp; Canada)</option>
+    <option>(GMT-07:00) Mountain Time (US &amp; Canada)</option>
+    <option>(GMT-06:00) Central Time (US &amp; Canada)</option>
+    <option>(GMT-05:00) Eastern Time (US &amp; Canada)</option>
+    </select></label>
+    <label class="text-sm md:col-span-2">Address*<input class="field mt-1 w-full rounded-lg border border-slate-700 bg-slate-900 px-3 py-2" name="address1" required=""/></label>
+    <label class="text-sm">Address 2<input class="field mt-1 w-full rounded-lg border border-slate-700 bg-slate-900 px-3 py-2" name="address2"/></label>
+    <label class="text-sm">City*<input class="field mt-1 w-full rounded-lg border border-slate-700 bg-slate-900 px-3 py-2" name="city" required=""/></label>
+    <label class="text-sm">State*<select class="field mt-1 w-full rounded-lg border border-slate-700 bg-slate-900 px-3 py-2" name="state" required=""></select></label>
+    <label class="text-sm">Zip/Postal Code*<input class="field mt-1 w-full rounded-lg border border-slate-700 bg-slate-900 px-3 py-2" name="postalCode" required=""/></label>
+    <label class="text-sm md:col-span-2">Website<input class="field mt-1 w-full rounded-lg border border-slate-700 bg-slate-900 px-3 py-2" name="website" placeholder="https://example.com" type="url"/></label>
+    <label class="text-sm">Language<select class="field mt-1 w-full rounded-lg border border-slate-700 bg-slate-900 px-3 py-2" name="language"><option>English</option></select></label>
+    </div>
+    </section>
+    <!-- Company Contact -->
+    <section class="p-6 rounded-2xl border border-slate-800">
+    <h2 class="text-xl font-bold">Company Contact (Primary User)</h2>
+    <p class="text-xs text-slate-500 mt-1">This person receives the welcome email and appears on receipts if enabled.</p>
+    <div class="mt-4 grid md:grid-cols-2 gap-4">
+    <label class="text-sm">First Name*<input class="field mt-1 w-full rounded-lg border border-slate-700 bg-slate-900 px-3 py-2" name="firstName" required=""/></label>
+    <label class="text-sm">Last Name*<input class="field mt-1 w-full rounded-lg border border-slate-700 bg-slate-900 px-3 py-2" name="lastName" required=""/></label>
+    <label class="text-sm">Email Address*<input class="field mt-1 w-full rounded-lg border border-slate-700 bg-slate-900 px-3 py-2" name="email" required="" type="email"/></label>
+    <label class="text-sm">Phone Number*<input class="field mt-1 w-full rounded-lg border border-slate-700 bg-slate-900 px-3 py-2" name="phone" required=""/></label>
+    <label class="text-sm">Fax Number<input class="field mt-1 w-full rounded-lg border border-slate-700 bg-slate-900 px-3 py-2" name="fax"/></label>
+    </div>
+    </section>
+    <!-- Account Setup & Services -->
+    <section class="p-6 rounded-2xl border border-slate-800">
+    <h2 class="text-xl font-bold">Account Setup</h2>
+    <div class="mt-4 grid md:grid-cols-2 gap-4">
+    <label class="text-sm md:col-span-2">Primary Username*<input class="field mt-1 w-full rounded-lg border border-slate-700 bg-slate-900 px-3 py-2" maxlength="32" minlength="4" name="username" pattern="[A-Za-z0-9]+" placeholder="letters and numbers only" required=""/></label>
+    </div>
+    <h3 class="mt-4 font-semibold">Processing Services</h3>
+    <div class="mt-2 grid md:grid-cols-3 gap-3 text-sm">
+    <label class="inline-flex items-center gap-2"><input checked="" class="accent-brand-crimson" name="svcCredit" type="checkbox"/>Credit Card</label>
+    <label class="inline-flex items-center gap-2"><input class="accent-brand-crimson" name="svcAch" type="checkbox"/>ACH / eCheck</label>
+    <label class="inline-flex items-center gap-2"><input class="accent-brand-crimson" name="svcCash" type="checkbox"/>Cash</label>
+    </div>
+    <h3 class="mt-4 font-semibold">Value‑added Services</h3>
+    <div class="mt-2 grid md:grid-cols-3 gap-3 text-sm">
+    <label class="inline-flex items-center gap-2"><input class="accent-brand-crimson" name="valEncryption" type="checkbox"/>Encryption (Encrypted Devices)</label>
+    <label class="inline-flex items-center gap-2"><input checked="" class="accent-brand-crimson" name="valInvoice" type="checkbox"/>Invoice</label>
+    <label class="inline-flex items-center gap-2"><input class="accent-brand-crimson" name="valLevel3" type="checkbox"/>Level III Advantage</label>
+    <label class="inline-flex items-center gap-2"><input class="accent-brand-crimson" name="valMobile" type="checkbox"/>Mobile Payments</label>
+    <label class="inline-flex items-center gap-2"><input checked="" class="accent-brand-crimson" name="valVault" type="checkbox"/>Customer Vault</label>
+    </div>
+    <div class="mt-4 text-xs text-slate-400">
+              By submitting, you agree to our <a class="underline hover:text-brand-teal" href="/terms.html" rel="noopener" target="_blank">Terms &amp; Conditions</a> and <a class="underline hover:text-brand-teal" href="/privacy.html" rel="noopener" target="_blank">Privacy Policy</a>.
+            </div>
+    </section>
+    <div class="flex items-center gap-3">
+    <button class="px-5 py-3 rounded-lg bg-brand-crimson text-white font-semibold hover:bg-opacity-90 transition-colors" type="submit">Submit Application</button>
+    <span class="text-sm text-slate-400" id="apply-out"></span>
+    </div>
+    </form>
+</main>
+
+
 <script>
 document.addEventListener('DOMContentLoaded', () => {
   if (window.lucide) lucide.createIcons();
@@ -709,7 +586,7 @@ document.addEventListener('DOMContentLoaded', () => {
       services.forEach(service => {
         const serviceEl = document.createElement('div');
         serviceEl.className = 'service-cell p-4 w-auto flex-shrink-0 flex items-center gap-4';
-        serviceEl.innerHTML = `<i data-lucide="${service.icon}" class="w-8 h-8 text-brand-crimson"></i>
+        serviceEl.innerHTML = `<i data-lucide="${service.icon}" class="w-10 h-10 text-brand-crimson"></i>
           <div class="text-left">
             <h3 class="font-bold text-lg font-ubuntu" style="color: #524848;">${service.title}</h3>
             <p class="text-base" style="color: #524848;">${service.description}</p>
@@ -722,6 +599,27 @@ document.addEventListener('DOMContentLoaded', () => {
     if (window.lucide) lucide.createIcons();
   }
 
+  // --- NEW INTEGRATIONS SCRIPT ---
+  const integrationLogos = [
+      'bigcommerce.webp', 'clover.webp', 'freshbooks.webp', 'hubspot.webp',
+      'keap.webp', 'lightspeed.webp', 'magento.webp', 'mastercard.webp',
+      'memberpress.webp', 'ncr.webp', 'quickbooks.webp', 'salesforce.webp',
+      'squarespace.webp', 'vend.webp', 'visa.webp', 'wix.webp',
+      'woocommerce.webp', 'zoho_crm.webp'
+  ];
+  const integrationsTrack = document.getElementById('integrations-track');
+  if (integrationsTrack) {
+    const allLogos = [...integrationLogos, ...integrationLogos]; // Duplicate for seamless loop
+    allLogos.forEach(logoFile => {
+        const logoName = logoFile.split('.')[0].replace('_', ' ').replace('-', ' ');
+        const item = document.createElement('div');
+        item.className = 'integration-item flex-shrink-0';
+        item.innerHTML = `<img src="assets/integrations/${logoFile}" alt="${logoName} Logo" class="integration-logo h-10 sm:h-12 object-contain">`;
+        integrationsTrack.appendChild(item);
+    });
+  }
+
+
   const supportModal = document.getElementById('support-modal');
   document.querySelectorAll('.js-support').forEach(el => {
     el.addEventListener('click', (e) => { e.preventDefault(); supportModal.classList.remove('hidden'); });
@@ -730,7 +628,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (e.target.dataset.close !== undefined) supportModal.classList.add('hidden');
   });
 
-  const headingTexts = { "integrations": "Integrate with Your Favorite Tools" };
+  const headingTexts = { "integrations-old": "Integrate with Your Favorite Tools" }; // Old logic, can be removed or updated
   const headingObserver = new IntersectionObserver((entries, observer) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
@@ -898,6 +796,52 @@ document.addEventListener('DOMContentLoaded', () => {
       submitBtn.innerHTML = originalBtnText;
     }
   });
+
+  // --- APPLICATION FORM LOGIC ---
+  const applyForm = document.getElementById('apply-form');
+  if (applyForm) {
+    const states = ["Alabama","Alaska","Arizona","Arkansas","California","Colorado","Connecticut","Delaware","District of Columbia","Florida","Georgia","Hawaii","Idaho","Illinois","Indiana","Iowa","Kansas","Kentucky","Louisiana","Maine","Maryland","Massachusetts","Michigan","Minnesota","Mississippi","Missouri","Montana","Nebraska","Nevada","New Hampshire","New Jersey","New Mexico","New York","North Carolina","North Dakota","Ohio","Oklahoma","Oregon","Pennsylvania","Rhode Island","South Carolina","South Dakota","Tennessee","Texas","Utah","Vermont","Virginia","Washington","West Virginia","Wisconsin","Wyoming"];
+    const stateSelect = document.querySelector('select[name="state"]');
+    if (stateSelect) { states.forEach(s => { const opt=document.createElement('option'); opt.textContent=opt.value=s; stateSelect.appendChild(opt); }); }
+
+    const out = document.getElementById('apply-out');
+    const LS_KEY = 'mh_apply_draft';
+    
+    function saveDraft(){ const data = Object.fromEntries(new FormData(applyForm).entries()); localStorage.setItem(LS_KEY, JSON.stringify(data)); }
+    function loadDraft(){ try { const d = JSON.parse(localStorage.getItem(LS_KEY)||'{}'); for (const k in d){ const el = applyForm.elements[k]; if (!el) continue; if (el.type==='checkbox'){ el.checked = !!d[k]; } else { el.value = d[k]; } } } catch(e){} }
+    
+    applyForm.addEventListener('input', saveDraft);
+    loadDraft();
+
+    function getUTM(){
+      const p = new URLSearchParams(location.search);
+      return {source:p.get('utm_source')||'',medium:p.get('utm_medium')||'',campaign:p.get('utm_campaign')||'',term:p.get('utm_term')||'',content:p.get('utm_content')||'',ref:document.referrer||''};
+    }
+
+    applyForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      out.textContent = 'Submitting…';
+      try {
+        const data = Object.fromEntries(new FormData(applyForm).entries());
+        ['svcCredit','svcAch','svcCash','valEncryption','valInvoice','valLevel3','valMobile','valVault'].forEach(k => { data[k] = !!applyForm.elements[k].checked; });
+        data.utm = getUTM();
+
+        const res = await fetch('/.netlify/functions/submit-application', {
+          method: 'POST',
+          headers: {'Content-Type':'application/json'},
+          body: JSON.stringify(data)
+        });
+        if (!res.ok) throw new Error('Request failed');
+        out.textContent = 'Thanks — we emailed you next steps and sent your application to our team.';
+        localStorage.removeItem(LS_KEY);
+        applyForm.reset();
+      } catch (err) {
+        console.error(err);
+        out.textContent = 'Something went wrong. Please try again or email hello@merchant.haus.';
+      }
+    });
+  }
+
 
   function typeWriter(element, text, speed, callback) {
     let i = 0;
