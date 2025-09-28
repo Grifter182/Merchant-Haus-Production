@@ -51,6 +51,7 @@
   </script>
   
   <script src="https://unpkg.com/lucide@latest"></script>
+  <script src="/assets/support.js" defer></script>
 
   <style>
     :root { color-scheme: light dark; }
@@ -246,7 +247,13 @@
                 <a href="#commitment" data-close class="px-4 py-2 rounded-lg hover:bg-brand-600 hover:text-white transition-colors">Commitment</a>
                 <a href="#limitations" data-close class="px-4 py-2 rounded-lg hover:bg-brand-600 hover:text-white transition-colors">Limitations</a>
                 <a href="#contact" data-close class="px-4 py-2 rounded-lg hover:bg-brand-600 hover:text-white transition-colors">Contact</a>
-                <a href="#" data-close class="js-support px-4 py-2 rounded-lg hover:bg-brand-600 hover:text-white transition-colors">Contact Support</a>
+                <a
+                  href="mailto:support@merchanthaus.io"
+                  data-close
+                  class="js-support px-4 py-2 rounded-lg hover:bg-brand-600 hover:text-white transition-colors"
+                  data-cta="contact-support"
+                  data-cta-location="accessibility-popout"
+                >Contact Support</a>
                 <a href="https://retailmanager.merchant.haus" data-close class="sm:hidden block px-4 py-2 rounded-lg hover:bg-brand-600 hover:text-white transition-colors mt-2 pt-2 border-t border-slate-200 dark:border-slate-800">Login</a>
             </nav>
             <div class="mt-4 pt-4 border-t border-slate-200 dark:border-slate-800">
@@ -389,7 +396,12 @@
       </nav>
       <nav class="space-y-2">
         <h3 class="font-semibold font-ubuntu">Support</h3>
-        <a href="#" class="js-support block">Contact Support</a>
+        <a
+          href="mailto:support@merchanthaus.io"
+          class="js-support block"
+          data-cta="contact-support"
+          data-cta-location="footer"
+        >Contact Support</a>
         <a href="#faq-question" class="block">FAQs</a>
       </nav>
       <nav class="space-y-2">

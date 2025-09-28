@@ -21,7 +21,12 @@
             </nav>
             <nav class="space-y-2">
                 <h3 class="font-semibold font-ubuntu text-white">Support</h3>
-                <a href="mailto:support@merchanthaus.io" class="block text-slate-300 hover:text-brand-teal">Contact Support</a>
+                <a
+                    href="mailto:support@merchanthaus.io"
+                    class="js-support block text-slate-300 hover:text-brand-teal"
+                    data-cta="contact-support"
+                    data-cta-location="footer"
+                >Contact Support</a>
                 <a href="/faq.html" class="block text-slate-300 hover:text-brand-teal">FAQ</a>
             </nav>
             <nav class="space-y-2">
@@ -41,6 +46,8 @@
         <span class="sr-only">Back to top</span>
     </button>
 
+
+    <script src="/assets/support.js" defer></script>
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
