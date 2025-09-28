@@ -503,7 +503,12 @@
       <input name="email" type="email" placeholder="Work email" class="field rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-950 px-3 py-2" required>
       <textarea name="message" placeholder="Your message..." rows="4" class="field rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-950 px-3 py-2" required></textarea>
       <button class="rounded-lg bg-brand-crimson text-white font-semibold px-4 py-2 hover:bg-brand-crimson" type="submit">Send Message</button>
-      <p id="support-out" class="text-xs text-slate-500"></p>
+      <p
+        id="support-error"
+        class="text-xs text-red-500 hidden"
+        role="alert"
+        aria-live="polite"
+      ></p>
     </form>
   </div>
 </div>
@@ -781,7 +786,7 @@ document.addEventListener('DOMContentLoaded', () => {
   faqQuestionInput.addEventListener('keypress', (e) => { if (e.key === 'Enter') handleFaqSubmit(); });
 
   const supportForm = document.getElementById('support-form');
-  const supportOut = document.getElementById('support-out');
+  const supportError = document.getElementById('support-error');
   supportForm.addEventListener('submit', async (e) => {
     e.preventDefault();
     const formData = new FormData(supportForm);
@@ -789,7 +794,10 @@ document.addEventListener('DOMContentLoaded', () => {
     const originalBtnText = submitBtn.innerHTML;
     submitBtn.disabled = true;
     submitBtn.innerHTML = '<span class="loader"></span> Sending...';
-    supportOut.textContent = '';
+    if (supportError) {
+      supportError.textContent = '';
+      supportError.classList.add('hidden');
+    }
     try {
       if (!formData.get('form-name')) {
         formData.append('form-name', supportForm.getAttribute('name') || 'contact');
@@ -800,12 +808,12 @@ document.addEventListener('DOMContentLoaded', () => {
         body: new URLSearchParams(formData).toString()
       });
       if (!response.ok) throw new Error('Network response was not ok');
-      supportOut.style.color = 'green';
-      supportOut.textContent = 'Message sent successfully!';
-      supportForm.reset();
+      window.location.href = '/thankyou.html';
     } catch (error) {
-      supportOut.style.color = 'red';
-      supportOut.textContent = `Error: ${error.message}`;
+      if (supportError) {
+        supportError.textContent = `Error: ${error.message}`;
+        supportError.classList.remove('hidden');
+      }
     } finally {
       submitBtn.disabled = false;
       submitBtn.innerHTML = originalBtnText;
