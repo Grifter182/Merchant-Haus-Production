@@ -44,6 +44,9 @@
     <!-- Lucide Icons -->
     <script src="https://unpkg.com/lucide@latest"></script>
 
+    <!-- Support CTA Handler -->
+    <script src="/assets/support.js" defer></script>
+
     <!-- Custom Styles -->
     <style>
         html {
@@ -198,7 +201,12 @@
                      </div>
                      <div class="space-y-2">
                          <h4 class="text-sm font-semibold text-brand-teal uppercase tracking-[0.2em]">Support</h4>
-                         <a href="mailto:support@merchanthaus.io" class="block w-full px-4 py-2 text-left rounded-full border border-brand-teal bg-[#262626] text-white transition-colors duration-200 hover:bg-brand-teal">Contact Support</a>
+                         <a
+                             href="mailto:support@merchanthaus.io"
+                             class="js-support block w-full px-4 py-2 text-left rounded-full border border-brand-teal bg-[#262626] text-white transition-colors duration-200 hover:bg-brand-teal"
+                             data-cta="contact-support"
+                             data-cta-location="mobile-nav"
+                         >Contact Support</a>
                          <a href="/faq.html" class="block w-full px-4 py-2 text-left rounded-full border border-brand-teal bg-[#262626] text-white transition-colors duration-200 hover:bg-brand-teal">FAQ</a>
                      </div>
                      <div class="space-y-2">
@@ -712,7 +720,12 @@
             </nav>
             <nav class="space-y-2">
                 <h3 class="font-semibold font-ubuntu text-white">Support</h3>
-                <a href="mailto:support@merchanthaus.io" class="block text-slate-300 hover:text-brand-teal">Contact Support</a>
+                <a
+                    href="mailto:support@merchanthaus.io"
+                    class="js-support block text-slate-300 hover:text-brand-teal"
+                    data-cta="contact-support"
+                    data-cta-location="footer"
+                >Contact Support</a>
                 <a href="/faq.html" class="block text-slate-300 hover:text-brand-teal">FAQ</a>
             </nav>
             <nav class="space-y-2">

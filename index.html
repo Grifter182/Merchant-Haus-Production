@@ -44,6 +44,9 @@
     <!-- Lucide Icons -->
     <script src="https://unpkg.com/lucide@latest"></script>
 
+    <!-- Support CTA Handler -->
+    <script src="/assets/support.js" defer></script>
+
     <!-- Custom Styles -->
     <style>
         html {
@@ -193,7 +196,12 @@
                     </div>
                     <div class="space-y-2">
                         <h4 class="text-sm font-semibold text-brand-teal uppercase tracking-[0.2em]">Support</h4>
-                        <a href="mailto:support@merchanthaus.io" class="block w-full px-4 py-2 text-left rounded-full border border-brand-teal bg-[#262626] text-white transition-colors duration-200 hover:bg-brand-teal">Contact Support</a>
+                        <a
+                          href="mailto:support@merchanthaus.io"
+                          class="js-support block w-full px-4 py-2 text-left rounded-full border border-brand-teal bg-[#262626] text-white transition-colors duration-200 hover:bg-brand-teal"
+                          data-cta="contact-support"
+                          data-cta-location="mobile-nav"
+                        >Contact Support</a>
                         <a href="/faq.html" class="block w-full px-4 py-2 text-left rounded-full border border-brand-teal bg-[#262626] text-white transition-colors duration-200 hover:bg-brand-teal">FAQ</a>
                     </div>
                     <div class="space-y-2">
@@ -368,7 +376,12 @@
             <div id="hero-actions" class="flex flex-wrap justify-center items-center gap-3">
               <button class="js-signup-cta bg-transparent hover:bg-brand-crimson text-brand-crimson hover:text-white border border-brand-crimson px-4 py-2 rounded-full text-sm font-semibold transition-colors duration-300">Get Started</button>
               <button class="bg-slate-100/20 dark:bg-slate-800/30 text-white px-4 py-2 rounded-full text-sm font-medium hover:bg-slate-200/30 dark:hover:bg-slate-700/40 transition-colors">Chargeback Help</button>
-              <button class="js-support bg-slate-100/20 dark:bg-slate-800/30 text-white px-4 py-2 rounded-full text-sm font-medium hover:bg-slate-200/30 dark:hover:bg-slate-700/40 transition-colors">Contact Support</button>
+              <button
+                type="button"
+                class="js-support bg-slate-100/20 dark:bg-slate-800/30 text-white px-4 py-2 rounded-full text-sm font-medium hover:bg-slate-200/30 dark:hover:bg-slate-700/40 transition-colors"
+                data-cta="contact-support"
+                data-cta-location="hero"
+              >Contact Support</button>
             </div>
             <div id="faq-answer" class="mt-6 p-4 text-left rounded-lg bg-white/90 dark:bg-slate-900/90 border border-slate-200 dark:border-slate-800 text-slate-800 dark:text-slate-200"></div>
           </div>
@@ -636,16 +649,6 @@ document.addEventListener('DOMContentLoaded', () => {
         integrationsTrack.appendChild(item);
     });
   }
-
-
-  const supportModal = document.getElementById('support-modal');
-  document.querySelectorAll('.js-support').forEach(el => {
-    el.addEventListener('click', (e) => { e.preventDefault(); supportModal.classList.remove('hidden'); });
-  });
-  supportModal.addEventListener('click', (e) => {
-    if (e.target.dataset.close !== undefined) supportModal.classList.add('hidden');
-  });
-
   const headingTexts = { "integrations-old": "Integrate with Your Favorite Tools" }; // Old logic, can be removed or updated
   const headingObserver = new IntersectionObserver((entries, observer) => {
     entries.forEach(entry => {
@@ -785,41 +788,6 @@ document.addEventListener('DOMContentLoaded', () => {
   askFaqBtn.addEventListener('click', handleFaqSubmit);
   faqQuestionInput.addEventListener('keypress', (e) => { if (e.key === 'Enter') handleFaqSubmit(); });
 
-  const supportForm = document.getElementById('support-form');
-  const supportError = document.getElementById('support-error');
-  supportForm.addEventListener('submit', async (e) => {
-    e.preventDefault();
-    const formData = new FormData(supportForm);
-    const submitBtn = supportForm.querySelector('button[type="submit"]');
-    const originalBtnText = submitBtn.innerHTML;
-    submitBtn.disabled = true;
-    submitBtn.innerHTML = '<span class="loader"></span> Sending...';
-    if (supportError) {
-      supportError.textContent = '';
-      supportError.classList.add('hidden');
-    }
-    try {
-      if (!formData.get('form-name')) {
-        formData.append('form-name', supportForm.getAttribute('name') || 'contact');
-      }
-      const response = await fetch('/', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-        body: new URLSearchParams(formData).toString()
-      });
-      if (!response.ok) throw new Error('Network response was not ok');
-      window.location.href = '/thankyou.html';
-    } catch (error) {
-      if (supportError) {
-        supportError.textContent = `Error: ${error.message}`;
-        supportError.classList.remove('hidden');
-      }
-    } finally {
-      submitBtn.disabled = false;
-      submitBtn.innerHTML = originalBtnText;
-    }
-  });
-
   // --- APPLICATION FORM LOGIC ---
   const applyForm = document.getElementById('apply-form');
   if (applyForm) {
@@ -923,7 +891,12 @@ document.addEventListener('DOMContentLoaded', () => {
             </nav>
             <nav class="space-y-2">
                 <h3 class="font-semibold font-ubuntu text-white">Support</h3>
-                <a href="mailto:support@merchanthaus.io" class="block text-slate-300 hover:text-brand-teal">Contact Support</a>
+                <a
+                  href="mailto:support@merchanthaus.io"
+                  class="js-support block text-slate-300 hover:text-brand-teal"
+                  data-cta="contact-support"
+                  data-cta-location="footer"
+                >Contact Support</a>
                 <a href="/faq.html" class="block text-slate-300 hover:text-brand-teal">FAQ</a>
             </nav>
             <nav class="space-y-2">
