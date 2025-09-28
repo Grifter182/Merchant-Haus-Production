@@ -92,11 +92,16 @@
       el.addEventListener('click', hide);
     });
 
-    modal.addEventListener('click', (event) => {
-      if (event.target && event.target.dataset && event.target.dataset.close !== undefined) {
-        hide();
-      }
-    });
+    const card = modal.querySelector('[data-modal-card]');
+    if (card && card.dataset.supportCardBound !== 'true') {
+      card.dataset.supportCardBound = 'true';
+      card.addEventListener('click', (event) => event.stopPropagation());
+    }
+
+    if (!modal.dataset.supportBackdropBound) {
+      modal.dataset.supportBackdropBound = 'true';
+      modal.addEventListener('click', hide);
+    }
 
     if (!escapeListenerAttached) {
       escapeListenerAttached = true;
@@ -113,18 +118,18 @@
   function injectModal() {
     const wrapper = document.createElement('div');
     wrapper.innerHTML = `
-      <div id="support-modal" class="fixed inset-0 z-[70] hidden">
+      <div id="support-modal" class="fixed inset-0 z-[70] hidden flex items-center justify-center">
         <div class="absolute inset-0 bg-black/60" data-close></div>
-        <div class="mx-auto mt-[10vh] w-[min(560px,92vw)] rounded-2xl bg-white dark:bg-slate-900 p-6 border border-slate-200 dark:border-slate-800 shadow-2xl">
+        <div class="relative z-10 w-[min(560px,92vw)] max-h-[90vh] overflow-y-auto rounded-2xl bg-white p-6 shadow-2xl border border-slate-200" data-modal-card>
           <div class="flex items-center justify-between">
-            <h3 class="text-xl font-extrabold font-ubuntu">Contact Support</h3>
-            <button class="p-2 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800" data-close aria-label="Close">
+            <h3 class="text-xl font-extrabold font-ubuntu text-slate-900">Contact Support</h3>
+            <button class="p-2 text-slate-500 hover:text-slate-700" data-close aria-label="Close">
               <i data-lucide="x" class="h-5 w-5"></i>
             </button>
           </div>
-          <p class="mt-1 text-sm text-slate-600 dark:text-slate-300">
+          <p class="mt-1 text-sm text-slate-600">
             Have a question? Fill out the form below or contact us at
-            <a href="tel:15056006042" class="text-brand-crimson dark:text-brand-teal hover:underline">1-505-600-6042</a>.
+            <a href="tel:15056006042" class="text-brand-crimson hover:underline">1-505-600-6042</a>.
           </p>
           <form
             id="support-form"
@@ -132,16 +137,28 @@
             method="POST"
             data-netlify="true"
             netlify-honeypot="bot-field"
-            class="mt-4 grid gap-3"
+            action="/thankyou.html"
+            class="mt-4 space-y-4"
           >
             <input type="hidden" name="form-name" value="contact">
             <p class="hidden">
               <label>Don’t fill this out: <input name="bot-field"></label>
             </p>
-            <input name="name" placeholder="Your name" class="field rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-950 px-3 py-2" required>
-            <input name="email" type="email" placeholder="Work email" class="field rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-950 px-3 py-2" required>
-            <textarea name="message" placeholder="Your message..." rows="4" class="field rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-950 px-3 py-2" required></textarea>
-            <button class="rounded-lg bg-brand-crimson text-white font-semibold px-4 py-2 hover:bg-brand-crimson" type="submit">Send Message</button>
+            <div>
+              <label for="support-name" class="block text-sm font-medium text-slate-700">Name</label>
+              <input id="support-name" name="name" placeholder="Your name" class="mt-1 block w-full rounded-md border border-slate-300 bg-white px-3 py-2 text-slate-900 shadow-sm focus:border-brand-crimson focus:ring-brand-crimson" required>
+            </div>
+            <div>
+              <label for="support-email" class="block text-sm font-medium text-slate-700">Email</label>
+              <input id="support-email" name="email" type="email" placeholder="Work email" class="mt-1 block w-full rounded-md border border-slate-300 bg-white px-3 py-2 text-slate-900 shadow-sm focus:border-brand-crimson focus:ring-brand-crimson" required>
+            </div>
+            <div>
+              <label for="support-message" class="block text-sm font-medium text-slate-700">Message</label>
+              <textarea id="support-message" name="message" placeholder="Your message..." rows="4" class="mt-1 block w-full rounded-md border border-slate-300 bg-white px-3 py-2 text-slate-900 shadow-sm focus:border-brand-crimson focus:ring-brand-crimson" required></textarea>
+            </div>
+            <div>
+              <button class="inline-flex justify-center rounded-md border border-transparent bg-brand-crimson px-4 py-2 text-sm font-semibold text-white shadow-sm transition hover:bg-brand-crimson/90 focus:outline-none focus:ring-2 focus:ring-brand-crimson focus:ring-offset-2" type="submit">Send Message</button>
+            </div>
             <p id="support-error" class="text-xs text-red-500 hidden" role="alert" aria-live="polite"></p>
           </form>
         </div>
