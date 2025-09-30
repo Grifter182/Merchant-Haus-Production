@@ -163,7 +163,12 @@
                      <div class="flex items-center gap-6">
                          <div class="hidden md:flex items-center gap-4 text-sm font-sans">
                              <a href="tel:15056006042" class="hover:text-brand-teal transition-colors">1-505-600-6042</a>
-                             <a href="mailto:support@merchanthaus.io" class="hover:text-brand-teal transition-colors">support@merchanthaus.io</a>
+                             <button
+                               type="button"
+                               class="js-support inline-flex items-center justify-center rounded-full border border-brand-teal px-4 py-2 font-semibold text-brand-teal transition-colors duration-300 hover:bg-brand-teal hover:text-white"
+                               data-cta="contact-support"
+                               data-cta-location="header-desktop"
+                             >Contact Support</button>
                          </div>
                          <button type="button" class="js-signup-cta bg-brand-crimson hover:bg-opacity-90 text-white border border-transparent px-4 py-2 rounded-full text-sm font-semibold font-inter transition-colors duration-300">Get Started</button>
                          <a href="https://retailmanager.merchant.haus" class="hidden sm:block bg-transparent hover:bg-brand-teal text-brand-teal hover:text-white border border-brand-teal px-4 py-2 rounded-lg text-sm font-semibold font-inter transition-colors duration-300">Login</a>
@@ -196,12 +201,12 @@
                     </div>
                     <div class="space-y-2">
                         <h4 class="text-sm font-semibold text-brand-teal uppercase tracking-[0.2em]">Support</h4>
-                        <a
-                          href="mailto:support@merchanthaus.io"
-                          class="js-support block w-full px-4 py-2 text-left rounded-full border border-brand-teal bg-[#262626] text-white transition-colors duration-200 hover:bg-brand-teal"
+                        <button
+                          type="button"
+                          class="js-support block w-full rounded-full border border-brand-teal bg-[#262626] px-4 py-2 text-left font-semibold text-white transition-colors duration-200 hover:bg-brand-teal"
                           data-cta="contact-support"
                           data-cta-location="mobile-nav"
-                        >Contact Support</a>
+                        >Contact Support</button>
                         <a href="/faq.html" class="block w-full px-4 py-2 text-left rounded-full border border-brand-teal bg-[#262626] text-white transition-colors duration-200 hover:bg-brand-teal">FAQ</a>
                     </div>
                     <div class="space-y-2">
@@ -373,15 +378,8 @@
                 <i data-lucide="arrow-up" class="h-5 w-5"></i>
               </button>
             </div>
-            <div id="hero-actions" class="flex flex-wrap justify-center items-center gap-3">
+            <div id="hero-actions" class="flex flex-wrap items-center justify-center gap-3">
               <button class="js-signup-cta bg-transparent hover:bg-brand-crimson text-brand-crimson hover:text-white border border-brand-crimson px-4 py-2 rounded-full text-sm font-semibold transition-colors duration-300">Get Started</button>
-              <button class="bg-slate-100/20 dark:bg-slate-800/30 text-white px-4 py-2 rounded-full text-sm font-medium hover:bg-slate-200/30 dark:hover:bg-slate-700/40 transition-colors">Chargeback Help</button>
-              <button
-                type="button"
-                class="js-support bg-slate-100/20 dark:bg-slate-800/30 text-white px-4 py-2 rounded-full text-sm font-medium hover:bg-slate-200/30 dark:hover:bg-slate-700/40 transition-colors"
-                data-cta="contact-support"
-                data-cta-location="hero"
-              >Contact Support</button>
             </div>
             <div id="faq-answer" class="mt-6 p-4 text-left rounded-lg bg-white/90 dark:bg-slate-900/90 border border-slate-200 dark:border-slate-800 text-slate-800 dark:text-slate-200"></div>
           </div>
