@@ -455,63 +455,97 @@
         .service-card {
             width: 100%;
             height: 100%;
-            border-radius: 1rem;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.25);
+            border-radius: 1.25rem;
+            box-shadow: 0 18px 38px rgba(15, 23, 42, 0.35);
             display: flex;
             flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            gap: 0.5rem;
-            padding: 1rem;
+            overflow: hidden;
+            background: linear-gradient(180deg, rgba(255, 255, 255, 0.05), rgba(15, 23, 42, 0.2));
             color: #ffffff;
             font-family: 'Ubuntu', sans-serif;
             font-weight: 700;
             text-align: center;
-            transition: transform 0.3s ease;
+            transition: transform 0.35s ease, box-shadow 0.35s ease;
             position: relative;
-            overflow: hidden;
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
+            isolation: isolate;
         }
         .service-card::before {
             content: '';
             position: absolute;
             inset: 0;
-            background: rgba(17, 24, 39, 0.55);
-            backdrop-filter: blur(2px);
-        }
-        .service-card > * {
-            position: relative;
-            z-index: 1;
+            background: linear-gradient(145deg, rgba(0, 206, 219, 0.12), rgba(124, 58, 237, 0.12));
+            z-index: -1;
         }
         .service-card:hover {
-            transform: translateY(-6px) scale(1.02);
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 22px 45px rgba(15, 23, 42, 0.45);
+        }
+        .service-image {
+            position: relative;
+            flex: 1 1 auto;
+            min-height: 160px;
+            background-size: cover;
+            background-position: center;
+            filter: brightness(1.1) saturate(1.05);
+            transition: transform 0.6s ease;
+        }
+        .service-image::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background-image: linear-gradient(145deg, rgba(0, 206, 219, 0.35), rgba(124, 58, 237, 0.35));
+            mix-blend-mode: screen;
+            opacity: 0.85;
+        }
+        .service-image::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to bottom, rgba(15, 23, 42, 0.05) 0%, rgba(15, 23, 42, 0.45) 100%);
+        }
+        .service-card:hover .service-image {
+            transform: scale(1.05);
+        }
+        .service-details {
+            position: relative;
+            padding: 1.5rem 1.25rem 1.75rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.75rem;
+            background: linear-gradient(150deg, rgba(10, 16, 28, 0.92), rgba(21, 11, 34, 0.94));
+            backdrop-filter: blur(6px);
+        }
+        .service-icon-wrap {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0.85rem;
+            border-radius: 9999px;
+            background: linear-gradient(145deg, rgba(0, 0, 0, 0.55), rgba(0, 0, 0, 0.35));
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.08), 0 8px 16px rgba(0, 0, 0, 0.35);
         }
         .service-icon {
-            width: 4rem;
-            height: 4rem;
-            stroke-width: 1.5;
-            transform: translateY(-5px);
-            filter: drop-shadow(4px 4px 3px rgba(0, 0, 0, 0.3));
-            transition: transform 0.3s ease;
-        }
-        .service-card:hover .service-icon {
-            transform: translateY(-12px);
+            width: 3.5rem;
+            height: 3.5rem;
+            stroke-width: 1.3;
+            color: #ffffff;
         }
         .service-name {
-            font-size: 1.1rem;
+            font-size: 1.2rem;
+            letter-spacing: 0.01em;
         }
-        .banner .item:nth-child(1) .service-card { background-image: linear-gradient(rgba(17, 24, 39, 0.65), rgba(17, 24, 39, 0.65)), url('assets/img/card1.png'); }
-        .banner .item:nth-child(2) .service-card { background-image: linear-gradient(rgba(17, 24, 39, 0.65), rgba(17, 24, 39, 0.65)), url('assets/img/card2.png'); }
-        .banner .item:nth-child(3) .service-card { background-image: linear-gradient(rgba(17, 24, 39, 0.65), rgba(17, 24, 39, 0.65)), url('assets/img/card3.png'); }
-        .banner .item:nth-child(4) .service-card { background-image: linear-gradient(rgba(17, 24, 39, 0.65), rgba(17, 24, 39, 0.65)), url('assets/img/card4.png'); }
-        .banner .item:nth-child(5) .service-card { background-image: linear-gradient(rgba(17, 24, 39, 0.65), rgba(17, 24, 39, 0.65)), url('assets/img/card5.png'); }
-        .banner .item:nth-child(6) .service-card { background-image: linear-gradient(rgba(17, 24, 39, 0.65), rgba(17, 24, 39, 0.65)), url('assets/img/card6.png'); }
-        .banner .item:nth-child(7) .service-card { background-image: linear-gradient(rgba(17, 24, 39, 0.65), rgba(17, 24, 39, 0.65)), url('assets/img/card7.png'); }
-        .banner .item:nth-child(8) .service-card { background-image: linear-gradient(rgba(17, 24, 39, 0.65), rgba(17, 24, 39, 0.65)), url('assets/img/card8.png'); }
-        .banner .item:nth-child(9) .service-card { background-image: linear-gradient(rgba(17, 24, 39, 0.65), rgba(17, 24, 39, 0.65)), url('assets/img/card9.png'); }
-        .banner .item:nth-child(10) .service-card { background-image: linear-gradient(rgba(17, 24, 39, 0.65), rgba(17, 24, 39, 0.65)), url('assets/img/card10.png'); }
+        .banner .item:nth-child(1) .service-image { background-image: linear-gradient(rgba(15, 23, 42, 0.1), rgba(15, 23, 42, 0.1)), url('assets/img/card1.png'); }
+        .banner .item:nth-child(2) .service-image { background-image: linear-gradient(rgba(15, 23, 42, 0.1), rgba(15, 23, 42, 0.1)), url('assets/img/card2.png'); }
+        .banner .item:nth-child(3) .service-image { background-image: linear-gradient(rgba(15, 23, 42, 0.1), rgba(15, 23, 42, 0.1)), url('assets/img/card3.png'); }
+        .banner .item:nth-child(4) .service-image { background-image: linear-gradient(rgba(15, 23, 42, 0.1), rgba(15, 23, 42, 0.1)), url('assets/img/card4.png'); }
+        .banner .item:nth-child(5) .service-image { background-image: linear-gradient(rgba(15, 23, 42, 0.1), rgba(15, 23, 42, 0.1)), url('assets/img/card5.png'); }
+        .banner .item:nth-child(6) .service-image { background-image: linear-gradient(rgba(15, 23, 42, 0.1), rgba(15, 23, 42, 0.1)), url('assets/img/card6.png'); }
+        .banner .item:nth-child(7) .service-image { background-image: linear-gradient(rgba(15, 23, 42, 0.1), rgba(15, 23, 42, 0.1)), url('assets/img/card7.png'); }
+        .banner .item:nth-child(8) .service-image { background-image: linear-gradient(rgba(15, 23, 42, 0.1), rgba(15, 23, 42, 0.1)), url('assets/img/card8.png'); }
+        .banner .item:nth-child(9) .service-image { background-image: linear-gradient(rgba(15, 23, 42, 0.1), rgba(15, 23, 42, 0.1)), url('assets/img/card9.png'); }
+        .banner .item:nth-child(10) .service-image { background-image: linear-gradient(rgba(15, 23, 42, 0.1), rgba(15, 23, 42, 0.1)), url('assets/img/card10.png'); }
         .loader {
             width: 20px;
             height: 20px;
@@ -606,62 +640,112 @@
       <div class="slider" style="--quantity: 10">
         <div class="item" style="--position: 1">
           <div class="service-card">
-            <i data-lucide="smartphone" class="service-icon"></i>
-            <span class="service-name">Mobile Payments</span>
+            <div class="service-image" aria-hidden="true"></div>
+            <div class="service-details">
+              <div class="service-icon-wrap">
+                <i data-lucide="smartphone" class="service-icon"></i>
+              </div>
+              <span class="service-name">Mobile Payments</span>
+            </div>
           </div>
         </div>
         <div class="item" style="--position: 2">
           <div class="service-card">
-            <i data-lucide="shuffle" class="service-icon"></i>
-            <span class="service-name">Smart Routing</span>
+            <div class="service-image" aria-hidden="true"></div>
+            <div class="service-details">
+              <div class="service-icon-wrap">
+                <i data-lucide="shuffle" class="service-icon"></i>
+              </div>
+              <span class="service-name">Smart Routing</span>
+            </div>
           </div>
         </div>
         <div class="item" style="--position: 3">
           <div class="service-card">
-            <i data-lucide="file-text" class="service-icon"></i>
-            <span class="service-name">Invoicing</span>
+            <div class="service-image" aria-hidden="true"></div>
+            <div class="service-details">
+              <div class="service-icon-wrap">
+                <i data-lucide="file-text" class="service-icon"></i>
+              </div>
+              <span class="service-name">Invoicing</span>
+            </div>
           </div>
         </div>
         <div class="item" style="--position: 4">
           <div class="service-card">
-            <i data-lucide="repeat" class="service-icon"></i>
-            <span class="service-name">Recurring Billing</span>
+            <div class="service-image" aria-hidden="true"></div>
+            <div class="service-details">
+              <div class="service-icon-wrap">
+                <i data-lucide="repeat" class="service-icon"></i>
+              </div>
+              <span class="service-name">Recurring Billing</span>
+            </div>
           </div>
         </div>
         <div class="item" style="--position: 5">
           <div class="service-card">
-            <i data-lucide="lock" class="service-icon"></i>
-            <span class="service-name">Secure Tokenization</span>
+            <div class="service-image" aria-hidden="true"></div>
+            <div class="service-details">
+              <div class="service-icon-wrap">
+                <i data-lucide="lock" class="service-icon"></i>
+              </div>
+              <span class="service-name">Secure Tokenization</span>
+            </div>
           </div>
         </div>
         <div class="item" style="--position: 6">
           <div class="service-card">
-            <i data-lucide="bar-chart-2" class="service-icon"></i>
-            <span class="service-name">Detailed Reporting</span>
+            <div class="service-image" aria-hidden="true"></div>
+            <div class="service-details">
+              <div class="service-icon-wrap">
+                <i data-lucide="bar-chart-2" class="service-icon"></i>
+              </div>
+              <span class="service-name">Detailed Reporting</span>
+            </div>
           </div>
         </div>
         <div class="item" style="--position: 7">
           <div class="service-card">
-            <i data-lucide="cpu" class="service-icon"></i>
-            <span class="service-name">Automation</span>
+            <div class="service-image" aria-hidden="true"></div>
+            <div class="service-details">
+              <div class="service-icon-wrap">
+                <i data-lucide="cpu" class="service-icon"></i>
+              </div>
+              <span class="service-name">Automation</span>
+            </div>
           </div>
         </div>
         <div class="item" style="--position: 8">
           <div class="service-card">
-            <i data-lucide="landmark" class="service-icon"></i>
-            <span class="service-name">ACH Payments</span>
+            <div class="service-image" aria-hidden="true"></div>
+            <div class="service-details">
+              <div class="service-icon-wrap">
+                <i data-lucide="landmark" class="service-icon"></i>
+              </div>
+              <span class="service-name">ACH Payments</span>
+            </div>
           </div>
         </div>
         <div class="item" style="--position: 9">
           <div class="service-card">
-            <i data-lucide="shield-alert" class="service-icon"></i>
-            <span class="service-name">Fraud Prevention</span>
+            <div class="service-image" aria-hidden="true"></div>
+            <div class="service-details">
+              <div class="service-icon-wrap">
+                <i data-lucide="shield-alert" class="service-icon"></i>
+              </div>
+              <span class="service-name">Fraud Prevention</span>
+            </div>
           </div>
         </div>
         <div class="item" style="--position: 10">
           <div class="service-card">
-            <i data-lucide="globe-2" class="service-icon"></i>
-            <span class="service-name">Global Payments</span>
+            <div class="service-image" aria-hidden="true"></div>
+            <div class="service-details">
+              <div class="service-icon-wrap">
+                <i data-lucide="globe-2" class="service-icon"></i>
+              </div>
+              <span class="service-name">Global Payments</span>
+            </div>
           </div>
         </div>
       </div>
