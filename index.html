@@ -1,5 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" class="dark">
+<!-- ================= HEAD SECTION START ================= -->
+<!-- Meta tags, external resources, and global styling configuration -->
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -203,9 +205,12 @@
     <link rel="icon" type="image/x-icon" href="/favicon.ico">
     <link rel="manifest" href="/site.webmanifest">
 </head>
+<!-- ================= HEAD SECTION END ================= -->
 <body class="text-slate-100">
 
     <!-- Header -->
+    <!-- ================= HEADER SECTION START ================= -->
+    <!-- Sticky navigation bar with logo, contact info, and responsive menus -->
     <div class="sticky top-0 z-50">
         <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-4 pb-6">
              <header class="header-glass border border-slate-200/70 dark:border-slate-800 rounded-full shadow-lg">
@@ -274,7 +279,10 @@
             </div>
         </div>
     </div>
+    <!-- ================= HEADER SECTION END ================= -->
 
+    <!-- ================= SIGNUP PANEL OVERLAY START ================= -->
+    <!-- Slide-in multi-step signup workflow for creating new accounts -->
     <div id="signup-panel-overlay" class="panel-overlay fixed inset-0 bg-black/60 z-50 opacity-0 invisible">
         <div id="signup-panel" class="panel-container fixed top-0 right-0 h-full w-full max-w-2xl bg-white dark:bg-slate-900 shadow-2xl transform translate-x-full flex flex-col">
             <div class="p-6 sm:p-8 relative flex-shrink-0">
@@ -308,7 +316,10 @@
             </div>
         </div>
     </div>
+    <!-- ================= SIGNUP PANEL OVERLAY END ================= -->
 
+<!-- ================= INLINE EXPERIENCE STYLES START ================= -->
+<!-- Additional page-specific styling for hero, banners, and dynamic effects -->
 <style>
 .field:focus { outline: none; box-shadow: 0 0 0 3px rgba(239,60,91,.35); }
 .cursor { display: inline-block; width: 3px; height: 1em; background-color: #dc2743; animation: blink-caret .75s step-end infinite; vertical-align: bottom; }
@@ -616,7 +627,10 @@
         }
         /* === END PAYMENT SERVICES EXPERIENCE === */
 </style>
+<!-- ================= INLINE EXPERIENCE STYLES END ================= -->
 
+<!-- ================= HERO SECTION START ================= -->
+<!-- Immersive introductory hero with animated FAQ assistant and onboarding CTA -->
 <div class="relative">
   <section class="relative overflow-hidden animate-fadeIn hero-bg-container">
     <div class="absolute inset-0 bg-black/50 -z-10"></div>
@@ -649,7 +663,10 @@
 
   </div>
 </div>
+<!-- ================= HERO SECTION END ================= -->
 
+<!-- ================= PAYMENT SERVICES SHOWCASE START ================= -->
+<!-- 3D carousel and CTAs highlighting core payment capabilities -->
 <div class="relative pt-32 w-full">
   <div class="absolute top-0 left-0 w-full h-48 bg-[#1c1c1c]"></div>
   <div class="hero-overlay absolute top-32 left-1/2 -translate-x-1/2 -translate-y-1/2 z-20 w-full max-w-5xl px-4">
@@ -799,7 +816,10 @@
     </div>
   </section>
 </div>
+<!-- ================= PAYMENT SERVICES SHOWCASE END ================= -->
 
+<!-- ================= AI SUGGESTER MODAL START ================= -->
+<!-- Pop-up assistant collecting business context to recommend services -->
 <div id="ai-suggester-modal" class="fixed inset-0 bg-black/70 z-50 hidden items-center justify-center p-4">
   <div class="bg-[#1c1c1c] border-2 border-brand-teal rounded-2xl shadow-xl p-6 sm:p-8 w-full max-w-2xl transform transition-all relative">
     <button id="close-ai-modal" class="absolute top-4 right-4 text-slate-400 hover:text-white transition-colors">
@@ -820,7 +840,10 @@
     <div id="recommendations-result" class="mt-6 max-h-64 overflow-y-auto pr-2"></div>
   </div>
 </div>
+<!-- ================= AI SUGGESTER MODAL END ================= -->
 
+<!-- ================= INTEGRATIONS SECTION START ================= -->
+<!-- Rotating partner logos showcasing supported commerce platforms -->
 <section id="integrations" class="py-16 md:py-24">
     <div class="max-w-7xl mx-auto px-4 text-center space-y-12">
         <div class="grid grid-cols-[1fr,auto,1fr] items-center gap-4 md:gap-8 max-w-4xl mx-auto">
@@ -838,7 +861,10 @@
         </div>
     </div>
 </section>
+<!-- ================= INTEGRATIONS SECTION END ================= -->
 
+<!-- ================= SETUP CHECKLIST SECTION START ================= -->
+<!-- Step-by-step onboarding checklist with pinned heading overlay -->
 <div class="relative">
   <section id="checklist" class="pt-28 pb-16 bg-slate-50 dark:bg-slate-900/40 border-y border-slate-200/70 dark:border-slate-800">
     <div class="max-w-7xl mx-auto px-4 text-center">
@@ -894,7 +920,10 @@
     </div>
   </div>
 </div>
+<!-- ================= SETUP CHECKLIST SECTION END ================= -->
 
+<!-- ================= SUPPORT MODAL START ================= -->
+<!-- Contact form modal enabling merchants to reach support team -->
 <div id="support-modal" class="fixed inset-0 z-[70] hidden flex items-center justify-center">
   <div class="absolute inset-0 bg-black/60" data-close></div>
   <div class="relative z-10 w-[min(560px,92vw)] max-h-[90vh] overflow-y-auto rounded-2xl bg-white p-6 shadow-2xl border border-slate-200" data-modal-card>
@@ -939,8 +968,12 @@
       ></p>
     </form>
   </div>
+  </div>
 </div>
+<!-- ================= SUPPORT MODAL END ================= -->
 
+<!-- ================= APPLICATION FORM SECTION START ================= -->
+<!-- Detailed merchant onboarding form capturing business and compliance data -->
 <main class="max-w-5xl mx-auto px-4 pt-10 pb-4 application-section">
     <h1 class="text-3xl md:text-4xl font-extrabold">Merchant Application</h1>
     <p class="mt-2 text-slate-300">U.S. retail only. Provide the details below — we’ll review and issue your Merchant ID (MID) &amp; access credentials during onboarding.</p>
@@ -1008,9 +1041,11 @@
     <span class="text-sm text-slate-400" id="apply-out"></span>
     </div>
     </form>
+
 </main>
-
-
+<!-- ================= APPLICATION FORM SECTION END ================= -->
+<!-- ================= APPLICATION INTERACTIVITY SCRIPT START ================= -->
+<!-- Handles AI suggestions, FAQs, form logic, and scroll-based animations -->
 <script>
 document.addEventListener('DOMContentLoaded', () => {
   if (window.lucide) lucide.createIcons();
@@ -1431,8 +1466,11 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 });
 </script>
+<!-- ================= APPLICATION INTERACTIVITY SCRIPT END ================= -->
 
     <!-- Footer -->
+    <!-- ================= FOOTER SECTION START ================= -->
+    <!-- Multi-column footer with contact details, navigation, and legal links -->
     <footer class="border-t border-slate-800 py-8 mt-8">
         <div class="max-w-7xl mx-auto px-4 grid sm:grid-cols-2 lg:grid-cols-4 gap-8 text-sm" >
             <div class="space-y-4">
@@ -1489,16 +1527,22 @@ document.addEventListener('DOMContentLoaded', () => {
             © <span id="year"></span> Merchant Haus. All rights reserved.
         </div>
     </footer>
-    
+    <!-- ================= FOOTER SECTION END ================= -->
+
     <!-- Back to Top Button -->
+    <!-- ================= BACK TO TOP CONTROL START ================= -->
+    <!-- Floating action button returning users to page top -->
     <button id="back-to-top" class="fixed bottom-6 right-6 bg-brand-crimson text-white p-3 rounded-full shadow-lg opacity-0 invisible transition-all duration-300 z-50 hover:bg-opacity-90">
         <i data-lucide="arrow-up" class="h-6 w-6"></i>
         <span class="sr-only">Back to top</span>
     </button>
+    <!-- ================= BACK TO TOP CONTROL END ================= -->
 
 
+    <!-- ================= GLOBAL LAYOUT SCRIPTS START ================= -->
+    <!-- External signup panel logic plus helpers for navigation, logos, and UI polish -->
     <script src="/assets/signup-panel.js" defer></script>
-    
+
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             if (window.lucide) lucide.createIcons();
@@ -1761,6 +1805,10 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     </script>
+    <!-- ================= GLOBAL LAYOUT SCRIPTS END ================= -->
+
+<!-- ================= CHATBOT INTEGRATION SECTION START ================= -->
+<!-- Third-party ChatBot embed and custom styling for FAQ assistant -->
 <!-- Start of ChatBot (www.chatbot.com) code -->
 <script>
   window.__ow = window.__ow || {};
@@ -1851,6 +1899,7 @@ document.addEventListener('DOMContentLoaded', function() {
   }
 });
 </script>
+<!-- ================= CHATBOT INTEGRATION SECTION END ================= -->
 </body>
 </html>
 
