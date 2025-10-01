@@ -49,6 +49,9 @@
 
     <!-- Custom Styles -->
     <style>
+        html, body {
+            overflow-x: hidden;
+        }
         html {
             scroll-behavior: smooth;
         }
@@ -143,6 +146,15 @@
 
         .hero-layout {
             gap: 2.5rem;
+        }
+
+        .hero-overlay {
+            max-width: min(100%, 80rem);
+            width: 100%;
+        }
+
+        .application-section {
+            padding-bottom: 1rem;
         }
 
         @media (max-width: 767px) {
@@ -579,7 +591,7 @@
 
 <div class="relative pt-32 w-full">
   <div class="absolute top-0 left-0 w-full h-48 bg-[#1c1c1c]"></div>
-  <div class="absolute top-32 left-1/2 -translate-x-1/2 -translate-y-1/2 z-20 w-full max-w-5xl px-4">
+  <div class="hero-overlay absolute top-32 left-1/2 -translate-x-1/2 -translate-y-1/2 z-20 w-full max-w-5xl px-4">
     <div class="payments-heading-card text-slate-200 px-8 py-4 rounded-xl border-2 border-brand-crimson shadow-lg text-center">
       <h2 class="text-3xl font-ubuntu font-bold">Payment Services Tailored for You</h2>
     </div>
@@ -755,7 +767,7 @@
       </div>
     </div>
   </section>
-  <div class="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 z-10 w-full max-w-5xl px-4">
+  <div class="hero-overlay absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 z-10 w-full max-w-5xl px-4">
     <div class="bg-brand-teal px-8 py-4 rounded-xl shadow-lg text-center">
       <h2 class="text-3xl font-ubuntu font-bold" style="color: #524848;">Setup Checklist: What You’ll Need to Begin</h2>
     </div>
@@ -808,7 +820,7 @@
   </div>
 </div>
 
-<main class="max-w-5xl mx-auto px-4 py-10">
+<main class="max-w-5xl mx-auto px-4 pt-10 pb-4 application-section">
     <h1 class="text-3xl md:text-4xl font-extrabold">Merchant Application</h1>
     <p class="mt-2 text-slate-300">U.S. retail only. Provide the details below — we’ll review and issue your Merchant ID (MID) &amp; access credentials during onboarding.</p>
     <form class="mt-8 grid gap-6" id="apply-form">
@@ -1300,7 +1312,7 @@ document.addEventListener('DOMContentLoaded', () => {
 </script>
 
     <!-- Footer -->
-    <footer class="border-t border-slate-800 py-10 mt-16">
+    <footer class="border-t border-slate-800 py-8 mt-8">
         <div class="max-w-7xl mx-auto px-4 grid sm:grid-cols-2 lg:grid-cols-4 gap-8 text-sm" >
             <div class="space-y-4">
                 <a href="/index.html" class="flex items-center gap-3">
