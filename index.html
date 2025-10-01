@@ -456,6 +456,22 @@
             font-weight: 700;
             text-align: center;
             transition: transform 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+        .service-card::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: rgba(17, 24, 39, 0.55);
+            backdrop-filter: blur(2px);
+        }
+        .service-card > * {
+            position: relative;
+            z-index: 1;
         }
         .service-card:hover {
             transform: translateY(-6px) scale(1.02);
@@ -474,16 +490,16 @@
         .service-name {
             font-size: 1.1rem;
         }
-        .banner .item:nth-child(1) .service-card { background-color: #7400B8; }
-        .banner .item:nth-child(2) .service-card { background-color: #6930C3; }
-        .banner .item:nth-child(3) .service-card { background-color: #5E60CE; }
-        .banner .item:nth-child(4) .service-card { background-color: #5390D9; }
-        .banner .item:nth-child(5) .service-card { background-color: #4EA8DE; }
-        .banner .item:nth-child(6) .service-card { background-color: #48BFE3; }
-        .banner .item:nth-child(7) .service-card { background-color: #56CFE1; }
-        .banner .item:nth-child(8) .service-card { background-color: #64DFDF; }
-        .banner .item:nth-child(9) .service-card { background-color: #72EFDD; }
-        .banner .item:nth-child(10) .service-card { background-color: #80FFDB; }
+        .banner .item:nth-child(1) .service-card { background-image: linear-gradient(rgba(17, 24, 39, 0.65), rgba(17, 24, 39, 0.65)), url('assets/img/card1.png'); }
+        .banner .item:nth-child(2) .service-card { background-image: linear-gradient(rgba(17, 24, 39, 0.65), rgba(17, 24, 39, 0.65)), url('assets/img/card2.png'); }
+        .banner .item:nth-child(3) .service-card { background-image: linear-gradient(rgba(17, 24, 39, 0.65), rgba(17, 24, 39, 0.65)), url('assets/img/card3.png'); }
+        .banner .item:nth-child(4) .service-card { background-image: linear-gradient(rgba(17, 24, 39, 0.65), rgba(17, 24, 39, 0.65)), url('assets/img/card4.png'); }
+        .banner .item:nth-child(5) .service-card { background-image: linear-gradient(rgba(17, 24, 39, 0.65), rgba(17, 24, 39, 0.65)), url('assets/img/card5.png'); }
+        .banner .item:nth-child(6) .service-card { background-image: linear-gradient(rgba(17, 24, 39, 0.65), rgba(17, 24, 39, 0.65)), url('assets/img/card6.png'); }
+        .banner .item:nth-child(7) .service-card { background-image: linear-gradient(rgba(17, 24, 39, 0.65), rgba(17, 24, 39, 0.65)), url('assets/img/card7.png'); }
+        .banner .item:nth-child(8) .service-card { background-image: linear-gradient(rgba(17, 24, 39, 0.65), rgba(17, 24, 39, 0.65)), url('assets/img/card8.png'); }
+        .banner .item:nth-child(9) .service-card { background-image: linear-gradient(rgba(17, 24, 39, 0.65), rgba(17, 24, 39, 0.65)), url('assets/img/card9.png'); }
+        .banner .item:nth-child(10) .service-card { background-image: linear-gradient(rgba(17, 24, 39, 0.65), rgba(17, 24, 39, 0.65)), url('assets/img/card10.png'); }
         .loader {
             width: 20px;
             height: 20px;
