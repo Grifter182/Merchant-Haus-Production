@@ -533,7 +533,7 @@
             position: relative;
             display: flex;
             flex: 1 1 auto;
-            background-image: linear-gradient(145deg, rgba(0, 206, 219, 0.18), rgba(124, 58, 237, 0.18)), var(--panel-image);
+            background-image: var(--panel-image);
             background-size: cover;
             background-position: center;
             filter: brightness(var(--service-image-brightness)) saturate(1.05);
@@ -545,21 +545,21 @@
             content: '';
             position: absolute;
             inset: 0;
-            background-image: linear-gradient(145deg, rgba(0, 206, 219, 0.35), rgba(124, 58, 237, 0.35));
-            mix-blend-mode: screen;
-            opacity: 0.75;
+            background: none;
+            mix-blend-mode: normal;
+            opacity: 1;
         }
         .service-image::after {
             content: '';
             position: absolute;
             inset: 0;
-            background: linear-gradient(180deg, rgba(15, 23, 42, 0.05) 0%, rgba(15, 23, 42, 0.68) 100%);
+            background: none;
         }
         .service-card:hover .service-image {
             transform: scale(1.02);
         }
         .service-card:hover .service-overlay {
-            background: radial-gradient(circle at 50% 25%, rgba(255, 255, 255, 0.5), rgba(15, 23, 42, 0.35) 55%, rgba(15, 23, 42, 0.75));
+            background: none;
         }
         .service-overlay {
             position: relative;
@@ -572,8 +572,8 @@
             gap: 0.85rem;
             padding: 2.5rem 1.5rem;
             width: 100%;
-            background: radial-gradient(circle at 50% 30%, rgba(255, 255, 255, 0.7), rgba(236, 240, 241, 0.35));
-            backdrop-filter: blur(6px);
+            background: none;
+            backdrop-filter: none;
             color: #1a1a1a;
             text-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
         }
