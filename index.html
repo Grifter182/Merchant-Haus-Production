@@ -370,9 +370,12 @@
   padding: 0.5rem 0.75rem;
 }
 #integrations .integration-logo {
+  --logo-scale: 1;
+  --logo-hover-scale: calc(var(--logo-scale) * 1.1);
   display: block;
   opacity: 0.95;
   transition: transform 0.3s ease, filter 0.3s ease, opacity 0.3s ease;
+  transform: scale(var(--logo-scale));
 }
 #integrations .integration-hero-logo {
   width: clamp(12rem, 28vw, 20rem);
@@ -381,8 +384,16 @@
   filter: drop-shadow(0 10px 25px rgba(16, 24, 40, 0.3));
 }
 #integrations .integration-item:hover .integration-logo {
-  transform: scale(1.1);
+  transform: scale(var(--logo-hover-scale));
   opacity: 1;
+}
+.integration-logo--xl {
+  --logo-scale: 1.95;
+}
+@media (max-width: 768px) {
+  .integration-logo--xl {
+    --logo-scale: 1.6;
+  }
 }
 .dark #integrations .integration-logo {
   filter: brightness(1.15) contrast(1.05);
@@ -414,41 +425,52 @@
             backdrop-filter: blur(14px);
         }
         .banner {
+            --card-width: clamp(9.75rem, 18vw, 13rem);
+            --card-height: calc(var(--card-width) * 16 / 9);
+            --tilt: -16deg;
+            --translateZ: calc(var(--card-width) * 4.6);
             width: 100%;
-            min-height: clamp(28rem, 70vh, 40rem);
+            min-height: clamp(30rem, 70vh, 42rem);
             text-align: center;
-            overflow: hidden;
             position: relative;
-            perspective: 1500px;
+            perspective: 1600px;
+            touch-action: pan-y;
         }
         .banner .slider {
+            --rotation: 0deg;
             position: absolute;
-            width: 160px;
-            height: 200px;
-            top: 10%;
-            left: calc(50% - 80px);
+            top: 50%;
+            left: 50%;
+            width: var(--card-width);
+            height: var(--card-height);
             transform-style: preserve-3d;
-            transform: perspective(1500px) rotateX(-18deg);
-            animation: autoRun 40s linear infinite;
+            transform: translate(-50%, -50%) rotateX(var(--tilt)) rotateY(var(--rotation));
+            cursor: grab;
+            user-select: none;
+            transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
             z-index: 2;
         }
-        .banner:hover .slider {
-            animation-play-state: paused;
-        }
-        @keyframes autoRun {
-            from {
-                transform: perspective(1500px) rotateX(-18deg) rotateY(0deg);
-            }
-            to {
-                transform: perspective(1500px) rotateX(-18deg) rotateY(360deg);
-            }
+        .banner .slider.is-grabbing {
+            cursor: grabbing;
+            transition: none;
         }
         .banner .slider .item {
             position: absolute;
             inset: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transform-style: preserve-3d;
             transform:
-                rotateY(calc((var(--position) - 1) * (360 / var(--quantity)) * 1deg))
-                translateZ(380px);
+                rotateY(calc((var(--position) - 1) * (360deg / var(--quantity))))
+                translateZ(var(--translateZ));
+        }
+        .banner .item.is-active .service-card {
+            box-shadow: 0 24px 48px rgba(15, 23, 42, 0.4);
+            background: rgba(255, 255, 255, 0.94);
+        }
+        .banner .item.is-active .service-card::after {
+            opacity: 0.68;
         }
         .banner .model {
             position: absolute;
@@ -464,37 +486,60 @@
             filter: drop-shadow(0 18px 35px rgba(0, 0, 0, 0.45));
         }
         .service-card {
-            width: 100%;
-            height: 100%;
-            border-radius: 1rem;
-            background: rgba(255, 255, 255, 0.85);
-            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
-            overflow: hidden;
+            position: relative;
+            width: var(--card-width);
+            height: var(--card-height);
+            border-radius: 1.35rem;
+            background: rgba(255, 255, 255, 0.88);
+            box-shadow: 0 14px 32px rgba(15, 23, 42, 0.28);
+            overflow: visible;
             color: #1a1a1a;
             font-family: 'Ubuntu', sans-serif;
             font-weight: 600;
             text-align: center;
             transition: transform 0.35s ease, box-shadow 0.35s ease, background 0.35s ease;
-            position: relative;
-            transform: translateY(-10%);
-            --service-image-brightness: 70%;
-            -webkit-box-reflect: below 0 linear-gradient(transparent 0%, rgba(15, 23, 42, 0.45) 55%, rgba(15, 23, 42, 0.75));
+            transform: translateY(-12%);
+            display: flex;
+            --service-image-brightness: 72%;
+            --panel-image: none;
+        }
+        .service-card::after {
+            content: '';
+            position: absolute;
+            top: calc(100% + 14px);
+            left: 0;
+            width: 100%;
+            height: calc(var(--card-height) * 0.42);
+            background-image:
+                linear-gradient(180deg, rgba(15, 23, 42, 0.38) 0%, rgba(15, 23, 42, 0.05) 70%),
+                var(--panel-image);
+            background-size: cover;
+            background-position: center;
+            transform: scaleY(-1);
+            transform-origin: top;
+            opacity: 0.52;
+            filter: blur(0.25px) saturate(0.95);
+            pointer-events: none;
+            -webkit-mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.7), transparent);
+                    mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.7), transparent);
         }
         .service-card:hover {
-            transform: translateY(calc(-10% - 8px)) scale(1.02);
-            box-shadow: 0 12px 28px rgba(15, 23, 42, 0.3);
-            background: rgba(255, 255, 255, 0.92);
-            --service-image-brightness: 85%;
+            transform: translateY(calc(-12% - 8px)) scale(1.02);
+            box-shadow: 0 20px 38px rgba(15, 23, 42, 0.34);
+            background: rgba(255, 255, 255, 0.95);
+            --service-image-brightness: 82%;
         }
         .service-image {
             position: relative;
             display: flex;
-            min-height: 220px;
+            flex: 1 1 auto;
+            background-image: linear-gradient(145deg, rgba(0, 206, 219, 0.18), rgba(124, 58, 237, 0.18)), var(--panel-image);
             background-size: cover;
             background-position: center;
             filter: brightness(var(--service-image-brightness)) saturate(1.05);
             transition: transform 0.6s ease, filter 0.6s ease;
             overflow: hidden;
+            border-radius: inherit;
         }
         .service-image::before {
             content: '';
@@ -502,13 +547,13 @@
             inset: 0;
             background-image: linear-gradient(145deg, rgba(0, 206, 219, 0.35), rgba(124, 58, 237, 0.35));
             mix-blend-mode: screen;
-            opacity: 0.85;
+            opacity: 0.75;
         }
         .service-image::after {
             content: '';
             position: absolute;
             inset: 0;
-            background: linear-gradient(180deg, rgba(15, 23, 42, 0.05) 0%, rgba(15, 23, 42, 0.65) 100%);
+            background: linear-gradient(180deg, rgba(15, 23, 42, 0.05) 0%, rgba(15, 23, 42, 0.68) 100%);
         }
         .service-card:hover .service-image {
             transform: scale(1.02);
@@ -574,16 +619,110 @@
                 font-size: 1rem;
             }
         }
-        .banner .item:nth-child(1) .service-image { background-image: linear-gradient(rgba(15, 23, 42, 0.1), rgba(15, 23, 42, 0.1)), url('assets/img/card1.png'); }
-        .banner .item:nth-child(2) .service-image { background-image: linear-gradient(rgba(15, 23, 42, 0.1), rgba(15, 23, 42, 0.1)), url('assets/img/card2.png'); }
-        .banner .item:nth-child(3) .service-image { background-image: linear-gradient(rgba(15, 23, 42, 0.1), rgba(15, 23, 42, 0.1)), url('assets/img/card3.png'); }
-        .banner .item:nth-child(4) .service-image { background-image: linear-gradient(rgba(15, 23, 42, 0.1), rgba(15, 23, 42, 0.1)), url('assets/img/card4.png'); }
-        .banner .item:nth-child(5) .service-image { background-image: linear-gradient(rgba(15, 23, 42, 0.1), rgba(15, 23, 42, 0.1)), url('assets/img/card5.png'); }
-        .banner .item:nth-child(6) .service-image { background-image: linear-gradient(rgba(15, 23, 42, 0.1), rgba(15, 23, 42, 0.1)), url('assets/img/card6.png'); }
-        .banner .item:nth-child(7) .service-image { background-image: linear-gradient(rgba(15, 23, 42, 0.1), rgba(15, 23, 42, 0.1)), url('assets/img/card7.png'); }
-        .banner .item:nth-child(8) .service-image { background-image: linear-gradient(rgba(15, 23, 42, 0.1), rgba(15, 23, 42, 0.1)), url('assets/img/card8.png'); }
-        .banner .item:nth-child(9) .service-image { background-image: linear-gradient(rgba(15, 23, 42, 0.1), rgba(15, 23, 42, 0.1)), url('assets/img/card9.png'); }
-        .banner .item:nth-child(10) .service-image { background-image: linear-gradient(rgba(15, 23, 42, 0.1), rgba(15, 23, 42, 0.1)), url('assets/img/card10.png'); }
+        @media (max-width: 1023px) {
+            .banner {
+                --card-width: clamp(8.5rem, 28vw, 11rem);
+                --translateZ: calc(var(--card-width) * 4);
+                --tilt: -14deg;
+            }
+        }
+        @media (max-width: 767px) {
+            .banner {
+                min-height: 26rem;
+                --card-width: clamp(7.25rem, 42vw, 9.5rem);
+                --translateZ: calc(var(--card-width) * 3.4);
+            }
+            .service-overlay {
+                padding: 2rem 1.25rem;
+            }
+        }
+        .banner-expansion {
+            position: fixed;
+            inset: 0;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: clamp(1.5rem, 6vw, 3rem);
+            z-index: 70;
+        }
+        .banner-expansion.is-visible {
+            display: flex;
+        }
+        .banner-expansion__backdrop {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(180deg, rgba(13, 18, 30, 0.85), rgba(13, 18, 30, 0.92));
+            backdrop-filter: blur(12px);
+        }
+        .banner-expansion__card {
+            position: relative;
+            width: min(90vw, 520px);
+            aspect-ratio: 9 / 16;
+            border-radius: 1.6rem;
+            overflow: hidden;
+            background-image: linear-gradient(160deg, rgba(15, 23, 42, 0.1), rgba(15, 23, 42, 0.65)), var(--panel-image, none);
+            background-size: cover;
+            background-position: center;
+            box-shadow: 0 40px 80px rgba(15, 23, 42, 0.55);
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: clamp(1.5rem, 3vh, 2.5rem);
+            color: #f8fafc;
+        }
+        .banner-expansion__card::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(180deg, rgba(15, 23, 42, 0.05) 0%, rgba(15, 23, 42, 0.78) 85%);
+            z-index: 0;
+        }
+        .banner-expansion__content {
+            position: relative;
+            z-index: 1;
+            display: grid;
+            gap: 0.75rem;
+        }
+        .banner-expansion__title {
+            font-size: clamp(1.75rem, 3vw, 2.25rem);
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+        }
+        .banner-expansion__copy {
+            font-size: clamp(1rem, 2.1vw, 1.125rem);
+            line-height: 1.6;
+            color: rgba(241, 245, 249, 0.95);
+        }
+        .banner-expansion__close {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 2.5rem;
+            height: 2.5rem;
+            border-radius: 999px;
+            background: rgba(15, 23, 42, 0.65);
+            color: #f8fafc;
+            border: 1px solid rgba(248, 250, 252, 0.2);
+            backdrop-filter: blur(4px);
+            transition: transform 0.2s ease, background 0.2s ease;
+            z-index: 2;
+        }
+        .banner-expansion__close:hover {
+            transform: scale(1.05);
+            background: rgba(220, 20, 60, 0.85);
+        }
+        @media (max-width: 640px) {
+            .banner-expansion__card {
+                width: min(92vw, 380px);
+            }
+        }
+        body.banner-expansion--open {
+            overflow: hidden;
+        }
         .loader {
             width: 20px;
             height: 20px;
@@ -847,9 +986,9 @@
 <section id="integrations" class="py-16 md:py-24">
     <div class="max-w-7xl mx-auto px-4 text-center space-y-12">
         <div class="grid grid-cols-[1fr,auto,1fr] items-center gap-4 md:gap-8 max-w-4xl mx-auto">
-            <img src="public/assets/images/shopifydark.png" alt="Shopify Logo" class="integration-logo integration-hero-logo object-contain justify-self-end">
+            <img src="public/assets/images/shopifydark.png" alt="Shopify Logo" class="integration-logo integration-hero-logo integration-logo--xl object-contain justify-self-end">
             <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold font-ubuntu uppercase tracking-wide">Integrate With Your Favorite Tools</h2>
-            <img src="public/assets/images/gohighleveldark.png" alt="GoHighLevel Logo" class="integration-logo integration-hero-logo object-contain justify-self-start">
+            <img src="public/assets/images/gohighleveldark.png" alt="GoHighLevel Logo" class="integration-logo integration-hero-logo integration-logo--xl object-contain justify-self-start">
         </div>
 
         <p class="text-lg text-slate-300 max-w-2xl mx-auto">Connect with your favorite tools and services</p>
@@ -1255,25 +1394,6 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // --- NEW INTEGRATIONS SCRIPT ---
-  const integrationLogos = [
-      'bigcommerce.webp', 'clover.webp', 'freshbooks.webp', 'hubspot.webp',
-      'keap.webp', 'lightspeed.webp', 'magento.webp', 'mastercard.webp',
-      'memberpress.webp', 'ncr.webp', 'quickbooks.webp', 'salesforce.webp',
-      'squarespace.webp', 'vend.webp', 'visa.webp', 'wix.webp',
-      'woocommerce.webp', 'zoho_crm.webp'
-  ];
-  const integrationsTrack = document.getElementById('integrations-track');
-  if (integrationsTrack) {
-    const allLogos = [...integrationLogos, ...integrationLogos]; // Duplicate for seamless loop
-    allLogos.forEach(logoFile => {
-        const logoName = logoFile.split('.')[0].replace('_', ' ').replace('-', ' ');
-        const item = document.createElement('div');
-        item.className = 'integration-item flex-shrink-0';
-        item.innerHTML = `<img src="assets/integrations/${logoFile}" alt="${logoName} Logo" class="integration-logo h-10 sm:h-12 object-contain">`;
-        integrationsTrack.appendChild(item);
-    });
-  }
   const headingTexts = { "integrations-old": "Integrate with Your Favorite Tools" }; // Old logic, can be removed or updated
   const headingObserver = new IntersectionObserver((entries, observer) => {
     entries.forEach(entry => {
@@ -1542,6 +1662,7 @@ document.addEventListener('DOMContentLoaded', () => {
     <!-- ================= GLOBAL LAYOUT SCRIPTS START ================= -->
     <!-- External signup panel logic plus helpers for navigation, logos, and UI polish -->
     <script src="/assets/signup-panel.js" defer></script>
+    <script type="module" src="/assets/banner-carousel.js"></script>
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
