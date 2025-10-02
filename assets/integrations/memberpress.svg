@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 120" role="img" aria-labelledby="title desc">
+  <title id="title">MemberPress Logo</title>
+  <desc id="desc">Stylised MP monogram used as a placeholder logo for MemberPress integrations carousel.</desc>
+  <defs>
+    <linearGradient id="mpGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1a94ff" />
+      <stop offset="100%" stop-color="#3bd9c6" />
+    </linearGradient>
+  </defs>
+  <rect width="240" height="120" rx="18" fill="#0f172a" />
+  <path fill="url(#mpGradient)" d="M52 84V36h19.6l17.2 23.7L106 36h19.6v48H108V61l-19.2 26.6H84L64.8 61v23H52zm109.4 0V36h22.3c15.5 0 25.9 9.6 25.9 24s-10.4 24-25.9 24h-22.3zm21.8-13.3c6.3 0 10.4-3.8 10.4-10.7 0-6.9-4.1-10.7-10.4-10.7h-6.6v21.4h6.6z" />
+</svg>

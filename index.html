@@ -1,5 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" class="dark">
+<!-- ================= HEAD SECTION START ================= -->
+<!-- Meta tags, external resources, and global styling configuration -->
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -44,8 +46,14 @@
     <!-- Lucide Icons -->
     <script src="https://unpkg.com/lucide@latest"></script>
 
+    <!-- Support CTA Handler -->
+    <script src="/assets/support.js" defer></script>
+
     <!-- Custom Styles -->
     <style>
+        html, body {
+            overflow-x: hidden;
+        }
         html {
             scroll-behavior: smooth;
         }
@@ -137,6 +145,57 @@
             clip: rect(0,0,0,0);
             border: 0;
         }
+
+        .hero-layout {
+            gap: 2.5rem;
+        }
+
+        .hero-overlay {
+            max-width: min(100%, 80rem);
+            width: 100%;
+        }
+
+        .application-section {
+            padding-bottom: 1rem;
+        }
+
+        @media (max-width: 767px) {
+            .hero-layout {
+                gap: 2rem;
+            }
+
+            .hero-text {
+                text-align: center;
+            }
+
+            .hero-text p {
+                text-align: center;
+            }
+
+            .hero-chat-card {
+                width: 100%;
+                margin: 0 auto;
+                padding: 1.25rem;
+                background-color: rgba(15, 23, 42, 0.35);
+                border-radius: 1.5rem;
+                backdrop-filter: blur(6px);
+            }
+
+            .hero-chat-card .field {
+                font-size: 1rem;
+                padding-top: 0.85rem;
+                padding-bottom: 0.85rem;
+            }
+
+            .hero-chat-card button {
+                transform: scale(0.95);
+            }
+
+            #faq-answer {
+                max-height: 240px;
+                font-size: 0.95rem;
+            }
+        }
     </style>
 
     <!-- Favicons -->
@@ -146,53 +205,14 @@
     <link rel="icon" type="image/x-icon" href="/favicon.ico">
     <link rel="manifest" href="/site.webmanifest">
 </head>
+<!-- ================= HEAD SECTION END ================= -->
 <body class="text-slate-100">
 
-    <!-- Mobile Menu Button - Pinned -->
-    <button id="mobile-menu-button" class="md:hidden p-3 rounded-full bg-slate-900/50 backdrop-blur-sm text-white fixed top-24 left-6 z-[60] hover:bg-slate-800/70 transition-colors">
-        <i data-lucide="menu" class="h-6 w-6"></i>
-        <span class="sr-only">Open menu</span>
-    </button>
-    
-    <!-- Mobile Menu Panel -->
-    <div id="mobile-menu" class="fixed top-24 left-6 mt-14 w-72 rounded-xl bg-[#1c1c1c] shadow-2xl border border-brand-teal p-4 z-[59] hidden">
-        <nav class="flex flex-col space-y-6 text-base font-medium font-inter">
-             <div class="space-y-2">
-                 <h4 class="text-sm font-semibold text-brand-teal uppercase tracking-[0.2em]">Product</h4>
-                 <a href="/#payments" class="block w-full px-4 py-2 text-left rounded-full border border-brand-teal bg-[#262626] text-white transition-colors duration-200 hover:bg-brand-teal">Payment Services</a>
-                 <button type="button" id="mobile-integrations-toggle" aria-expanded="false" aria-controls="mobile-integrations-menu" class="flex items-center justify-between w-full px-4 py-2 text-left rounded-full border border-brand-teal bg-[#262626] text-white transition-colors duration-200 hover:bg-brand-teal">
-                     <span>Integrations</span>
-                     <span class="ml-2 text-brand-teal">
-                         <svg data-collapsible-icon class="w-4 h-4 transition-transform" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                             <polyline points="6 9 12 15 18 9"></polyline>
-                         </svg>
-                     </span>
-                 </button>
-                <div id="mobile-integrations-menu" class="mt-2 space-y-2 pl-3 hidden">
-                    <a href="/integrations.html" class="block w-full px-4 py-2 text-left rounded-full border border-brand-teal bg-[#1f1f1f] text-white transition-colors duration-200 hover:bg-brand-teal">Integrations Directory</a>
-                    <a href="/.html" class="block w-full px-4 py-2 text-left rounded-full border border-brand-teal bg-[#1f1f1f] text-white transition-colors duration-200 hover:bg-brand-teal">Shopify Integration</a>
-                    <a href="/gohighlevel.html" class="block w-full px-4 py-2 text-left rounded-full border border-brand-teal bg-[#1f1f1f] text-white transition-colors duration-200 hover:bg-brand-teal">GoHighLevel Integration</a>
-                </div>
-                 <a href="/#checklist" class="block w-full px-4 py-2 text-left rounded-full border border-brand-teal bg-[#262626] text-white transition-colors duration-200 hover:bg-brand-teal">Setup Checklist</a>
-             </div>
-             <div class="space-y-2">
-                 <h4 class="text-sm font-semibold text-brand-teal uppercase tracking-[0.2em]">Support</h4>
-                 <a href="mailto:support@merchanthaus.io" class="block w-full px-4 py-2 text-left rounded-full border border-brand-teal bg-[#262626] text-white transition-colors duration-200 hover:bg-brand-teal">Contact Support</a>
-                 <a href="/faq.html" class="block w-full px-4 py-2 text-left rounded-full border border-brand-teal bg-[#262626] text-white transition-colors duration-200 hover:bg-brand-teal">FAQ</a>
-             </div>
-             <div class="space-y-2">
-                 <h4 class="text-sm font-semibold text-brand-teal uppercase tracking-[0.2em]">Legal</h4>
-                 <a href="/privacy.html" class="block w-full px-4 py-2 text-left rounded-full border border-brand-teal bg-[#262626] text-white transition-colors duration-200 hover:bg-brand-teal">Privacy Policy</a>
-                 <a href="/terms.html" class="block w-full px-4 py-2 text-left rounded-full border border-brand-teal bg-[#262626] text-white transition-colors duration-200 hover:bg-brand-teal">Terms &amp; Conditions</a>
-                 <a href="/compliance.html" class="block w-full px-4 py-2 text-left rounded-full border border-brand-teal bg-[#262626] text-white transition-colors duration-200 hover:bg-brand-teal">Compliance</a>
-             </div>
-             <a href="https://retailmanager.merchant.haus" class="sm:hidden block w-full px-4 py-2 text-center rounded-full border border-brand-teal bg-[#262626] text-white transition-colors duration-200 hover:bg-brand-teal">Login</a>
-         </nav>
-    </div>
-
     <!-- Header -->
+    <!-- ================= HEADER SECTION START ================= -->
+    <!-- Sticky navigation bar with logo, contact info, and responsive menus -->
     <div class="sticky top-0 z-50">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-4 pb-6">
+        <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-4 pb-6">
              <header class="header-glass border border-slate-200/70 dark:border-slate-800 rounded-full shadow-lg">
                  <div class="relative max-w-7xl mx-auto px-6 py-3 flex items-center justify-between">
                     <a href="/index.html" class="flex items-center gap-3 group">
@@ -202,16 +222,67 @@
                      <div class="flex items-center gap-6">
                          <div class="hidden md:flex items-center gap-4 text-sm font-sans">
                              <a href="tel:15056006042" class="hover:text-brand-teal transition-colors">1-505-600-6042</a>
-                             <a href="mailto:support@merchanthaus.io" class="hover:text-brand-teal transition-colors">support@merchanthaus.io</a>
+                             <button
+                               type="button"
+                               class="js-support inline-flex items-center justify-center rounded-full border border-brand-teal px-4 py-2 font-semibold text-brand-teal transition-colors duration-300 hover:bg-brand-teal hover:text-white"
+                               data-cta="contact-support"
+                               data-cta-location="header-desktop"
+                             >Contact Support</button>
                          </div>
                          <button type="button" class="js-signup-cta bg-brand-crimson hover:bg-opacity-90 text-white border border-transparent px-4 py-2 rounded-full text-sm font-semibold font-inter transition-colors duration-300">Get Started</button>
                          <a href="https://retailmanager.merchant.haus" class="hidden sm:block bg-transparent hover:bg-brand-teal text-brand-teal hover:text-white border border-brand-teal px-4 py-2 rounded-lg text-sm font-semibold font-inter transition-colors duration-300">Login</a>
                      </div>
                  </div>
             </header>
+            <button id="mobile-menu-button" class="md:hidden p-3 rounded-full bg-slate-900/50 backdrop-blur-sm text-white absolute left-6 top-full translate-y-3 z-[60] hover:bg-slate-800/70 transition-colors shadow-lg">
+                <i data-lucide="menu" class="h-6 w-6"></i>
+                <span class="sr-only">Open menu</span>
+            </button>
+            <div id="mobile-menu" class="absolute left-6 top-full mt-16 w-72 rounded-xl bg-[#1c1c1c] shadow-2xl border border-brand-teal p-4 z-[59] hidden">
+                <nav class="flex flex-col space-y-6 text-base font-medium font-inter">
+                    <div class="space-y-2">
+                        <h4 class="text-sm font-semibold text-brand-teal uppercase tracking-[0.2em]">Product</h4>
+                        <a href="/#payments" class="block w-full px-4 py-2 text-left rounded-full border border-brand-teal bg-[#262626] text-white transition-colors duration-200 hover:bg-brand-teal">Payment Services</a>
+                        <button type="button" id="mobile-integrations-toggle" aria-expanded="false" aria-controls="mobile-integrations-menu" class="flex items-center justify-between w-full px-4 py-2 text-left rounded-full border border-brand-teal bg-[#262626] text-white transition-colors duration-200 hover:bg-brand-teal">
+                            <span>Integrations</span>
+                            <span class="ml-2 text-brand-teal">
+                                <svg data-collapsible-icon class="w-4 h-4 transition-transform" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <polyline points="6 9 12 15 18 9"></polyline>
+                                </svg>
+                            </span>
+                        </button>
+                        <div id="mobile-integrations-menu" class="mt-2 space-y-2 pl-3 hidden">
+                            <a href="/integrations.html" class="block w-full px-4 py-2 text-left rounded-full border border-brand-teal bg-[#1f1f1f] text-white transition-colors duration-200 hover:bg-brand-teal">Integrations Directory</a>
+                            <a href="/.html" class="block w-full px-4 py-2 text-left rounded-full border border-brand-teal bg-[#1f1f1f] text-white transition-colors duration-200 hover:bg-brand-teal">Shopify Integration</a>
+                            <a href="/gohighlevel.html" class="block w-full px-4 py-2 text-left rounded-full border border-brand-teal bg-[#1f1f1f] text-white transition-colors duration-200 hover:bg-brand-teal">GoHighLevel Integration</a>
+                        </div>
+                        <a href="/#checklist" class="block w-full px-4 py-2 text-left rounded-full border border-brand-teal bg-[#262626] text-white transition-colors duration-200 hover:bg-brand-teal">Setup Checklist</a>
+                    </div>
+                    <div class="space-y-2">
+                        <h4 class="text-sm font-semibold text-brand-teal uppercase tracking-[0.2em]">Support</h4>
+                        <button
+                          type="button"
+                          class="js-support block w-full rounded-full border border-brand-teal bg-[#262626] px-4 py-2 text-left font-semibold text-white transition-colors duration-200 hover:bg-brand-teal"
+                          data-cta="contact-support"
+                          data-cta-location="mobile-nav"
+                        >Contact Support</button>
+                        <a href="/faq.html" class="block w-full px-4 py-2 text-left rounded-full border border-brand-teal bg-[#262626] text-white transition-colors duration-200 hover:bg-brand-teal">FAQ</a>
+                    </div>
+                    <div class="space-y-2">
+                        <h4 class="text-sm font-semibold text-brand-teal uppercase tracking-[0.2em]">Legal</h4>
+                        <a href="/privacy.html" class="block w-full px-4 py-2 text-left rounded-full border border-brand-teal bg-[#262626] text-white transition-colors duration-200 hover:bg-brand-teal">Privacy Policy</a>
+                        <a href="/terms.html" class="block w-full px-4 py-2 text-left rounded-full border border-brand-teal bg-[#262626] text-white transition-colors duration-200 hover:bg-brand-teal">Terms &amp; Conditions</a>
+                        <a href="/compliance.html" class="block w-full px-4 py-2 text-left rounded-full border border-brand-teal bg-[#262626] text-white transition-colors duration-200 hover:bg-brand-teal">Compliance</a>
+                    </div>
+                    <a href="https://retailmanager.merchant.haus" class="sm:hidden block w-full px-4 py-2 text-center rounded-full border border-brand-teal bg-[#262626] text-white transition-colors duration-200 hover:bg-brand-teal">Login</a>
+                </nav>
+            </div>
         </div>
     </div>
+    <!-- ================= HEADER SECTION END ================= -->
 
+    <!-- ================= SIGNUP PANEL OVERLAY START ================= -->
+    <!-- Slide-in multi-step signup workflow for creating new accounts -->
     <div id="signup-panel-overlay" class="panel-overlay fixed inset-0 bg-black/60 z-50 opacity-0 invisible">
         <div id="signup-panel" class="panel-container fixed top-0 right-0 h-full w-full max-w-2xl bg-white dark:bg-slate-900 shadow-2xl transform translate-x-full flex flex-col">
             <div class="p-6 sm:p-8 relative flex-shrink-0">
@@ -245,7 +316,10 @@
             </div>
         </div>
     </div>
+    <!-- ================= SIGNUP PANEL OVERLAY END ================= -->
 
+<!-- ================= INLINE EXPERIENCE STYLES START ================= -->
+<!-- Additional page-specific styling for hero, banners, and dynamic effects -->
 <style>
 .field:focus { outline: none; box-shadow: 0 0 0 3px rgba(239,60,91,.35); }
 .cursor { display: inline-block; width: 3px; height: 1em; background-color: #dc2743; animation: blink-caret .75s step-end infinite; vertical-align: bottom; }
@@ -262,7 +336,7 @@
           mask-image: linear-gradient(to right, transparent 0, #000 var(--marquee-fade), #000 calc(100% - var(--marquee-fade)), transparent 100%);
 }
 .marquee-track {
-  animation: marquee-slide-left 45s linear infinite;
+  animation: marquee-slide-left 30s linear infinite;
   will-change: transform;
 }
 .marquee-track--reverse { animation-name: marquee-slide-right; }
@@ -296,9 +370,18 @@
   padding: 0.5rem 0.75rem;
 }
 #integrations .integration-logo {
+  --logo-scale: 1;
+  --logo-hover-scale: calc(var(--logo-scale) * 1.1);
   display: block;
   opacity: 0.95;
   transition: transform 0.3s ease, filter 0.3s ease, opacity 0.3s ease;
+  transform: scale(var(--logo-scale));
+}
+#integrations .integration-hero-logo {
+  width: clamp(12rem, 28vw, 20rem);
+  max-height: clamp(6rem, 18vw, 12rem);
+  height: auto;
+  filter: drop-shadow(0 10px 25px rgba(16, 24, 40, 0.3));
 }
 #integrations .integration-hero-logo {
   width: clamp(14rem, 32vw, 22rem);
@@ -308,61 +391,405 @@
   filter: drop-shadow(0 10px 25px rgba(16, 24, 40, 0.3));
 }
 #integrations .integration-item:hover .integration-logo {
-  transform: scale(1.1);
+  transform: scale(var(--logo-hover-scale));
   opacity: 1;
+}
+.integration-logo--xl {
+  --logo-scale: 1.95;
+}
+@media (max-width: 768px) {
+  .integration-logo--xl {
+    --logo-scale: 1.6;
+  }
 }
 .dark #integrations .integration-logo {
   filter: brightness(1.15) contrast(1.05);
 }
 
 
-/* === ADDED STYLES FOR PAYMENTS SECTION === */
-#payments {
-  position: relative;
-  overflow: hidden;
-  background-color: #6dffca;
-}
-#payments::before {
-  content: '';
-  position: absolute;
-  top: -50%;
-  left: -50%;
-  width: 200%;
-  height: 200%;
-  background-image:
-    repeating-linear-gradient(45deg, transparent, transparent 35px, rgba(255,255,255,0.1) 35px, rgba(255,255,255,0.1) 70px),
-    repeating-linear-gradient(-45deg, transparent, transparent 35px, rgba(0,0,0,0.05) 35px, rgba(0,0,0,0.05) 70px);
-  z-index: 0;
-  animation: fadeInAnimation 4s ease-out forwards, panBackgroundAnimation 80s linear infinite;
-}
-#payments > * {
-  position: relative;
-  z-index: 1;
-}
-@keyframes fadeInAnimation {
-  from { opacity: 0; }
-  to { opacity: 1; }
-}
-@keyframes panBackgroundAnimation {
-  0% { transform: translate(0, 0); }
-  100% { transform: translate(140px, 140px); }
-}
-/* === END OF ADDED STYLES === */
+        /* === PAYMENT SERVICES EXPERIENCE === */
+        #payments {
+            position: relative;
+            overflow: hidden;
+            width: 100%;
+        }
+        #payments::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle at top, rgba(220, 20, 60, 0.25), transparent 55%),
+                        radial-gradient(circle at bottom, rgba(0, 206, 219, 0.15), transparent 60%);
+            opacity: 0.8;
+            z-index: 0;
+            transform: scale(1.2);
+        }
+        #payments > * {
+            position: relative;
+            z-index: 1;
+        }
+        .payments-heading-card {
+            background: rgba(28, 28, 28, 0.9);
+            backdrop-filter: blur(14px);
+        }
+        .banner {
+            --card-width: clamp(9.75rem, 18vw, 13rem);
+            --card-height: calc(var(--card-width) * 16 / 9);
+            --tilt: -16deg;
+            --translateZ: calc(var(--card-width) * 4.6);
+            width: 100%;
+            min-height: clamp(30rem, 70vh, 42rem);
+            text-align: center;
+            position: relative;
+            perspective: 1600px;
+            touch-action: pan-y;
+        }
+        .banner .slider {
+            --rotation: 0deg;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: var(--card-width);
+            height: var(--card-height);
+            transform-style: preserve-3d;
+            transform: translate(-50%, -50%) rotateX(var(--tilt)) rotateY(var(--rotation));
+            cursor: grab;
+            user-select: none;
+            transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+            z-index: 2;
+        }
+        .banner .slider.is-grabbing {
+            cursor: grabbing;
+            transition: none;
+        }
+        .banner .slider .item {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transform-style: preserve-3d;
+            transform:
+                rotateY(calc((var(--position) - 1) * (360deg / var(--quantity))))
+                translateZ(var(--translateZ));
+        }
+        .banner .item.is-active .service-card {
+            box-shadow: 0 24px 48px rgba(15, 23, 42, 0.4);
+            background: rgba(255, 255, 255, 0.94);
+        }
+        .banner .item.is-active .service-card::after {
+            opacity: 0.68;
+        }
+        .banner .model {
+            position: absolute;
+            inset: auto 0 0;
+            margin: 0 auto;
+            width: min(520px, 90vw);
+            height: clamp(18rem, 45vh, 24rem);
+            background-image: url('assets/3dbanner/images/model.png');
+            background-repeat: no-repeat;
+            background-position: top center;
+            background-size: contain;
+            z-index: 1;
+            filter: drop-shadow(0 18px 35px rgba(0, 0, 0, 0.45));
+        }
+        .service-card {
+            position: relative;
+            width: var(--card-width);
+            height: var(--card-height);
+            border-radius: 1.35rem;
+            background: rgba(255, 255, 255, 0.88);
+            box-shadow: 0 14px 32px rgba(15, 23, 42, 0.28);
+            overflow: visible;
+            color: #1a1a1a;
+            font-family: 'Ubuntu', sans-serif;
+            font-weight: 600;
+            text-align: center;
+            transition: transform 0.35s ease, box-shadow 0.35s ease, background 0.35s ease;
+            transform: translateY(-12%);
+            display: flex;
+            --service-image-brightness: 67%;
+            --panel-image: none;
+        }
+        .service-card::after {
+            content: '';
+            position: absolute;
+            top: calc(100% + 14px);
+            left: 0;
+            width: 100%;
+            height: calc(var(--card-height) * 0.42);
+            background-image:
+                linear-gradient(180deg, rgba(15, 23, 42, 0.38) 0%, rgba(15, 23, 42, 0.05) 70%),
+                var(--panel-image);
+            background-size: cover;
+            background-position: center;
+            transform: scaleY(-1);
+            transform-origin: top;
+            opacity: 0.52;
+            filter: blur(0.25px) saturate(0.95);
+            pointer-events: none;
+            -webkit-mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.7), transparent);
+                    mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.7), transparent);
+        }
+        .service-card:hover {
+            transform: translateY(calc(-12% - 8px)) scale(1.02);
+            box-shadow: 0 20px 38px rgba(15, 23, 42, 0.34);
+            background: rgba(255, 255, 255, 0.95);
+            --service-image-brightness: 77%;
+        }
+        .service-image {
+            position: relative;
+            display: flex;
+            flex: 1 1 auto;
+            background-image: var(--panel-image);
+            background-size: cover;
+            background-position: center;
+            filter: brightness(var(--service-image-brightness)) saturate(1.05);
+            transition: transform 0.6s ease, filter 0.6s ease;
+            overflow: hidden;
+            border-radius: inherit;
+        }
+        .service-image::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: none;
+            mix-blend-mode: normal;
+            opacity: 1;
+        }
+        .service-image::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: none;
+        }
+        .service-card:hover .service-image {
+            transform: scale(1.02);
+        }
+        .service-card:hover .service-overlay {
+            background: none;
+        }
+        .service-overlay {
+            position: relative;
+            z-index: 1;
+            display: flex;
+            flex: 1 1 auto;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 0.85rem;
+            padding: 2.5rem 1.5rem;
+            width: 100%;
+            background: none;
+            backdrop-filter: none;
+            color: #ffffff;
+            text-shadow: 0 1px 3px rgba(0, 0, 0, 0.55);
+        }
+        .service-icon-wrap {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0.5rem;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.7);
+            box-shadow: 0 12px 22px rgba(44, 62, 80, 0.18);
+            transition: transform 0.35s ease, box-shadow 0.35s ease;
+        }
+        .service-icon {
+            width: 2.2rem;
+            height: 2.2rem;
+            stroke-width: 1.5;
+            color: #ffffff;
+        }
+        .service-name {
+            font-size: 1.2rem;
+            font-weight: 600;
+            letter-spacing: 0.01em;
+            text-transform: uppercase;
+            text-align: center;
+            margin: 0.25rem 0 0;
+            transition: letter-spacing 0.35s ease, transform 0.35s ease;
+        }
+        .service-card:hover .service-icon-wrap {
+            transform: translateY(-6px) scale(1.05);
+            box-shadow: 0 18px 30px rgba(44, 62, 80, 0.25);
+        }
+        .service-card:hover .service-name {
+            letter-spacing: 0.08em;
+            transform: translateY(-2px);
+        }
+        @media (max-width: 768px) {
+            .service-icon {
+                width: 1.8rem;
+                height: 1.8rem;
+            }
+            .service-name {
+                font-size: 1rem;
+            }
+        }
+        @media (max-width: 1023px) {
+            .banner {
+                --card-width: clamp(8.5rem, 28vw, 11rem);
+                --translateZ: calc(var(--card-width) * 4);
+                --tilt: -14deg;
+            }
+        }
+        @media (max-width: 767px) {
+            .banner {
+                min-height: 26rem;
+                --card-width: clamp(7.25rem, 42vw, 9.5rem);
+                --translateZ: calc(var(--card-width) * 3.4);
+            }
+            .service-overlay {
+                padding: 2rem 1.25rem;
+            }
+        }
+        .banner-expansion {
+            position: fixed;
+            inset: 0;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: clamp(1.5rem, 6vw, 3rem);
+            z-index: 70;
+        }
+        .banner-expansion.is-visible {
+            display: flex;
+        }
+        .banner-expansion__backdrop {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(180deg, rgba(13, 18, 30, 0.85), rgba(13, 18, 30, 0.92));
+            backdrop-filter: blur(12px);
+        }
+        .banner-expansion__card {
+            position: relative;
+            width: min(90vw, 520px);
+            aspect-ratio: 9 / 16;
+            border-radius: 1.6rem;
+            overflow: hidden;
+            background-image: linear-gradient(160deg, rgba(15, 23, 42, 0.1), rgba(15, 23, 42, 0.65)), var(--panel-image, none);
+            background-size: cover;
+            background-position: center;
+            box-shadow: 0 40px 80px rgba(15, 23, 42, 0.55);
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: clamp(1.5rem, 3vh, 2.5rem);
+            color: #f8fafc;
+        }
+        .banner-expansion__card::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(180deg, rgba(15, 23, 42, 0.05) 0%, rgba(15, 23, 42, 0.78) 85%);
+            z-index: 0;
+        }
+        .banner-expansion__content {
+            position: relative;
+            z-index: 1;
+            display: grid;
+            gap: 0.75rem;
+        }
+        .banner-expansion__title {
+            font-size: clamp(1.75rem, 3vw, 2.25rem);
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+        }
+        .banner-expansion__copy {
+            font-size: clamp(1rem, 2.1vw, 1.125rem);
+            line-height: 1.6;
+            color: rgba(241, 245, 249, 0.95);
+        }
+        .banner-expansion__close {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 2.5rem;
+            height: 2.5rem;
+            border-radius: 999px;
+            background: rgba(15, 23, 42, 0.65);
+            color: #f8fafc;
+            border: 1px solid rgba(248, 250, 252, 0.2);
+            backdrop-filter: blur(4px);
+            transition: transform 0.2s ease, background 0.2s ease;
+            z-index: 2;
+        }
+        .banner-expansion__close:hover {
+            transform: scale(1.05);
+            background: rgba(220, 20, 60, 0.85);
+        }
+        @media (max-width: 640px) {
+            .banner-expansion__card {
+                width: min(92vw, 380px);
+            }
+        }
+        body.banner-expansion--open {
+            overflow: hidden;
+        }
+        .loader {
+            width: 20px;
+            height: 20px;
+            border: 3px solid #FFF;
+            border-bottom-color: transparent;
+            border-radius: 50%;
+            display: inline-block;
+            box-sizing: border-box;
+            animation: rotation 1s linear infinite;
+        }
+        @keyframes rotation {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        @media (max-width: 1023px) {
+            .banner .slider {
+                width: 140px;
+                height: 180px;
+                left: calc(50% - 70px);
+            }
+            .banner .slider .item {
+                transform:
+                    rotateY(calc((var(--position) - 1) * (360 / var(--quantity)) * 1deg))
+                    translateZ(300px);
+            }
+        }
+        @media (max-width: 767px) {
+            .banner {
+                min-height: 26rem;
+            }
+            .banner .slider {
+                width: 110px;
+                height: 150px;
+                left: calc(50% - 55px);
+            }
+            .banner .slider .item {
+                transform:
+                    rotateY(calc((var(--position) - 1) * (360 / var(--quantity)) * 1deg))
+                    translateZ(210px);
+            }
+        }
+        /* === END PAYMENT SERVICES EXPERIENCE === */
 </style>
+<!-- ================= INLINE EXPERIENCE STYLES END ================= -->
 
+<!-- ================= HERO SECTION START ================= -->
+<!-- Immersive introductory hero with animated FAQ assistant and onboarding CTA -->
 <div class="relative">
   <section class="relative overflow-hidden animate-fadeIn hero-bg-container">
     <div class="absolute inset-0 bg-black/50 -z-10"></div>
-    <div class="max-w-7xl mx-auto px-4 pt-16 md:pt-24 pb-28">
-      <div class="grid md:grid-cols-2 gap-10 items-center">
-        <div class="space-y-6 text-left">
+    <div class="max-w-7xl mx-auto px-4 pt-12 sm:pt-16 md:pt-24 pb-20 md:pb-28">
+      <div class="flex flex-col-reverse hero-layout md:grid md:grid-cols-2 md:gap-10 items-center">
+        <div class="space-y-6 text-left hero-text">
           <h1 class="text-3xl sm:text-4xl tracking-tight leading-tight text-white">
             <span class="uppercase font-ubuntu">PAYMENTS ANYWHERE - GROWTH EVERYWHERE</span>
             <span id="animated-headline-sub" class="grad-text-static text-2xl sm:text-3xl font-ubuntu inline sm:inline sm:ml-2">Engineered for speed, secured for trust, and designed to scale.</span>
           </h1>
-          <p class="text-lg text-gray-200 dark:text-slate-300 font-inter text-justify" style="font-weight:100">Effortlessly create your business profile and start accepting payments in minutes—cards, ACH, and secure pay links across online, in-store, and mobile. Lower your costs, onboard quickly, track performance in real time, and protect your business with advanced fraud and chargeback tools.</p>
+          <p class="text-lg text-gray-200 dark:text-slate-300 font-inter text-center md:text-justify" style="font-weight:100">Effortlessly create your business profile and start accepting payments in minutes—cards, ACH, and secure pay links across online, in-store, and mobile. Lower your costs, onboard quickly, track performance in real time, and protect your business with advanced fraud and chargeback tools.</p>
         </div>
-        <div class="relative p-4">
+        <div class="relative p-4 hero-chat-card">
           <div class="w-full space-y-4 relative z-10">
             <div class="relative">
               <input type="text" id="faq-question" placeholder="Ask about pricing, features..." class="field w-full p-4 pr-12 text-lg rounded-full bg-white/20 dark:bg-slate-900/30 border border-slate-300/50 dark:border-slate-700/50 text-white placeholder-slate-300 focus:ring-2 focus:ring-brand-crimson focus:border-transparent transition-all">
@@ -370,10 +797,8 @@
                 <i data-lucide="arrow-up" class="h-5 w-5"></i>
               </button>
             </div>
-            <div id="hero-actions" class="flex flex-wrap justify-center items-center gap-3">
+            <div id="hero-actions" class="flex flex-wrap items-center justify-center gap-3">
               <button class="js-signup-cta bg-transparent hover:bg-brand-crimson text-brand-crimson hover:text-white border border-brand-crimson px-4 py-2 rounded-full text-sm font-semibold transition-colors duration-300">Get Started</button>
-              <button class="bg-slate-100/20 dark:bg-slate-800/30 text-white px-4 py-2 rounded-full text-sm font-medium hover:bg-slate-200/30 dark:hover:bg-slate-700/40 transition-colors">Chargeback Help</button>
-              <button class="js-support bg-slate-100/20 dark:bg-slate-800/30 text-white px-4 py-2 rounded-full text-sm font-medium hover:bg-slate-200/30 dark:hover:bg-slate-700/40 transition-colors">Contact Support</button>
             </div>
             <div id="faq-answer" class="mt-6 p-4 text-left rounded-lg bg-white/90 dark:bg-slate-900/90 border border-slate-200 dark:border-slate-800 text-slate-800 dark:text-slate-200"></div>
           </div>
@@ -382,40 +807,204 @@
     </div>
   </section>
 
-  <div class="absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-1/2 z-10 w-full max-w-5xl px-4">
-    <div class="bg-white dark:bg-[#1c1c1c] text-slate-800 dark:text-slate-200 px-8 py-4 rounded-xl border-2 border-brand-crimson shadow-lg text-center">
+  </div>
+</div>
+<!-- ================= HERO SECTION END ================= -->
+
+<!-- ================= PAYMENT SERVICES SHOWCASE START ================= -->
+<!-- 3D carousel and CTAs highlighting core payment capabilities -->
+<div class="relative pt-32 w-full">
+  <div class="absolute top-0 left-0 w-full h-48 bg-[#1c1c1c]"></div>
+  <div class="hero-overlay absolute top-32 left-1/2 -translate-x-1/2 -translate-y-1/2 z-20 w-full max-w-5xl px-4">
+    <div class="payments-heading-card text-slate-200 px-8 py-4 rounded-xl border-2 border-brand-crimson shadow-lg text-center">
       <h2 class="text-3xl font-ubuntu font-bold">Payment Services Tailored for You</h2>
     </div>
   </div>
-</div>
 
-<section id="payments" class="pt-28 pb-12">
-  <div class="max-w-5xl mx-auto px-4 text-center">
-    <p class="text-2xl sm:text-3xl font-ubuntu mb-12" style="color: #524848;">Your complete business toolkit for accepting and managing payments.</p>
-  </div>
-  <div class="marquee-wrapper relative w-full overflow-hidden">
-    <div class="marquee-track flex">
-      <div class="flex-shrink-0 flex items-center space-x-8" id="services-container-1"></div>
-      <div class="flex-shrink-0 flex items-center space-x-8" id="services-container-2" aria-hidden="true"></div>
+  <section id="payments" class="pt-28 pb-12">
+    <div class="max-w-5xl mx-auto px-4 text-center">
+      <p class="text-2xl sm:text-3xl font-ubuntu mb-4 text-slate-300">Your complete business toolkit for accepting and managing payments.</p>
     </div>
-  </div>
-  <div class="mt-8 sm:mt-10 flex justify-center px-4">
-    <button
-      type="button"
-      class="js-signup-cta inline-flex items-center justify-center rounded-full px-8 py-3 text-lg font-semibold text-white shadow-lg transition-all duration-300 hover:-translate-y-0.5 hover:shadow-xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-crimson focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:focus-visible:ring-offset-slate-900"
-      style="background-image: linear-gradient(135deg, #dc143c 0%, #f43f5e 50%, #ff758c 100%);"
-    >
-      Start accepting payments today
-    </button>
-  </div>
-</section>
 
+    <div class="banner">
+      <div class="slider" style="--quantity: 10">
+        <div class="item" style="--position: 1">
+          <div class="service-card">
+            <div class="service-image">
+              <div class="service-overlay">
+                <div class="service-icon-wrap">
+                  <i data-lucide="smartphone" class="service-icon"></i>
+                </div>
+                <span class="service-name">Mobile Payments</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="item" style="--position: 2">
+          <div class="service-card">
+            <div class="service-image">
+              <div class="service-overlay">
+                <div class="service-icon-wrap">
+                  <i data-lucide="shuffle" class="service-icon"></i>
+                </div>
+                <span class="service-name">Smart Routing</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="item" style="--position: 3">
+          <div class="service-card">
+            <div class="service-image">
+              <div class="service-overlay">
+                <div class="service-icon-wrap">
+                  <i data-lucide="file-text" class="service-icon"></i>
+                </div>
+                <span class="service-name">Invoicing</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="item" style="--position: 4">
+          <div class="service-card">
+            <div class="service-image">
+              <div class="service-overlay">
+                <div class="service-icon-wrap">
+                  <i data-lucide="repeat" class="service-icon"></i>
+                </div>
+                <span class="service-name">Recurring Billing</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="item" style="--position: 5">
+          <div class="service-card">
+            <div class="service-image">
+              <div class="service-overlay">
+                <div class="service-icon-wrap">
+                  <i data-lucide="lock" class="service-icon"></i>
+                </div>
+                <span class="service-name">Secure Tokenization</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="item" style="--position: 6">
+          <div class="service-card">
+            <div class="service-image">
+              <div class="service-overlay">
+                <div class="service-icon-wrap">
+                  <i data-lucide="bar-chart-2" class="service-icon"></i>
+                </div>
+                <span class="service-name">Detailed Reporting</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="item" style="--position: 7">
+          <div class="service-card">
+            <div class="service-image">
+              <div class="service-overlay">
+                <div class="service-icon-wrap">
+                  <i data-lucide="cpu" class="service-icon"></i>
+                </div>
+                <span class="service-name">Automation</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="item" style="--position: 8">
+          <div class="service-card">
+            <div class="service-image">
+              <div class="service-overlay">
+                <div class="service-icon-wrap">
+                  <i data-lucide="landmark" class="service-icon"></i>
+                </div>
+                <span class="service-name">ACH Payments</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="item" style="--position: 9">
+          <div class="service-card">
+            <div class="service-image">
+              <div class="service-overlay">
+                <div class="service-icon-wrap">
+                  <i data-lucide="shield-alert" class="service-icon"></i>
+                </div>
+                <span class="service-name">Fraud Prevention</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="item" style="--position: 10">
+          <div class="service-card">
+            <div class="service-image">
+              <div class="service-overlay">
+                <div class="service-icon-wrap">
+                  <i data-lucide="globe-2" class="service-icon"></i>
+                </div>
+                <span class="service-name">Global Payments</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="model" aria-hidden="true"></div>
+    </div>
+
+    <div class="mt-8 sm:mt-10 flex flex-wrap justify-center gap-4 px-4">
+      <button type="button" class="js-signup-cta inline-flex items-center justify-center rounded-full px-8 py-3 text-lg font-semibold text-white shadow-lg transition-all duration-300 hover:-translate-y-0.5 hover:shadow-xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-crimson focus-visible:ring-offset-2" style="background-image: linear-gradient(135deg, #dc143c 0%, #f43f5e 50%, #ff758c 100%);">
+        Start accepting payments today
+      </button>
+      <button id="open-ai-modal-btn" type="button" class="inline-flex items-center justify-center rounded-full px-8 py-3 text-lg font-semibold text-brand-dark bg-white shadow-lg transition-all duration-300 hover:-translate-y-0.5 hover:shadow-xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-teal focus-visible:ring-offset-2">
+        ✨ Find Your Perfect Fit
+      </button>
+    </div>
+  </section>
+</div>
+<!-- ================= PAYMENT SERVICES SHOWCASE END ================= -->
+
+<!-- ================= AI SUGGESTER MODAL START ================= -->
+<!-- Pop-up assistant collecting business context to recommend services -->
+<div id="ai-suggester-modal" class="fixed inset-0 bg-black/70 z-50 hidden items-center justify-center p-4">
+  <div class="bg-[#1c1c1c] border-2 border-brand-teal rounded-2xl shadow-xl p-6 sm:p-8 w-full max-w-2xl transform transition-all relative">
+    <button id="close-ai-modal" class="absolute top-4 right-4 text-slate-400 hover:text-white transition-colors">
+      <i data-lucide="x" class="h-6 w-6"></i>
+    </button>
+    <div class="flex items-center gap-3 mb-4">
+      <h3 class="text-2xl font-ubuntu font-bold text-white">✨ AI Service Suggester</h3>
+    </div>
+    <p class="text-slate-300 mb-4 font-inter text-sm sm:text-base">Describe your business, and our AI will recommend the best payment services for your needs.</p>
+
+    <textarea id="business-description" class="w-full bg-[#2a2a2a] border border-slate-700 rounded-lg p-3 text-white placeholder-slate-400 focus:ring-2 focus:ring-brand-teal focus:border-transparent transition" rows="3" placeholder="e.g., 'I run an online clothing store using Shopify.' or 'I'm a freelance photographer who needs to send invoices.'"></textarea>
+
+    <button id="get-recommendations-btn" class="mt-4 w-full bg-brand-crimson text-white font-bold py-3 px-4 rounded-lg hover:bg-opacity-90 transition-all flex items-center justify-center disabled:opacity-50 disabled:cursor-not-allowed">
+      <span class="btn-text">Get Recommendations</span>
+      <span class="loader hidden ml-2"></span>
+    </button>
+
+    <div id="recommendations-result" class="mt-6 max-h-64 overflow-y-auto pr-2"></div>
+  </div>
+</div>
+<!-- ================= AI SUGGESTER MODAL END ================= -->
+
+<!-- ================= INTEGRATIONS SECTION START ================= -->
+<!-- Rotating partner logos showcasing supported commerce platforms -->
 <section id="integrations" class="py-16 md:py-24">
     <div class="max-w-7xl mx-auto px-4 text-center space-y-12">
         <div class="grid grid-cols-[1fr,auto,1fr] items-center gap-4 md:gap-8 max-w-4xl mx-auto">
-            <img src="public/assets/images/shopifydark.png" alt="Shopify Logo" class="integration-logo integration-hero-logo object-contain justify-self-end">
-            <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold font-ubuntu uppercase tracking-wide">Integrate With Your Favorite Tools</h2>
-            <img src="public/assets/images/gohighleveldark.png" alt="GoHighLevel Logo" class="integration-logo integration-hero-logo object-contain justify-self-start">
+<img src="public/assets/images/shopifydark.png" 
+     alt="Shopify Logo" 
+     class="integration-logo integration-hero-logo integration-logo--xl object-contain justify-self-end">
+
+<h2 class="text-2xl sm:text-3xl md:text-4xl font-bold font-ubuntu uppercase tracking-wide">
+  Integrate With Your Favorite Tools
+</h2>
+
+<img src="public/assets/images/gohighleveldark.png" 
+     alt="GoHighLevel Logo" 
+     class="integration-logo integration-hero-logo integration-logo--xl object-contain justify-self-start">
+
         </div>
 
         <p class="text-lg text-slate-300 max-w-2xl mx-auto">Connect with your favorite tools and services</p>
@@ -427,7 +1016,10 @@
         </div>
     </div>
 </section>
+<!-- ================= INTEGRATIONS SECTION END ================= -->
 
+<!-- ================= SETUP CHECKLIST SECTION START ================= -->
+<!-- Step-by-step onboarding checklist with pinned heading overlay -->
 <div class="relative">
   <section id="checklist" class="pt-28 pb-16 bg-slate-50 dark:bg-slate-900/40 border-y border-slate-200/70 dark:border-slate-800">
     <div class="max-w-7xl mx-auto px-4 text-center">
@@ -477,32 +1069,67 @@
       </div>
     </div>
   </section>
-  <div class="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 z-10 w-full max-w-5xl px-4">
+  <div class="hero-overlay absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 z-10 w-full max-w-5xl px-4">
     <div class="bg-brand-teal px-8 py-4 rounded-xl shadow-lg text-center">
       <h2 class="text-3xl font-ubuntu font-bold" style="color: #524848;">Setup Checklist: What You’ll Need to Begin</h2>
     </div>
   </div>
 </div>
+<!-- ================= SETUP CHECKLIST SECTION END ================= -->
 
-<div id="support-modal" class="fixed inset-0 z-[70] hidden">
+<!-- ================= SUPPORT MODAL START ================= -->
+<!-- Contact form modal enabling merchants to reach support team -->
+<div id="support-modal" class="fixed inset-0 z-[70] hidden flex items-center justify-center">
   <div class="absolute inset-0 bg-black/60" data-close></div>
-  <div class="mx-auto mt-[10vh] w-[min(560px,92vw)] rounded-2xl bg-white dark:bg-slate-900 p-6 border border-slate-200 dark:border-slate-800 shadow-2xl">
+  <div class="relative z-10 w-[min(560px,92vw)] max-h-[90vh] overflow-y-auto rounded-2xl bg-white p-6 shadow-2xl border border-slate-200" data-modal-card>
     <div class="flex items-center justify-between">
-      <h3 class="text-xl font-extrabold font-ubuntu">Contact Support</h3>
-      <button class="p-2 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800" data-close aria-label="Close"><i data-lucide="x" class="h-5 w-5"></i></button>
+      <h3 class="text-xl font-extrabold font-ubuntu text-slate-900">Contact Support</h3>
+      <button class="p-2 text-slate-500 hover:text-slate-700" data-close aria-label="Close"><i data-lucide="x" class="h-5 w-5"></i></button>
     </div>
-    <p class="mt-1 text-sm text-slate-600 dark:text-slate-300">Have a question? Fill out the form below or contact us at <a href="tel:15056006042" class="text-brand-crimson dark:text-brand-teal hover:underline">1-505-600-6042</a>.</p>
-    <form id="support-form" class="mt-4 grid gap-3">
-      <input name="name" placeholder="Your name" class="field rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-950 px-3 py-2" required>
-      <input name="email" type="email" placeholder="Work email" class="field rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-950 px-3 py-2" required>
-      <textarea name="message" placeholder="Your message..." rows="4" class="field rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-950 px-3 py-2" required></textarea>
-      <button class="rounded-lg bg-brand-crimson text-white font-semibold px-4 py-2 hover:bg-brand-crimson" type="submit">Send Message</button>
-      <p id="support-out" class="text-xs text-slate-500"></p>
+    <p class="mt-1 text-sm text-slate-600">Have a question? Fill out the form below or contact us at <a href="tel:15056006042" class="text-brand-crimson hover:underline">1-505-600-6042</a>.</p>
+    <form
+      id="support-form"
+      name="contact"
+      method="POST"
+      data-netlify="true"
+      netlify-honeypot="bot-field"
+      action="/thankyou.html"
+      class="mt-4 space-y-4"
+    >
+      <input type="hidden" name="form-name" value="contact">
+      <p class="hidden">
+        <label>Don’t fill this out: <input name="bot-field"></label>
+      </p>
+      <div>
+        <label for="support-name" class="block text-sm font-medium text-slate-700">Name</label>
+        <input id="support-name" name="name" placeholder="Your name" class="mt-1 block w-full rounded-md border border-slate-300 bg-white px-3 py-2 text-slate-900 shadow-sm focus:border-brand-crimson focus:ring-brand-crimson" required>
+      </div>
+      <div>
+        <label for="support-email" class="block text-sm font-medium text-slate-700">Email</label>
+        <input id="support-email" name="email" type="email" placeholder="Work email" class="mt-1 block w-full rounded-md border border-slate-300 bg-white px-3 py-2 text-slate-900 shadow-sm focus:border-brand-crimson focus:ring-brand-crimson" required>
+      </div>
+      <div>
+        <label for="support-message" class="block text-sm font-medium text-slate-700">Message</label>
+        <textarea id="support-message" name="message" placeholder="Your message..." rows="4" class="mt-1 block w-full rounded-md border border-slate-300 bg-white px-3 py-2 text-slate-900 shadow-sm focus:border-brand-crimson focus:ring-brand-crimson" required></textarea>
+      </div>
+      <div>
+        <button class="inline-flex justify-center rounded-md border border-transparent bg-brand-crimson px-4 py-2 text-sm font-semibold text-white shadow-sm transition hover:bg-brand-crimson/90 focus:outline-none focus:ring-2 focus:ring-brand-crimson focus:ring-offset-2" type="submit">Send Message</button>
+      </div>
+      <p
+        id="support-error"
+        class="text-xs text-red-500 hidden"
+        role="alert"
+        aria-live="polite"
+      ></p>
     </form>
   </div>
+  </div>
 </div>
+<!-- ================= SUPPORT MODAL END ================= -->
 
-<main class="max-w-5xl mx-auto px-4 py-10">
+<!-- ================= APPLICATION FORM SECTION START ================= -->
+<!-- Detailed merchant onboarding form capturing business and compliance data -->
+<main class="max-w-5xl mx-auto px-4 pt-10 pb-4 application-section">
     <h1 class="text-3xl md:text-4xl font-extrabold">Merchant Application</h1>
     <p class="mt-2 text-slate-300">U.S. retail only. Provide the details below — we’ll review and issue your Merchant ID (MID) &amp; access credentials during onboarding.</p>
     <form class="mt-8 grid gap-6" id="apply-form">
@@ -569,71 +1196,219 @@
     <span class="text-sm text-slate-400" id="apply-out"></span>
     </div>
     </form>
+
 </main>
-
-
+<!-- ================= APPLICATION FORM SECTION END ================= -->
+<!-- ================= APPLICATION INTERACTIVITY SCRIPT START ================= -->
+<!-- Handles AI suggestions, FAQs, form logic, and scroll-based animations -->
 <script>
 document.addEventListener('DOMContentLoaded', () => {
   if (window.lucide) lucide.createIcons();
 
-  const services = [
-    { icon: "smartphone", title: "Accept Payments Anywhere", description: "Online, in‑store, or on the go." },
-    { icon: "git-pull-request-arrow", title: "Smart Processing & Routing", description: "Reduce costs and minimize fraud." },
-    { icon: "link", title: "Payment Links & Invoicing", description: "Send secure pay‑by‑link options." },
-    { icon: "repeat", title: "Recurring Billing", description: "Automated plans and reminders." },
-    { icon: "lock", title: "Secure Tokenization", description: "Protect customer info safely." },
-    { icon: "bar-chart-2", title: "Detailed Reporting", description: "Track settlements and insights." },
-    { icon: "settings-2", title: "Integration & Automation", description: "APIs and webhooks to connect systems." },
-    { icon: "banknote", title: "Bank Payments & ACH", description: "Lower-cost direct transfers." }
-  ];
-  const container1 = document.getElementById('services-container-1');
-  const container2 = document.getElementById('services-container-2');
-  if (container1 && container2) {
-    const renderServices = (container) => {
-      services.forEach(service => {
-        const serviceEl = document.createElement('div');
-        serviceEl.className = 'service-cell p-4 w-auto flex-shrink-0 flex items-center gap-4';
-        serviceEl.innerHTML = `<i data-lucide="${service.icon}" class="w-10 h-10 text-brand-crimson"></i>
-          <div class="text-left">
-            <h3 class="font-bold text-lg font-ubuntu" style="color: #524848;">${service.title}</h3>
-            <p class="text-base" style="color: #524848;">${service.description}</p>
-          </div>`;
-        container.appendChild(serviceEl);
-      });
-    };
-    renderServices(container1);
-    renderServices(container2);
-    if (window.lucide) lucide.createIcons();
-  }
+  const aiModal = document.getElementById('ai-suggester-modal');
+  const openModalBtn = document.getElementById('open-ai-modal-btn');
+  const closeModalBtn = document.getElementById('close-ai-modal');
+  const getRecsBtn = document.getElementById('get-recommendations-btn');
+  const businessDescField = document.getElementById('business-description');
+  const recommendationsResult = document.getElementById('recommendations-result');
 
-  // --- NEW INTEGRATIONS SCRIPT ---
-  const integrationLogos = [
-      'bigcommerce.webp', 'clover.webp', 'freshbooks.webp', 'hubspot.webp',
-      'keap.webp', 'lightspeed.webp', 'magento.webp', 'mastercard.webp',
-      'memberpress.webp', 'ncr.webp', 'quickbooks.webp', 'salesforce.webp',
-      'squarespace.webp', 'vend.webp', 'visa.webp', 'wix.webp',
-      'woocommerce.webp', 'zoho_crm.webp'
-  ];
-  const integrationsTrack = document.getElementById('integrations-track');
-  if (integrationsTrack) {
-    const allLogos = [...integrationLogos, ...integrationLogos]; // Duplicate for seamless loop
-    allLogos.forEach(logoFile => {
-        const logoName = logoFile.split('.')[0].replace('_', ' ').replace('-', ' ');
-        const item = document.createElement('div');
-        item.className = 'integration-item flex-shrink-0';
-        item.innerHTML = `<img src="assets/integrations/${logoFile}" alt="${logoName} Logo" class="integration-logo h-10 sm:h-12 object-contain">`;
-        integrationsTrack.appendChild(item);
+  if (aiModal && openModalBtn && closeModalBtn && getRecsBtn && businessDescField && recommendationsResult) {
+    const availableServices = [
+      { name: 'Mobile Payments', keywords: ['mobile', 'on-the-go', 'on the go', 'smartphone', 'delivery', 'pop-up', 'events', 'field'], reason: 'Enable tap-to-pay, QR, and wallet acceptance for curbside, pop-up, or on-site sales.' },
+      { name: 'Smart Routing', keywords: ['route', 'routing', 'multi-processor', 'multiple processor', 'optimize', 'cost', 'fees', 'decline'], reason: 'Automatically send each transaction to the best processor to lower costs and improve approvals.' },
+      { name: 'Invoicing', keywords: ['invoice', 'billing', 'send bills', 'accounts receivable', 'collect later'], reason: 'Create branded invoices with automated reminders so customers can pay online instantly.' },
+      { name: 'Recurring Billing', keywords: ['subscription', 'membership', 'recurring', 'installment', 'retainer'], reason: 'Automate subscriptions and payment plans with built-in dunning and renewal reminders.' },
+      { name: 'Secure Tokenization', keywords: ['security', 'token', 'vault', 'card on file', 'store card'], reason: 'Protect stored card data with PCI-compliant tokenization for repeat and card-on-file transactions.' },
+      { name: 'Detailed Reporting', keywords: ['report', 'analytics', 'dashboard', 'reconciliation', 'settlement', 'accounting'], reason: 'Track settlements, deposits, and trends with real-time dashboards and exportable reports.' },
+      { name: 'Automation', keywords: ['automation', 'workflow', 'api', 'webhook', 'integration', 'sync'], reason: 'Connect MerchantHaus to your tech stack with APIs and workflows that eliminate manual steps.' },
+      { name: 'ACH Payments', keywords: ['ach', 'bank transfer', 'echeck', 'checking', 'wire'], reason: 'Lower processing costs by letting customers pay straight from their bank accounts.' },
+      { name: 'Fraud Prevention', keywords: ['fraud', 'chargeback', 'dispute', 'risk', 'security review'], reason: 'Use machine learning, velocity controls, and alerts to stop fraud before it impacts revenue.' },
+      { name: 'Global Payments', keywords: ['international', 'global', 'multi-currency', 'cross-border'], reason: 'Support cross-border payments and settle in the currencies your customers prefer.' }
+    ];
+
+    const toServiceNameList = () => availableServices.map(service => service.name);
+
+    const addRecommendation = (collection, service) => {
+      if (!collection.some(item => item.serviceName === service.name)) {
+        collection.push({ serviceName: service.name, reason: service.reason });
+      }
+    };
+
+    const getFallbackRecommendations = (description) => {
+      const normalized = description.toLowerCase();
+      const matches = [];
+      availableServices.forEach(service => {
+        if (service.keywords.some(keyword => normalized.includes(keyword))) {
+          addRecommendation(matches, service);
+        }
+      });
+      if (!matches.length && normalized.trim().length) {
+        addRecommendation(matches, availableServices.find(service => service.name === 'Detailed Reporting'));
+        addRecommendation(matches, availableServices.find(service => service.name === 'Fraud Prevention'));
+      }
+      if (!matches.length) {
+        availableServices.slice(0, 3).forEach(service => addRecommendation(matches, service));
+      }
+      return matches;
+    };
+
+    const toggleLoading = (isLoading) => {
+      const btnText = getRecsBtn.querySelector('.btn-text');
+      const loader = getRecsBtn.querySelector('.loader');
+      if (isLoading) {
+        getRecsBtn.disabled = true;
+        btnText.textContent = 'Analyzing...';
+        loader.classList.remove('hidden');
+      } else {
+        getRecsBtn.disabled = false;
+        btnText.textContent = 'Get Recommendations';
+        loader.classList.add('hidden');
+      }
+    };
+
+    const renderRecommendations = (recs) => {
+      recommendationsResult.innerHTML = '';
+      if (!recs || !recs.length) {
+        recommendationsResult.innerHTML = '<p class="text-slate-400">No specific recommendations found. Try describing your business in more detail.</p>';
+        return;
+      }
+      recommendationsResult.innerHTML = '<h4 class="font-bold text-lg mb-2 text-brand-teal">Recommended For You:</h4>';
+      const list = document.createElement('ul');
+      list.className = 'space-y-3';
+      recs.forEach(rec => {
+        const li = document.createElement('li');
+        li.className = 'bg-[#2a2a2a] p-3 rounded-lg border border-slate-700';
+        li.innerHTML = `
+          <p class="font-bold text-white">${rec.serviceName}</p>
+          <p class="text-slate-300 text-sm">${rec.reason}</p>
+        `;
+        list.appendChild(li);
+      });
+      recommendationsResult.appendChild(list);
+    };
+
+    const getAiRecommendations = async (businessDescription) => {
+      const apiKey = '';
+      if (!apiKey) {
+        return getFallbackRecommendations(businessDescription);
+      }
+
+      const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-05-20:generateContent?key=${apiKey}`;
+      const systemPrompt = `You are an expert business consultant specializing in payment processing solutions. Your goal is to recommend the most relevant payment services for a business based on its description. You must choose from the following list of available services: ${toServiceNameList().join(', ')}.`;
+      const userQuery = `Here is the business description: "${businessDescription}". Based on this, which services do you recommend?`;
+
+      const payload = {
+        systemInstruction: { parts: [{ text: systemPrompt }] },
+        contents: [{ parts: [{ text: userQuery }] }],
+        generationConfig: {
+          responseMimeType: 'application/json',
+          responseSchema: {
+            type: 'ARRAY',
+            items: {
+              type: 'OBJECT',
+              properties: {
+                serviceName: { type: 'STRING' },
+                reason: { type: 'STRING' }
+              },
+              required: ['serviceName', 'reason']
+            }
+          }
+        }
+      };
+
+      let response;
+      let delay = 1000;
+      for (let attempt = 0; attempt < 5; attempt += 1) {
+        try {
+          response = await fetch(apiUrl, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(payload)
+          });
+
+          if (response.status === 429) {
+            await new Promise(resolve => setTimeout(resolve, delay));
+            delay *= 2;
+            continue;
+          }
+
+          if (!response.ok) {
+            throw new Error(`API request failed with status ${response.status}`);
+          }
+          break;
+        } catch (error) {
+          if (attempt === 4) {
+            console.error('AI recommendation error:', error);
+            return getFallbackRecommendations(businessDescription);
+          }
+        }
+      }
+
+      try {
+        const result = await response.json();
+        const candidate = result.candidates?.[0];
+        if (candidate && candidate.content?.parts?.[0]?.text) {
+          const parsed = JSON.parse(candidate.content.parts[0].text);
+          if (Array.isArray(parsed)) {
+            return parsed;
+          }
+        }
+        console.warn('Unexpected AI response format:', result);
+      } catch (error) {
+        console.error('Failed to parse AI response:', error);
+      }
+
+      return getFallbackRecommendations(businessDescription);
+    };
+
+    const showModal = () => {
+      aiModal.classList.remove('hidden');
+      aiModal.classList.add('flex');
+      recommendationsResult.innerHTML = '';
+      if (businessDescField.value.trim() === '') {
+        businessDescField.value = '';
+      }
+      setTimeout(() => businessDescField.focus(), 50);
+    };
+
+    const hideModal = () => {
+      aiModal.classList.add('hidden');
+      aiModal.classList.remove('flex');
+    };
+
+    openModalBtn.addEventListener('click', showModal);
+    closeModalBtn.addEventListener('click', hideModal);
+    aiModal.addEventListener('click', (event) => {
+      if (event.target === aiModal) {
+        hideModal();
+      }
+    });
+
+    document.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape' && !aiModal.classList.contains('hidden')) {
+        hideModal();
+      }
+    });
+
+    getRecsBtn.addEventListener('click', async () => {
+      const description = businessDescField.value.trim();
+      if (!description) {
+        alert('Please describe your business first.');
+        return;
+      }
+
+      toggleLoading(true);
+      try {
+        const recommendations = await getAiRecommendations(description);
+        renderRecommendations(recommendations);
+      } catch (error) {
+        console.error('Error getting recommendations:', error);
+        recommendationsResult.innerHTML = '<p class="text-red-400">Sorry, something went wrong. Please try again later.</p>';
+      } finally {
+        toggleLoading(false);
+      }
     });
   }
-
-
-  const supportModal = document.getElementById('support-modal');
-  document.querySelectorAll('.js-support').forEach(el => {
-    el.addEventListener('click', (e) => { e.preventDefault(); supportModal.classList.remove('hidden'); });
-  });
-  supportModal.addEventListener('click', (e) => {
-    if (e.target.dataset.close !== undefined) supportModal.classList.add('hidden');
-  });
 
   const headingTexts = { "integrations-old": "Integrate with Your Favorite Tools" }; // Old logic, can be removed or updated
   const headingObserver = new IntersectionObserver((entries, observer) => {
@@ -651,16 +1426,6 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }, { threshold: 0.8 });
   document.querySelectorAll('.animate-on-scroll').forEach(el => headingObserver.observe(el));
-
-  const cellObserver = new IntersectionObserver((entries, observer) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('is-visible');
-        observer.unobserve(entry.target);
-      }
-    });
-  }, { threshold: 0.5 });
-  document.querySelectorAll('.service-cell').forEach(cell => cellObserver.observe(cell));
 
   const askFaqBtn = document.getElementById('ask-faq');
   const faqQuestionInput = document.getElementById('faq-question');
@@ -774,36 +1539,6 @@ document.addEventListener('DOMContentLoaded', () => {
   askFaqBtn.addEventListener('click', handleFaqSubmit);
   faqQuestionInput.addEventListener('keypress', (e) => { if (e.key === 'Enter') handleFaqSubmit(); });
 
-  const supportForm = document.getElementById('support-form');
-  const supportOut = document.getElementById('support-out');
-  supportForm.addEventListener('submit', async (e) => {
-    e.preventDefault();
-    const formData = new FormData(supportForm);
-    const submitBtn = supportForm.querySelector('button[type="submit"]');
-    const originalBtnText = submitBtn.innerHTML;
-    submitBtn.disabled = true;
-    submitBtn.innerHTML = '<span class="loader"></span> Sending...';
-    supportOut.textContent = '';
-    try {
-      const response = await fetch('support.php', { method: 'POST', body: formData });
-      if (!response.ok) throw new Error('Network response was not ok');
-      const result = await response.json();
-      if (result.success) {
-        supportOut.style.color = 'green';
-        supportOut.textContent = 'Message sent successfully!';
-        supportForm.reset();
-      } else {
-        throw new Error(result.message || 'An unknown error occurred.');
-      }
-    } catch (error) {
-      supportOut.style.color = 'red';
-      supportOut.textContent = `Error: ${error.message}`;
-    } finally {
-      submitBtn.disabled = false;
-      submitBtn.innerHTML = originalBtnText;
-    }
-  });
-
   // --- APPLICATION FORM LOGIC ---
   const applyForm = document.getElementById('apply-form');
   if (applyForm) {
@@ -867,9 +1602,12 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 });
 </script>
+<!-- ================= APPLICATION INTERACTIVITY SCRIPT END ================= -->
 
     <!-- Footer -->
-    <footer class="border-t border-slate-800 py-10 mt-16">
+    <!-- ================= FOOTER SECTION START ================= -->
+    <!-- Multi-column footer with contact details, navigation, and legal links -->
+    <footer class="border-t border-slate-800 py-8 mt-8">
         <div class="max-w-7xl mx-auto px-4 grid sm:grid-cols-2 lg:grid-cols-4 gap-8 text-sm" >
             <div class="space-y-4">
                 <a href="/index.html" class="flex items-center gap-3">
@@ -907,7 +1645,12 @@ document.addEventListener('DOMContentLoaded', () => {
             </nav>
             <nav class="space-y-2">
                 <h3 class="font-semibold font-ubuntu text-white">Support</h3>
-                <a href="mailto:support@merchanthaus.io" class="block text-slate-300 hover:text-brand-teal">Contact Support</a>
+                <a
+                  href="mailto:support@merchanthaus.io"
+                  class="js-support block text-slate-300 hover:text-brand-teal"
+                  data-cta="contact-support"
+                  data-cta-location="footer"
+                >Contact Support</a>
                 <a href="/faq.html" class="block text-slate-300 hover:text-brand-teal">FAQ</a>
             </nav>
             <nav class="space-y-2">
@@ -920,16 +1663,23 @@ document.addEventListener('DOMContentLoaded', () => {
             © <span id="year"></span> Merchant Haus. All rights reserved.
         </div>
     </footer>
-    
+    <!-- ================= FOOTER SECTION END ================= -->
+
     <!-- Back to Top Button -->
+    <!-- ================= BACK TO TOP CONTROL START ================= -->
+    <!-- Floating action button returning users to page top -->
     <button id="back-to-top" class="fixed bottom-6 right-6 bg-brand-crimson text-white p-3 rounded-full shadow-lg opacity-0 invisible transition-all duration-300 z-50 hover:bg-opacity-90">
         <i data-lucide="arrow-up" class="h-6 w-6"></i>
         <span class="sr-only">Back to top</span>
     </button>
+    <!-- ================= BACK TO TOP CONTROL END ================= -->
 
 
+    <!-- ================= GLOBAL LAYOUT SCRIPTS START ================= -->
+    <!-- External signup panel logic plus helpers for navigation, logos, and UI polish -->
     <script src="/assets/signup-panel.js" defer></script>
-    
+    <script type="module" src="/assets/banner-carousel.js"></script>
+
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             if (window.lucide) lucide.createIcons();
@@ -946,9 +1696,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 });
 
                 return `
-                <svg viewBox="0 0 450 100" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%">
+                <svg viewBox="0 0 600 100" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%">
                     <defs>
-                        <linearGradient id="shimmer-${id}" gradientUnits="userSpaceOnUse" x1="120" y1="0" x2="420" y2="0">
+                        <linearGradient id="shimmer-${id}" gradientUnits="userSpaceOnUse" x1="120" y1="0" x2="560" y2="0">
                             <stop offset="0%" stop-color="#DC143C" />
                             <stop offset="45%" stop-color="#DC143C">
                                 ${shimmer ? `<animate attributeName="stop-color" values="#DC143C; #FFC0CB; #DC143C" keyTimes="0; 0.5; 1" dur="2s" begin="1.5s" fill="freeze" repeatCount="1"/>` : ''}
@@ -960,7 +1710,7 @@ document.addEventListener('DOMContentLoaded', () => {
                                 ${shimmer ? `<animate attributeName="stop-color" values="#DC143C; #FFC0CB; #DC143C" keyTimes="0; 0.5; 1" dur="2s" begin="1.5s" fill="freeze" repeatCount="1"/>` : ''}
                             </stop>
                             <stop offset="100%" stop-color="#DC143C" />
-                            ${shimmer ? `<animateTransform attributeName="transform" type="translate" from="-450 0" to="450 0" dur="2s" begin="1.5s" fill="freeze" repeatCount="1"/>` : ''}
+                            ${shimmer ? `<animateTransform attributeName="transform" type="translate" from="-600 0" to="600 0" dur="2s" begin="1.5s" fill="freeze" repeatCount="1"/>` : ''}
                         </linearGradient>
                         <style>
                             .mh-text-${id} { font-family: 'Ubuntu', sans-serif; font-size: 50px; font-weight: 700; fill: url(#shimmer-${id}); }
@@ -1192,11 +1942,15 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     </script>
+    <!-- ================= GLOBAL LAYOUT SCRIPTS END ================= -->
+
+<!-- ================= CHATBOT INTEGRATION SECTION START ================= -->
+<!-- Third-party ChatBot embed and custom styling for FAQ assistant -->
 <!-- Start of ChatBot (www.chatbot.com) code -->
 <script>
   window.__ow = window.__ow || {};
   window.__ow.organizationId = "ded96f09-612d-4fa3-b3e8-014830167318";
-  window.__ow.template_id = "55371eae-5b93-456c-8cce-7469ed556849";
+  window.__ow.template_id = "200f2913-f66f-4b3a-aa4c-349b6e62113f";
   window.__ow.integration_name = "manual_settings";
   window.__ow.product_name = "chatbot";   
   ;(function(n,t,c){function i(n){return e._h?e._h.apply(null,n):e._q.push(n)}var e={_q:[],_h:null,_v:"2.0",on:function(){i(["on",c.call(arguments)])},once:function(){i(["once",c.call(arguments)])},off:function(){i(["off",c.call(arguments)])},get:function(){if(!e._h)throw new Error("[OpenWidget] You can't use getters before load.");return i(["get",c.call(arguments)])},call:function(){i(["call",c.call(arguments)])},init:function(){var n=t.createElement("script");n.async=!0,n.type="text/javascript",n.src="https://cdn.openwidget.com/openwidget.js",t.head.appendChild(n)}};!n.__ow.asyncInit&&e.init(),n.OpenWidget=n.OpenWidget||e}(window,document,[].slice))
@@ -1282,6 +2036,7 @@ document.addEventListener('DOMContentLoaded', function() {
   }
 });
 </script>
+<!-- ================= CHATBOT INTEGRATION SECTION END ================= -->
 </body>
 </html>
 

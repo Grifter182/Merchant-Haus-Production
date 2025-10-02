@@ -21,7 +21,12 @@
             </nav>
             <nav class="space-y-2">
                 <h3 class="font-semibold font-ubuntu text-white">Support</h3>
-                <a href="mailto:support@merchanthaus.io" class="block text-slate-300 hover:text-brand-teal">Contact Support</a>
+                <a
+                    href="mailto:support@merchanthaus.io"
+                    class="js-support block text-slate-300 hover:text-brand-teal"
+                    data-cta="contact-support"
+                    data-cta-location="footer"
+                >Contact Support</a>
                 <a href="/faq.html" class="block text-slate-300 hover:text-brand-teal">FAQ</a>
             </nav>
             <nav class="space-y-2">
@@ -42,6 +47,8 @@
     </button>
 
 
+    <script src="/assets/support.js" defer></script>
+
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             if (window.lucide) lucide.createIcons();
@@ -57,9 +64,9 @@
                 });
 
                 return `
-                <svg viewBox="0 0 450 100" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%">
+                <svg viewBox="0 0 600 100" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%">
                     <defs>
-                        <linearGradient id="shimmer-${id}" gradientUnits="userSpaceOnUse" x1="120" y1="0" x2="420" y2="0">
+                        <linearGradient id="shimmer-${id}" gradientUnits="userSpaceOnUse" x1="120" y1="0" x2="560" y2="0">
                             <stop offset="0%" stop-color="#DC143C" />
                             <stop offset="45%" stop-color="#DC143C">
                                 ${shimmer ? `<animate attributeName="stop-color" values="#DC143C; #FFC0CB; #DC143C" keyTimes="0; 0.5; 1" dur="2s" begin="1.5s" fill="freeze" repeatCount="1"/>` : ''}
@@ -71,7 +78,7 @@
                                 ${shimmer ? `<animate attributeName="stop-color" values="#DC143C; #FFC0CB; #DC143C" keyTimes="0; 0.5; 1" dur="2s" begin="1.5s" fill="freeze" repeatCount="1"/>` : ''}
                             </stop>
                             <stop offset="100%" stop-color="#DC143C" />
-                            ${shimmer ? `<animateTransform attributeName="transform" type="translate" from="-450 0" to="450 0" dur="2s" begin="1.5s" fill="freeze" repeatCount="1"/>` : ''}
+                            ${shimmer ? `<animateTransform attributeName="transform" type="translate" from="-600 0" to="600 0" dur="2s" begin="1.5s" fill="freeze" repeatCount="1"/>` : ''}
                         </linearGradient>
                         <style>
                             .mh-text-${id} { font-family: 'Ubuntu', sans-serif; font-size: 50px; font-weight: 700; fill: url(#shimmer-${id}); }
