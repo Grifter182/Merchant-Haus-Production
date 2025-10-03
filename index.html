@@ -494,11 +494,11 @@
                 translateZ(var(--translateZ));
         }
         .banner .item.is-active .service-card {
-            box-shadow: 0 35px 70px rgba(8, 15, 35, 0.55);
-            transform: translateY(calc(-12% - 6px)) scale(1.015);
+            box-shadow: 0 24px 48px rgba(15, 23, 42, 0.4);
+            background: rgba(255, 255, 255, 0.94);
         }
         .banner .item.is-active .service-card::after {
-            opacity: 0.65;
+            opacity: 0.68;
         }
         .banner .model {
             position: absolute;
@@ -517,46 +517,26 @@
             position: relative;
             width: var(--card-width);
             height: var(--card-height);
-            border-radius: 1.5rem;
-            overflow: hidden;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            color: #f8fafc;
-            font-family: 'Inter', sans-serif;
+            border-radius: 1.35rem;
+            background: rgba(255, 255, 255, 0.88);
+            box-shadow: 0 14px 32px rgba(15, 23, 42, 0.28);
+            overflow: visible;
+            color: #1a1a1a;
+            font-family: 'Ubuntu', sans-serif;
+            font-weight: 600;
             text-align: center;
+            transition: transform 0.4s ease, top 0.4s ease, left 0.4s ease,
+                width 0.4s ease, height 0.4s ease, box-shadow 0.4s ease, background 0.35s ease;
             transform: translateY(-12%);
-            transition: transform 0.45s ease, box-shadow 0.45s ease;
-            background-image:
-                linear-gradient(165deg, rgba(12, 18, 36, 0.92) 10%, rgba(28, 26, 42, 0.45) 65%, rgba(220, 20, 60, 0.55) 115%),
-                var(--card-image, linear-gradient(140deg, #111827, #0f172a));
+            display: flex;
+            cursor: pointer;
             background-size: cover;
             background-position: center;
-            border: 1px solid rgba(248, 250, 252, 0.14);
-            box-shadow: 0 24px 48px rgba(8, 15, 35, 0.48);
-        }
-        .service-card::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background: radial-gradient(circle at 20% 15%, rgba(255, 255, 255, 0.22), transparent 55%);
-            mix-blend-mode: screen;
-            opacity: 0.9;
-            transition: opacity 0.45s ease;
-        }
-        .service-card::after {
-            content: '';
-            position: absolute;
-            inset: auto 12% -18%;
-            height: 45%;
-            background: radial-gradient(ellipse at center, rgba(220, 20, 60, 0.35), transparent 70%);
-            filter: blur(22px);
-            opacity: 0.45;
-            transition: opacity 0.45s ease, transform 0.45s ease;
+            --service-image-brightness: 67%;
+            --panel-image: none;
         }
         .service-card.expanding {
-            transform: translateY(calc(-12% - 6px)) scale(1.08);
+            transform: scale(1.2);
             z-index: 50;
         }
         .service-card.expanded {
@@ -569,112 +549,149 @@
             border-radius: 0;
             transform: none !important;
         }
-        .service-card .card-content {
-            position: relative;
-            z-index: 1;
-            width: 100%;
-            height: 100%;
-            padding: 2.75rem 2rem 2.25rem;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            gap: 1.25rem;
-            backdrop-filter: blur(6px);
-            background: linear-gradient(180deg, rgba(11, 15, 25, 0.15) 0%, rgba(11, 15, 25, 0.75) 65%, rgba(11, 15, 25, 0.9) 100%);
-        }
         .service-card.expanded .card-content {
-            align-items: flex-start;
-            justify-content: flex-end;
-            text-align: left;
-            padding: clamp(2rem, 5vw, 3rem);
-            gap: 1.5rem;
+            position: absolute;
+            bottom: 2rem;
+            left: 2rem;
+            right: 2rem;
+            background: rgba(0, 0, 0, 0.5);
+            padding: 1rem;
+            border-radius: 0.5rem;
+            color: white;
         }
         .service-card .details {
             display: none;
-            margin-top: 0.5rem;
-            font-size: 0.95rem;
-            color: rgba(241, 245, 249, 0.9);
-            line-height: 1.6;
-            text-align: left;
         }
         .service-card.expanded .details {
             display: block;
-            max-width: 36ch;
+            margin-top: 1rem;
+        }
+        .service-card::after {
+            content: '';
+            position: absolute;
+            top: calc(100% + 14px);
+            left: 0;
+            width: 100%;
+            height: calc(var(--card-height) * 0.42);
+            background-image:
+                linear-gradient(180deg, rgba(15, 23, 42, 0.38) 0%, rgba(15, 23, 42, 0.05) 70%),
+                var(--panel-image);
+            background-size: cover;
+            background-position: center;
+            transform: scaleY(-1);
+            transform-origin: top;
+            opacity: 0.52;
+            filter: blur(0.25px) saturate(0.95);
+            pointer-events: none;
+            -webkit-mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.7), transparent);
+                    mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.7), transparent);
         }
         .service-card:hover {
-            transform: translateY(calc(-12% - 10px)) scale(1.04);
-            box-shadow: 0 38px 70px rgba(8, 15, 35, 0.58);
+            transform: translateY(calc(-12% - 8px)) scale(1.02);
+            box-shadow: 0 20px 38px rgba(15, 23, 42, 0.34);
+            background: rgba(255, 255, 255, 0.95);
+            --service-image-brightness: 77%;
         }
-        .service-card:hover::before {
+        .service-card .card-content {
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            gap: 0.75rem;
+            width: 100%;
+            height: 100%;
+            padding: 2rem 1.5rem;
+            border-radius: inherit;
+            background: linear-gradient(180deg, rgba(15, 23, 42, 0.05) 0%, rgba(15, 23, 42, 0.85) 100%);
+            color: #f8fafc;
+        }
+        .service-image {
+            position: relative;
+            display: flex;
+            flex: 1 1 auto;
+            background-image: var(--panel-image);
+            background-size: cover;
+            background-position: center;
+            filter: brightness(var(--service-image-brightness)) saturate(1.05);
+            transition: transform 0.6s ease, filter 0.6s ease;
+            overflow: hidden;
+            border-radius: inherit;
+        }
+        .service-image::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: none;
+            mix-blend-mode: normal;
             opacity: 1;
         }
-        .service-card:hover::after {
-            opacity: 0.65;
-            transform: translateY(-6px);
+        .service-image::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: none;
+        }
+        .service-card:hover .service-image {
+            transform: scale(1.02);
+        }
+        .service-card:hover .service-overlay {
+            background: none;
+        }
+        .service-overlay {
+            position: relative;
+            z-index: 1;
+            display: flex;
+            flex: 1 1 auto;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 0.85rem;
+            padding: 2.5rem 1.5rem;
+            width: 100%;
+            background: none;
+            backdrop-filter: none;
+            color: #ffffff;
+            text-shadow: 0 1px 3px rgba(0, 0, 0, 0.55);
         }
         .service-icon-wrap {
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            width: clamp(4.25rem, 12vw, 5.75rem);
-            height: clamp(4.25rem, 12vw, 5.75rem);
-            border-radius: 999px;
-            background: rgba(15, 23, 42, 0.55);
-            border: 1.5px solid rgba(248, 250, 252, 0.18);
-            box-shadow:
-                0 18px 35px rgba(220, 20, 60, 0.35),
-                inset 0 0 0 1px rgba(248, 250, 252, 0.18);
-            backdrop-filter: blur(8px);
-            transition: transform 0.4s ease, box-shadow 0.4s ease;
+            padding: 0.5rem;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.7);
+            box-shadow: 0 12px 22px rgba(44, 62, 80, 0.18);
+            transition: transform 0.35s ease, box-shadow 0.35s ease;
         }
         .service-icon {
-            width: clamp(2.4rem, 6vw, 2.9rem);
-            height: clamp(2.4rem, 6vw, 2.9rem);
-            stroke-width: 1.75;
-            color: #f8fafc;
-            filter: drop-shadow(0 10px 18px rgba(220, 20, 60, 0.45));
-        }
-        .service-card:hover .service-icon-wrap,
-        .banner .item.is-active .service-card .service-icon-wrap {
-            transform: translateY(-4px) scale(1.05);
-            box-shadow:
-                0 24px 45px rgba(220, 20, 60, 0.45),
-                inset 0 0 0 1px rgba(248, 250, 252, 0.24);
+            width: 2.2rem;
+            height: 2.2rem;
+            stroke-width: 1.5;
+            color: #ffffff;
         }
         .service-name {
-            font-family: 'Ubuntu', sans-serif;
-            font-size: clamp(1rem, 2.2vw, 1.2rem);
-            font-weight: 700;
-            letter-spacing: 0.08em;
+            font-size: 1.2rem;
+            font-weight: 600;
+            letter-spacing: 0.01em;
             text-transform: uppercase;
+            text-align: center;
+            margin: 0.25rem 0 0;
+            transition: letter-spacing 0.35s ease, transform 0.35s ease;
         }
-        .service-text {
-            display: flex;
-            flex-direction: column;
-            gap: 0.5rem;
-            align-items: center;
-        }
-        .service-description {
-            font-size: clamp(0.85rem, 2vw, 0.95rem);
-            line-height: 1.5;
-            color: rgba(226, 232, 240, 0.85);
-            max-width: 18ch;
-            margin: 0;
+        .service-card:hover .service-icon-wrap {
+            transform: translateY(-6px) scale(1.05);
+            box-shadow: 0 18px 30px rgba(44, 62, 80, 0.25);
         }
         .service-card:hover .service-name {
-            letter-spacing: 0.12em;
+            letter-spacing: 0.08em;
+            transform: translateY(-2px);
         }
         @media (max-width: 768px) {
-            .service-card {
-                border-radius: 1.35rem;
+            .service-icon {
+                width: 1.8rem;
+                height: 1.8rem;
             }
-            .service-card .card-content {
-                padding: 2.25rem 1.75rem 2rem;
-                gap: 1rem;
-            }
-            .service-description {
-                max-width: 22ch;
+            .service-name {
+                font-size: 1rem;
             }
         }
         @media (max-width: 1023px) {
@@ -689,6 +706,9 @@
                 min-height: clamp(18rem, 62vh, 26rem);
                 --card-width: clamp(5rem, 48vw, 8rem);
                 --translateZ: calc(var(--card-width) * 2.2);
+            }
+            .service-overlay {
+                padding: 2rem 1.25rem;
             }
         }
         .banner-expansion {
@@ -715,7 +735,7 @@
             aspect-ratio: 9 / 16;
             border-radius: 1.6rem;
             overflow: hidden;
-            background-image: linear-gradient(160deg, rgba(15, 23, 42, 0.1), rgba(15, 23, 42, 0.65)), var(--card-image, none);
+            background-image: linear-gradient(160deg, rgba(15, 23, 42, 0.1), rgba(15, 23, 42, 0.65)), var(--panel-image, none);
             background-size: cover;
             background-position: center;
             box-shadow: 0 40px 80px rgba(15, 23, 42, 0.55);
@@ -850,131 +870,121 @@
     <div class="banner">
       <div class="slider" style="--quantity: 10">
         <div class="item" style="--position: 1">
-          <div class="service-card" style="--card-image: url('https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?auto=format&fit=crop&w=800&q=80')">
-            <div class="card-content">
-              <div class="service-icon-wrap">
-                <i data-lucide="smartphone" class="service-icon"></i>
-              </div>
-              <div class="service-text">
+          <div class="service-card">
+            <div class="service-image">
+              <div class="service-overlay">
+                <div class="service-icon-wrap">
+                  <i data-lucide="smartphone" class="service-icon"></i>
+                </div>
                 <span class="service-name">Mobile Payments</span>
-                <p class="service-description">Tap, chip, and scan payments in the field.</p>
               </div>
             </div>
           </div>
         </div>
         <div class="item" style="--position: 2">
-          <div class="service-card" style="--card-image: url('https://images.unsplash.com/photo-1487058792275-0ad4aaf24ca7?auto=format&fit=crop&w=800&q=80')">
-            <div class="card-content">
-              <div class="service-icon-wrap">
-                <i data-lucide="shuffle" class="service-icon"></i>
-              </div>
-              <div class="service-text">
+          <div class="service-card">
+            <div class="service-image">
+              <div class="service-overlay">
+                <div class="service-icon-wrap">
+                  <i data-lucide="shuffle" class="service-icon"></i>
+                </div>
                 <span class="service-name">Smart Routing</span>
-                <p class="service-description">Route every sale to the best processor.</p>
               </div>
             </div>
           </div>
         </div>
         <div class="item" style="--position: 3">
-          <div class="service-card" style="--card-image: url('https://images.unsplash.com/photo-1521540216272-a50305cd4421?auto=format&fit=crop&w=800&q=80')">
-            <div class="card-content">
-              <div class="service-icon-wrap">
-                <i data-lucide="file-text" class="service-icon"></i>
-              </div>
-              <div class="service-text">
+          <div class="service-card">
+            <div class="service-image">
+              <div class="service-overlay">
+                <div class="service-icon-wrap">
+                  <i data-lucide="file-text" class="service-icon"></i>
+                </div>
                 <span class="service-name">Invoicing</span>
-                <p class="service-description">Send branded invoices with reminders.</p>
               </div>
             </div>
           </div>
         </div>
         <div class="item" style="--position: 4">
-          <div class="service-card" style="--card-image: url('https://images.unsplash.com/photo-1506784983877-45594efa4cbe?auto=format&fit=crop&w=800&q=80')">
-            <div class="card-content">
-              <div class="service-icon-wrap">
-                <i data-lucide="repeat" class="service-icon"></i>
-              </div>
-              <div class="service-text">
+          <div class="service-card">
+            <div class="service-image">
+              <div class="service-overlay">
+                <div class="service-icon-wrap">
+                  <i data-lucide="repeat" class="service-icon"></i>
+                </div>
                 <span class="service-name">Recurring Billing</span>
-                <p class="service-description">Automate renewals and payment plans.</p>
               </div>
             </div>
           </div>
         </div>
         <div class="item" style="--position: 5">
-          <div class="service-card" style="--card-image: url('https://images.unsplash.com/photo-1556740749-887f6717d7e4?auto=format&fit=crop&w=800&q=80')">
-            <div class="card-content">
-              <div class="service-icon-wrap">
-                <i data-lucide="lock" class="service-icon"></i>
-              </div>
-              <div class="service-text">
+          <div class="service-card">
+            <div class="service-image">
+              <div class="service-overlay">
+                <div class="service-icon-wrap">
+                  <i data-lucide="lock" class="service-icon"></i>
+                </div>
                 <span class="service-name">Secure Tokenization</span>
-                <p class="service-description">Store customer cards with PCI-grade vaulting.</p>
               </div>
             </div>
           </div>
         </div>
         <div class="item" style="--position: 6">
-          <div class="service-card" style="--card-image: url('https://images.unsplash.com/photo-1454166155302-ef4863c27e70?auto=format&fit=crop&w=800&q=80')">
-            <div class="card-content">
-              <div class="service-icon-wrap">
-                <i data-lucide="bar-chart-2" class="service-icon"></i>
-              </div>
-              <div class="service-text">
+          <div class="service-card">
+            <div class="service-image">
+              <div class="service-overlay">
+                <div class="service-icon-wrap">
+                  <i data-lucide="bar-chart-2" class="service-icon"></i>
+                </div>
                 <span class="service-name">Detailed Reporting</span>
-                <p class="service-description">Track revenue with live dashboards.</p>
               </div>
             </div>
           </div>
         </div>
         <div class="item" style="--position: 7">
-          <div class="service-card" style="--card-image: url('https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=800&q=80')">
-            <div class="card-content">
-              <div class="service-icon-wrap">
-                <i data-lucide="cpu" class="service-icon"></i>
-              </div>
-              <div class="service-text">
+          <div class="service-card">
+            <div class="service-image">
+              <div class="service-overlay">
+                <div class="service-icon-wrap">
+                  <i data-lucide="cpu" class="service-icon"></i>
+                </div>
                 <span class="service-name">Automation</span>
-                <p class="service-description">Trigger workflows with APIs and webhooks.</p>
               </div>
             </div>
           </div>
         </div>
         <div class="item" style="--position: 8">
-          <div class="service-card" style="--card-image: url('https://images.unsplash.com/photo-1523287562758-66c7fc58967f?auto=format&fit=crop&w=800&q=80')">
-            <div class="card-content">
-              <div class="service-icon-wrap">
-                <i data-lucide="landmark" class="service-icon"></i>
-              </div>
-              <div class="service-text">
+          <div class="service-card">
+            <div class="service-image">
+              <div class="service-overlay">
+                <div class="service-icon-wrap">
+                  <i data-lucide="landmark" class="service-icon"></i>
+                </div>
                 <span class="service-name">ACH Payments</span>
-                <p class="service-description">Lower costs with bank-to-bank transfers.</p>
               </div>
             </div>
           </div>
         </div>
         <div class="item" style="--position: 9">
-          <div class="service-card" style="--card-image: url('https://images.unsplash.com/photo-1526378722484-bd91ca387e72?auto=format&fit=crop&w=800&q=80')">
-            <div class="card-content">
-              <div class="service-icon-wrap">
-                <i data-lucide="shield-alert" class="service-icon"></i>
-              </div>
-              <div class="service-text">
+          <div class="service-card">
+            <div class="service-image">
+              <div class="service-overlay">
+                <div class="service-icon-wrap">
+                  <i data-lucide="shield-alert" class="service-icon"></i>
+                </div>
                 <span class="service-name">Fraud Prevention</span>
-                <p class="service-description">Block risky transactions in real time.</p>
               </div>
             </div>
           </div>
         </div>
         <div class="item" style="--position: 10">
-          <div class="service-card" style="--card-image: url('https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=800&q=80')">
-            <div class="card-content">
-              <div class="service-icon-wrap">
-                <i data-lucide="globe-2" class="service-icon"></i>
-              </div>
-              <div class="service-text">
+          <div class="service-card">
+            <div class="service-image">
+              <div class="service-overlay">
+                <div class="service-icon-wrap">
+                  <i data-lucide="globe-2" class="service-icon"></i>
+                </div>
                 <span class="service-name">Global Payments</span>
-                <p class="service-description">Accept local currencies worldwide.</p>
               </div>
             </div>
           </div>
@@ -1271,88 +1281,88 @@ document.addEventListener('DOMContentLoaded', () => {
     const services = [
       {
         icon: "smartphone",
-        title: "Mobile Payments",
-        description: "Tap, chip, and scan payments in the field.",
-        details: "Equip staff with tap-to-pay, QR codes, and portable terminals for curbside, pop-up, or field sales.",
-        link: "/docs/mobile-payments",
-        image: "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?auto=format&fit=crop&w=1200&q=80"
+        title: "Accept Payments Anywhere",
+        description: "Online, in-store, or on the go.",
+        details: "Accept credit cards, mobile wallets, and more with one integration.",
+        link: "/docs/payments",
+        image: "https://placehold.co/800x600/000/fff?text=Payments"
       },
       {
         icon: "shuffle",
         title: "Smart Routing",
-        description: "Route every sale to the best processor.",
-        details: "Route transactions across multiple processors in real time to maximize approvals and minimize costs.",
-        link: "/docs/smart-routing",
-        image: "https://images.unsplash.com/photo-1487058792275-0ad4aaf24ca7?auto=format&fit=crop&w=1200&q=80"
+        description: "Optimize approvals and reduce fees.",
+        details: "Automatically steer each transaction to the least-cost, highest-approval processor.",
+        link: "/docs/routing",
+        image: "https://placehold.co/800x600/111/fff?text=Routing"
       },
       {
         icon: "file-text",
         title: "Invoicing",
-        description: "Send branded invoices with reminders.",
-        details: "Send invoices that accept cards, ACH, and digital wallets with automatic reminders and tracking.",
+        description: "Send branded invoices instantly.",
+        details: "Create invoices with pay links, reminders, and partial payment tracking in minutes.",
         link: "/docs/invoicing",
-        image: "https://images.unsplash.com/photo-1521540216272-a50305cd4421?auto=format&fit=crop&w=1200&q=80"
+        image: "https://placehold.co/800x600/222/fff?text=Invoicing"
       },
       {
         icon: "repeat",
         title: "Recurring Billing",
-        description: "Automate renewals and payment plans.",
-        details: "Manage memberships, retainers, and installment plans with automated dunning and smart retries.",
+        description: "Automate subscriptions effortlessly.",
+        details: "Manage memberships, payment plans, and retries with automated dunning tools.",
         link: "/docs/recurring",
-        image: "https://images.unsplash.com/photo-1506784983877-45594efa4cbe?auto=format&fit=crop&w=1200&q=80"
+        image: "https://placehold.co/800x600/333/fff?text=Recurring"
       },
       {
         icon: "lock",
         title: "Secure Tokenization",
-        description: "Store customer cards with PCI-grade vaulting.",
-        details: "Tokenize customer cards for future transactions with our PCI-compliant vault and lifecycle management.",
-        link: "/docs/tokenization",
-        image: "https://images.unsplash.com/photo-1556740749-887f6717d7e4?auto=format&fit=crop&w=1200&q=80"
+        description: "Keep card data safe and compliant.",
+        details: "Vault sensitive cardholder data with PCI-compliant tokenization across every channel.",
+        link: "/docs/security",
+        image: "https://placehold.co/800x600/444/fff?text=Tokenization"
       },
       {
         icon: "bar-chart-2",
         title: "Detailed Reporting",
-        description: "Track revenue with live dashboards.",
+        description: "Understand performance in real time.",
         details: "Track settlements, disputes, and trends with dashboards and export-ready reports.",
         link: "/docs/reporting",
-        image: "https://images.unsplash.com/photo-1454166155302-ef4863c27e70?auto=format&fit=crop&w=1200&q=80"
+        image: "https://placehold.co/800x600/555/fff?text=Reporting"
       },
       {
         icon: "cpu",
         title: "Automation",
-        description: "Trigger workflows with APIs and webhooks.",
+        description: "Trigger workflows automatically.",
         details: "Connect MerchantHaus to your stack with APIs and webhooks that eliminate manual steps.",
         link: "/docs/automation",
-        image: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=1200&q=80"
+        image: "https://placehold.co/800x600/666/fff?text=Automation"
       },
       {
         icon: "landmark",
         title: "ACH Payments",
-        description: "Lower costs with bank-to-bank transfers.",
+        description: "Offer low-cost bank transfers.",
         details: "Let customers pay straight from their bank accounts with instant verification and limits.",
         link: "/docs/ach",
-        image: "https://images.unsplash.com/photo-1523287562758-66c7fc58967f?auto=format&fit=crop&w=1200&q=80"
+        image: "https://placehold.co/800x600/777/fff?text=ACH"
       },
       {
-        icon: "shield-alert",
-        title: "Fraud Prevention",
-        description: "Block risky transactions in real time.",
-        details: `Keep your merchants focused on growth while we handle security.
-Our robust fraud-prevention suite continuously inspects transactions to detect and mitigate threats—protecting both you and your merchants.
+        icon: "shield",
+        title: "Always-On Fraud Protection",
+        description: "Advanced security on every transaction.",
+        details: `Keep your merchants focused on growth while we handle security. 
+Our robust fraud-prevention suite continuously inspects transactions to detect and mitigate threats—protecting both you and your merchants. 
 Powered by Kount’s AI-driven engine, our solution delivers enterprise-grade fraud prevention with no additional work required.
 
 - AI-Powered Security: Kount Advanced Fraud Prevention uses machine learning to identify and stop fraud in real time.
 - Big Data Advantage: With over 30 billion transactions analyzed annually, Kount continually sharpens its fraud detection capabilities.
 - Real-Time Scoring: Every transaction is instantly scored and flagged as Approved, Declined, or Needs Review for quick, confident decision-making.`,
-        image: "https://images.unsplash.com/photo-1526378722484-bd91ca387e72?auto=format&fit=crop&w=1200&q=80"
+        image: "https://placehold.co/800x600/990000/FFFFFF?text=Fraud+Protection"
       },
       {
         icon: "globe-2",
         title: "Global Payments",
-        description: "Accept local currencies worldwide.",
+        description: "Scale across borders confidently.",
         details: "Support multi-currency pricing and localized methods with dynamic FX management.",
         link: "/docs/global",
-        image: "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1200&q=80"
+        image: "https://placehold.co/800x600/999/fff?text=Global"
       }
     ];
 
@@ -1365,19 +1375,16 @@ Powered by Kount’s AI-driven engine, our solution delivers enterprise-grade fr
       const card = document.createElement('div');
       card.className = 'service-card';
       if (service.image) {
-        const imageLayer = service.image.startsWith('url(') ? service.image : `url(${service.image})`;
-        card.style.setProperty('--card-image', imageLayer);
+        const imageUrl = `url(${service.image})`;
+        card.style.backgroundImage = imageUrl;
+        card.style.setProperty('--panel-image', imageUrl);
       }
 
       card.innerHTML = `
         <div class="card-content">
-          <div class="service-icon-wrap">
-            <i data-lucide="${service.icon}" class="service-icon"></i>
-          </div>
-          <div class="service-text">
-            <span class="service-name">${service.title}</span>
-            <p class="service-description">${service.description}</p>
-          </div>
+          <i data-lucide="${service.icon}"></i>
+          <h3>${service.title}</h3>
+          <p>${service.description}</p>
           <div class="details">
             <p>${service.details || ''}</p>
             ${service.link ? `<a href="${service.link}" class="underline">Learn more</a>` : ""}
