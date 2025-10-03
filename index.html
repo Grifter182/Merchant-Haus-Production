@@ -453,12 +453,12 @@
             backdrop-filter: blur(14px);
         }
         .banner {
-            --card-width: clamp(7rem, 40vw, 13rem);
+            --card-width: clamp(6rem, 32vw, 11rem);
             --card-height: calc(var(--card-width) * 16 / 9);
             --tilt: -16deg;
-            --translateZ: calc(var(--card-width) * 3);
+            --translateZ: calc(var(--card-width) * 2.6);
             width: 100%;
-            min-height: clamp(24rem, 65vh, 38rem);
+            min-height: clamp(20rem, 55vh, 32rem);
             text-align: center;
             position: relative;
             perspective: 1600px;
@@ -696,16 +696,16 @@
         }
         @media (max-width: 1023px) {
             .banner {
-                --card-width: clamp(6.5rem, 46vw, 11rem);
-                --translateZ: calc(var(--card-width) * 2.75);
+                --card-width: clamp(5.5rem, 38vw, 9.5rem);
+                --translateZ: calc(var(--card-width) * 2.4);
                 --tilt: -14deg;
             }
         }
         @media (max-width: 767px) {
             .banner {
-                min-height: clamp(20rem, 70vh, 28rem);
-                --card-width: clamp(6rem, 50vw, 9rem);
-                --translateZ: calc(var(--card-width) * 2.5);
+                min-height: clamp(18rem, 62vh, 26rem);
+                --card-width: clamp(5rem, 48vw, 8rem);
+                --translateZ: calc(var(--card-width) * 2.2);
             }
             .service-overlay {
                 padding: 2rem 1.25rem;
