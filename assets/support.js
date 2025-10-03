@@ -120,7 +120,7 @@
     wrapper.innerHTML = `
       <div id="support-modal" class="fixed inset-0 z-[70] hidden flex items-center justify-center">
         <div class="absolute inset-0 bg-black/60" data-close></div>
-        <div class="relative z-10 w-[min(560px,92vw)] max-h-[90vh] overflow-y-auto rounded-2xl bg-white p-6 shadow-2xl border border-slate-200" data-modal-card>
+        <div class="relative z-10 w-full max-w-[clamp(20rem,90vw,35rem)] max-h-[90vh] overflow-y-auto rounded-2xl bg-white p-6 shadow-2xl border border-slate-200" data-modal-card>
           <div class="flex items-center justify-between">
             <h3 class="text-xl font-extrabold font-ubuntu text-slate-900">Contact Support</h3>
             <button class="p-2 text-slate-500 hover:text-slate-700" data-close aria-label="Close">
