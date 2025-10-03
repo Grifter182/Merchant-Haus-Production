@@ -1288,11 +1288,18 @@ document.addEventListener('DOMContentLoaded', () => {
       }, 50);
     };
 
+    const anglesAreClose = (angleA, angleB, tolerance = 0.5) => {
+      const normalized = ((angleA - angleB + 540) % 360) - 180;
+      return Math.abs(normalized) < tolerance;
+    };
+
     const handleClick = (event) => {
       if (dragDistance > dragThreshold) {
         event.preventDefault();
         return;
       }
+
+      stopAutoRotate();
 
       const item = event.currentTarget;
       const iconContainer = item.querySelector('.service-icon-container');
@@ -1303,31 +1310,44 @@ document.addEventListener('DOMContentLoaded', () => {
       const position = parseInt(item.style.getPropertyValue('--position'), 10);
       const targetRotation = -(position - 1) * rotationIncrement;
 
-      if (Math.abs((currentYRotation - targetRotation) % 360) < 1) {
+      const emitParticleStreaks = () => {
+        const sliderRect = slider.getBoundingClientRect();
+        const iconHeight = iconContainer.offsetHeight || 90;
+        const endCenterX = sliderRect.left + sliderRect.width / 2;
+        const sliderCenterY = sliderRect.top + sliderRect.height / 2;
+        const endYTop = sliderCenterY - iconHeight / 2;
+        const endYBottom = sliderCenterY + iconHeight / 2;
+        createCurvedParticleTrail(startCenterX, startYTop, endCenterX, endYTop, 1100);
+        createCurvedParticleTrail(startCenterX, startYBottom, endCenterX, endYBottom, 1100);
+      };
+
+      if (anglesAreClose(currentYRotation, targetRotation)) {
+        emitParticleStreaks();
         zoomIn(item);
         return;
       }
 
+      const handleTransitionEnd = (transitionEvent) => {
+        if (transitionEvent.target !== slider || transitionEvent.propertyName !== 'transform') {
+          return;
+        }
+        slider.removeEventListener('transitionend', handleTransitionEnd);
+        zoomIn(item);
+      };
+
+      slider.addEventListener('transitionend', handleTransitionEnd);
+
       currentYRotation = targetRotation;
       updateSliderRotation();
-
-      slider.addEventListener('transitionend', () => zoomIn(item), { once: true });
-
-      setTimeout(() => {
-        const endIcon = sliderItems[0]?.querySelector('.service-icon-container');
-        if (!endIcon) return;
-        const endRect = endIcon.getBoundingClientRect();
-        const endX = endRect.left + endRect.width / 2;
-        const endY = endRect.bottom;
-        createCurvedParticleTrail(startCenterX, startYTop, endX, endY, 1100);
-        createCurvedParticleTrail(startCenterX, startYBottom, endX, endY, 1100);
-      }, 100);
+      emitParticleStreaks();
     };
 
     function carouselLoop() {
       if (autoRotate && !isDragging) {
         currentYRotation += 0.03;
         updateSliderRotation();
+      } else {
+        updateCardZIndexes();
       }
       requestAnimationFrame(carouselLoop);
     }
