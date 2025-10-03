@@ -204,6 +204,274 @@
     return true;
   }
 
+  const COOKIE_STORAGE_KEY = 'mhCookieConsent';
+
+  function ensureCookieStyles() {
+    if (document.getElementById('mh-cookie-styles')) return;
+    const style = document.createElement('style');
+    style.id = 'mh-cookie-styles';
+    style.textContent = `
+      .mh-cookie-btn-transition { transition: all 0.2s ease-in-out; }
+      .mh-cookie-btn-transition:active { transform: scale(0.98); }
+      .mh-cookie-focus-red:focus-visible {
+        outline: none;
+        box-shadow: 0 0 0 3px rgba(220, 20, 60, 0.45);
+      }
+      .mh-cookie-focus-cyan:focus-visible {
+        outline: none;
+        box-shadow: 0 0 0 3px rgba(0, 206, 219, 0.45);
+      }
+      @media (prefers-reduced-motion: reduce) {
+        .mh-cookie-btn-transition { transition: none; }
+        .mh-cookie-btn-transition:active { transform: none; }
+      }
+    `;
+    document.head.appendChild(style);
+  }
+
+  function injectCookieMarkup() {
+    if (document.getElementById('mh-cookie-banner') || !document.body) {
+      return {
+        banner: document.getElementById('mh-cookie-banner'),
+        modal: document.getElementById('mh-cookie-modal')
+      };
+    }
+
+    const template = document.createElement('template');
+    template.innerHTML = `
+      <div
+        id="mh-cookie-banner"
+        class="fixed bottom-4 left-4 right-4 mx-auto max-w-xl p-6 bg-slate-900/95 border border-slate-700 shadow-2xl rounded-2xl z-[60] text-center text-sm text-slate-100 backdrop-blur hidden"
+        role="region"
+        aria-label="Cookie consent banner"
+      >
+        <p class="mb-4 text-slate-200">
+          We use cookies to improve your browsing experience, analyze traffic, and serve personalized content. By clicking
+          <span class="font-semibold">Accept All</span>, you consent to our use of cookies. You can manage your preferences at any time.
+        </p>
+        <div class="flex flex-col sm:flex-row justify-center gap-3">
+          <button
+            type="button"
+            data-cookie-accept
+            class="mh-cookie-btn-transition mh-cookie-focus-red w-full sm:w-auto px-4 py-2 bg-brand-crimson text-white font-semibold rounded-lg cursor-pointer hover:bg-brand-crimson/90"
+          >
+            Accept All
+          </button>
+          <button
+            type="button"
+            data-cookie-reject
+            class="mh-cookie-btn-transition mh-cookie-focus-cyan w-full sm:w-auto px-4 py-2 bg-slate-700 text-white font-semibold rounded-lg cursor-pointer hover:bg-slate-600"
+          >
+            Reject Non-Essential
+          </button>
+          <button
+            type="button"
+            data-cookie-manage
+            class="mh-cookie-btn-transition mh-cookie-focus-cyan w-full sm:w-auto px-4 py-2 bg-brand-teal text-slate-900 font-semibold rounded-lg cursor-pointer hover:bg-brand-teal/90"
+          >
+            Manage Preferences
+          </button>
+        </div>
+      </div>
+      <div
+        id="mh-cookie-modal"
+        class="fixed inset-0 flex items-center justify-center z-[80] bg-slate-950/80 hidden"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="mh-cookie-modal-title"
+      >
+        <div class="w-11/12 max-w-md rounded-2xl border border-slate-700 bg-slate-900 p-6 text-left text-slate-100 shadow-2xl" data-cookie-card>
+          <h3 id="mh-cookie-modal-title" class="text-xl font-bold text-brand-crimson mb-4">Cookie Preferences</h3>
+          <div class="space-y-4 text-sm">
+            <section>
+              <p class="font-semibold text-slate-100">Essential Cookies</p>
+              <p class="text-xs text-slate-400 mt-1">These cookies are required for the website to function and cannot be turned off.</p>
+              <label class="mt-2 flex items-center gap-2 text-xs text-slate-300">
+                <input type="checkbox" checked disabled class="h-4 w-4 rounded border-slate-600 bg-slate-800 text-brand-crimson cursor-not-allowed">
+                Essential (Always Active)
+              </label>
+            </section>
+            <section>
+              <p class="font-semibold text-slate-100">Analytics Cookies</p>
+              <p class="text-xs text-slate-400 mt-1">Allow us to count visits and traffic sources so we can measure and improve the performance of our site.</p>
+              <label class="mt-2 flex items-center gap-2 text-xs text-slate-300">
+                <input type="checkbox" data-cookie-analytics class="h-4 w-4 rounded border-slate-600 bg-slate-800 text-brand-crimson">
+                Enable Analytics
+              </label>
+            </section>
+            <section>
+              <p class="font-semibold text-slate-100">Advertising Cookies</p>
+              <p class="text-xs text-slate-400 mt-1">May be set through our site by advertising partners to build a profile of your interests.</p>
+              <label class="mt-2 flex items-center gap-2 text-xs text-slate-300">
+                <input type="checkbox" data-cookie-ads class="h-4 w-4 rounded border-slate-600 bg-slate-800 text-brand-crimson">
+                Enable Advertising
+              </label>
+            </section>
+          </div>
+          <div class="mt-6 text-right">
+            <button
+              type="button"
+              data-cookie-save
+              class="mh-cookie-btn-transition mh-cookie-focus-red inline-flex items-center justify-center rounded-lg bg-brand-crimson px-4 py-2 text-sm font-semibold text-white hover:bg-brand-crimson/90"
+            >
+              Save Preferences
+            </button>
+          </div>
+        </div>
+      </div>
+    `;
+
+    const fragment = template.content.cloneNode(true);
+    document.body.appendChild(fragment);
+
+    return {
+      banner: document.getElementById('mh-cookie-banner'),
+      modal: document.getElementById('mh-cookie-modal')
+    };
+  }
+
+  function getStoredConsent() {
+    try {
+      const stored = localStorage.getItem(COOKIE_STORAGE_KEY);
+      if (!stored) return null;
+      const parsed = JSON.parse(stored);
+      if (!parsed || typeof parsed !== 'object') return null;
+      return {
+        essential: true,
+        analytics: Boolean(parsed.analytics),
+        ads: Boolean(parsed.ads)
+      };
+    } catch (error) {
+      console.warn('Cookie consent: unable to read stored preferences', error);
+      return null;
+    }
+  }
+
+  function persistConsent(consent) {
+    try {
+      localStorage.setItem(COOKIE_STORAGE_KEY, JSON.stringify(consent));
+    } catch (error) {
+      console.warn('Cookie consent: unable to persist preferences', error);
+    }
+  }
+
+  function dispatchConsent(consent) {
+    try {
+      window.dispatchEvent(new CustomEvent('mh:cookie-consent-change', { detail: consent }));
+    } catch (error) {
+      console.warn('Cookie consent: event dispatch failed', error);
+    }
+  }
+
+  function initCookieConsent() {
+    ensureCookieStyles();
+    const { banner, modal } = injectCookieMarkup();
+    if (!banner || !modal || banner.dataset.cookieBound === 'true') {
+      return;
+    }
+
+    banner.dataset.cookieBound = 'true';
+    modal.dataset.cookieBound = 'true';
+
+    const acceptBtn = banner.querySelector('[data-cookie-accept]');
+    const rejectBtn = banner.querySelector('[data-cookie-reject]');
+    const manageBtn = banner.querySelector('[data-cookie-manage]');
+    const saveBtn = modal.querySelector('[data-cookie-save]');
+    const analyticsCheckbox = modal.querySelector('[data-cookie-analytics]');
+    const adsCheckbox = modal.querySelector('[data-cookie-ads]');
+
+    const defaultConsent = { essential: true, analytics: false, ads: false };
+
+    const focusFirstInput = () => {
+      const target = analyticsCheckbox || adsCheckbox;
+      if (target && typeof target.focus === 'function') {
+        try { target.focus({ preventScroll: true }); } catch (error) { target.focus(); }
+      }
+    };
+
+    const hideBanner = () => banner.classList.add('hidden');
+    const showBanner = () => banner.classList.remove('hidden');
+    const hideModal = () => modal.classList.add('hidden');
+
+    const syncModal = (consent) => {
+      const values = consent || getStoredConsent() || defaultConsent;
+      if (analyticsCheckbox) analyticsCheckbox.checked = Boolean(values.analytics);
+      if (adsCheckbox) adsCheckbox.checked = Boolean(values.ads);
+    };
+
+    const showModal = () => {
+      syncModal(getStoredConsent());
+      modal.classList.remove('hidden');
+      focusFirstInput();
+    };
+
+    const updateApi = () => {
+      window.mhCookieConsent = {
+        getConsent: () => ({ ...(getStoredConsent() || defaultConsent) }),
+        openPreferences: () => showModal()
+      };
+    };
+
+    const commitConsent = (consent, logMessage) => {
+      persistConsent(consent);
+      dispatchConsent(consent);
+      hideBanner();
+      hideModal();
+      if (logMessage) {
+        try {
+          console.info(`Cookie Consent: ${logMessage}`, consent);
+        } catch (error) {
+          /* noop */
+        }
+      }
+      updateApi();
+    };
+
+    const storedConsent = getStoredConsent();
+    if (!storedConsent) {
+      showBanner();
+    } else {
+      dispatchConsent(storedConsent);
+    }
+    updateApi();
+
+    acceptBtn?.addEventListener('click', () => {
+      commitConsent({ essential: true, analytics: true, ads: true }, 'All cookies accepted.');
+    });
+
+    rejectBtn?.addEventListener('click', () => {
+      commitConsent({ essential: true, analytics: false, ads: false }, 'Only essential cookies accepted.');
+    });
+
+    manageBtn?.addEventListener('click', () => {
+      showModal();
+    });
+
+    saveBtn?.addEventListener('click', () => {
+      const consent = {
+        essential: true,
+        analytics: analyticsCheckbox ? analyticsCheckbox.checked : false,
+        ads: adsCheckbox ? adsCheckbox.checked : false
+      };
+      commitConsent(consent, 'Preferences saved.');
+    });
+
+    modal.addEventListener('click', (event) => {
+      if (event.target === modal) {
+        hideModal();
+      }
+    });
+
+    if (!modal.dataset.cookieEscapeBound) {
+      modal.dataset.cookieEscapeBound = 'true';
+      document.addEventListener('keydown', (event) => {
+        if (event.key === 'Escape' && !modal.classList.contains('hidden')) {
+          hideModal();
+        }
+      });
+    }
+  }
+
   function bindCta(element) {
     if (!element || element.dataset.supportCtaBound === 'true') return;
 
@@ -231,5 +499,6 @@
       cachedModal = existing;
       attachModalEvents(existing);
     }
+    initCookieConsent();
   });
 })();
