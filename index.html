@@ -344,17 +344,78 @@
 .dark .feature-display { background-color: #1f2937; color: #f9fafb; }
 .feature-display.active { opacity: 1; transform: translateX(-50%) translateY(0); }
 .feature-display.exiting { opacity: 0; transform: translateX(-50%) translateY(-10px); }
-.marquee-wrapper {
-  --marquee-fade: clamp(96px, 8vw, 128px);
-  -webkit-mask-image: linear-gradient(to right, transparent 0, #000 var(--marquee-fade), #000 calc(100% - var(--marquee-fade)), transparent 100%);
-          mask-image: linear-gradient(to right, transparent 0, #000 var(--marquee-fade), #000 calc(100% - var(--marquee-fade)), transparent 100%);
+.integrations {
+  background: radial-gradient(circle at left, #2c0c17, transparent),
+              radial-gradient(circle at right, #0a1d1f, transparent);
+  padding: 4rem 2rem;
+  color: #fff;
+  overflow: hidden;
+}
+.title-with-logo {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+.integrations .section-title {
+  font-size: 2rem;
+  font-weight: 700;
+  margin: 0;
+  overflow: hidden;
+  white-space: nowrap;
+  border-right: .15em solid #fff;
+}
+.typewriter {
+  display: inline-block;
+  width: 0;
+  animation: typing 4s steps(34, end) forwards, blink .75s step-end infinite;
+}
+@keyframes typing {
+  from { width: 0 }
+  to { width: 34ch }
+}
+@keyframes blink {
+  from, to { border-color: transparent }
+  50% { border-color: #fff }
+}
+.shopify-hero {
+  height: clamp(72px, 10vw, 140px);
+  width: auto;
+  object-fit: contain;
+}
+.integrations .section-subtitle {
+  font-size: 1.1rem;
+  margin: 1rem 0 2rem;
+  color: #ccc;
+}
+.integrations-marquee {
+  position: relative;
+  overflow: hidden;
 }
 .marquee-track {
-  animation: marquee-slide-left 30s linear infinite;
-  will-change: transform;
+  display: flex;
+  width: max-content;
+  animation: marquee 30s linear infinite;
 }
-.marquee-track--reverse { animation-name: marquee-slide-right; }
-.marquee-wrapper:hover .marquee-track { animation-play-state: paused; }
+.integrations-logos {
+  display: flex;
+  gap: 2rem;
+  align-items: center;
+}
+.integrations-logos img {
+  max-height: 50px;
+  object-fit: contain;
+  filter: brightness(0) invert(1);
+  transition: transform 0.3s ease;
+}
+.integrations-logos img:hover {
+  transform: scale(1.1);
+}
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
 .service-cell { opacity: 0; transition: opacity 0.5s ease-in-out; }
 .service-cell.is-visible { opacity: 1; }
 .service-cell h3, .service-cell p { opacity: 0; transform: translateY(10px); transition: opacity 0.4s ease-out, transform 0.4s ease-out; }
@@ -365,60 +426,9 @@
 #faq-answer ul { margin: 0; }
 .hero-bg-container::before { content: ''; position: absolute; inset: 0; background-image: url('/public/assets/images/hero.png'); background-size: 100%; background-position: center; background-repeat: no-repeat; animation: kenBurns 20s ease-in-out infinite alternate; z-index: -20; }
 @keyframes kenBurns { 0% { transform: scale(1) rotate(0deg); background-position: center; } 100% { transform: scale(1.1) rotate(1deg); background-position: top left; } }
-@keyframes marquee-slide-left { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
-@keyframes marquee-slide-right { 0% { transform: translateX(-50%); } 100% { transform: translateX(0); } }
 @media (prefers-reduced-motion: reduce) { .marquee-track { animation: none !important; } }
 .panel-overlay, .panel-container { transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
 
-/* Integration Section Styles */
-#integrations .integration-track {
-  display: flex;
-  align-items: center;
-  gap: clamp(2.5rem, 8vw, 4.5rem);
-  padding: 0 1rem;
-}
-#integrations .integration-item {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  padding: 0.5rem 0.75rem;
-}
-#integrations .integration-logo {
-  --logo-scale: 1;
-  --logo-hover-scale: calc(var(--logo-scale) * 1.1);
-  display: block;
-  opacity: 0.95;
-  transition: transform 0.3s ease, filter 0.3s ease, opacity 0.3s ease;
-  transform: scale(var(--logo-scale));
-}
-#integrations .integration-hero-logo {
-  width: clamp(12rem, 28vw, 20rem);
-  max-height: clamp(6rem, 18vw, 12rem);
-  height: auto;
-  filter: drop-shadow(0 10px 25px rgba(16, 24, 40, 0.3));
-}
-#integrations .integration-hero-logo {
-  width: clamp(14rem, 32vw, 22rem);
-  max-height: clamp(7rem, 20vw, 14rem);
-  min-height: clamp(3.75rem, 8vw, 6.5rem);
-  height: auto;
-  filter: drop-shadow(0 10px 25px rgba(16, 24, 40, 0.3));
-}
-#integrations .integration-item:hover .integration-logo {
-  transform: scale(var(--logo-hover-scale));
-  opacity: 1;
-}
-.integration-logo--xl {
-  --logo-scale: 1.95;
-}
-@media (max-width: 768px) {
-  .integration-logo--xl {
-    --logo-scale: 1.6;
-  }
-}
-.dark #integrations .integration-logo {
-  filter: brightness(1.15) contrast(1.05);
-}
         /* === PAYMENT SERVICES EXPERIENCE === */
         #payments {
             position: relative;
@@ -1022,31 +1032,61 @@
 
 <!-- ================= INTEGRATIONS SECTION START ================= -->
 <!-- Rotating partner logos showcasing supported commerce platforms -->
-<section id="integrations" class="py-16 md:py-24">
-    <div class="max-w-7xl mx-auto px-4 text-center space-y-12">
-        <div class="grid grid-cols-[1fr,auto,1fr] items-center gap-4 md:gap-8 max-w-4xl mx-auto">
-<img src="public/assets/images/shopifydark.png" 
-     alt="Shopify Logo" 
-     class="integration-logo integration-hero-logo integration-logo--xl object-contain justify-self-end">
-
-<h2 class="text-2xl sm:text-3xl md:text-4xl font-bold font-ubuntu uppercase tracking-wide">
-  Integrate With Your Favorite Tools
-</h2>
-
-<img src="public/assets/images/gohighleveldark.png" 
-     alt="GoHighLevel Logo" 
-     class="integration-logo integration-hero-logo integration-logo--xl object-contain justify-self-start">
-
-        </div>
-
-        <p class="text-lg text-slate-300 max-w-2xl mx-auto">Connect with your favorite tools and services</p>
-
-        <div class="marquee-wrapper">
-            <div id="integrations-track" class="marquee-track integration-track">
-                <!-- Logos will be injected by JS -->
-            </div>
-        </div>
+<section id="integrations" class="integrations">
+  <div class="container text-center">
+    <div class="title-with-logo">
+      <h2 class="section-title typewriter">INTEGRATE WITH YOUR FAVORITE TOOLS</h2>
+      <img class="shopify-hero" src="/public/assets/images/shopifydark.png" alt="Shopify" />
     </div>
+    <p class="section-subtitle">Connect with your favorite tools and services</p>
+
+    <!-- Scroller with all logos -->
+    <div class="integrations-marquee">
+      <div class="marquee-track">
+        <div class="integrations-logos">
+          <img src="/assets/integrations/bigcommerce.webp" alt="BigCommerce" />
+          <img src="/assets/integrations/clovernew.svg" alt="Clover" />
+          <img src="/assets/integrations/freshbooks.webp" alt="FreshBooks" />
+          <img src="/assets/integrations/hubspot.webp" alt="HubSpot" />
+          <img src="/assets/integrations/keap.webp" alt="Keap" />
+          <img src="/assets/integrations/lightspeed.webp" alt="Lightspeed" />
+          <img src="/assets/integrations/magento.webp" alt="Magento" />
+          <img src="/assets/integrations/mastercard.webp" alt="Mastercard" />
+          <img src="/assets/integrations/memberpress.svg" alt="MemberPress" />
+          <img src="/assets/integrations/ncr.webp" alt="NCR" />
+          <img src="/assets/integrations/quickbooks.webp" alt="QuickBooks" />
+          <img src="/assets/integrations/salesforce.webp" alt="Salesforce" />
+          <img src="/assets/integrations/squarespace.webp" alt="Squarespace" />
+          <img src="/assets/integrations/vend.webp" alt="Vend" />
+          <img src="/assets/integrations/visa.webp" alt="Visa" />
+          <img src="/assets/integrations/wix.webp" alt="Wix" />
+          <img src="/assets/integrations/woocommerce.webp" alt="WooCommerce" />
+          <img src="/assets/integrations/zoho_crm.webp" alt="Zoho CRM" />
+        </div>
+        <!-- duplicate for infinite loop -->
+        <div class="integrations-logos">
+          <img src="/assets/integrations/bigcommerce.webp" alt="BigCommerce" />
+          <img src="/assets/integrations/clovernew.svg" alt="Clover" />
+          <img src="/assets/integrations/freshbooks.webp" alt="FreshBooks" />
+          <img src="/assets/integrations/hubspot.webp" alt="HubSpot" />
+          <img src="/assets/integrations/keap.webp" alt="Keap" />
+          <img src="/assets/integrations/lightspeed.webp" alt="Lightspeed" />
+          <img src="/assets/integrations/magento.webp" alt="Magento" />
+          <img src="/assets/integrations/mastercard.webp" alt="Mastercard" />
+          <img src="/assets/integrations/memberpress.svg" alt="MemberPress" />
+          <img src="/assets/integrations/ncr.webp" alt="NCR" />
+          <img src="/assets/integrations/quickbooks.webp" alt="QuickBooks" />
+          <img src="/assets/integrations/salesforce.webp" alt="Salesforce" />
+          <img src="/assets/integrations/squarespace.webp" alt="Squarespace" />
+          <img src="/assets/integrations/vend.webp" alt="Vend" />
+          <img src="/assets/integrations/visa.webp" alt="Visa" />
+          <img src="/assets/integrations/wix.webp" alt="Wix" />
+          <img src="/assets/integrations/woocommerce.webp" alt="WooCommerce" />
+          <img src="/assets/integrations/zoho_crm.webp" alt="Zoho CRM" />
+        </div>
+      </div>
+    </div>
+  </div>
 </section>
 <!-- ================= INTEGRATIONS SECTION END ================= -->
 
