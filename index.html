@@ -1,11 +1,9 @@
 <!DOCTYPE html>
 <html lang="en" class="dark">
-<!-- ================= HEAD SECTION START ================= -->
-<!-- Meta tags, external resources, and global styling configuration -->
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MerchantHaus.io  - Empiritos Automata</title>
+    <title>MerchantHaus – ISO Solutions for U.S. Retail – MerchantHaus</title>
     <meta name="description" content="Effortlessly set up your business profile and start taking payments in minutes—cards, ACH, and secure pay links—online, in-store, or on the go.">
     <meta name="theme-color" content="#E63946">
     <meta name="theme-color" media="(prefers-color-scheme: light)" content="#E63946">
@@ -46,9 +44,6 @@
     <!-- Lucide Icons -->
     <script src="https://unpkg.com/lucide@latest"></script>
 
-    <!-- Support CTA Handler -->
-    <script src="/assets/support.js" defer></script>
-
     <!-- Custom Styles -->
     <style>
         html {
@@ -61,6 +56,9 @@
             -moz-osx-font-smoothing: grayscale;
             background-color: #1c1c1c;
             color: #f5f5f5;
+        }
+         body.grabbing {
+            cursor: grabbing;
         }
         body::before {
             content: '';
@@ -83,55 +81,6 @@
         }
         .dark .border-slate-800 { border-color: #2a2a2a !important; }
 
-        /* Headline scroller */
-        .scrolling-words-container {
-            height: 4.5rem; 
-            line-height: 4.5rem;
-            overflow: hidden;
-            position: relative;
-            display: inline-block;
-        }
-        @media (min-width: 768px) {
-            .scrolling-words-container {
-                height: 3.75rem;
-                line-height: 3.75rem;
-            }
-        }
-        .scrolling-words-box {
-            display: inline-block;
-            list-style: none;
-            padding: 0;
-            margin: 0;
-            animation: spin-words 10s ease-in-out infinite;
-        }
-        @keyframes spin-words {
-            0%, 20% { transform: translateY(0); }
-            25%, 45% { transform: translateY(-4.5rem); }
-            50%, 70% { transform: translateY(-9rem); }
-            75%, 95% { transform: translateY(-13.5rem); }
-            100% { transform: translateY(-18rem); }
-        }
-        @media (min-width: 768px) {
-           @keyframes spin-words {
-                0%, 20% { transform: translateY(0); }
-                25%, 45% { transform: translateY(-3.75rem); }
-                50%, 70% { transform: translateY(-7.5rem); }
-                75%, 95% { transform: translateY(-11.25rem); }
-                100% { transform: translateY(-15rem); }
-            }
-        }
-
-        /* Typewriter effect */
-        .typewriter-text {
-            border-right: .15em solid #00CEDB;
-            white-space: pre-wrap;
-            animation: blink-caret .75s step-end infinite;
-        }
-        @keyframes blink-caret {
-            from, to { border-color: transparent }
-            50% { border-color: #00CEDB; }
-        }
-
         .sr-only {
             position: absolute;
             width: 1px;
@@ -142,310 +91,14 @@
             clip: rect(0,0,0,0);
             border: 0;
         }
+        .panel-overlay, .panel-container { transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
 
-        .hero-layout {
-            gap: 2.5rem;
-        }
-
-        .hero-overlay {
-            max-width: clamp(90%, 80rem, 100%);
-            width: 100%;
-        }
-
-        .hero-heading {
-            font-size: clamp(1.75rem, 4vw + 0.5rem, 3.25rem);
-            line-height: 1.15;
-        }
-
-        .hero-subheading {
-            font-size: clamp(1.25rem, 3vw + 0.25rem, 2.5rem);
-        }
-
-        .section-heading {
-            font-size: clamp(1.5rem, 3vw + 0.5rem, 2.75rem);
-        }
-
-        .section-subheading {
-            font-size: clamp(1.125rem, 2.5vw, 2.25rem);
-        }
-
-        .application-section {
-            padding-bottom: 1rem;
-        }
-
-        @media (max-width: 767px) {
-            .hero-layout {
-                gap: 2rem;
-            }
-
-            .hero-text {
-                text-align: center;
-            }
-
-            .hero-text p {
-                text-align: center;
-            }
-
-            .hero-chat-card {
-                width: 100%;
-                margin: 0 auto;
-                padding: 1.25rem;
-                background-color: rgba(15, 23, 42, 0.35);
-                border-radius: 1.5rem;
-                backdrop-filter: blur(6px);
-            }
-
-            .hero-chat-card .field {
-                font-size: 1rem;
-                padding-top: 0.85rem;
-                padding-bottom: 0.85rem;
-            }
-
-            .hero-chat-card button {
-                transform: scale(0.95);
-            }
-
-            #faq-answer {
-                max-height: 240px;
-                font-size: 0.95rem;
-            }
-        }
-    </style>
-
-    <!-- Favicons -->
-    <link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="192x192" href="/favicons/android-chrome-192x192.png">
-    <link rel="icon" type="image/png" sizes="512x512" href="/favicons/android-chrome-512x512.png">
-    <link rel="icon" type="image/x-icon" href="/favicon.ico">
-    <link rel="manifest" href="/site.webmanifest">
-</head>
-<!-- ================= HEAD SECTION END ================= -->
-<body class="text-slate-100">
-
-    <!-- Header -->
-    <!-- ================= HEADER SECTION START ================= -->
-    <!-- Sticky navigation bar with logo, contact info, and responsive menus -->
-    <div class="sticky top-0 z-50">
-        <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-4 pb-6">
-             <header class="header-glass border border-slate-200/70 dark:border-slate-800 rounded-full shadow-lg">
-                 <div class="relative max-w-7xl mx-auto px-6 py-3 flex items-center justify-between">
-                    <a href="/index.html" class="flex items-center gap-3 group">
-                         <div class="w-[190px] md:w-[260px]" data-mh-logo-header></div>
-                         <span class="sr-only">MerchantHaus Homepage</span>
-                     </a>
-                     <div class="flex items-center gap-6">
-                         <div class="hidden md:flex items-center gap-4 text-sm font-sans">
-                             <a href="tel:15056006042" class="hover:text-brand-teal transition-colors">1-505-600-6042</a>
-                             <button
-                               type="button"
-                               class="js-support inline-flex items-center justify-center rounded-full border border-brand-teal px-4 py-2 font-semibold text-brand-teal transition-colors duration-300 hover:bg-brand-teal hover:text-white"
-                               data-cta="contact-support"
-                               data-cta-location="header-desktop"
-                             >Contact Support</button>
-                         </div>
-                         <button type="button" class="js-signup-cta bg-brand-crimson hover:bg-opacity-90 text-white border border-transparent px-4 py-2 rounded-full text-sm font-semibold font-inter transition-colors duration-300">Get Started</button>
-                         <a href="https://retailmanager.merchant.haus" class="hidden sm:block bg-transparent hover:bg-brand-teal text-brand-teal hover:text-white border border-brand-teal px-4 py-2 rounded-lg text-sm font-semibold font-inter transition-colors duration-300">Login</a>
-                     </div>
-                 </div>
-            </header>
-            <button id="mobile-menu-button" class="md:hidden p-3 rounded-full bg-slate-900/50 backdrop-blur-sm text-white absolute left-6 top-full translate-y-3 z-[60] hover:bg-slate-800/70 transition-colors shadow-lg">
-                <i data-lucide="menu" class="h-6 w-6"></i>
-                <span class="sr-only">Open menu</span>
-            </button>
-            <div id="mobile-menu" class="absolute left-6 top-full mt-16 w-72 rounded-xl bg-[#1c1c1c] shadow-2xl border border-brand-teal p-4 z-[59] hidden">
-                <nav class="flex flex-col space-y-6 text-base font-medium font-inter">
-                    <div class="space-y-2">
-                        <h4 class="text-sm font-semibold text-brand-teal uppercase tracking-[0.2em]">Product</h4>
-                        <a href="/#payments" class="block w-full px-4 py-2 text-left rounded-full border border-brand-teal bg-[#262626] text-white transition-colors duration-200 hover:bg-brand-teal">Payment Services</a>
-                        <button type="button" id="mobile-integrations-toggle" aria-expanded="false" aria-controls="mobile-integrations-menu" class="flex items-center justify-between w-full px-4 py-2 text-left rounded-full border border-brand-teal bg-[#262626] text-white transition-colors duration-200 hover:bg-brand-teal">
-                            <span>Integrations</span>
-                            <span class="ml-2 text-brand-teal">
-                                <svg data-collapsible-icon class="w-4 h-4 transition-transform" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                    <polyline points="6 9 12 15 18 9"></polyline>
-                                </svg>
-                            </span>
-                        </button>
-                        <div id="mobile-integrations-menu" class="mt-2 space-y-2 pl-3 hidden">
-                            <a href="/integrations.html" class="block w-full px-4 py-2 text-left rounded-full border border-brand-teal bg-[#1f1f1f] text-white transition-colors duration-200 hover:bg-brand-teal">Integrations Directory</a>
-                            <a href="/.html" class="block w-full px-4 py-2 text-left rounded-full border border-brand-teal bg-[#1f1f1f] text-white transition-colors duration-200 hover:bg-brand-teal">Shopify Integration</a>
-                            <a href="/gohighlevel.html" class="block w-full px-4 py-2 text-left rounded-full border border-brand-teal bg-[#1f1f1f] text-white transition-colors duration-200 hover:bg-brand-teal">GoHighLevel Integration</a>
-                        </div>
-                        <a href="/#checklist" class="block w-full px-4 py-2 text-left rounded-full border border-brand-teal bg-[#262626] text-white transition-colors duration-200 hover:bg-brand-teal">Setup Checklist</a>
-                    </div>
-                    <div class="space-y-2">
-                        <h4 class="text-sm font-semibold text-brand-teal uppercase tracking-[0.2em]">Support</h4>
-                        <button
-                          type="button"
-                          class="js-support block w-full rounded-full border border-brand-teal bg-[#262626] px-4 py-2 text-left font-semibold text-white transition-colors duration-200 hover:bg-brand-teal"
-                          data-cta="contact-support"
-                          data-cta-location="mobile-nav"
-                        >Contact Support</button>
-                        <a href="/faq.html" class="block w-full px-4 py-2 text-left rounded-full border border-brand-teal bg-[#262626] text-white transition-colors duration-200 hover:bg-brand-teal">FAQ</a>
-                    </div>
-                    <div class="space-y-2">
-                        <h4 class="text-sm font-semibold text-brand-teal uppercase tracking-[0.2em]">Legal</h4>
-                        <a href="/privacy.html" class="block w-full px-4 py-2 text-left rounded-full border border-brand-teal bg-[#262626] text-white transition-colors duration-200 hover:bg-brand-teal">Privacy Policy</a>
-                        <a href="/terms.html" class="block w-full px-4 py-2 text-left rounded-full border border-brand-teal bg-[#262626] text-white transition-colors duration-200 hover:bg-brand-teal">Terms &amp; Conditions</a>
-                        <a href="/compliance.html" class="block w-full px-4 py-2 text-left rounded-full border border-brand-teal bg-[#262626] text-white transition-colors duration-200 hover:bg-brand-teal">Compliance</a>
-                    </div>
-                    <a href="https://retailmanager.merchant.haus" class="sm:hidden block w-full px-4 py-2 text-center rounded-full border border-brand-teal bg-[#262626] text-white transition-colors duration-200 hover:bg-brand-teal">Login</a>
-                </nav>
-            </div>
-        </div>
-    </div>
-    <!-- ================= HEADER SECTION END ================= -->
-
-    <!-- ================= SIGNUP PANEL OVERLAY START ================= -->
-    <!-- Slide-in multi-step signup workflow for creating new accounts -->
-    <div id="signup-panel-overlay" class="panel-overlay fixed inset-0 bg-black/60 z-50 opacity-0 invisible">
-        <div id="signup-panel" class="panel-container fixed top-0 right-0 h-full w-full max-w-2xl bg-white dark:bg-slate-900 shadow-2xl transform translate-x-full flex flex-col">
-            <div class="p-6 sm:p-8 relative flex-shrink-0">
-                <button id="close-signup-panel-btn" class="absolute top-4 right-4 text-slate-500 hover:text-slate-800 dark:hover:text-slate-200">
-                    <i data-lucide="x" class="h-6 w-6"></i>
-                </button>
-                <div class="mb-6">
-                    <div class="flex justify-between mb-2 text-sm font-semibold text-slate-800 dark:text-slate-200">
-                        <p>Step <span id="current-step-text">1</span> of 3</p>
-                        <p id="step-name">Account Details</p>
-                    </div>
-                    <div class="w-full bg-slate-200 dark:bg-slate-700 rounded-full h-2.5 overflow-hidden">
-                        <div id="progress-bar" class="bg-brand-crimson h-full rounded-full" style="width: 33%"></div>
-                    </div>
-                </div>
-            </div>
-            <div class="px-6 sm:px-8 pb-4 flex-grow overflow-y-auto">
-                <form id="signup-form" novalidate></form>
-                <div id="form-message" class="mt-4 text-center text-sm"></div>
-            </div>
-            <div class="p-6 sm:p-8 mt-auto pt-6 border-t border-slate-200 dark:border-slate-800 flex justify-between items-center flex-shrink-0">
-                <div class="text-sm">
-                    <p class="font-semibold">Need Help?</p>
-                    <a href="tel:15056006042" class="text-slate-500 hover:text-brand-crimson dark:hover:text-brand-teal transition-colors">1-505-600-6042</a>
-                </div>
-                <div class="flex items-center gap-4">
-                    <button type="button" id="prev-btn" class="bg-slate-200 text-slate-800 dark:bg-slate-700 dark:text-slate-200 px-6 py-2.5 rounded-lg font-semibold hover:bg-slate-300 dark:hover:bg-slate-600 transition-all invisible">Previous</button>
-                    <button type="button" id="next-btn" class="bg-brand-crimson text-white px-6 py-2.5 rounded-lg font-semibold hover:bg-brand-crimson transition-all shadow-sm hover:shadow-md">Next</button>
-                    <button type="submit" id="submit-btn" form="signup-form" class="bg-brand-crimson text-white px-6 py-2.5 rounded-lg font-bold hover:bg-brand-crimson transition-all shadow-sm hover:shadow-md hidden">Create Account</button>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- ================= SIGNUP PANEL OVERLAY END ================= -->
-
-<!-- ================= INLINE EXPERIENCE STYLES START ================= -->
-<!-- Additional page-specific styling for hero, banners, and dynamic effects -->
-<style>
-.field:focus { outline: none; box-shadow: 0 0 0 3px rgba(239,60,91,.35); }
-.cursor { display: inline-block; width: 3px; height: 1em; background-color: #dc2743; animation: blink-caret .75s step-end infinite; vertical-align: bottom; }
-@keyframes blink-caret { from, to { background-color: transparent; } 50% { background-color: #dc2743; } }
-.loader { width: 16px; height: 16px; border: 2px solid #FFF; border-bottom-color: transparent; border-radius: 50%; display: inline-block; box-sizing: border-box; animation: rotation 1s linear infinite; vertical-align: middle; margin-right: 8px; }
-@keyframes rotation { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
-.feature-display { display: flex; align-items: center; justify-content: center; min-width: 150px; height: 38px; padding: 0 16px; border-radius: 9999px; background-color: #F3F4F6; color: #111827; font-size: 0.875rem; font-weight: 500; transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out; opacity: 0; transform: translateX(-50%) translateY(10px); position: absolute; left: 50%; white-space: nowrap; }
-.dark .feature-display { background-color: #1f2937; color: #f9fafb; }
-.feature-display.active { opacity: 1; transform: translateX(-50%) translateY(0); }
-.feature-display.exiting { opacity: 0; transform: translateX(-50%) translateY(-10px); }
-.integrations {
-  background: radial-gradient(circle at left, #2c0c17, transparent),
-              radial-gradient(circle at right, #0a1d1f, transparent);
-  padding: 4rem 2rem;
-  color: #fff;
-  overflow: hidden;
-}
-.title-with-logo {
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-  gap: 1rem;
-  flex-wrap: wrap;
-}
-.integrations .section-title {
-  font-size: 2rem;
-  font-weight: 700;
-  margin: 0;
-  overflow: hidden;
-  white-space: nowrap;
-  border-right: .15em solid #fff;
-}
-.typewriter {
-  display: inline-block;
-  width: 0;
-  animation: typing 4s steps(34, end) forwards, blink .75s step-end infinite;
-}
-@keyframes typing {
-  from { width: 0 }
-  to { width: 34ch }
-}
-@keyframes blink {
-  from, to { border-color: transparent }
-  50% { border-color: #fff }
-}
-.shopify-hero {
-  height: clamp(50px, 7vw, 98px);
-  width: auto;
-  object-fit: contain;
-}
-.integrations .section-subtitle {
-  font-size: 1.1rem;
-  margin: 1rem 0 2rem;
-  color: #ccc;
-}
-.integrations-marquee {
-  position: relative;
-  overflow: hidden;
-}
-.marquee-track {
-  display: flex;
-  width: max-content;
-  animation: marquee 30s linear infinite;
-}
-.integrations-logos {
-  display: flex;
-  gap: 2rem;
-  align-items: center;
-}
-.integrations-logos img {
-  max-height: 35px;
-  object-fit: contain;
-  transition: transform 0.3s ease;
-}
-.integrations-logos img:hover {
-  transform: scale(1.1);
-}
-@keyframes marquee {
-  from { transform: translateX(0); }
-  to { transform: translateX(-50%); }
-}
-.service-cell { opacity: 0; transition: opacity 0.5s ease-in-out; }
-.service-cell.is-visible { opacity: 1; }
-.service-cell h3, .service-cell p { opacity: 0; transform: translateY(10px); transition: opacity 0.4s ease-out, transform 0.4s ease-out; }
-.service-cell.is-visible h3 { opacity: 1; transform: translateY(0); transition-delay: 0.2s; }
-.service-cell.is-visible p { opacity: 1; transform: translateY(0); transition-delay: 0.3s; }
-#faq-answer p { margin: 0 0 0.75rem; }
-#faq-answer p:last-child { margin-bottom: 0; }
-#faq-answer ul { margin: 0; }
-.hero-bg-container::before { content: ''; position: absolute; inset: 0; background-image: url('/public/assets/images/hero.png'); background-size: 100%; background-position: center; background-repeat: no-repeat; animation: kenBurns 20s ease-in-out infinite alternate; z-index: -20; }
-@keyframes kenBurns { 0% { transform: scale(1) rotate(0deg); background-position: center; } 100% { transform: scale(1.1) rotate(1deg); background-position: top left; } }
-@media (prefers-reduced-motion: reduce) { .marquee-track { animation: none !important; } }
-.panel-overlay, .panel-container { transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
-
-        /* === PAYMENT SERVICES EXPERIENCE === */
         #payments {
           position: relative;
           overflow: hidden;
           width: 100%;
         }
 
-        body.grabbing {
-            cursor: grabbing;
-        }
-
-        .payments-experience {
-            position: relative;
-            background-color: #1c1c1c;
-            color: #f5f5f5;
-        }
-
-        /* Pure CSS Slider Styles based on reference */
         .banner {
             width: 100%;
             height: 100vh;
@@ -472,8 +125,6 @@
             opacity: 0;
             pointer-events: none;
         }
-
-
         .banner .slider .item{
             position: absolute;
             inset: 0 0 0 0;
@@ -496,6 +147,18 @@
             box-shadow: 0 10px 25px rgba(0,0,0,0.3);
             border: 1px solid rgba(255, 255, 255, 0.1);
         }
+
+        .item:nth-child(1) .service-card { background-image: url('assets/img/card1.png'); }
+        .item:nth-child(2) .service-card { background-image: url('assets/img/card2.png'); }
+        .item:nth-child(3) .service-card { background-image: url('assets/img/card3.png'); }
+        .item:nth-child(4) .service-card { background-image: url('assets/img/card4.png'); }
+        .item:nth-child(5) .service-card { background-image: url('assets/img/card5.png'); }
+        .item:nth-child(6) .service-card { background-image: url('assets/img/card6.png'); }
+        .item:nth-child(7) .service-card { background-image: url('assets/img/card7.png'); }
+        .item:nth-child(8) .service-card { background-image: url('assets/img/card8.png'); }
+        .item:nth-child(9) .service-card { background-image: url('assets/img/card9.png'); }
+        .item:nth-child(10) .service-card { background-image: url('assets/img/card10.png'); }
+
         
         .service-icon-container {
             width: 90px;
@@ -513,19 +176,6 @@
             overflow: hidden;
         }
         
-        /* Applying Images */
-        .item:nth-child(1) .service-card { background-image: url('assets/img/card1.png'); }
-        .item:nth-child(2) .service-card { background-image: url('assets/img/card2.png'); }
-        .item:nth-child(3) .service-card { background-image: url('assets/img/card3.png'); }
-        .item:nth-child(4) .service-card { background-image: url('assets/img/card4.png'); }
-        .item:nth-child(5) .service-card { background-image: url('assets/img/card5.png'); }
-        .item:nth-child(6) .service-card { background-image: url('assets/img/card6.png'); }
-        .item:nth-child(7) .service-card { background-image: url('assets/img/card7.png'); }
-        .item:nth-child(8) .service-card { background-image: url('assets/img/card8.png'); }
-        .item:nth-child(9) .service-card { background-image: url('assets/img/card9.png'); }
-        .item:nth-child(10) .service-card { background-image: url('assets/img/card10.png'); }
-
-
         .item:hover .service-icon-container {
              transform: translateY(-10px);
         }
@@ -534,12 +184,23 @@
             width: 3.5rem;
             height: 3.5rem;
             stroke-width: 1.5;
-            stroke: #DC143C;
             filter: drop-shadow(3px 3px 2px rgba(0, 0, 0, 0.3)); 
             position: relative;
             z-index: 2;
         }
         
+        .item:nth-child(1) .service-icon { stroke: #33FF57; }
+        .item:nth-child(2) .service-icon { stroke: #3357FF; }
+        .item:nth-child(3) .service-icon { stroke: #FF33A1; }
+        .item:nth-child(4) .service-icon { stroke: #A133FF; }
+        .item:nth-child(5) .service-icon { stroke: #33FFF6; }
+        .item:nth-child(6) .service-icon { stroke: #F6FF33; }
+        .item:nth-child(7) .service-icon { stroke: #FF8C33; }
+        .item:nth-child(8) .service-icon { stroke: #8CFF33; }
+        .item:nth-child(9) .service-icon { stroke: #DC143C; }
+        .item:nth-child(10) .service-icon { stroke: #FF5733; }
+
+
         .service-title {
             position: absolute;
             bottom: 105%;
@@ -578,28 +239,68 @@
             opacity: 0;
             pointer-events: none;
             transition: opacity 0.5s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
         #fullscreen-view.visible {
             opacity: 1;
             pointer-events: all;
         }
         #fullscreen-card {
-            position: absolute;
+            position: relative;
             transition: all 0.6s cubic-bezier(0.645, 0.045, 0.355, 1);
+            width: 40vmax; 
+            height: 50vmax;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+        }
+        #fullscreen-card.visible {
+            opacity: 1;
+        }
+
+        #fullscreen-card .service-card {
+             width: 100%;
+             height: 100%;
         }
         #fullscreen-card .service-icon-container {
-             width: 40vmax;
-             height: 40vmax;
-        }
-        #fullscreen-card .service-icon {
-             width: 15vmax;
-             height: 15vmax;
+             width: 40%;
+             height: auto;
+             aspect-ratio: 1/1;
+             display: none;
         }
         #fullscreen-card .service-title {
-            font-size: 4vmax;
-            padding: 1rem 3rem;
-            bottom: 110%;
+            display: none;
         }
+        .fullscreen-description {
+            color: #d1d5db;
+            font-family: 'Inter', sans-serif;
+            font-size: 1.2vmax;
+            width: 100%;
+            max-width: 90%;
+            padding: 2rem;
+            position: absolute;
+            background-color: rgba(0,0,0,0.6);
+            border-radius: 1rem;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.5s 0.3s, transform 0.5s 0.3s;
+        }
+        #fullscreen-card.visible .fullscreen-description {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .fullscreen-description .service-icon {
+            width: 3vmax;
+            height: 3vmax;
+            min-width: 40px;
+            min-height: 40px;
+        }
+
+
         #close-fullscreen-btn {
             position: absolute;
             top: 40px;
@@ -614,25 +315,11 @@
             transform: scale(1.1);
         }
 
-        .loader {
-            width: 20px;
-            height: 20px;
-            border: 3px solid #FFF;
-            border-bottom-color: transparent;
-            border-radius: 50%;
-            display: inline-block;
-            box-sizing: border-box;
-            animation: rotation 1s linear infinite;
-        }
-        @keyframes rotation {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-
         .banner .content{
             position: absolute;
             bottom: 0;
-            left: 0;
+            left: 50%;
+            transform: translateX(-50%);
             width: 100%;
             height: 100%;
             pointer-events: none;
@@ -649,25 +336,131 @@
             background-position: center bottom;
             z-index: 1;
         }
-        /* === END PAYMENT SERVICES EXPERIENCE === */
-</style>
-<!-- ================= INLINE EXPERIENCE STYLES END ================= -->
 
-<!-- ================= HERO SECTION START ================= -->
-<!-- Immersive introductory hero with animated FAQ assistant and onboarding CTA -->
+    </style>
+</head>
+<body class="text-slate-100">
+
+    <!-- Header -->
+    <div class="sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-4 pb-6">
+             <header class="header-glass border border-slate-200/70 dark:border-slate-800 rounded-full shadow-lg">
+                 <div class="relative max-w-7xl mx-auto px-6 py-3 flex items-center justify-between">
+                    <a href="/index.html" class="flex items-center gap-3 group">
+                         <div class="w-[190px] md:w-[260px]" data-mh-logo-header></div>
+                         <span class="sr-only">MerchantHaus Homepage</span>
+                     </a>
+                     <div class="flex items-center gap-6">
+                         <div class="hidden md:flex items-center gap-4 text-sm font-sans">
+                             <a href="tel:15056006042" class="hover:text-brand-teal transition-colors">1-505-600-6042</a>
+                             <a href="mailto:support@merchanthaus.io" class="hover:text-brand-teal transition-colors">support@merchanthaus.io</a>
+                         </div>
+                         <button type="button" class="js-signup-cta bg-brand-crimson hover:bg-opacity-90 text-white border border-transparent px-4 py-2 rounded-full text-sm font-semibold font-inter transition-colors duration-300">Get Started</button>
+                         <a href="https://retailmanager.merchant.haus" class="hidden sm:block bg-transparent hover:bg-brand-teal text-brand-teal hover:text-white border border-brand-teal px-4 py-2 rounded-lg text-sm font-semibold font-inter transition-colors duration-300">Login</a>
+                         <button id="mobile-menu-button" class="p-2 rounded-lg hover:bg-slate-800">
+                             <i data-lucide="menu" class="h-6 w-6"></i>
+                         </button>
+                     </div>
+                 </div>
+            </header>
+            <div id="mobile-menu" class="fixed top-24 left-4 mt-2 w-72 rounded-xl bg-[#1c1c1c] shadow-2xl border border-brand-teal p-4 z-40 hidden">
+                 <nav class="flex flex-col space-y-6 text-base font-medium font-inter">
+                     <div class="space-y-2">
+                         <h4 class="text-sm font-semibold text-brand-teal uppercase tracking-[0.2em]">Product</h4>
+                         <a href="/#payments" class="block w-full px-4 py-2 text-left rounded-full border border-brand-teal bg-[#262626] text-white transition-colors duration-200 hover:bg-brand-teal">Payment Services</a>
+                         <button
+                             type="button"
+                             id="mobile-integrations-toggle"
+                             aria-expanded="false"
+                             aria-controls="mobile-integrations-menu"
+                             class="flex items-center justify-between w-full px-4 py-2 text-left rounded-full border border-brand-teal bg-[#262626] text-white transition-colors duration-200 hover:bg-brand-teal"
+                         >
+                             <span>Integrations</span>
+                             <span class="ml-2 text-brand-teal">
+                                 <svg data-collapsible-icon class="w-4 h-4 transition-transform" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                     <polyline points="6 9 12 15 18 9" />
+                                 </svg>
+                             </span>
+                         </button>
+                        <div id="mobile-integrations-menu" class="mt-2 space-y-2 pl-3 hidden">
+                            <a href="/integrations.html" class="block w-full px-4 py-2 text-left rounded-full border border-brand-teal bg-[#1f1f1f] text-white transition-colors duration-200 hover:bg-brand-teal">Integrations Directory</a>
+                            <a href="/shopify.html" class="block w-full px-4 py-2 text-left rounded-full border border-brand-teal bg-[#1f1f1f] text-white transition-colors duration-200 hover:bg-brand-teal">Shopify Integration</a>
+                            <a href="/gohighlevel.html" class="block w-full px-4 py-2 text-left rounded-full border border-brand-teal bg-[#1f1f1f] text-white transition-colors duration-200 hover:bg-brand-teal">GoHighLevel Integration</a>
+                        </div>
+                         <a href="/#checklist" class="block w-full px-4 py-2 text-left rounded-full border border-brand-teal bg-[#262626] text-white transition-colors duration-200 hover:bg-brand-teal">Setup Checklist</a>
+                     </div>
+                     <div class="space-y-2">
+                         <h4 class="text-sm font-semibold text-brand-teal uppercase tracking-[0.2em]">Support</h4>
+                         <a href="mailto:support@merchanthaus.io" class="block w-full px-4 py-2 text-left rounded-full border border-brand-teal bg-[#262626] text-white transition-colors duration-200 hover:bg-brand-teal">Contact Support</a>
+                         <a href="/faq.html" class="block w-full px-4 py-2 text-left rounded-full border border-brand-teal bg-[#262626] text-white transition-colors duration-200 hover:bg-brand-teal">FAQ</a>
+                     </div>
+                     <div class="space-y-2">
+                         <h4 class="text-sm font-semibold text-brand-teal uppercase tracking-[0.2em]">Legal</h4>
+                         <a href="/privacy.html" class="block w-full px-4 py-2 text-left rounded-full border border-brand-teal bg-[#262626] text-white transition-colors duration-200 hover:bg-brand-teal">Privacy Policy</a>
+                         <a href="/terms.html" class="block w-full px-4 py-2 text-left rounded-full border border-brand-teal bg-[#262626] text-white transition-colors duration-200 hover:bg-brand-teal">Terms &amp; Conditions</a>
+                         <a href="/compliance.html" class="block w-full px-4 py-2 text-left rounded-full border border-brand-teal bg-[#262626] text-white transition-colors duration-200 hover:bg-brand-teal">Compliance</a>
+                     </div>
+                     <a href="https://retailmanager.merchant.haus" class="sm:hidden block w-full px-4 py-2 text-center rounded-full border border-brand-teal bg-[#262626] text-white transition-colors duration-200 hover:bg-brand-teal">Login</a>
+                 </nav>
+            </div>
+        </div>
+    </div>
+
+    <div id="signup-panel-overlay" class="panel-overlay fixed inset-0 bg-black/60 z-50 opacity-0 invisible">
+        <div id="signup-panel" class="panel-container fixed top-0 right-0 h-full w-full max-w-2xl bg-white dark:bg-slate-900 shadow-2xl transform translate-x-full flex flex-col">
+            <div class="p-6 sm:p-8 relative flex-shrink-0">
+                <button id="close-signup-panel-btn" class="absolute top-4 right-4 text-slate-500 hover:text-slate-800 dark:hover:text-slate-200">
+                    <i data-lucide="x" class="h-6 w-6"></i>
+                </button>
+                <div class="mb-6">
+                    <div class="flex justify-between mb-2 text-sm font-semibold text-slate-800 dark:text-slate-200">
+                        <p>Step <span id="current-step-text">1</span> of 3</p>
+                        <p id="step-name">Account Details</p>
+                    </div>
+                    <div class="w-full bg-slate-200 dark:bg-slate-700 rounded-full h-2.5 overflow-hidden">
+                        <div id="progress-bar" class="bg-brand-crimson h-full rounded-full" style="width: 33%"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="px-6 sm:px-8 pb-4 flex-grow overflow-y-auto">
+                <form id="signup-form" novalidate></form>
+                <div id="form-message" class="mt-4 text-center text-sm"></div>
+            </div>
+            <div class="p-6 sm:p-8 mt-auto pt-6 border-t border-slate-200 dark:border-slate-800 flex justify-between items-center flex-shrink-0">
+                <div class="text-sm">
+                    <p class="font-semibold">Need Help?</p>
+                    <a href="tel:15056006042" class="text-slate-500 hover:text-brand-crimson dark:hover:text-brand-teal transition-colors">1-505-600-6042</a>
+                </div>
+                <div class="flex items-center gap-4">
+                    <button type="button" id="prev-btn" class="bg-slate-200 text-slate-800 dark:bg-slate-700 dark:text-slate-200 px-6 py-2.5 rounded-lg font-semibold hover:bg-slate-300 dark:hover:bg-slate-600 transition-all invisible">Previous</button>
+                    <button type="button" id="next-btn" class="bg-brand-crimson text-white px-6 py-2.5 rounded-lg font-semibold hover:bg-brand-crimson transition-all shadow-sm hover:shadow-md">Next</button>
+                    <button type="submit" id="submit-btn" form="signup-form" class="bg-brand-crimson text-white px-6 py-2.5 rounded-lg font-bold hover:bg-brand-crimson transition-all shadow-sm hover:shadow-md hidden">Create Account</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <canvas id="particle-canvas"></canvas>
+
+    <div id="fullscreen-view">
+        <div id="fullscreen-card"></div>
+        <i id="close-fullscreen-btn" data-lucide="x-circle" class="h-12 w-12"></i>
+    </div>
+
+
 <div class="relative">
   <section class="relative overflow-hidden animate-fadeIn hero-bg-container">
     <div class="absolute inset-0 bg-black/50 -z-10"></div>
-    <div class="max-w-7xl mx-auto px-4 pt-12 sm:pt-16 md:pt-24 pb-20 md:pb-28">
-      <div class="flex flex-col-reverse hero-layout md:grid md:grid-cols-2 md:gap-10 items-center">
-        <div class="space-y-6 text-left hero-text">
-          <h1 class="hero-heading tracking-tight text-white">
+    <div class="max-w-7xl mx-auto px-4 pt-16 md:pt-24 pb-28">
+      <div class="grid md:grid-cols-2 gap-10 items-center">
+        <div class="space-y-6 text-left">
+          <h1 class="text-3xl sm:text-4xl tracking-tight leading-tight text-white">
             <span class="uppercase font-ubuntu">PAYMENTS ANYWHERE - GROWTH EVERYWHERE</span>
-            <span id="animated-headline-sub" class="grad-text-static hero-subheading font-ubuntu inline sm:ml-2">Engineered for speed, secured for trust, and designed to scale.</span>
+            <span id="animated-headline-sub" class="grad-text-static text-2xl sm:text-3xl font-ubuntu inline sm:inline sm:ml-2">Engineered for speed, secured for trust, and designed to scale.</span>
           </h1>
-          <p class="text-lg text-gray-200 dark:text-slate-300 font-inter text-center md:text-justify" style="font-weight:100">Effortlessly create your business profile and start accepting payments in minutes—cards, ACH, and secure pay links across online, in-store, and mobile. Lower your costs, onboard quickly, track performance in real time, and protect your business with advanced fraud and chargeback tools.</p>
+          <p class="text-lg text-gray-200 dark:text-slate-300 font-inter text-justify" style="font-weight:100">Effortlessly create your business profile and start accepting payments in minutes—cards, ACH, and secure pay links across online, in-store, and mobile. Lower your costs, onboard quickly, track performance in real time, and protect your business with advanced fraud and chargeback tools.</p>
         </div>
-        <div class="relative p-4 hero-chat-card">
+        <div class="relative p-4">
           <div class="w-full space-y-4 relative z-10">
             <div class="relative">
               <input type="text" id="faq-question" placeholder="Ask about pricing, features..." class="field w-full p-4 pr-12 text-lg rounded-full bg-white/20 dark:bg-slate-900/30 border border-slate-300/50 dark:border-slate-700/50 text-white placeholder-slate-300 focus:ring-2 focus:ring-brand-crimson focus:border-transparent transition-all">
@@ -675,8 +468,10 @@
                 <i data-lucide="arrow-up" class="h-5 w-5"></i>
               </button>
             </div>
-            <div id="hero-actions" class="flex flex-wrap items-center justify-center gap-3">
+            <div id="hero-actions" class="flex flex-wrap justify-center items-center gap-3">
               <button class="js-signup-cta bg-transparent hover:bg-brand-crimson text-brand-crimson hover:text-white border border-brand-crimson px-4 py-2 rounded-full text-sm font-semibold transition-colors duration-300">Get Started</button>
+              <button class="bg-slate-100/20 dark:bg-slate-800/30 text-white px-4 py-2 rounded-full text-sm font-medium hover:bg-slate-200/30 dark:hover:bg-slate-700/40 transition-colors">Chargeback Help</button>
+              <button class="js-support bg-slate-100/20 dark:bg-slate-800/30 text-white px-4 py-2 rounded-full text-sm font-medium hover:bg-slate-200/30 dark:hover:bg-slate-700/40 transition-colors">Contact Support</button>
             </div>
             <div id="faq-answer" class="mt-6 p-4 text-left rounded-lg bg-white/90 dark:bg-slate-900/90 border border-slate-200 dark:border-slate-800 text-slate-800 dark:text-slate-200"></div>
           </div>
@@ -685,221 +480,199 @@
     </div>
   </section>
 
-  </div>
-</div>
-<!-- ================= HERO SECTION END ================= -->
+    <div class="relative pt-32 w-full">
+        <section id="payments" class="pt-28 pb-12">
+            <div class="max-w-5xl mx-auto px-4 text-center">
+                 <div class="absolute top-16 left-1/2 -translate-x-1/2 z-20 w-full max-w-5xl px-4">
+                    <div class="bg-white dark:bg-[#1c1c1c] text-slate-800 dark:text-slate-200 px-8 py-4 rounded-xl border-2 border-brand-crimson shadow-lg text-center">
+                        <h2 class="text-3xl font-ubuntu font-bold">Payment Services Tailored for You</h2>
+                    </div>
+                </div>
+                <p class="text-2xl sm:text-3xl font-ubuntu mb-4 text-slate-400 mt-20">Your complete business toolkit for accepting and managing payments.</p>
+            </div>
+            
+            <div class="banner">
+                <div class="slider" style="--quantity: 10">
+                    <div class="item" style="--position: 1">
+                        <div class="service-card">
+                            <div class="service-icon-container">
+                                <i data-lucide="smartphone" class="service-icon"></i>
+                            </div>
+                        </div>
+                        <div class="service-title">Mobile Payments</div>
+                    </div>
+                    <div class="item" style="--position: 2">
+                        <div class="service-card">
+                            <div class="service-icon-container">
+                                <i data-lucide="shuffle" class="service-icon"></i>
+                            </div>
+                        </div>
+                        <div class="service-title">Smart Routing</div>
+                    </div>
+                    <div class="item" style="--position: 3">
+                        <div class="service-card">
+                             <div class="service-icon-container">
+                                <i data-lucide="file-text" class="service-icon"></i>
+                             </div>
+                        </div>
+                        <div class="service-title">Invoicing</div>
+                    </div>
+                    <div class="item" style="--position: 4">
+                        <div class="service-card">
+                            <div class="service-icon-container">
+                                <i data-lucide="repeat" class="service-icon"></i>
+                            </div>
+                        </div>
+                        <div class="service-title">Recurring Billing</div>
+                    </div>
+                    <div class="item" style="--position: 5">
+                        <div class="service-card">
+                            <div class="service-icon-container">
+                                <i data-lucide="lock" class="service-icon"></i>
+                            </div>
+                        </div>
+                        <div class="service-title">Secure Tokenization</div>
+                    </div>
+                    <div class="item" style="--position: 6">
+                        <div class="service-card">
+                            <div class="service-icon-container">
+                                <i data-lucide="bar-chart-2" class="service-icon"></i>
+                            </div>
+                        </div>
+                        <div class="service-title">Detailed Reporting</div>
+                    </div>
+                    <div class="item" style="--position: 7">
+                        <div class="service-card">
+                            <div class="service-icon-container">
+                                <i data-lucide="cpu" class="service-icon"></i>
+                            </div>
+                        </div>
+                        <div class="service-title">Automation</div>
+                    </div>
+                    <div class="item" style="--position: 8">
+                         <div class="service-card">
+                            <div class="service-icon-container">
+                                <i data-lucide="landmark" class="service-icon"></i>
+                            </div>
+                         </div>
+                         <div class="service-title">ACH Payments</div>
+                    </div>
+                    <div class="item" style="--position: 9">
+                         <div class="service-card">
+                            <div class="service-icon-container">
+                                <i data-lucide="shield-alert" class="service-icon"></i>
+                            </div>
+                         </div>
+                         <div class="service-title">Fraud Prevention</div>
+                    </div>
+                    <div class="item" style="--position: 10">
+                         <div class="service-card">
+                            <div class="service-icon-container">
+                                <i data-lucide="globe-2" class="service-icon"></i>
+                            </div>
+                         </div>
+                         <div class="service-title">Global Payments</div>
+                    </div>
+                </div>
+                <div class="content">
+                    <div class="model"></div>
+                </div>
+            </div>
 
-<!-- ================= PAYMENT SERVICES SHOWCASE START ================= -->
-<!-- 3D carousel and CTAs highlighting core payment capabilities -->
-<div class="payments-experience">
-  <canvas id="particle-canvas"></canvas>
-
-  <div id="fullscreen-view">
-    <div id="fullscreen-card"></div>
-    <i id="close-fullscreen-btn" data-lucide="x-circle" class="h-12 w-12"></i>
-  </div>
-
-  <div class="relative pt-32 w-full">
-    <div class="absolute top-0 left-0 w-full h-48 bg-[#1c1c1c]"></div>
-
-    <div class="absolute top-32 left-1/2 -translate-x-1/2 -translate-y-1/2 z-20 w-full max-w-5xl px-4">
-      <div class="bg-white dark:bg-[#1c1c1c] text-slate-800 dark:text-slate-200 px-8 py-4 rounded-xl border-2 border-brand-crimson shadow-lg text-center">
-        <h2 class="text-3xl font-ubuntu font-bold">Payment Services Tailored for You</h2>
-      </div>
+            <div class="mt-8 sm:mt-10 flex flex-wrap justify-center gap-4 px-4">
+                <button type="button" class="js-signup-cta inline-flex items-center justify-center rounded-full px-8 py-3 text-lg font-semibold text-white shadow-lg transition-all duration-300 hover:-translate-y-0.5 hover:shadow-xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-crimson focus-visible:ring-offset-2" style="background-image: linear-gradient(135deg, #dc143c 0%, #f43f5e 50%, #ff758c 100%);">
+                    Start accepting payments today
+                </button>
+                 <button id="open-ai-modal-btn" type="button" class="inline-flex items-center justify-center rounded-full px-8 py-3 text-lg font-semibold text-brand-dark bg-white shadow-lg transition-all duration-300 hover:-translate-y-0.5 hover:shadow-xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-teal focus-visible:ring-offset-2">
+                    ✨ Find Your Perfect Fit
+                </button>
+            </div>
+        </section>
     </div>
-
-    <section id="payments" class="pt-28 pb-12">
-      <div class="max-w-5xl mx-auto px-4 text-center">
-        <p class="text-2xl sm:text-3xl font-ubuntu mb-4 text-slate-400">Your complete business toolkit for accepting and managing payments.</p>
-      </div>
-      
-      <div class="banner">
-        <div class="slider" style="--quantity: 10">
-          <div class="item" style="--position: 1">
-            <div class="service-card">
-              <div class="service-icon-container">
-                <i data-lucide="smartphone" class="service-icon"></i>
-              </div>
-            </div>
-            <div class="service-title">Mobile Payments</div>
-          </div>
-          <div class="item" style="--position: 2">
-            <div class="service-card">
-              <div class="service-icon-container">
-                <i data-lucide="shuffle" class="service-icon"></i>
-              </div>
-            </div>
-            <div class="service-title">Smart Routing</div>
-          </div>
-          <div class="item" style="--position: 3">
-            <div class="service-card">
-              <div class="service-icon-container">
-                <i data-lucide="file-text" class="service-icon"></i>
-              </div>
-            </div>
-            <div class="service-title">Invoicing</div>
-          </div>
-          <div class="item" style="--position: 4">
-            <div class="service-card">
-              <div class="service-icon-container">
-                <i data-lucide="repeat" class="service-icon"></i>
-              </div>
-            </div>
-            <div class="service-title">Recurring Billing</div>
-          </div>
-          <div class="item" style="--position: 5">
-            <div class="service-card">
-              <div class="service-icon-container">
-                <i data-lucide="lock" class="service-icon"></i>
-              </div>
-            </div>
-            <div class="service-title">Secure Tokenization</div>
-          </div>
-          <div class="item" style="--position: 6">
-            <div class="service-card">
-              <div class="service-icon-container">
-                <i data-lucide="bar-chart-2" class="service-icon"></i>
-              </div>
-            </div>
-            <div class="service-title">Detailed Reporting</div>
-          </div>
-          <div class="item" style="--position: 7">
-            <div class="service-card">
-              <div class="service-icon-container">
-                <i data-lucide="cpu" class="service-icon"></i>
-              </div>
-            </div>
-            <div class="service-title">Automation</div>
-          </div>
-          <div class="item" style="--position: 8">
-            <div class="service-card">
-              <div class="service-icon-container">
-                <i data-lucide="landmark" class="service-icon"></i>
-              </div>
-            </div>
-            <div class="service-title">ACH Payments</div>
-          </div>
-          <div class="item" style="--position: 9">
-            <div class="service-card">
-              <div class="service-icon-container">
-                <i data-lucide="shield-alert" class="service-icon"></i>
-              </div>
-            </div>
-            <div class="service-title">Fraud Prevention</div>
-          </div>
-          <div class="item" style="--position: 10">
-            <div class="service-card">
-              <div class="service-icon-container">
-                <i data-lucide="globe-2" class="service-icon"></i>
-              </div>
-            </div>
-            <div class="service-title">Global Payments</div>
-          </div>
-        </div>
-        <div class="content">
-          <div class="model"></div>
-        </div>
-      </div>
-
-      <div class="mt-8 sm:mt-10 flex flex-wrap justify-center gap-4 px-4">
-        <button type="button" class="js-signup-cta inline-flex items-center justify-center rounded-full px-8 py-3 text-lg font-semibold text-white shadow-lg transition-all duration-300 hover:-translate-y-0.5 hover:shadow-xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-crimson focus-visible:ring-offset-2" style="background-image: linear-gradient(135deg, #dc143c 0%, #f43f5e 50%, #ff758c 100%);">
-          Start accepting payments today
-        </button>
-        <button id="open-ai-modal-btn" type="button" class="inline-flex items-center justify-center rounded-full px-8 py-3 text-lg font-semibold text-brand-dark bg-white shadow-lg transition-all duration-300 hover:-translate-y-0.5 hover:shadow-xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-teal focus-visible:ring-offset-2">
-          ✨ Find Your Perfect Fit
-        </button>
-      </div>
-    </section>
-  </div>
 </div>
-<!-- ================= PAYMENT SERVICES SHOWCASE END ================= -->
 
-<!-- ================= AI SUGGESTER MODAL START ================= -->
-<!-- Pop-up assistant collecting business context to recommend services -->
-<div id="ai-suggester-modal" class="fixed inset-0 bg-black/70 z-50 hidden items-center justify-center p-4">
-  <div class="bg-[#1c1c1c] border-2 border-brand-teal rounded-2xl shadow-xl p-6 sm:p-8 w-full max-w-2xl transform transition-all relative">
-    <button id="close-ai-modal" class="absolute top-4 right-4 text-slate-400 hover:text-white transition-colors">
-      <i data-lucide="x" class="h-6 w-6"></i>
-    </button>
-    <div class="flex items-center gap-3 mb-4">
-      <h3 class="text-2xl font-ubuntu font-bold text-white">✨ AI Service Suggester</h3>
-    </div>
-    <p class="text-slate-300 mb-4 font-inter text-sm sm:text-base">Describe your business, and our AI will recommend the best payment services for your needs.</p>
-
-    <textarea id="business-description" class="w-full bg-[#2a2a2a] border border-slate-700 rounded-lg p-3 text-white placeholder-slate-400 focus:ring-2 focus:ring-brand-teal focus:border-transparent transition" rows="3" placeholder="e.g., 'I run an online clothing store using Shopify.' or 'I'm a freelance photographer who needs to send invoices.'"></textarea>
-
-    <button id="get-recommendations-btn" class="mt-4 w-full bg-brand-crimson text-white font-bold py-3 px-4 rounded-lg hover:bg-opacity-90 transition-all flex items-center justify-center disabled:opacity-50 disabled:cursor-not-allowed">
-      <span class="btn-text">Get Recommendations</span>
-      <span class="loader hidden ml-2"></span>
-    </button>
-
-    <div id="recommendations-result" class="mt-6 max-h-64 overflow-y-auto pr-2"></div>
-  </div>
-</div>
-<!-- ================= AI SUGGESTER MODAL END ================= -->
-
-<!-- ================= INTEGRATIONS SECTION START ================= -->
-<!-- Rotating partner logos showcasing supported commerce platforms -->
-<section id="integrations" class="integrations">
-  <div class="container text-center">
-    <div class="title-with-logo">
-      <h2 class="section-title typewriter">INTEGRATE WITH YOUR FAVORITE TOOLS</h2>
-      <img class="shopify-hero" src="/public/assets/images/shopifydark.png" alt="Shopify" />
-    </div>
-    <p class="section-subtitle">Connect with your favorite tools and services</p>
-
-    <!-- Scroller with all logos -->
-    <div class="integrations-marquee">
-      <div class="marquee-track">
-        <div class="integrations-logos">
-          <img src="/assets/integrations/bigcommerce.webp" alt="BigCommerce" />
-          <img src="/assets/integrations/clovernew.svg" alt="Clover" />
-          <img src="/assets/integrations/freshbooks.webp" alt="FreshBooks" />
-          <img src="/assets/integrations/hubspot.webp" alt="HubSpot" />
-          <img src="/assets/integrations/keap.webp" alt="Keap" />
-          <img src="/assets/integrations/lightspeed.webp" alt="Lightspeed" />
-          <img src="/assets/integrations/magento.webp" alt="Magento" />
-          <img src="/assets/integrations/mastercard.webp" alt="Mastercard" />
-          <img src="/assets/integrations/memberpress.svg" alt="MemberPress" />
-          <img src="/assets/integrations/ncr.webp" alt="NCR" />
-          <img src="/assets/integrations/quickbooks.webp" alt="QuickBooks" />
-          <img src="/assets/integrations/salesforce.webp" alt="Salesforce" />
-          <img src="/assets/integrations/squarespace.webp" alt="Squarespace" />
-          <img src="/assets/integrations/vend.webp" alt="Vend" />
-          <img src="/assets/integrations/visa.webp" alt="Visa" />
-          <img src="/assets/integrations/wix.webp" alt="Wix" />
-          <img src="/assets/integrations/woocommerce.webp" alt="WooCommerce" />
-          <img src="/assets/integrations/zoho_crm.webp" alt="Zoho CRM" />
-        </div>
-        <!-- duplicate for infinite loop -->
-        <div class="integrations-logos">
-          <img src="/assets/integrations/bigcommerce.webp" alt="BigCommerce" />
-          <img src="/assets/integrations/clovernew.svg" alt="Clover" />
-          <img src="/assets/integrations/freshbooks.webp" alt="FreshBooks" />
-          <img src="/assets/integrations/hubspot.webp" alt="HubSpot" />
-          <img src="/assets/integrations/keap.webp" alt="Keap" />
-          <img src="/assets/integrations/lightspeed.webp" alt="Lightspeed" />
-          <img src="/assets/integrations/magento.webp" alt="Magento" />
-          <img src="/assets/integrations/mastercard.webp" alt="Mastercard" />
-          <img src="/assets/integrations/memberpress.svg" alt="MemberPress" />
-          <img src="/assets/integrations/ncr.webp" alt="NCR" />
-          <img src="/assets/integrations/quickbooks.webp" alt="QuickBooks" />
-          <img src="/assets/integrations/salesforce.webp" alt="Salesforce" />
-          <img src="/assets/integrations/squarespace.webp" alt="Squarespace" />
-          <img src="/assets/integrations/vend.webp" alt="Vend" />
-          <img src="/assets/integrations/visa.webp" alt="Visa" />
-          <img src="/assets/integrations/wix.webp" alt="Wix" />
-          <img src="/assets/integrations/woocommerce.webp" alt="WooCommerce" />
-          <img src="/assets/integrations/zoho_crm.webp" alt="Zoho CRM" />
-        </div>
+<section id="integrations" class="py-12 md:py-20">
+  <div class="max-w-5xl mx-auto px-4 space-y-12">
+    <div class="flex flex-col md:flex-row items-center justify-center gap-6 md:gap-12 text-center">
+      <img src="assets/integrations/shopify.svg" alt="Shopify Logo" class="h-12 md:h-16">
+      <div class="space-y-2">
+        <h2 class="text-3xl md:text-4xl font-bold font-ubuntu">Integrate With Your Favorite Tools</h2>
+        <p class="text-slate-400 text-lg">Connect with your favorite tools and services.</p>
       </div>
+      <img src="assets/integrations/gohighlevel.svg" alt="GoHighLevel Logo" class="h-12 md:h-16">
+    </div>
+    
+    <div class="relative w-full overflow-hidden group">
+        <div class="flex animate-marquee group-hover:pause">
+            <div class="flex-shrink-0 flex items-center justify-around w-full">
+                <img src="assets/integrations/bigcommerce.webp" class="h-12 mx-8 object-contain">
+                <img src="assets/integrations/clover.webp" class="h-12 mx-8 object-contain">
+                <img src="assets/integrations/freshbooks.webp" class="h-12 mx-8 object-contain">
+                <img src="assets/integrations/hubspot.webp" class="h-12 mx-8 object-contain">
+                <img src="assets/integrations/keap.webp" class="h-12 mx-8 object-contain">
+                <img src="assets/integrations/lightspeed.webp" class="h-12 mx-8 object-contain">
+                <img src="assets/integrations/magento.webp" class="h-12 mx-8 object-contain">
+                <img src="assets/integrations/mastercard.webp" class="h-12 mx-8 object-contain">
+                <img src="assets/integrations/ncr.webp" class="h-12 mx-8 object-contain">
+            </div>
+             <div class="flex-shrink-0 flex items-center justify-around w-full" aria-hidden="true">
+                <img src="assets/integrations/bigcommerce.webp" class="h-12 mx-8 object-contain">
+                <img src="assets/integrations/clover.webp" class="h-12 mx-8 object-contain">
+                <img src="assets/integrations/freshbooks.webp" class="h-12 mx-8 object-contain">
+                <img src="assets/integrations/hubspot.webp" class="h-12 mx-8 object-contain">
+                <img src="assets/integrations/keap.webp" class="h-12 mx-8 object-contain">
+                <img src="assets/integrations/lightspeed.webp" class="h-12 mx-8 object-contain">
+                <img src="assets/integrations/magento.webp" class="h-12 mx-8 object-contain">
+                <img src="assets/integrations/mastercard.webp" class="h-12 mx-8 object-contain">
+                <img src="assets/integrations/ncr.webp" class="h-12 mx-8 object-contain">
+            </div>
+        </div>
+        <div class="flex animate-marquee-reverse group-hover:pause mt-8">
+             <div class="flex-shrink-0 flex items-center justify-around w-full">
+                <img src="assets/integrations/quickbooks.webp" class="h-12 mx-8 object-contain">
+                <img src="assets/integrations/salesforce.webp" class="h-12 mx-8 object-contain">
+                <img src="assets/integrations/squarespace.webp" class="h-12 mx-8 object-contain">
+                <img src="assets/integrations/vend.webp" class="h-12 mx-8 object-contain">
+                <img src="assets/integrations/visa.webp" class="h-12 mx-8 object-contain">
+                <img src="assets/integrations/wix.webp" class="h-12 mx-8 object-contain">
+                <img src="assets/integrations/woocommerce.webp" class="h-12 mx-8 object-contain">
+                <img src="assets/integrations/zoho_crm.webp" class="h-12 mx-8 object-contain">
+            </div>
+            <div class="flex-shrink-0 flex items-center justify-around w-full" aria-hidden="true">
+                <img src="assets/integrations/quickbooks.webp" class="h-12 mx-8 object-contain">
+                <img src="assets/integrations/salesforce.webp" class="h-12 mx-8 object-contain">
+                <img src="assets/integrations/squarespace.webp" class="h-12 mx-8 object-contain">
+                <img src="assets/integrations/vend.webp" class="h-12 mx-8 object-contain">
+                <img src="assets/integrations/visa.webp" class="h-12 mx-8 object-contain">
+                <img src="assets/integrations/wix.webp" class="h-12 mx-8 object-contain">
+                <img src="assets/integrations/woocommerce.webp" class="h-12 mx-8 object-contain">
+                <img src="assets/integrations/zoho_crm.webp" class="h-12 mx-8 object-contain">
+            </div>
+        </div>
     </div>
   </div>
 </section>
-<!-- ================= INTEGRATIONS SECTION END ================= -->
 
-<!-- ================= SETUP CHECKLIST SECTION START ================= -->
-<!-- Step-by-step onboarding checklist with pinned heading overlay -->
+<style>
+@keyframes marquee {
+  0% { transform: translateX(0%); }
+  100% { transform: translateX(-100%); }
+}
+@keyframes marquee-reverse {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(0%); }
+}
+.animate-marquee {
+  animation: marquee 40s linear infinite;
+}
+.animate-marquee-reverse {
+  animation: marquee-reverse 40s linear infinite;
+}
+.group-hover\:pause:hover {
+  animation-play-state: paused;
+}
+</style>
+
 <div class="relative">
   <section id="checklist" class="pt-28 pb-16 bg-slate-50 dark:bg-slate-900/40 border-y border-slate-200/70 dark:border-slate-800">
     <div class="max-w-7xl mx-auto px-4 text-center">
@@ -949,772 +722,101 @@
       </div>
     </div>
   </section>
-  <div class="hero-overlay absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 z-10 w-full px-4">
+  <div class="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 z-10 w-full max-w-5xl px-4">
     <div class="bg-brand-teal px-8 py-4 rounded-xl shadow-lg text-center">
       <h2 class="text-3xl font-ubuntu font-bold" style="color: #524848;">Setup Checklist: What You’ll Need to Begin</h2>
     </div>
   </div>
 </div>
-<!-- ================= SETUP CHECKLIST SECTION END ================= -->
 
-<!-- ================= SUPPORT MODAL START ================= -->
-<!-- Contact form modal enabling merchants to reach support team -->
-<div id="support-modal" class="fixed inset-0 z-[70] hidden flex items-center justify-center">
+<main class="max-w-5xl mx-auto px-4 py-10">
+<h1 class="text-3xl md:text-4xl font-extrabold">Merchant Application</h1>
+<p class="mt-2 text-slate-600 dark:text-slate-300">U.S. retail only. Provide the details below — we’ll review and issue your Merchant ID (MID) &amp; access credentials during onboarding.</p>
+<form class="mt-8 grid gap-6" id="apply-form">
+<!-- Merchant Information -->
+<section class="p-6 rounded-2xl border border-slate-200 dark:border-slate-800">
+<h2 class="text-xl font-bold">Merchant Information</h2>
+<div class="mt-4 grid md:grid-cols-2 gap-4">
+<label class="text-sm">Company Name*<input class="field mt-1 w-full rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-900 px-3 py-2" name="companyName" required=""/></label>
+<label class="text-sm">External Identifier<input class="field mt-1 w-full rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-900 px-3 py-2" name="externalId"/></label>
+<label class="text-sm">Country*<select class="field mt-1 w-full rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-900 px-3 py-2" name="country" required=""><option>United States</option></select></label>
+<label class="text-sm">Timezone*<select class="field mt-1 w-full rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-900 px-3 py-2" name="timezone" required="">
+<option>(GMT-08:00) Pacific Time (US &amp; Canada)</option>
+<option>(GMT-07:00) Mountain Time (US &amp; Canada)</option>
+<option>(GMT-06:00) Central Time (US &amp; Canada)</option>
+<option>(GMT-05:00) Eastern Time (US &amp; Canada)</option>
+</select></label>
+<label class="text-sm md:col-span-2">Address*<input class="field mt-1 w-full rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-900 px-3 py-2" name="address1" required=""/></label>
+<label class="text-sm">Address 2<input class="field mt-1 w-full rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-900 px-3 py-2" name="address2"/></label>
+<label class="text-sm">City*<input class="field mt-1 w-full rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-900 px-3 py-2" name="city" required=""/></label>
+<label class="text-sm">State*<select class="field mt-1 w-full rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-900 px-3 py-2" name="state" required=""></select></label>
+<label class="text-sm">Zip/Postal Code*<input class="field mt-1 w-full rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-900 px-3 py-2" name="postalCode" required=""/></label>
+<label class="text-sm md:col-span-2">Website<input class="field mt-1 w-full rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-900 px-3 py-2" name="website" placeholder="https://example.com" type="url"/></label>
+<label class="text-sm">Language<select class="field mt-1 w-full rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-900 px-3 py-2" name="language"><option>English</option></select></label>
+</div>
+</section>
+<!-- Company Contact -->
+<section class="p-6 rounded-2xl border border-slate-200 dark:border-slate-800">
+<h2 class="text-xl font-bold">Company Contact (Primary User)</h2>
+<p class="text-xs text-slate-500 mt-1">This person receives the welcome email and appears on receipts if enabled.</p>
+<div class="mt-4 grid md:grid-cols-2 gap-4">
+<label class="text-sm">First Name*<input class="field mt-1 w-full rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-900 px-3 py-2" name="firstName" required=""/></label>
+<label class="text-sm">Last Name*<input class="field mt-1 w-full rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-900 px-3 py-2" name="lastName" required=""/></label>
+<label class="text-sm">Email Address*<input class="field mt-1 w-full rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-900 px-3 py-2" name="email" required="" type="email"/></label>
+<label class="text-sm">Phone Number*<input class="field mt-1 w-full rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-900 px-3 py-2" name="phone" required=""/></label>
+<label class="text-sm">Fax Number<input class="field mt-1 w-full rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-900 px-3 py-2" name="fax"/></label>
+</div>
+</section>
+<!-- Account Setup & Services -->
+<section class="p-6 rounded-2xl border border-slate-200 dark:border-slate-800">
+<h2 class="text-xl font-bold">Account Setup</h2>
+<div class="mt-4 grid md:grid-cols-2 gap-4">
+<label class="text-sm md:col-span-2">Primary Username*<input class="field mt-1 w-full rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-900 px-3 py-2" maxlength="32" minlength="4" name="username" pattern="[A-Za-z0-9]+" placeholder="letters and numbers only" required=""/></label>
+</div>
+<h3 class="mt-4 font-semibold">Processing Services</h3>
+<div class="mt-2 grid md:grid-cols-3 gap-3 text-sm">
+<label class="inline-flex items-center gap-2"><input checked="" class="accent-red-600" name="svcCredit" type="checkbox"/>Credit Card</label>
+<label class="inline-flex items-center gap-2"><input class="accent-red-600" name="svcAch" type="checkbox"/>ACH / eCheck</label>
+<label class="inline-flex items-center gap-2"><input class="accent-red-600" name="svcCash" type="checkbox"/>Cash</label>
+</div>
+<h3 class="mt-4 font-semibold">Value‑added Services</h3>
+<div class="mt-2 grid md:grid-cols-3 gap-3 text-sm">
+<label class="inline-flex items-center gap-2"><input class="accent-red-600" name="valEncryption" type="checkbox"/>Encryption (Encrypted Devices)</label>
+<label class="inline-flex items-center gap-2"><input checked="" class="accent-red-600" name="valInvoice" type="checkbox"/>Invoice</label>
+<label class="inline-flex items-center gap-2"><input class="accent-red-600" name="valLevel3" type="checkbox"/>Level III Advantage</label>
+<label class="inline-flex items-center gap-2"><input class="accent-red-600" name="valMobile" type="checkbox"/>Mobile Payments</label>
+<label class="inline-flex items-center gap-2"><input checked="" class="accent-red-600" name="valVault" type="checkbox"/>Customer Vault</label>
+</div>
+<div class="mt-4 text-xs text-slate-600 dark:text-slate-300">
+          By submitting, you agree to our <a class="underline" href="https://merchant.haus/terms" rel="noopener" target="_blank">Terms &amp; Conditions</a> and <a class="underline" href="https://merchant.haus/privacy" rel="noopener" target="_blank">Privacy Policy</a>.
+        </div>
+</section>
+<div class="flex items-center gap-3">
+<button class="px-5 py-3 rounded-lg bg-brand-600 text-white font-semibold hover:bg-brand-700" type="submit">Submit Application</button>
+<span class="text-sm text-slate-600 dark:text-slate-300" id="apply-out"></span>
+</div>
+</form>
+</main>
+<div id="support-modal" class="fixed inset-0 z-[70] hidden">
   <div class="absolute inset-0 bg-black/60" data-close></div>
-  <div class="relative z-10 w-full max-w-[clamp(20rem,90vw,35rem)] max-h-[90vh] overflow-y-auto rounded-2xl bg-white p-6 shadow-2xl border border-slate-200" data-modal-card>
+  <div class="mx-auto mt-[10vh] w-[min(560px,92vw)] rounded-2xl bg-white dark:bg-slate-900 p-6 border border-slate-200 dark:border-slate-800 shadow-2xl">
     <div class="flex items-center justify-between">
-      <h3 class="text-xl font-extrabold font-ubuntu text-slate-900">Contact Support</h3>
-      <button class="p-2 text-slate-500 hover:text-slate-700" data-close aria-label="Close"><i data-lucide="x" class="h-5 w-5"></i></button>
+      <h3 class="text-xl font-extrabold font-ubuntu">Contact Support</h3>
+      <button class="p-2 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800" data-close aria-label="Close"><i data-lucide="x" class="h-5 w-5"></i></button>
     </div>
-    <p class="mt-1 text-sm text-slate-600">Have a question? Fill out the form below or contact us at <a href="tel:15056006042" class="text-brand-crimson hover:underline">1-505-600-6042</a>.</p>
-    <form
-      id="support-form"
-      name="contact"
-      method="POST"
-      data-netlify="true"
-      netlify-honeypot="bot-field"
-      action="/thankyou.html"
-      class="mt-4 space-y-4"
-    >
-      <input type="hidden" name="form-name" value="contact">
-      <p class="hidden">
-        <label>Don’t fill this out: <input name="bot-field"></label>
-      </p>
-      <div>
-        <label for="support-name" class="block text-sm font-medium text-slate-700">Name</label>
-        <input id="support-name" name="name" placeholder="Your name" class="mt-1 block w-full rounded-md border border-slate-300 bg-white px-3 py-2 text-slate-900 shadow-sm focus:border-brand-crimson focus:ring-brand-crimson" required>
-      </div>
-      <div>
-        <label for="support-email" class="block text-sm font-medium text-slate-700">Email</label>
-        <input id="support-email" name="email" type="email" placeholder="Work email" class="mt-1 block w-full rounded-md border border-slate-300 bg-white px-3 py-2 text-slate-900 shadow-sm focus:border-brand-crimson focus:ring-brand-crimson" required>
-      </div>
-      <div>
-        <label for="support-message" class="block text-sm font-medium text-slate-700">Message</label>
-        <textarea id="support-message" name="message" placeholder="Your message..." rows="4" class="mt-1 block w-full rounded-md border border-slate-300 bg-white px-3 py-2 text-slate-900 shadow-sm focus:border-brand-crimson focus:ring-brand-crimson" required></textarea>
-      </div>
-      <div>
-        <button class="inline-flex justify-center rounded-md border border-transparent bg-brand-crimson px-4 py-2 text-sm font-semibold text-white shadow-sm transition hover:bg-brand-crimson/90 focus:outline-none focus:ring-2 focus:ring-brand-crimson focus:ring-offset-2" type="submit">Send Message</button>
-      </div>
-      <p
-        id="support-error"
-        class="text-xs text-red-500 hidden"
-        role="alert"
-        aria-live="polite"
-      ></p>
+    <p class="mt-1 text-sm text-slate-600 dark:text-slate-300">Have a question? Fill out the form below or contact us at <a href="tel:15056006042" class="text-brand-crimson dark:text-brand-teal hover:underline">1-505-600-6042</a>.</p>
+    <form id="support-form" class="mt-4 grid gap-3">
+      <input name="name" placeholder="Your name" class="field rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-950 px-3 py-2" required>
+      <input name="email" type="email" placeholder="Work email" class="field rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-950 px-3 py-2" required>
+      <textarea name="message" placeholder="Your message..." rows="4" class="field rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-950 px-3 py-2" required></textarea>
+      <button class="rounded-lg bg-brand-crimson text-white font-semibold px-4 py-2 hover:bg-brand-crimson" type="submit">Send Message</button>
+      <p id="support-out" class="text-xs text-slate-500"></p>
     </form>
-  </div>
   </div>
 </div>
-<!-- ================= SUPPORT MODAL END ================= -->
-
-<!-- ================= APPLICATION FORM SECTION START ================= -->
-<!-- Detailed merchant onboarding form capturing business and compliance data -->
-<main class="max-w-5xl mx-auto px-4 pt-10 pb-4 application-section">
-    <h1 class="text-3xl md:text-4xl font-extrabold">Merchant Application</h1>
-    <p class="mt-2 text-slate-300">U.S. retail only. Provide the details below — we’ll review and issue your Merchant ID (MID) &amp; access credentials during onboarding.</p>
-    <form class="mt-8 grid gap-6" id="apply-form">
-    <!-- Merchant Information -->
-    <section class="p-6 rounded-2xl border border-slate-800">
-    <h2 class="text-xl font-bold">Merchant Information</h2>
-    <div class="mt-4 grid md:grid-cols-2 gap-4">
-    <label class="text-sm">Company Name*<input class="field mt-1 w-full rounded-lg border border-slate-700 bg-slate-900 px-3 py-2" name="companyName" required=""/></label>
-    <label class="text-sm">External Identifier<input class="field mt-1 w-full rounded-lg border border-slate-700 bg-slate-900 px-3 py-2" name="externalId"/></label>
-    <label class="text-sm">Country*<select class="field mt-1 w-full rounded-lg border border-slate-700 bg-slate-900 px-3 py-2" name="country" required=""><option>United States</option></select></label>
-    <label class="text-sm">Timezone*<select class="field mt-1 w-full rounded-lg border border-slate-700 bg-slate-900 px-3 py-2" name="timezone" required="">
-    <option>(GMT-08:00) Pacific Time (US &amp; Canada)</option>
-    <option>(GMT-07:00) Mountain Time (US &amp; Canada)</option>
-    <option>(GMT-06:00) Central Time (US &amp; Canada)</option>
-    <option>(GMT-05:00) Eastern Time (US &amp; Canada)</option>
-    </select></label>
-    <label class="text-sm md:col-span-2">Address*<input class="field mt-1 w-full rounded-lg border border-slate-700 bg-slate-900 px-3 py-2" name="address1" required=""/></label>
-    <label class="text-sm">Address 2<input class="field mt-1 w-full rounded-lg border border-slate-700 bg-slate-900 px-3 py-2" name="address2"/></label>
-    <label class="text-sm">City*<input class="field mt-1 w-full rounded-lg border border-slate-700 bg-slate-900 px-3 py-2" name="city" required=""/></label>
-    <label class="text-sm">State*<select class="field mt-1 w-full rounded-lg border border-slate-700 bg-slate-900 px-3 py-2" name="state" required=""></select></label>
-    <label class="text-sm">Zip/Postal Code*<input class="field mt-1 w-full rounded-lg border border-slate-700 bg-slate-900 px-3 py-2" name="postalCode" required=""/></label>
-    <label class="text-sm md:col-span-2">Website<input class="field mt-1 w-full rounded-lg border border-slate-700 bg-slate-900 px-3 py-2" name="website" placeholder="https://example.com" type="url"/></label>
-    <label class="text-sm">Language<select class="field mt-1 w-full rounded-lg border border-slate-700 bg-slate-900 px-3 py-2" name="language"><option>English</option></select></label>
-    </div>
-    </section>
-    <!-- Company Contact -->
-    <section class="p-6 rounded-2xl border border-slate-800">
-    <h2 class="text-xl font-bold">Company Contact (Primary User)</h2>
-    <p class="text-xs text-slate-500 mt-1">This person receives the welcome email and appears on receipts if enabled.</p>
-    <div class="mt-4 grid md:grid-cols-2 gap-4">
-    <label class="text-sm">First Name*<input class="field mt-1 w-full rounded-lg border border-slate-700 bg-slate-900 px-3 py-2" name="firstName" required=""/></label>
-    <label class="text-sm">Last Name*<input class="field mt-1 w-full rounded-lg border border-slate-700 bg-slate-900 px-3 py-2" name="lastName" required=""/></label>
-    <label class="text-sm">Email Address*<input class="field mt-1 w-full rounded-lg border border-slate-700 bg-slate-900 px-3 py-2" name="email" required="" type="email"/></label>
-    <label class="text-sm">Phone Number*<input class="field mt-1 w-full rounded-lg border border-slate-700 bg-slate-900 px-3 py-2" name="phone" required=""/></label>
-    <label class="text-sm">Fax Number<input class="field mt-1 w-full rounded-lg border border-slate-700 bg-slate-900 px-3 py-2" name="fax"/></label>
-    </div>
-    </section>
-    <!-- Account Setup & Services -->
-    <section class="p-6 rounded-2xl border border-slate-800">
-    <h2 class="text-xl font-bold">Account Setup</h2>
-    <div class="mt-4 grid md:grid-cols-2 gap-4">
-    <label class="text-sm md:col-span-2">Primary Username*<input class="field mt-1 w-full rounded-lg border border-slate-700 bg-slate-900 px-3 py-2" maxlength="32" minlength="4" name="username" pattern="[A-Za-z0-9]+" placeholder="letters and numbers only" required=""/></label>
-    </div>
-    <h3 class="mt-4 font-semibold">Processing Services</h3>
-    <div class="mt-2 grid md:grid-cols-3 gap-3 text-sm">
-    <label class="inline-flex items-center gap-2"><input checked="" class="accent-brand-crimson" name="svcCredit" type="checkbox"/>Credit Card</label>
-    <label class="inline-flex items-center gap-2"><input class="accent-brand-crimson" name="svcAch" type="checkbox"/>ACH / eCheck</label>
-    <label class="inline-flex items-center gap-2"><input class="accent-brand-crimson" name="svcCash" type="checkbox"/>Cash</label>
-    </div>
-    <h3 class="mt-4 font-semibold">Value‑added Services</h3>
-    <div class="mt-2 grid md:grid-cols-3 gap-3 text-sm">
-    <label class="inline-flex items-center gap-2"><input class="accent-brand-crimson" name="valEncryption" type="checkbox"/>Encryption (Encrypted Devices)</label>
-    <label class="inline-flex items-center gap-2"><input checked="" class="accent-brand-crimson" name="valInvoice" type="checkbox"/>Invoice</label>
-    <label class="inline-flex items-center gap-2"><input class="accent-brand-crimson" name="valLevel3" type="checkbox"/>Level III Advantage</label>
-    <label class="inline-flex items-center gap-2"><input class="accent-brand-crimson" name="valMobile" type="checkbox"/>Mobile Payments</label>
-    <label class="inline-flex items-center gap-2"><input checked="" class="accent-brand-crimson" name="valVault" type="checkbox"/>Customer Vault</label>
-    </div>
-    <div class="mt-4 text-xs text-slate-400">
-              By submitting, you agree to our <a class="underline hover:text-brand-teal" href="/terms.html" rel="noopener" target="_blank">Terms &amp; Conditions</a> and <a class="underline hover:text-brand-teal" href="/privacy.html" rel="noopener" target="_blank">Privacy Policy</a>.
-            </div>
-    </section>
-    <div class="flex items-center gap-3">
-    <button class="px-5 py-3 rounded-lg bg-brand-crimson text-white font-semibold hover:bg-opacity-90 transition-colors" type="submit">Submit Application</button>
-    <span class="text-sm text-slate-400" id="apply-out"></span>
-    </div>
-    </form>
-
-</main>
-<!-- ================= APPLICATION FORM SECTION END ================= -->
-<!-- ================= APPLICATION INTERACTIVITY SCRIPT START ================= -->
-<!-- Handles AI suggestions, FAQs, form logic, and scroll-based animations -->
-<script>
-document.addEventListener('DOMContentLoaded', () => {
-  if (window.lucide) lucide.createIcons();
-
-  const particleCanvas = document.getElementById('particle-canvas');
-  const slider = document.querySelector('.banner .slider');
-  const sliderItems = document.querySelectorAll('.banner .slider .item');
-  const fullscreenView = document.getElementById('fullscreen-view');
-  const fullscreenCard = document.getElementById('fullscreen-card');
-  const closeFullscreenBtn = document.getElementById('close-fullscreen-btn');
-
-  if (particleCanvas && slider && sliderItems.length && fullscreenView && fullscreenCard && closeFullscreenBtn) {
-    const pCtx = particleCanvas.getContext('2d');
-    let particles = [];
-
-    const resizeParticleCanvas = () => {
-      particleCanvas.width = window.innerWidth;
-      particleCanvas.height = window.innerHeight;
-    };
-    resizeParticleCanvas();
-    window.addEventListener('resize', resizeParticleCanvas);
-
-    class Particle {
-      constructor(x, y, vx = (Math.random() - 0.5) * 2, vy = (Math.random() - 0.5) * 2) {
-        this.x = x;
-        this.y = y;
-        this.vx = vx;
-        this.vy = vy;
-        this.alpha = 1;
-        this.radius = Math.random() * 1.5 + 1;
-        this.life = Math.random() * 30 + 20;
-      }
-      update() {
-        this.x += this.vx;
-        this.y += this.vy;
-        this.alpha -= 0.05;
-        this.life -= 1;
-      }
-      draw() {
-        pCtx.beginPath();
-        pCtx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
-        pCtx.fillStyle = `rgba(0, 206, 219, ${this.alpha})`;
-        pCtx.fill();
-      }
-    }
-
-    function createCurvedParticleTrail(startX, startY, endX, endY, duration) {
-      const startTime = Date.now();
-      const midX = (startX + endX) / 2;
-      const midY = (startY + endY) / 2;
-      const dx = endX - startX;
-      const dy = endY - startY;
-      const dist = Math.sqrt(dx * dx + dy * dy);
-      const angle = Math.atan2(dy, dx);
-      const perpAngle = angle - Math.PI / 2;
-      const curveAmount = dist * 0.3;
-      const controlX = midX + Math.cos(perpAngle) * curveAmount;
-      const controlY = midY + Math.sin(perpAngle) * curveAmount;
-
-      function animateTrail() {
-        const elapsedTime = Date.now() - startTime;
-        const progress = Math.min(elapsedTime / duration, 1);
-        const pX = Math.pow(1 - progress, 2) * startX + 2 * (1 - progress) * progress * controlX + Math.pow(progress, 2) * endX;
-        const pY = Math.pow(1 - progress, 2) * startY + 2 * (1 - progress) * progress * controlY + Math.pow(progress, 2) * endY;
-
-        if (Math.random() > 0.3) {
-          const prev = particles[particles.length - 1];
-          const particleAngle = Math.atan2(pY - (prev?.y ?? pY), pX - (prev?.x ?? pX));
-          const speed = 2;
-          const vx = Math.cos(particleAngle) * speed + (Math.random() - 0.5) * 1.5;
-          const vy = Math.sin(particleAngle) * speed + (Math.random() - 0.5) * 1.5;
-          particles.push(new Particle(pX, pY, vx, vy));
-        }
-        if (progress < 1) requestAnimationFrame(animateTrail);
-      }
-      requestAnimationFrame(animateTrail);
-    }
-
-    function animateParticles() {
-      pCtx.clearRect(0, 0, particleCanvas.width, particleCanvas.height);
-      for (let i = particles.length - 1; i >= 0; i -= 1) {
-        const particle = particles[i];
-        particle.update();
-        particle.draw();
-        if (particle.alpha <= 0 || particle.life <= 0) {
-          particles.splice(i, 1);
-        }
-      }
-      requestAnimationFrame(animateParticles);
-    }
-    animateParticles();
-
-    const numItems = sliderItems.length;
-    const rotationIncrement = 360 / numItems;
-
-    let currentYRotation = 0;
-    let isDragging = false;
-    let startX;
-    let startRotation;
-    let dragDistance = 0;
-    const dragThreshold = 5;
-    let autoRotate = true;
-    let autoRotateTimeout;
-
-    const updateCardZIndexes = () => {
-      sliderItems.forEach(item => {
-        const position = parseInt(item.style.getPropertyValue('--position'), 10);
-        const itemAngle = (position - 1) * rotationIncrement;
-        let effectiveAngle = (currentYRotation + itemAngle) % 360;
-        if (effectiveAngle < 0) effectiveAngle += 360;
-
-        item.style.zIndex = (effectiveAngle > 90 && effectiveAngle < 270) ? 0 : 2;
-      });
-    };
-
-    const updateSliderRotation = () => {
-      slider.style.transform = `perspective(1500px) rotateX(-18deg) rotateY(${currentYRotation}deg)`;
-      updateCardZIndexes();
-    };
-
-    const stopAutoRotate = () => {
-      autoRotate = false;
-      clearTimeout(autoRotateTimeout);
-    };
-    const resumeAutoRotate = (delay = 5000) => {
-      clearTimeout(autoRotateTimeout);
-      autoRotateTimeout = setTimeout(() => {
-        autoRotate = true;
-      }, delay);
-    };
-
-    const handleMouseDown = (event) => {
-      stopAutoRotate();
-      isDragging = true;
-      slider.classList.add('dragging');
-      startX = (event.pageX ?? event.touches?.[0]?.pageX ?? 0);
-      startRotation = currentYRotation;
-      dragDistance = 0;
-      document.body.classList.add('grabbing');
-    };
-
-    const handleMouseMove = (event) => {
-      if (!isDragging) return;
-      const x = (event.pageX ?? event.touches?.[0]?.pageX ?? 0);
-      const walk = (x - startX) * 0.5;
-      currentYRotation = startRotation - walk;
-      dragDistance = Math.abs(walk);
-      updateSliderRotation();
-    };
-
-    const handleMouseUp = () => {
-      if (!isDragging) return;
-      isDragging = false;
-      slider.classList.remove('dragging');
-      document.body.classList.remove('grabbing');
-      resumeAutoRotate();
-    };
-
-    const zoomIn = (item) => {
-      stopAutoRotate();
-      slider.classList.add('hidden');
-      const clonedItem = item.cloneNode(true);
-      fullscreenCard.innerHTML = '';
-      fullscreenCard.appendChild(clonedItem);
-
-      const rect = item.querySelector('.service-icon-container').getBoundingClientRect();
-
-      fullscreenCard.style.left = `${rect.left - (160 - rect.width) / 2}px`;
-      fullscreenCard.style.top = `${rect.top - (200 - rect.height) / 2}px`;
-      fullscreenCard.style.width = '160px';
-      fullscreenCard.style.height = '200px';
-      fullscreenCard.style.transform = 'rotateY(0deg) translateZ(0px)';
-
-      fullscreenView.classList.add('visible');
-
-      requestAnimationFrame(() => {
-        fullscreenCard.style.left = '50%';
-        fullscreenCard.style.top = '50%';
-        fullscreenCard.style.width = '40vmax';
-        fullscreenCard.style.height = '50vmax';
-        fullscreenCard.style.transform = 'translate(-50%, -50%)';
-      });
-    };
-
-    const zoomOut = () => {
-      const endIcon = sliderItems[0]?.querySelector('.service-icon-container');
-      if (!endIcon) {
-        fullscreenView.classList.remove('visible');
-        slider.classList.remove('hidden');
-        resumeAutoRotate();
-        return;
-      }
-      const finalRect = endIcon.getBoundingClientRect();
-      fullscreenCard.style.left = `${finalRect.left - (160 - finalRect.width) / 2}px`;
-      fullscreenCard.style.top = `${finalRect.top - (200 - finalRect.height) / 2}px`;
-      fullscreenCard.style.width = '160px';
-      fullscreenCard.style.height = '200px';
-      fullscreenCard.style.transform = 'translate(0, 0)';
-
-      fullscreenView.classList.remove('visible');
-
-      setTimeout(() => {
-        slider.classList.remove('hidden');
-        resumeAutoRotate();
-      }, 50);
-    };
-
-    const anglesAreClose = (angleA, angleB, tolerance = 0.5) => {
-      const normalized = ((angleA - angleB + 540) % 360) - 180;
-      return Math.abs(normalized) < tolerance;
-    };
-
-    const handleClick = (event) => {
-      if (dragDistance > dragThreshold) {
-        event.preventDefault();
-        return;
-      }
-
-      stopAutoRotate();
-
-      const item = event.currentTarget;
-      const iconContainer = item.querySelector('.service-icon-container');
-      const startRect = iconContainer.getBoundingClientRect();
-      const startCenterX = startRect.left + startRect.width / 2;
-      const startYTop = startRect.top;
-      const startYBottom = startRect.bottom;
-      const position = parseInt(item.style.getPropertyValue('--position'), 10);
-      const targetRotation = -(position - 1) * rotationIncrement;
-
-      const emitParticleStreaks = () => {
-        const sliderRect = slider.getBoundingClientRect();
-        const iconHeight = iconContainer.offsetHeight || 90;
-        const endCenterX = sliderRect.left + sliderRect.width / 2;
-        const sliderCenterY = sliderRect.top + sliderRect.height / 2;
-        const endYTop = sliderCenterY - iconHeight / 2;
-        const endYBottom = sliderCenterY + iconHeight / 2;
-        createCurvedParticleTrail(startCenterX, startYTop, endCenterX, endYTop, 1100);
-        createCurvedParticleTrail(startCenterX, startYBottom, endCenterX, endYBottom, 1100);
-      };
-
-      if (anglesAreClose(currentYRotation, targetRotation)) {
-        emitParticleStreaks();
-        zoomIn(item);
-        return;
-      }
-
-      const handleTransitionEnd = (transitionEvent) => {
-        if (transitionEvent.target !== slider || transitionEvent.propertyName !== 'transform') {
-          return;
-        }
-        slider.removeEventListener('transitionend', handleTransitionEnd);
-        zoomIn(item);
-      };
-
-      slider.addEventListener('transitionend', handleTransitionEnd);
-
-      currentYRotation = targetRotation;
-      updateSliderRotation();
-      emitParticleStreaks();
-    };
-
-    function carouselLoop() {
-      if (autoRotate && !isDragging) {
-        currentYRotation += 0.03;
-        updateSliderRotation();
-      } else {
-        updateCardZIndexes();
-      }
-      requestAnimationFrame(carouselLoop);
-    }
-
-    slider.addEventListener('mousedown', handleMouseDown);
-    slider.addEventListener('touchstart', handleMouseDown, { passive: true });
-    document.addEventListener('mousemove', handleMouseMove);
-    document.addEventListener('touchmove', handleMouseMove, { passive: true });
-    document.addEventListener('mouseup', handleMouseUp);
-    document.addEventListener('touchend', handleMouseUp);
-    slider.addEventListener('mouseenter', stopAutoRotate);
-    slider.addEventListener('mouseleave', () => resumeAutoRotate(1000));
-    sliderItems.forEach(item => {
-      item.addEventListener('click', handleClick);
-    });
-    closeFullscreenBtn.addEventListener('click', zoomOut);
-
-    updateCardZIndexes();
-    carouselLoop();
-  }
-
-  const modal = document.getElementById('ai-suggester-modal');
-  const openBtn = document.getElementById('open-ai-modal-btn');
-  const closeBtn = document.getElementById('close-ai-modal');
-  const getRecsBtn = document.getElementById('get-recommendations-btn');
-  const businessDesc = document.getElementById('business-description');
-  const resultsContainer = document.getElementById('recommendations-result');
-
-  if (modal && openBtn && closeBtn && getRecsBtn && businessDesc && resultsContainer) {
-    const services = [
-      'Mobile Payments', 'Smart Routing', 'Invoicing', 'Recurring Billing',
-      'Secure Tokenization', 'Detailed Reporting', 'Automation', 'ACH Payments',
-      'Fraud Prevention', 'Global Payments'
-    ];
-
-    openBtn.addEventListener('click', () => {
-      modal.classList.remove('hidden');
-      modal.classList.add('flex');
-    });
-    closeBtn.addEventListener('click', () => modal.classList.add('hidden'));
-    modal.addEventListener('click', (event) => {
-      if (event.target === modal) {
-        modal.classList.add('hidden');
-      }
-    });
-
-    getRecsBtn.addEventListener('click', async () => {
-      const description = businessDesc.value.trim();
-      if (!description) {
-        alert('Please describe your business first.');
-        return;
-      }
-
-      toggleLoading(true);
-
-      try {
-        const recommendations = await getAiRecommendations(description);
-        renderRecommendations(recommendations);
-      } catch (error) {
-        console.error('Error getting recommendations:', error);
-        resultsContainer.innerHTML = `<p class="text-red-400">Sorry, something went wrong. Please try again later.</p>`;
-      } finally {
-        toggleLoading(false);
-      }
-    });
-
-    function toggleLoading(isLoading) {
-      const btnText = getRecsBtn.querySelector('.btn-text');
-      const loader = getRecsBtn.querySelector('.loader');
-      if (isLoading) {
-        getRecsBtn.disabled = true;
-        btnText.textContent = 'Analyzing...';
-        loader.classList.remove('hidden');
-      } else {
-        getRecsBtn.disabled = false;
-        btnText.textContent = 'Get Recommendations';
-        loader.classList.add('hidden');
-      }
-    }
-
-    function renderRecommendations(recs) {
-      if (!recs || !recs.length) {
-        resultsContainer.innerHTML = `<p class="text-slate-400">No specific recommendations found. Try describing your business in more detail.</p>`;
-        return;
-      }
-
-      resultsContainer.innerHTML = '<h4 class="font-bold text-lg mb-2 text-brand-teal">Recommended For You:</h4>';
-      const list = document.createElement('ul');
-      list.className = 'space-y-3';
-      recs.forEach(rec => {
-        const li = document.createElement('li');
-        li.className = 'bg-[#2a2a2a] p-3 rounded-lg border border-slate-700';
-        li.innerHTML = `
-            <p class="font-bold text-white">${rec.serviceName}</p>
-            <p class="text-slate-300 text-sm">${rec.reason}</p>
-        `;
-        list.appendChild(li);
-      });
-      resultsContainer.appendChild(list);
-    }
-
-    async function getAiRecommendations(businessDescription) {
-      const apiKey = '';
-      const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-05-20:generateContent?key=${apiKey}`;
-
-      const systemPrompt = `You are an expert business consultant specializing in payment processing solutions. Your goal is to recommend the most relevant payment services for a business based on its description. You must choose from the following list of available services: ${services.join(', ')}.`;
-
-      const userQuery = `Here is the business description: "${businessDescription}". Based on this, which services do you recommend?`;
-
-      const payload = {
-          systemInstruction: { parts: [{ text: systemPrompt }] },
-          contents: [{ parts: [{ text: userQuery }] }],
-          generationConfig: {
-              responseMimeType: "application/json",
-              responseSchema: {
-                  type: "ARRAY",
-                  items: {
-                      type: "OBJECT",
-                      properties: {
-                          "serviceName": { "type": "STRING" },
-                          "reason": { "type": "STRING" }
-                      },
-                      required: ["serviceName", "reason"]
-                  }
-              }
-          }
-      };
-
-      let response;
-      let delay = 1000;
-      for (let attempt = 0; attempt < 5; attempt += 1) {
-          try {
-              response = await fetch(apiUrl, {
-                  method: 'POST',
-                  headers: { 'Content-Type': 'application/json' },
-                  body: JSON.stringify(payload)
-              });
-
-              if (response.status === 429) {
-                  await new Promise(resolve => setTimeout(resolve, delay));
-                  delay *= 2;
-                  continue;
-              }
-
-              if (!response.ok) {
-                  throw new Error(`API request failed with status ${response.status}`);
-              }
-              break;
-          } catch (error) {
-              if (attempt === 4) throw error;
-          }
-      }
-
-      const result = await response.json();
-
-      const candidate = result.candidates?.[0];
-      if (candidate && candidate.content?.parts?.[0]?.text) {
-          try {
-              return JSON.parse(candidate.content.parts[0].text);
-          } catch (e) {
-              console.error("Failed to parse JSON response from AI", e);
-              throw new Error("Invalid format received from AI.");
-          }
-      } else {
-          console.error("Unexpected API response structure:", result);
-          throw new Error("Could not get a valid response from the AI.");
-      }
-    }
-  }
-  const headingTexts = { "integrations-old": "Integrate with Your Favorite Tools" }; // Old logic, can be removed or updated
-  const headingObserver = new IntersectionObserver((entries, observer) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        const heading = entry.target;
-        const sectionId = heading.closest('section').id;
-        const text = headingTexts[sectionId];
-        if (text && !heading.dataset.animated) {
-          heading.dataset.animated = 'true';
-          typeWriter(heading, text, 75);
-          observer.unobserve(heading);
-        }
-      }
-    });
-  }, { threshold: 0.8 });
-  document.querySelectorAll('.animate-on-scroll').forEach(el => headingObserver.observe(el));
-
-  const askFaqBtn = document.getElementById('ask-faq');
-  const faqQuestionInput = document.getElementById('faq-question');
-  const faqAnswerContainer = document.getElementById('faq-answer');
-
-  const createFaqInlineNodes = (text) => {
-    const fragment = document.createDocumentFragment();
-    if (!text) return fragment;
-    const boldRegex = /\*\*(.*?)\*\*/g;
-    let lastIndex = 0;
-    let match;
-    while ((match = boldRegex.exec(text)) !== null) {
-      if (match.index > lastIndex) {
-        fragment.appendChild(document.createTextNode(text.slice(lastIndex, match.index)));
-      }
-      const strong = document.createElement('strong');
-      strong.textContent = match[1];
-      fragment.appendChild(strong);
-      lastIndex = boldRegex.lastIndex;
-    }
-    if (lastIndex < text.length) {
-      fragment.appendChild(document.createTextNode(text.slice(lastIndex)));
-    }
-    return fragment;
-  };
-
-  const sanitizeFaqReply = (reply) => {
-    if (typeof reply !== 'string') return [];
-    const lines = reply.split(/\r?\n/);
-    const nodes = [];
-    let listEl = null;
-    let paragraphBuffer = [];
-
-    const flushList = () => {
-      if (listEl) {
-        nodes.push(listEl);
-        listEl = null;
-      }
-    };
-
-    const flushParagraph = () => {
-      if (!paragraphBuffer.length) return;
-      const paragraph = document.createElement('p');
-      paragraph.appendChild(createFaqInlineNodes(paragraphBuffer.join(' ')));
-      nodes.push(paragraph);
-      paragraphBuffer = [];
-    };
-
-    lines.forEach((line) => {
-      const trimmed = line.trim();
-      if (!trimmed) {
-        flushParagraph();
-        flushList();
-        return;
-      }
-      const bulletMatch = trimmed.match(/^[-*] (.+)$/);
-      if (bulletMatch) {
-        flushParagraph();
-        if (!listEl) {
-          listEl = document.createElement('ul');
-          listEl.className = 'list-disc pl-5 space-y-2';
-        }
-        const li = document.createElement('li');
-        li.appendChild(createFaqInlineNodes(bulletMatch[1].trim()));
-        listEl.appendChild(li);
-      } else {
-        flushList();
-        paragraphBuffer.push(line.trim());
-      }
-    });
-
-    flushParagraph();
-    flushList();
-    return nodes;
-  };
-
-  const handleFaqSubmit = async () => {
-    const question = faqQuestionInput.value.trim();
-    if (!question) return;
-    faqAnswerContainer.classList.remove('hidden');
-    askFaqBtn.disabled = true;
-    askFaqBtn.innerHTML = '<span class="loader"></span>';
-    faqAnswerContainer.textContent = 'Thinking...';
-    try {
-      const response = await fetch('/.netlify/functions/gemini-chat', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ prompt: question, history: [] })
-      });
-      if (!response.ok) throw new Error('API request failed');
-      const result = await response.json();
-      if (result.reply) {
-        const sanitizedNodes = sanitizeFaqReply(result.reply);
-        if (sanitizedNodes.length) {
-          faqAnswerContainer.replaceChildren(...sanitizedNodes);
-        } else {
-          faqAnswerContainer.textContent = 'Sorry, I could not find an answer to your question.';
-        }
-      } else {
-        faqAnswerContainer.textContent = 'Sorry, I could not find an answer to your question.';
-      }
-    } catch (err) {
-      console.error('Error fetching AI response:', err);
-      faqAnswerContainer.textContent = 'Sorry, something went wrong. Please try again later.';
-    } finally {
-      askFaqBtn.disabled = false;
-      askFaqBtn.innerHTML = '<i data-lucide="arrow-up" class="h-5 w-5"></i>';
-      if (window.lucide) lucide.createIcons();
-    }
-  };
-  askFaqBtn.addEventListener('click', handleFaqSubmit);
-  faqQuestionInput.addEventListener('keypress', (e) => { if (e.key === 'Enter') handleFaqSubmit(); });
-
-  // --- APPLICATION FORM LOGIC ---
-  const applyForm = document.getElementById('apply-form');
-  if (applyForm) {
-    const states = ["Alabama","Alaska","Arizona","Arkansas","California","Colorado","Connecticut","Delaware","District of Columbia","Florida","Georgia","Hawaii","Idaho","Illinois","Indiana","Iowa","Kansas","Kentucky","Louisiana","Maine","Maryland","Massachusetts","Michigan","Minnesota","Mississippi","Missouri","Montana","Nebraska","Nevada","New Hampshire","New Jersey","New Mexico","New York","North Carolina","North Dakota","Ohio","Oklahoma","Oregon","Pennsylvania","Rhode Island","South Carolina","South Dakota","Tennessee","Texas","Utah","Vermont","Virginia","Washington","West Virginia","Wisconsin","Wyoming"];
-    const stateSelect = document.querySelector('select[name="state"]');
-    if (stateSelect) { states.forEach(s => { const opt=document.createElement('option'); opt.textContent=opt.value=s; stateSelect.appendChild(opt); }); }
-
-    const out = document.getElementById('apply-out');
-    const LS_KEY = 'mh_apply_draft';
-    
-    function saveDraft(){ const data = Object.fromEntries(new FormData(applyForm).entries()); localStorage.setItem(LS_KEY, JSON.stringify(data)); }
-    function loadDraft(){ try { const d = JSON.parse(localStorage.getItem(LS_KEY)||'{}'); for (const k in d){ const el = applyForm.elements[k]; if (!el) continue; if (el.type==='checkbox'){ el.checked = !!d[k]; } else { el.value = d[k]; } } } catch(e){} }
-    
-    applyForm.addEventListener('input', saveDraft);
-    loadDraft();
-
-    function getUTM(){
-      const p = new URLSearchParams(location.search);
-      return {source:p.get('utm_source')||'',medium:p.get('utm_medium')||'',campaign:p.get('utm_campaign')||'',term:p.get('utm_term')||'',content:p.get('utm_content')||'',ref:document.referrer||''};
-    }
-
-    applyForm.addEventListener('submit', async (e) => {
-      e.preventDefault();
-      out.textContent = 'Submitting…';
-      try {
-        const data = Object.fromEntries(new FormData(applyForm).entries());
-        ['svcCredit','svcAch','svcCash','valEncryption','valInvoice','valLevel3','valMobile','valVault'].forEach(k => { data[k] = !!applyForm.elements[k].checked; });
-        data.utm = getUTM();
-
-        const res = await fetch('/.netlify/functions/submit-application', {
-          method: 'POST',
-          headers: {'Content-Type':'application/json'},
-          body: JSON.stringify(data)
-        });
-        if (!res.ok) throw new Error('Request failed');
-        out.textContent = 'Thanks — we emailed you next steps and sent your application to our team.';
-        localStorage.removeItem(LS_KEY);
-        applyForm.reset();
-      } catch (err) {
-        console.error(err);
-        out.textContent = 'Something went wrong. Please try again or email hello@merchant.haus.';
-      }
-    });
-  }
-
-
-  function typeWriter(element, text, speed, callback) {
-    let i = 0;
-    if (!element) return;
-    element.innerHTML = '';
-    const typingInterval = setInterval(() => {
-      if (i < text.length) {
-        element.innerHTML = text.substring(0, i + 1) + '<span class="cursor"></span>';
-        i++;
-      } else {
-        clearInterval(typingInterval);
-        element.innerHTML = text;
-        if (callback) callback();
-      }
-    }, speed);
-  }
-});
-</script>
-<!-- ================= APPLICATION INTERACTIVITY SCRIPT END ================= -->
 
     <!-- Footer -->
-    <!-- ================= FOOTER SECTION START ================= -->
-    <!-- Multi-column footer with contact details, navigation, and legal links -->
-    <footer class="border-t border-slate-800 py-8 mt-8">
+    <footer class="border-t border-slate-800 py-10 mt-16">
         <div class="max-w-7xl mx-auto px-4 grid sm:grid-cols-2 lg:grid-cols-4 gap-8 text-sm" >
             <div class="space-y-4">
                 <a href="/index.html" class="flex items-center gap-3">
@@ -1752,12 +854,7 @@ document.addEventListener('DOMContentLoaded', () => {
             </nav>
             <nav class="space-y-2">
                 <h3 class="font-semibold font-ubuntu text-white">Support</h3>
-                <a
-                  href="mailto:support@merchanthaus.io"
-                  class="js-support block text-slate-300 hover:text-brand-teal"
-                  data-cta="contact-support"
-                  data-cta-location="footer"
-                >Contact Support</a>
+                <a href="mailto:support@merchanthaus.io" class="block text-slate-300 hover:text-brand-teal">Contact Support</a>
                 <a href="/faq.html" class="block text-slate-300 hover:text-brand-teal">FAQ</a>
             </nav>
             <nav class="space-y-2">
@@ -1770,30 +867,26 @@ document.addEventListener('DOMContentLoaded', () => {
             © <span id="year"></span> Merchant Haus. All rights reserved.
         </div>
     </footer>
-    <!-- ================= FOOTER SECTION END ================= -->
-
+    
     <!-- Back to Top Button -->
-    <!-- ================= BACK TO TOP CONTROL START ================= -->
-    <!-- Floating action button returning users to page top -->
     <button id="back-to-top" class="fixed bottom-6 right-6 bg-brand-crimson text-white p-3 rounded-full shadow-lg opacity-0 invisible transition-all duration-300 z-50 hover:bg-opacity-90">
         <i data-lucide="arrow-up" class="h-6 w-6"></i>
         <span class="sr-only">Back to top</span>
     </button>
-    <!-- ================= BACK TO TOP CONTROL END ================= -->
 
 
-    <!-- ================= GLOBAL LAYOUT SCRIPTS START ================= -->
-    <!-- External signup panel logic plus helpers for navigation, logos, and UI polish -->
     <script src="/assets/signup-panel.js" defer></script>
-    <script type="module" src="/assets/banner-carousel.js"></script>
-
-    <script>
+    
+     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            if (window.lucide) lucide.createIcons();
+            if (window.lucide) {
+              lucide.createIcons();
+            }
+
+            // --- Main Page Scripts ---
             document.getElementById('year').textContent = new Date().getFullYear();
 
-            const logoImagePath = "\/public\/assets\/images\/Shield.png";
-            // --- Animated Logo Injection ---
+             const logoImagePath = "/assets/img/model.png"; // Changed to new shield
             const logoSVG = (id, tagline = true, shimmer = true) => {
                 const letters = ['M','e','r','c','h','a','n','t','H','a','u','s'];
                 let letterTags = '';
@@ -1803,21 +896,11 @@ document.addEventListener('DOMContentLoaded', () => {
                 });
 
                 return `
-                <svg viewBox="0 0 600 100" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%">
+                <svg viewBox="0 0 450 100" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%">
                     <defs>
-                        <linearGradient id="shimmer-${id}" gradientUnits="userSpaceOnUse" x1="120" y1="0" x2="560" y2="0">
+                        <linearGradient id="shimmer-${id}" gradientUnits="userSpaceOnUse" x1="120" y1="0" x2="420" y2="0">
                             <stop offset="0%" stop-color="#DC143C" />
-                            <stop offset="45%" stop-color="#DC143C">
-                                ${shimmer ? `<animate attributeName="stop-color" values="#DC143C; #FFC0CB; #DC143C" keyTimes="0; 0.5; 1" dur="2s" begin="1.5s" fill="freeze" repeatCount="1"/>` : ''}
-                            </stop>
-                            <stop offset="50%" stop-color="#DC143C">
-                                ${shimmer ? `<animate attributeName="stop-color" values="#DC143C; #FFFFFF; #DC143C" keyTimes="0; 0.5; 1" dur="2s" begin="1.5s" fill="freeze" repeatCount="1"/>` : ''}
-                            </stop>
-                            <stop offset="55%" stop-color="#DC143C">
-                                ${shimmer ? `<animate attributeName="stop-color" values="#DC143C; #FFC0CB; #DC143C" keyTimes="0; 0.5; 1" dur="2s" begin="1.5s" fill="freeze" repeatCount="1"/>` : ''}
-                            </stop>
                             <stop offset="100%" stop-color="#DC143C" />
-                            ${shimmer ? `<animateTransform attributeName="transform" type="translate" from="-600 0" to="600 0" dur="2s" begin="1.5s" fill="freeze" repeatCount="1"/>` : ''}
                         </linearGradient>
                         <style>
                             .mh-text-${id} { font-family: 'Ubuntu', sans-serif; font-size: 50px; font-weight: 700; fill: url(#shimmer-${id}); }
@@ -1837,17 +920,12 @@ document.addEventListener('DOMContentLoaded', () => {
                 </svg>`;
             };
             
-            // Only select and inject logos if the placeholder exists on the current page
             if (document.querySelector('[data-mh-logo-header]')) {
                 document.querySelector('[data-mh-logo-header]').innerHTML = logoSVG('header', false, false);
-            }
-            if (document.querySelector('[data-mh-logo-hero]')) {
-                document.querySelector('[data-mh-logo-hero]').innerHTML = logoSVG('hero', true, true);
             }
             if (document.querySelector('[data-mh-logo-footer]')) {
                  document.querySelector('[data-mh-logo-footer]').innerHTML = logoSVG('footer', true, false);
             }
-
 
             const setupCollapsibleMenu = (toggleId, menuId) => {
                 const toggle = document.getElementById(toggleId);
@@ -1876,23 +954,10 @@ document.addEventListener('DOMContentLoaded', () => {
                         closeMenu();
                     }
                 });
-
-                document.addEventListener('click', (event) => {
-                    if (!menu.classList.contains('hidden') && !menu.contains(event.target) && !toggle.contains(event.target)) {
-                        closeMenu();
-                    }
-                });
-
-                menu.querySelectorAll('a').forEach(link => {
-                    link.addEventListener('click', closeMenu);
-                });
             };
-
             setupCollapsibleMenu('footer-integrations-toggle', 'footer-integrations-menu');
             setupCollapsibleMenu('mobile-integrations-toggle', 'mobile-integrations-menu');
-
-
-            // --- Mobile Menu ---
+            
             const mobileMenuButton = document.getElementById('mobile-menu-button');
             const mobileMenu = document.getElementById('mobile-menu');
             if(mobileMenuButton && mobileMenu) {
@@ -1905,135 +970,8 @@ document.addEventListener('DOMContentLoaded', () => {
                         mobileMenu.classList.add('hidden');
                     }
                 });
-                mobileMenu.querySelectorAll('a').forEach(link => {
-                    link.addEventListener('click', () => mobileMenu.classList.add('hidden'));
-                });
             }
 
-            // --- Stars Canvas Logic (if canvas exists) ---
-            const canvas = document.getElementById('mh-stars');
-            if (canvas) {
-                const ctx = canvas.getContext('2d');
-                let stars;
-                let animationFrameId;
-                const starColors = [
-                    'rgba(255, 255, 255,', 'rgba(230, 230, 250,',
-                    'rgba(255, 250, 205,', 'rgba(240, 255, 255,'
-                ];
-
-                const setupStars = () => {
-                    const parent = canvas.parentElement;
-                    canvas.width = parent.offsetWidth;
-                    canvas.height = parent.offsetHeight;
-                    stars = [];
-                    const numStars = Math.floor((canvas.width * canvas.height) / 8000);
-                    for (let i = 0; i < numStars; i++) {
-                        stars.push({
-                            x: Math.random() * canvas.width,
-                            y: Math.random() * canvas.height,
-                            radius: Math.random() * 1.2 + 0.3,
-                            alpha: Math.random(),
-                            dAlpha: Math.random() * 0.02 - 0.01,
-                            color: starColors[Math.floor(Math.random() * starColors.length)],
-                            vx: (Math.random() - 0.5) * 0.1,
-                            vy: (Math.random() - 0.5) * 0.1
-                        });
-                    }
-                };
-
-                const drawStars = () => {
-                    if(!ctx) return;
-                    ctx.clearRect(0, 0, canvas.width, canvas.height);
-                    stars.forEach(star => {
-                        star.x += star.vx;
-                        star.y += star.vy;
-                        if (star.x < 0) star.x = canvas.width;
-                        if (star.x > canvas.width) star.x = 0;
-                        if (star.y < 0) star.y = canvas.height;
-                        if (star.y > canvas.height) star.y = 0;
-
-                        star.alpha += star.dAlpha;
-                        if (star.alpha <= 0.1 || star.alpha >= 1) { star.dAlpha *= -1; }
-                        
-                        ctx.beginPath();
-                        ctx.arc(star.x, star.y, star.radius, 0, Math.PI * 2);
-                        ctx.fillStyle = star.color + star.alpha + ')';
-                        ctx.fill();
-                    });
-                    animationFrameId = requestAnimationFrame(drawStars);
-                };
-                
-                let resizeTimeout;
-                const initCanvas = () => {
-                    cancelAnimationFrame(animationFrameId);
-                    clearTimeout(resizeTimeout);
-                    resizeTimeout = setTimeout(() => {
-                        setupStars();
-                        drawStars();
-                    }, 100);
-                };
-
-                initCanvas();
-                window.addEventListener('resize', initCanvas);
-            }
-
-            // --- Sequential Typewriter Animation on Scroll (if steps exist) ---
-            const steps = [
-                { id: 'step-1', text: "Fill out our simple application form. Our team will review your details and get you approved quickly." },
-                { id: 'step-2', text: "Once approved, we'll provide you with API keys to easily connect MerchantHaus as your payment provider in your Shopify admin." },
-                { id: 'step-3', text: "That's it! You're ready to accept payments securely and affordably, with all your transaction data synced to your MerchantHaus dashboard." }
-            ];
-            
-            const stepElements = document.querySelectorAll('.step-card');
-
-            if(stepElements.length > 0) {
-                let animationQueue = Promise.resolve();
-                let animatedSteps = new Set();
-
-                const typewriter = (element, text, duration) => {
-                    return new Promise(resolve => {
-                        let i = 0;
-                        element.innerHTML = '<span class="typewriter-text"></span>';
-                        const span = element.querySelector('.typewriter-text');
-                        
-                        function type() {
-                            if (i < text.length) {
-                                span.textContent += text.charAt(i);
-                                i++;
-                                setTimeout(type, duration / text.length);
-                            } else {
-                            if (span) span.style.borderRight = 'none';
-                            resolve();
-                            }
-                        }
-                        type();
-                    });
-                };
-
-                const animateStep = (entry) => {
-                    if (entry.isIntersecting && !animatedSteps.has(entry.target.id)) {
-                        const stepConf = steps.find(s => s.id === entry.target.id);
-                        if (stepConf) {
-                            animatedSteps.add(stepConf.id);
-                            const pElement = entry.target.querySelector('p');
-                            entry.target.style.opacity = '1';
-                            entry.target.style.transform = 'translateY(0)';
-                            animationQueue = animationQueue.then(() => typewriter(pElement, stepConf.text, 2000));
-                        }
-                    }
-                };
-                
-                const observer = new IntersectionObserver((entries) => {
-                    entries.forEach(animateStep);
-                }, { threshold: 0.8 });
-
-                steps.forEach(step => {
-                    const el = document.getElementById(step.id);
-                    if (el) observer.observe(el);
-                });
-            }
-
-            // --- Back to Top Button ---
             const backToTopButton = document.getElementById('back-to-top');
             if(backToTopButton) {
                 window.addEventListener('scroll', () => {
@@ -2047,103 +985,272 @@ document.addEventListener('DOMContentLoaded', () => {
                     window.scrollTo({ top: 0, behavior: 'smooth' });
                 });
             }
+
+            // --- CAROUSEL AND PARTICLE SCRIPT ---
+            
+            const serviceDetails = {
+                "Mobile Payments": {
+                    description: "Take payments anywhere using a phone or tablet. Supports Tap to Pay and popular mobile wallets. Ideal for retail, service, and on-the-go transactions. Backed by secure, PCI-compliant technology."
+                }
+            };
+
+            const particleCanvas = document.getElementById('particle-canvas');
+            const pCtx = particleCanvas.getContext('2d');
+            let particles = [];
+            
+            function resizeParticleCanvas() {
+                particleCanvas.width = window.innerWidth;
+                particleCanvas.height = window.innerHeight;
+            }
+            resizeParticleCanvas();
+            window.addEventListener('resize', resizeParticleCanvas);
+
+            class Particle {
+                constructor(x, y, vx = (Math.random() - 0.5) * 2, vy = (Math.random() - 0.5) * 2) {
+                    this.x = x; this.y = y; this.vx = vx; this.vy = vy;
+                    this.alpha = 1; this.radius = Math.random() * 1.5 + 1;
+                    this.life = Math.random() * 30 + 20;
+                }
+                update() {
+                    this.x += this.vx; this.y += this.vy;
+                    this.alpha -= 0.05; this.life--;
+                }
+                draw() {
+                    pCtx.beginPath();
+                    pCtx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+                    pCtx.fillStyle = `rgba(0, 206, 219, ${this.alpha})`;
+                    pCtx.fill();
+                }
+            }
+            
+            function createCurvedParticleTrail(startX, startY, endX, endY, duration) {
+                const startTime = Date.now();
+                const midX = (startX + endX) / 2; const midY = (startY + endY) / 2;
+                const dx = endX - startX; const dy = endY - startY;
+                const dist = Math.sqrt(dx*dx + dy*dy); const angle = Math.atan2(dy, dx);
+                const perpAngle = angle - Math.PI / 2; const curveAmount = dist * 0.3;
+                const controlX = midX + Math.cos(perpAngle) * curveAmount;
+                const controlY = midY + Math.sin(perpAngle) * curveAmount;
+
+                function animateTrail() {
+                    const elapsedTime = Date.now() - startTime;
+                    const progress = Math.min(elapsedTime / duration, 1);
+                    const pX = Math.pow(1 - progress, 2) * startX + 2 * (1 - progress) * progress * controlX + Math.pow(progress, 2) * endX;
+                    const pY = Math.pow(1 - progress, 2) * startY + 2 * (1 - progress) * progress * controlY + Math.pow(progress, 2) * endY;
+                    
+                    if (Math.random() > 0.3) {
+                        const particleAngle = Math.atan2(pY - (particles[particles.length-1]?.y || pY), pX - (particles[particles.length-1]?.x || pX));
+                        const speed = 2;
+                        const vx = Math.cos(particleAngle) * speed + (Math.random() - 0.5) * 1.5;
+                        const vy = Math.sin(particleAngle) * speed + (Math.random() - 0.5) * 1.5;
+                        particles.push(new Particle(pX, pY, vx, vy));
+                    }
+                    if (progress < 1) requestAnimationFrame(animateTrail);
+                }
+                requestAnimationFrame(animateTrail);
+            }
+
+            function animateParticles() {
+                pCtx.clearRect(0, 0, particleCanvas.width, particleCanvas.height);
+                for (let i = particles.length - 1; i >= 0; i--) {
+                    const p = particles[i]; p.update(); p.draw();
+                    if (p.alpha <= 0 || p.life <= 0) particles.splice(i, 1);
+                }
+                requestAnimationFrame(animateParticles);
+            }
+            animateParticles();
+
+            const slider = document.querySelector('.banner .slider');
+            const items = document.querySelectorAll('.banner .slider .item');
+            const fullscreenView = document.getElementById('fullscreen-view');
+            const fullscreenCard = document.getElementById('fullscreen-card');
+            const closeFullscreenBtn = document.getElementById('close-fullscreen-btn');
+            const numItems = items.length;
+            const rotationIncrement = 360 / numItems;
+
+            let currentYRotation = 0;
+            let isDragging = false;
+            let startX, startRotation, dragDistance = 0;
+            let dragThreshold = 5; 
+            let autoRotate = true;
+            let autoRotateTimeout;
+
+            const updateSliderRotation = () => {
+                slider.style.transform = `perspective(1500px) rotateX(-18deg) rotateY(${currentYRotation}deg)`;
+                updateCardZIndexes();
+            };
+
+            const updateCardZIndexes = () => {
+                items.forEach(item => {
+                    const position = parseInt(item.style.getPropertyValue('--position'));
+                    const itemAngle = (position - 1) * rotationIncrement;
+                    let effectiveAngle = (currentYRotation + itemAngle) % 360;
+                    if (effectiveAngle < 0) effectiveAngle += 360;
+
+                    if (effectiveAngle > 90 && effectiveAngle < 270) {
+                        item.style.zIndex = 0;
+                    } else {
+                        item.style.zIndex = 2;
+                    }
+                });
+            };
+
+            const stopAutoRotate = () => {
+                autoRotate = false;
+                clearTimeout(autoRotateTimeout);
+            };
+            const resumeAutoRotate = (delay = 5000) => {
+                clearTimeout(autoRotateTimeout);
+                autoRotateTimeout = setTimeout(() => { autoRotate = true; }, delay);
+            };
+
+            const handleMouseDown = (e) => {
+                stopAutoRotate(); isDragging = true;
+                slider.classList.add('dragging');
+                startX = e.pageX || e.touches[0].pageX;
+                startRotation = currentYRotation;
+                dragDistance = 0;
+                document.body.classList.add('grabbing');
+            };
+            const handleMouseMove = (e) => {
+                if (!isDragging) return;
+                const x = e.pageX || e.touches[0].pageX;
+                const walk = (x - startX) * 0.5; 
+                currentYRotation = startRotation - walk;
+                dragDistance = Math.abs(walk);
+                updateSliderRotation();
+            };
+            const handleMouseUp = () => {
+                if (!isDragging) return;
+                isDragging = false;
+                slider.classList.remove('dragging');
+                document.body.classList.remove('grabbing');
+                resumeAutoRotate();
+            };
+
+            const handleClick = (e) => {
+                if (dragDistance > dragThreshold) { e.preventDefault(); return; }
+                const item = e.currentTarget;
+                const iconContainer = item.querySelector('.service-icon-container');
+                const startRect = iconContainer.getBoundingClientRect();
+                const startX = startRect.left + startRect.width / 2;
+                const startYTop = startRect.top; const startYBottom = startRect.bottom;
+                const position = parseInt(item.style.getPropertyValue('--position'));
+                const targetRotation = -(position - 1) * rotationIncrement;
+                
+                if (Math.abs(currentYRotation - targetRotation) % 360 < 1) {
+                    zoomIn(item);
+                    return;
+                }
+
+                currentYRotation = targetRotation;
+                updateSliderRotation();
+
+                slider.addEventListener('transitionend', () => zoomIn(item), { once: true });
+                
+                setTimeout(() => {
+                    const endIcon = items[0].querySelector('.service-icon-container'); 
+                    const endRect = endIcon.getBoundingClientRect();
+                    const endX = endRect.left + endRect.width / 2;
+                    const endY = endRect.bottom;
+                    createCurvedParticleTrail(startX, startYTop, endX, endY, 1100);
+                    createCurvedParticleTrail(startX, startYBottom, endX, endY, 1100);
+                }, 100);
+            };
+
+             const zoomIn = (item) => {
+                 stopAutoRotate();
+                 slider.classList.add('hidden');
+                 
+                 const title = item.querySelector('.service-title').textContent;
+                 const service = serviceDetails[title];
+
+                 const clonedCard = item.querySelector('.service-card').cloneNode(true);
+                 clonedCard.innerHTML = ''; 
+
+                 fullscreenCard.innerHTML = ''; 
+                 fullscreenCard.appendChild(clonedCard);
+                
+                if (title === "Mobile Payments" && service) {
+                    const descriptionContainer = document.createElement('div');
+                    descriptionContainer.className = 'fullscreen-description';
+                    const iconHTML = item.querySelector('.service-icon').outerHTML;
+                    const [firstLine, ...bulletPoints] = service.description.split('. ');
+
+                    let bulletHTML = bulletPoints.map(point => `<li>${point.replace(/\.$/, '')}</li>`).join('');
+
+                    descriptionContainer.innerHTML = `
+                        <div style="display: flex; align-items: flex-start; gap: 20px; text-align: left;">
+                            <div style="flex-shrink: 0;">${iconHTML}</div>
+                            <div>
+                                <p style="margin: 0; padding: 0; line-height: 1.5; font-size: 1.2em;">
+                                    <strong style="font-weight: bold;">${title}:</strong> 
+                                    ${firstLine}.
+                                </p>
+                                <ul style="list-style-position: inside; margin-top: 1em; padding-left: 5px; display: flex; flex-direction: column; gap: 0.5em;">
+                                    ${bulletHTML}
+                                </ul>
+                            </div>
+                        </div>
+                    `;
+                     fullscreenCard.appendChild(descriptionContainer);
+                } else {
+                     const defaultIcon = item.querySelector('.service-icon-container').cloneNode(true);
+                     const defaultTitle = item.querySelector('.service-title').cloneNode(true);
+                     fullscreenCard.appendChild(defaultIcon);
+                     fullscreenCard.appendChild(defaultTitle);
+                }
+                 
+                 fullscreenView.classList.add('visible');
+                 setTimeout(() => fullscreenCard.classList.add('visible'), 50);
+            };
+
+            const zoomOut = () => {
+                 fullscreenCard.classList.remove('visible');
+                 fullscreenView.classList.remove('visible');
+                 setTimeout(() => {
+                    slider.classList.remove('hidden');
+                    resumeAutoRotate();
+                 }, 500);
+            };
+            
+            function carouselLoop() {
+                if(autoRotate && !isDragging) {
+                    currentYRotation += 0.03;
+                    updateSliderRotation();
+                }
+                requestAnimationFrame(carouselLoop);
+            }
+
+            slider.addEventListener('mousedown', handleMouseDown);
+            slider.addEventListener('touchstart', handleMouseDown, { passive: true });
+            document.addEventListener('mousemove', handleMouseMove);
+            document.addEventListener('touchmove', handleMouseMove, { passive: true });
+            document.addEventListener('mouseup', handleMouseUp);
+            document.addEventListener('touchend', handleMouseUp);
+            slider.addEventListener('mouseenter', stopAutoRotate);
+            slider.addEventListener('mouseleave', () => resumeAutoRotate(1000));
+            items.forEach(item => { item.addEventListener('click', handleClick); });
+            closeFullscreenBtn.addEventListener('click', zoomOut);
+            
+            updateCardZIndexes();
+            carouselLoop();
+
+            const modal = document.getElementById('ai-suggester-modal');
+            const openBtn = document.getElementById('open-ai-modal-btn');
+            const closeBtn = document.getElementById('close-ai-modal');
+            
+            if (openBtn && modal && closeBtn) {
+                openBtn.addEventListener('click', () => modal.classList.add('flex'));
+                closeBtn.addEventListener('click', () => modal.classList.remove('flex'));
+                modal.addEventListener('click', (e) => {
+                    if(e.target === modal) {
+                        modal.classList.remove('flex');
+                    }
+                });
+            }
         });
     </script>
-    <!-- ================= GLOBAL LAYOUT SCRIPTS END ================= -->
-
-<!-- ================= CHATBOT INTEGRATION SECTION START ================= -->
-<!-- Third-party ChatBot embed and custom styling for FAQ assistant -->
-<!-- Start of ChatBot (www.chatbot.com) code -->
-<script>
-  window.__ow = window.__ow || {};
-  window.__ow.organizationId = "ded96f09-612d-4fa3-b3e8-014830167318";
-  window.__ow.template_id = "200f2913-f66f-4b3a-aa4c-349b6e62113f";
-  window.__ow.integration_name = "manual_settings";
-  window.__ow.product_name = "chatbot";   
-  ;(function(n,t,c){function i(n){return e._h?e._h.apply(null,n):e._q.push(n)}var e={_q:[],_h:null,_v:"2.0",on:function(){i(["on",c.call(arguments)])},once:function(){i(["once",c.call(arguments)])},off:function(){i(["off",c.call(arguments)])},get:function(){if(!e._h)throw new Error("[OpenWidget] You can't use getters before load.");return i(["get",c.call(arguments)])},call:function(){i(["call",c.call(arguments)])},init:function(){var n=t.createElement("script");n.async=!0,n.type="text/javascript",n.src="https://cdn.openwidget.com/openwidget.js",t.head.appendChild(n)}};!n.__ow.asyncInit&&e.init(),n.OpenWidget=n.OpenWidget||e}(window,document,[].slice))
-</script>
-<noscript>You need to <a href="https://www.chatbot.com/help/chat-widget/enable-javascript-in-your-browser/" rel="noopener nofollow">enable JavaScript</a> in order to use the AI chatbot tool powered by <a href="https://www.chatbot.com/" rel="noopener nofollow" target="_blank">ChatBot</a></noscript>
-<!-- End of ChatBot code -->
-<style>
-  #faq-answer {
-    max-height: 320px;
-    overflow-y: auto;
-    padding: 1rem;
-    background: #f8fafc;
-    border-radius: 0.5rem;
-    margin-bottom: 1rem;
-  }
-  .chat-user {
-    background: #dc143c;
-    color: #fff;
-    padding: 0.5rem 1rem;
-    border-radius: 1rem 1rem 0 1rem;
-    margin: 0.5rem 0 0.5rem auto;
-    max-width: 70%;
-    text-align: right;
-    float: right;
-    clear: both;
-    box-shadow: 0 2px 8px rgba(220,20,60,0.08);
-  }
-  .chat-bot {
-    background: #475569;
-    color: #f1f5f9;
-    padding: 0.5rem 1rem;
-    border-radius: 1rem 1rem 1rem 0;
-    margin: 0.5rem auto 0.5rem 0;
-    max-width: 70%;
-    text-align: left;
-    float: left;
-    clear: both;
-    box-shadow: 0 2px 8px rgba(71,85,105,0.08);
-  }
-</style>
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-  const input = document.getElementById('faq-question');
-  const sendBtn = document.getElementById('ask-faq');
-  const answerBox = document.getElementById('faq-answer');
-
-  function appendMessage(text, sender) {
-    const div = document.createElement('div');
-    div.className = sender === 'user' ? 'chat-user' : 'chat-bot';
-    div.textContent = text;
-    answerBox.appendChild(div);
-    answerBox.scrollTop = answerBox.scrollHeight;
-  }
-
-  function sendMessage() {
-    const text = input.value.trim();
-    if (!text) return;
-    appendMessage(text, 'user');
-    input.value = '';
-    if (!window.ChatBot || typeof window.ChatBot.call !== 'function') {
-      console.warn('ChatBot.com integration not found.');
-      appendMessage('ChatBot integration not available.', 'bot');
-      return;
-    }
-    window.ChatBot.call('send', { message: text });
-  }
-
-  input.addEventListener('keydown', function(e) {
-    if (e.key === 'Enter') {
-      sendMessage();
-    }
-  });
-  sendBtn.addEventListener('click', sendMessage);
-
-  if (window.ChatBot && typeof window.ChatBot.on === 'function') {
-    window.ChatBot.on('message', function(data) {
-      if (data && data.message) {
-        appendMessage(data.message, 'bot');
-      }
-    });
-  } else {
-    console.warn('ChatBot.com integration not found.');
-  }
-});
-</script>
-<!-- ================= CHATBOT INTEGRATION SECTION END ================= -->
 </body>
 </html>
 
