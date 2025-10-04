@@ -62,6 +62,9 @@
             background-color: #1c1c1c;
             color: #f5f5f5;
         }
+        body.grabbing {
+            cursor: grabbing;
+        }
         body::before {
             content: '';
             position: fixed;
@@ -82,55 +85,6 @@
             backdrop-filter: blur(10px);
         }
         .dark .border-slate-800 { border-color: #2a2a2a !important; }
-
-        /* Headline scroller */
-        .scrolling-words-container {
-            height: 4.5rem; 
-            line-height: 4.5rem;
-            overflow: hidden;
-            position: relative;
-            display: inline-block;
-        }
-        @media (min-width: 768px) {
-            .scrolling-words-container {
-                height: 3.75rem;
-                line-height: 3.75rem;
-            }
-        }
-        .scrolling-words-box {
-            display: inline-block;
-            list-style: none;
-            padding: 0;
-            margin: 0;
-            animation: spin-words 10s ease-in-out infinite;
-        }
-        @keyframes spin-words {
-            0%, 20% { transform: translateY(0); }
-            25%, 45% { transform: translateY(-4.5rem); }
-            50%, 70% { transform: translateY(-9rem); }
-            75%, 95% { transform: translateY(-13.5rem); }
-            100% { transform: translateY(-18rem); }
-        }
-        @media (min-width: 768px) {
-           @keyframes spin-words {
-                0%, 20% { transform: translateY(0); }
-                25%, 45% { transform: translateY(-3.75rem); }
-                50%, 70% { transform: translateY(-7.5rem); }
-                75%, 95% { transform: translateY(-11.25rem); }
-                100% { transform: translateY(-15rem); }
-            }
-        }
-
-        /* Typewriter effect */
-        .typewriter-text {
-            border-right: .15em solid #00CEDB;
-            white-space: pre-wrap;
-            animation: blink-caret .75s step-end infinite;
-        }
-        @keyframes blink-caret {
-            from, to { border-color: transparent }
-            50% { border-color: #00CEDB; }
-        }
 
         .sr-only {
             position: absolute;
@@ -210,23 +164,286 @@
                 font-size: 0.95rem;
             }
         }
-    </style>
+        
+        /* === PAYMENT SERVICES EXPERIENCE === */
+        #payments {
+          position: relative;
+          overflow: hidden;
+          width: 100%;
+        }
 
-    <!-- Favicons -->
-    <link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="192x192" href="/favicons/android-chrome-192x192.png">
-    <link rel="icon" type="image/png" sizes="512x512" href="/favicons/android-chrome-512x512.png">
-    <link rel="icon" type="image/x-icon" href="/favicon.ico">
-    <link rel="manifest" href="/site.webmanifest">
+        .payments-experience {
+            position: relative;
+            background-color: #1c1c1c;
+            color: #f5f5f5;
+        }
+
+        .banner {
+            width: 100%;
+            height: 100vh;
+            text-align: center;
+            overflow: hidden;
+            position: relative;
+            touch-action: pan-y;
+        }
+        .slider {
+            position: absolute;
+            width: 160px; 
+            height: 200px; 
+            top: 10%;
+            left: calc(50% - 80px); 
+            transform-style: preserve-3d;
+            -webkit-transform-style: preserve-3d;
+            backface-visibility: hidden;
+            -webkit-backface-visibility: hidden;
+            will-change: transform;
+            transform: perspective(1500px) rotateX(-18deg);
+            cursor: grab;
+            transition: transform 1.8s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.5s;
+        }
+        #front-slider { z-index: 2; }
+        #back-slider { z-index: 0; }
+        
+        .slider.dragging {
+            transition: none;
+        }
+        .slider.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+        .banner .slider .item{
+            position: absolute;
+            inset: 0 0 0 0;
+            transform-style: preserve-3d;
+            -webkit-transform-style: preserve-3d;
+            backface-visibility: hidden;
+            -webkit-backface-visibility: hidden;
+            will-change: transform;
+            transform: 
+                rotateY(calc( (var(--position) - 1) * (360 / var(--quantity)) * 1deg))
+                translateZ(380px); 
+        }
+
+        .service-card {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            pointer-events: none;
+            background-size: cover;
+            background-position: center;
+            border-radius: 1rem;
+            overflow: hidden;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .item[data-pos="1"] .service-card { background-image: url('/assets/img/card1.png'); }
+        .item[data-pos="2"] .service-card { background-image: url('/assets/img/card2.png'); }
+        .item[data-pos="3"] .service-card { background-image: url('/assets/img/card3.png'); }
+        .item[data-pos="4"] .service-card { background-image: url('/assets/img/card4.png'); }
+        .item[data-pos="5"] .service-card { background-image: url('/assets/img/card5.png'); }
+        .item[data-pos="6"] .service-card { background-image: url('/assets/img/card6.png'); }
+        .item[data-pos="7"] .service-card { background-image: url('/assets/img/card7.png'); }
+        .item[data-pos="8"] .service-card { background-image: url('/assets/img/card8.png'); }
+        .item[data-pos="9"] .service-card { background-image: url('/assets/img/card9.png'); }
+        .item[data-pos="10"] .service-card { background-image: url('/assets/img/card10.png'); }
+
+        
+        .service-icon-container {
+            width: 90px;
+            height: 90px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .item:hover .service-icon-container {
+             transform: translateY(-10px);
+        }
+
+        .service-icon {
+            width: 3.5rem;
+            height: 3.5rem;
+            stroke-width: 1.5;
+            filter: drop-shadow(3px 3px 2px rgba(0, 0, 0, 0.3)); 
+            position: relative;
+            z-index: 2;
+        }
+        
+        .item[data-pos="1"] .service-icon { stroke: #33FF57; }
+        .item[data-pos="2"] .service-icon { stroke: #3357FF; }
+        .item[data-pos="3"] .service-icon { stroke: #FF33A1; }
+        .item[data-pos="4"] .service-icon { stroke: #A133FF; }
+        .item[data-pos="5"] .service-icon { stroke: #33FFF6; }
+        .item[data-pos="6"] .service-icon { stroke: #F6FF33; }
+        .item[data-pos="7"] .service-icon { stroke: #FF8C33; }
+        .item[data-pos="8"] .service-icon { stroke: #8CFF33; }
+        .item[data-pos="9"] .service-icon { stroke: #DC143C; }
+        .item[data-pos="10"] .service-icon { stroke: #FF5733; }
+
+
+        .service-title {
+            position: absolute;
+            bottom: 105%;
+            left: 50%;
+            transform: translateX(-50%) translateZ(50px);
+            background-color: rgba(10, 10, 10, 0.8);
+            backdrop-filter: blur(10px);
+            color: #fff;
+            padding: 0.35rem 1rem;
+            border-radius: 9999px;
+            font-size: 1rem;
+            font-family: 'Ubuntu', sans-serif;
+            font-weight: bold;
+            white-space: nowrap;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            pointer-events: none;
+        }
+
+        #particle-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            pointer-events: none;
+            z-index: 100;
+        }
+
+        #fullscreen-view {
+            position: fixed;
+            inset: 0;
+            z-index: 110;
+            background-color: rgba(0,0,0,0.8);
+            backdrop-filter: blur(10px);
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 1s ease; /* Slower zoom */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        #fullscreen-view.visible {
+            opacity: 1;
+            pointer-events: all;
+        }
+        #fullscreen-card {
+            position: relative;
+            width: 60vmax; 
+            height: 70vmax;
+            max-width: 900px;
+            max-height: 700px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            padding-top: 5vh;
+            opacity: 0;
+            transition: all 1s cubic-bezier(0.645, 0.045, 0.355, 1);
+            background-size: cover;
+            background-position: center;
+            border-radius: 1.5rem;
+            overflow: hidden;
+        }
+        #fullscreen-card::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background-color: rgba(0,0,0,0.6);
+            z-index: 1;
+        }
+
+        #fullscreen-card.visible {
+            opacity: 1;
+        }
+
+        #fullscreen-card .fullscreen-content {
+            position: relative;
+            z-index: 2;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+            padding: 2rem;
+            color: white;
+        }
+
+        #fullscreen-card .service-icon {
+             width: 8vmax;
+             height: 8vmax;
+             margin-bottom: 2rem;
+        }
+        
+        .fullscreen-description {
+            color: #d1d5db;
+            font-family: 'Inter', sans-serif;
+            font-size: clamp(1rem, 1.5vw, 1.25rem);
+            width: 100%;
+            max-width: 90%;
+            text-align: center;
+        }
+        .fullscreen-description p {
+            margin-bottom: 1.5rem;
+            border-right: 2px solid transparent;
+            white-space: nowrap;
+            overflow: hidden;
+        }
+
+        #close-fullscreen-btn {
+            position: absolute;
+            top: 40px;
+            right: 40px;
+            color: white;
+            opacity: 0.8;
+            cursor: pointer;
+            transition: opacity 0.3s, transform 0.3s;
+            z-index: 120;
+        }
+        #close-fullscreen-btn:hover {
+            opacity: 1;
+            transform: scale(1.1);
+        }
+        
+        .banner .content{
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+        }
+        .banner .content .model{
+            background-image: url(/assets/img/model.png);
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center bottom;
+            z-index: 1;
+        }
+
+    </style>
 </head>
-<!-- ================= HEAD SECTION END ================= -->
 <body class="text-slate-100">
 
     <!-- Header -->
-    <!-- ================= HEADER SECTION START ================= -->
-    <!-- Sticky navigation bar with logo, contact info, and responsive menus -->
     <div class="sticky top-0 z-50">
-        <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-4 pb-6">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-4 pb-6">
              <header class="header-glass border border-slate-200/70 dark:border-slate-800 rounded-full shadow-lg">
                  <div class="relative max-w-7xl mx-auto px-6 py-3 flex items-center justify-between">
                     <a href="/index.html" class="flex items-center gap-3 group">
@@ -244,7 +461,7 @@
                              >Contact Support</button>
                          </div>
                          <button type="button" class="js-signup-cta bg-brand-crimson hover:bg-opacity-90 text-white border border-transparent px-4 py-2 rounded-full text-sm font-semibold font-inter transition-colors duration-300">Get Started</button>
-                         <a href="https://retailmanager.merchant.haus/gateway.html" class="hidden sm:block bg-transparent hover:bg-brand-teal text-brand-teal hover:text-white border border-brand-teal px-4 py-2 rounded-lg text-sm font-semibold font-inter transition-colors duration-300">Login</a>
+                         <a href="https://retailmanager.merchant.haus" class="hidden sm:block bg-transparent hover:bg-brand-teal text-brand-teal hover:text-white border border-brand-teal px-4 py-2 rounded-lg text-sm font-semibold font-inter transition-colors duration-300">Login</a>
                      </div>
                  </div>
             </header>
@@ -293,10 +510,7 @@
             </div>
         </div>
     </div>
-    <!-- ================= HEADER SECTION END ================= -->
 
-    <!-- ================= SIGNUP PANEL OVERLAY START ================= -->
-    <!-- Slide-in multi-step signup workflow for creating new accounts -->
     <div id="signup-panel-overlay" class="panel-overlay fixed inset-0 bg-black/60 z-50 opacity-0 invisible">
         <div id="signup-panel" class="panel-container fixed top-0 right-0 h-full w-full max-w-2xl bg-white dark:bg-slate-900 shadow-2xl transform translate-x-full flex flex-col">
             <div class="p-6 sm:p-8 relative flex-shrink-0">
@@ -330,331 +544,7 @@
             </div>
         </div>
     </div>
-    <!-- ================= SIGNUP PANEL OVERLAY END ================= -->
 
-<!-- ================= INLINE EXPERIENCE STYLES START ================= -->
-<!-- Additional page-specific styling for hero, banners, and dynamic effects -->
-<style>
-.field:focus { outline: none; box-shadow: 0 0 0 3px rgba(239,60,91,.35); }
-.cursor { display: inline-block; width: 3px; height: 1em; background-color: #dc2743; animation: blink-caret .75s step-end infinite; vertical-align: bottom; }
-@keyframes blink-caret { from, to { background-color: transparent; } 50% { background-color: #dc2743; } }
-.loader { width: 16px; height: 16px; border: 2px solid #FFF; border-bottom-color: transparent; border-radius: 50%; display: inline-block; box-sizing: border-box; animation: rotation 1s linear infinite; vertical-align: middle; margin-right: 8px; }
-@keyframes rotation { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
-.feature-display { display: flex; align-items: center; justify-content: center; min-width: 150px; height: 38px; padding: 0 16px; border-radius: 9999px; background-color: #F3F4F6; color: #111827; font-size: 0.875rem; font-weight: 500; transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out; opacity: 0; transform: translateX(-50%) translateY(10px); position: absolute; left: 50%; white-space: nowrap; }
-.dark .feature-display { background-color: #1f2937; color: #f9fafb; }
-.feature-display.active { opacity: 1; transform: translateX(-50%) translateY(0); }
-.feature-display.exiting { opacity: 0; transform: translateX(-50%) translateY(-10px); }
-.integrations {
-  background: radial-gradient(circle at left, #2c0c17, transparent),
-              radial-gradient(circle at right, #0a1d1f, transparent);
-  padding: 4rem 2rem;
-  color: #fff;
-  overflow: hidden;
-}
-.title-with-logo {
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-  gap: 1rem;
-  flex-wrap: wrap;
-}
-.integrations .section-title {
-  font-size: 2rem;
-  font-weight: 700;
-  margin: 0;
-  overflow: hidden;
-  white-space: nowrap;
-  border-right: .15em solid #fff;
-}
-.typewriter {
-  display: inline-block;
-  width: 0;
-  animation: typing 4s steps(34, end) forwards, blink .75s step-end infinite;
-}
-@keyframes typing {
-  from { width: 0 }
-  to { width: 34ch }
-}
-@keyframes blink {
-  from, to { border-color: transparent }
-  50% { border-color: #fff }
-}
-.shopify-hero {
-  height: clamp(50px, 7vw, 98px);
-  width: auto;
-  object-fit: contain;
-}
-.integrations .section-subtitle {
-  font-size: 1.1rem;
-  margin: 1rem 0 2rem;
-  color: #ccc;
-}
-.integrations-marquee {
-  position: relative;
-  overflow: hidden;
-}
-.marquee-track {
-  display: flex;
-  width: max-content;
-  animation: marquee 30s linear infinite;
-}
-.integrations-logos {
-  display: flex;
-  gap: 2rem;
-  align-items: center;
-}
-.integrations-logos img {
-  max-height: 35px;
-  object-fit: contain;
-  transition: transform 0.3s ease;
-}
-.integrations-logos img:hover {
-  transform: scale(1.1);
-}
-@keyframes marquee {
-  from { transform: translateX(0); }
-  to { transform: translateX(-50%); }
-}
-.service-cell { opacity: 0; transition: opacity 0.5s ease-in-out; }
-.service-cell.is-visible { opacity: 1; }
-.service-cell h3, .service-cell p { opacity: 0; transform: translateY(10px); transition: opacity 0.4s ease-out, transform 0.4s ease-out; }
-.service-cell.is-visible h3 { opacity: 1; transform: translateY(0); transition-delay: 0.2s; }
-.service-cell.is-visible p { opacity: 1; transform: translateY(0); transition-delay: 0.3s; }
-#faq-answer p { margin: 0 0 0.75rem; }
-#faq-answer p:last-child { margin-bottom: 0; }
-#faq-answer ul { margin: 0; }
-.hero-bg-container::before { content: ''; position: absolute; inset: 0; background-image: url('/public/assets/images/hero.png'); background-size: 100%; background-position: center; background-repeat: no-repeat; animation: kenBurns 20s ease-in-out infinite alternate; z-index: -20; }
-@keyframes kenBurns { 0% { transform: scale(1) rotate(0deg); background-position: center; } 100% { transform: scale(1.1) rotate(1deg); background-position: top left; } }
-@media (prefers-reduced-motion: reduce) { .marquee-track { animation: none !important; } }
-.panel-overlay, .panel-container { transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
-
-        /* === PAYMENT SERVICES EXPERIENCE === */
-        #payments {
-          position: relative;
-          overflow: hidden;
-          width: 100%;
-        }
-
-        body.grabbing {
-            cursor: grabbing;
-        }
-
-        .payments-experience {
-            position: relative;
-            background-color: #1c1c1c;
-            color: #f5f5f5;
-        }
-
-        /* Pure CSS Slider Styles based on reference */
-        .banner {
-            width: 100%;
-            height: 100vh;
-            text-align: center;
-            overflow: hidden;
-            position: relative;
-        }
-        .banner .slider{
-            position: absolute;
-            width: 160px; 
-            height: 200px; 
-            top: 10%;
-            left: calc(50% - 80px); 
-            transform-style: preserve-3d;
-            transform: perspective(1500px) rotateX(-18deg);
-            z-index: 2;
-            cursor: grab;
-            transition: transform 1.2s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.5s;
-        }
-        .banner .slider.dragging {
-            transition: none;
-        }
-        .banner .slider.hidden {
-            opacity: 0;
-            pointer-events: none;
-        }
-
-
-        .banner .slider .item{
-            position: absolute;
-            inset: 0 0 0 0;
-            transform: 
-                rotateY(calc( (var(--position) - 1) * (360 / var(--quantity)) * 1deg))
-                translateZ(380px); 
-        }
-
-        .service-card {
-            width: 100%;
-            height: 100%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            pointer-events: none;
-            background-size: cover;
-            background-position: center;
-            border-radius: 1rem;
-            overflow: hidden;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-        }
-        
-        .service-icon-container {
-            width: 90px;
-            height: 90px;
-            border-radius: 50%;
-            background-color: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(8px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            box-shadow: 0 5px 20px rgba(0,0,0,0.2);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: transform 0.3s ease;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        /* Applying Images */
-        .item:nth-child(1) .service-card { background-image: url('assets/img/card1.png'); }
-        .item:nth-child(2) .service-card { background-image: url('assets/img/card2.png'); }
-        .item:nth-child(3) .service-card { background-image: url('assets/img/card3.png'); }
-        .item:nth-child(4) .service-card { background-image: url('assets/img/card4.png'); }
-        .item:nth-child(5) .service-card { background-image: url('assets/img/card5.png'); }
-        .item:nth-child(6) .service-card { background-image: url('assets/img/card6.png'); }
-        .item:nth-child(7) .service-card { background-image: url('assets/img/card7.png'); }
-        .item:nth-child(8) .service-card { background-image: url('assets/img/card8.png'); }
-        .item:nth-child(9) .service-card { background-image: url('assets/img/card9.png'); }
-        .item:nth-child(10) .service-card { background-image: url('assets/img/card10.png'); }
-
-
-        .item:hover .service-icon-container {
-             transform: translateY(-10px);
-        }
-
-        .service-icon {
-            width: 3.5rem;
-            height: 3.5rem;
-            stroke-width: 1.5;
-            stroke: #DC143C;
-            filter: drop-shadow(3px 3px 2px rgba(0, 0, 0, 0.3)); 
-            position: relative;
-            z-index: 2;
-        }
-        
-        .service-title {
-            position: absolute;
-            bottom: 105%;
-            left: 50%;
-            transform: translateX(-50%) translateZ(50px);
-            background-color: rgba(10, 10, 10, 0.8);
-            backdrop-filter: blur(10px);
-            color: #fff;
-            padding: 0.35rem 1rem;
-            border-radius: 9999px;
-            font-size: 1rem;
-            font-family: 'Ubuntu', sans-serif;
-            font-weight: bold;
-            white-space: nowrap;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
-            pointer-events: none;
-        }
-
-        #particle-canvas {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
-            pointer-events: none;
-            z-index: 100;
-        }
-
-        #fullscreen-view {
-            position: fixed;
-            inset: 0;
-            z-index: 110;
-            background-color: rgba(0,0,0,0.8);
-            backdrop-filter: blur(10px);
-            opacity: 0;
-            pointer-events: none;
-            transition: opacity 0.5s ease;
-        }
-        #fullscreen-view.visible {
-            opacity: 1;
-            pointer-events: all;
-        }
-        #fullscreen-card {
-            position: absolute;
-            transition: all 0.6s cubic-bezier(0.645, 0.045, 0.355, 1);
-        }
-        #fullscreen-card .service-icon-container {
-             width: 40vmax;
-             height: 40vmax;
-        }
-        #fullscreen-card .service-icon {
-             width: 15vmax;
-             height: 15vmax;
-        }
-        #fullscreen-card .service-title {
-            font-size: 4vmax;
-            padding: 1rem 3rem;
-            bottom: 110%;
-        }
-        #close-fullscreen-btn {
-            position: absolute;
-            top: 40px;
-            right: 40px;
-            color: white;
-            opacity: 0.8;
-            cursor: pointer;
-            transition: opacity 0.3s, transform 0.3s;
-        }
-        #close-fullscreen-btn:hover {
-            opacity: 1;
-            transform: scale(1.1);
-        }
-
-        .loader {
-            width: 20px;
-            height: 20px;
-            border: 3px solid #FFF;
-            border-bottom-color: transparent;
-            border-radius: 50%;
-            display: inline-block;
-            box-sizing: border-box;
-            animation: rotation 1s linear infinite;
-        }
-        @keyframes rotation {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-
-        .banner .content{
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-        }
-        .banner .content .model{
-            background-image: url(assets/img/model.png);
-            width: 100%;
-            height: 100%;
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            background-size: contain;
-            background-repeat: no-repeat;
-            background-position: center bottom;
-            z-index: 1;
-        }
-        /* === END PAYMENT SERVICES EXPERIENCE === */
-</style>
-<!-- ================= INLINE EXPERIENCE STYLES END ================= -->
-
-<!-- ================= HERO SECTION START ================= -->
-<!-- Immersive introductory hero with animated FAQ assistant and onboarding CTA -->
 <div class="relative">
   <section class="relative overflow-hidden animate-fadeIn hero-bg-container">
     <div class="absolute inset-0 bg-black/50 -z-10"></div>
@@ -690,7 +580,6 @@
 <!-- ================= HERO SECTION END ================= -->
 
 <!-- ================= PAYMENT SERVICES SHOWCASE START ================= -->
-<!-- 3D carousel and CTAs highlighting core payment capabilities -->
 <div class="payments-experience">
   <canvas id="particle-canvas"></canvas>
 
@@ -713,93 +602,13 @@
         <p class="text-2xl sm:text-3xl font-ubuntu mb-4 text-slate-400">Your complete business toolkit for accepting and managing payments.</p>
       </div>
       
-      <div class="banner">
-        <div class="slider" style="--quantity: 10">
-          <div class="item" style="--position: 1">
-            <div class="service-card">
-              <div class="service-icon-container">
-                <i data-lucide="smartphone" class="service-icon"></i>
-              </div>
+       <div class="banner">
+            <div id="back-slider" class="slider" style="--quantity: 10"></div>
+            <div id="front-slider" class="slider" style="--quantity: 10"></div>
+            <div class="content">
+                <div class="model"></div>
             </div>
-            <div class="service-title">Mobile Payments</div>
-          </div>
-          <div class="item" style="--position: 2">
-            <div class="service-card">
-              <div class="service-icon-container">
-                <i data-lucide="shuffle" class="service-icon"></i>
-              </div>
-            </div>
-            <div class="service-title">Smart Routing</div>
-          </div>
-          <div class="item" style="--position: 3">
-            <div class="service-card">
-              <div class="service-icon-container">
-                <i data-lucide="file-text" class="service-icon"></i>
-              </div>
-            </div>
-            <div class="service-title">Invoicing</div>
-          </div>
-          <div class="item" style="--position: 4">
-            <div class="service-card">
-              <div class="service-icon-container">
-                <i data-lucide="repeat" class="service-icon"></i>
-              </div>
-            </div>
-            <div class="service-title">Recurring Billing</div>
-          </div>
-          <div class="item" style="--position: 5">
-            <div class="service-card">
-              <div class="service-icon-container">
-                <i data-lucide="lock" class="service-icon"></i>
-              </div>
-            </div>
-            <div class="service-title">Secure Tokenization</div>
-          </div>
-          <div class="item" style="--position: 6">
-            <div class="service-card">
-              <div class="service-icon-container">
-                <i data-lucide="bar-chart-2" class="service-icon"></i>
-              </div>
-            </div>
-            <div class="service-title">Detailed Reporting</div>
-          </div>
-          <div class="item" style="--position: 7">
-            <div class="service-card">
-              <div class="service-icon-container">
-                <i data-lucide="cpu" class="service-icon"></i>
-              </div>
-            </div>
-            <div class="service-title">Automation</div>
-          </div>
-          <div class="item" style="--position: 8">
-            <div class="service-card">
-              <div class="service-icon-container">
-                <i data-lucide="landmark" class="service-icon"></i>
-              </div>
-            </div>
-            <div class="service-title">ACH Payments</div>
-          </div>
-          <div class="item" style="--position: 9">
-            <div class="service-card">
-              <div class="service-icon-container">
-                <i data-lucide="shield-alert" class="service-icon"></i>
-              </div>
-            </div>
-            <div class="service-title">Fraud Prevention</div>
-          </div>
-          <div class="item" style="--position: 10">
-            <div class="service-card">
-              <div class="service-icon-container">
-                <i data-lucide="globe-2" class="service-icon"></i>
-              </div>
-            </div>
-            <div class="service-title">Global Payments</div>
-          </div>
         </div>
-        <div class="content">
-          <div class="model"></div>
-        </div>
-      </div>
 
       <div class="mt-8 sm:mt-10 flex flex-wrap justify-center gap-4 px-4">
         <button type="button" class="js-signup-cta inline-flex items-center justify-center rounded-full px-8 py-3 text-lg font-semibold text-white shadow-lg transition-all duration-300 hover:-translate-y-0.5 hover:shadow-xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-crimson focus-visible:ring-offset-2" style="background-image: linear-gradient(135deg, #dc143c 0%, #f43f5e 50%, #ff758c 100%);">
@@ -815,7 +624,6 @@
 <!-- ================= PAYMENT SERVICES SHOWCASE END ================= -->
 
 <!-- ================= AI SUGGESTER MODAL START ================= -->
-<!-- Pop-up assistant collecting business context to recommend services -->
 <div id="ai-suggester-modal" class="fixed inset-0 bg-black/70 z-50 hidden items-center justify-center p-4">
   <div class="bg-[#1c1c1c] border-2 border-brand-teal rounded-2xl shadow-xl p-6 sm:p-8 w-full max-w-2xl transform transition-all relative">
     <button id="close-ai-modal" class="absolute top-4 right-4 text-slate-400 hover:text-white transition-colors">
@@ -830,7 +638,6 @@
 
     <button id="get-recommendations-btn" class="mt-4 w-full bg-brand-crimson text-white font-bold py-3 px-4 rounded-lg hover:bg-opacity-90 transition-all flex items-center justify-center disabled:opacity-50 disabled:cursor-not-allowed">
       <span class="btn-text">Get Recommendations</span>
-      <span class="loader hidden ml-2"></span>
     </button>
 
     <div id="recommendations-result" class="mt-6 max-h-64 overflow-y-auto pr-2"></div>
@@ -839,7 +646,6 @@
 <!-- ================= AI SUGGESTER MODAL END ================= -->
 
 <!-- ================= INTEGRATIONS SECTION START ================= -->
-<!-- Rotating partner logos showcasing supported commerce platforms -->
 <section id="integrations" class="integrations">
   <div class="container text-center">
     <div class="title-with-logo">
@@ -899,7 +705,6 @@
 <!-- ================= INTEGRATIONS SECTION END ================= -->
 
 <!-- ================= SETUP CHECKLIST SECTION START ================= -->
-<!-- Step-by-step onboarding checklist with pinned heading overlay -->
 <div class="relative">
   <section id="checklist" class="pt-28 pb-16 bg-slate-50 dark:bg-slate-900/40 border-y border-slate-200/70 dark:border-slate-800">
     <div class="max-w-7xl mx-auto px-4 text-center">
@@ -958,7 +763,6 @@
 <!-- ================= SETUP CHECKLIST SECTION END ================= -->
 
 <!-- ================= SUPPORT MODAL START ================= -->
-<!-- Contact form modal enabling merchants to reach support team -->
 <div id="support-modal" class="fixed inset-0 z-[70] hidden flex items-center justify-center">
   <div class="absolute inset-0 bg-black/60" data-close></div>
   <div class="relative z-10 w-full max-w-[clamp(20rem,90vw,35rem)] max-h-[90vh] overflow-y-auto rounded-2xl bg-white p-6 shadow-2xl border border-slate-200" data-modal-card>
@@ -1008,7 +812,6 @@
 <!-- ================= SUPPORT MODAL END ================= -->
 
 <!-- ================= APPLICATION FORM SECTION START ================= -->
-<!-- Detailed merchant onboarding form capturing business and compliance data -->
 <main class="max-w-5xl mx-auto px-4 pt-10 pb-4 application-section">
     <h1 class="text-3xl md:text-4xl font-extrabold">Merchant Application</h1>
     <p class="mt-2 text-slate-300">U.S. retail only. Provide the details below — we’ll review and issue your Merchant ID (MID) &amp; access credentials during onboarding.</p>
@@ -1078,643 +881,8 @@
     </form>
 
 </main>
-<!-- ================= APPLICATION FORM SECTION END ================= -->
-<!-- ================= APPLICATION INTERACTIVITY SCRIPT START ================= -->
-<!-- Handles AI suggestions, FAQs, form logic, and scroll-based animations -->
-<script>
-document.addEventListener('DOMContentLoaded', () => {
-  if (window.lucide) lucide.createIcons();
 
-  const particleCanvas = document.getElementById('particle-canvas');
-  const slider = document.querySelector('.banner .slider');
-  const sliderItems = document.querySelectorAll('.banner .slider .item');
-  const fullscreenView = document.getElementById('fullscreen-view');
-  const fullscreenCard = document.getElementById('fullscreen-card');
-  const closeFullscreenBtn = document.getElementById('close-fullscreen-btn');
-
-  if (particleCanvas && slider && sliderItems.length && fullscreenView && fullscreenCard && closeFullscreenBtn) {
-    const pCtx = particleCanvas.getContext('2d');
-    let particles = [];
-
-    const resizeParticleCanvas = () => {
-      particleCanvas.width = window.innerWidth;
-      particleCanvas.height = window.innerHeight;
-    };
-    resizeParticleCanvas();
-    window.addEventListener('resize', resizeParticleCanvas);
-
-    class Particle {
-      constructor(x, y, vx = (Math.random() - 0.5) * 2, vy = (Math.random() - 0.5) * 2) {
-        this.x = x;
-        this.y = y;
-        this.vx = vx;
-        this.vy = vy;
-        this.alpha = 1;
-        this.radius = Math.random() * 1.5 + 1;
-        this.life = Math.random() * 30 + 20;
-      }
-      update() {
-        this.x += this.vx;
-        this.y += this.vy;
-        this.alpha -= 0.05;
-        this.life -= 1;
-      }
-      draw() {
-        pCtx.beginPath();
-        pCtx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
-        pCtx.fillStyle = `rgba(0, 206, 219, ${this.alpha})`;
-        pCtx.fill();
-      }
-    }
-
-    function createCurvedParticleTrail(startX, startY, endX, endY, duration) {
-      const startTime = Date.now();
-      const midX = (startX + endX) / 2;
-      const midY = (startY + endY) / 2;
-      const dx = endX - startX;
-      const dy = endY - startY;
-      const dist = Math.sqrt(dx * dx + dy * dy);
-      const angle = Math.atan2(dy, dx);
-      const perpAngle = angle - Math.PI / 2;
-      const curveAmount = dist * 0.3;
-      const controlX = midX + Math.cos(perpAngle) * curveAmount;
-      const controlY = midY + Math.sin(perpAngle) * curveAmount;
-
-      function animateTrail() {
-        const elapsedTime = Date.now() - startTime;
-        const progress = Math.min(elapsedTime / duration, 1);
-        const pX = Math.pow(1 - progress, 2) * startX + 2 * (1 - progress) * progress * controlX + Math.pow(progress, 2) * endX;
-        const pY = Math.pow(1 - progress, 2) * startY + 2 * (1 - progress) * progress * controlY + Math.pow(progress, 2) * endY;
-
-        if (Math.random() > 0.3) {
-          const prev = particles[particles.length - 1];
-          const particleAngle = Math.atan2(pY - (prev?.y ?? pY), pX - (prev?.x ?? pX));
-          const speed = 2;
-          const vx = Math.cos(particleAngle) * speed + (Math.random() - 0.5) * 1.5;
-          const vy = Math.sin(particleAngle) * speed + (Math.random() - 0.5) * 1.5;
-          particles.push(new Particle(pX, pY, vx, vy));
-        }
-        if (progress < 1) requestAnimationFrame(animateTrail);
-      }
-      requestAnimationFrame(animateTrail);
-    }
-
-    function animateParticles() {
-      pCtx.clearRect(0, 0, particleCanvas.width, particleCanvas.height);
-      for (let i = particles.length - 1; i >= 0; i -= 1) {
-        const particle = particles[i];
-        particle.update();
-        particle.draw();
-        if (particle.alpha <= 0 || particle.life <= 0) {
-          particles.splice(i, 1);
-        }
-      }
-      requestAnimationFrame(animateParticles);
-    }
-    animateParticles();
-
-    const numItems = sliderItems.length;
-    const rotationIncrement = 360 / numItems;
-
-    let currentYRotation = 0;
-    let isDragging = false;
-    let startX;
-    let startRotation;
-    let dragDistance = 0;
-    const dragThreshold = 5;
-    let autoRotate = true;
-    let autoRotateTimeout;
-
-    const updateCardZIndexes = () => {
-      sliderItems.forEach(item => {
-        const position = parseInt(item.style.getPropertyValue('--position'), 10);
-        const itemAngle = (position - 1) * rotationIncrement;
-        let effectiveAngle = (currentYRotation + itemAngle) % 360;
-        if (effectiveAngle < 0) effectiveAngle += 360;
-
-        item.style.zIndex = (effectiveAngle > 90 && effectiveAngle < 270) ? 0 : 2;
-      });
-    };
-
-    const updateSliderRotation = () => {
-      slider.style.transform = `perspective(1500px) rotateX(-18deg) rotateY(${currentYRotation}deg)`;
-      updateCardZIndexes();
-    };
-
-    const stopAutoRotate = () => {
-      autoRotate = false;
-      clearTimeout(autoRotateTimeout);
-    };
-    const resumeAutoRotate = (delay = 5000) => {
-      clearTimeout(autoRotateTimeout);
-      autoRotateTimeout = setTimeout(() => {
-        autoRotate = true;
-      }, delay);
-    };
-
-    const handleMouseDown = (event) => {
-      stopAutoRotate();
-      isDragging = true;
-      slider.classList.add('dragging');
-      startX = (event.pageX ?? event.touches?.[0]?.pageX ?? 0);
-      startRotation = currentYRotation;
-      dragDistance = 0;
-      document.body.classList.add('grabbing');
-    };
-
-    const handleMouseMove = (event) => {
-      if (!isDragging) return;
-      const x = (event.pageX ?? event.touches?.[0]?.pageX ?? 0);
-      const walk = (x - startX) * 0.5;
-      currentYRotation = startRotation - walk;
-      dragDistance = Math.abs(walk);
-      updateSliderRotation();
-    };
-
-    const handleMouseUp = () => {
-      if (!isDragging) return;
-      isDragging = false;
-      slider.classList.remove('dragging');
-      document.body.classList.remove('grabbing');
-      resumeAutoRotate();
-    };
-
-    const zoomIn = (item) => {
-      stopAutoRotate();
-      slider.classList.add('hidden');
-      const clonedItem = item.cloneNode(true);
-      fullscreenCard.innerHTML = '';
-      fullscreenCard.appendChild(clonedItem);
-
-      const rect = item.querySelector('.service-icon-container').getBoundingClientRect();
-
-      fullscreenCard.style.left = `${rect.left - (160 - rect.width) / 2}px`;
-      fullscreenCard.style.top = `${rect.top - (200 - rect.height) / 2}px`;
-      fullscreenCard.style.width = '160px';
-      fullscreenCard.style.height = '200px';
-      fullscreenCard.style.transform = 'rotateY(0deg) translateZ(0px)';
-
-      fullscreenView.classList.add('visible');
-
-      requestAnimationFrame(() => {
-        fullscreenCard.style.left = '50%';
-        fullscreenCard.style.top = '50%';
-        fullscreenCard.style.width = '40vmax';
-        fullscreenCard.style.height = '50vmax';
-        fullscreenCard.style.transform = 'translate(-50%, -50%)';
-      });
-    };
-
-    const zoomOut = () => {
-      const endIcon = sliderItems[0]?.querySelector('.service-icon-container');
-      if (!endIcon) {
-        fullscreenView.classList.remove('visible');
-        slider.classList.remove('hidden');
-        resumeAutoRotate();
-        return;
-      }
-      const finalRect = endIcon.getBoundingClientRect();
-      fullscreenCard.style.left = `${finalRect.left - (160 - finalRect.width) / 2}px`;
-      fullscreenCard.style.top = `${finalRect.top - (200 - finalRect.height) / 2}px`;
-      fullscreenCard.style.width = '160px';
-      fullscreenCard.style.height = '200px';
-      fullscreenCard.style.transform = 'translate(0, 0)';
-
-      fullscreenView.classList.remove('visible');
-
-      setTimeout(() => {
-        slider.classList.remove('hidden');
-        resumeAutoRotate();
-      }, 50);
-    };
-
-    const anglesAreClose = (angleA, angleB, tolerance = 0.5) => {
-      const normalized = ((angleA - angleB + 540) % 360) - 180;
-      return Math.abs(normalized) < tolerance;
-    };
-
-    const handleClick = (event) => {
-      if (dragDistance > dragThreshold) {
-        event.preventDefault();
-        return;
-      }
-
-      stopAutoRotate();
-
-      const item = event.currentTarget;
-      const iconContainer = item.querySelector('.service-icon-container');
-      const startRect = iconContainer.getBoundingClientRect();
-      const startCenterX = startRect.left + startRect.width / 2;
-      const startYTop = startRect.top;
-      const startYBottom = startRect.bottom;
-      const position = parseInt(item.style.getPropertyValue('--position'), 10);
-      const targetRotation = -(position - 1) * rotationIncrement;
-
-      const emitParticleStreaks = () => {
-        const sliderRect = slider.getBoundingClientRect();
-        const iconHeight = iconContainer.offsetHeight || 90;
-        const endCenterX = sliderRect.left + sliderRect.width / 2;
-        const sliderCenterY = sliderRect.top + sliderRect.height / 2;
-        const endYTop = sliderCenterY - iconHeight / 2;
-        const endYBottom = sliderCenterY + iconHeight / 2;
-        createCurvedParticleTrail(startCenterX, startYTop, endCenterX, endYTop, 1100);
-        createCurvedParticleTrail(startCenterX, startYBottom, endCenterX, endYBottom, 1100);
-      };
-
-      if (anglesAreClose(currentYRotation, targetRotation)) {
-        emitParticleStreaks();
-        zoomIn(item);
-        return;
-      }
-
-      const handleTransitionEnd = (transitionEvent) => {
-        if (transitionEvent.target !== slider || transitionEvent.propertyName !== 'transform') {
-          return;
-        }
-        slider.removeEventListener('transitionend', handleTransitionEnd);
-        zoomIn(item);
-      };
-
-      slider.addEventListener('transitionend', handleTransitionEnd);
-
-      currentYRotation = targetRotation;
-      updateSliderRotation();
-      emitParticleStreaks();
-    };
-
-    function carouselLoop() {
-      if (autoRotate && !isDragging) {
-        currentYRotation += 0.03;
-        updateSliderRotation();
-      } else {
-        updateCardZIndexes();
-      }
-      requestAnimationFrame(carouselLoop);
-    }
-
-    slider.addEventListener('mousedown', handleMouseDown);
-    slider.addEventListener('touchstart', handleMouseDown, { passive: true });
-    document.addEventListener('mousemove', handleMouseMove);
-    document.addEventListener('touchmove', handleMouseMove, { passive: true });
-    document.addEventListener('mouseup', handleMouseUp);
-    document.addEventListener('touchend', handleMouseUp);
-    slider.addEventListener('mouseenter', stopAutoRotate);
-    slider.addEventListener('mouseleave', () => resumeAutoRotate(1000));
-    sliderItems.forEach(item => {
-      item.addEventListener('click', handleClick);
-    });
-    closeFullscreenBtn.addEventListener('click', zoomOut);
-
-    updateCardZIndexes();
-    carouselLoop();
-  }
-
-  const modal = document.getElementById('ai-suggester-modal');
-  const openBtn = document.getElementById('open-ai-modal-btn');
-  const closeBtn = document.getElementById('close-ai-modal');
-  const getRecsBtn = document.getElementById('get-recommendations-btn');
-  const businessDesc = document.getElementById('business-description');
-  const resultsContainer = document.getElementById('recommendations-result');
-
-  if (modal && openBtn && closeBtn && getRecsBtn && businessDesc && resultsContainer) {
-    const services = [
-      'Mobile Payments', 'Smart Routing', 'Invoicing', 'Recurring Billing',
-      'Secure Tokenization', 'Detailed Reporting', 'Automation', 'ACH Payments',
-      'Fraud Prevention', 'Global Payments'
-    ];
-
-    openBtn.addEventListener('click', () => {
-      modal.classList.remove('hidden');
-      modal.classList.add('flex');
-    });
-    closeBtn.addEventListener('click', () => modal.classList.add('hidden'));
-    modal.addEventListener('click', (event) => {
-      if (event.target === modal) {
-        modal.classList.add('hidden');
-      }
-    });
-
-    getRecsBtn.addEventListener('click', async () => {
-      const description = businessDesc.value.trim();
-      if (!description) {
-        alert('Please describe your business first.');
-        return;
-      }
-
-      toggleLoading(true);
-
-      try {
-        const recommendations = await getAiRecommendations(description);
-        renderRecommendations(recommendations);
-      } catch (error) {
-        console.error('Error getting recommendations:', error);
-        resultsContainer.innerHTML = `<p class="text-red-400">Sorry, something went wrong. Please try again later.</p>`;
-      } finally {
-        toggleLoading(false);
-      }
-    });
-
-    function toggleLoading(isLoading) {
-      const btnText = getRecsBtn.querySelector('.btn-text');
-      const loader = getRecsBtn.querySelector('.loader');
-      if (isLoading) {
-        getRecsBtn.disabled = true;
-        btnText.textContent = 'Analyzing...';
-        loader.classList.remove('hidden');
-      } else {
-        getRecsBtn.disabled = false;
-        btnText.textContent = 'Get Recommendations';
-        loader.classList.add('hidden');
-      }
-    }
-
-    function renderRecommendations(recs) {
-      if (!recs || !recs.length) {
-        resultsContainer.innerHTML = `<p class="text-slate-400">No specific recommendations found. Try describing your business in more detail.</p>`;
-        return;
-      }
-
-      resultsContainer.innerHTML = '<h4 class="font-bold text-lg mb-2 text-brand-teal">Recommended For You:</h4>';
-      const list = document.createElement('ul');
-      list.className = 'space-y-3';
-      recs.forEach(rec => {
-        const li = document.createElement('li');
-        li.className = 'bg-[#2a2a2a] p-3 rounded-lg border border-slate-700';
-        li.innerHTML = `
-            <p class="font-bold text-white">${rec.serviceName}</p>
-            <p class="text-slate-300 text-sm">${rec.reason}</p>
-        `;
-        list.appendChild(li);
-      });
-      resultsContainer.appendChild(list);
-    }
-
-    async function getAiRecommendations(businessDescription) {
-      const apiKey = '';
-      const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-05-20:generateContent?key=${apiKey}`;
-
-      const systemPrompt = `You are an expert business consultant specializing in payment processing solutions. Your goal is to recommend the most relevant payment services for a business based on its description. You must choose from the following list of available services: ${services.join(', ')}.`;
-
-      const userQuery = `Here is the business description: "${businessDescription}". Based on this, which services do you recommend?`;
-
-      const payload = {
-          systemInstruction: { parts: [{ text: systemPrompt }] },
-          contents: [{ parts: [{ text: userQuery }] }],
-          generationConfig: {
-              responseMimeType: "application/json",
-              responseSchema: {
-                  type: "ARRAY",
-                  items: {
-                      type: "OBJECT",
-                      properties: {
-                          "serviceName": { "type": "STRING" },
-                          "reason": { "type": "STRING" }
-                      },
-                      required: ["serviceName", "reason"]
-                  }
-              }
-          }
-      };
-
-      let response;
-      let delay = 1000;
-      for (let attempt = 0; attempt < 5; attempt += 1) {
-          try {
-              response = await fetch(apiUrl, {
-                  method: 'POST',
-                  headers: { 'Content-Type': 'application/json' },
-                  body: JSON.stringify(payload)
-              });
-
-              if (response.status === 429) {
-                  await new Promise(resolve => setTimeout(resolve, delay));
-                  delay *= 2;
-                  continue;
-              }
-
-              if (!response.ok) {
-                  throw new Error(`API request failed with status ${response.status}`);
-              }
-              break;
-          } catch (error) {
-              if (attempt === 4) throw error;
-          }
-      }
-
-      const result = await response.json();
-
-      const candidate = result.candidates?.[0];
-      if (candidate && candidate.content?.parts?.[0]?.text) {
-          try {
-              return JSON.parse(candidate.content.parts[0].text);
-          } catch (e) {
-              console.error("Failed to parse JSON response from AI", e);
-              throw new Error("Invalid format received from AI.");
-          }
-      } else {
-          console.error("Unexpected API response structure:", result);
-          throw new Error("Could not get a valid response from the AI.");
-      }
-    }
-  }
-  const headingTexts = { "integrations-old": "Integrate with Your Favorite Tools" }; // Old logic, can be removed or updated
-  const headingObserver = new IntersectionObserver((entries, observer) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        const heading = entry.target;
-        const sectionId = heading.closest('section').id;
-        const text = headingTexts[sectionId];
-        if (text && !heading.dataset.animated) {
-          heading.dataset.animated = 'true';
-          typeWriter(heading, text, 75);
-          observer.unobserve(heading);
-        }
-      }
-    });
-  }, { threshold: 0.8 });
-  document.querySelectorAll('.animate-on-scroll').forEach(el => headingObserver.observe(el));
-
-  const askFaqBtn = document.getElementById('ask-faq');
-  const faqQuestionInput = document.getElementById('faq-question');
-  const faqAnswerContainer = document.getElementById('faq-answer');
-
-  const createFaqInlineNodes = (text) => {
-    const fragment = document.createDocumentFragment();
-    if (!text) return fragment;
-    const boldRegex = /\*\*(.*?)\*\*/g;
-    let lastIndex = 0;
-    let match;
-    while ((match = boldRegex.exec(text)) !== null) {
-      if (match.index > lastIndex) {
-        fragment.appendChild(document.createTextNode(text.slice(lastIndex, match.index)));
-      }
-      const strong = document.createElement('strong');
-      strong.textContent = match[1];
-      fragment.appendChild(strong);
-      lastIndex = boldRegex.lastIndex;
-    }
-    if (lastIndex < text.length) {
-      fragment.appendChild(document.createTextNode(text.slice(lastIndex)));
-    }
-    return fragment;
-  };
-
-  const sanitizeFaqReply = (reply) => {
-    if (typeof reply !== 'string') return [];
-    const lines = reply.split(/\r?\n/);
-    const nodes = [];
-    let listEl = null;
-    let paragraphBuffer = [];
-
-    const flushList = () => {
-      if (listEl) {
-        nodes.push(listEl);
-        listEl = null;
-      }
-    };
-
-    const flushParagraph = () => {
-      if (!paragraphBuffer.length) return;
-      const paragraph = document.createElement('p');
-      paragraph.appendChild(createFaqInlineNodes(paragraphBuffer.join(' ')));
-      nodes.push(paragraph);
-      paragraphBuffer = [];
-    };
-
-    lines.forEach((line) => {
-      const trimmed = line.trim();
-      if (!trimmed) {
-        flushParagraph();
-        flushList();
-        return;
-      }
-      const bulletMatch = trimmed.match(/^[-*] (.+)$/);
-      if (bulletMatch) {
-        flushParagraph();
-        if (!listEl) {
-          listEl = document.createElement('ul');
-          listEl.className = 'list-disc pl-5 space-y-2';
-        }
-        const li = document.createElement('li');
-        li.appendChild(createFaqInlineNodes(bulletMatch[1].trim()));
-        listEl.appendChild(li);
-      } else {
-        flushList();
-        paragraphBuffer.push(line.trim());
-      }
-    });
-
-    flushParagraph();
-    flushList();
-    return nodes;
-  };
-
-  const handleFaqSubmit = async () => {
-    const question = faqQuestionInput.value.trim();
-    if (!question) return;
-    faqAnswerContainer.classList.remove('hidden');
-    askFaqBtn.disabled = true;
-    askFaqBtn.innerHTML = '<span class="loader"></span>';
-    faqAnswerContainer.textContent = 'Thinking...';
-    try {
-      const response = await fetch('/.netlify/functions/gemini-chat', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ prompt: question, history: [] })
-      });
-      if (!response.ok) throw new Error('API request failed');
-      const result = await response.json();
-      if (result.reply) {
-        const sanitizedNodes = sanitizeFaqReply(result.reply);
-        if (sanitizedNodes.length) {
-          faqAnswerContainer.replaceChildren(...sanitizedNodes);
-        } else {
-          faqAnswerContainer.textContent = 'Sorry, I could not find an answer to your question.';
-        }
-      } else {
-        faqAnswerContainer.textContent = 'Sorry, I could not find an answer to your question.';
-      }
-    } catch (err) {
-      console.error('Error fetching AI response:', err);
-      faqAnswerContainer.textContent = 'Sorry, something went wrong. Please try again later.';
-    } finally {
-      askFaqBtn.disabled = false;
-      askFaqBtn.innerHTML = '<i data-lucide="arrow-up" class="h-5 w-5"></i>';
-      if (window.lucide) lucide.createIcons();
-    }
-  };
-  askFaqBtn.addEventListener('click', handleFaqSubmit);
-  faqQuestionInput.addEventListener('keypress', (e) => { if (e.key === 'Enter') handleFaqSubmit(); });
-
-  // --- APPLICATION FORM LOGIC ---
-  const applyForm = document.getElementById('apply-form');
-  if (applyForm) {
-    const states = ["Alabama","Alaska","Arizona","Arkansas","California","Colorado","Connecticut","Delaware","District of Columbia","Florida","Georgia","Hawaii","Idaho","Illinois","Indiana","Iowa","Kansas","Kentucky","Louisiana","Maine","Maryland","Massachusetts","Michigan","Minnesota","Mississippi","Missouri","Montana","Nebraska","Nevada","New Hampshire","New Jersey","New Mexico","New York","North Carolina","North Dakota","Ohio","Oklahoma","Oregon","Pennsylvania","Rhode Island","South Carolina","South Dakota","Tennessee","Texas","Utah","Vermont","Virginia","Washington","West Virginia","Wisconsin","Wyoming"];
-    const stateSelect = document.querySelector('select[name="state"]');
-    if (stateSelect) { states.forEach(s => { const opt=document.createElement('option'); opt.textContent=opt.value=s; stateSelect.appendChild(opt); }); }
-
-    const out = document.getElementById('apply-out');
-    const LS_KEY = 'mh_apply_draft';
-    
-    function saveDraft(){ const data = Object.fromEntries(new FormData(applyForm).entries()); localStorage.setItem(LS_KEY, JSON.stringify(data)); }
-    function loadDraft(){ try { const d = JSON.parse(localStorage.getItem(LS_KEY)||'{}'); for (const k in d){ const el = applyForm.elements[k]; if (!el) continue; if (el.type==='checkbox'){ el.checked = !!d[k]; } else { el.value = d[k]; } } } catch(e){} }
-    
-    applyForm.addEventListener('input', saveDraft);
-    loadDraft();
-
-    function getUTM(){
-      const p = new URLSearchParams(location.search);
-      return {source:p.get('utm_source')||'',medium:p.get('utm_medium')||'',campaign:p.get('utm_campaign')||'',term:p.get('utm_term')||'',content:p.get('utm_content')||'',ref:document.referrer||''};
-    }
-
-    applyForm.addEventListener('submit', async (e) => {
-      e.preventDefault();
-      out.textContent = 'Submitting…';
-      try {
-        const data = Object.fromEntries(new FormData(applyForm).entries());
-        ['svcCredit','svcAch','svcCash','valEncryption','valInvoice','valLevel3','valMobile','valVault'].forEach(k => { data[k] = !!applyForm.elements[k].checked; });
-        data.utm = getUTM();
-
-        const res = await fetch('/.netlify/functions/submit-application', {
-          method: 'POST',
-          headers: {'Content-Type':'application/json'},
-          body: JSON.stringify(data)
-        });
-        if (!res.ok) throw new Error('Request failed');
-        out.textContent = 'Thanks — we emailed you next steps and sent your application to our team.';
-        localStorage.removeItem(LS_KEY);
-        applyForm.reset();
-      } catch (err) {
-        console.error(err);
-        out.textContent = 'Something went wrong. Please try again or email hello@merchant.haus.';
-      }
-    });
-  }
-
-
-  function typeWriter(element, text, speed, callback) {
-    let i = 0;
-    if (!element) return;
-    element.innerHTML = '';
-    const typingInterval = setInterval(() => {
-      if (i < text.length) {
-        element.innerHTML = text.substring(0, i + 1) + '<span class="cursor"></span>';
-        i++;
-      } else {
-        clearInterval(typingInterval);
-        element.innerHTML = text;
-        if (callback) callback();
-      }
-    }, speed);
-  }
-});
-</script>
-<!-- ================= APPLICATION INTERACTIVITY SCRIPT END ================= -->
-
-    <!-- Footer -->
-    <!-- ================= FOOTER SECTION START ================= -->
-    <!-- Multi-column footer with contact details, navigation, and legal links -->
-    <footer class="border-t border-slate-800 py-8 mt-8">
+<footer class="border-t border-slate-800 py-8 mt-8">
         <div class="max-w-7xl mx-auto px-4 grid sm:grid-cols-2 lg:grid-cols-4 gap-8 text-sm" >
             <div class="space-y-4">
                 <a href="/index.html" class="flex items-center gap-3">
@@ -1770,30 +938,346 @@ document.addEventListener('DOMContentLoaded', () => {
             © <span id="year"></span> Merchant Haus. All rights reserved.
         </div>
     </footer>
-    <!-- ================= FOOTER SECTION END ================= -->
-
-    <!-- Back to Top Button -->
-    <!-- ================= BACK TO TOP CONTROL START ================= -->
-    <!-- Floating action button returning users to page top -->
+    
     <button id="back-to-top" class="fixed bottom-6 right-6 bg-brand-crimson text-white p-3 rounded-full shadow-lg opacity-0 invisible transition-all duration-300 z-50 hover:bg-opacity-90">
         <i data-lucide="arrow-up" class="h-6 w-6"></i>
         <span class="sr-only">Back to top</span>
     </button>
-    <!-- ================= BACK TO TOP CONTROL END ================= -->
 
 
-    <!-- ================= GLOBAL LAYOUT SCRIPTS START ================= -->
-    <!-- External signup panel logic plus helpers for navigation, logos, and UI polish -->
     <script src="/assets/signup-panel.js" defer></script>
-    <script type="module" src="/assets/banner-carousel.js"></script>
-
+    
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            if (window.lucide) lucide.createIcons();
+            // --- CAROUSEL AND PARTICLE SCRIPT ---
+            const serviceDetails = {
+                "Mobile Payments": "Turn any smartphone or tablet into a secure point-of-sale. Accept chip, tap, and mobile-wallet payments without extra hardware. Collect Checkout adds Apple Pay and Google Pay for a seamless experience, while mobile SDKs let you build custom apps that stay PCI-compliant. Sell anywhere with real-time reporting and centralized control.",
+                "Smart Routing": "Cut costs and boost reliability with Smart Routing. Every transaction is automatically sent to the most cost-effective or available processor, balancing volume across accounts to reduce fees and avoid downtime. It’s intelligent optimization that keeps payments fast, stable, and cost-efficient—without manual oversight.",
+                "Invoicing": "Send professional invoices in just a few clicks. Each email includes a secure payment link so customers can pay instantly by card or ACH in their preferred currency. Track partial or full payments in your dashboard and enjoy automated record-keeping that keeps your billing simple, organized, and paper-free.",
+                "Recurring Billing": "Put subscriptions on autopilot. Set up billing plans once and let the system handle scheduled payments securely. The Customer Vault stores card data safely, and expired cards update automatically—no customer follow-up required. Enjoy predictable revenue and effortless account management for memberships and recurring services.",
+                "Secure Tokenization": "Protect payment data with advanced tokenization. Sensitive card or bank details are replaced with encrypted tokens stored in a PCI-certified vault, keeping them off your systems. Dynamic network tokens automatically refresh when cards are reissued, reducing declines, chargebacks, and fraud while simplifying compliance.",
+                "Detailed Reporting": "Gain full visibility into your payments. Detailed Reporting organizes transactions by processor, card type, date, or batch. Monitor authorizations, refunds, and chargebacks in one clean dashboard. Export custom reports for accounting or use real-time insights to optimize performance and uncover growth opportunities.",
+                "ACH Payments": "Accept direct bank transfers quickly and securely. ACH Payments enable low-cost electronic checks for single or recurring transactions. Manage sales, refunds, and voids through the Virtual Terminal, with encrypted, NACHA-compliant processing. Get reliable settlements in a few business days—ideal for high-value or recurring payments.",
+                "Fraud Prevention": "Stay secure with AI-driven fraud protection. Powered by Kount, every transaction is scored in real time to block suspicious activity before it happens. Custom rules, velocity checks, and tokenization prevent card-testing and stop fraudsters—while letting genuine customers pay without friction.",
+                "Hosted Checkout": "Start accepting online payments instantly. Hosted Checkout provides a fully PCI-compliant payment page that runs on NMI’s secure servers. Customize it with your brand and link it to your website—no coding required. A quick, safe way for small merchants and startups to go live fast.",
+                "Automatic Card Updater": "Keep recurring payments uninterrupted. Automatic Card Updater connects directly with card networks to refresh expired or reissued card details. Reduce declines, retain customers, and maintain steady subscription revenue—without chasing updated payment info. Seamless continuity, built right into your billing system."
+            };
+
+            const particleCanvas = document.getElementById('particle-canvas');
+            const pCtx = particleCanvas.getContext('2d');
+            let particles = [];
+            
+            function resizeParticleCanvas() {
+                particleCanvas.width = window.innerWidth;
+                particleCanvas.height = window.innerHeight;
+            }
+            resizeParticleCanvas();
+            window.addEventListener('resize', resizeParticleCanvas);
+
+            class Particle {
+                constructor(x, y, vx = (Math.random() - 0.5) * 2, vy = (Math.random() - 0.5) * 2) {
+                    this.x = x; this.y = y; this.vx = vx; this.vy = vy;
+                    this.alpha = 1; this.radius = Math.random() * 2 + 1.5;
+                    this.life = Math.random() * 50 + 40;
+                }
+                update() {
+                    this.x += this.vx; this.y += this.vy;
+                    this.alpha -= 0.03;
+                    this.life--;
+                }
+                draw() {
+                    pCtx.beginPath();
+                    pCtx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+                    pCtx.fillStyle = `rgba(0, 206, 219, ${this.alpha})`;
+                    pCtx.fill();
+                }
+            }
+            
+            function createCurvedParticleTrail(startX, startY, endX, endY, duration) {
+                const startTime = Date.now();
+                const midX = (startX + endX) / 2; const midY = (startY + endY) / 2;
+                const dx = endX - startX; const dy = endY - startY;
+                const dist = Math.sqrt(dx*dx + dy*dy); const angle = Math.atan2(dy, dx);
+                const perpAngle = angle - Math.PI / 2; const curveAmount = dist * 0.3;
+                const controlX = midX + Math.cos(perpAngle) * curveAmount;
+                const controlY = midY + Math.sin(perpAngle) * curveAmount;
+
+                function animateTrail() {
+                    const elapsedTime = Date.now() - startTime;
+                    const progress = Math.min(elapsedTime / duration, 1);
+                    const pX = Math.pow(1 - progress, 2) * startX + 2 * (1 - progress) * progress * controlX + Math.pow(progress, 2) * endX;
+                    const pY = Math.pow(1 - progress, 2) * startY + 2 * (1 - progress) * progress * controlY + Math.pow(progress, 2) * endY;
+                    
+                    if (Math.random() > 0.1) {
+                        const particleAngle = Math.atan2(pY - (particles[particles.length-1]?.y || pY), pX - (particles[particles.length-1]?.x || pX));
+                        const speed = 2;
+                        const vx = Math.cos(particleAngle) * speed + (Math.random() - 0.5) * 1.5;
+                        const vy = Math.sin(particleAngle) * speed + (Math.random() - 0.5) * 1.5;
+                        particles.push(new Particle(pX, pY, vx, vy));
+                    }
+                    if (progress < 1) requestAnimationFrame(animateTrail);
+                }
+                requestAnimationFrame(animateTrail);
+            }
+
+            function animateParticles() {
+                pCtx.clearRect(0, 0, particleCanvas.width, particleCanvas.height);
+                for (let i = particles.length - 1; i >= 0; i--) {
+                    const p = particles[i]; p.update(); p.draw();
+                    if (p.alpha <= 0 || p.life <= 0) particles.splice(i, 1);
+                }
+                requestAnimationFrame(animateParticles);
+            }
+            animateParticles();
+
+            const frontSlider = document.getElementById('front-slider');
+            const backSlider = document.getElementById('back-slider');
+            const allItems = [];
+
+            const services = [
+                { title: "Mobile Payments", icon: "smartphone" },
+                { title: "Smart Routing", icon: "shuffle" },
+                { title: "Invoicing", icon: "file-text" },
+                { title: "Recurring Billing", icon: "repeat" },
+                { title: "Secure Tokenization", icon: "lock" },
+                { title: "Detailed Reporting", icon: "bar-chart-2" },
+                { title: "ACH Payments", icon: "landmark" },
+                { title: "Fraud Prevention", icon: "shield-alert" },
+                { title: "Hosted Checkout", icon: "layout-template" },
+                { title: "Automatic Card Updater", icon: "refresh-cw" }
+            ];
+
+            services.forEach((service, i) => {
+                const item = document.createElement('div');
+                item.className = 'item';
+                item.style.setProperty('--position', i + 1);
+                item.dataset.pos = i + 1;
+                item.innerHTML = `
+                    <div class="service-card">
+                        <div class="service-icon-container">
+                            <i data-lucide="${service.icon}" class="service-icon"></i>
+                        </div>
+                    </div>
+                    <div class="service-title">${service.title}</div>
+                `;
+                allItems.push(item);
+            });
+            
+            const fullscreenView = document.getElementById('fullscreen-view');
+            const fullscreenCard = document.getElementById('fullscreen-card');
+            const closeFullscreenBtn = document.getElementById('close-fullscreen-btn');
+            const numItems = allItems.length;
+            const rotationIncrement = 360 / numItems;
+
+            let currentYRotation = 0;
+            let isDragging = false;
+            let startX, startRotation, dragDistance = 0;
+            let dragThreshold = 5; 
+            let autoRotate = true;
+            let autoRotateTimeout;
+
+            function updateSliderRotation() {
+                const rotationStyle = `perspective(1500px) rotateX(-18deg) rotateY(${currentYRotation}deg)`;
+                frontSlider.style.transform = rotationStyle;
+                backSlider.style.transform = rotationStyle;
+                updateCardZIndexes();
+            };
+
+            function updateCardZIndexes() {
+                allItems.forEach(item => {
+                    const position = parseInt(item.style.getPropertyValue('--position'));
+                    const itemAngle = (position - 1) * rotationIncrement;
+                    let effectiveAngle = (currentYRotation + itemAngle) % 360;
+                    if (effectiveAngle < 0) effectiveAngle += 360;
+
+                    if (effectiveAngle > 90 && effectiveAngle < 270) {
+                        if (item.parentElement !== backSlider) {
+                            backSlider.appendChild(item);
+                        }
+                    } else {
+                        if (item.parentElement !== frontSlider) {
+                            frontSlider.appendChild(item);
+                        }
+                    }
+                });
+            };
+
+            allItems.forEach(item => frontSlider.appendChild(item));
+            updateCardZIndexes();
+            if (window.lucide) {
+              lucide.createIcons();
+            }
+
+            const stopAutoRotate = () => {
+                autoRotate = false;
+                clearTimeout(autoRotateTimeout);
+            };
+            const resumeAutoRotate = (delay = 5000) => {
+                clearTimeout(autoRotateTimeout);
+                autoRotateTimeout = setTimeout(() => { autoRotate = true; }, delay);
+            };
+
+            const handleMouseDown = (e) => {
+                stopAutoRotate(); isDragging = true;
+                frontSlider.classList.add('dragging');
+                backSlider.classList.add('dragging');
+                startX = e.pageX || e.touches[0].pageX;
+                startRotation = currentYRotation;
+                dragDistance = 0;
+                document.body.classList.add('grabbing');
+            };
+            const handleMouseMove = (e) => {
+                if (!isDragging) return;
+                const x = e.pageX || e.touches[0].pageX;
+                const walk = (x - startX) * 0.5; 
+                currentYRotation = startRotation - walk;
+                dragDistance = Math.abs(walk);
+                updateSliderRotation();
+            };
+            const handleMouseUp = () => {
+                if (!isDragging) return;
+                isDragging = false;
+                frontSlider.classList.remove('dragging');
+                backSlider.classList.remove('dragging');
+                document.body.classList.remove('grabbing');
+                resumeAutoRotate();
+            };
+
+            function typewriter(element, text, speed, callback) {
+                let i = 0;
+                element.innerHTML = "";
+                const typingInterval = setInterval(() => {
+                    if (i < text.length) {
+                        element.innerHTML += text.charAt(i);
+                        i++;
+                    } else {
+                        clearInterval(typingInterval);
+                        element.style.borderRight = 'none';
+                        if(callback) callback();
+                    }
+                }, speed);
+            }
+            
+            const handleClick = (e) => {
+                if (dragDistance > dragThreshold) { e.preventDefault(); return; }
+                const item = e.currentTarget;
+                const iconContainer = item.querySelector('.service-icon-container');
+                const startRect = iconContainer.getBoundingClientRect();
+                const startX = startRect.left + startRect.width / 2;
+                const startYTop = startRect.top; const startYBottom = startRect.bottom;
+                const position = parseInt(item.style.getPropertyValue('--position'));
+                const targetRotation = -(position - 1) * rotationIncrement;
+                
+                if (Math.abs(currentYRotation - targetRotation) % 360 < 1) {
+                    zoomIn(item);
+                    return;
+                }
+
+                currentYRotation = targetRotation;
+                updateSliderRotation();
+                
+                const transitionHandler = () => zoomIn(item);
+                frontSlider.addEventListener('transitionend', transitionHandler, { once: true });
+                
+                setTimeout(() => {
+                    const frontCard = frontSlider.querySelector('.item[data-pos="' + position + '"]');
+                    if (!frontCard) return;
+                    
+                    setTimeout(() => {
+                         const endIcon = frontCard.querySelector('.service-icon-container'); 
+                         const endRect = endIcon.getBoundingClientRect();
+                         const endX = endRect.left + endRect.width / 2;
+                         const endY = endRect.bottom;
+                         createCurvedParticleTrail(startX, startYTop, endX, endY, 1700);
+                         createCurvedParticleTrail(startX, startYBottom, endX, endY, 1700);
+                    }, 1800);
+
+                }, 100);
+            };
+
+            const zoomIn = (item) => {
+                 stopAutoRotate();
+                 frontSlider.classList.add('hidden');
+                 backSlider.classList.add('hidden');
+                 
+                 const pos = item.dataset.pos;
+                 const service = services[pos - 1];
+                 
+                 fullscreenCard.style.backgroundImage = `url('/assets/img/card${pos}.png')`;
+                 fullscreenCard.innerHTML = '';
+                 
+                 const contentContainer = document.createElement('div');
+                 contentContainer.className = 'fullscreen-content';
+                 
+                 const iconClone = item.querySelector('.service-icon').cloneNode(true);
+                 
+                 const descriptionEl = document.createElement('div');
+                 descriptionEl.className = 'fullscreen-description';
+                 descriptionEl.innerHTML = `<p>${serviceDetails[service.title]}</p>`;
+
+                 contentContainer.appendChild(iconClone);
+                 contentContainer.appendChild(descriptionEl);
+                 fullscreenCard.appendChild(contentContainer);
+                 
+                 if (window.lucide) {
+                    const svgs = contentContainer.querySelectorAll('[data-lucide]');
+                    if (svgs.length > 0) {
+                        lucide.createIcons({
+                            nodes: Array.from(svgs)
+                        });
+                    }
+                 }
+
+                 fullscreenView.classList.add('visible');
+                 setTimeout(() => {
+                    fullscreenCard.classList.add('visible');
+                    const paragraph = descriptionEl.querySelector('p');
+                    if (paragraph) {
+                        const text = paragraph.textContent;
+                        paragraph.textContent = '';
+                        typewriter(paragraph, text, 20);
+                    }
+                 }, 50);
+            };
+
+            const zoomOut = () => {
+                 fullscreenCard.classList.remove('visible');
+                 fullscreenView.classList.remove('visible');
+                 setTimeout(() => {
+                    frontSlider.classList.remove('hidden');
+                    backSlider.classList.remove('hidden');
+                    resumeAutoRotate();
+                 }, 1000);
+            };
+            
+            function carouselLoop() {
+                if(autoRotate && !isDragging) {
+                    currentYRotation -= 0.08;
+                    updateSliderRotation();
+                }
+                requestAnimationFrame(carouselLoop);
+            }
+            
+            const banner = document.querySelector('.banner');
+            banner.addEventListener('mousedown', handleMouseDown);
+            banner.addEventListener('touchstart', handleMouseDown, { passive: true });
+            document.addEventListener('mousemove', handleMouseMove);
+            document.addEventListener('touchmove', handleMouseMove, { passive: true });
+            document.addEventListener('mouseup', handleMouseUp);
+            document.addEventListener('touchend', handleMouseUp);
+            banner.addEventListener('mouseenter', stopAutoRotate);
+            banner.addEventListener('mouseleave', () => resumeAutoRotate(1000));
+            allItems.forEach(item => { item.addEventListener('click', handleClick); });
+            closeFullscreenBtn.addEventListener('click', zoomOut);
+            
+            updateCardZIndexes();
+            carouselLoop();
+
+
+            // --- Main Page Scripts ---
             document.getElementById('year').textContent = new Date().getFullYear();
 
-            const logoImagePath = "\/public\/assets\/images\/Shield.png";
-            // --- Animated Logo Injection ---
+             const logoImagePath = "/assets/img/model.png"; 
             const logoSVG = (id, tagline = true, shimmer = true) => {
                 const letters = ['M','e','r','c','h','a','n','t','H','a','u','s'];
                 let letterTags = '';
@@ -1803,21 +1287,11 @@ document.addEventListener('DOMContentLoaded', () => {
                 });
 
                 return `
-                <svg viewBox="0 0 600 100" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%">
+                <svg viewBox="0 0 450 100" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%">
                     <defs>
-                        <linearGradient id="shimmer-${id}" gradientUnits="userSpaceOnUse" x1="120" y1="0" x2="560" y2="0">
+                        <linearGradient id="shimmer-${id}" gradientUnits="userSpaceOnUse" x1="120" y1="0" x2="420" y2="0">
                             <stop offset="0%" stop-color="#DC143C" />
-                            <stop offset="45%" stop-color="#DC143C">
-                                ${shimmer ? `<animate attributeName="stop-color" values="#DC143C; #FFC0CB; #DC143C" keyTimes="0; 0.5; 1" dur="2s" begin="1.5s" fill="freeze" repeatCount="1"/>` : ''}
-                            </stop>
-                            <stop offset="50%" stop-color="#DC143C">
-                                ${shimmer ? `<animate attributeName="stop-color" values="#DC143C; #FFFFFF; #DC143C" keyTimes="0; 0.5; 1" dur="2s" begin="1.5s" fill="freeze" repeatCount="1"/>` : ''}
-                            </stop>
-                            <stop offset="55%" stop-color="#DC143C">
-                                ${shimmer ? `<animate attributeName="stop-color" values="#DC143C; #FFC0CB; #DC143C" keyTimes="0; 0.5; 1" dur="2s" begin="1.5s" fill="freeze" repeatCount="1"/>` : ''}
-                            </stop>
                             <stop offset="100%" stop-color="#DC143C" />
-                            ${shimmer ? `<animateTransform attributeName="transform" type="translate" from="-600 0" to="600 0" dur="2s" begin="1.5s" fill="freeze" repeatCount="1"/>` : ''}
                         </linearGradient>
                         <style>
                             .mh-text-${id} { font-family: 'Ubuntu', sans-serif; font-size: 50px; font-weight: 700; fill: url(#shimmer-${id}); }
@@ -1837,17 +1311,12 @@ document.addEventListener('DOMContentLoaded', () => {
                 </svg>`;
             };
             
-            // Only select and inject logos if the placeholder exists on the current page
             if (document.querySelector('[data-mh-logo-header]')) {
                 document.querySelector('[data-mh-logo-header]').innerHTML = logoSVG('header', false, false);
-            }
-            if (document.querySelector('[data-mh-logo-hero]')) {
-                document.querySelector('[data-mh-logo-hero]').innerHTML = logoSVG('hero', true, true);
             }
             if (document.querySelector('[data-mh-logo-footer]')) {
                  document.querySelector('[data-mh-logo-footer]').innerHTML = logoSVG('footer', true, false);
             }
-
 
             const setupCollapsibleMenu = (toggleId, menuId) => {
                 const toggle = document.getElementById(toggleId);
@@ -1876,23 +1345,10 @@ document.addEventListener('DOMContentLoaded', () => {
                         closeMenu();
                     }
                 });
-
-                document.addEventListener('click', (event) => {
-                    if (!menu.classList.contains('hidden') && !menu.contains(event.target) && !toggle.contains(event.target)) {
-                        closeMenu();
-                    }
-                });
-
-                menu.querySelectorAll('a').forEach(link => {
-                    link.addEventListener('click', closeMenu);
-                });
             };
-
             setupCollapsibleMenu('footer-integrations-toggle', 'footer-integrations-menu');
             setupCollapsibleMenu('mobile-integrations-toggle', 'mobile-integrations-menu');
-
-
-            // --- Mobile Menu ---
+            
             const mobileMenuButton = document.getElementById('mobile-menu-button');
             const mobileMenu = document.getElementById('mobile-menu');
             if(mobileMenuButton && mobileMenu) {
@@ -1905,135 +1361,8 @@ document.addEventListener('DOMContentLoaded', () => {
                         mobileMenu.classList.add('hidden');
                     }
                 });
-                mobileMenu.querySelectorAll('a').forEach(link => {
-                    link.addEventListener('click', () => mobileMenu.classList.add('hidden'));
-                });
             }
 
-            // --- Stars Canvas Logic (if canvas exists) ---
-            const canvas = document.getElementById('mh-stars');
-            if (canvas) {
-                const ctx = canvas.getContext('2d');
-                let stars;
-                let animationFrameId;
-                const starColors = [
-                    'rgba(255, 255, 255,', 'rgba(230, 230, 250,',
-                    'rgba(255, 250, 205,', 'rgba(240, 255, 255,'
-                ];
-
-                const setupStars = () => {
-                    const parent = canvas.parentElement;
-                    canvas.width = parent.offsetWidth;
-                    canvas.height = parent.offsetHeight;
-                    stars = [];
-                    const numStars = Math.floor((canvas.width * canvas.height) / 8000);
-                    for (let i = 0; i < numStars; i++) {
-                        stars.push({
-                            x: Math.random() * canvas.width,
-                            y: Math.random() * canvas.height,
-                            radius: Math.random() * 1.2 + 0.3,
-                            alpha: Math.random(),
-                            dAlpha: Math.random() * 0.02 - 0.01,
-                            color: starColors[Math.floor(Math.random() * starColors.length)],
-                            vx: (Math.random() - 0.5) * 0.1,
-                            vy: (Math.random() - 0.5) * 0.1
-                        });
-                    }
-                };
-
-                const drawStars = () => {
-                    if(!ctx) return;
-                    ctx.clearRect(0, 0, canvas.width, canvas.height);
-                    stars.forEach(star => {
-                        star.x += star.vx;
-                        star.y += star.vy;
-                        if (star.x < 0) star.x = canvas.width;
-                        if (star.x > canvas.width) star.x = 0;
-                        if (star.y < 0) star.y = canvas.height;
-                        if (star.y > canvas.height) star.y = 0;
-
-                        star.alpha += star.dAlpha;
-                        if (star.alpha <= 0.1 || star.alpha >= 1) { star.dAlpha *= -1; }
-                        
-                        ctx.beginPath();
-                        ctx.arc(star.x, star.y, star.radius, 0, Math.PI * 2);
-                        ctx.fillStyle = star.color + star.alpha + ')';
-                        ctx.fill();
-                    });
-                    animationFrameId = requestAnimationFrame(drawStars);
-                };
-                
-                let resizeTimeout;
-                const initCanvas = () => {
-                    cancelAnimationFrame(animationFrameId);
-                    clearTimeout(resizeTimeout);
-                    resizeTimeout = setTimeout(() => {
-                        setupStars();
-                        drawStars();
-                    }, 100);
-                };
-
-                initCanvas();
-                window.addEventListener('resize', initCanvas);
-            }
-
-            // --- Sequential Typewriter Animation on Scroll (if steps exist) ---
-            const steps = [
-                { id: 'step-1', text: "Fill out our simple application form. Our team will review your details and get you approved quickly." },
-                { id: 'step-2', text: "Once approved, we'll provide you with API keys to easily connect MerchantHaus as your payment provider in your Shopify admin." },
-                { id: 'step-3', text: "That's it! You're ready to accept payments securely and affordably, with all your transaction data synced to your MerchantHaus dashboard." }
-            ];
-            
-            const stepElements = document.querySelectorAll('.step-card');
-
-            if(stepElements.length > 0) {
-                let animationQueue = Promise.resolve();
-                let animatedSteps = new Set();
-
-                const typewriter = (element, text, duration) => {
-                    return new Promise(resolve => {
-                        let i = 0;
-                        element.innerHTML = '<span class="typewriter-text"></span>';
-                        const span = element.querySelector('.typewriter-text');
-                        
-                        function type() {
-                            if (i < text.length) {
-                                span.textContent += text.charAt(i);
-                                i++;
-                                setTimeout(type, duration / text.length);
-                            } else {
-                            if (span) span.style.borderRight = 'none';
-                            resolve();
-                            }
-                        }
-                        type();
-                    });
-                };
-
-                const animateStep = (entry) => {
-                    if (entry.isIntersecting && !animatedSteps.has(entry.target.id)) {
-                        const stepConf = steps.find(s => s.id === entry.target.id);
-                        if (stepConf) {
-                            animatedSteps.add(stepConf.id);
-                            const pElement = entry.target.querySelector('p');
-                            entry.target.style.opacity = '1';
-                            entry.target.style.transform = 'translateY(0)';
-                            animationQueue = animationQueue.then(() => typewriter(pElement, stepConf.text, 2000));
-                        }
-                    }
-                };
-                
-                const observer = new IntersectionObserver((entries) => {
-                    entries.forEach(animateStep);
-                }, { threshold: 0.8 });
-
-                steps.forEach(step => {
-                    const el = document.getElementById(step.id);
-                    if (el) observer.observe(el);
-                });
-            }
-
-            // --- Back to Top Button ---
             const backToTopButton = document.getElementById('back-to-top');
             if(backToTopButton) {
                 window.addEventListener('scroll', () => {
@@ -2047,102 +1376,9 @@ document.addEventListener('DOMContentLoaded', () => {
                     window.scrollTo({ top: 0, behavior: 'smooth' });
                 });
             }
+
         });
     </script>
-    <!-- ================= GLOBAL LAYOUT SCRIPTS END ================= -->
-
-<!-- ================= CHATBOT INTEGRATION SECTION START ================= -->
-<!-- Third-party ChatBot embed and custom styling for FAQ assistant -->
-<!-- Start of ChatBot (www.chatbot.com) code -->
-<script>
-  window.__ow = window.__ow || {};
-  window.__ow.organizationId = "ded96f09-612d-4fa3-b3e8-014830167318";
-  window.__ow.template_id = "200f2913-f66f-4b3a-aa4c-349b6e62113f";
-  window.__ow.integration_name = "manual_settings";
-  window.__ow.product_name = "chatbot";   
-  ;(function(n,t,c){function i(n){return e._h?e._h.apply(null,n):e._q.push(n)}var e={_q:[],_h:null,_v:"2.0",on:function(){i(["on",c.call(arguments)])},once:function(){i(["once",c.call(arguments)])},off:function(){i(["off",c.call(arguments)])},get:function(){if(!e._h)throw new Error("[OpenWidget] You can't use getters before load.");return i(["get",c.call(arguments)])},call:function(){i(["call",c.call(arguments)])},init:function(){var n=t.createElement("script");n.async=!0,n.type="text/javascript",n.src="https://cdn.openwidget.com/openwidget.js",t.head.appendChild(n)}};!n.__ow.asyncInit&&e.init(),n.OpenWidget=n.OpenWidget||e}(window,document,[].slice))
-</script>
-<noscript>You need to <a href="https://www.chatbot.com/help/chat-widget/enable-javascript-in-your-browser/" rel="noopener nofollow">enable JavaScript</a> in order to use the AI chatbot tool powered by <a href="https://www.chatbot.com/" rel="noopener nofollow" target="_blank">ChatBot</a></noscript>
-<!-- End of ChatBot code -->
-<style>
-  #faq-answer {
-    max-height: 320px;
-    overflow-y: auto;
-    padding: 1rem;
-    background: #f8fafc;
-    border-radius: 0.5rem;
-    margin-bottom: 1rem;
-  }
-  .chat-user {
-    background: #dc143c;
-    color: #fff;
-    padding: 0.5rem 1rem;
-    border-radius: 1rem 1rem 0 1rem;
-    margin: 0.5rem 0 0.5rem auto;
-    max-width: 70%;
-    text-align: right;
-    float: right;
-    clear: both;
-    box-shadow: 0 2px 8px rgba(220,20,60,0.08);
-  }
-  .chat-bot {
-    background: #475569;
-    color: #f1f5f9;
-    padding: 0.5rem 1rem;
-    border-radius: 1rem 1rem 1rem 0;
-    margin: 0.5rem auto 0.5rem 0;
-    max-width: 70%;
-    text-align: left;
-    float: left;
-    clear: both;
-    box-shadow: 0 2px 8px rgba(71,85,105,0.08);
-  }
-</style>
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-  const input = document.getElementById('faq-question');
-  const sendBtn = document.getElementById('ask-faq');
-  const answerBox = document.getElementById('faq-answer');
-
-  function appendMessage(text, sender) {
-    const div = document.createElement('div');
-    div.className = sender === 'user' ? 'chat-user' : 'chat-bot';
-    div.textContent = text;
-    answerBox.appendChild(div);
-    answerBox.scrollTop = answerBox.scrollHeight;
-  }
-
-  function sendMessage() {
-    const text = input.value.trim();
-    if (!text) return;
-    appendMessage(text, 'user');
-    input.value = '';
-    if (!window.ChatBot || typeof window.ChatBot.call !== 'function') {
-      console.warn('ChatBot.com integration not found.');
-      appendMessage('ChatBot integration not available.', 'bot');
-      return;
-    }
-    window.ChatBot.call('send', { message: text });
-  }
-
-  input.addEventListener('keydown', function(e) {
-    if (e.key === 'Enter') {
-      sendMessage();
-    }
-  });
-  sendBtn.addEventListener('click', sendMessage);
-
-  if (window.ChatBot && typeof window.ChatBot.on === 'function') {
-    window.ChatBot.on('message', function(data) {
-      if (data && data.message) {
-        appendMessage(data.message, 'bot');
-      }
-    });
-  } else {
-    console.warn('ChatBot.com integration not found.');
-  }
-});
-</script>
-<!-- ================= CHATBOT INTEGRATION SECTION END ================= -->
 </body>
 </html>
+
