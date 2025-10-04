@@ -1,0 +1,679 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Isolated Services Carousel</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@700&family=Vollkorn:wght@400&family=Inter:wght@500&display=swap" rel="stylesheet">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Vollkorn', 'serif'],
+                        ubuntu: ['Ubuntu', 'sans-serif'],
+                        inter: ['Inter', 'sans-serif']
+                    },
+                    colors: {
+                        'brand-crimson': '#DC143C',
+                        'brand-teal': '#00CEDB',
+                        'brand-silver': '#A9A9A9',
+                        'brand-dark': '#1A1A1A',
+                        'brand-light': '#F8F9FA',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <!-- Custom Styles -->
+    <style>
+        html {
+            scroll-behavior: smooth;
+        }
+        body {
+            font-family: 'Vollkorn', serif;
+            position: relative;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            background-color: #1c1c1c;
+            color: #f5f5f5;
+            margin: 0;
+            overflow: hidden;
+        }
+         body.grabbing {
+            cursor: grabbing;
+        }
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0; left: 0;
+            width: 100vw; height: 100vh;
+            z-index: -1;
+            background: 
+                radial-gradient(circle at 15% 25%, rgba(220, 20, 60, 0.25), transparent 40%),
+                radial-gradient(circle at 85% 75%, rgba(0, 206, 219, 0.2), transparent 40%);
+            animation: bloom 25s linear infinite alternate;
+        }
+        @keyframes bloom {
+            0% { background-position: 0% 0%, 0% 0%; }
+            100% { background-position: 50% -50%, -50% 50%; }
+        }
+
+        #payments {
+          position: relative;
+          overflow: hidden;
+          width: 100%;
+        }
+
+        .banner {
+            width: 100%;
+            text-align: center;
+            overflow: hidden;
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .slider {
+            position: absolute;
+            width: 160px; 
+            height: 200px; 
+            transform-style: preserve-3d;
+            transform: perspective(1500px) rotateX(-18deg);
+            cursor: grab;
+            transition: transform 1.2s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.5s;
+        }
+        #front-slider { z-index: 2; }
+        #back-slider { z-index: 0; }
+        
+        .slider.dragging {
+            transition: none;
+        }
+        .slider.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+        .banner .slider .item{
+            position: absolute;
+            inset: 0 0 0 0;
+            transform: 
+                rotateY(calc( (var(--position) - 1) * (360 / var(--quantity)) * 1deg))
+                translateZ(380px); 
+        }
+
+        .service-card {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            pointer-events: none;
+            background-size: cover;
+            background-position: center;
+            border-radius: 1rem;
+            overflow: hidden;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .service-card {
+            background-color: rgba(255,255,255,0.05);
+        }
+
+        .service-icon-container {
+            width: 90px;
+            height: 90px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .item:hover .service-icon-container {
+             transform: translateY(-10px);
+        }
+
+        .service-icon {
+            width: 3.5rem;
+            height: 3.5rem;
+            stroke-width: 1.5;
+            filter: drop-shadow(3px 3px 2px rgba(0, 0, 0, 0.3)); 
+            position: relative;
+            z-index: 2;
+        }
+        
+        .item[data-pos="1"] .service-icon { stroke: #33FF57; }
+        .item[data-pos="2"] .service-icon { stroke: #3357FF; }
+        .item[data-pos="3"] .service-icon { stroke: #FF33A1; }
+        .item[data-pos="4"] .service-icon { stroke: #A133FF; }
+        .item[data-pos="5"] .service-icon { stroke: #33FFF6; }
+        .item[data-pos="6"] .service-icon { stroke: #F6FF33; }
+        .item[data-pos="7"] .service-icon { stroke: #FF8C33; }
+        .item[data-pos="8"] .service-icon { stroke: #8CFF33; }
+        .item[data-pos="9"] .service-icon { stroke: #DC143C; }
+        .item[data-pos="10"] .service-icon { stroke: #FF5733; }
+
+
+        .service-title {
+            position: absolute;
+            bottom: 105%;
+            left: 50%;
+            transform: translateX(-50%) translateZ(50px);
+            background-color: rgba(10, 10, 10, 0.8);
+            backdrop-filter: blur(10px);
+            color: #fff;
+            padding: 0.35rem 1rem;
+            border-radius: 9999px;
+            font-size: 1rem;
+            font-family: 'Ubuntu', sans-serif;
+            font-weight: bold;
+            white-space: nowrap;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            pointer-events: none;
+        }
+
+        #particle-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            pointer-events: none;
+            z-index: 100;
+        }
+
+        #fullscreen-view {
+            position: fixed;
+            inset: 0;
+            z-index: 110;
+            background-color: rgba(0,0,0,0.8);
+            backdrop-filter: blur(10px);
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.5s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        #fullscreen-view.visible {
+            opacity: 1;
+            pointer-events: all;
+        }
+        #fullscreen-card {
+            position: relative;
+            transition: all 0.6s cubic-bezier(0.645, 0.045, 0.355, 1);
+            width: 40vmax; 
+            height: 50vmax;
+            opacity: 0;
+        }
+        #fullscreen-card.visible {
+            opacity: 1;
+        }
+
+        #fullscreen-card .service-card {
+             width: 100%;
+             height: 100%;
+             position: absolute;
+             inset: 0;
+             z-index: 1;
+        }
+        
+        .fullscreen-content-overlay {
+            position: relative;
+            z-index: 2;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            padding: 2rem;
+            background-color: rgba(28, 28, 28, 0.9);
+            backdrop-filter: blur(5px);
+            border-radius: 1rem;
+        }
+
+        .fullscreen-title {
+            color: #f5f5f5;
+            font-family: 'Ubuntu', sans-serif;
+            font-size: 2rem;
+            font-weight: bold;
+            text-align: center;
+            margin-bottom: 1.5rem;
+            flex-shrink: 0;
+        }
+
+        .fullscreen-description {
+            color: #d1d5db;
+            font-family: 'Inter', sans-serif;
+            font-size: 1.1vmax;
+            width: 100%;
+            flex-grow: 1;
+            overflow-y: auto;
+            text-align: center;
+        }
+        
+        .fullscreen-description ul {
+            list-style-position: inside;
+            margin-top: 1em;
+            padding-left: 0;
+            display: inline-block;
+            text-align: left;
+        }
+
+
+        .fullscreen-bottom-icon-container {
+            margin-top: 1.5rem;
+            flex-shrink: 0;
+            display: flex;
+            justify-content: center;
+        }
+
+        .fullscreen-bottom-icon-container .service-icon {
+            width: 3.5rem;
+            height: 3.5rem;
+        }
+
+
+        #close-fullscreen-btn {
+            position: absolute;
+            top: 40px;
+            right: 40px;
+            color: white;
+            opacity: 0.8;
+            cursor: pointer;
+            transition: opacity 0.3s, transform 0.3s;
+            z-index: 120;
+        }
+        #close-fullscreen-btn:hover {
+            opacity: 1;
+            transform: scale(1.1);
+        }
+    </style>
+</head>
+<body class="text-slate-100">
+    
+    <canvas id="particle-canvas"></canvas>
+
+    <div id="fullscreen-view">
+        <div id="fullscreen-card"></div>
+        <i id="close-fullscreen-btn" data-lucide="x-circle" class="h-12 w-12"></i>
+    </div>
+
+    <section id="payments" class="w-full h-screen flex flex-col items-center justify-center p-4">
+        <!-- Title -->
+        <div class="max-w-5xl w-full mx-auto px-4 text-center">
+            <div class="inline-block bg-transparent text-slate-200 px-8 py-4 rounded-full border-2 border-brand-teal shadow-lg">
+                <h2 class="text-3xl font-ubuntu font-bold">Payment Services Tailored for You</h2>
+            </div>
+        </div>
+        
+        <!-- Carousel Container -->
+        <div class="banner flex-grow w-full">
+            <div id="back-slider" class="slider" style="--quantity: 10"></div>
+            <div id="front-slider" class="slider" style="--quantity: 10"></div>
+        </div>
+    
+        <!-- Subtitle -->
+        <p class="text-2xl sm:text-3xl font-ubuntu text-slate-400 text-center px-4">
+           Your complete business toolkit for accepting and managing payments.
+        </p>
+    </section>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            if (window.lucide) {
+              lucide.createIcons();
+            }
+
+            // --- CAROUSEL AND PARTICLE SCRIPT ---
+            const serviceDetails = {
+                "Mobile Payments": {
+                    description: "Take payments anywhere using a phone or tablet. Supports Tap to Pay and popular mobile wallets. Ideal for retail, service, and on-the-go transactions. Backed by secure, PCI-compliant technology."
+                },
+                "Smart Routing": { description: "Dynamically route transactions to optimize for cost, speed, and success rates. Our intelligent algorithms analyze each payment in real-time to select the best processing path." },
+                "Invoicing": { description: "Create and send professional, customized invoices in minutes. Track payment status, send automated reminders, and accept payments directly from the invoice." },
+                "Recurring Billing": { description: "Automate your subscription and recurring payment processes. Set up flexible billing cycles, manage customer plans, and reduce churn with smart dunning management." },
+                "Secure Tokenization": { description: "Protect sensitive customer data with our advanced tokenization technology. Cardholder information is replaced with a secure token, reducing your PCI compliance scope." },
+                "Detailed Reporting": { description: "Gain valuable insights into your business with comprehensive reporting tools. Track sales trends, monitor transaction history, and easily reconcile your accounts." },
+                "Automation": { description: "Streamline your workflows with powerful automation tools. Set up rules for fraud detection, chargeback management, and other repetitive tasks to save time and reduce errors." },
+                "ACH Payments": { description: "Offer your customers the flexibility of paying directly from their bank accounts. Our ACH processing is secure, reliable, and cost-effective for large transactions." },
+                "Fraud Prevention": { description: "Protect your business from fraudulent transactions with our multi-layered security system. We use machine learning, velocity checks, and customizable rules to minimize risk." },
+                "Global Payments": { description: "Expand your business internationally by accepting payments in multiple currencies. We provide competitive exchange rates and settlement in your local currency." }
+            };
+
+            const particleCanvas = document.getElementById('particle-canvas');
+            const pCtx = particleCanvas.getContext('2d');
+            let particles = [];
+            
+            function resizeParticleCanvas() {
+                particleCanvas.width = window.innerWidth;
+                particleCanvas.height = window.innerHeight;
+            }
+            resizeParticleCanvas();
+            window.addEventListener('resize', resizeParticleCanvas);
+
+            class Particle {
+                constructor(x, y, vx = (Math.random() - 0.5) * 2, vy = (Math.random() - 0.5) * 2) {
+                    this.x = x; this.y = y; this.vx = vx; this.vy = vy;
+                    this.alpha = 1; this.radius = Math.random() * 1.5 + 1;
+                    this.life = Math.random() * 30 + 20;
+                }
+                update() {
+                    this.x += this.vx; this.y += this.vy;
+                    this.alpha -= 0.05; this.life--;
+                }
+                draw() {
+                    pCtx.beginPath();
+                    pCtx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+                    pCtx.fillStyle = `rgba(0, 206, 219, ${this.alpha})`;
+                    pCtx.fill();
+                }
+            }
+            
+            function createCurvedParticleTrail(startX, startY, endX, endY, duration) {
+                const startTime = Date.now();
+                const midX = (startX + endX) / 2; const midY = (startY + endY) / 2;
+                const dx = endX - startX; const dy = endY - startY;
+                const dist = Math.sqrt(dx*dx + dy*dy); const angle = Math.atan2(dy, dx);
+                const perpAngle = angle - Math.PI / 2; const curveAmount = dist * 0.3;
+                const controlX = midX + Math.cos(perpAngle) * curveAmount;
+                const controlY = midY + Math.sin(perpAngle) * curveAmount;
+
+                function animateTrail() {
+                    const elapsedTime = Date.now() - startTime;
+                    const progress = Math.min(elapsedTime / duration, 1);
+                    const pX = Math.pow(1 - progress, 2) * startX + 2 * (1 - progress) * progress * controlX + Math.pow(progress, 2) * endX;
+                    const pY = Math.pow(1 - progress, 2) * startY + 2 * (1 - progress) * progress * controlY + Math.pow(progress, 2) * endY;
+                    
+                    if (Math.random() > 0.3) {
+                        const particleAngle = Math.atan2(pY - (particles[particles.length-1]?.y || pY), pX - (particles[particles.length-1]?.x || pX));
+                        const speed = 2;
+                        const vx = Math.cos(particleAngle) * speed + (Math.random() - 0.5) * 1.5;
+                        const vy = Math.sin(particleAngle) * speed + (Math.random() - 0.5) * 1.5;
+                        particles.push(new Particle(pX, pY, vx, vy));
+                    }
+                    if (progress < 1) requestAnimationFrame(animateTrail);
+                }
+                requestAnimationFrame(animateTrail);
+            }
+
+            function animateParticles() {
+                pCtx.clearRect(0, 0, particleCanvas.width, particleCanvas.height);
+                for (let i = particles.length - 1; i >= 0; i--) {
+                    const p = particles[i]; p.update(); p.draw();
+                    if (p.alpha <= 0 || p.life <= 0) particles.splice(i, 1);
+                }
+                requestAnimationFrame(animateParticles);
+            }
+            animateParticles();
+
+            const frontSlider = document.getElementById('front-slider');
+            const backSlider = document.getElementById('back-slider');
+            const allItems = [];
+
+            const services = [
+                { title: "Mobile Payments", icon: "smartphone" },
+                { title: "Smart Routing", icon: "shuffle" },
+                { title: "Invoicing", icon: "file-text" },
+                { title: "Recurring Billing", icon: "repeat" },
+                { title: "Secure Tokenization", icon: "lock" },
+                { title: "Detailed Reporting", icon: "bar-chart-2" },
+                { title: "Automation", icon: "cpu" },
+                { title: "ACH Payments", icon: "landmark" },
+                { title: "Fraud Prevention", icon: "shield-alert" },
+                { title: "Global Payments", icon: "globe-2" }
+            ];
+
+            services.forEach((service, i) => {
+                const item = document.createElement('div');
+                item.className = 'item';
+                item.style.setProperty('--position', i + 1);
+                item.dataset.pos = i + 1;
+                item.innerHTML = `
+                    <div class="service-card">
+                        <div class="service-icon-container">
+                            <i data-lucide="${service.icon}" class="service-icon"></i>
+                        </div>
+                    </div>
+                    <div class="service-title">${service.title}</div>
+                `;
+                allItems.push(item);
+            });
+            
+            if (window.lucide) {
+              lucide.createIcons();
+            }
+
+            const fullscreenView = document.getElementById('fullscreen-view');
+            const fullscreenCard = document.getElementById('fullscreen-card');
+            const numItems = allItems.length;
+            const rotationIncrement = 360 / numItems;
+
+            let currentYRotation = 0;
+            let isDragging = false;
+            let startX, startRotation, dragDistance = 0;
+            let dragThreshold = 5; 
+            let autoRotate = true;
+            let autoRotateTimeout;
+
+            const updateSliderRotation = () => {
+                const rotationStyle = `perspective(1500px) rotateX(-18deg) rotateY(${currentYRotation}deg)`;
+                frontSlider.style.transform = rotationStyle;
+                backSlider.style.transform = rotationStyle;
+                updateCardZIndexes();
+            };
+
+            const updateCardZIndexes = () => {
+                allItems.forEach(item => {
+                    const position = parseInt(item.style.getPropertyValue('--position'));
+                    const itemAngle = (position - 1) * rotationIncrement;
+                    let effectiveAngle = (currentYRotation + itemAngle) % 360;
+                    if (effectiveAngle < 0) effectiveAngle += 360;
+
+                    if (effectiveAngle > 90 && effectiveAngle < 270) {
+                        if (item.parentElement !== backSlider) {
+                            backSlider.appendChild(item);
+                        }
+                    } else {
+                        if (item.parentElement !== frontSlider) {
+                            frontSlider.appendChild(item);
+                        }
+                    }
+                });
+            };
+
+            const stopAutoRotate = () => {
+                autoRotate = false;
+                clearTimeout(autoRotateTimeout);
+            };
+            const resumeAutoRotate = (delay = 5000) => {
+                clearTimeout(autoRotateTimeout);
+                autoRotateTimeout = setTimeout(() => { autoRotate = true; }, delay);
+            };
+
+            const handleMouseDown = (e) => {
+                stopAutoRotate(); isDragging = true;
+                frontSlider.classList.add('dragging');
+                backSlider.classList.add('dragging');
+                startX = e.pageX || e.touches[0].pageX;
+                startRotation = currentYRotation;
+                dragDistance = 0;
+                document.body.classList.add('grabbing');
+            };
+            const handleMouseMove = (e) => {
+                if (!isDragging) return;
+                const x = e.pageX || e.touches[0].pageX;
+                const walk = (x - startX) * 0.5; 
+                currentYRotation = startRotation - walk;
+                dragDistance = Math.abs(walk);
+                updateSliderRotation();
+            };
+            const handleMouseUp = () => {
+                if (!isDragging) return;
+                isDragging = false;
+                frontSlider.classList.remove('dragging');
+                backSlider.classList.remove('dragging');
+                document.body.classList.remove('grabbing');
+                resumeAutoRotate();
+            };
+            
+            const handleClick = (e) => {
+                if (dragDistance > dragThreshold) { e.preventDefault(); return; }
+                const item = e.currentTarget;
+                const iconContainer = item.querySelector('.service-icon-container');
+                const startRect = iconContainer.getBoundingClientRect();
+                const startX = startRect.left + startRect.width / 2;
+                const startYTop = startRect.top; const startYBottom = startRect.bottom;
+                const position = parseInt(item.style.getPropertyValue('--position'));
+                const targetRotation = -(position - 1) * rotationIncrement;
+                
+                if (Math.abs(currentYRotation - targetRotation) % 360 < 1) {
+                    zoomIn(item);
+                    return;
+                }
+
+                currentYRotation = targetRotation;
+                updateSliderRotation();
+                
+                const transitionHandler = () => zoomIn(item);
+                frontSlider.addEventListener('transitionend', transitionHandler, { once: true });
+                
+                setTimeout(() => {
+                    const frontCard = frontSlider.querySelector('.item');
+                    if (!frontCard) return;
+                    const endIcon = frontCard.querySelector('.service-icon-container'); 
+                    const endRect = endIcon.getBoundingClientRect();
+                    const endX = endRect.left + endRect.width / 2;
+                    const endY = endRect.bottom;
+                    createCurvedParticleTrail(startX, startYTop, endX, endY, 1100);
+                    createCurvedParticleTrail(startX, startYBottom, endX, endY, 1100);
+                }, 100);
+            };
+
+            const zoomIn = (item) => {
+                stopAutoRotate();
+                frontSlider.classList.add('hidden');
+                backSlider.classList.add('hidden');
+                
+                const title = item.querySelector('.service-title').textContent;
+                const service = serviceDetails[title];
+                const iconHTML = item.querySelector('.service-icon').outerHTML;
+
+                fullscreenCard.innerHTML = ''; 
+
+                const clonedCardBackground = item.querySelector('.service-card').cloneNode(true);
+                clonedCardBackground.innerHTML = '';
+                fullscreenCard.appendChild(clonedCardBackground);
+                
+                const contentOverlay = document.createElement('div');
+                contentOverlay.className = 'fullscreen-content-overlay';
+
+                const titleEl = document.createElement('h2');
+                titleEl.className = 'fullscreen-title';
+                titleEl.textContent = title;
+                contentOverlay.appendChild(titleEl);
+                
+                if (service) {
+                    const descriptionContainer = document.createElement('div');
+                    descriptionContainer.className = 'fullscreen-description';
+                    const [firstLine, ...bulletPoints] = service.description.split('. ');
+
+                    let bulletHTML = bulletPoints.filter(p => p).map(point => `<li>${point.replace(/\.$/, '')}</li>`).join('');
+                    
+                    descriptionContainer.innerHTML = `
+                        <div>
+                            <p style="margin: 0; padding: 0; line-height: 1.5;">
+                                ${firstLine}.
+                            </p>
+                            <ul>
+                                ${bulletHTML}
+                            </ul>
+                        </div>
+                    `;
+                    contentOverlay.appendChild(descriptionContainer);
+                }
+                
+                const bottomIconContainer = document.createElement('div');
+                bottomIconContainer.className = 'fullscreen-bottom-icon-container';
+                bottomIconContainer.innerHTML = iconHTML;
+                contentOverlay.appendChild(bottomIconContainer);
+
+                fullscreenCard.appendChild(contentOverlay);
+                
+                fullscreenView.classList.add('visible');
+                setTimeout(() => {
+                    fullscreenCard.classList.add('visible');
+                    if (window.lucide) {
+                        lucide.createIcons();
+                    }
+                }, 50);
+            };
+
+            const zoomOut = () => {
+                 fullscreenCard.classList.remove('visible');
+                 fullscreenView.classList.remove('visible');
+                 setTimeout(() => {
+                    frontSlider.classList.remove('hidden');
+                    backSlider.classList.remove('hidden');
+                    resumeAutoRotate();
+                 }, 500);
+            };
+            
+            function carouselLoop() {
+                if(autoRotate && !isDragging) {
+                    currentYRotation -= 0.045; 
+                    updateSliderRotation();
+                }
+                requestAnimationFrame(carouselLoop);
+            }
+            
+            const banner = document.querySelector('.banner');
+            banner.addEventListener('mousedown', handleMouseDown);
+            banner.addEventListener('touchstart', handleMouseDown, { passive: true });
+            document.addEventListener('mousemove', handleMouseMove);
+            document.addEventListener('touchmove', handleMouseMove, { passive: true });
+            document.addEventListener('mouseup', handleMouseUp);
+            document.addEventListener('touchend', handleMouseUp);
+            banner.addEventListener('mouseenter', stopAutoRotate);
+            banner.addEventListener('mouseleave', () => resumeAutoRotate(1000));
+            allItems.forEach(item => { item.addEventListener('click', handleClick); });
+            
+            fullscreenView.addEventListener('click', (e) => {
+                if (e.target.closest('#close-fullscreen-btn')) {
+                    zoomOut();
+                }
+            });
+
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape' && fullscreenView.classList.contains('visible')) {
+                    zoomOut();
+                }
+            });
+            
+            updateCardZIndexes();
+            carouselLoop();
+
+        });
+    </script>
+</body>
+</html>
+
