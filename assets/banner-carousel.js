@@ -170,7 +170,8 @@ function initBannerCarousel(slider) {
     animationFrame: null,
     autoRotateTimer: null,
     isHovered: false,
-    autoRotateSpeed: 0.25 // degrees per frame for smooth rotation
+    autoRotateSpeed: 0.08, // Slightly reduced speed for smoother rotation
+    dragSensitivity: 0.5 // Enhanced drag responsiveness
   };
 
   const setRotation = (value) => {
@@ -178,6 +179,31 @@ function initBannerCarousel(slider) {
     // Apply rotation to the slider transform, maintaining the perspective and rotateX
     slider.style.transform = `perspective(1500px) rotateX(-18deg) rotateY(${value}deg)`;
     updateActive();
+    updateCardZIndexes(); // Enhanced z-index management
+  };
+
+  // Enhanced z-index management for front/back sliders
+  const updateCardZIndexes = () => {
+    const frontSlider = document.getElementById('front-slider');
+    const backSlider = document.getElementById('back-slider');
+    if (!frontSlider || !backSlider) return;
+
+    items.forEach(item => {
+      const position = parseInt(item.style.getPropertyValue('--position'));
+      const itemAngle = (position - 1) * angleStep;
+      let effectiveAngle = (state.rotation + itemAngle) % 360;
+      if (effectiveAngle < 0) effectiveAngle += 360;
+
+      if (effectiveAngle > 90 && effectiveAngle < 270) {
+        if (item.parentElement !== backSlider) {
+          backSlider.appendChild(item);
+        }
+      } else {
+        if (item.parentElement !== frontSlider) {
+          frontSlider.appendChild(item);
+        }
+      }
+    });
   };
 
   const cancelInertia = () => {
@@ -202,7 +228,7 @@ function initBannerCarousel(slider) {
     
     const autoRotate = () => {
       if (!state.pointerActive && !state.isHovered && !document.body.classList.contains('banner-expansion--open')) {
-        setRotation(state.rotation + state.autoRotateSpeed);
+        setRotation(state.rotation - state.autoRotateSpeed);
       }
       state.autoRotateTimer = requestAnimationFrame(autoRotate);
     };
@@ -281,7 +307,7 @@ function initBannerCarousel(slider) {
       snapToNearest();
       return;
     }
-    const friction = 0.94;
+    const friction = 0.92; // Slightly more friction for better control
     const step = () => {
       state.velocity *= friction;
       if (Math.abs(state.velocity) < 0.05) {
@@ -295,89 +321,104 @@ function initBannerCarousel(slider) {
     state.inertiaFrame = requestAnimationFrame(step);
   };
 
+  // Enhanced pointer event handling
   const pointerDown = (event) => {
     if (document.body.classList.contains('banner-expansion--open')) return;
     state.pointerActive = true;
     state.dragMoved = false;
-    state.pointerStartX = event.clientX;
-    state.lastPointerX = event.clientX;
-    slider.classList.add('is-grabbing');
+    state.pointerStartX = event.clientX || event.touches?.[0]?.clientX || 0;
+    state.lastPointerX = state.pointerStartX;
+    slider.classList.add('is-grabbing', 'dragging');
+    document.body.classList.add('grabbing');
     cancelAnimation();
     cancelInertia();
-    stopAutoRotation(); // Stop auto-rotation during manual interaction
-    slider.setPointerCapture(event.pointerId);
+    stopAutoRotation();
+    if (event.pointerId) slider.setPointerCapture(event.pointerId);
   };
 
   const pointerMove = (event) => {
     if (!state.pointerActive) return;
     event.preventDefault();
-    const currentX = event.clientX;
+    const currentX = event.clientX || event.touches?.[0]?.clientX || state.lastPointerX;
     const deltaX = currentX - state.lastPointerX;
-    if (!state.dragMoved && Math.abs(currentX - state.pointerStartX) > 3) {
+    
+    if (!state.dragMoved && Math.abs(currentX - state.pointerStartX) > 5) {
       state.dragMoved = true;
     }
-    const deltaRotation = deltaX * 0.4;
+    
+    const deltaRotation = deltaX * state.dragSensitivity;
     state.velocity = deltaRotation;
-    setRotation(state.rotation + deltaRotation);
+    setRotation(state.rotation - deltaRotation); // Inverted for natural feel
     state.lastPointerX = currentX;
   };
 
   const pointerUp = (event) => {
     if (!state.pointerActive) return;
-    slider.releasePointerCapture(event.pointerId);
+    if (event.pointerId) slider.releasePointerCapture(event.pointerId);
     state.pointerActive = false;
-    slider.classList.remove('is-grabbing');
+    slider.classList.remove('is-grabbing', 'dragging');
+    document.body.classList.remove('grabbing');
+    
     if (state.dragMoved) {
       state.preventClick = true;
       setTimeout(() => {
         state.preventClick = false;
-      }, 0);
+      }, 100);
       startInertia();
     } else {
       snapToNearest();
     }
+    
     state.dragMoved = false;
     state.pointerStartX = 0;
     state.lastPointerX = 0;
     
-    // Resume auto-rotation after a short delay
+    // Resume auto-rotation after interaction
     setTimeout(() => {
       if (!state.isHovered) {
         startAutoRotation();
       }
-    }, 1000);
+    }, 1500);
   };
 
+  // Enhanced event listeners with touch support
   slider.addEventListener('pointerdown', pointerDown);
   slider.addEventListener('pointermove', pointerMove);
   slider.addEventListener('pointerup', pointerUp);
   slider.addEventListener('pointercancel', pointerUp);
+  slider.addEventListener('touchstart', (e) => pointerDown(e.touches[0]), { passive: true });
+  slider.addEventListener('touchmove', (e) => pointerMove(e.touches[0]), { passive: true });
+  slider.addEventListener('touchend', pointerUp);
+  
   slider.addEventListener('pointerleave', () => {
     if (!state.pointerActive) return;
     state.pointerActive = false;
-    slider.classList.remove('is-grabbing');
+    slider.classList.remove('is-grabbing', 'dragging');
+    document.body.classList.remove('grabbing');
     startInertia();
     state.dragMoved = false;
   });
 
-  // Add hover event listeners to pause/resume auto-rotation
-  slider.addEventListener('mouseenter', () => {
-    state.isHovered = true;
-  });
+  // Enhanced hover management
+  const banner = document.querySelector('.banner');
+  if (banner) {
+    banner.addEventListener('mouseenter', () => {
+      state.isHovered = true;
+      stopAutoRotation();
+    });
 
-  slider.addEventListener('mouseleave', () => {
-    state.isHovered = false;
-    if (!state.pointerActive) {
-      setTimeout(() => {
-        startAutoRotation();
-      }, 500); // Brief delay before resuming rotation
-    }
-  });
+    banner.addEventListener('mouseleave', () => {
+      state.isHovered = false;
+      if (!state.pointerActive) {
+        setTimeout(startAutoRotation, 1000);
+      }
+    });
+  }
 
   items.forEach((item, index) => {
     item.dataset.index = String(index);
     item.addEventListener('click', (event) => {
-      if (state.preventClick) {
+      if (state.preventClick || state.dragMoved) {
         event.preventDefault();
         return;
       }
@@ -392,9 +433,9 @@ function initBannerCarousel(slider) {
     });
   });
 
+  // Initialize
   setRotation(0);
-  
-  // Start auto-rotation
+  updateCardZIndexes();
   startAutoRotation();
 }
 
