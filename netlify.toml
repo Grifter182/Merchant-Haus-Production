@@ -1,6 +1,6 @@
 [build]
-  command = "npm run lint && npm test && npm run build"
-  publish = "dist"
+  command = "npm run lint && npm test"
+  publish = "."
   functions = "netlify/functions"   # points to the netlify/functions folder
 
 [build.environment]
