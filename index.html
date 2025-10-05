@@ -465,13 +465,10 @@
             width: 100%;
             height: 100%;
             pointer-events: none;
-            /* Use a CSS pattern instead of an image for the moving texture */
-            background-image: 
-                linear-gradient(45deg, rgba(220, 20, 60, 0.1) 25%, transparent 25%, transparent 75%, rgba(220, 20, 60, 0.1) 75%),
-                linear-gradient(45deg, rgba(0, 206, 219, 0.1) 25%, transparent 25%, transparent 75%, rgba(0, 206, 219, 0.1) 75%);
-            background-size: 40px 40px, 60px 60px;
-            background-position: 0 0, 20px 20px;
-            /* Make the pattern larger than the container so it can move across */
+            /* Use the colorful geometric pattern image as the moving texture. The file is at /assets/img/hero-overlay.svg */
+            background-image: url('/assets/img/hero-overlay.svg');
+            /* Make the image larger than the container so it can move across */
+            background-size: 150% 150%;
             opacity: 0.4;
             animation: slideOverlay 60s linear infinite;
             z-index: -20;
