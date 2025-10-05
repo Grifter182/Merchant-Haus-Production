@@ -19,6 +19,8 @@
     "@google/generative-ai": "^0.21.0"
   },
   "devDependencies": {
+    "@stackbit/cms-contentful": "^1.0.33",
+    "@stackbit/types": "^2.1.14",
     "@types/node": "^20.14.0",
     "eslint": "^9.9.0",
     "eslint-config-prettier": "^9.1.0",
