@@ -1,0 +1,1345 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<!-- ================= HEAD SECTION START ================= -->
+<!-- Meta tags, external resources, and global styling configuration -->
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MerchantHaus.io  - Empiritos Automata</title>
+    <meta name="description" content="Effortlessly set up your business profile and start taking payments in minutes—cards, ACH, and secure pay links—online, in-store, or on the go.">
+    <meta name="theme-color" content="#E63946">
+    <meta name="theme-color" media="(prefers-color-scheme: light)" content="#E63946">
+    <meta name="theme-color" media="(prefers-color-scheme: dark)" content="linear-gradient(#1B1B1B, #E63946)">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="msapplication-navbutton-color" content="#E63946">
+    <link rel="preload" as="image" href="/public/assets/images/banner1.png">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@700&family=Vollkorn:wght@400&family=Inter:wght@500&display=swap" rel="stylesheet">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Vollkorn', 'serif'],
+                        ubuntu: ['Ubuntu', 'sans-serif'],
+                        inter: ['Inter', 'sans-serif']
+                    },
+                    colors: {
+                        'brand-crimson': '#DC143C',
+                        'brand-teal': '#00CEDB',
+                        'brand-silver': '#A9A9A9',
+                        'brand-dark': '#1A1A1A',
+                        'brand-light': '#F8F9FA',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <!-- Support CTA Handler -->
+    <script src="/assets/support.js" defer></script>
+
+    <!-- Custom Styles -->
+    <style>
+        html {
+            scroll-behavior: smooth;
+        }
+        body {
+            font-family: 'Vollkorn', serif;
+            position: relative;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            background-color: #1c1c1c;
+            color: #f5f5f5;
+        }
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0; left: 0;
+            width: 100vw; height: 100vh;
+            z-index: -1;
+            background: 
+                radial-gradient(circle at 15% 25%, rgba(220, 20, 60, 0.25), transparent 40%),
+                radial-gradient(circle at 85% 75%, rgba(0, 206, 219, 0.2), transparent 40%);
+            animation: bloom 25s linear infinite alternate;
+        }
+        @keyframes bloom {
+            0% { background-position: 0% 0%, 0% 0%; }
+            100% { background-position: 50% -50%, -50% 50%; }
+        }
+        .header-glass {
+            background-color: rgba(28, 28, 28, 0.8);
+            backdrop-filter: blur(10px);
+        }
+        .dark .border-slate-800 { border-color: #2a2a2a !important; }
+
+        .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0,0,0,0);
+            border: 0;
+        }
+        .panel-overlay, .panel-container { transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
+
+        #payments {
+          position: relative;
+          overflow: hidden;
+          width: 100%;
+        }
+
+        .banner {
+            width: 100%;
+            text-align: center;
+            overflow: hidden;
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .slider {
+            position: absolute;
+            width: 160px; 
+            height: 200px; 
+            transform-style: preserve-3d;
+            transform: perspective(1500px) rotateX(-18deg);
+            cursor: grab;
+            transition: transform 1.2s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.5s;
+        }
+        #front-slider { z-index: 2; }
+        #back-slider { z-index: 0; }
+        
+        .slider.dragging {
+            transition: none;
+        }
+        .slider.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+        .banner .slider .item{
+            position: absolute;
+            inset: 0 0 0 0;
+            transform: 
+                rotateY(calc( (var(--position) - 1) * (360 / var(--quantity)) * 1deg))
+                translateZ(380px); 
+        }
+
+        .service-card {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            pointer-events: none;
+            background-size: cover;
+            background-position: center;
+            border-radius: 1rem;
+            overflow: hidden;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            position: relative;
+        }
+        
+        .service-card::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background-color: rgba(0,0,0,0.2);
+            z-index: 1;
+        }
+        
+        .item[data-pos="1"] .service-card { background-image: url('assets/img/card1.png'); }
+        .item[data-pos="2"] .service-card { background-image: url('assets/img/card2.png'); }
+        .item[data-pos="3"] .service-card { background-image: url('assets/img/card3.png'); }
+        .item[data-pos="4"] .service-card { background-image: url('assets/img/card4.png'); }
+        .item[data-pos="5"] .service-card { background-image: url('assets/img/card5.png'); }
+        .item[data-pos="6"] .service-card { background-image: url('assets/img/card6.png'); }
+        .item[data-pos="7"] .service-card { background-image: url('assets/img/card7.png'); }
+        .item[data-pos="8"] .service-card { background-image: url('assets/img/card8.png'); }
+        .item[data-pos="9"] .service-card { background-image: url('assets/img/card9.png'); }
+        .item[data-pos="10"] .service-card { background-image: url('assets/img/card10.png'); }
+
+
+        .service-icon-container {
+            width: 90px;
+            height: 90px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            z-index: 2;
+        }
+        
+        .item:hover .service-icon-container {
+             transform: translateY(-10px);
+        }
+
+        .service-icon {
+            width: 3.5rem;
+            height: 3.5rem;
+            stroke-width: 1.5;
+            filter: drop-shadow(3px 3px 2px rgba(0, 0, 0, 0.3)); 
+            position: relative;
+            z-index: 2;
+        }
+        
+        .item[data-pos="1"] .service-icon { stroke: #33FF57; }
+        .item[data-pos="2"] .service-icon { stroke: #3357FF; }
+        .item[data-pos="3"] .service-icon { stroke: #FF33A1; }
+        .item[data-pos="4"] .service-icon { stroke: #A133FF; }
+        .item[data-pos="5"] .service-icon { stroke: #33FFF6; }
+        .item[data-pos="6"] .service-icon { stroke: #F6FF33; }
+        .item[data-pos="7"] .service-icon { stroke: #FF8C33; }
+        .item[data-pos="8"] .service-icon { stroke: #8CFF33; }
+        .item[data-pos="9"] .service-icon { stroke: #DC143C; }
+        .item[data-pos="10"] .service-icon { stroke: #FF5733; }
+
+        .service-title {
+            position: absolute;
+            bottom: 105%;
+            left: 50%;
+            transform: translateX(-50%) translateZ(50px);
+            background-color: rgba(10, 10, 10, 0.8);
+            backdrop-filter: blur(10px);
+            color: #fff;
+            padding: 0.35rem 1rem;
+            border-radius: 9999px;
+            font-size: 1rem;
+            font-family: 'Ubuntu', sans-serif;
+            font-weight: bold;
+            white-space: nowrap;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            pointer-events: none;
+        }
+
+        #particle-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            pointer-events: none;
+            z-index: 100;
+        }
+
+        #fullscreen-view {
+            position: fixed;
+            inset: 0;
+            z-index: 110;
+            background-color: rgba(0,0,0,0.8);
+            backdrop-filter: blur(10px);
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.5s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        #fullscreen-view.visible {
+            opacity: 1;
+            pointer-events: all;
+        }
+        #fullscreen-card {
+            position: relative;
+            transition: all 0.6s cubic-bezier(0.645, 0.045, 0.355, 1);
+            width: clamp(320px, 40vmax, 600px); 
+            height: clamp(400px, 50vmax, 750px);
+            opacity: 0;
+        }
+        #fullscreen-card.visible {
+            opacity: 1;
+        }
+
+        #fullscreen-card .service-card {
+             width: 100%;
+             height: 100%;
+             position: absolute;
+             inset: 0;
+             z-index: 1;
+        }
+        
+        .fullscreen-content-overlay {
+            position: relative;
+            z-index: 2;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            padding: 2.5rem;
+            background-color: rgba(28, 28, 28, 0.9);
+            backdrop-filter: blur(5px);
+            border-radius: 1rem;
+        }
+
+        .fullscreen-title {
+            color: #f5f5f5;
+            font-family: 'Ubuntu', sans-serif;
+            font-size: 2rem;
+            font-weight: bold;
+            text-align: center;
+            margin-bottom: 1.5rem;
+            flex-shrink: 0;
+        }
+
+        .fullscreen-description {
+            color: #d1d5db;
+            font-family: 'Inter', sans-serif;
+            font-size: 1.1vmax;
+            width: 100%;
+            flex-grow: 1;
+            overflow-y: auto;
+            text-align: center;
+        }
+        
+        .fullscreen-description ul {
+            list-style-position: inside;
+            margin-top: 1em;
+            padding-left: 0;
+            display: inline-block;
+            text-align: left;
+        }
+
+        .fullscreen-bottom-icon-container {
+            margin-top: 1.5rem;
+            flex-shrink: 0;
+            display: flex;
+            justify-content: center;
+        }
+
+        .fullscreen-bottom-icon-container .service-icon {
+            width: 3.5rem;
+            height: 3.5rem;
+        }
+
+        #close-fullscreen-btn {
+            position: absolute;
+            top: 40px;
+            right: 40px;
+            color: white;
+            opacity: 0.8;
+            cursor: pointer;
+            transition: opacity 0.3s, transform 0.3s;
+            z-index: 120;
+        }
+        #close-fullscreen-btn:hover {
+            opacity: 1;
+            transform: scale(1.1);
+        }
+        .banner .content{
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+        }
+        .banner .content .model{
+            background-image: url(assets/img/model.png);
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center bottom;
+            z-index: 1;
+        }
+
+    </style>
+</head>
+<body class="text-slate-100">
+
+    <!-- Header -->
+    <div class="sticky top-0 z-50">
+        <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-4 pb-6">
+             <header class="header-glass border border-slate-200/70 dark:border-slate-800 rounded-full shadow-lg">
+                 <div class="relative max-w-7xl mx-auto px-6 py-3 flex items-center justify-between">
+                    <a href="/index.html" class="flex items-center gap-3 group">
+                         <div class="w-[190px] md:w-[260px]" data-mh-logo-header></div>
+                         <span class="sr-only">MerchantHaus Homepage</span>
+                     </a>
+                     <div class="flex items-center gap-6">
+                         <div class="hidden md:flex items-center gap-4 text-sm font-sans">
+                             <a href="tel:15056006042" class="hover:text-brand-teal transition-colors">1-505-600-6042</a>
+                             <button
+                               type="button"
+                               class="js-support inline-flex items-center justify-center rounded-full border border-brand-teal px-4 py-2 font-semibold text-brand-teal transition-colors duration-300 hover:bg-brand-teal hover:text-white"
+                               data-cta="contact-support"
+                               data-cta-location="header-desktop"
+                             >Contact Support</button>
+                         </div>
+                         <button type="button" class="js-signup-cta bg-brand-crimson hover:bg-opacity-90 text-white border border-transparent px-4 py-2 rounded-full text-sm font-semibold font-inter transition-colors duration-300">Get Started</button>
+                         <a href="https://retailmanager.merchant.haus" class="hidden sm:block bg-transparent hover:bg-brand-teal text-brand-teal hover:text-white border border-brand-teal px-4 py-2 rounded-lg text-sm font-semibold font-inter transition-colors duration-300">Login</a>
+                     </div>
+                 </div>
+            </header>
+            <button id="mobile-menu-button" class="md:hidden p-3 rounded-full bg-slate-900/50 backdrop-blur-sm text-white absolute left-6 top-full translate-y-3 z-[60] hover:bg-slate-800/70 transition-colors shadow-lg">
+                <i data-lucide="menu" class="h-6 w-6"></i>
+                <span class="sr-only">Open menu</span>
+            </button>
+            <div id="mobile-menu" class="absolute left-6 top-full mt-16 w-72 rounded-xl bg-[#1c1c1c] shadow-2xl border border-brand-teal p-4 z-[59] hidden">
+                <nav class="flex flex-col space-y-6 text-base font-medium font-inter">
+                    <div class="space-y-2">
+                        <h4 class="text-sm font-semibold text-brand-teal uppercase tracking-[0.2em]">Product</h4>
+                        <a href="/#payments" class="block w-full px-4 py-2 text-left rounded-full border border-brand-teal bg-[#262626] text-white transition-colors duration-200 hover:bg-brand-teal">Payment Services</a>
+                        <button type="button" id="mobile-integrations-toggle" aria-expanded="false" aria-controls="mobile-integrations-menu" class="flex items-center justify-between w-full px-4 py-2 text-left rounded-full border border-brand-teal bg-[#262626] text-white transition-colors duration-200 hover:bg-brand-teal">
+                            <span>Integrations</span>
+                            <span class="ml-2 text-brand-teal">
+                                <svg data-collapsible-icon class="w-4 h-4 transition-transform" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <polyline points="6 9 12 15 18 9"></polyline>
+                                </svg>
+                            </span>
+                        </button>
+                        <div id="mobile-integrations-menu" class="mt-2 space-y-2 pl-3 hidden">
+                            <a href="/integrations.html" class="block w-full px-4 py-2 text-left rounded-full border border-brand-teal bg-[#1f1f1f] text-white transition-colors duration-200 hover:bg-brand-teal">Integrations Directory</a>
+                            <a href="/.html" class="block w-full px-4 py-2 text-left rounded-full border border-brand-teal bg-[#1f1f1f] text-white transition-colors duration-200 hover:bg-brand-teal">Shopify Integration</a>
+                            <a href="/gohighlevel.html" class="block w-full px-4 py-2 text-left rounded-full border border-brand-teal bg-[#1f1f1f] text-white transition-colors duration-200 hover:bg-brand-teal">GoHighLevel Integration</a>
+                        </div>
+                        <a href="/#checklist" class="block w-full px-4 py-2 text-left rounded-full border border-brand-teal bg-[#262626] text-white transition-colors duration-200 hover:bg-brand-teal">Setup Checklist</a>
+                    </div>
+                    <div class="space-y-2">
+                        <h4 class="text-sm font-semibold text-brand-teal uppercase tracking-[0.2em]">Support</h4>
+                        <button
+                          type="button"
+                          class="js-support block w-full rounded-full border border-brand-teal bg-[#262626] px-4 py-2 text-left font-semibold text-white transition-colors duration-200 hover:bg-brand-teal"
+                          data-cta="contact-support"
+                          data-cta-location="mobile-nav"
+                        >Contact Support</button>
+                        <a href="/faq.html" class="block w-full px-4 py-2 text-left rounded-full border border-brand-teal bg-[#262626] text-white transition-colors duration-200 hover:bg-brand-teal">FAQ</a>
+                    </div>
+                    <div class="space-y-2">
+                        <h4 class="text-sm font-semibold text-brand-teal uppercase tracking-[0.2em]">Legal</h4>
+                        <a href="/privacy.html" class="block w-full px-4 py-2 text-left rounded-full border border-brand-teal bg-[#262626] text-white transition-colors duration-200 hover:bg-brand-teal">Privacy Policy</a>
+                        <a href="/terms.html" class="block w-full px-4 py-2 text-left rounded-full border border-brand-teal bg-[#262626] text-white transition-colors duration-200 hover:bg-brand-teal">Terms &amp; Conditions</a>
+                        <a href="/compliance.html" class="block w-full px-4 py-2 text-left rounded-full border border-brand-teal bg-[#262626] text-white transition-colors duration-200 hover:bg-brand-teal">Compliance</a>
+                    </div>
+                    <a href="https://retailmanager.merchant.haus" class="sm:hidden block w-full px-4 py-2 text-center rounded-full border border-brand-teal bg-[#262626] text-white transition-colors duration-200 hover:bg-brand-teal">Login</a>
+                </nav>
+            </div>
+        </div>
+    </div>
+
+    <div id="signup-panel-overlay" class="panel-overlay fixed inset-0 bg-black/60 z-50 opacity-0 invisible">
+        <div id="signup-panel" class="panel-container fixed top-0 right-0 h-full w-full max-w-2xl bg-white dark:bg-slate-900 shadow-2xl transform translate-x-full flex flex-col">
+            <div class="p-6 sm:p-8 relative flex-shrink-0">
+                <button id="close-signup-panel-btn" class="absolute top-4 right-4 text-slate-500 hover:text-slate-800 dark:hover:text-slate-200">
+                    <i data-lucide="x" class="h-6 w-6"></i>
+                </button>
+                <div class="mb-6">
+                    <div class="flex justify-between mb-2 text-sm font-semibold text-slate-800 dark:text-slate-200">
+                        <p>Step <span id="current-step-text">1</span> of 3</p>
+                        <p id="step-name">Account Details</p>
+                    </div>
+                    <div class="w-full bg-slate-200 dark:bg-slate-700 rounded-full h-2.5 overflow-hidden">
+                        <div id="progress-bar" class="bg-brand-crimson h-full rounded-full" style="width: 33%"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="px-6 sm:px-8 pb-4 flex-grow overflow-y-auto">
+                <form id="signup-form" novalidate></form>
+                <div id="form-message" class="mt-4 text-center text-sm"></div>
+            </div>
+            <div class="p-6 sm:p-8 mt-auto pt-6 border-t border-slate-200 dark:border-slate-800 flex justify-between items-center flex-shrink-0">
+                <div class="text-sm">
+                    <p class="font-semibold">Need Help?</p>
+                    <a href="tel:15056006042" class="text-slate-500 hover:text-brand-crimson dark:hover:text-brand-teal transition-colors">1-505-600-6042</a>
+                </div>
+                <div class="flex items-center gap-4">
+                    <button type="button" id="prev-btn" class="bg-slate-200 text-slate-800 dark:bg-slate-700 dark:text-slate-200 px-6 py-2.5 rounded-lg font-semibold hover:bg-slate-300 dark:hover:bg-slate-600 transition-all invisible">Previous</button>
+                    <button type="button" id="next-btn" class="bg-brand-crimson text-white px-6 py-2.5 rounded-lg font-semibold hover:bg-brand-crimson transition-all shadow-sm hover:shadow-md">Next</button>
+                    <button type="submit" id="submit-btn" form="signup-form" class="bg-brand-crimson text-white px-6 py-2.5 rounded-lg font-bold hover:bg-brand-crimson transition-all shadow-sm hover:shadow-md hidden">Create Account</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <canvas id="particle-canvas"></canvas>
+
+    <div id="fullscreen-view">
+        <div id="fullscreen-card"></div>
+        <i id="close-fullscreen-btn" data-lucide="x-circle" class="h-12 w-12"></i>
+    </div>
+
+<div class="relative">
+  <section class="relative overflow-hidden animate-fadeIn hero-bg-container">
+    <div class="absolute inset-0 bg-black/50 -z-10"></div>
+    <div class="max-w-7xl mx-auto px-4 pt-12 sm:pt-16 md:pt-24 pb-20 md:pb-28">
+      <div class="flex flex-col-reverse md:grid md:grid-cols-2 md:gap-10 items-center">
+        <div class="space-y-6 text-left">
+          <h1 class="text-3xl sm:text-4xl tracking-tight leading-tight text-white">
+            <span class="uppercase font-ubuntu">PAYMENTS ANYWHERE - GROWTH EVERYWHERE</span>
+            <span id="animated-headline-sub" class="grad-text-static text-2xl sm:text-3xl font-ubuntu inline sm:ml-2">Engineered for speed, secured for trust, and designed to scale.</span>
+          </h1>
+          <p class="text-lg text-gray-200 dark:text-slate-300 font-inter text-center md:text-justify" style="font-weight:100">Effortlessly create your business profile and start accepting payments in minutes—cards, ACH, and secure pay links across online, in-store, and mobile. Lower your costs, onboard quickly, track performance in real time, and protect your business with advanced fraud and chargeback tools.</p>
+        </div>
+        <div class="relative p-4">
+          <div class="w-full space-y-4 relative z-10">
+            <div class="relative">
+              <input type="text" id="faq-question" placeholder="Ask about pricing, features..." class="field w-full p-4 pr-12 text-lg rounded-full bg-white/20 dark:bg-slate-900/30 border border-slate-300/50 dark:border-slate-700/50 text-white placeholder-slate-300 focus:ring-2 focus:ring-brand-crimson focus:border-transparent transition-all">
+              <button id="ask-faq" class="absolute top-1/2 right-2 -translate-y-1/2 p-2 rounded-full bg-brand-crimson text-white hover:bg-brand-crimson transition-colors">
+                <i data-lucide="arrow-up" class="h-5 w-5"></i>
+              </button>
+            </div>
+            <div id="hero-actions" class="flex flex-wrap items-center justify-center gap-3">
+              <button class="js-signup-cta bg-transparent hover:bg-brand-crimson text-brand-crimson hover:text-white border border-brand-crimson px-4 py-2 rounded-full text-sm font-semibold transition-colors duration-300">Get Started</button>
+            </div>
+            <div id="faq-answer" class="mt-6 p-4 text-left rounded-lg bg-white/90 dark:bg-slate-900/90 border border-slate-200 dark:border-slate-800 text-slate-800 dark:text-slate-200"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+    <section id="payments" class="w-full min-h-screen flex flex-col items-center justify-center p-4 relative py-20">
+        <!-- Title -->
+        <div class="max-w-5xl w-full mx-auto px-4 text-center mb-4">
+            <div class="inline-block bg-transparent text-slate-200 px-8 py-4 rounded-full border-2 border-brand-teal shadow-lg">
+                <h2 class="text-3xl font-ubuntu font-bold">Payment Services Tailored for You</h2>
+            </div>
+        </div>
+        
+        <!-- Carousel Container -->
+        <div class="banner flex-grow w-full h-[50vh]">
+            <div id="back-slider" class="slider" style="--quantity: 10"></div>
+            <div id="front-slider" class="slider" style="--quantity: 10"></div>
+            <div class="content">
+                <div class="model"></div>
+            </div>
+        </div>
+    
+        <!-- Subtitle -->
+        <p class="text-2xl sm:text-3xl font-ubuntu text-slate-400 text-center px-4 mt-4">
+           Your complete business toolkit for accepting and managing payments.
+        </p>
+
+        <div class="mt-8 sm:mt-10 flex flex-wrap justify-center gap-4 px-4">
+            <button type="button" class="js-signup-cta inline-flex items-center justify-center rounded-full px-8 py-3 text-lg font-semibold text-white shadow-lg transition-all duration-300 hover:-translate-y-0.5 hover:shadow-xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-crimson focus-visible:ring-offset-2" style="background-image: linear-gradient(135deg, #dc143c 0%, #f43f5e 50%, #ff758c 100%);">
+                Start accepting payments today
+            </button>
+             <button id="open-ai-modal-btn" type="button" class="inline-flex items-center justify-center rounded-full px-8 py-3 text-lg font-semibold text-brand-dark bg-white shadow-lg transition-all duration-300 hover:-translate-y-0.5 hover:shadow-xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-teal focus-visible:ring-offset-2">
+                ✨ Find Your Perfect Fit
+            </button>
+        </div>
+    </section>
+</div>
+
+
+<!-- ================= AI SUGGESTER MODAL START ================= -->
+<!-- Pop-up assistant collecting business context to recommend services -->
+<div id="ai-suggester-modal" class="fixed inset-0 bg-black/70 z-50 hidden items-center justify-center p-4">
+  <div class="bg-[#1c1c1c] border-2 border-brand-teal rounded-2xl shadow-xl p-6 sm:p-8 w-full max-w-2xl transform transition-all relative">
+    <button id="close-ai-modal" class="absolute top-4 right-4 text-slate-400 hover:text-white transition-colors">
+      <i data-lucide="x" class="h-6 w-6"></i>
+    </button>
+    <div class="flex items-center gap-3 mb-4">
+      <h3 class="text-2xl font-ubuntu font-bold text-white">✨ AI Service Suggester</h3>
+    </div>
+    <p class="text-slate-300 mb-4 font-inter text-sm sm:text-base">Describe your business, and our AI will recommend the best payment services for your needs.</p>
+
+    <textarea id="business-description" class="w-full bg-[#2a2a2a] border border-slate-700 rounded-lg p-3 text-white placeholder-slate-400 focus:ring-2 focus:ring-brand-teal focus:border-transparent transition" rows="3" placeholder="e.g., 'I run an online clothing store using Shopify.' or 'I'm a freelance photographer who needs to send invoices.'"></textarea>
+
+    <button id="get-recommendations-btn" class="mt-4 w-full bg-brand-crimson text-white font-bold py-3 px-4 rounded-lg hover:bg-opacity-90 transition-all flex items-center justify-center disabled:opacity-50 disabled:cursor-not-allowed">
+      <span class="btn-text">Get Recommendations</span>
+      <span class="loader hidden ml-2"></span>
+    </button>
+
+    <div id="recommendations-result" class="mt-6 max-h-64 overflow-y-auto pr-2"></div>
+  </div>
+</div>
+<!-- ================= AI SUGGESTER MODAL END ================= -->
+
+<section id="integrations" class="py-12 md:py-20">
+  <div class="max-w-5xl mx-auto px-4 space-y-12">
+    <div class="flex flex-col md:flex-row items-center justify-center gap-6 md:gap-12 text-center">
+      <img src="assets/integrations/shopify.svg" alt="Shopify Logo" class="h-12 md:h-16">
+      <div class="space-y-2">
+        <h2 class="text-3xl md:text-4xl font-bold font-ubuntu">Integrate With Your Favorite Tools</h2>
+        <p class="text-slate-400 text-lg">Connect with your favorite tools and services.</p>
+      </div>
+      <img src="assets/integrations/gohighlevel.svg" alt="GoHighLevel Logo" class="h-12 md:h-16">
+    </div>
+    
+    <div class="relative w-full overflow-hidden group">
+        <div class="flex animate-marquee group-hover:pause">
+            <div class="flex-shrink-0 flex items-center justify-around w-full">
+                <img src="assets/integrations/bigcommerce.webp" class="h-12 mx-8 object-contain">
+                <img src="assets/integrations/clover.webp" class="h-12 mx-8 object-contain">
+                <img src="assets/integrations/freshbooks.webp" class="h-12 mx-8 object-contain">
+                <img src="assets/integrations/hubspot.webp" class="h-12 mx-8 object-contain">
+                <img src="assets/integrations/keap.webp" class="h-12 mx-8 object-contain">
+                <img src="assets/integrations/lightspeed.webp" class="h-12 mx-8 object-contain">
+                <img src="assets/integrations/magento.webp" class="h-12 mx-8 object-contain">
+                <img src="assets/integrations/mastercard.webp" class="h-12 mx-8 object-contain">
+                <img src="assets/integrations/ncr.webp" class="h-12 mx-8 object-contain">
+            </div>
+             <div class="flex-shrink-0 flex items-center justify-around w-full" aria-hidden="true">
+                <img src="assets/integrations/bigcommerce.webp" class="h-12 mx-8 object-contain">
+                <img src="assets/integrations/clover.webp" class="h-12 mx-8 object-contain">
+                <img src="assets/integrations/freshbooks.webp" class="h-12 mx-8 object-contain">
+                <img src="assets/integrations/hubspot.webp" class="h-12 mx-8 object-contain">
+                <img src="assets/integrations/keap.webp" class="h-12 mx-8 object-contain">
+                <img src="assets/integrations/lightspeed.webp" class="h-12 mx-8 object-contain">
+                <img src="assets/integrations/magento.webp" class="h-12 mx-8 object-contain">
+                <img src="assets/integrations/mastercard.webp" class="h-12 mx-8 object-contain">
+                <img src="assets/integrations/ncr.webp" class="h-12 mx-8 object-contain">
+            </div>
+        </div>
+        <div class="flex animate-marquee-reverse group-hover:pause mt-8">
+             <div class="flex-shrink-0 flex items-center justify-around w-full">
+                <img src="assets/integrations/quickbooks.webp" class="h-12 mx-8 object-contain">
+                <img src="assets/integrations/salesforce.webp" class="h-12 mx-8 object-contain">
+                <img src="assets/integrations/squarespace.webp" class="h-12 mx-8 object-contain">
+                <img src="assets/integrations/vend.webp" class="h-12 mx-8 object-contain">
+                <img src="assets/integrations/visa.webp" class="h-12 mx-8 object-contain">
+                <img src="assets/integrations/wix.webp" class="h-12 mx-8 object-contain">
+                <img src="assets/integrations/woocommerce.webp" class="h-12 mx-8 object-contain">
+                <img src="assets/integrations/zoho_crm.webp" class="h-12 mx-8 object-contain">
+            </div>
+            <div class="flex-shrink-0 flex items-center justify-around w-full" aria-hidden="true">
+                <img src="assets/integrations/quickbooks.webp" class="h-12 mx-8 object-contain">
+                <img src="assets/integrations/salesforce.webp" class="h-12 mx-8 object-contain">
+                <img src="assets/integrations/squarespace.webp" class="h-12 mx-8 object-contain">
+                <img src="assets/integrations/vend.webp" class="h-12 mx-8 object-contain">
+                <img src="assets/integrations/visa.webp" class="h-12 mx-8 object-contain">
+                <img src="assets/integrations/wix.webp" class="h-12 mx-8 object-contain">
+                <img src="assets/integrations/woocommerce.webp" class="h-12 mx-8 object-contain">
+                <img src="assets/integrations/zoho_crm.webp" class="h-12 mx-8 object-contain">
+            </div>
+        </div>
+    </div>
+  </div>
+</section>
+
+<style>
+@keyframes marquee {
+  0% { transform: translateX(0%); }
+  100% { transform: translateX(-100%); }
+}
+@keyframes marquee-reverse {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(0%); }
+}
+.animate-marquee {
+  animation: marquee 40s linear infinite;
+}
+.animate-marquee-reverse {
+  animation: marquee-reverse 40s linear infinite;
+}
+.group-hover\:pause:hover {
+  animation-play-state: paused;
+}
+</style>
+
+<div class="relative">
+  <section id="checklist" class="pt-28 pb-16 bg-slate-50 dark:bg-slate-900/40 border-y border-slate-200/70 dark:border-slate-800">
+    <div class="max-w-7xl mx-auto px-4 text-center">
+      <p class="mt-4 max-w-3xl mx-auto text-slate-600 dark:text-slate-300">Here’s everything we’ll ask for during setup—business details, security info, documentation. We’ll guide you step‑by‑step.</p>
+      <div class="grid md:grid-cols-3 gap-8 mt-12 text-left">
+        <div class="bg-white dark:bg-slate-950 p-6 rounded-xl border border-slate-200 dark:border-slate-800 space-y-4">
+          <div class="flex items-center gap-4">
+            <div class="w-12 h-12 rounded-full bg-brand-crimson/10 dark:bg-brand-teal/10 flex-shrink-0 flex items-center justify-center text-brand-crimson dark:text-brand-teal">
+              <i data-lucide="briefcase" class="w-6 h-6"></i>
+            </div>
+            <h3 class="text-xl font-ubuntu font-bold">Business Information</h3>
+          </div>
+          <ul class="list-disc pl-5 space-y-2 text-sm text-slate-600 dark:text-slate-400">
+            <li>Business information (name, address, industry)</li>
+            <li>Owner/representative info (name, contact, ID)</li>
+            <li>Bank account for payouts</li>
+            <li>Verification documents (e.g. photo ID, business registration)—upload when prompted</li>
+          </ul>
+        </div>
+        <div class="bg-white dark:bg-slate-950 p-6 rounded-xl border border-slate-200 dark:border-slate-800 space-y-4">
+          <div class="flex items-center gap-4">
+            <div class="w-12 h-12 rounded-full bg-brand-crimson/10 dark:bg-brand-teal/10 flex-shrink-0 flex items-center justify-center text-brand-crimson dark:text-brand-teal">
+              <i data-lucide="shield-check" class="w-6 h-6"></i>
+            </div>
+            <h3 class="text-xl font-ubuntu font-bold">Security & Compliance</h3>
+          </div>
+          <ul class="list-disc pl-5 space-y-2 text-sm text-slate-600 dark:text-slate-400">
+            <li>Basic fraud and security setup (required for processing)</li>
+            <li>Evidence of PCI DSS certification or self-assessment</li>
+            <li>Use of PCI-compliant POS systems or software</li>
+            <li>Merchant attestation of cardholder data handling policies</li>
+          </ul>
+        </div>
+        <div class="bg-white dark:bg-slate-950 p-6 rounded-xl border border-slate-200 dark:border-slate-800 space-y-4">
+          <div class="flex items-center gap-4">
+            <div class="w-12 h-12 rounded-full bg-brand-crimson/10 dark:bg-brand-teal/10 flex-shrink-0 flex items-center justify-center text-brand-crimson dark:text-brand-teal">
+              <i data-lucide="rocket" class="w-6 h-6"></i>
+            </div>
+            <h3 class="text-xl font-ubuntu font-bold">Platform Readiness</h3>
+          </div>
+          <ul class="list-disc pl-5 space-y-2 text-sm text-slate-600 dark:text-slate-400">
+            <li>User account creation and login testing</li>
+            <li>Review of available transaction and reconciliation tools</li>
+            <li>Setup of reporting email or dashboard notifications</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+  <div class="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 z-10 w-full max-w-5xl px-4">
+    <div class="bg-brand-teal px-8 py-4 rounded-xl shadow-lg text-center">
+      <h2 class="text-3xl font-ubuntu font-bold" style="color: #524848;">Setup Checklist: What You’ll Need to Begin</h2>
+    </div>
+  </div>
+</div>
+
+<main class="max-w-5xl mx-auto px-4 pt-10 pb-4">
+    <h1 class="text-3xl md:text-4xl font-extrabold">Merchant Application</h1>
+    <p class="mt-2 text-slate-300">U.S. retail only. Provide the details below — we’ll review and issue your Merchant ID (MID) &amp; access credentials during onboarding.</p>
+    <form class="mt-8 grid gap-6" id="apply-form">
+    <!-- Merchant Information -->
+    <section class="p-6 rounded-2xl border border-slate-800">
+    <h2 class="text-xl font-bold">Merchant Information</h2>
+    <div class="mt-4 grid md:grid-cols-2 gap-4">
+    <label class="text-sm">Company Name*<input class="field mt-1 w-full rounded-lg border border-slate-700 bg-slate-900 px-3 py-2" name="companyName" required=""/></label>
+    <label class="text-sm">External Identifier<input class="field mt-1 w-full rounded-lg border border-slate-700 bg-slate-900 px-3 py-2" name="externalId"/></label>
+    <label class="text-sm">Country*<select class="field mt-1 w-full rounded-lg border border-slate-700 bg-slate-900 px-3 py-2" name="country" required=""><option>United States</option></select></label>
+    <label class="text-sm">Timezone*<select class="field mt-1 w-full rounded-lg border border-slate-700 bg-slate-900 px-3 py-2" name="timezone" required="">
+    <option>(GMT-08:00) Pacific Time (US &amp; Canada)</option>
+    <option>(GMT-07:00) Mountain Time (US &amp; Canada)</option>
+    <option>(GMT-06:00) Central Time (US &amp; Canada)</option>
+    <option>(GMT-05:00) Eastern Time (US &amp; Canada)</option>
+    </select></label>
+    <label class="text-sm md:col-span-2">Address*<input class="field mt-1 w-full rounded-lg border border-slate-700 bg-slate-900 px-3 py-2" name="address1" required=""/></label>
+    <label class="text-sm">Address 2<input class="field mt-1 w-full rounded-lg border border-slate-700 bg-slate-900 px-3 py-2" name="address2"/></label>
+    <label class="text-sm">City*<input class="field mt-1 w-full rounded-lg border border-slate-700 bg-slate-900 px-3 py-2" name="city" required=""/></label>
+    <label class="text-sm">State*<select class="field mt-1 w-full rounded-lg border border-slate-700 bg-slate-900 px-3 py-2" name="state" required=""></select></label>
+    <label class="text-sm">Zip/Postal Code*<input class="field mt-1 w-full rounded-lg border border-slate-700 bg-slate-900 px-3 py-2" name="postalCode" required=""/></label>
+    <label class="text-sm md:col-span-2">Website<input class="field mt-1 w-full rounded-lg border border-slate-700 bg-slate-900 px-3 py-2" name="website" placeholder="https://example.com" type="url"/></label>
+    <label class="text-sm">Language<select class="field mt-1 w-full rounded-lg border border-slate-700 bg-slate-900 px-3 py-2" name="language"><option>English</option></select></label>
+    </div>
+    </section>
+    <!-- Company Contact -->
+    <section class="p-6 rounded-2xl border border-slate-800">
+    <h2 class="text-xl font-bold">Company Contact (Primary User)</h2>
+    <p class="text-xs text-slate-500 mt-1">This person receives the welcome email and appears on receipts if enabled.</p>
+    <div class="mt-4 grid md:grid-cols-2 gap-4">
+    <label class="text-sm">First Name*<input class="field mt-1 w-full rounded-lg border border-slate-700 bg-slate-900 px-3 py-2" name="firstName" required=""/></label>
+    <label class="text-sm">Last Name*<input class="field mt-1 w-full rounded-lg border border-slate-700 bg-slate-900 px-3 py-2" name="lastName" required=""/></label>
+    <label class="text-sm">Email Address*<input class="field mt-1 w-full rounded-lg border border-slate-700 bg-slate-900 px-3 py-2" name="email" required="" type="email"/></label>
+    <label class="text-sm">Phone Number*<input class="field mt-1 w-full rounded-lg border border-slate-700 bg-slate-900 px-3 py-2" name="phone" required=""/></label>
+    <label class="text-sm">Fax Number<input class="field mt-1 w-full rounded-lg border border-slate-700 bg-slate-900 px-3 py-2" name="fax"/></label>
+    </div>
+    </section>
+    <!-- Account Setup & Services -->
+    <section class="p-6 rounded-2xl border border-slate-800">
+    <h2 class="text-xl font-bold">Account Setup</h2>
+    <div class="mt-4 grid md:grid-cols-2 gap-4">
+    <label class="text-sm md:col-span-2">Primary Username*<input class="field mt-1 w-full rounded-lg border border-slate-700 bg-slate-900 px-3 py-2" maxlength="32" minlength="4" name="username" pattern="[A-Za-z0-9]+" placeholder="letters and numbers only" required=""/></label>
+    </div>
+    <h3 class="mt-4 font-semibold">Processing Services</h3>
+    <div class="mt-2 grid md:grid-cols-3 gap-3 text-sm">
+    <label class="inline-flex items-center gap-2"><input checked="" class="accent-brand-crimson" name="svcCredit" type="checkbox"/>Credit Card</label>
+    <label class="inline-flex items-center gap-2"><input class="accent-brand-crimson" name="svcAch" type="checkbox"/>ACH / eCheck</label>
+    <label class="inline-flex items-center gap-2"><input class="accent-brand-crimson" name="svcCash" type="checkbox"/>Cash</label>
+    </div>
+    <h3 class="mt-4 font-semibold">Value‑added Services</h3>
+    <div class="mt-2 grid md:grid-cols-3 gap-3 text-sm">
+    <label class="inline-flex items-center gap-2"><input class="accent-brand-crimson" name="valEncryption" type="checkbox"/>Encryption (Encrypted Devices)</label>
+    <label class="inline-flex items-center gap-2"><input checked="" class="accent-brand-crimson" name="valInvoice" type="checkbox"/>Invoice</label>
+    <label class="inline-flex items-center gap-2"><input class="accent-brand-crimson" name="valLevel3" type="checkbox"/>Level III Advantage</label>
+    <label class="inline-flex items-center gap-2"><input class="accent-brand-crimson" name="valMobile" type="checkbox"/>Mobile Payments</label>
+    <label class="inline-flex items-center gap-2"><input checked="" class="accent-brand-crimson" name="valVault" type="checkbox"/>Customer Vault</label>
+    </div>
+    <div class="mt-4 text-xs text-slate-400">
+              By submitting, you agree to our <a class="underline hover:text-brand-teal" href="/terms.html" rel="noopener" target="_blank">Terms &amp; Conditions</a> and <a class="underline hover:text-brand-teal" href="/privacy.html" rel="noopener" target="_blank">Privacy Policy</a>.
+            </div>
+    </section>
+    <div class="flex items-center gap-3">
+    <button class="px-5 py-3 rounded-lg bg-brand-crimson text-white font-semibold hover:bg-opacity-90 transition-colors" type="submit">Submit Application</button>
+    <span class="text-sm text-slate-400" id="apply-out"></span>
+    </div>
+    </form>
+
+</main>
+
+<div id="support-modal" class="fixed inset-0 z-[70] hidden">
+  <div class="absolute inset-0 bg-black/60" data-close></div>
+  <div class="mx-auto mt-[10vh] w-[min(560px,92vw)] rounded-2xl bg-white dark:bg-slate-900 p-6 border border-slate-200 dark:border-slate-800 shadow-2xl">
+    <div class="flex items-center justify-between">
+      <h3 class="text-xl font-extrabold font-ubuntu">Contact Support</h3>
+      <button class="p-2 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800" data-close aria-label="Close"><i data-lucide="x" class="h-5 w-5"></i></button>
+    </div>
+    <p class="mt-1 text-sm text-slate-600 dark:text-slate-300">Have a question? Fill out the form below or contact us at <a href="tel:15056006042" class="text-brand-crimson dark:text-brand-teal hover:underline">1-505-600-6042</a>.</p>
+    <form id="support-form" class="mt-4 grid gap-3">
+      <input name="name" placeholder="Your name" class="field rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-950 px-3 py-2" required>
+      <input name="email" type="email" placeholder="Work email" class="field rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-950 px-3 py-2" required>
+      <textarea name="message" placeholder="Your message..." rows="4" class="field rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-950 px-3 py-2" required></textarea>
+      <button class="rounded-lg bg-brand-crimson text-white font-semibold px-4 py-2 hover:bg-brand-crimson" type="submit">Send Message</button>
+      <p id="support-out" class="text-xs text-slate-500"></p>
+    </form>
+  </div>
+</div>
+
+    <!-- Footer -->
+    <footer class="border-t border-slate-800 py-8 mt-8">
+        <div class="max-w-7xl mx-auto px-4 grid sm:grid-cols-2 lg:grid-cols-4 gap-8 text-sm" >
+            <div class="space-y-4">
+                <a href="/index.html" class="flex items-center gap-3">
+                    <div class="w-[220px]" data-mh-logo-footer></div>
+                     <span class="sr-only">MerchantHaus Homepage</span>
+                </a>
+                <div class="text-sm">
+                    <a href="tel:15056006042" class="block text-slate-300 hover:text-brand-teal">1-505-600-6042</a>
+                    <a href="mailto:support@merchanthaus.io" class="block text-slate-300 hover:text-brand-teal">support@merchanthaus.io</a>
+                </div>
+            </div>
+            <nav class="space-y-2">
+                <h3 class="font-semibold font-ubuntu text-white">Product</h3>
+                <a href="/#payments" class="block text-slate-300 hover:text-brand-teal">Payment Services</a>
+                <button
+                    type="button"
+                    id="footer-integrations-toggle"
+                    aria-expanded="false"
+                    aria-controls="footer-integrations-menu"
+                    class="flex items-center justify-between w-full text-left text-slate-300 hover:text-brand-teal transition-colors"
+                >
+                    <span>Integrations</span>
+                    <span class="ml-2 text-slate-400">
+                        <svg data-collapsible-icon class="w-4 h-4 transition-transform" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <polyline points="6 9 12 15 18 9" />
+                        </svg>
+                    </span>
+                </button>
+                <div id="footer-integrations-menu" class="mt-2 space-y-2 pl-4 hidden">
+                    <a href="/integrations.html" class="block text-slate-400 hover:text-brand-teal">Integrations Directory</a>
+                    <a href="/shopify.html" class="block text-slate-400 hover:text-brand-teal">Shopify Integration</a>
+                    <a href="/gohighlevel.html" class="block text-slate-400 hover:text-brand-teal">GoHighLevel Integration</a>
+                </div>
+                <a href="/#checklist" class="block text-slate-300 hover:text-brand-teal">Setup Checklist</a>
+            </nav>
+            <nav class="space-y-2">
+                <h3 class="font-semibold font-ubuntu text-white">Support</h3>
+                <a
+                  href="mailto:support@merchanthaus.io"
+                  class="js-support block text-slate-300 hover:text-brand-teal"
+                  data-cta="contact-support"
+                  data-cta-location="footer"
+                >Contact Support</a>
+                <a href="/faq.html" class="block text-slate-300 hover:text-brand-teal">FAQ</a>
+            </nav>
+            <nav class="space-y-2">
+                <h3 class="font-semibold font-ubuntu text-white">Legal</h3>
+                <a href="/privacy.html" class="block text-slate-300 hover:text-brand-teal">Privacy Policy</a>
+                <a href="/terms.html" class="block text-slate-300 hover:text-brand-teal">Terms & Conditions</a>
+            </nav>
+        </div>
+        <div class="text-center text-xs pt-8 mt-8 border-t border-slate-800 text-slate-500 font-inter">
+            © <span id="year"></span> Merchant Haus. All rights reserved.
+        </div>
+    </footer>
+    
+    <button id="back-to-top" class="fixed bottom-6 right-6 bg-brand-crimson text-white p-3 rounded-full shadow-lg opacity-0 invisible transition-all duration-300 z-50 hover:bg-opacity-90">
+        <i data-lucide="arrow-up" class="h-6 w-6"></i>
+        <span class="sr-only">Back to top</span>
+    </button>
+
+
+    <script src="/assets/signup-panel.js" defer></script>
+    
+     <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            if (window.lucide) {
+              lucide.createIcons();
+            }
+
+            // --- Main Page Scripts ---
+            document.getElementById('year').textContent = new Date().getFullYear();
+
+             const logoImagePath = "\/public\/assets\/images\/Shield.png";
+            // --- Animated Logo Injection ---
+            const logoSVG = (id, tagline = true, shimmer = true) => {
+                const letters = ['M','e','r','c','h','a','n','t','H','a','u','s'];
+                let letterTags = '';
+                letters.forEach((letter, index) => {
+                    const delay = index * 0.1;
+                    letterTags += `<tspan opacity="0" dy="-20">${letter}<animate attributeName="opacity" from="0" to="1" dur="0.2s" begin="${delay}s" fill="freeze"/><animate attributeName="dy" from="-20" to="0" dur="0.2s" begin="${delay}s" fill="freeze" calcMode="discrete"/></tspan>`;
+                });
+
+                return `
+                <svg viewBox="0 0 600 100" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%">
+                    <defs>
+                        <linearGradient id="shimmer-${id}" gradientUnits="userSpaceOnUse" x1="120" y1="0" x2="560" y2="0">
+                            <stop offset="0%" stop-color="#DC143C" />
+                            <stop offset="45%" stop-color="#DC143C">
+                                ${shimmer ? `<animate attributeName="stop-color" values="#DC143C; #FFC0CB; #DC143C" keyTimes="0; 0.5; 1" dur="2s" begin="1.5s" fill="freeze" repeatCount="1"/>` : ''}
+                            </stop>
+                            <stop offset="50%" stop-color="#DC143C">
+                                ${shimmer ? `<animate attributeName="stop-color" values="#DC143C; #FFFFFF; #DC143C" keyTimes="0; 0.5; 1" dur="2s" begin="1.5s" fill="freeze" repeatCount="1"/>` : ''}
+                            </stop>
+                            <stop offset="55%" stop-color="#DC143C">
+                                ${shimmer ? `<animate attributeName="stop-color" values="#DC143C; #FFC0CB; #DC143C" keyTimes="0; 0.5; 1" dur="2s" begin="1.5s" fill="freeze" repeatCount="1"/>` : ''}
+                            </stop>
+                            <stop offset="100%" stop-color="#DC143C" />
+                            ${shimmer ? `<animateTransform attributeName="transform" type="translate" from="-600 0" to="600 0" dur="2s" begin="1.5s" fill="freeze" repeatCount="1"/>` : ''}
+                        </linearGradient>
+                        <style>
+                            .mh-text-${id} { font-family: 'Ubuntu', sans-serif; font-size: 50px; font-weight: 700; fill: url(#shimmer-${id}); }
+                            .mh-tagline-${id} { font-family: 'Inter', sans-serif; font-size: 18px; font-weight: 500; fill: #A9A9A9; text-anchor: middle; letter-spacing: 4px; }
+                        </style>
+                    </defs>
+                    <image href="${logoImagePath}" x="10" y="10" height="80" width="80" />
+                    <text class="mh-text-${id}" y="60" x="110">${letterTags}</text>
+                    ${tagline ? `
+                        <line x1="160" x2="400" y1="72" y2="72" stroke="#00CEDB" stroke-width="2" opacity="0">
+                            <animate attributeName="opacity" from="0" to="1" dur="1s" begin="1.5s" fill="freeze" />
+                        </line>
+                        <text x="280" y="92" class="mh-tagline-${id}" opacity="0">
+                            <animate attributeName="opacity" from="0" to="1" dur="1s" begin="2s" fill="freeze" />plug. play. grow.
+                        </text>
+                    ` : ''}
+                </svg>`;
+            };
+            
+            if (document.querySelector('[data-mh-logo-header]')) {
+                document.querySelector('[data-mh-logo-header]').innerHTML = logoSVG('header', false, false);
+            }
+            if (document.querySelector('[data-mh-logo-footer]')) {
+                 document.querySelector('[data-mh-logo-footer]').innerHTML = logoSVG('footer', true, false);
+            }
+
+            const setupCollapsibleMenu = (toggleId, menuId) => {
+                const toggle = document.getElementById(toggleId);
+                const menu = document.getElementById(menuId);
+                if (!toggle || !menu) return;
+
+                const icon = toggle.querySelector('[data-collapsible-icon]');
+
+                const openMenu = () => {
+                    menu.classList.remove('hidden');
+                    toggle.setAttribute('aria-expanded', 'true');
+                    if (icon) icon.classList.add('rotate-180');
+                };
+
+                const closeMenu = () => {
+                    menu.classList.add('hidden');
+                    toggle.setAttribute('aria-expanded', 'false');
+                    if (icon) icon.classList.remove('rotate-180');
+                };
+
+                toggle.addEventListener('click', (event) => {
+                    event.preventDefault();
+                    if (menu.classList.contains('hidden')) {
+                        openMenu();
+                    } else {
+                        closeMenu();
+                    }
+                });
+            };
+            setupCollapsibleMenu('footer-integrations-toggle', 'footer-integrations-menu');
+            setupCollapsibleMenu('mobile-integrations-toggle', 'mobile-integrations-menu');
+            
+            const mobileMenuButton = document.getElementById('mobile-menu-button');
+            const mobileMenu = document.getElementById('mobile-menu');
+            if(mobileMenuButton && mobileMenu) {
+                mobileMenuButton.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    mobileMenu.classList.toggle('hidden');
+                });
+                document.addEventListener('click', (e) => {
+                    if (!mobileMenu.classList.contains('hidden') && !mobileMenu.contains(e.target) && !mobileMenuButton.contains(e.target)) {
+                        mobileMenu.classList.add('hidden');
+                    }
+                });
+            }
+
+            const backToTopButton = document.getElementById('back-to-top');
+            if(backToTopButton) {
+                window.addEventListener('scroll', () => {
+                    if (window.scrollY > 300) {
+                        backToTopButton.classList.remove('invisible', 'opacity-0');
+                    } else {
+                        backToTopButton.classList.add('invisible', 'opacity-0');
+                    }
+                });
+                backToTopButton.addEventListener('click', () => {
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                });
+            }
+
+            // --- CAROUSEL AND PARTICLE SCRIPT ---
+            const serviceDetails = {
+                "Mobile Payments": {
+                    description: "Take payments anywhere using a phone or tablet. Supports Tap to Pay and popular mobile wallets. Ideal for retail, service, and on-the-go transactions. Backed by secure, PCI-compliant technology."
+                },
+                "Smart Routing": { description: "Dynamically route transactions to optimize for cost, speed, and success rates. Our intelligent algorithms analyze each payment in real-time to select the best processing path." },
+                "Invoicing": { description: "Create and send professional, customized invoices in minutes. Track payment status, send automated reminders, and accept payments directly from the invoice." },
+                "Recurring Billing": { description: "Automate your subscription and recurring payment processes. Set up flexible billing cycles, manage customer plans, and reduce churn with smart dunning management." },
+                "Secure Tokenization": { description: "Protect sensitive customer data with our advanced tokenization technology. Cardholder information is replaced with a secure token, reducing your PCI compliance scope." },
+                "Detailed Reporting": { description: "Gain valuable insights into your business with comprehensive reporting tools. Track sales trends, monitor transaction history, and easily reconcile your accounts." },
+                "Automation": { description: "Streamline your workflows with powerful automation tools. Set up rules for fraud detection, chargeback management, and other repetitive tasks to save time and reduce errors." },
+                "ACH Payments": { description: "Offer your customers the flexibility of paying directly from their bank accounts. Our ACH processing is secure, reliable, and cost-effective for large transactions." },
+                "Fraud Prevention": { description: "Protect your business from fraudulent transactions with our multi-layered security system. We use machine learning, velocity checks, and customizable rules to minimize risk." },
+                "Global Payments": { description: "Expand your business internationally by accepting payments in multiple currencies. We provide competitive exchange rates and settlement in your local currency." }
+            };
+
+            const particleCanvas = document.getElementById('particle-canvas');
+            const pCtx = particleCanvas.getContext('2d');
+            let particles = [];
+            
+            function resizeParticleCanvas() {
+                particleCanvas.width = window.innerWidth;
+                particleCanvas.height = window.innerHeight;
+            }
+            resizeParticleCanvas();
+            window.addEventListener('resize', resizeParticleCanvas);
+
+            class Particle {
+                constructor(x, y, vx = (Math.random() - 0.5) * 2, vy = (Math.random() - 0.5) * 2) {
+                    this.x = x; this.y = y; this.vx = vx; this.vy = vy;
+                    this.alpha = 1; this.radius = Math.random() * 1.5 + 1;
+                    this.life = Math.random() * 30 + 20;
+                }
+                update() {
+                    this.x += this.vx; this.y += this.vy;
+                    this.alpha -= 0.05; this.life--;
+                }
+                draw() {
+                    pCtx.beginPath();
+                    pCtx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+                    pCtx.fillStyle = `rgba(0, 206, 219, ${this.alpha})`;
+                    pCtx.fill();
+                }
+            }
+            
+            function createCurvedParticleTrail(startX, startY, endX, endY, duration) {
+                const startTime = Date.now();
+                const midX = (startX + endX) / 2; const midY = (startY + endY) / 2;
+                const dx = endX - startX; const dy = endY - startY;
+                const dist = Math.sqrt(dx*dx + dy*dy); const angle = Math.atan2(dy, dx);
+                const perpAngle = angle - Math.PI / 2; const curveAmount = dist * 0.3;
+                const controlX = midX + Math.cos(perpAngle) * curveAmount;
+                const controlY = midY + Math.sin(perpAngle) * curveAmount;
+
+                function animateTrail() {
+                    const elapsedTime = Date.now() - startTime;
+                    const progress = Math.min(elapsedTime / duration, 1);
+                    const pX = Math.pow(1 - progress, 2) * startX + 2 * (1 - progress) * progress * controlX + Math.pow(progress, 2) * endX;
+                    const pY = Math.pow(1 - progress, 2) * startY + 2 * (1 - progress) * progress * controlY + Math.pow(progress, 2) * endY;
+                    
+                    if (Math.random() > 0.3) {
+                        const particleAngle = Math.atan2(pY - (particles[particles.length-1]?.y || pY), pX - (particles[particles.length-1]?.x || pX));
+                        const speed = 2;
+                        const vx = Math.cos(particleAngle) * speed + (Math.random() - 0.5) * 1.5;
+                        const vy = Math.sin(particleAngle) * speed + (Math.random() - 0.5) * 1.5;
+                        particles.push(new Particle(pX, pY, vx, vy));
+                    }
+                    if (progress < 1) requestAnimationFrame(animateTrail);
+                }
+                requestAnimationFrame(animateTrail);
+            }
+
+            function animateParticles() {
+                pCtx.clearRect(0, 0, particleCanvas.width, particleCanvas.height);
+                for (let i = particles.length - 1; i >= 0; i--) {
+                    const p = particles[i]; p.update(); p.draw();
+                    if (p.alpha <= 0 || p.life <= 0) particles.splice(i, 1);
+                }
+                requestAnimationFrame(animateParticles);
+            }
+            animateParticles();
+
+            const frontSlider = document.getElementById('front-slider');
+            const backSlider = document.getElementById('back-slider');
+            const allItems = [];
+
+            const services = [
+                { title: "Mobile Payments", icon: "smartphone" },
+                { title: "Smart Routing", icon: "shuffle" },
+                { title: "Invoicing", icon: "file-text" },
+                { title: "Recurring Billing", icon: "repeat" },
+                { title: "Secure Tokenization", icon: "lock" },
+                { title: "Detailed Reporting", icon: "bar-chart-2" },
+                { title: "Automation", icon: "cpu" },
+                { title: "ACH Payments", icon: "landmark" },
+                { title: "Fraud Prevention", icon: "shield-alert" },
+                { title: "Global Payments", icon: "globe-2" }
+            ];
+
+            services.forEach((service, i) => {
+                const item = document.createElement('div');
+                item.className = 'item';
+                item.style.setProperty('--position', i + 1);
+                item.dataset.pos = i + 1;
+                item.innerHTML = `
+                    <div class="service-card">
+                        <div class="service-icon-container">
+                            <i data-lucide="${service.icon}" class="service-icon"></i>
+                        </div>
+                    </div>
+                    <div class="service-title">${service.title}</div>
+                `;
+                allItems.push(item);
+            });
+
+            const fullscreenView = document.getElementById('fullscreen-view');
+            const fullscreenCard = document.getElementById('fullscreen-card');
+            const numItems = allItems.length;
+            const rotationIncrement = 360 / numItems;
+
+            let currentYRotation = 0;
+            let isDragging = false;
+            let startX, startRotation, dragDistance = 0;
+            let dragThreshold = 5; 
+            let autoRotate = true;
+            let autoRotateTimeout;
+
+            const updateSliderRotation = () => {
+                const rotationStyle = `perspective(1500px) rotateX(-18deg) rotateY(${currentYRotation}deg)`;
+                frontSlider.style.transform = rotationStyle;
+                backSlider.style.transform = rotationStyle;
+                updateCardZIndexes();
+            };
+
+            const updateCardZIndexes = () => {
+                allItems.forEach(item => {
+                    const position = parseInt(item.style.getPropertyValue('--position'));
+                    const itemAngle = (position - 1) * rotationIncrement;
+                    let effectiveAngle = (currentYRotation + itemAngle) % 360;
+                    if (effectiveAngle < 0) effectiveAngle += 360;
+
+                    if (effectiveAngle > 90 && effectiveAngle < 270) {
+                        if (item.parentElement !== backSlider) {
+                            backSlider.appendChild(item);
+                        }
+                    } else {
+                        if (item.parentElement !== frontSlider) {
+                            frontSlider.appendChild(item);
+                        }
+                    }
+                });
+            };
+
+            const stopAutoRotate = () => {
+                autoRotate = false;
+                clearTimeout(autoRotateTimeout);
+            };
+            const resumeAutoRotate = (delay = 5000) => {
+                clearTimeout(autoRotateTimeout);
+                autoRotateTimeout = setTimeout(() => { autoRotate = true; }, delay);
+            };
+
+            const handleMouseDown = (e) => {
+                stopAutoRotate(); isDragging = true;
+                frontSlider.classList.add('dragging');
+                backSlider.classList.add('dragging');
+                startX = e.pageX || e.touches[0].pageX;
+                startRotation = currentYRotation;
+                dragDistance = 0;
+                document.body.classList.add('grabbing');
+            };
+            const handleMouseMove = (e) => {
+                if (!isDragging) return;
+                const x = e.pageX || e.touches[0].pageX;
+                const walk = (x - startX) * 0.5; 
+                currentYRotation = startRotation - walk;
+                dragDistance = Math.abs(walk);
+                updateSliderRotation();
+            };
+            const handleMouseUp = () => {
+                if (!isDragging) return;
+                isDragging = false;
+                frontSlider.classList.remove('dragging');
+                backSlider.classList.remove('dragging');
+                document.body.classList.remove('grabbing');
+                resumeAutoRotate();
+            };
+            
+            const handleClick = (e) => {
+                if (dragDistance > dragThreshold) { e.preventDefault(); return; }
+                const item = e.currentTarget;
+                const iconContainer = item.querySelector('.service-icon-container');
+                const startRect = iconContainer.getBoundingClientRect();
+                const startX = startRect.left + startRect.width / 2;
+                const startYTop = startRect.top; const startYBottom = startRect.bottom;
+                const position = parseInt(item.style.getPropertyValue('--position'));
+                const targetRotation = -(position - 1) * rotationIncrement;
+                
+                if (Math.abs(currentYRotation - targetRotation) % 360 < 1) {
+                    zoomIn(item);
+                    return;
+                }
+
+                currentYRotation = targetRotation;
+                updateSliderRotation();
+                
+                const transitionHandler = () => zoomIn(item);
+                frontSlider.addEventListener('transitionend', transitionHandler, { once: true });
+                
+                setTimeout(() => {
+                    const frontCard = frontSlider.querySelector('.item');
+                    if (!frontCard) return;
+                    const endIcon = frontCard.querySelector('.service-icon-container'); 
+                    const endRect = endIcon.getBoundingClientRect();
+                    const endX = endRect.left + endRect.width / 2;
+                    const endY = endRect.bottom;
+                    createCurvedParticleTrail(startX, startYTop, endX, endY, 1100);
+                    createCurvedParticleTrail(startX, startYBottom, endX, endY, 1100);
+                }, 100);
+            };
+
+            const zoomIn = (item) => {
+                stopAutoRotate();
+                frontSlider.classList.add('hidden');
+                backSlider.classList.add('hidden');
+                
+                const title = item.querySelector('.service-title').textContent;
+                const service = serviceDetails[title];
+                const iconHTML = item.querySelector('.service-icon').outerHTML;
+
+                fullscreenCard.innerHTML = ''; 
+
+                const clonedCardBackground = item.querySelector('.service-card').cloneNode(true);
+                clonedCardBackground.innerHTML = '';
+                fullscreenCard.appendChild(clonedCardBackground);
+                
+                const contentOverlay = document.createElement('div');
+                contentOverlay.className = 'fullscreen-content-overlay';
+
+                const titleEl = document.createElement('h2');
+                titleEl.className = 'fullscreen-title';
+                titleEl.textContent = title;
+                contentOverlay.appendChild(titleEl);
+                
+                if (service) {
+                    const descriptionContainer = document.createElement('div');
+                    descriptionContainer.className = 'fullscreen-description';
+                    const [firstLine, ...bulletPoints] = service.description.split('. ');
+
+                    let bulletHTML = bulletPoints.filter(p => p).map(point => `<li>${point.replace(/\.$/, '')}</li>`).join('');
+                    
+                    descriptionContainer.innerHTML = `
+                        <div>
+                            <p style="margin: 0; padding: 0; line-height: 1.5;">
+                                ${firstLine}.
+                            </p>
+                            <ul>
+                                ${bulletHTML}
+                            </ul>
+                        </div>
+                    `;
+                    contentOverlay.appendChild(descriptionContainer);
+                }
+                
+                const bottomIconContainer = document.createElement('div');
+                bottomIconContainer.className = 'fullscreen-bottom-icon-container';
+                bottomIconContainer.innerHTML = iconHTML;
+                contentOverlay.appendChild(bottomIconContainer);
+
+                fullscreenCard.appendChild(contentOverlay);
+                
+                fullscreenView.classList.add('visible');
+                setTimeout(() => {
+                    fullscreenCard.classList.add('visible');
+                    if (window.lucide) {
+                        lucide.createIcons();
+                    }
+                }, 50);
+            };
+
+            const zoomOut = () => {
+                 fullscreenCard.classList.remove('visible');
+                 fullscreenView.classList.remove('visible');
+                 setTimeout(() => {
+                    frontSlider.classList.remove('hidden');
+                    backSlider.classList.remove('hidden');
+                    resumeAutoRotate();
+                 }, 500);
+            };
+            
+            function carouselLoop() {
+                if(autoRotate && !isDragging) {
+                    currentYRotation -= 0.08; 
+                    updateSliderRotation();
+                }
+                requestAnimationFrame(carouselLoop);
+            }
+            
+            const banner = document.querySelector('.banner');
+            banner.addEventListener('mousedown', handleMouseDown);
+            banner.addEventListener('touchstart', handleMouseDown, { passive: true });
+            document.addEventListener('mousemove', handleMouseMove);
+            document.addEventListener('touchmove', handleMouseMove, { passive: true });
+            document.addEventListener('mouseup', handleMouseUp);
+            document.addEventListener('touchend', handleMouseUp);
+            banner.addEventListener('mouseenter', stopAutoRotate);
+            banner.addEventListener('mouseleave', () => resumeAutoRotate(1000));
+            allItems.forEach(item => { item.addEventListener('click', handleClick); });
+            
+            fullscreenView.addEventListener('click', (e) => {
+                if (e.target.closest('#close-fullscreen-btn')) {
+                    zoomOut();
+                }
+            });
+
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape' && fullscreenView.classList.contains('visible')) {
+                    zoomOut();
+                }
+            });
+            
+            updateCardZIndexes();
+            carouselLoop();
+
+            if (window.lucide) {
+              lucide.createIcons();
+            }
+
+            const modal = document.getElementById('ai-suggester-modal');
+            const openBtn = document.getElementById('open-ai-modal-btn');
+            const closeBtn = document.getElementById('close-ai-modal');
+            if (openBtn && modal && closeBtn) {
+                openBtn.addEventListener('click', () => {
+                    modal.classList.remove('hidden');
+                    modal.classList.add('flex');
+                });
+                closeBtn.addEventListener('click', () => {
+                    modal.classList.add('hidden');
+                    modal.classList.remove('flex');
+                });
+                modal.addEventListener('click', (e) => {
+                    if (e.target === modal) {
+                        modal.classList.add('hidden');
+                        modal.classList.remove('flex');
+                    }
+                });
+            }
+
+            // --- APPLICATION FORM LOGIC ---
+            const applyForm = document.getElementById('apply-form');
+            if (applyForm) {
+                const states = ["Alabama","Alaska","Arizona","Arkansas","California","Colorado","Connecticut","Delaware","District of Columbia","Florida","Georgia","Hawaii","Idaho","Illinois","Indiana","Iowa","Kansas","Kentucky","Louisiana","Maine","Maryland","Massachusetts","Michigan","Minnesota","Mississippi","Missouri","Montana","Nebraska","Nevada","New Hampshire","New Jersey","New Mexico","New York","North Carolina","North Dakota","Ohio","Oklahoma","Oregon","Pennsylvania","Rhode Island","South Carolina","South Dakota","Tennessee","Texas","Utah","Vermont","Virginia","Washington","West Virginia","Wisconsin","Wyoming"];
+                const stateSelect = document.querySelector('select[name="state"]');
+                if (stateSelect) { states.forEach(s => { const opt=document.createElement('option'); opt.textContent=opt.value=s; stateSelect.appendChild(opt); }); }
+            }
+        });
+    </script>
+</body>
+</html>
+
