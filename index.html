@@ -457,6 +457,36 @@
           width: 100%;
         }
 
+        /* Animated overlay for hero section */
+        .hero-moving-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            /* Use a CSS pattern instead of an image for the moving texture */
+            background-image: 
+                linear-gradient(45deg, rgba(220, 20, 60, 0.1) 25%, transparent 25%, transparent 75%, rgba(220, 20, 60, 0.1) 75%),
+                linear-gradient(45deg, rgba(0, 206, 219, 0.1) 25%, transparent 25%, transparent 75%, rgba(0, 206, 219, 0.1) 75%);
+            background-size: 40px 40px, 60px 60px;
+            background-position: 0 0, 20px 20px;
+            /* Make the pattern larger than the container so it can move across */
+            opacity: 0.4;
+            animation: slideOverlay 60s linear infinite;
+            z-index: -20;
+        }
+
+        @keyframes slideOverlay {
+            from {
+                transform: translate(0%, 0%);
+            }
+            to {
+                /* Move diagonally upward/left; adjust percentages to tune speed/direction */
+                transform: translate(-50%, -30%);
+            }
+        }
+
         body.grabbing {
             cursor: grabbing;
         }
@@ -787,38 +817,58 @@
 <!-- ================= INLINE EXPERIENCE STYLES END ================= -->
 
 <!-- ================= HERO SECTION START ================= -->
-<!-- Immersive introductory hero with animated FAQ assistant and onboarding CTA -->
 <div class="relative">
-  <section class="relative overflow-hidden animate-fadeIn hero-bg-container">
-    <div class="absolute inset-0 bg-black/50 -z-10"></div>
-    <div class="max-w-7xl mx-auto px-4 pt-12 sm:pt-16 md:pt-24 pb-20 md:pb-28">
+  <section class="relative overflow-hidden hero-bg-container">
+    <!-- Animated overlay moves across the hero to mimic Netlify's dynamic lines -->
+    <div class="hero-moving-overlay"></div>
+    <!-- Dark overlay to improve contrast -->
+    <div class="absolute inset-0 bg-black/60 -z-10"></div>
+    <div class="max-w-7xl mx-auto px-4 pt-16 sm:pt-24 md:pt-32 pb-24 md:pb-32">
       <div class="flex flex-col-reverse hero-layout md:grid md:grid-cols-2 md:gap-10 items-center">
-        <div class="space-y-6 text-left hero-text">
-          <h1 class="hero-heading tracking-tight text-white">
-            <span class="uppercase font-ubuntu">PAYMENTS ANYWHERE - GROWTH EVERYWHERE</span>
-            <span id="animated-headline-sub" class="grad-text-static hero-subheading font-ubuntu inline sm:ml-2">Engineered for speed, secured for trust, and designed to scale.</span>
+        <div class="space-y-6 hero-text">
+          <h1 class="hero-heading tracking-tight text-white uppercase font-ubuntu">
+            Payment freedom that powers your growth
           </h1>
-          <p class="text-lg text-gray-200 dark:text-slate-300 font-inter text-center md:text-justify" style="font-weight:100">Effortlessly create your business profile and start accepting payments in minutes—cards, ACH, and secure pay links across online, in-store, and mobile. Lower your costs, onboard quickly, track performance in real time, and protect your business with advanced fraud and chargeback tools.</p>
+          <h2 class="hero-subheading text-brand-teal font-ubuntu font-bold">
+            Speed. Security. Scale.
+          </h2>
+          <p class="text-lg text-gray-200 dark:text-slate-300 font-inter text-left md:text-left" style="font-weight:100">
+            Create your business profile in minutes and begin accepting cards, ACH, and secure pay links anywhere—online, in‑store, or on the go. Reduce your costs, onboard quickly, monitor performance in real time, and safeguard every transaction with next‑generation fraud and chargeback protection.
+          </p>
         </div>
+        <!-- Retain existing chat card for FAQs and actions -->
         <div class="relative p-4 hero-chat-card">
           <div class="w-full space-y-4 relative z-10">
             <div class="relative">
-              <input type="text" id="faq-question" placeholder="Ask about pricing, features..." class="field w-full p-4 pr-12 text-lg rounded-full bg-white/20 dark:bg-slate-900/30 border border-slate-300/50 dark:border-slate-700/50 text-white placeholder-slate-300 focus:ring-2 focus:ring-brand-crimson focus:border-transparent transition-all">
-              <button id="ask-faq" class="absolute top-1/2 right-2 -translate-y-1/2 p-2 rounded-full bg-brand-crimson text-white hover:bg-brand-crimson transition-colors">
+              <input
+                type="text"
+                id="faq-question"
+                placeholder="Ask about pricing, features..."
+                class="field w-full p-4 pr-12 text-lg rounded-full bg-white/20 dark:bg-slate-900/30 border border-slate-300/50 dark:border-slate-700/50 text-white placeholder-slate-300 focus:ring-2 focus:ring-brand-crimson focus:border-transparent transition-all"
+              />
+              <button
+                id="ask-faq"
+                class="absolute top-1/2 right-2 -translate-y-1/2 p-2 rounded-full bg-brand-crimson text-white hover:bg-brand-crimson transition-colors"
+              >
                 <i data-lucide="arrow-up" class="h-5 w-5"></i>
               </button>
             </div>
             <div id="hero-actions" class="flex flex-wrap items-center justify-center gap-3">
-              <button class="js-signup-cta bg-transparent hover:bg-brand-crimson text-brand-crimson hover:text-white border border-brand-crimson px-4 py-2 rounded-full text-sm font-semibold transition-colors duration-300">Get Started</button>
+              <button
+                class="js-signup-cta bg-transparent hover:bg-brand-crimson text-brand-crimson hover:text-white border border-brand-crimson px-4 py-2 rounded-full text-sm font-semibold transition-colors duration-300"
+              >
+                Get Started
+              </button>
             </div>
-            <div id="faq-answer" class="mt-6 p-4 text-left rounded-lg bg-white/90 dark:bg-slate-900/90 border border-slate-200 dark:border-slate-800 text-slate-800 dark:text-slate-200"></div>
+            <div
+              id="faq-answer"
+              class="mt-6 p-4 text-left rounded-lg bg-white/90 dark:bg-slate-900/90 border border-slate-200 dark:border-slate-800 text-slate-800 dark:text-slate-200"
+            ></div>
           </div>
         </div>
       </div>
     </div>
   </section>
-
-  </div>
 </div>
 <!-- ================= HERO SECTION END ================= -->
 
