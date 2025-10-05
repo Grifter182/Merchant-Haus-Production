@@ -448,23 +448,25 @@
         /* Pure CSS Slider Styles based on reference */
         .banner {
             width: 100%;
-            height: 100vh;
             text-align: center;
             overflow: hidden;
             position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
         .banner .slider{
             position: absolute;
             width: 160px; 
             height: 200px; 
-            top: 10%;
-            left: calc(50% - 80px); 
             transform-style: preserve-3d;
             transform: perspective(1500px) rotateX(-18deg);
-            z-index: 2;
             cursor: grab;
             transition: transform 1.2s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.5s;
         }
+        #front-slider { z-index: 2; }
+        #back-slider { z-index: 0; }
+        
         .banner .slider.dragging {
             transition: none;
         }
@@ -495,8 +497,30 @@
             overflow: hidden;
             box-shadow: 0 10px 25px rgba(0,0,0,0.3);
             border: 1px solid rgba(255, 255, 255, 0.1);
+            position: relative;
         }
         
+        .service-card::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background-color: rgba(0,0,0,0.2);
+            z-index: 1;
+        }
+        
+        /* Applying Images */
+        .item[data-pos="1"] .service-card { background-image: url('assets/img/card1.png'); }
+        .item[data-pos="2"] .service-card { background-image: url('assets/img/card2.png'); }
+        .item[data-pos="3"] .service-card { background-image: url('assets/img/card3.png'); }
+        .item[data-pos="4"] .service-card { background-image: url('assets/img/card4.png'); }
+        .item[data-pos="5"] .service-card { background-image: url('assets/img/card5.png'); }
+        .item[data-pos="6"] .service-card { background-image: url('assets/img/card6.png'); }
+        .item[data-pos="7"] .service-card { background-image: url('assets/img/card7.png'); }
+        .item[data-pos="8"] .service-card { background-image: url('assets/img/card8.png'); }
+        .item[data-pos="9"] .service-card { background-image: url('assets/img/card9.png'); }
+        .item[data-pos="10"] .service-card { background-image: url('assets/img/card10.png'); }
+
+
         .service-icon-container {
             width: 90px;
             height: 90px;
@@ -511,21 +535,9 @@
             transition: transform 0.3s ease;
             position: relative;
             overflow: hidden;
+            z-index: 2;
         }
         
-        /* Applying Images */
-        .item:nth-child(1) .service-card { background-image: url('assets/img/card1.png'); }
-        .item:nth-child(2) .service-card { background-image: url('assets/img/card2.png'); }
-        .item:nth-child(3) .service-card { background-image: url('assets/img/card3.png'); }
-        .item:nth-child(4) .service-card { background-image: url('assets/img/card4.png'); }
-        .item:nth-child(5) .service-card { background-image: url('assets/img/card5.png'); }
-        .item:nth-child(6) .service-card { background-image: url('assets/img/card6.png'); }
-        .item:nth-child(7) .service-card { background-image: url('assets/img/card7.png'); }
-        .item:nth-child(8) .service-card { background-image: url('assets/img/card8.png'); }
-        .item:nth-child(9) .service-card { background-image: url('assets/img/card9.png'); }
-        .item:nth-child(10) .service-card { background-image: url('assets/img/card10.png'); }
-
-
         .item:hover .service-icon-container {
              transform: translateY(-10px);
         }
@@ -534,11 +546,21 @@
             width: 3.5rem;
             height: 3.5rem;
             stroke-width: 1.5;
-            stroke: #DC143C;
             filter: drop-shadow(3px 3px 2px rgba(0, 0, 0, 0.3)); 
             position: relative;
             z-index: 2;
         }
+        
+        .item[data-pos="1"] .service-icon { stroke: #33FF57; }
+        .item[data-pos="2"] .service-icon { stroke: #3357FF; }
+        .item[data-pos="3"] .service-icon { stroke: #FF33A1; }
+        .item[data-pos="4"] .service-icon { stroke: #A133FF; }
+        .item[data-pos="5"] .service-icon { stroke: #33FFF6; }
+        .item[data-pos="6"] .service-icon { stroke: #F6FF33; }
+        .item[data-pos="7"] .service-icon { stroke: #FF8C33; }
+        .item[data-pos="8"] .service-icon { stroke: #8CFF33; }
+        .item[data-pos="9"] .service-icon { stroke: #DC143C; }
+        .item[data-pos="10"] .service-icon { stroke: #FF5733; }
         
         .service-title {
             position: absolute;
@@ -578,27 +600,84 @@
             opacity: 0;
             pointer-events: none;
             transition: opacity 0.5s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
         #fullscreen-view.visible {
             opacity: 1;
             pointer-events: all;
         }
         #fullscreen-card {
-            position: absolute;
+            position: relative;
             transition: all 0.6s cubic-bezier(0.645, 0.045, 0.355, 1);
+            width: clamp(320px, 40vmax, 600px); 
+            height: clamp(400px, 50vmax, 750px);
+            opacity: 0;
         }
-        #fullscreen-card .service-icon-container {
-             width: 40vmax;
-             height: 40vmax;
+        #fullscreen-card.visible {
+            opacity: 1;
         }
-        #fullscreen-card .service-icon {
-             width: 15vmax;
-             height: 15vmax;
+
+        #fullscreen-card .service-card {
+             width: 100%;
+             height: 100%;
+             position: absolute;
+             inset: 0;
+             z-index: 1;
         }
-        #fullscreen-card .service-title {
-            font-size: 4vmax;
-            padding: 1rem 3rem;
-            bottom: 110%;
+        
+        .fullscreen-content-overlay {
+            position: relative;
+            z-index: 2;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            padding: 2.5rem;
+            background-color: rgba(28, 28, 28, 0.9);
+            backdrop-filter: blur(5px);
+            border-radius: 1rem;
+        }
+
+        .fullscreen-title {
+            color: #f5f5f5;
+            font-family: 'Ubuntu', sans-serif;
+            font-size: 2rem;
+            font-weight: bold;
+            text-align: center;
+            margin-bottom: 1.5rem;
+            flex-shrink: 0;
+        }
+
+        .fullscreen-description {
+            color: #d1d5db;
+            font-family: 'Inter', sans-serif;
+            font-size: 1.1vmax;
+            width: 100%;
+            flex-grow: 1;
+            overflow-y: auto;
+            text-align: center;
+        }
+        
+        .fullscreen-description ul {
+            list-style-position: inside;
+            margin-top: 1em;
+            padding-left: 0;
+            display: inline-block;
+            text-align: left;
+        }
+
+        .fullscreen-bottom-icon-container {
+            margin-top: 1.5rem;
+            flex-shrink: 0;
+            display: flex;
+            justify-content: center;
+        }
+
+        .fullscreen-bottom-icon-container .service-icon {
+            width: 3.5rem;
+            height: 3.5rem;
         }
         #close-fullscreen-btn {
             position: absolute;
@@ -608,6 +687,7 @@
             opacity: 0.8;
             cursor: pointer;
             transition: opacity 0.3s, transform 0.3s;
+            z-index: 120;
         }
         #close-fullscreen-btn:hover {
             opacity: 1;
@@ -632,7 +712,8 @@
         .banner .content{
             position: absolute;
             bottom: 0;
-            left: 0;
+            left: 50%;
+            transform: translateX(-50%);
             width: 100%;
             height: 100%;
             pointer-events: none;
@@ -699,118 +780,118 @@
     <i id="close-fullscreen-btn" data-lucide="x-circle" class="h-12 w-12"></i>
   </div>
 
-  <div class="relative pt-32 w-full">
-    <div class="absolute top-0 left-0 w-full h-48 bg-[#1c1c1c]"></div>
-
-    <div class="absolute top-32 left-1/2 -translate-x-1/2 -translate-y-1/2 z-20 w-full max-w-5xl px-4">
-      <div class="bg-white dark:bg-[#1c1c1c] text-slate-800 dark:text-slate-200 px-8 py-4 rounded-xl border-2 border-brand-crimson shadow-lg text-center">
-        <h2 class="text-3xl font-ubuntu font-bold">Payment Services Tailored for You</h2>
-      </div>
-    </div>
-
-    <section id="payments" class="pt-28 pb-12">
-      <div class="max-w-5xl mx-auto px-4 text-center">
-        <p class="text-2xl sm:text-3xl font-ubuntu mb-4 text-slate-400">Your complete business toolkit for accepting and managing payments.</p>
-      </div>
-      
-      <div class="banner">
-        <div class="slider" style="--quantity: 10">
-          <div class="item" style="--position: 1">
-            <div class="service-card">
-              <div class="service-icon-container">
-                <i data-lucide="smartphone" class="service-icon"></i>
-              </div>
+  <section id="payments" class="w-full min-h-screen flex flex-col items-center justify-center p-4 relative py-20">
+        <!-- Title -->
+        <div class="max-w-5xl w-full mx-auto px-4 text-center mb-4">
+            <div class="inline-block bg-transparent text-slate-200 px-8 py-4 rounded-full border-2 border-brand-teal shadow-lg">
+                <h2 class="text-3xl font-ubuntu font-bold">Payment Services Tailored for You</h2>
             </div>
-            <div class="service-title">Mobile Payments</div>
-          </div>
-          <div class="item" style="--position: 2">
-            <div class="service-card">
-              <div class="service-icon-container">
-                <i data-lucide="shuffle" class="service-icon"></i>
-              </div>
-            </div>
-            <div class="service-title">Smart Routing</div>
-          </div>
-          <div class="item" style="--position: 3">
-            <div class="service-card">
-              <div class="service-icon-container">
-                <i data-lucide="file-text" class="service-icon"></i>
-              </div>
-            </div>
-            <div class="service-title">Invoicing</div>
-          </div>
-          <div class="item" style="--position: 4">
-            <div class="service-card">
-              <div class="service-icon-container">
-                <i data-lucide="repeat" class="service-icon"></i>
-              </div>
-            </div>
-            <div class="service-title">Recurring Billing</div>
-          </div>
-          <div class="item" style="--position: 5">
-            <div class="service-card">
-              <div class="service-icon-container">
-                <i data-lucide="lock" class="service-icon"></i>
-              </div>
-            </div>
-            <div class="service-title">Secure Tokenization</div>
-          </div>
-          <div class="item" style="--position: 6">
-            <div class="service-card">
-              <div class="service-icon-container">
-                <i data-lucide="bar-chart-2" class="service-icon"></i>
-              </div>
-            </div>
-            <div class="service-title">Detailed Reporting</div>
-          </div>
-          <div class="item" style="--position: 7">
-            <div class="service-card">
-              <div class="service-icon-container">
-                <i data-lucide="cpu" class="service-icon"></i>
-              </div>
-            </div>
-            <div class="service-title">Automation</div>
-          </div>
-          <div class="item" style="--position: 8">
-            <div class="service-card">
-              <div class="service-icon-container">
-                <i data-lucide="landmark" class="service-icon"></i>
-              </div>
-            </div>
-            <div class="service-title">ACH Payments</div>
-          </div>
-          <div class="item" style="--position: 9">
-            <div class="service-card">
-              <div class="service-icon-container">
-                <i data-lucide="shield-alert" class="service-icon"></i>
-              </div>
-            </div>
-            <div class="service-title">Fraud Prevention</div>
-          </div>
-          <div class="item" style="--position: 10">
-            <div class="service-card">
-              <div class="service-icon-container">
-                <i data-lucide="globe-2" class="service-icon"></i>
-              </div>
-            </div>
-            <div class="service-title">Global Payments</div>
-          </div>
         </div>
-        <div class="content">
-          <div class="model"></div>
+        
+        <!-- Carousel Container -->
+        <div class="banner flex-grow w-full h-[50vh]">
+            <div id="back-slider" class="slider" style="--quantity: 10">
+                <div class="item" data-pos="1" style="--position: 1">
+                    <div class="service-card">
+                        <div class="service-icon-container">
+                            <i data-lucide="smartphone" class="service-icon"></i>
+                        </div>
+                    </div>
+                    <div class="service-title">Mobile Payments</div>
+                </div>
+                <div class="item" data-pos="2" style="--position: 2">
+                    <div class="service-card">
+                        <div class="service-icon-container">
+                            <i data-lucide="shuffle" class="service-icon"></i>
+                        </div>
+                    </div>
+                    <div class="service-title">Smart Routing</div>
+                </div>
+                <div class="item" data-pos="3" style="--position: 3">
+                    <div class="service-card">
+                        <div class="service-icon-container">
+                            <i data-lucide="file-text" class="service-icon"></i>
+                        </div>
+                    </div>
+                    <div class="service-title">Invoicing</div>
+                </div>
+                <div class="item" data-pos="4" style="--position: 4">
+                    <div class="service-card">
+                        <div class="service-icon-container">
+                            <i data-lucide="repeat" class="service-icon"></i>
+                        </div>
+                    </div>
+                    <div class="service-title">Recurring Billing</div>
+                </div>
+                <div class="item" data-pos="5" style="--position: 5">
+                    <div class="service-card">
+                        <div class="service-icon-container">
+                            <i data-lucide="lock" class="service-icon"></i>
+                        </div>
+                    </div>
+                    <div class="service-title">Secure Tokenization</div>
+                </div>
+                <div class="item" data-pos="6" style="--position: 6">
+                    <div class="service-card">
+                        <div class="service-icon-container">
+                            <i data-lucide="bar-chart-2" class="service-icon"></i>
+                        </div>
+                    </div>
+                    <div class="service-title">Detailed Reporting</div>
+                </div>
+                <div class="item" data-pos="7" style="--position: 7">
+                    <div class="service-card">
+                        <div class="service-icon-container">
+                            <i data-lucide="cpu" class="service-icon"></i>
+                        </div>
+                    </div>
+                    <div class="service-title">Automation</div>
+                </div>
+                <div class="item" data-pos="8" style="--position: 8">
+                    <div class="service-card">
+                        <div class="service-icon-container">
+                            <i data-lucide="landmark" class="service-icon"></i>
+                        </div>
+                    </div>
+                    <div class="service-title">ACH Payments</div>
+                </div>
+                <div class="item" data-pos="9" style="--position: 9">
+                    <div class="service-card">
+                        <div class="service-icon-container">
+                            <i data-lucide="shield-alert" class="service-icon"></i>
+                        </div>
+                    </div>
+                    <div class="service-title">Fraud Prevention</div>
+                </div>
+                <div class="item" data-pos="10" style="--position: 10">
+                    <div class="service-card">
+                        <div class="service-icon-container">
+                            <i data-lucide="globe-2" class="service-icon"></i>
+                        </div>
+                    </div>
+                    <div class="service-title">Global Payments</div>
+                </div>
+            </div>
+            <div id="front-slider" class="slider" style="--quantity: 10"></div>
+            <div class="content">
+                <div class="model"></div>
+            </div>
         </div>
-      </div>
+    
+        <!-- Subtitle -->
+        <p class="text-2xl sm:text-3xl font-ubuntu text-slate-400 text-center px-4 mt-4">
+           Your complete business toolkit for accepting and managing payments.
+        </p>
 
-      <div class="mt-8 sm:mt-10 flex flex-wrap justify-center gap-4 px-4">
-        <button type="button" class="js-signup-cta inline-flex items-center justify-center rounded-full px-8 py-3 text-lg font-semibold text-white shadow-lg transition-all duration-300 hover:-translate-y-0.5 hover:shadow-xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-crimson focus-visible:ring-offset-2" style="background-image: linear-gradient(135deg, #dc143c 0%, #f43f5e 50%, #ff758c 100%);">
-          Start accepting payments today
-        </button>
-        <button id="open-ai-modal-btn" type="button" class="inline-flex items-center justify-center rounded-full px-8 py-3 text-lg font-semibold text-brand-dark bg-white shadow-lg transition-all duration-300 hover:-translate-y-0.5 hover:shadow-xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-teal focus-visible:ring-offset-2">
-          ✨ Find Your Perfect Fit
-        </button>
-      </div>
+        <div class="mt-8 sm:mt-10 flex flex-wrap justify-center gap-4 px-4">
+            <button type="button" class="js-signup-cta inline-flex items-center justify-center rounded-full px-8 py-3 text-lg font-semibold text-white shadow-lg transition-all duration-300 hover:-translate-y-0.5 hover:shadow-xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-crimson focus-visible:ring-offset-2" style="background-image: linear-gradient(135deg, #dc143c 0%, #f43f5e 50%, #ff758c 100%);">
+                Start accepting payments today
+            </button>
+             <button id="open-ai-modal-btn" type="button" class="inline-flex items-center justify-center rounded-full px-8 py-3 text-lg font-semibold text-brand-dark bg-white shadow-lg transition-all duration-300 hover:-translate-y-0.5 hover:shadow-xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-teal focus-visible:ring-offset-2">
+                ✨ Find Your Perfect Fit
+            </button>
+        </div>
     </section>
-  </div>
 </div>
 <!-- ================= PAYMENT SERVICES SHOWCASE END ================= -->
 
@@ -1085,14 +1166,30 @@
 document.addEventListener('DOMContentLoaded', () => {
   if (window.lucide) lucide.createIcons();
 
+  const serviceDetails = {
+    "Mobile Payments": {
+      description: "Take payments anywhere using a phone or tablet. Supports Tap to Pay and popular mobile wallets. Ideal for retail, service, and on-the-go transactions. Backed by secure, PCI-compliant technology."
+    },
+    "Smart Routing": { description: "Dynamically route transactions to optimize for cost, speed, and success rates. Our intelligent algorithms analyze each payment in real-time to select the best processing path." },
+    "Invoicing": { description: "Create and send professional, customized invoices in minutes. Track payment status, send automated reminders, and accept payments directly from the invoice." },
+    "Recurring Billing": { description: "Automate your subscription and recurring payment processes. Set up flexible billing cycles, manage customer plans, and reduce churn with smart dunning management." },
+    "Secure Tokenization": { description: "Protect sensitive customer data with our advanced tokenization technology. Cardholder information is replaced with a secure token, reducing your PCI compliance scope." },
+    "Detailed Reporting": { description: "Gain valuable insights into your business with comprehensive reporting tools. Track sales trends, monitor transaction history, and easily reconcile your accounts." },
+    "Automation": { description: "Streamline your workflows with powerful automation tools. Set up rules for fraud detection, chargeback management, and other repetitive tasks to save time and reduce errors." },
+    "ACH Payments": { description: "Offer your customers the flexibility of paying directly from their bank accounts. Our ACH processing is secure, reliable, and cost-effective for large transactions." },
+    "Fraud Prevention": { description: "Protect your business from fraudulent transactions with our multi-layered security system. We use machine learning, velocity checks, and customizable rules to minimize risk." },
+    "Global Payments": { description: "Expand your business internationally by accepting payments in multiple currencies. We provide competitive exchange rates and settlement in your local currency." }
+  };
+
   const particleCanvas = document.getElementById('particle-canvas');
-  const slider = document.querySelector('.banner .slider');
-  const sliderItems = document.querySelectorAll('.banner .slider .item');
+  const frontSlider = document.getElementById('front-slider');
+  const backSlider = document.getElementById('back-slider');
+  const allItems = document.querySelectorAll('.item');
   const fullscreenView = document.getElementById('fullscreen-view');
   const fullscreenCard = document.getElementById('fullscreen-card');
   const closeFullscreenBtn = document.getElementById('close-fullscreen-btn');
 
-  if (particleCanvas && slider && sliderItems.length && fullscreenView && fullscreenCard && closeFullscreenBtn) {
+  if (particleCanvas && frontSlider && backSlider && allItems.length && fullscreenView && fullscreenCard && closeFullscreenBtn) {
     const pCtx = particleCanvas.getContext('2d');
     let particles = [];
 
@@ -1173,7 +1270,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     animateParticles();
 
-    const numItems = sliderItems.length;
+    const numItems = allItems.length;
     const rotationIncrement = 360 / numItems;
 
     let currentYRotation = 0;
@@ -1186,18 +1283,28 @@ document.addEventListener('DOMContentLoaded', () => {
     let autoRotateTimeout;
 
     const updateCardZIndexes = () => {
-      sliderItems.forEach(item => {
+      allItems.forEach(item => {
         const position = parseInt(item.style.getPropertyValue('--position'), 10);
         const itemAngle = (position - 1) * rotationIncrement;
         let effectiveAngle = (currentYRotation + itemAngle) % 360;
         if (effectiveAngle < 0) effectiveAngle += 360;
 
-        item.style.zIndex = (effectiveAngle > 90 && effectiveAngle < 270) ? 0 : 2;
+        if (effectiveAngle > 90 && effectiveAngle < 270) {
+          if (item.parentElement !== backSlider) {
+            backSlider.appendChild(item);
+          }
+        } else {
+          if (item.parentElement !== frontSlider) {
+            frontSlider.appendChild(item);
+          }
+        }
       });
     };
 
     const updateSliderRotation = () => {
-      slider.style.transform = `perspective(1500px) rotateX(-18deg) rotateY(${currentYRotation}deg)`;
+      const rotationStyle = `perspective(1500px) rotateX(-18deg) rotateY(${currentYRotation}deg)`;
+      frontSlider.style.transform = rotationStyle;
+      backSlider.style.transform = rotationStyle;
       updateCardZIndexes();
     };
 
@@ -1215,7 +1322,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const handleMouseDown = (event) => {
       stopAutoRotate();
       isDragging = true;
-      slider.classList.add('dragging');
+      frontSlider.classList.add('dragging');
+      backSlider.classList.add('dragging');
       startX = (event.pageX ?? event.touches?.[0]?.pageX ?? 0);
       startRotation = currentYRotation;
       dragDistance = 0;
@@ -1234,58 +1342,79 @@ document.addEventListener('DOMContentLoaded', () => {
     const handleMouseUp = () => {
       if (!isDragging) return;
       isDragging = false;
-      slider.classList.remove('dragging');
+      frontSlider.classList.remove('dragging');
+      backSlider.classList.remove('dragging');
       document.body.classList.remove('grabbing');
       resumeAutoRotate();
     };
 
     const zoomIn = (item) => {
       stopAutoRotate();
-      slider.classList.add('hidden');
-      const clonedItem = item.cloneNode(true);
-      fullscreenCard.innerHTML = '';
-      fullscreenCard.appendChild(clonedItem);
+      frontSlider.classList.add('hidden');
+      backSlider.classList.add('hidden');
+      
+      const title = item.querySelector('.service-title').textContent;
+      const service = serviceDetails[title];
+      const iconHTML = item.querySelector('.service-icon').outerHTML;
 
-      const rect = item.querySelector('.service-icon-container').getBoundingClientRect();
+      fullscreenCard.innerHTML = ''; 
 
-      fullscreenCard.style.left = `${rect.left - (160 - rect.width) / 2}px`;
-      fullscreenCard.style.top = `${rect.top - (200 - rect.height) / 2}px`;
-      fullscreenCard.style.width = '160px';
-      fullscreenCard.style.height = '200px';
-      fullscreenCard.style.transform = 'rotateY(0deg) translateZ(0px)';
+      const clonedCardBackground = item.querySelector('.service-card').cloneNode(true);
+      clonedCardBackground.innerHTML = '';
+      fullscreenCard.appendChild(clonedCardBackground);
+      
+      const contentOverlay = document.createElement('div');
+      contentOverlay.className = 'fullscreen-content-overlay';
 
+      const titleEl = document.createElement('h2');
+      titleEl.className = 'fullscreen-title';
+      titleEl.textContent = title;
+      contentOverlay.appendChild(titleEl);
+      
+      if (service) {
+        const descriptionContainer = document.createElement('div');
+        descriptionContainer.className = 'fullscreen-description';
+        const [firstLine, ...bulletPoints] = service.description.split('. ');
+
+        let bulletHTML = bulletPoints.filter(p => p).map(point => `<li>${point.replace(/\.$/, '')}</li>`).join('');
+        
+        descriptionContainer.innerHTML = `
+          <div>
+            <p style="margin: 0; padding: 0; line-height: 1.5;">
+              ${firstLine}.
+            </p>
+            <ul>
+              ${bulletHTML}
+            </ul>
+          </div>
+        `;
+        contentOverlay.appendChild(descriptionContainer);
+      }
+      
+      const bottomIconContainer = document.createElement('div');
+      bottomIconContainer.className = 'fullscreen-bottom-icon-container';
+      bottomIconContainer.innerHTML = iconHTML;
+      contentOverlay.appendChild(bottomIconContainer);
+
+      fullscreenCard.appendChild(contentOverlay);
+      
       fullscreenView.classList.add('visible');
-
-      requestAnimationFrame(() => {
-        fullscreenCard.style.left = '50%';
-        fullscreenCard.style.top = '50%';
-        fullscreenCard.style.width = '40vmax';
-        fullscreenCard.style.height = '50vmax';
-        fullscreenCard.style.transform = 'translate(-50%, -50%)';
-      });
+      setTimeout(() => {
+        fullscreenCard.classList.add('visible');
+        if (window.lucide) {
+          lucide.createIcons();
+        }
+      }, 50);
     };
 
     const zoomOut = () => {
-      const endIcon = sliderItems[0]?.querySelector('.service-icon-container');
-      if (!endIcon) {
-        fullscreenView.classList.remove('visible');
-        slider.classList.remove('hidden');
-        resumeAutoRotate();
-        return;
-      }
-      const finalRect = endIcon.getBoundingClientRect();
-      fullscreenCard.style.left = `${finalRect.left - (160 - finalRect.width) / 2}px`;
-      fullscreenCard.style.top = `${finalRect.top - (200 - finalRect.height) / 2}px`;
-      fullscreenCard.style.width = '160px';
-      fullscreenCard.style.height = '200px';
-      fullscreenCard.style.transform = 'translate(0, 0)';
-
+      fullscreenCard.classList.remove('visible');
       fullscreenView.classList.remove('visible');
-
       setTimeout(() => {
-        slider.classList.remove('hidden');
+        frontSlider.classList.remove('hidden');
+        backSlider.classList.remove('hidden');
         resumeAutoRotate();
-      }, 50);
+      }, 500);
     };
 
     const anglesAreClose = (angleA, angleB, tolerance = 0.5) => {
@@ -1311,12 +1440,12 @@ document.addEventListener('DOMContentLoaded', () => {
       const targetRotation = -(position - 1) * rotationIncrement;
 
       const emitParticleStreaks = () => {
-        const sliderRect = slider.getBoundingClientRect();
+        const bannerRect = banner.getBoundingClientRect();
         const iconHeight = iconContainer.offsetHeight || 90;
-        const endCenterX = sliderRect.left + sliderRect.width / 2;
-        const sliderCenterY = sliderRect.top + sliderRect.height / 2;
-        const endYTop = sliderCenterY - iconHeight / 2;
-        const endYBottom = sliderCenterY + iconHeight / 2;
+        const endCenterX = bannerRect.left + bannerRect.width / 2;
+        const bannerCenterY = bannerRect.top + bannerRect.height / 2;
+        const endYTop = bannerCenterY - iconHeight / 2;
+        const endYBottom = bannerCenterY + iconHeight / 2;
         createCurvedParticleTrail(startCenterX, startYTop, endCenterX, endYTop, 1100);
         createCurvedParticleTrail(startCenterX, startYBottom, endCenterX, endYBottom, 1100);
       };
@@ -1328,14 +1457,16 @@ document.addEventListener('DOMContentLoaded', () => {
       }
 
       const handleTransitionEnd = (transitionEvent) => {
-        if (transitionEvent.target !== slider || transitionEvent.propertyName !== 'transform') {
+        if ((transitionEvent.target !== frontSlider && transitionEvent.target !== backSlider) || transitionEvent.propertyName !== 'transform') {
           return;
         }
-        slider.removeEventListener('transitionend', handleTransitionEnd);
+        frontSlider.removeEventListener('transitionend', handleTransitionEnd);
+        backSlider.removeEventListener('transitionend', handleTransitionEnd);
         zoomIn(item);
       };
 
-      slider.addEventListener('transitionend', handleTransitionEnd);
+      frontSlider.addEventListener('transitionend', handleTransitionEnd);
+      backSlider.addEventListener('transitionend', handleTransitionEnd);
 
       currentYRotation = targetRotation;
       updateSliderRotation();
@@ -1344,7 +1475,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function carouselLoop() {
       if (autoRotate && !isDragging) {
-        currentYRotation += 0.03;
+        currentYRotation -= 0.08;
         updateSliderRotation();
       } else {
         updateCardZIndexes();
@@ -1352,18 +1483,30 @@ document.addEventListener('DOMContentLoaded', () => {
       requestAnimationFrame(carouselLoop);
     }
 
-    slider.addEventListener('mousedown', handleMouseDown);
-    slider.addEventListener('touchstart', handleMouseDown, { passive: true });
+    const banner = document.querySelector('.banner');
+    banner.addEventListener('mousedown', handleMouseDown);
+    banner.addEventListener('touchstart', handleMouseDown, { passive: true });
     document.addEventListener('mousemove', handleMouseMove);
     document.addEventListener('touchmove', handleMouseMove, { passive: true });
     document.addEventListener('mouseup', handleMouseUp);
     document.addEventListener('touchend', handleMouseUp);
-    slider.addEventListener('mouseenter', stopAutoRotate);
-    slider.addEventListener('mouseleave', () => resumeAutoRotate(1000));
-    sliderItems.forEach(item => {
+    banner.addEventListener('mouseenter', stopAutoRotate);
+    banner.addEventListener('mouseleave', () => resumeAutoRotate(1000));
+    allItems.forEach(item => {
       item.addEventListener('click', handleClick);
     });
-    closeFullscreenBtn.addEventListener('click', zoomOut);
+    
+    fullscreenView.addEventListener('click', (e) => {
+      if (e.target.closest('#close-fullscreen-btn')) {
+        zoomOut();
+      }
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && fullscreenView.classList.contains('visible')) {
+        zoomOut();
+      }
+    });
 
     updateCardZIndexes();
     carouselLoop();

@@ -167,12 +167,16 @@ function initBannerCarousel(slider) {
     pointerStartX: 0,
     lastPointerX: 0,
     inertiaFrame: null,
-    animationFrame: null
+    animationFrame: null,
+    autoRotateTimer: null,
+    isHovered: false,
+    autoRotateSpeed: 0.25 // degrees per frame for smooth rotation
   };
 
   const setRotation = (value) => {
     state.rotation = value;
-    slider.style.setProperty('--rotation', `${value}deg`);
+    // Apply rotation to the slider transform, maintaining the perspective and rotateX
+    slider.style.transform = `perspective(1500px) rotateX(-18deg) rotateY(${value}deg)`;
     updateActive();
   };
 
@@ -188,6 +192,28 @@ function initBannerCarousel(slider) {
     if (state.animationFrame) {
       cancelAnimationFrame(state.animationFrame);
       state.animationFrame = null;
+    }
+  };
+
+  const startAutoRotation = () => {
+    if (state.autoRotateTimer) {
+      cancelAnimationFrame(state.autoRotateTimer);
+    }
+    
+    const autoRotate = () => {
+      if (!state.pointerActive && !state.isHovered && !document.body.classList.contains('banner-expansion--open')) {
+        setRotation(state.rotation + state.autoRotateSpeed);
+      }
+      state.autoRotateTimer = requestAnimationFrame(autoRotate);
+    };
+    
+    state.autoRotateTimer = requestAnimationFrame(autoRotate);
+  };
+
+  const stopAutoRotation = () => {
+    if (state.autoRotateTimer) {
+      cancelAnimationFrame(state.autoRotateTimer);
+      state.autoRotateTimer = null;
     }
   };
 
@@ -278,6 +304,7 @@ function initBannerCarousel(slider) {
     slider.classList.add('is-grabbing');
     cancelAnimation();
     cancelInertia();
+    stopAutoRotation(); // Stop auto-rotation during manual interaction
     slider.setPointerCapture(event.pointerId);
   };
 
@@ -312,6 +339,13 @@ function initBannerCarousel(slider) {
     state.dragMoved = false;
     state.pointerStartX = 0;
     state.lastPointerX = 0;
+    
+    // Resume auto-rotation after a short delay
+    setTimeout(() => {
+      if (!state.isHovered) {
+        startAutoRotation();
+      }
+    }, 1000);
   };
 
   slider.addEventListener('pointerdown', pointerDown);
@@ -324,6 +358,20 @@ function initBannerCarousel(slider) {
     slider.classList.remove('is-grabbing');
     startInertia();
     state.dragMoved = false;
+  });
+
+  // Add hover event listeners to pause/resume auto-rotation
+  slider.addEventListener('mouseenter', () => {
+    state.isHovered = true;
+  });
+
+  slider.addEventListener('mouseleave', () => {
+    state.isHovered = false;
+    if (!state.pointerActive) {
+      setTimeout(() => {
+        startAutoRotation();
+      }, 500); // Brief delay before resuming rotation
+    }
   });
 
   items.forEach((item, index) => {
@@ -345,6 +393,9 @@ function initBannerCarousel(slider) {
   });
 
   setRotation(0);
+  
+  // Start auto-rotation
+  startAutoRotation();
 }
 
 async function initIntegrationsCarousel() {
@@ -374,7 +425,7 @@ async function initIntegrationsCarousel() {
 
 async function init() {
   await ready();
-  const slider = document.querySelector('.banner .slider');
+  const slider = document.querySelector('#back-slider');
   if (slider) {
     const itemCount = slider.querySelectorAll('.item').length || FALLBACK_BANNER_IMAGES.length;
     const { files, basePath } = await fetchAssetList(BANNER_ENDPOINT, FALLBACK_BANNER_IMAGES, 'assets/img');
