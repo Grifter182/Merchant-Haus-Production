@@ -59,6 +59,10 @@
             position: relative;
             -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
+            background-color: #f8f9fa;
+            color: #1a1a1a;
+        }
+        .dark body {
             background-color: #1c1c1c;
             color: #f5f5f5;
         }
@@ -78,8 +82,11 @@
             100% { background-position: 50% -50%, -50% 50%; }
         }
         .header-glass {
-            background-color: rgba(28, 28, 28, 0.8);
+            background-color: rgba(255, 255, 255, 0.9);
             backdrop-filter: blur(10px);
+        }
+        .dark .header-glass {
+            background-color: rgba(28, 28, 28, 0.8);
         }
         .dark .border-slate-800 { border-color: #2a2a2a !important; }
 
@@ -244,7 +251,12 @@
                              >Contact Support</button>
                          </div>
                          <button type="button" class="js-signup-cta bg-brand-crimson hover:bg-opacity-90 text-white border border-transparent px-4 py-2 rounded-full text-sm font-semibold font-inter transition-colors duration-300">Get Started</button>
-                         <a href="https://retailmanager.merchant.haus" class="hidden sm:block bg-transparent hover:bg-brand-teal text-brand-teal hover:text-white border border-brand-teal px-4 py-2 rounded-lg text-sm font-semibold font-inter transition-colors duration-300">Login</a>
+                         <!-- Theme Toggle -->
+                        <button type="button" id="theme-toggle" class="hidden sm:block p-2 rounded-lg border border-brand-teal text-brand-teal hover:bg-brand-teal hover:text-white transition-colors duration-300">
+                            <i data-lucide="sun" class="h-5 w-5 dark:hidden"></i>
+                            <i data-lucide="moon" class="h-5 w-5 hidden dark:block"></i>
+                        </button>
+                        <a href="https://retailmanager.merchant.haus" class="hidden sm:block bg-transparent hover:bg-brand-teal text-brand-teal hover:text-white border border-brand-teal px-4 py-2 rounded-lg text-sm font-semibold font-inter transition-colors duration-300">Login</a>
                      </div>
                  </div>
             </header>
@@ -287,6 +299,16 @@
                         <a href="/privacy.html" class="block w-full px-4 py-2 text-left rounded-full border border-brand-teal bg-[#262626] text-white transition-colors duration-200 hover:bg-brand-teal">Privacy Policy</a>
                         <a href="/terms.html" class="block w-full px-4 py-2 text-left rounded-full border border-brand-teal bg-[#262626] text-white transition-colors duration-200 hover:bg-brand-teal">Terms &amp; Conditions</a>
                         <a href="/compliance.html" class="block w-full px-4 py-2 text-left rounded-full border border-brand-teal bg-[#262626] text-white transition-colors duration-200 hover:bg-brand-teal">Compliance</a>
+                    </div>
+                    <div class="space-y-2">
+                        <h4 class="text-sm font-semibold text-brand-teal uppercase tracking-[0.2em]">Settings</h4>
+                        <button type="button" id="mobile-theme-toggle" class="flex items-center justify-between w-full px-4 py-2 text-left rounded-full border border-brand-teal bg-[#262626] text-white transition-colors duration-200 hover:bg-brand-teal">
+                            <span>Theme</span>
+                            <span class="ml-2">
+                                <i data-lucide="sun" class="h-4 w-4 dark:hidden"></i>
+                                <i data-lucide="moon" class="h-4 w-4 hidden dark:block"></i>
+                            </span>
+                        </button>
                     </div>
                     <a href="https://retailmanager.merchant.haus" class="sm:hidden block w-full px-4 py-2 text-center rounded-full border border-brand-teal bg-[#262626] text-white transition-colors duration-200 hover:bg-brand-teal">Login</a>
                 </nav>
@@ -441,6 +463,10 @@
 
         .payments-experience {
             position: relative;
+            background-color: #ffffff;
+            color: #1a1a1a;
+        }
+        .dark .payments-experience {
             background-color: #1c1c1c;
             color: #f5f5f5;
         }
@@ -1893,6 +1919,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 <div class="text-sm">
                     <a href="tel:15056006042" class="block text-slate-300 hover:text-brand-teal">1-505-600-6042</a>
                     <a href="mailto:support@merchanthaus.io" class="block text-slate-300 hover:text-brand-teal">support@merchanthaus.io</a>
+                    <div class="mt-2 text-slate-400">
+                        <p class="text-sm">1209 Mountain Road Pl Ne Ste N</p>
+                        <p class="text-sm">Albuquerque, NM 87110 US</p>
+                    </div>
                 </div>
             </div>
             <nav class="space-y-2">
@@ -1936,7 +1966,12 @@ document.addEventListener('DOMContentLoaded', () => {
             </nav>
         </div>
         <div class="text-center text-xs pt-8 mt-8 border-t border-slate-800 text-slate-500 font-inter">
-            © <span id="year"></span> Merchant Haus. All rights reserved.
+            <div class="mb-2">
+                © <span id="year"></span> Merchant Haus. All rights reserved.
+            </div>
+            <div class="text-xs text-slate-600">
+                New Mexico Formation Date: 09/29/2025 | State Entity ID: 0008052674
+            </div>
         </div>
     </footer>
     <!-- ================= FOOTER SECTION END ================= -->
@@ -1960,6 +1995,48 @@ document.addEventListener('DOMContentLoaded', () => {
         document.addEventListener('DOMContentLoaded', () => {
             if (window.lucide) lucide.createIcons();
             document.getElementById('year').textContent = new Date().getFullYear();
+
+            // Theme toggle functionality
+            const themeToggle = document.getElementById('theme-toggle');
+            const mobileThemeToggle = document.getElementById('mobile-theme-toggle');
+            const htmlElement = document.documentElement;
+            
+            const toggleTheme = () => {
+                if (htmlElement.classList.contains('dark')) {
+                    htmlElement.classList.remove('dark');
+                    localStorage.setItem('theme', 'light');
+                } else {
+                    htmlElement.classList.add('dark');
+                    localStorage.setItem('theme', 'dark');
+                }
+                
+                // Refresh icons after theme change
+                if (window.lucide) {
+                    setTimeout(() => lucide.createIcons(), 50);
+                }
+            };
+            
+            // Initialize theme from localStorage or default to dark
+            const savedTheme = localStorage.getItem('theme');
+            if (savedTheme) {
+                if (savedTheme === 'light') {
+                    htmlElement.classList.remove('dark');
+                } else {
+                    htmlElement.classList.add('dark');
+                }
+            } else {
+                // Default to dark mode
+                htmlElement.classList.add('dark');
+                localStorage.setItem('theme', 'dark');
+            }
+            
+            // Theme toggle event listeners
+            if (themeToggle) {
+                themeToggle.addEventListener('click', toggleTheme);
+            }
+            if (mobileThemeToggle) {
+                mobileThemeToggle.addEventListener('click', toggleTheme);
+            }
 
             const logoImagePath = "\/public\/assets\/images\/Shield.webp";
             // --- Animated Logo Injection ---
