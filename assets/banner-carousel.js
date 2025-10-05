@@ -2,16 +2,16 @@ const BANNER_ENDPOINT = '/.netlify/functions/list-assets?type=banner';
 const INTEGRATIONS_ENDPOINT = '/.netlify/functions/list-assets?type=integrations';
 
 const FALLBACK_BANNER_IMAGES = [
-  'card1.png',
-  'card2.png',
-  'card3.png',
-  'card4.png',
-  'card5.png',
-  'card6.png',
-  'card7.png',
-  'card8.png',
-  'card9.png',
-  'card10.png'
+  'card1.webp',
+  'card2.webp',
+  'card3.webp',
+  'card4.webp',
+  'card5.webp',
+  'card6.webp',
+  'card7.webp',
+  'card8.webp',
+  'card9.webp',
+  'card10.webp'
 ];
 
 const FALLBACK_INTEGRATION_IMAGES = [

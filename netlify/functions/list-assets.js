@@ -1,7 +1,7 @@
 const path = require('path');
 const { promises: fs } = require('fs');
 
-const IMAGE_EXTENSIONS = new Set(['.png', '.jpg', '.jpeg', '.webp', '.gif', '.svg', '.avif']);
+const IMAGE_EXTENSIONS = new Set(['.webp', '.webp', '.webp', '.webp', '.gif', '.svg', '.avif']);
 
 const DIRECTORY_MAP = {
   banner: {
