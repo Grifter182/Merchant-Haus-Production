@@ -59,8 +59,10 @@
             position: relative;
             -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
-            background-color: #f8f9fa;
-            color: #1a1a1a;
+            background-color: #ffffff;
+            color: #0f172a;
+            font-size: 16px;
+            line-height: 1.6;
         }
         .dark body {
             background-color: #1c1c1c;
@@ -82,11 +84,13 @@
             100% { background-position: 50% -50%, -50% 50%; }
         }
         .header-glass {
-            background-color: rgba(255, 255, 255, 0.9);
+            background-color: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(10px);
+            border: 1px solid rgba(15, 23, 42, 0.1);
         }
         .dark .header-glass {
             background-color: rgba(28, 28, 28, 0.8);
+            border: 1px solid rgba(255, 255, 255, 0.1);
         }
         .dark .border-slate-800 { border-color: #2a2a2a !important; }
 
@@ -227,7 +231,7 @@
     <link rel="manifest" href="/site.webmanifest">
 </head>
 <!-- ================= HEAD SECTION END ================= -->
-<body class="text-slate-100">
+<body class="text-slate-800 dark:text-slate-100">
 
     <!-- Header -->
     <!-- ================= HEADER SECTION START ================= -->
@@ -279,7 +283,7 @@
                         </button>
                         <div id="mobile-integrations-menu" class="mt-2 space-y-2 pl-3 hidden">
                             <a href="/integrations.html" class="block w-full px-4 py-2 text-left rounded-full border border-brand-teal bg-[#1f1f1f] text-white transition-colors duration-200 hover:bg-brand-teal">Integrations Directory</a>
-                            <a href="/.html" class="block w-full px-4 py-2 text-left rounded-full border border-brand-teal bg-[#1f1f1f] text-white transition-colors duration-200 hover:bg-brand-teal">Shopify Integration</a>
+                            <a href="/shopify.html" class="block w-full px-4 py-2 text-left rounded-full border border-brand-teal bg-[#1f1f1f] text-white transition-colors duration-200 hover:bg-brand-teal">Shopify Integration</a>
                             <a href="/gohighlevel.html" class="block w-full px-4 py-2 text-left rounded-full border border-brand-teal bg-[#1f1f1f] text-white transition-colors duration-200 hover:bg-brand-teal">GoHighLevel Integration</a>
                         </div>
                         <a href="/#checklist" class="block w-full px-4 py-2 text-left rounded-full border border-brand-teal bg-[#262626] text-white transition-colors duration-200 hover:bg-brand-teal">Setup Checklist</a>
@@ -861,6 +865,7 @@
               id="faq-answer"
               class="mt-6 p-4 text-left rounded-lg bg-white/90 dark:bg-slate-900/90 border border-slate-200 dark:border-slate-800 text-slate-800 dark:text-slate-200"
             ></div>
+            <div id="faq-answer" class="mt-6 p-4 text-left rounded-lg bg-white/90 dark:bg-slate-900/90 border border-slate-300 dark:border-slate-800 text-slate-900 dark:text-slate-200"></div>
           </div>
         </div>
       </div>
@@ -1081,7 +1086,7 @@
 <!-- ================= SETUP CHECKLIST SECTION START ================= -->
 <!-- Step-by-step onboarding checklist with pinned heading overlay -->
 <div class="relative">
-  <section id="checklist" class="pt-28 pb-16 bg-slate-50 dark:bg-slate-900/40 border-y border-slate-200/70 dark:border-slate-800">
+  <section id="checklist" class="pt-28 pb-16 bg-slate-50 dark:bg-slate-900/40 border-y border-slate-200 dark:border-slate-800">
     <div class="max-w-7xl mx-auto px-4 text-center">
       <p class="mt-4 max-w-3xl mx-auto text-slate-600 dark:text-slate-300">Here’s everything we’ll ask for during setup—business details, security info, documentation. We’ll guide you step‑by‑step.</p>
       <div class="grid md:grid-cols-3 gap-8 mt-12 text-left">
@@ -1131,7 +1136,7 @@
   </section>
   <div class="hero-overlay absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 z-10 w-full px-4">
     <div class="bg-brand-teal px-8 py-4 rounded-xl shadow-lg text-center">
-      <h2 class="text-3xl font-ubuntu font-bold" style="color: #524848;">Setup Checklist: What You’ll Need to Begin</h2>
+      <h2 class="text-3xl font-ubuntu font-bold text-slate-800 dark:text-slate-100">Setup Checklist: What You'll Need to Begin</h2>
     </div>
   </div>
 </div>
@@ -1956,7 +1961,7 @@ document.addEventListener('DOMContentLoaded', () => {
     <!-- Footer -->
     <!-- ================= FOOTER SECTION START ================= -->
     <!-- Multi-column footer with contact details, navigation, and legal links -->
-    <footer class="border-t border-slate-800 py-8 mt-8">
+    <footer class="border-t border-slate-200 dark:border-slate-800 py-8 mt-8 bg-white dark:bg-transparent">
         <div class="max-w-7xl mx-auto px-4 grid sm:grid-cols-2 lg:grid-cols-4 gap-8 text-sm" >
             <div class="space-y-4">
                 <a href="/index.html" class="flex items-center gap-3">
@@ -1973,14 +1978,14 @@ document.addEventListener('DOMContentLoaded', () => {
                 </div>
             </div>
             <nav class="space-y-2">
-                <h3 class="font-semibold font-ubuntu text-white">Product</h3>
-                <a href="/#payments" class="block text-slate-300 hover:text-brand-teal">Payment Services</a>
+                <h3 class="font-semibold font-ubuntu text-slate-900 dark:text-white">Product</h3>
+                <a href="/#payments" class="block text-slate-600 dark:text-slate-300 hover:text-brand-teal">Payment Services</a>
                 <button
                     type="button"
                     id="footer-integrations-toggle"
                     aria-expanded="false"
                     aria-controls="footer-integrations-menu"
-                    class="flex items-center justify-between w-full text-left text-slate-300 hover:text-brand-teal transition-colors"
+                    class="flex items-center justify-between w-full text-left text-slate-600 dark:text-slate-300 hover:text-brand-teal transition-colors"
                 >
                     <span>Integrations</span>
                     <span class="ml-2 text-slate-400">
@@ -1990,29 +1995,29 @@ document.addEventListener('DOMContentLoaded', () => {
                     </span>
                 </button>
                 <div id="footer-integrations-menu" class="mt-2 space-y-2 pl-4 hidden">
-                    <a href="/integrations.html" class="block text-slate-400 hover:text-brand-teal">Integrations Directory</a>
-                    <a href="/shopify.html" class="block text-slate-400 hover:text-brand-teal">Shopify Integration</a>
-                    <a href="/gohighlevel.html" class="block text-slate-400 hover:text-brand-teal">GoHighLevel Integration</a>
+                    <a href="/integrations.html" class="block text-slate-500 dark:text-slate-400 hover:text-brand-teal">Integrations Directory</a>
+                    <a href="/shopify.html" class="block text-slate-500 dark:text-slate-400 hover:text-brand-teal">Shopify Integration</a>
+                    <a href="/gohighlevel.html" class="block text-slate-500 dark:text-slate-400 hover:text-brand-teal">GoHighLevel Integration</a>
                 </div>
-                <a href="/#checklist" class="block text-slate-300 hover:text-brand-teal">Setup Checklist</a>
+                <a href="/#checklist" class="block text-slate-600 dark:text-slate-300 hover:text-brand-teal">Setup Checklist</a>
             </nav>
             <nav class="space-y-2">
-                <h3 class="font-semibold font-ubuntu text-white">Support</h3>
+                <h3 class="font-semibold font-ubuntu text-slate-900 dark:text-white">Support</h3>
                 <a
                   href="mailto:support@merchanthaus.io"
-                  class="js-support block text-slate-300 hover:text-brand-teal"
+                  class="js-support block text-slate-600 dark:text-slate-300 hover:text-brand-teal"
                   data-cta="contact-support"
                   data-cta-location="footer"
                 >Contact Support</a>
-                <a href="/faq.html" class="block text-slate-300 hover:text-brand-teal">FAQ</a>
+                <a href="/faq.html" class="block text-slate-600 dark:text-slate-300 hover:text-brand-teal">FAQ</a>
             </nav>
             <nav class="space-y-2">
-                <h3 class="font-semibold font-ubuntu text-white">Legal</h3>
-                <a href="/privacy.html" class="block text-slate-300 hover:text-brand-teal">Privacy Policy</a>
-                <a href="/terms.html" class="block text-slate-300 hover:text-brand-teal">Terms & Conditions</a>
+                <h3 class="font-semibold font-ubuntu text-slate-900 dark:text-white">Legal</h3>
+                <a href="/privacy.html" class="block text-slate-600 dark:text-slate-300 hover:text-brand-teal">Privacy Policy</a>
+                <a href="/terms.html" class="block text-slate-600 dark:text-slate-300 hover:text-brand-teal">Terms & Conditions</a>
             </nav>
         </div>
-        <div class="text-center text-xs pt-8 mt-8 border-t border-slate-800 text-slate-500 font-inter">
+        <div class="text-center text-xs pt-8 mt-8 border-t border-slate-200 dark:border-slate-800 text-slate-500 dark:text-slate-500 font-inter">
             <div class="mb-2">
                 © <span id="year"></span> Merchant Haus. All rights reserved.
             </div>
@@ -2362,9 +2367,12 @@ document.addEventListener('DOMContentLoaded', () => {
     max-height: 320px;
     overflow-y: auto;
     padding: 1rem;
-    background: #f8fafc;
+    background: rgba(248, 250, 252, 0.9);
     border-radius: 0.5rem;
     margin-bottom: 1rem;
+  }
+  .dark #faq-answer {
+    background: rgba(15, 23, 42, 0.9);
   }
   .chat-user {
     background: #dc143c;

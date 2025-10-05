@@ -57,6 +57,12 @@
             position: relative;
             -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
+            background-color: #ffffff;
+            color: #0f172a;
+            font-size: 16px;
+            line-height: 1.6;
+        }
+        .dark body {
             background-color: #1c1c1c;
             color: #f5f5f5;
         }
@@ -76,8 +82,13 @@
             100% { background-position: 50% -50%, -50% 50%; }
         }
         .header-glass {
-            background-color: rgba(28, 28, 28, 0.8);
+            background-color: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(10px);
+            border: 1px solid rgba(15, 23, 42, 0.1);
+        }
+        .dark .header-glass {
+            background-color: rgba(28, 28, 28, 0.8);
+            border: 1px solid rgba(255, 255, 255, 0.1);
         }
         .dark .border-slate-800 { border-color: #2a2a2a !important; }
 
@@ -149,7 +160,7 @@
     <link rel="icon" type="image/x-icon" href="/favicon.ico">
     <link rel="manifest" href="/site.webmanifest">
 </head>
-<body class="text-slate-100">
+<body class="text-slate-800 dark:text-slate-100">
 
     <!-- Header -->
     <div class="sticky top-0 z-50">
@@ -171,7 +182,12 @@
                              >Contact Support</button>
                          </div>
                          <button type="button" class="js-signup-cta bg-brand-crimson hover:bg-opacity-90 text-white border border-transparent px-4 py-2 rounded-full text-sm font-semibold font-inter transition-colors duration-300">Get Started</button>
-                         <a href="https://retailmanager.merchant.haus" class="hidden sm:block bg-transparent hover:bg-brand-teal text-brand-teal hover:text-white border border-brand-teal px-4 py-2 rounded-lg text-sm font-semibold font-inter transition-colors duration-300">Login</a>
+                         <!-- Theme Toggle -->
+                        <button type="button" id="theme-toggle" class="hidden sm:block p-2 rounded-lg border border-brand-teal text-brand-teal hover:bg-brand-teal hover:text-white transition-colors duration-300">
+                            <i data-lucide="sun" class="h-5 w-5 dark:hidden"></i>
+                            <i data-lucide="moon" class="h-5 w-5 hidden dark:block"></i>
+                        </button>
+                        <a href="https://retailmanager.merchant.haus" class="hidden sm:block bg-transparent hover:bg-brand-teal text-brand-teal hover:text-white border border-brand-teal px-4 py-2 rounded-lg text-sm font-semibold font-inter transition-colors duration-300">Login</a>
                          <button id="mobile-menu-button" class="md:hidden p-2 rounded-lg hover:bg-slate-800">
                              <i data-lucide="menu" class="h-6 w-6"></i>
                          </button>
@@ -220,6 +236,16 @@
                          <a href="/terms.html" class="block w-full px-4 py-2 text-left rounded-full border border-brand-teal bg-[#262626] text-white transition-colors duration-200 hover:bg-brand-teal">Terms &amp; Conditions</a>
                          <a href="/compliance.html" class="block w-full px-4 py-2 text-left rounded-full border border-brand-teal bg-[#262626] text-white transition-colors duration-200 hover:bg-brand-teal">Compliance</a>
                      </div>
+                    <div class="space-y-2">
+                        <h4 class="text-sm font-semibold text-brand-teal uppercase tracking-[0.2em]">Settings</h4>
+                        <button type="button" id="mobile-theme-toggle" class="flex items-center justify-between w-full px-4 py-2 text-left rounded-full border border-brand-teal bg-[#262626] text-white transition-colors duration-200 hover:bg-brand-teal">
+                            <span>Theme</span>
+                            <span class="ml-2">
+                                <i data-lucide="sun" class="h-4 w-4 dark:hidden"></i>
+                                <i data-lucide="moon" class="h-4 w-4 hidden dark:block"></i>
+                            </span>
+                        </button>
+                    </div>
                      <a href="https://retailmanager.merchant.haus" class="sm:hidden block w-full px-4 py-2 text-center rounded-full border border-brand-teal bg-[#262626] text-white transition-colors duration-200 hover:bg-brand-teal">Login</a>
                  </nav>
             </div>
