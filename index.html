@@ -1288,7 +1288,8 @@ document.addEventListener('DOMContentLoaded', () => {
   const particleCanvas = document.getElementById('particle-canvas');
   const frontSlider = document.getElementById('front-slider');
   const backSlider = document.getElementById('back-slider');
-  const allItems = document.querySelectorAll('.item');
+  // Only select carousel items within the services banner
+  const allItems = document.querySelectorAll('.banner .item');
   const fullscreenView = document.getElementById('fullscreen-view');
   const fullscreenCard = document.getElementById('fullscreen-card');
   const closeFullscreenBtn = document.getElementById('close-fullscreen-btn');
@@ -1376,6 +1377,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const numItems = allItems.length;
     const rotationIncrement = 360 / numItems;
+    // keep CSS variable in sync with actual number of items
+    frontSlider.style.setProperty('--quantity', numItems);
+    backSlider.style.setProperty('--quantity', numItems);
 
     let currentYRotation = 0;
     let isDragging = false;
