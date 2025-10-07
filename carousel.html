@@ -88,11 +88,14 @@
         }
         .slider {
             position: absolute;
-            width: 160px; 
-            height: 200px; 
+            width: 160px;
+            height: 200px;
             transform-style: preserve-3d;
             transform: perspective(1500px) rotateX(-18deg);
             cursor: grab;
+            transition: opacity 0.5s;
+        }
+        .slider.with-transition {
             transition: transform 1.2s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.5s;
         }
         #front-slider { z-index: 2; }
@@ -429,6 +432,17 @@
             const frontSlider = document.getElementById('front-slider');
             const backSlider = document.getElementById('back-slider');
             const allItems = [];
+            const rotationSpeed = 0.0027; // degrees per millisecond
+
+            const enableSliderTransition = () => {
+                frontSlider.classList.add('with-transition');
+                backSlider.classList.add('with-transition');
+            };
+
+            const disableSliderTransition = () => {
+                frontSlider.classList.remove('with-transition');
+                backSlider.classList.remove('with-transition');
+            };
 
             const services = [
                 { title: "Mobile Payments", icon: "smartphone" },
@@ -471,9 +485,10 @@
             let currentYRotation = 0;
             let isDragging = false;
             let startX, startRotation, dragDistance = 0;
-            let dragThreshold = 5; 
+            let dragThreshold = 5;
             let autoRotate = true;
             let autoRotateTimeout;
+            let lastFrameTime = performance.now();
 
             const updateSliderRotation = () => {
                 const rotationStyle = `perspective(1500px) rotateX(-18deg) rotateY(${currentYRotation}deg)`;
@@ -483,22 +498,36 @@
             };
 
             const updateCardZIndexes = () => {
+                const frontItems = [];
+                const backItems = [];
+
                 allItems.forEach(item => {
                     const position = parseInt(item.style.getPropertyValue('--position'));
                     const itemAngle = (position - 1) * rotationIncrement;
                     let effectiveAngle = (currentYRotation + itemAngle) % 360;
                     if (effectiveAngle < 0) effectiveAngle += 360;
 
+                    const depth = Math.cos((effectiveAngle * Math.PI) / 180);
+                    item.style.zIndex = Math.round(depth * 1000);
+
                     if (effectiveAngle > 90 && effectiveAngle < 270) {
-                        if (item.parentElement !== backSlider) {
-                            backSlider.appendChild(item);
-                        }
+                        item.style.opacity = 0.35;
+                        item.style.pointerEvents = 'none';
+                        backItems.push({ item, depth });
                     } else {
-                        if (item.parentElement !== frontSlider) {
-                            frontSlider.appendChild(item);
-                        }
+                        item.style.opacity = 1;
+                        item.style.pointerEvents = 'auto';
+                        frontItems.push({ item, depth });
                     }
                 });
+
+                const frontFragment = document.createDocumentFragment();
+                frontItems.sort((a, b) => a.depth - b.depth).forEach(({ item }) => frontFragment.appendChild(item));
+                frontSlider.appendChild(frontFragment);
+
+                const backFragment = document.createDocumentFragment();
+                backItems.sort((a, b) => a.depth - b.depth).forEach(({ item }) => backFragment.appendChild(item));
+                backSlider.appendChild(backFragment);
             };
 
             const stopAutoRotate = () => {
@@ -512,6 +541,7 @@
 
             const handleMouseDown = (e) => {
                 stopAutoRotate(); isDragging = true;
+                disableSliderTransition();
                 frontSlider.classList.add('dragging');
                 backSlider.classList.add('dragging');
                 startX = e.pageX || e.touches[0].pageX;
@@ -522,7 +552,7 @@
             const handleMouseMove = (e) => {
                 if (!isDragging) return;
                 const x = e.pageX || e.touches[0].pageX;
-                const walk = (x - startX) * 0.5; 
+                const walk = (x - startX) * 0.5;
                 currentYRotation = startRotation - walk;
                 dragDistance = Math.abs(walk);
                 updateSliderRotation();
@@ -537,25 +567,33 @@
             };
             
             const handleClick = (e) => {
-                if (dragDistance > dragThreshold) { e.preventDefault(); return; }
+                if (dragDistance > dragThreshold) { e.preventDefault(); resumeAutoRotate(); return; }
                 const item = e.currentTarget;
+                stopAutoRotate();
                 const iconContainer = item.querySelector('.service-icon-container');
                 const startRect = iconContainer.getBoundingClientRect();
                 const startX = startRect.left + startRect.width / 2;
                 const startYTop = startRect.top; const startYBottom = startRect.bottom;
                 const position = parseInt(item.style.getPropertyValue('--position'));
                 const targetRotation = -(position - 1) * rotationIncrement;
-                
+
                 if (Math.abs(currentYRotation - targetRotation) % 360 < 1) {
                     zoomIn(item);
                     return;
                 }
 
+                enableSliderTransition();
                 currentYRotation = targetRotation;
                 updateSliderRotation();
-                
+
                 const transitionHandler = () => zoomIn(item);
                 frontSlider.addEventListener('transitionend', transitionHandler, { once: true });
+
+                const transitionCleanup = () => {
+                    disableSliderTransition();
+                };
+                frontSlider.addEventListener('transitionend', transitionCleanup, { once: true });
+                backSlider.addEventListener('transitionend', transitionCleanup, { once: true });
                 
                 setTimeout(() => {
                     const frontCard = frontSlider.querySelector('.item');
@@ -638,9 +676,13 @@
                  }, 500);
             };
             
-            function carouselLoop() {
-                if(autoRotate && !isDragging) {
-                    currentYRotation -= 0.045; 
+            function carouselLoop(timestamp) {
+                const delta = timestamp - lastFrameTime;
+                lastFrameTime = timestamp;
+
+                if (autoRotate && !isDragging) {
+                    disableSliderTransition();
+                    currentYRotation = (currentYRotation - delta * rotationSpeed) % 360;
                     updateSliderRotation();
                 }
                 requestAnimationFrame(carouselLoop);
@@ -669,8 +711,12 @@
                 }
             });
             
+            disableSliderTransition();
             updateCardZIndexes();
-            carouselLoop();
+            requestAnimationFrame((time) => {
+                lastFrameTime = time;
+                carouselLoop(time);
+            });
 
         });
     </script>
