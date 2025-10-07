@@ -56,6 +56,15 @@ const ready = () => new Promise((resolve) => {
   }
 });
 
+// Additional function to ensure all resources are loaded
+const fullyLoaded = () => new Promise((resolve) => {
+  if (document.readyState === 'complete') {
+    resolve();
+  } else {
+    window.addEventListener('load', resolve, { once: true });
+  }
+});
+
 async function fetchAssetList(endpoint, fallbackFiles, fallbackBasePath) {
   try {
     const response = await fetch(endpoint, { headers: { 'Cache-Control': 'no-cache' } });
@@ -466,6 +475,12 @@ async function initIntegrationsCarousel() {
 
 async function init() {
   await ready();
+  await fullyLoaded();
+  
+  // Add additional delay to ensure CSS and fonts are fully loaded before initializing
+  // This prevents carousel glitches during the loading sequence
+  await new Promise(resolve => setTimeout(resolve, 500));
+  
   const slider = document.querySelector('#back-slider');
   if (slider) {
     const itemCount = slider.querySelectorAll('.item').length || FALLBACK_BANNER_IMAGES.length;
