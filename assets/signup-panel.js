@@ -41,8 +41,21 @@
       const form = document.getElementById('signup-form');
       if (!form) return;
 
+      // Add Netlify Forms attributes
+      if (!form.hasAttribute('name')) {
+        form.setAttribute('name', 'signup');
+        form.setAttribute('method', 'POST');
+        form.setAttribute('data-netlify', 'true');
+        form.setAttribute('netlify-honeypot', 'bot-field');
+        form.setAttribute('action', '/thankyou.html');
+      }
+
       if (!formInitialized) {
         form.innerHTML = `
+      <input type="hidden" name="form-name" value="signup">
+      <p class="hidden">
+        <label>Don't fill this out if you're human: <input name="bot-field"></label>
+      </p>
       <div id="step-1" class="form-step">
         <h2 class="text-2xl font-bold mb-2">Primary Contact Information</h2>
         <p class="text-sm text-slate-500 mb-6">This person will be the primary user on the account.</p>
@@ -92,6 +105,63 @@
 
         nextBtn?.addEventListener('click', goNext);
         prevBtn?.addEventListener('click', goPrev);
+
+        // Add form submission handling
+        form.addEventListener('submit', async (event) => {
+          event.preventDefault();
+          
+          const formData = new FormData(form);
+          const data = Object.fromEntries(formData.entries());
+          
+          // Get message div for status updates
+          const messageDiv = document.getElementById('form-message');
+          if (messageDiv) {
+            messageDiv.textContent = 'Submitting...';
+            messageDiv.className = 'mt-4 text-center text-sm text-slate-600';
+          }
+          
+          try {
+            // Try Netlify Function first
+            try {
+              const functionRes = await fetch('/.netlify/functions/submit-signup', {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify(data)
+              });
+              
+              if (functionRes.ok) {
+                if (messageDiv) {
+                  messageDiv.textContent = 'Thanks for signing up! Our team will review and reach out with next steps.';
+                  messageDiv.className = 'mt-4 text-center text-sm text-green-600';
+                }
+                setTimeout(() => closePanel(), 2000);
+                return;
+              }
+              throw new Error('Function failed');
+            } catch (functionError) {
+              console.warn('Netlify Function failed, falling back to Netlify Forms:', functionError);
+              
+              // Fallback to Netlify Forms
+              const netlifyRes = await fetch('/', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                body: new URLSearchParams(formData).toString()
+              });
+              
+              if (!netlifyRes.ok) throw new Error('Netlify Forms submission failed');
+              
+              // Redirect to thank you page for Netlify Forms
+              window.location.href = '/thankyou.html';
+              return;
+            }
+          } catch (error) {
+            console.error('Form submission error:', error);
+            if (messageDiv) {
+              messageDiv.textContent = 'Something went wrong. Please try again.';
+              messageDiv.className = 'mt-4 text-center text-sm text-red-600';
+            }
+          }
+        });
 
         formInitialized = true;
       }

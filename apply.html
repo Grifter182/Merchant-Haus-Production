@@ -290,7 +290,11 @@
     <h1 class="text-3xl md:text-4xl font-extrabold">Merchant Application</h1>
     <p class="mt-2 text-slate-600 dark:text-slate-300">U.S. retail only. Provide the details below — we’ll review and issue your Merchant ID (MID) &amp; access credentials during onboarding.</p>
 
-    <form class="mt-8 grid gap-6" id="apply-form">
+    <form class="mt-8 grid gap-6" id="apply-form" name="merchant-application" method="POST" data-netlify="true" netlify-honeypot="bot-field" action="/thankyou.html">
+        <input type="hidden" name="form-name" value="merchant-application">
+        <p class="hidden">
+            <label>Don't fill this out if you're human: <input name="bot-field"></label>
+        </p>
         <!-- Merchant Information -->
         <section class="p-6 rounded-2xl border border-slate-200 dark:border-slate-800">
             <h2 class="text-xl font-bold">Merchant Information</h2>
@@ -374,20 +378,59 @@
   form.addEventListener('submit', async (e) => {
     e.preventDefault();
     out.textContent = 'Submitting…';
+    
     try {
-      const data = Object.fromEntries(new FormData(form).entries());
-      ['svcCredit','svcAch','svcCash','valEncryption','valInvoice','valLevel3','valMobile','valVault'].forEach(k => { data[k] = !!form.elements[k].checked; });
+      const formData = new FormData(form);
+      const data = Object.fromEntries(formData.entries());
+      ['svcCredit','svcAch','svcCash','valEncryption','valInvoice','valLevel3','valMobile','valVault'].forEach(k => { 
+        data[k] = !!form.elements[k].checked; 
+      });
       data.utm = getUTM();
 
-      const res = await fetch('/.netlify/functions/submit-application', {
-        method: 'POST',
-        headers: {'Content-Type':'application/json'},
-        body: JSON.stringify(data)
-      });
-      if (!res.ok) throw new Error('Request failed');
-      out.textContent = 'Thanks — we emailed you next steps and sent your application to our team.';
-      localStorage.removeItem(LS_KEY);
-      form.reset();
+      // Try Netlify Function first
+      try {
+        const res = await fetch('/.netlify/functions/submit-application', {
+          method: 'POST',
+          headers: {'Content-Type':'application/json'},
+          body: JSON.stringify(data)
+        });
+        
+        if (res.ok) {
+          out.textContent = 'Thanks — we emailed you next steps and sent your application to our team.';
+          localStorage.removeItem(LS_KEY);
+          form.reset();
+          return;
+        }
+        throw new Error('Function failed');
+      } catch (functionError) {
+        console.warn('Netlify Function failed, falling back to Netlify Forms:', functionError);
+        
+        // Fallback to Netlify Forms
+        // Add UTM data to form for Netlify Forms submission
+        const utmData = getUTM();
+        Object.keys(utmData).forEach(key => {
+          if (utmData[key]) {
+            const hiddenField = document.createElement('input');
+            hiddenField.type = 'hidden';
+            hiddenField.name = `utm_${key}`;
+            hiddenField.value = utmData[key];
+            form.appendChild(hiddenField);
+          }
+        });
+        
+        // Submit to Netlify Forms
+        const netlifyRes = await fetch('/', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+          body: new URLSearchParams(new FormData(form)).toString()
+        });
+        
+        if (!netlifyRes.ok) throw new Error('Netlify Forms submission failed');
+        
+        // Redirect to thank you page for Netlify Forms
+        window.location.href = '/thankyou.html';
+        return;
+      }
     } catch (err) {
       console.error(err);
       out.textContent = 'Something went wrong. Please try again or email hello@merchant.haus.';
