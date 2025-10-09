@@ -90,6 +90,19 @@
             overflow: hidden;
             position: relative;
         }
+        
+        /* Desktop overlay for brightness reduction */
+        .slider::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.15);
+            pointer-events: none;
+            z-index: 10;
+        }
         .slider .list .item{
             width: 100%;
             height: 100%;
@@ -152,7 +165,7 @@
         .thumbnail-track {
             display: flex;
             gap: 20px;
-            animation: infinite-scroll 15s linear infinite;
+            /* Removed auto-scroll animation for desktop - keeping infinite cycle capability */
             will-change: transform;
         }
         .thumbnail .item{
@@ -162,6 +175,12 @@
             position: relative;
             opacity: 1;
             transform: scale(1);
+            cursor: pointer;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .thumbnail .item:hover {
+            transform: scale(1.05);
+            z-index: 110;
         }
         @keyframes infinite-scroll {
             0% { transform: translateX(0); }
@@ -177,7 +196,7 @@
         .nextPrevArrows{
             position: absolute;
             bottom: 120px;
-            right: 220px;
+            left: 20px; /* Moved to the left side */
             z-index: 100;
             width: 100px;
             display: flex;
@@ -300,27 +319,22 @@
             .slider .list .item .content .title{ font-size: 2.5em; }
             .slider .list .item .content .type{ font-size: 2em; }
             .slider .list .item .content .description { font-size: 1rem; }
+            
+            /* Hide cards on mobile to save real estate */
             .thumbnail { 
-                display: flex; 
-                right: 10px;
-                gap: 10px;
-                width: calc(80px * 5 + 10px * 4); /* Adjusted for mobile */
+                display: none !important;
             }
-            .thumbnail-track {
-                gap: 10px;
-                animation: infinite-scroll-mobile 15s linear infinite;
-            }
-            .thumbnail .item {
-                width: 80px;
-                height: 120px;
-            }
-            @keyframes infinite-scroll-mobile {
-                0% { transform: translateX(0); }
-                100% { transform: translateX(calc(-80px - 10px)); }
-            }
+            
+            /* Keep navigation arrows visible and functional on mobile */
             .nextPrevArrows { 
                 bottom: 30px; 
-                right: 120px;
+                left: 20px; /* Also moved to left on mobile */
+                display: flex;
+            }
+            
+            /* Remove desktop overlay on mobile */
+            .slider::after {
+                display: none;
             }
         }
             
@@ -1163,11 +1177,36 @@
 </script>
 
 <script>
-    // Simplified slider script - only handles main hero slides
+    // Enhanced slider script with clickable cards and improved modal close functionality
     let nextBtn = document.querySelector('.next');
     let prevBtn = document.querySelector('.prev');
     let slider = document.querySelector('.slider');
     let sliderList = slider.querySelector('.slider .list');
+    let thumbnailItems = document.querySelectorAll('.thumbnail .item');
+    
+    // Make cards clickable - clicking a card switches to that slide
+    thumbnailItems.forEach((card, index) => {
+        card.addEventListener('click', () => {
+            // Move to the clicked card's slide
+            const sliderItems = sliderList.querySelectorAll('.item');
+            const currentIndex = 0; // First item is always the active one
+            const targetIndex = index;
+            
+            if (targetIndex !== currentIndex) {
+                // Calculate how many moves needed
+                const moves = targetIndex;
+                for (let i = 0; i < moves; i++) {
+                    sliderList.appendChild(sliderItems[0]);
+                }
+                
+                // Add animation class
+                slider.classList.add('next');
+                slider.addEventListener('animationend', function() {
+                    slider.classList.remove('next');
+                }, { once: true });
+            }
+        });
+    });
     
     // Simple main slider functionality
     function moveSlider(direction) {
@@ -1197,6 +1236,53 @@
         prevBtn.onclick = function() {
             moveSlider('prev');
         }
+    }
+    
+    // Enhanced modal close functionality
+    function ensureModalCloseWorks() {
+        // Find all modals and ensure their close buttons work
+        const modals = document.querySelectorAll('[id$="-modal"], [id$="-overlay"], [id$="-panel"]');
+        
+        modals.forEach(modal => {
+            // Find close buttons within each modal
+            const closeButtons = modal.querySelectorAll('[data-close], .js-close, [aria-label="Close"]');
+            
+            closeButtons.forEach(closeBtn => {
+                closeBtn.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    
+                    // Hide the modal
+                    modal.classList.add('hidden');
+                    
+                    // Also try common hiding methods
+                    modal.style.display = 'none';
+                });
+            });
+            
+            // Also handle escape key for modals
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape' && !modal.classList.contains('hidden')) {
+                    modal.classList.add('hidden');
+                    modal.style.display = 'none';
+                }
+            });
+            
+            // Handle backdrop clicks
+            modal.addEventListener('click', (e) => {
+                if (e.target === modal || e.target.hasAttribute('data-close')) {
+                    modal.classList.add('hidden');
+                    modal.style.display = 'none';
+                }
+            });
+        });
+    }
+    
+    // Initialize enhanced close functionality when DOM is ready
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', ensureModalCloseWorks);
+    } else {
+        ensureModalCloseWorks();
     }
 </script>
 
