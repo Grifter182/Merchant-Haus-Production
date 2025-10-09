@@ -1,0 +1,868 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MerchantHaus | Omnichannel Payment Services for Your Business</title>
+    <meta name="description" content="MerchantHaus provides reliable, easy-to-use payment solutions for in-store, online, and mobile sales. Accept cards, ACH, and digital wallets with developer-friendly tools and dedicated support.">
+    <meta name="robots" content="index,follow">
+    <meta property="og:title" content="MerchantHaus | Modern Payments, Personalized Service">
+    <meta property="og:description" content="Omnichannel payment solutions for retail, e-commerce, and service businesses, combining modern technology with white-glove support.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://www.merchant.haus/">
+    <meta property="og:image" content="https://www.merchant.haus/public/assets/images/banner1.png">
+    <meta name="theme-color" content="#0B1D3D">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Ubuntu:wght@600;700&display=swap" rel="stylesheet">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        display: ['Ubuntu', 'sans-serif']
+                    },
+                    colors: {
+                        'brand-crimson': '#DC143C',
+                        'brand-teal': '#00CEDB',
+                        'brand-silver': '#A9A9A9',
+                        'brand-dark': '#1A1A1A',
+                        'brand-light': '#F8F9FA',
+                        'brand-navy': '#1A1A1A',
+                        'brand-slate': '#F8F9FA',
+                        'brand-cyan': '#00CEDB',
+                        'brand-mint': '#5BE4E6'
+                    }
+                }
+            }
+        }
+    </script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <style>
+        body {
+            background-color: #F8F9FA;
+            color: #1A1A1A;
+            font-family: 'Inter', 'sans-serif';
+        }
+        .section-title {
+            letter-spacing: -0.02em;
+        }
+        .section-subtitle {
+            color: rgba(26, 26, 26, 0.72);
+        }
+
+        /* Slider Styles */
+        .slider{
+            height: 80vh;
+            width: 100%;
+            overflow: hidden;
+            position: relative;
+        }
+        .slider .list .item{
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            inset: 0 0 0 0;
+        }
+        .slider .list .item img{
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .slider .list .item .content{
+            position: absolute;
+            top: 55%;
+            left: 10%; /* Align to the left */
+            transform: translateY(-50%);
+            width: 90%;
+            max-width: 700px;
+            box-sizing: border-box;
+            color: #fff;
+            text-shadow: 0 2px 8px rgba(0,0,0,0.7);
+            text-align: left; /* Set text alignment to left */
+        }
+
+        .slider .list .item .content .title,
+        .slider .list .item .content .type{
+            font-size: 4em;
+            font-weight: 700;
+            line-height: 1.2;
+            font-family: 'Ubuntu', sans-serif;
+        }
+        
+        .slider .list .item .content .type{
+            color: #DC143C; /* brand-crimson */
+            font-size: 3em;
+        }
+
+        .slider .list .item .content .description {
+            font-family: 'Inter', sans-serif;
+            font-size: 1.1rem;
+            line-height: 1.6;
+            margin-top: 1rem;
+            max-width: 600px;
+        }
+
+        .slider .list .item .button{
+            margin-top: 20px;
+        }
+
+        .thumbnail{
+            position: absolute;
+            bottom: 50px;
+            left: 50%;
+            width: max-content;
+            z-index: 100;
+            display: flex;
+            gap: 20px;
+            transform: translateX(-50%);
+        }
+        .thumbnail .item{
+            width: 150px;
+            height: 220px;
+            flex-shrink: 0;
+            position: relative;
+        }
+        .thumbnail .item img{
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 20px;
+            box-shadow: 5px 0 15px rgba(0, 0, 0, 0.3);
+        }
+        .nextPrevArrows{
+            position: absolute;
+            bottom: 120px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 100;
+            width: 100px;
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+        .nextPrevArrows button{
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: #DC143C; /* brand-crimson */
+            border: none;
+            color: #fff;
+            font-family: monospace;
+            font-weight: bold;
+            transition: .5s;
+            cursor: pointer;
+        }
+        .nextPrevArrows button:hover{
+            background-color: #fff;
+            color: #000;
+        }
+        .slider .list .item:nth-child(1){
+            z-index: 1;
+        }
+        .slider .list .item:nth-child(1) .content .title,
+        .slider .list .item:nth-child(1) .content .type,
+        .slider .list .item:nth-child(1) .content .description,
+        .slider .list .item:nth-child(1) .content .button
+        {
+            transform: translateY(50px);
+            filter: blur(20px);
+            opacity: 0;
+            animation: showContent .5s 1s linear 1 forwards;
+        }
+        @keyframes showContent{
+            to{
+                transform: translateY(0px);
+                filter: blur(0px);
+                opacity: 1;
+            }
+        }
+        .slider .list .item:nth-child(1) .content .title{ animation-delay: 0.4s !important; }
+        .slider .list .item:nth-child(1) .content .type{ animation-delay: 0.6s !important; }
+        .slider .list .item:nth-child(1) .content .description{ animation-delay: 0.8s !important; }
+        .slider .list .item:nth-child(1) .content .button{ animation-delay: 1s !important; }
+        .slider.next .list .item:nth-child(1) img{
+            width: 150px;
+            height: 220px;
+            position: absolute;
+            bottom: 50px;
+            left: 50%;
+            border-radius: 30px;
+            animation: showImage .5s linear 1 forwards;
+        }
+        @keyframes showImage{
+            to{
+                bottom: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                border-radius: 0;
+            }
+        }
+        .slider.next .thumbnail .item:nth-last-child(1){
+            overflow: hidden;
+            animation: showThumbnail .5s linear 1 forwards;
+        }
+        .slider.prev .list .item img{
+            z-index: 100;
+        }
+        @keyframes showThumbnail{ from{ width: 0; opacity: 0; } }
+        .slider.next .thumbnail{ animation: effectNext .5s linear 1 forwards; }
+        @keyframes effectNext{ from{ transform: translateX(150px); } }
+        .slider.prev .list .item:nth-child(2){ z-index: 2; }
+        .slider.prev .list .item:nth-child(2) img{
+            animation: outFrame 0.5s linear 1 forwards;
+            position: absolute;
+            bottom: 0;
+            left: 0;
+        }
+        @keyframes outFrame{
+            to{
+                width: 150px;
+                height: 220px;
+                bottom: 50px;
+                left: 50%;
+                border-radius: 20px;
+            }
+        }
+        .slider.prev .thumbnail .item:nth-child(1){
+            overflow: hidden;
+            opacity: 0;
+            animation: showThumbnail .5s linear 1 forwards;
+        }
+        .slider.next .nextPrevArrows button,
+        .slider.prev .nextPrevArrows button{
+            pointer-events: none;
+        }
+        .slider.prev .list .item:nth-child(2) .content .title,
+        .slider.prev .list .item:nth-child(2) .content .type,
+        .slider.prev .list .item:nth-child(2) .content .description,
+        .slider.prev .list .item:nth-child(2) .content .button
+        {
+            animation: contentOut 1.5s linear 1 forwards!important;
+        }
+        @keyframes contentOut{
+            to{
+                transform: translateY(-150px);
+                filter: blur(20px);
+                opacity: 0;
+            }
+        }
+        @media screen and (max-width: 768px) {
+            .slider .list .item .content { left: 5%; transform: translateY(-50%); }
+            .slider .list .item .content .title{ font-size: 2.5em; }
+            .slider .list .item .content .type{ font-size: 2em; }
+            .slider .list .item .content .description { font-size: 1rem; }
+            .thumbnail { display: none; }
+            .nextPrevArrows { bottom: 30px; }
+        }
+    </style>
+    <link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="/favicons/android-chrome-192x192.png">
+    <link rel="icon" type="image/png" sizes="512x512" href="/favicons/android-chrome-512x512.png">
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <link rel="manifest" href="/site.webmanifest">
+</head>
+<body class="bg-brand-light text-brand-dark antialiased">
+<div class="min-h-screen flex flex-col">
+    <header class="sticky top-0 z-50 border-b border-brand-silver/30 bg-white/90 backdrop-blur">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between py-4">
+                <a href="/index.html" class="flex items-center gap-3">
+                    <img src="redshield.webp" alt="MerchantHaus Logo" class="h-10 w-auto">
+                    <span class="font-display text-xl tracking-wide text-brand-dark">MerchantHaus</span>
+                    <span class="sr-only">MerchantHaus homepage</span>
+                </a>
+                <nav class="hidden md:flex items-center gap-8 text-sm font-medium text-brand-dark/80">
+                    <a class="hover:text-brand-crimson transition" href="#platform">Platform</a>
+                    <a class="hover:text-brand-crimson transition" href="#solutions">Solutions</a>
+                    <a class="hover:text-brand-crimson transition" href="#industries">Industries</a>
+                    <a class="hover:text-brand-crimson transition" href="/faq.html">Developers</a>
+                    <a class="hover:text-brand-crimson transition" href="/compliance.html">Pricing</a>
+                </nav>
+                <div class="hidden md:flex items-center gap-3">
+                    <button type="button" class="js-support inline-flex items-center gap-2 rounded-full border border-brand-crimson/20 px-4 py-2 text-sm font-semibold text-brand-crimson transition hover:bg-brand-crimson hover:text-white" data-cta="contact-support" data-cta-location="header">
+                        <i data-lucide="life-buoy" class="h-4 w-4"></i>
+                        Support
+                    </button>
+                    <button type="button" class="js-cta inline-flex items-center gap-2 rounded-full border-2 border-brand-dark px-5 py-2 text-sm font-semibold text-brand-dark transition hover:bg-brand-crimson hover:text-white hover:border-brand-crimson">
+                        <i data-lucide="calendar" class="h-4 w-4"></i>
+                        Contact Us
+                    </button>
+                    <button type="button" class="js-signup-cta inline-flex items-center gap-2 rounded-full border border-brand-dark/10 px-4 py-2 text-sm font-semibold text-brand-dark transition hover:border-brand-crimson hover:text-brand-crimson">
+                        <i data-lucide="sparkles" class="h-4 w-4"></i>
+                        Create account
+                    </button>
+                </div>
+                <div class="md:hidden flex items-center gap-3">
+                    <button type="button" class="js-cta inline-flex items-center gap-2 rounded-full bg-brand-crimson px-4 py-2 text-sm font-semibold text-white shadow-sm">
+                        Contact
+                    </button>
+                    <button id="mobile-menu-button" type="button" class="p-2 rounded-md border border-brand-dark/10 text-brand-dark">
+                        <i data-lucide="menu" class="h-6 w-6"></i>
+                        <span class="sr-only">Open navigation</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div id="mobile-menu" class="md:hidden hidden border-t border-brand-silver/20 bg-white">
+            <div class="px-4 py-6 space-y-4 text-sm text-brand-dark/85">
+                <a class="block rounded-lg border border-brand-silver/30 px-4 py-2 hover:border-brand-crimson hover:text-brand-crimson transition" href="#platform">Platform</a>
+                <a class="block rounded-lg border border-brand-silver/30 px-4 py-2 hover:border-brand-crimson hover:text-brand-crimson transition" href="#solutions">Solutions</a>
+                <a class="block rounded-lg border border-brand-silver/30 px-4 py-2 hover:border-brand-crimson hover:text-brand-crimson transition" href="#industries">Industries</a>
+                <a class="block rounded-lg border border-brand-silver/30 px-4 py-2 hover:border-brand-crimson hover:text-brand-crimson transition" href="/compliance.html">Developers</a>
+                <div class="pt-4 border-t border-brand-silver/20 flex flex-col gap-3">
+                    <button type="button" class="js-support inline-flex items-center justify-center gap-2 rounded-full border border-brand-crimson/20 px-4 py-2 text-sm font-semibold text-brand-crimson transition hover:bg-brand-crimson hover:text-white" data-cta="contact-support" data-cta-location="mobile">
+                        <i data-lucide="life-buoy" class="h-4 w-4"></i>
+                        Support
+                    </button>
+                    <button type="button" class="js-signup-cta inline-flex items-center justify-center gap-2 rounded-full border border-brand-dark/10 px-4 py-2 text-sm font-semibold text-brand-dark transition hover:border-brand-crimson hover:text-brand-crimson">
+                        <i data-lucide="sparkles" class="h-4 w-4"></i>
+                        Create account
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+    <main class="flex-1">
+        
+        <section class="relative border-b border-brand-silver/30 bg-brand-dark">
+            <div class="slider">
+                <div class="list">
+                    <div class="item">
+                        <img src="https://placehold.co/1920x1080/1A1A1A/F8F9FA?text=Secure+Online+Payments" alt="Secure Online Payments">
+                        <div class="content">
+                            <div class="title">Modern Payments</div>
+                            <div class="type">Personalized Service</div>
+                            <div class="description">
+                                MerchantHaus provides reliable, easy-to-use payment solutions for in-store, online, and mobile sales.
+                            </div>
+                            <div class="button">
+                                <button class="border-2 border-white text-white px-6 py-3 rounded-full font-semibold text-sm transition hover:bg-brand-crimson hover:border-brand-crimson">Get a Quote</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <img src="https://placehold.co/1920x1080/DC143C/FFFFFF?text=Retail+POS" alt="Retail POS">
+                        <div class="content">
+                            <div class="title">Omnichannel</div>
+                            <div class="type">Solutions</div>
+                            <div class="description">
+                                Unified payment processing for retail, e-commerce, and mobile, designed to grow with your business.
+                            </div>
+                            <div class="button">
+                                <button class="border-2 border-white text-white px-6 py-3 rounded-full font-semibold text-sm transition hover:bg-brand-crimson hover:border-brand-crimson">Get a Quote</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <img src="https://placehold.co/1920x1080/00CEDB/FFFFFF?text=Seamless+Integration" alt="Seamless Integration">
+                        <div class="content">
+                            <div class="title">Developer Friendly</div>
+                            <div class="type">APIs & SDKs</div>
+                            <div class="description">
+                                Integrate quickly with our robust APIs, SDKs, and no-code hosted checkout pages.
+                            </div>
+                            <div class="button">
+                                <button class="border-2 border-white text-white px-6 py-3 rounded-full font-semibold text-sm transition hover:bg-brand-crimson hover:border-brand-crimson">Get a Quote</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <img src="https://placehold.co/1920x1080/A9A9A9/1A1A1A?text=Business+Analytics" alt="Business Analytics">
+                        <div class="content">
+                            <div class="title">AI-Powered</div>
+                            <div class="type">Insights</div>
+                            <div class="description">
+                                Leverage our AI consulting and analytics to boost conversion and automate operations.
+                            </div>
+                            <div class="button">
+                                <button class="border-2 border-white text-white px-6 py-3 rounded-full font-semibold text-sm transition hover:bg-brand-crimson hover:border-brand-crimson">Get a Quote</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="thumbnail">
+                    <div class="item"><img src="https://placehold.co/150x220/1A1A1A/F8F9FA?text=Payments" alt=""></div>
+                    <div class="item"><img src="https://placehold.co/150x220/DC143C/FFFFFF?text=Retail" alt=""></div>
+                    <div class="item"><img src="https://placehold.co/150x220/00CEDB/FFFFFF?text=APIs" alt=""></div>
+                    <div class="item"><img src="https://placehold.co/150x220/A9A9A9/1A1A1A?text=AI" alt=""></div>
+                </div>
+                <div class="nextPrevArrows">
+                    <button class="prev">&lt;</button>
+                    <button class="next">&gt;</button>
+                </div>
+            </div>
+        </section>
+
+        
+        <section id="platform" class="border-b border-brand-silver/30 bg-white">
+            <div class="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8 lg:py-20">
+                <div class="grid items-start gap-12 lg:grid-cols-[1.2fr_1fr]">
+                    <div>
+                        <h2 class="section-title text-3xl font-display font-semibold text-brand-dark">A Complete Commerce Toolkit</h2>
+                        <p class="section-subtitle mt-4 text-base leading-relaxed">From accepting your first payment to scaling your operations, we have a solution for every stage of your business. Our platform combines secure technology and dedicated support.</p>
+                    </div>
+                    <div class="rounded-3xl border border-brand-silver/30 bg-brand-light p-6 text-sm text-brand-dark/80 shadow-sm">
+                        <div class="flex items-center gap-3">
+                            <i data-lucide="check-circle" class="h-5 w-5 text-brand-crimson"></i>
+                            <span>Cards, ACH/eCheck, Apple Pay, Google Pay</span>
+                        </div>
+                        <div class="mt-4 flex items-center gap-3">
+                            <i data-lucide="check-circle" class="h-5 w-5 text-brand-crimson"></i>
+                            <span>Secure token vault and recurring billing engine</span>
+                        </div>
+                        <div class="mt-4 flex items-center gap-3">
+                            <i data-lucide="check-circle" class="h-5 w-5 text-brand-crimson"></i>
+                            <span>100+ integrations for shopping carts, CRM, and apps</span>
+                        </div>
+                        <div class="mt-4 flex items-center gap-3">
+                            <i data-lucide="check-circle" class="h-5 w-5 text-brand-crimson"></i>
+                            <span>Transparent pricing with next-day funding options</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="mt-12 grid gap-8 md:grid-cols-2 xl:grid-cols-3">
+                    <div class="h-full rounded-3xl border border-brand-silver/30 bg-white p-6 shadow-card">
+                        <h3 class="text-xl font-semibold text-brand-dark">Fast, Simple Onboarding</h3>
+                        <p class="mt-3 text-sm text-brand-dark/75">Get set up quickly with our streamlined online application. We handle the KYC and risk review so you can start accepting payments faster.</p>
+                        <ul class="mt-4 list-disc space-y-2 pl-5 text-sm text-brand-dark/75">
+                            <li>Quick decisions and rapid approval</li>
+                            <li>Dedicated onboarding specialist</li>
+                            <li>Clear setup checklist</li>
+                        </ul>
+                    </div>
+                    <div class="h-full rounded-3xl border border-brand-silver/30 bg-white p-6 shadow-card">
+                        <h3 class="text-xl font-semibold text-brand-dark">Accept Payments Anywhere</h3>
+                        <p class="mt-3 text-sm text-brand-dark/75">A single platform for your e-commerce site, retail store, and mobile app. Use our secure token vault and recurring billing tools to build great customer experiences.</p>
+                        <ul class="mt-4 list-disc space-y-2 pl-5 text-sm text-brand-dark/75">
+                            <li>Hosted payments, mobile SDKs, EMV terminals</li>
+                            <li>Recurring billing, invoicing, and pay-by-link</li>
+                            <li>Unified portal for sales and settlements</li>
+                        </ul>
+                    </div>
+                    <div class="h-full rounded-3xl border border-brand-silver/30 bg-white p-6 shadow-card">
+                        <h3 class="text-xl font-semibold text-brand-dark">Advanced Fraud & Security</h3>
+                        <p class="mt-3 text-sm text-brand-dark/75">Protect your business with enterprise-grade security, including 3D Secure, AVS/CVV checks, and a powerful fraud rule engine.</p>
+                        <ul class="mt-4 list-disc space-y-2 pl-5 text-sm text-brand-dark/75">
+                            <li>PCI DSS Level 1 compliant platform</li>
+                            <li>3D Secure 2.0 for liability shift</li>
+                            <li>Velocity rules and device fingerprinting</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        
+        <section id="solutions" class="border-b border-brand-silver/30 bg-brand-light">
+            <div class="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8 lg:py-20">
+                <div class="items-end justify-between gap-10 lg:flex">
+                    <div class="max-w-3xl">
+                        <h2 class="section-title text-3xl font-display font-semibold text-brand-dark">Built for Growth. Ready for Scale.</h2>
+                        <p class="section-subtitle mt-4 text-base">MerchantHaus wraps powerful developer tools, design services, and AI-driven insights into one cohesive platform so you can focus on building your business.</p>
+                    </div>
+                    <div class="mt-6 flex flex-wrap gap-3 text-xs font-semibold uppercase tracking-[0.35em] text-brand-dark/70 lg:mt-0">
+                        <span class="rounded-full border border-brand-silver/40 bg-white px-4 py-2">REST APIs & SDKs</span>
+                        <span class="rounded-full border border-brand-silver/40 bg-white px-4 py-2">Web & App Design</span>
+                        <span class="rounded-full border border-brand-silver/40 bg-white px-4 py-2">AI Consulting</span>
+                    </div>
+                </div>
+                <div class="mt-12 grid gap-8 md:grid-cols-2 xl:grid-cols-4">
+                    <article class="rounded-3xl border border-brand-silver/30 bg-white p-6 shadow-sm">
+                        <h3 class="text-lg font-semibold text-brand-dark">Developer Tools</h3>
+                        <p class="mt-3 text-sm text-brand-dark/75">Integrate payments your way with REST APIs, mobile SDKs (iOS/Android), and secure JavaScript fields. Get sandbox keys to test your integration.</p>
+                        <dl class="mt-4 space-y-2 text-xs uppercase tracking-wide text-brand-dark/60">
+                            <div class="flex justify-between"><dt>Tools</dt><dd>Webhooks, token vault</dd></div>
+                            <div class="flex justify-between"><dt>Support</dt><dd>Solution engineers on call</dd></div>
+                        </dl>
+                    </article>
+                    <article class="rounded-3xl border border-brand-silver/30 bg-white p-6 shadow-sm">
+                        <h3 class="text-lg font-semibold text-brand-dark">Web & App Design</h3>
+                        <p class="mt-3 text-sm text-brand-dark/75">Our team designs and develops conversion-ready e-commerce sites, hosted checkouts, and mobile apps pre-integrated with MerchantHaus payments.</p>
+                        <dl class="mt-4 space-y-2 text-xs uppercase tracking-wide text-brand-dark/60">
+                            <div class="flex justify-between"><dt>Focus</dt><dd>Conversion rate optimization</dd></div>
+                            <div class="flex justify-between"><dt>Benefit</dt><dd>Launch faster</dd></div>
+                        </dl>
+                    </article>
+                    <article class="rounded-3xl border border-brand-silver/30 bg-white p-6 shadow-sm">
+                        <h3 class="text-lg font-semibold text-brand-dark">AI Consulting</h3>
+                        <p class="mt-3 text-sm text-brand-dark/75">Use practical AI to grow your business. We help with analytics, forecasting dashboards, customer segmentation, and process automation.</p>
+                        <dl class="mt-4 space-y-2 text-xs uppercase tracking-wide text-brand-dark/60">
+                            <div class="flex justify-between"><dt>Insights</dt><dd>Customer LTV</dd></div>
+                            <div class="flex justify-between"><dt>Automation</dt><dd>Conversational support bots</dd></div>
+                        </dl>
+                    </article>
+                    <article class="rounded-3xl border border-brand-silver/30 bg-white p-6 shadow-sm">
+                        <h3 class="text-lg font-semibold text-brand-dark">Compliance & Risk</h3>
+                        <p class="mt-3 text-sm text-brand-dark/75">Simplify compliance with our PCI DSS Level 1 platform, NACHA-aligned ACH workflows, and automated KYC/KYB and AML checks.</p>
+                        <dl class="mt-4 space-y-2 text-xs uppercase tracking-wide text-brand-dark/60">
+                            <div class="flex justify-between"><dt>Data Privacy</dt><dd>GDPR/CCPA support</dd></div>
+                            <div class="flex justify-between"><dt>Advisory</dt><dd>Risk experts on demand</dd></div>
+                        </dl>
+                    </article>
+                </div>
+            </div>
+        </section>
+        
+        <section id="industries" class="border-b border-brand-silver/30 bg-white">
+            <div class="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8 lg:py-20">
+                <div class="items-center justify-between gap-10 lg:flex">
+                    <div class="max-w-3xl">
+                        <h2 class="section-title text-3xl font-display font-semibold text-brand-dark">Solutions for your industry.</h2>
+                        <p class="section-subtitle mt-4 text-base">Purpose-built playbooks for retail, subscription, field services, software platforms, and B2B invoicing. Each includes product enablement and best practices.</p>
+                    </div>
+                    <button type="button" class="js-cta mt-8 inline-flex items-center gap-2 rounded-full border border-brand-crimson/30 px-5 py-2.5 text-sm font-semibold text-brand-crimson transition hover:bg-brand-crimson hover:text-white lg:mt-0">
+                        <i data-lucide="clipboard-list" class="h-4 w-4"></i>
+                        Explore integrations
+                    </button>
+                </div>
+                <div class="mt-12 grid gap-6 md:grid-cols-2 xl:grid-cols-3">
+                    <div class="rounded-3xl border border-brand-silver/30 bg-brand-light p-6 shadow-sm">
+                        <h3 class="text-lg font-semibold text-brand-dark">Software and platforms</h3>
+                        <p class="mt-3 text-sm text-brand-dark/75">Integrated payments for SaaS and marketplaces with partner revenue sharing, embedded compliance, and marketplace payout flows.</p>
+                    </div>
+                    <div class="rounded-3xl border border-brand-silver/30 bg-brand-light p-6 shadow-sm">
+                        <h3 class="text-lg font-semibold text-brand-dark">Retail & E-commerce</h3>
+                        <p class="mt-3 text-sm text-brand-dark/75">Unified in-store and ecommerce experience with EMV terminals, contactless wallets, and inventory-friendly reporting.</p>
+                    </div>
+                    <div class="rounded-3xl border border-brand-silver/30 bg-brand-light p-6 shadow-sm">
+                        <h3 class="text-lg font-semibold text-brand-dark">Field and home services</h3>
+                        <p class="mt-3 text-sm text-brand-dark/75">Mobile payments, card-on-file workflows, and risk controls tailored for high ticket values and delayed fulfillment.</p>
+                    </div>
+                    <div class="rounded-3xl border border-brand-silver/30 bg-brand-light p-6 shadow-sm">
+                        <h3 class="text-lg font-semibold text-brand-dark">Healthcare and wellness</h3>
+                        <p class="mt-3 text-sm text-brand-dark/75">HIPAA-aligned payment flows, recurring plans, and card-on-file for patient billing.</p>
+                    </div>
+                    <div class="rounded-3xl border border-brand-silver/30 bg-brand-light p-6 shadow-sm">
+                        <h3 class="text-lg font-semibold text-brand-dark">B2B & Professional Services</h3>
+                        <p class="mt-3 text-sm text-brand-dark/75">Level II/III data for lower interchange costs, high-ticket handling, and ACH for paying invoices.</p>
+                    </div>
+                    <div class="rounded-3xl border border-brand-silver/30 bg-brand-light p-6 shadow-sm">
+                        <h3 class="text-lg font-semibold text-brand-dark">Nonprofit and education</h3>
+                        <p class="mt-3 text-sm text-brand-dark/75">Donation pages, recurring giving, tuition plans, and ACH to reduce fees on large payments.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        
+        <section class="border-b border-brand-silver/30 bg-brand-light">
+            <div class="mx-auto max-w-6xl px-4 py-16 sm:px-6 lg:px-8 lg:py-20">
+                <div class="gap-12 lg:flex lg:items-center">
+                    <div class="max-w-2xl">
+                        <h2 class="section-title text-3xl font-display font-semibold text-brand-dark">Customer Success Snapshots</h2>
+                        <p class="section-subtitle mt-4 text-base">We partner with businesses to improve conversion, reduce costs, and create new revenue streams.</p>
+                    </div>
+                    <div class="mt-8 grid flex-1 gap-6 text-sm text-brand-dark/75 lg:mt-0">
+                        <div class="rounded-3xl border border-brand-silver/30 bg-white p-5 shadow-sm">
+                            <p class="font-semibold text-brand-dark">Retailer Success</p>
+                            <p class="mt-2">Saved 15% on processing costs, cut chargebacks by 80% with 3DS, and lifted online conversion by 10%.</p>
+                        </div>
+                        <div class="rounded-3xl border border-brand-silver/30 bg-white p-5 shadow-sm">
+                            <p class="font-semibold text-brand-dark">SaaS Platform Success</p>
+                            <p class="mt-2">Embedded payments in-app, achieving over 70% client adoption and creating a new shared revenue stream.</p>
+                        </div>
+                        <div class="rounded-3xl border border-brand-silver/30 bg-white p-5 shadow-sm">
+                            <p class="font-semibold text-brand-dark">Nonprofit Success</p>
+                            <p class="mt-2">Increased donations by 30% YoY and shifted 25% of volume to ACH for lower fees, ensuring predictable revenue.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        
+        <section class="border-b border-brand-silver/30 bg-white">
+            <div class="mx-auto max-w-6xl px-4 py-16 sm:px-6 lg:px-8 lg:py-20">
+                <div class="grid gap-8 md:grid-cols-2">
+                    <div class="rounded-3xl border border-brand-silver/30 bg-brand-light p-6 shadow-sm">
+                        <h3 class="text-lg font-semibold text-brand-dark">Simple, Transparent Pricing</h3>
+                        <ul class="mt-4 list-decimal space-y-3 pl-5 text-sm text-brand-dark/75">
+                           <li>Choose competitive interchange-plus or simple flat-rate options.</li>
+                           <li>No setup fees and no long-term lock-ins.</li>
+                           <li>Clear monthly statements with interchange optimization.</li>
+                           <li>Volume discounts that grow with your business.</li>
+                           <li>ACH and nonprofit pricing available to reduce costs.</li>
+                        </ul>
+                    </div>
+                    <div class="rounded-3xl border border-brand-silver/30 bg-brand-light p-6 shadow-sm">
+                        <h3 class="text-lg font-semibold text-brand-dark">What you get</h3>
+                        <ul class="mt-4 space-y-3 text-sm text-brand-dark/75">
+                            <li class="flex items-start gap-3"><i data-lucide="badge-check" class="mt-0.5 h-5 w-5 text-brand-crimson"></i>A dedicated onboarding specialist</li>
+                            <li class="flex items-start gap-3"><i data-lucide="badge-check" class="mt-0.5 h-5 w-5 text-brand-crimson"></i>White-glove support via email and phone</li>
+                            <li class="flex items-start gap-3"><i data-lucide="badge-check" class="mt-0.5 h-5 w-5 text-brand-crimson"></i>Risk and compliance advisory on demand</li>
+                            <li class="flex items-start gap-3"><i data-lucide="badge-check" class="mt-0.5 h-5 w-5 text-brand-crimson"></i>Access to solution engineers for integrations</li>
+                        </ul>
+                        <button type="button" class="js-cta mt-6 inline-flex items-center gap-2 rounded-full bg-brand-crimson px-6 py-3 text-sm font-semibold text-white shadow-sm transition hover:bg-brand-crimson/90">
+                            <i data-lucide="mail-open" class="h-5 w-5"></i>
+                            Talk with an expert
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        
+        <section class="bg-brand-light">
+            <div class="mx-auto max-w-6xl px-4 py-16 sm:px-6 lg:px-8 lg:py-20">
+                <div class="rounded-3xl border border-brand-silver/30 bg-white p-10 text-center shadow-card">
+                    <p class="text-xs font-semibold uppercase tracking-[0.35em] text-brand-crimson">Ready to get started?</p>
+                    <h2 class="mt-4 text-3xl font-display font-semibold text-brand-dark">Grow your business with a better partner.</h2>
+                    <p class="mt-4 text-base text-brand-dark/75">Tell us about your business and our team will map a payment solution that fits your needs for today and tomorrow.</p>
+                    <div class="mt-8 flex flex-wrap justify-center gap-4">
+                        <button type="button" class="js-cta inline-flex items-center gap-2 rounded-full bg-brand-crimson px-6 py-3 text-sm font-semibold text-white shadow-sm transition hover:bg-brand-crimson/90">
+                            <i data-lucide="phone" class="h-5 w-5"></i>
+                            Contact Us
+                        </button>
+                        <a href="/apply.html" class="inline-flex items-center gap-2 rounded-full border border-brand-crimson/30 px-6 py-3 text-sm font-semibold text-brand-crimson transition hover:bg-brand-crimson hover:text-white">
+                            <i data-lucide="file-signature" class="h-5 w-5"></i>
+                            Apply online
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+        <footer class="border-t border-brand-silver/30 bg-white">
+        <div class="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
+            <div class="grid gap-10 md:grid-cols-[1.1fr_auto]">
+                <div class="space-y-4">
+                    <div class="flex items-center gap-3">
+                        <img src="redshield.webp" alt="MerchantHaus Logo" class="h-10 w-auto">
+                        <span class="font-display text-xl font-semibold text-brand-dark">MerchantHaus</span>
+                    </div>
+                    <p class="text-sm text-brand-dark/70">A next-generation merchant services provider offering omnichannel payments, developer-friendly integrations, and boutique, white-glove service.</p>
+                     <address class="text-sm not-italic text-brand-dark/70">
+                        1209 Mountain Road Pl Ne Ste N<br>
+                        Albuquerque, NM 87110 US
+                    </address>
+                    <p class="text-xs text-brand-dark/60">Powered by NMI. MerchantHaus LLC is a registered Independent Sales Organization of Fifth Third Bank, N.A., Cincinnati, Ohio.</p>
+                </div>
+                <div class="grid grid-cols-2 gap-8 text-sm text-brand-dark/75 sm:grid-cols-3">
+                    <div>
+                        <h4 class="font-semibold text-brand-dark">Company</h4>
+                        <ul class="mt-3 space-y-2">
+                            <li><a class="transition hover:text-brand-crimson" href="/index.html">Home</a></li>
+                            <li><a class="transition hover:text-brand-crimson" href="/apply.html">Apply</a></li>
+                            <li><a class="transition hover:text-brand-crimson" href="/faq.html">FAQ</a></li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4 class="font-semibold text-brand-dark">Solutions</h4>
+                        <ul class="mt-3 space-y-2">
+                            <li><a class="transition hover:text-brand-crimson" href="/compliance.html">Developers</a></li>
+                            <li><a class="transition hover:text-brand-crimson" href="/privacy.html">Pricing</a></li>
+                            <li><a class="transition hover:text-brand-crimson" href="/terms.html">Integrations</a></li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4 class="font-semibold text-brand-dark">Contact</h4>
+                        <ul class="mt-3 space-y-2">
+                            <li><a class="transition hover:text-brand-crimson" href="mailto:support@merchanthaus.io">support@merchanthaus.io</a></li>
+                            <li><a class="transition hover:text-brand-crimson" href="tel:1-505-600-6042">1-505-600-6042</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="mt-10 flex flex-col items-center justify-between gap-4 text-xs text-brand-dark/60 sm:flex-row">
+                <p>© 2025 MerchantHaus LLC. All rights reserved.</p>
+                <div class="flex flex-wrap gap-4">
+                    <a class="transition hover:text-brand-crimson" href="/privacy.html">Privacy</a>
+                    <a class="transition hover:text-brand-crimson" href="/terms.html">Terms</a>
+                    <a class="transition hover:text-brand-crimson" href="/compliance.html">Compliance</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+</div>
+
+<!-- Request demo modal -->
+<div id="book-modal" class="fixed inset-0 z-50 hidden items-center justify-center bg-brand-dark/60 px-4 py-6" role="dialog" aria-modal="true">
+    <div class="w-full max-w-lg rounded-3xl border border-brand-silver/30 bg-white p-6 shadow-card">
+        <div class="flex items-start justify-between gap-4">
+            <div>
+                <h2 class="text-xl font-semibold text-brand-dark">Schedule a consultation</h2>
+                <p class="mt-2 text-sm text-brand-dark/70">Tell us about your business goals and we will send a private booking link.</p>
+            </div>
+            <button type="button" class="text-brand-dark/50 transition hover:text-brand-crimson" data-close>
+                <i data-lucide="x" class="h-5 w-5"></i>
+                <span class="sr-only">Close</span>
+            </button>
+        </div>
+        <form id="book-form" class="mt-6 space-y-4">
+            <div class="grid gap-4 sm:grid-cols-2">
+                <label class="flex flex-col text-sm text-brand-dark/75">
+                    <span class="mb-1 font-semibold text-brand-dark">Full name</span>
+                    <input class="rounded-lg border border-brand-silver/40 bg-brand-light px-3 py-2 text-sm text-brand-dark focus:border-brand-crimson focus:outline-none" type="text" name="name" required>
+                </label>
+                <label class="flex flex-col text-sm text-brand-dark/75">
+                    <span class="mb-1 font-semibold text-brand-dark">Business email</span>
+                    <input class="rounded-lg border border-brand-silver/40 bg-brand-light px-3 py-2 text-sm text-brand-dark focus:border-brand-crimson focus:outline-none" type="email" name="email" required>
+                </label>
+            </div>
+            <label class="flex flex-col text-sm text-brand-dark/75">
+                <span class="mb-1 font-semibold text-brand-dark">Company</span>
+                <input class="rounded-lg border border-brand-silver/40 bg-brand-light px-3 py-2 text-sm text-brand-dark focus:border-brand-crimson focus:outline-none" type="text" name="company">
+            </label>
+            <label class="flex flex-col text-sm text-brand-dark/75">
+                <span class="mb-1 font-semibold text-brand-dark">Phone</span>
+                <input class="rounded-lg border border-brand-silver/40 bg-brand-light px-3 py-2 text-sm text-brand-dark focus:border-brand-crimson focus:outline-none" type="tel" name="phone">
+            </label>
+            <label class="flex flex-col text-sm text-brand-dark/75">
+                <span class="mb-1 font-semibold text-brand-dark">What should we prepare?</span>
+                <textarea class="min-h-[110px] rounded-lg border border-brand-silver/40 bg-brand-light px-3 py-2 text-sm text-brand-dark focus:border-brand-crimson focus:outline-none" name="notes" placeholder="Business type, sales channels, transaction volume..."></textarea>
+            </label>
+            <input type="text" name="hp" class="hidden" tabindex="-1" autocomplete="off">
+            <p id="book-out" class="text-xs text-brand-crimson"></p>
+            <div class="flex flex-wrap items-center justify-between gap-3 text-xs text-brand-dark/60">
+                <p>By submitting you agree to the MerchantHaus <a class="text-brand-crimson hover:underline" href="/privacy.html">Privacy Policy</a>.</p>
+                <button type="submit" class="inline-flex items-center gap-2 rounded-full bg-brand-crimson px-5 py-2 text-sm font-semibold text-white transition hover:bg-brand-crimson/90">
+                    <i data-lucide="send" class="h-4 w-4"></i>
+                    Send booking link
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+<div id="signup-panel-overlay" class="fixed inset-0 z-40 hidden items-stretch justify-end bg-brand-dark/50">
+    <div id="signup-panel" class="relative flex h-full w-full max-w-2xl flex-col bg-white text-brand-dark shadow-card transition-transform duration-300 ease-out translate-x-full">
+        <div class="relative border-b border-brand-silver/30 px-6 py-6 sm:px-8">
+            <button id="close-signup-panel-btn" type="button" class="absolute right-6 top-6 text-brand-dark/50 transition hover:text-brand-crimson">
+                <i data-lucide="x" class="h-5 w-5"></i>
+                <span class="sr-only">Close panel</span>
+            </button>
+            <div class="flex flex-col gap-3">
+                <p class="text-xs font-semibold uppercase tracking-[0.35em] text-brand-crimson">MerchantHaus onboarding</p>
+                <div>
+                    <div class="flex items-center justify-between text-xs text-brand-dark/65">
+                        <span>Step <span id="current-step-text">1</span> of 3</span>
+                        <span id="step-name">Account Details</span>
+                    </div>
+                    <div class="mt-2 h-2.5 w-full rounded-full bg-brand-silver/30">
+                        <div id="progress-bar" class="h-full w-1/3 rounded-full bg-brand-crimson"></div>
+                    </div>
+                </div>
+                <p class="text-sm text-brand-dark/75">Complete the short application to receive credentials, sandbox keys, and pricing documentation.</p>
+            </div>
+        </div>
+        <div class="flex-1 overflow-y-auto px-6 py-6 sm:px-8">
+            <form id="signup-form" novalidate></form>
+            <div id="form-message" class="mt-4 text-sm text-brand-crimson"></div>
+        </div>
+        <div class="border-t border-brand-silver/30 px-6 py-6 sm:px-8">
+            <div class="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+                <div class="text-sm text-brand-dark/75">
+                    <p class="font-semibold text-brand-dark">Need help with the application?</p>
+                    <p>Email <a class="text-brand-crimson hover:underline" href="mailto:support@merchanthaus.io">support@merchanthaus.io</a> or call <a class="text-brand-crimson hover:underline" href="tel:1-505-600-6042">1-505-600-6042</a>.</p>
+                </div>
+                <div class="flex items-center gap-3">
+                    <button type="button" id="prev-btn" class="hidden rounded-full border border-brand-silver/40 px-5 py-2 text-sm font-semibold text-brand-dark transition hover:border-brand-crimson hover:text-brand-crimson">Previous</button>
+                    <button type="button" id="next-btn" class="rounded-full bg-brand-crimson px-5 py-2 text-sm font-semibold text-white transition hover:bg-brand-crimson/90">Next</button>
+                    <button type="submit" id="submit-btn" form="signup-form" class="hidden rounded-full bg-brand-crimson px-5 py-2 text-sm font-semibold text-white transition hover:bg-brand-crimson/90">Submit application</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script>
+    (function() {
+        const doc = document;
+        const mobileButton = doc.getElementById('mobile-menu-button');
+        const mobileMenu = doc.getElementById('mobile-menu');
+        const modal = doc.getElementById('book-modal');
+        const signupOverlay = doc.getElementById('signup-panel-overlay');
+
+        function toggleMobile() {
+            if (!mobileMenu) return;
+            mobileMenu.classList.toggle('hidden');
+        }
+
+        mobileButton?.addEventListener('click', toggleMobile);
+
+        doc.addEventListener('click', (event) => {
+            const target = event.target;
+            if (!mobileMenu || !mobileButton) return;
+            if (!mobileMenu.classList.contains('hidden')) {
+                const outsideMenu = !mobileMenu.contains(target);
+                const clickedButton = mobileButton.contains(target);
+                if (outsideMenu && !clickedButton) {
+                    mobileMenu.classList.add('hidden');
+                }
+            }
+        });
+
+        function escapeHandler(event) {
+            if (event.key !== 'Escape') return;
+            if (modal && !modal.classList.contains('hidden')) modal.classList.add('hidden');
+            if (signupOverlay && !signupOverlay.classList.contains('hidden')) signupOverlay.classList.add('hidden');
+            if (mobileMenu && !mobileMenu.classList.contains('hidden')) mobileMenu.classList.add('hidden');
+        }
+        doc.addEventListener('keydown', escapeHandler);
+
+        if (window.lucide && window.lucide.createIcons) {
+            window.lucide.createIcons();
+        }
+    })();
+</script>
+
+<script>
+    // Slider script
+    let nextBtn = document.querySelector('.next');
+    let prevBtn = document.querySelector('.prev');
+    let slider = document.querySelector('.slider');
+    let sliderList = slider.querySelector('.slider .list');
+    let thumbnail = document.querySelector('.slider .thumbnail');
+    let thumbnailItems = thumbnail.querySelectorAll('.item');
+
+    if (thumbnailItems.length > 0) {
+        thumbnail.appendChild(thumbnailItems[0]);
+    }
+
+    function moveSlider(direction) {
+        let sliderItems = sliderList.querySelectorAll('.item');
+        let thumbnailItems = document.querySelectorAll('.thumbnail .item');
+        
+        if (direction === 'next') {
+            sliderList.appendChild(sliderItems[0]);
+            thumbnail.appendChild(thumbnailItems[0]);
+            slider.classList.add('next');
+        } else {
+            sliderList.prepend(sliderItems[sliderItems.length - 1]);
+            thumbnail.prepend(thumbnailItems[thumbnailItems.length - 1]);
+            slider.classList.add('prev');
+        }
+
+        slider.addEventListener('animationend', function() {
+            if (direction === 'next') {
+                slider.classList.remove('next');
+            } else {
+                slider.classList.remove('prev');
+            }
+        }, { once: true });
+    }
+
+    if (nextBtn && prevBtn) {
+        nextBtn.onclick = function() {
+            moveSlider('next');
+        }
+        prevBtn.onclick = function() {
+            moveSlider('prev');
+        }
+    }
+</script>
+
+<script src="/assets/support.js" defer></script>
+<script src="/assets/app.js" defer></script>
+<script src="/assets/signup-panel.js" defer></script>
+</body>
+</html>
+
