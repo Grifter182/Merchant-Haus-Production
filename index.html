@@ -64,6 +64,24 @@
         .dark .section-subtitle {
             color: rgba(248, 249, 250, 0.72);
         }
+        .dark .text-brand-dark {
+            color: #F8F9FA !important;
+        }
+        .dark .text-brand-dark\/80 {
+            color: rgba(248, 249, 250, 0.8) !important;
+        }
+        .dark .text-brand-dark\/75 {
+            color: rgba(248, 249, 250, 0.75) !important;
+        }
+        .dark .text-brand-dark\/70 {
+            color: rgba(248, 249, 250, 0.7) !important;
+        }
+        .dark .text-brand-dark\/65 {
+            color: rgba(248, 249, 250, 0.65) !important;
+        }
+        .dark .text-brand-dark\/60 {
+            color: rgba(248, 249, 250, 0.6) !important;
+        }
 
         /* Slider Styles */
         .slider{
@@ -85,9 +103,9 @@
         }
         .slider .list .item .content{
             position: absolute;
-            top: 55%;
-            left: 10%; /* Align to the left */
-            transform: translateY(-50%);
+            top: 20%;
+            left: 5%; /* Further left for top-left positioning */
+            transform: none;
             width: 90%;
             max-width: 700px;
             box-sizing: border-box;
@@ -124,18 +142,30 @@
         .thumbnail{
             position: absolute;
             bottom: 50px;
-            left: 50%;
-            width: max-content;
+            right: 20px;
+            width: calc(150px * 5 + 20px * 4); /* Exactly 5 cards width */
             z-index: 100;
             display: flex;
             gap: 20px;
-            transform: translateX(-50%);
+            overflow: hidden;
+        }
+        .thumbnail-track {
+            display: flex;
+            gap: 20px;
+            animation: infinite-scroll 15s linear infinite;
+            will-change: transform;
         }
         .thumbnail .item{
             width: 150px;
             height: 220px;
             flex-shrink: 0;
             position: relative;
+            opacity: 1;
+            transform: scale(1);
+        }
+        @keyframes infinite-scroll {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(calc(-150px - 20px)); }
         }
         .thumbnail .item img{
             width: 100%;
@@ -147,8 +177,7 @@
         .nextPrevArrows{
             position: absolute;
             bottom: 120px;
-            left: 50%;
-            transform: translateX(-50%);
+            right: 220px;
             z-index: 100;
             width: 100px;
             display: flex;
@@ -263,12 +292,71 @@
             }
         }
         @media screen and (max-width: 768px) {
-            .slider .list .item .content { left: 5%; transform: translateY(-50%); }
+            .slider .list .item .content { 
+                left: 5%; 
+                top: 15%;
+                transform: none;
+            }
             .slider .list .item .content .title{ font-size: 2.5em; }
             .slider .list .item .content .type{ font-size: 2em; }
             .slider .list .item .content .description { font-size: 1rem; }
-            .thumbnail { display: none; }
-            .nextPrevArrows { bottom: 30px; }
+            .thumbnail { 
+                display: flex; 
+                right: 10px;
+                gap: 10px;
+                width: calc(80px * 5 + 10px * 4); /* Adjusted for mobile */
+            }
+            .thumbnail-track {
+                gap: 10px;
+                animation: infinite-scroll-mobile 15s linear infinite;
+            }
+            .thumbnail .item {
+                width: 80px;
+                height: 120px;
+            }
+            @keyframes infinite-scroll-mobile {
+                0% { transform: translateX(0); }
+                100% { transform: translateX(calc(-80px - 10px)); }
+            }
+            .nextPrevArrows { 
+                bottom: 30px; 
+                right: 120px;
+            }
+        }
+            
+        /* Integrations marquee animation */
+        @keyframes marquee {
+          from { transform: translateX(0); }
+          to { transform: translateX(-50%); }
+        }
+        .animate-marquee {
+          animation: marquee 30s linear infinite;
+        }
+        @media (prefers-reduced-motion: reduce) {
+          .animate-marquee { animation: none !important; }
+        }
+
+        /* Hero background image with Ken Burns animation */
+        .hero-bg-container::before { 
+            content: ''; 
+            position: absolute; 
+            inset: 0; 
+            background-image: url('/public/assets/images/hero.webp'); 
+            background-size: 100%; 
+            background-position: center; 
+            background-repeat: no-repeat; 
+            animation: kenBurns 20s ease-in-out infinite alternate; 
+            z-index: -20; 
+        }
+        @keyframes kenBurns { 
+            0% { 
+                transform: scale(1) rotate(0deg); 
+                background-position: center; 
+            } 
+            100% { 
+                transform: scale(1.1) rotate(1deg); 
+                background-position: top left; 
+            } 
         }
     </style>
     <link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
@@ -283,8 +371,7 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex items-center justify-between py-4">
                 <a href="/index.html" class="flex items-center gap-3">
-                    <img src="redshield.webp" alt="MerchantHaus Logo" class="h-10 w-auto">
-                    <span class="font-display text-xl tracking-wide text-brand-dark">MerchantHaus</span>
+                    <div class="w-[190px] md:w-[260px]" data-mh-logo-header></div>
                     <span class="sr-only">MerchantHaus homepage</span>
                 </a>
                 <nav class="hidden md:flex items-center gap-8 text-sm font-medium text-brand-dark/80">
@@ -350,11 +437,11 @@
     </header>
     <main class="flex-1">
         
-        <section class="relative border-b border-brand-silver/30 bg-brand-dark">
+        <section class="relative border-b border-brand-silver/30 bg-brand-dark hero-bg-container">
             <div class="slider">
                 <div class="list">
                     <div class="item">
-                        <img src="https://placehold.co/1920x1080/1A1A1A/F8F9FA?text=Secure+Online+Payments" alt="Secure Online Payments">
+                        <img src="/assets/img/card1.webp" alt="Secure Online Payments">
                         <div class="content">
                             <div class="title">Modern Payments</div>
                             <div class="type">Personalized Service</div>
@@ -367,7 +454,7 @@
                         </div>
                     </div>
                     <div class="item">
-                        <img src="https://placehold.co/1920x1080/DC143C/FFFFFF?text=Retail+POS" alt="Retail POS">
+                        <img src="/assets/img/card2.webp" alt="Retail POS">
                         <div class="content">
                             <div class="title">Omnichannel</div>
                             <div class="type">Solutions</div>
@@ -380,7 +467,7 @@
                         </div>
                     </div>
                     <div class="item">
-                        <img src="https://placehold.co/1920x1080/00CEDB/FFFFFF?text=Seamless+Integration" alt="Seamless Integration">
+                        <img src="/assets/img/card3.webp" alt="Seamless Integration">
                         <div class="content">
                             <div class="title">Developer Friendly</div>
                             <div class="type">APIs & SDKs</div>
@@ -393,7 +480,7 @@
                         </div>
                     </div>
                     <div class="item">
-                        <img src="https://placehold.co/1920x1080/A9A9A9/1A1A1A?text=Business+Analytics" alt="Business Analytics">
+                        <img src="/assets/img/card4.webp" alt="Business Analytics">
                         <div class="content">
                             <div class="title">AI-Powered</div>
                             <div class="type">Insights</div>
@@ -405,12 +492,110 @@
                             </div>
                         </div>
                     </div>
+                    <div class="item">
+                        <img src="/assets/img/card5.webp" alt="Payment Security">
+                        <div class="content">
+                            <div class="title">Advanced</div>
+                            <div class="type">Security</div>
+                            <div class="description">
+                                Enterprise-grade security with PCI DSS Level 1 compliance and fraud protection.
+                            </div>
+                            <div class="button">
+                                <button class="border-2 border-white text-white px-6 py-3 rounded-full font-semibold text-sm transition hover:bg-brand-crimson hover:border-brand-crimson">Get a Quote</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <img src="/assets/img/card6.webp" alt="Mobile Payments">
+                        <div class="content">
+                            <div class="title">Mobile</div>
+                            <div class="type">Commerce</div>
+                            <div class="description">
+                                Accept payments anywhere with our mobile apps and contactless payment solutions.
+                            </div>
+                            <div class="button">
+                                <button class="border-2 border-white text-white px-6 py-3 rounded-full font-semibold text-sm transition hover:bg-brand-crimson hover:border-brand-crimson">Get a Quote</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <img src="/assets/img/card7.webp" alt="Global Payments">
+                        <div class="content">
+                            <div class="title">Global</div>
+                            <div class="type">Reach</div>
+                            <div class="description">
+                                Process payments worldwide with multi-currency support and local payment methods.
+                            </div>
+                            <div class="button">
+                                <button class="border-2 border-white text-white px-6 py-3 rounded-full font-semibold text-sm transition hover:bg-brand-crimson hover:border-brand-crimson">Get a Quote</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <img src="/assets/img/card8.webp" alt="Analytics Dashboard">
+                        <div class="content">
+                            <div class="title">Real-time</div>
+                            <div class="type">Analytics</div>
+                            <div class="description">
+                                Monitor your business performance with comprehensive reporting and insights.
+                            </div>
+                            <div class="button">
+                                <button class="border-2 border-white text-white px-6 py-3 rounded-full font-semibold text-sm transition hover:bg-brand-crimson hover:border-brand-crimson">Get a Quote</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <img src="/assets/img/card9.webp" alt="Subscription Billing">
+                        <div class="content">
+                            <div class="title">Recurring</div>
+                            <div class="type">Billing</div>
+                            <div class="description">
+                                Automate subscription management and recurring payments for predictable revenue.
+                            </div>
+                            <div class="button">
+                                <button class="border-2 border-white text-white px-6 py-3 rounded-full font-semibold text-sm transition hover:bg-brand-crimson hover:border-brand-crimson">Get a Quote</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <img src="/assets/img/card10.webp" alt="Customer Support">
+                        <div class="content">
+                            <div class="title">24/7</div>
+                            <div class="type">Support</div>
+                            <div class="description">
+                                Get dedicated support from our expert team whenever you need assistance.
+                            </div>
+                            <div class="button">
+                                <button class="border-2 border-white text-white px-6 py-3 rounded-full font-semibold text-sm transition hover:bg-brand-crimson hover:border-brand-crimson">Get a Quote</button>
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 <div class="thumbnail">
-                    <div class="item"><img src="https://placehold.co/150x220/1A1A1A/F8F9FA?text=Payments" alt=""></div>
-                    <div class="item"><img src="https://placehold.co/150x220/DC143C/FFFFFF?text=Retail" alt=""></div>
-                    <div class="item"><img src="https://placehold.co/150x220/00CEDB/FFFFFF?text=APIs" alt=""></div>
-                    <div class="item"><img src="https://placehold.co/150x220/A9A9A9/1A1A1A?text=AI" alt=""></div>
+                    <div class="thumbnail-track">
+                        <!-- Original set of cards -->
+                        <div class="item"><img src="/assets/img/card1.webp" alt="Payments"></div>
+                        <div class="item"><img src="/assets/img/card2.webp" alt="Retail"></div>
+                        <div class="item"><img src="/assets/img/card3.webp" alt="APIs"></div>
+                        <div class="item"><img src="/assets/img/card4.webp" alt="AI"></div>
+                        <div class="item"><img src="/assets/img/card5.webp" alt="Security"></div>
+                        <div class="item"><img src="/assets/img/card6.webp" alt="Mobile"></div>
+                        <div class="item"><img src="/assets/img/card7.webp" alt="Global"></div>
+                        <div class="item"><img src="/assets/img/card8.webp" alt="Analytics"></div>
+                        <div class="item"><img src="/assets/img/card9.webp" alt="Billing"></div>
+                        <div class="item"><img src="/assets/img/card10.webp" alt="Support"></div>
+                        <!-- Duplicate set for infinite loop -->
+                        <div class="item"><img src="/assets/img/card1.webp" alt="Payments"></div>
+                        <div class="item"><img src="/assets/img/card2.webp" alt="Retail"></div>
+                        <div class="item"><img src="/assets/img/card3.webp" alt="APIs"></div>
+                        <div class="item"><img src="/assets/img/card4.webp" alt="AI"></div>
+                        <div class="item"><img src="/assets/img/card5.webp" alt="Security"></div>
+                        <div class="item"><img src="/assets/img/card6.webp" alt="Mobile"></div>
+                        <div class="item"><img src="/assets/img/card7.webp" alt="Global"></div>
+                        <div class="item"><img src="/assets/img/card8.webp" alt="Analytics"></div>
+                        <div class="item"><img src="/assets/img/card9.webp" alt="Billing"></div>
+                        <div class="item"><img src="/assets/img/card10.webp" alt="Support"></div>
+                    </div>
                 </div>
                 <div class="nextPrevArrows">
                     <button class="prev">&lt;</button>
@@ -418,6 +603,63 @@
                 </div>
             </div>
         </section>
+
+        <!-- ================= INTEGRATIONS SECTION START ================= -->
+        <!-- Rotating partner logos showcasing supported commerce platforms -->
+        <section id="integrations" class="py-4 bg-brand-dark">
+          <div class="container text-center max-w-7xl mx-auto px-4">
+            <h2 class="text-xl font-display font-semibold text-white mb-2">INTEGRATE WITH YOUR FAVORITE TOOLS</h2>
+            <p class="text-sm text-slate-300 mb-4">Connect with your favorite tools and services</p>
+
+            <!-- Scroller with all logos -->
+            <div class="integrations-marquee overflow-hidden relative">
+              <div class="marquee-track flex w-max animate-marquee">
+                <div class="integrations-logos flex gap-8 items-center">
+                  <img src="/assets/integrations/bigcommerce.webp" alt="BigCommerce" class="max-h-8 object-contain transition-transform hover:scale-110" />
+                  <img src="/assets/integrations/clovernew.svg" alt="Clover" class="max-h-8 object-contain transition-transform hover:scale-110" />
+                  <img src="/assets/integrations/freshbooks.webp" alt="FreshBooks" class="max-h-8 object-contain transition-transform hover:scale-110" />
+                  <img src="/assets/integrations/hubspot.webp" alt="HubSpot" class="max-h-8 object-contain transition-transform hover:scale-110" />
+                  <img src="/assets/integrations/keap.webp" alt="Keap" class="max-h-8 object-contain transition-transform hover:scale-110" />
+                  <img src="/assets/integrations/lightspeed.webp" alt="Lightspeed" class="max-h-8 object-contain transition-transform hover:scale-110" />
+                  <img src="/assets/integrations/magento.webp" alt="Magento" class="max-h-8 object-contain transition-transform hover:scale-110" />
+                  <img src="/assets/integrations/mastercard.webp" alt="Mastercard" class="max-h-8 object-contain transition-transform hover:scale-110" />
+                  <img src="/assets/integrations/memberpress.svg" alt="MemberPress" class="max-h-8 object-contain transition-transform hover:scale-110" />
+                  <img src="/assets/integrations/ncr.webp" alt="NCR" class="max-h-8 object-contain transition-transform hover:scale-110" />
+                  <img src="/assets/integrations/quickbooks.webp" alt="QuickBooks" class="max-h-8 object-contain transition-transform hover:scale-110" />
+                  <img src="/assets/integrations/salesforce.webp" alt="Salesforce" class="max-h-8 object-contain transition-transform hover:scale-110" />
+                  <img src="/assets/integrations/squarespace.webp" alt="Squarespace" class="max-h-8 object-contain transition-transform hover:scale-110" />
+                  <img src="/assets/integrations/vend.webp" alt="Vend" class="max-h-8 object-contain transition-transform hover:scale-110" />
+                  <img src="/assets/integrations/visa.webp" alt="Visa" class="max-h-8 object-contain transition-transform hover:scale-110" />
+                  <img src="/assets/integrations/wix.webp" alt="Wix" class="max-h-8 object-contain transition-transform hover:scale-110" />
+                  <img src="/assets/integrations/woocommerce.webp" alt="WooCommerce" class="max-h-8 object-contain transition-transform hover:scale-110" />
+                  <img src="/assets/integrations/zoho_crm.webp" alt="Zoho CRM" class="max-h-8 object-contain transition-transform hover:scale-110" />
+                </div>
+                <!-- duplicate for infinite loop -->
+                <div class="integrations-logos flex gap-8 items-center">
+                  <img src="/assets/integrations/bigcommerce.webp" alt="BigCommerce" class="max-h-8 object-contain transition-transform hover:scale-110" />
+                  <img src="/assets/integrations/clovernew.svg" alt="Clover" class="max-h-8 object-contain transition-transform hover:scale-110" />
+                  <img src="/assets/integrations/freshbooks.webp" alt="FreshBooks" class="max-h-8 object-contain transition-transform hover:scale-110" />
+                  <img src="/assets/integrations/hubspot.webp" alt="HubSpot" class="max-h-8 object-contain transition-transform hover:scale-110" />
+                  <img src="/assets/integrations/keap.webp" alt="Keap" class="max-h-8 object-contain transition-transform hover:scale-110" />
+                  <img src="/assets/integrations/lightspeed.webp" alt="Lightspeed" class="max-h-8 object-contain transition-transform hover:scale-110" />
+                  <img src="/assets/integrations/magento.webp" alt="Magento" class="max-h-8 object-contain transition-transform hover:scale-110" />
+                  <img src="/assets/integrations/mastercard.webp" alt="Mastercard" class="max-h-8 object-contain transition-transform hover:scale-110" />
+                  <img src="/assets/integrations/memberpress.svg" alt="MemberPress" class="max-h-8 object-contain transition-transform hover:scale-110" />
+                  <img src="/assets/integrations/ncr.webp" alt="NCR" class="max-h-8 object-contain transition-transform hover:scale-110" />
+                  <img src="/assets/integrations/quickbooks.webp" alt="QuickBooks" class="max-h-8 object-contain transition-transform hover:scale-110" />
+                  <img src="/assets/integrations/salesforce.webp" alt="Salesforce" class="max-h-8 object-contain transition-transform hover:scale-110" />
+                  <img src="/assets/integrations/squarespace.webp" alt="Squarespace" class="max-h-8 object-contain transition-transform hover:scale-110" />
+                  <img src="/assets/integrations/vend.webp" alt="Vend" class="max-h-8 object-contain transition-transform hover:scale-110" />
+                  <img src="/assets/integrations/visa.webp" alt="Visa" class="max-h-8 object-contain transition-transform hover:scale-110" />
+                  <img src="/assets/integrations/wix.webp" alt="Wix" class="max-h-8 object-contain transition-transform hover:scale-110" />
+                  <img src="/assets/integrations/woocommerce.webp" alt="WooCommerce" class="max-h-8 object-contain transition-transform hover:scale-110" />
+                  <img src="/assets/integrations/zoho_crm.webp" alt="Zoho CRM" class="max-h-8 object-contain transition-transform hover:scale-110" />
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+        <!-- ================= INTEGRATIONS SECTION END ================= -->
 
         
         <section id="platform" class="border-b border-brand-silver/30 bg-white dark:bg-brand-dark">
@@ -653,8 +895,7 @@
             <div class="grid gap-10 md:grid-cols-[1.1fr_auto]">
                 <div class="space-y-4">
                     <div class="flex items-center gap-3">
-                        <img src="redshield.webp" alt="MerchantHaus Logo" class="h-10 w-auto">
-                        <span class="font-display text-xl font-semibold text-brand-dark">MerchantHaus</span>
+                        <div class="w-[220px]" data-mh-logo-footer></div>
                     </div>
                     <p class="text-sm text-brand-dark/70">A next-generation merchant services provider offering omnichannel payments, developer-friendly integrations, and boutique, white-glove service.</p>
                      <address class="text-sm not-italic text-brand-dark/70">
@@ -858,6 +1099,63 @@
         }
         doc.addEventListener('keydown', escapeHandler);
 
+        // Logo generation script
+        const logoImagePath = "/public/assets/images/Shield.webp";
+        // --- Animated Logo Injection ---
+        const logoSVG = (id, tagline = true, shimmer = true) => {
+            const letters = ['M','e','r','c','h','a','n','t','H','a','u','s'];
+            let letterTags = '';
+            letters.forEach((letter, index) => {
+                const delay = index * 0.1;
+                letterTags += `<tspan opacity="0" dy="-20">${letter}<animate attributeName="opacity" from="0" to="1" dur="0.2s" begin="${delay}s" fill="freeze"/><animate attributeName="dy" from="-20" to="0" dur="0.2s" begin="${delay}s" fill="freeze" calcMode="discrete"/></tspan>`;
+            });
+
+            return `
+            <svg viewBox="0 0 600 100" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%">
+                <defs>
+                    <linearGradient id="shimmer-${id}" gradientUnits="userSpaceOnUse" x1="120" y1="0" x2="560" y2="0">
+                        <stop offset="0%" stop-color="#DC143C" />
+                        <stop offset="45%" stop-color="#DC143C">
+                            ${shimmer ? `<animate attributeName="stop-color" values="#DC143C; #FFC0CB; #DC143C" keyTimes="0; 0.5; 1" dur="2s" begin="1.5s" fill="freeze" repeatCount="1"/>` : ''}
+                        </stop>
+                        <stop offset="50%" stop-color="#DC143C">
+                            ${shimmer ? `<animate attributeName="stop-color" values="#DC143C; #FFFFFF; #DC143C" keyTimes="0; 0.5; 1" dur="2s" begin="1.5s" fill="freeze" repeatCount="1"/>` : ''}
+                        </stop>
+                        <stop offset="55%" stop-color="#DC143C">
+                            ${shimmer ? `<animate attributeName="stop-color" values="#DC143C; #FFC0CB; #DC143C" keyTimes="0; 0.5; 1" dur="2s" begin="1.5s" fill="freeze" repeatCount="1"/>` : ''}
+                        </stop>
+                        <stop offset="100%" stop-color="#DC143C" />
+                        ${shimmer ? `<animateTransform attributeName="transform" type="translate" from="-600 0" to="600 0" dur="2s" begin="1.5s" fill="freeze" repeatCount="1"/>` : ''}
+                    </linearGradient>
+                    <style>
+                        .mh-text-${id} { font-family: 'Ubuntu', sans-serif; font-size: 50px; font-weight: 700; fill: url(#shimmer-${id}); }
+                        .mh-tagline-${id} { font-family: 'Inter', sans-serif; font-size: 18px; font-weight: 500; fill: #A9A9A9; text-anchor: middle; letter-spacing: 4px; }
+                    </style>
+                </defs>
+                <image href="${logoImagePath}" x="10" y="10" height="80" width="80" />
+                <text class="mh-text-${id}" y="60" x="110">${letterTags}</text>
+                ${tagline ? `
+                    <line x1="160" x2="400" y1="72" y2="72" stroke="#00CEDB" stroke-width="2" opacity="0">
+                        <animate attributeName="opacity" from="0" to="1" dur="1s" begin="1.5s" fill="freeze" />
+                    </line>
+                    <text x="280" y="92" class="mh-tagline-${id}" opacity="0">
+                        <animate attributeName="opacity" from="0" to="1" dur="1s" begin="2s" fill="freeze" />plug. play. grow.
+                    </text>
+                ` : ''}
+            </svg>`;
+        };
+        
+        // Only select and inject logos if the placeholder exists on the current page
+        if (document.querySelector('[data-mh-logo-header]')) {
+            document.querySelector('[data-mh-logo-header]').innerHTML = logoSVG('header', false, false);
+        }
+        if (document.querySelector('[data-mh-logo-hero]')) {
+            document.querySelector('[data-mh-logo-hero]').innerHTML = logoSVG('hero', true, true);
+        }
+        if (document.querySelector('[data-mh-logo-footer]')) {
+             document.querySelector('[data-mh-logo-footer]').innerHTML = logoSVG('footer', true, false);
+        }
+
         if (window.lucide && window.lucide.createIcons) {
             window.lucide.createIcons();
         }
@@ -865,29 +1163,21 @@
 </script>
 
 <script>
-    // Slider script
+    // Simplified slider script - only handles main hero slides
     let nextBtn = document.querySelector('.next');
     let prevBtn = document.querySelector('.prev');
     let slider = document.querySelector('.slider');
     let sliderList = slider.querySelector('.slider .list');
-    let thumbnail = document.querySelector('.slider .thumbnail');
-    let thumbnailItems = thumbnail.querySelectorAll('.item');
-
-    if (thumbnailItems.length > 0) {
-        thumbnail.appendChild(thumbnailItems[0]);
-    }
-
+    
+    // Simple main slider functionality
     function moveSlider(direction) {
         let sliderItems = sliderList.querySelectorAll('.item');
-        let thumbnailItems = document.querySelectorAll('.thumbnail .item');
         
         if (direction === 'next') {
             sliderList.appendChild(sliderItems[0]);
-            thumbnail.appendChild(thumbnailItems[0]);
             slider.classList.add('next');
         } else {
             sliderList.prepend(sliderItems[sliderItems.length - 1]);
-            thumbnail.prepend(thumbnailItems[thumbnailItems.length - 1]);
             slider.classList.add('prev');
         }
 
@@ -910,9 +1200,154 @@
     }
 </script>
 
+    <!-- ================= SUPPORT MODAL START ================= -->
+    <!-- Contact form modal enabling merchants to reach support team -->
+    <div id="support-modal" class="fixed inset-0 z-[70] hidden flex items-center justify-center">
+      <div class="absolute inset-0 bg-black/60" data-close></div>
+      <div class="relative z-10 w-full max-w-[clamp(20rem,90vw,35rem)] max-h-[90vh] overflow-y-auto rounded-2xl bg-white p-6 shadow-2xl border border-slate-200 dark:bg-brand-dark dark:border-slate-800" data-modal-card>
+        <div class="flex items-center justify-between">
+          <h3 class="text-xl font-extrabold font-display text-slate-900 dark:text-slate-100">Contact Support</h3>
+          <button class="p-2 text-slate-500 hover:text-slate-700 dark:text-slate-400 dark:hover:text-slate-200" data-close aria-label="Close"><i data-lucide="x" class="h-5 w-5"></i></button>
+        </div>
+        <p class="mt-1 text-sm text-slate-600 dark:text-slate-300">Have a question? Fill out the form below or contact us at <a href="tel:15056006042" class="text-brand-crimson hover:underline">1-505-600-6042</a>.</p>
+        <form
+          id="support-form"
+          name="contact"
+          method="POST"
+          data-netlify="true"
+          netlify-honeypot="bot-field"
+          action="/thankyou.html"
+          class="mt-4 space-y-4"
+        >
+          <input type="hidden" name="form-name" value="contact">
+          <p class="hidden">
+            <label>Don't fill this out: <input name="bot-field"></label>
+          </p>
+          <div>
+            <label for="support-name" class="block text-sm font-medium text-slate-700 dark:text-slate-300">Name</label>
+            <input id="support-name" name="name" placeholder="Your name" class="mt-1 block w-full rounded-md border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 px-3 py-2 text-slate-900 dark:text-slate-100 shadow-sm focus:border-brand-crimson focus:ring-brand-crimson" required>
+          </div>
+          <div>
+            <label for="support-email" class="block text-sm font-medium text-slate-700 dark:text-slate-300">Email</label>
+            <input id="support-email" name="email" type="email" placeholder="Work email" class="mt-1 block w-full rounded-md border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 px-3 py-2 text-slate-900 dark:text-slate-100 shadow-sm focus:border-brand-crimson focus:ring-brand-crimson" required>
+          </div>
+          <div>
+            <label for="support-message" class="block text-sm font-medium text-slate-700 dark:text-slate-300">Message</label>
+            <textarea id="support-message" name="message" placeholder="Your message..." rows="4" class="mt-1 block w-full rounded-md border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 px-3 py-2 text-slate-900 dark:text-slate-100 shadow-sm focus:border-brand-crimson focus:ring-brand-crimson" required></textarea>
+          </div>
+          <div>
+            <button class="inline-flex justify-center rounded-md border border-transparent bg-brand-crimson px-4 py-2 text-sm font-semibold text-white shadow-sm transition hover:bg-brand-crimson/90 focus:outline-none focus:ring-2 focus:ring-brand-crimson focus:ring-offset-2" type="submit">Send Message</button>
+          </div>
+          <p
+            id="support-error"
+            class="text-xs text-red-500 hidden"
+            role="alert"
+            aria-live="polite"
+          ></p>
+        </form>
+      </div>
+    </div>
+    <!-- ================= SUPPORT MODAL END ================= -->
+
 <script src="/assets/support.js" defer></script>
 <script src="/assets/app.js" defer></script>
 <script src="/assets/signup-panel.js" defer></script>
+<!-- ================= CHATBOT INTEGRATION SECTION START ================= -->
+<!-- Third-party ChatBot embed and custom styling for FAQ assistant -->
+<!-- Start of ChatBot (www.chatbot.com) code -->
+<script>
+  window.__ow = window.__ow || {};
+  window.__ow.organizationId = "ded96f09-612d-4fa3-b3e8-014830167318";
+  window.__ow.template_id = "200f2913-f66f-4b3a-aa4c-349b6e62113f";
+  window.__ow.integration_name = "manual_settings";
+  window.__ow.product_name = "chatbot";   
+  ;(function(n,t,c){function i(n){return e._h?e._h.apply(null,n):e._q.push(n)}var e={_q:[],_h:null,_v:"2.0",on:function(){i(["on",c.call(arguments)])},once:function(){i(["once",c.call(arguments)])},off:function(){i(["off",c.call(arguments)])},get:function(){if(!e._h)throw new Error("[OpenWidget] You can't use getters before load.");return i(["get",c.call(arguments)])},call:function(){i(["call",c.call(arguments)])},init:function(){var n=t.createElement("script");n.async=!0,n.type="text/javascript",n.src="https://cdn.openwidget.com/openwidget.js",t.head.appendChild(n)}};!n.__ow.asyncInit&&e.init(),n.OpenWidget=n.OpenWidget||e}(window,document,[].slice))
+</script>
+<noscript>You need to <a href="https://www.chatbot.com/help/chat-widget/enable-javascript-in-your-browser/" rel="noopener nofollow">enable JavaScript</a> in order to use the AI chatbot tool powered by <a href="https://www.chatbot.com/" rel="noopener nofollow" target="_blank">ChatBot</a></noscript>
+<!-- End of ChatBot code -->
+<style>
+  #faq-answer {
+    max-height: 320px;
+    overflow-y: auto;
+    padding: 1rem;
+    background: rgba(248, 250, 252, 0.9);
+    border-radius: 0.5rem;
+    margin-bottom: 1rem;
+  }
+  .dark #faq-answer {
+    background: rgba(15, 23, 42, 0.9);
+  }
+  .chat-user {
+    background: #dc143c;
+    color: #fff;
+    padding: 0.5rem 1rem;
+    border-radius: 1rem 1rem 0 1rem;
+    margin: 0.5rem 0 0.5rem auto;
+    max-width: 70%;
+    text-align: right;
+    float: right;
+    clear: both;
+    box-shadow: 0 2px 8px rgba(220,20,60,0.08);
+  }
+  .chat-bot {
+    background: #475569;
+    color: #f1f5f9;
+    padding: 0.5rem 1rem;
+    border-radius: 1rem 1rem 1rem 0;
+    margin: 0.5rem auto 0.5rem 0;
+    max-width: 70%;
+    text-align: left;
+    float: left;
+    clear: both;
+    box-shadow: 0 2px 8px rgba(71,85,105,0.08);
+  }
+</style>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  const input = document.getElementById('faq-question');
+  const sendBtn = document.getElementById('ask-faq');
+  const answerBox = document.getElementById('faq-answer');
+
+  function appendMessage(text, sender) {
+    const div = document.createElement('div');
+    div.className = sender === 'user' ? 'chat-user' : 'chat-bot';
+    div.textContent = text;
+    answerBox.appendChild(div);
+    answerBox.scrollTop = answerBox.scrollHeight;
+  }
+
+  function sendMessage() {
+    const text = input.value.trim();
+    if (!text) return;
+    appendMessage(text, 'user');
+    input.value = '';
+    if (!window.ChatBot || typeof window.ChatBot.call !== 'function') {
+      console.warn('ChatBot.com integration not found.');
+      appendMessage('ChatBot integration not available.', 'bot');
+      return;
+    }
+    window.ChatBot.call('send', { message: text });
+  }
+
+  input.addEventListener('keydown', function(e) {
+    if (e.key === 'Enter') {
+      sendMessage();
+    }
+  });
+  sendBtn.addEventListener('click', sendMessage);
+
+  if (window.ChatBot && typeof window.ChatBot.on === 'function') {
+    window.ChatBot.on('message', function(data) {
+      if (data && data.message) {
+        appendMessage(data.message, 'bot');
+      }
+    });
+  } else {
+    console.warn('ChatBot.com integration not found.');
+  }
+});
+</script>
+<!-- ================= CHATBOT INTEGRATION SECTION END ================= -->
 </body>
 </html>
 
