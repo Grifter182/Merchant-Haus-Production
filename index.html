@@ -98,11 +98,22 @@
 
         /* Slider Styles */
         .slider{
-            height: 80vh;
             width: 100%;
             max-width: 100vw;
+            height: 80vh; /* Fallback for browsers without aspect-ratio support */
+            aspect-ratio: 16/9;
+            min-height: 60vh;
+            max-height: 80vh;
             overflow: hidden;
             position: relative;
+            background: #000;
+        }
+        
+        /* For browsers that support aspect-ratio, use more flexible sizing */
+        @supports (aspect-ratio: 16/9) {
+            .slider {
+                height: auto;
+            }
         }
         
         /* Desktop overlay for brightness reduction */
@@ -126,7 +137,8 @@
         .slider .list .item img{
             width: 100%;
             height: 100%;
-            object-fit: cover;
+            object-fit: contain;
+            object-position: center;
         }
         .slider .list .item .content{
             position: absolute;
@@ -327,6 +339,20 @@
             }
         }
         @media screen and (max-width: 768px) {
+            .slider {
+                height: 60vh; /* Fallback for browsers without aspect-ratio support */
+                min-height: 50vh;
+                max-height: 70vh;
+                aspect-ratio: 16/9;
+            }
+            
+            /* For browsers that support aspect-ratio on mobile */
+            @supports (aspect-ratio: 16/9) {
+                .slider {
+                    height: auto;
+                }
+            }
+            
             .slider .list .item .content { 
                 left: 5%; 
                 top: 15%;
