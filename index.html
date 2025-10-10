@@ -50,6 +50,19 @@
             color: #1A1A1A;
             font-family: 'Inter', 'sans-serif';
             transition: background-color 0.3s ease, color 0.3s ease;
+            max-width: 100vw;
+            overflow-x: hidden;
+        }
+        
+        /* Global width constraint to prevent any elements from exceeding viewport */
+        * {
+            max-width: 100vw;
+            box-sizing: border-box;
+        }
+        
+        /* Reset max-width for elements that should be constrained to their containers */
+        .max-w-7xl *, .max-w-6xl *, [class*="max-w-"] * {
+            max-width: none;
         }
         .dark body {
             background-color: #1A1A1A;
@@ -87,6 +100,7 @@
         .slider{
             height: 80vh;
             width: 100%;
+            max-width: 100vw;
             overflow: hidden;
             position: relative;
         }
@@ -156,7 +170,8 @@
             position: absolute;
             bottom: 50px;
             right: 20px;
-            width: calc(150px * 5 + 20px * 4); /* Exactly 5 cards width */
+            width: calc(150px * 5 + 20px * 4); /* Show 5 cards at a time */
+            max-width: calc(100vw - 40px); /* Ensure it doesn't exceed viewport */
             z-index: 100;
             display: flex;
             gap: 20px;
@@ -167,6 +182,7 @@
             gap: 20px;
             /* Removed auto-scroll animation for desktop - keeping infinite cycle capability */
             will-change: transform;
+            width: max-content;
         }
         .thumbnail .item{
             width: 150px;
@@ -349,6 +365,16 @@
         @media (prefers-reduced-motion: reduce) {
           .animate-marquee { animation: none !important; }
         }
+        
+        /* Fix marquee width overflow */
+        .integrations-marquee {
+          max-width: 100vw;
+          overflow-x: hidden !important;
+        }
+        .marquee-track {
+          width: max-content !important;
+          max-width: none;
+        }
 
         /* Hero background image with Ken Burns animation */
         .hero-bg-container::before { 
@@ -456,7 +482,7 @@
                 <div class="slider">
                 <div class="list">
                     <div class="item">
-                        <img src="/assets/img/card1.webp" alt="Secure Online Payments">
+                        <img src="/assets/img/card1land.webp" alt="Secure Online Payments">
                         <div class="content">
                             <div class="title">Modern Payments</div>
                             <div class="type">Personalized Service</div>
@@ -469,7 +495,7 @@
                         </div>
                     </div>
                     <div class="item">
-                        <img src="/assets/img/card2.webp" alt="Retail POS">
+                        <img src="/assets/img/Card2land.webp" alt="Retail POS">
                         <div class="content">
                             <div class="title">Omnichannel</div>
                             <div class="type">Solutions</div>
@@ -482,20 +508,7 @@
                         </div>
                     </div>
                     <div class="item">
-                        <img src="/assets/img/card3.webp" alt="Seamless Integration">
-                        <div class="content">
-                            <div class="title">Developer Friendly</div>
-                            <div class="type">APIs & SDKs</div>
-                            <div class="description">
-                                Integrate quickly with our robust APIs, SDKs, and no-code hosted checkout pages.
-                            </div>
-                            <div class="button">
-                                <button class="border-2 border-white text-white px-6 py-3 rounded-full font-semibold text-sm transition hover:bg-brand-crimson hover:border-brand-crimson">Get a Quote</button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="item">
-                        <img src="/assets/img/card4.webp" alt="Business Analytics">
+                        <img src="/assets/img/Card4land.webp" alt="Business Analytics">
                         <div class="content">
                             <div class="title">AI-Powered</div>
                             <div class="type">Insights</div>
@@ -508,7 +521,7 @@
                         </div>
                     </div>
                     <div class="item">
-                        <img src="/assets/img/card5.webp" alt="Payment Security">
+                        <img src="/assets/img/card5land.webp" alt="Payment Security">
                         <div class="content">
                             <div class="title">Advanced</div>
                             <div class="type">Security</div>
@@ -521,7 +534,7 @@
                         </div>
                     </div>
                     <div class="item">
-                        <img src="/assets/img/card6.webp" alt="Mobile Payments">
+                        <img src="/assets/img/card6land.webp" alt="Mobile Payments">
                         <div class="content">
                             <div class="title">Mobile</div>
                             <div class="type">Commerce</div>
@@ -534,7 +547,7 @@
                         </div>
                     </div>
                     <div class="item">
-                        <img src="/assets/img/card7.webp" alt="Global Payments">
+                        <img src="/assets/img/card7land.webp" alt="Global Payments">
                         <div class="content">
                             <div class="title">Global</div>
                             <div class="type">Reach</div>
@@ -547,33 +560,7 @@
                         </div>
                     </div>
                     <div class="item">
-                        <img src="/assets/img/card8.webp" alt="Analytics Dashboard">
-                        <div class="content">
-                            <div class="title">Real-time</div>
-                            <div class="type">Analytics</div>
-                            <div class="description">
-                                Monitor your business performance with comprehensive reporting and insights.
-                            </div>
-                            <div class="button">
-                                <button class="border-2 border-white text-white px-6 py-3 rounded-full font-semibold text-sm transition hover:bg-brand-crimson hover:border-brand-crimson">Get a Quote</button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="item">
-                        <img src="/assets/img/card9.webp" alt="Subscription Billing">
-                        <div class="content">
-                            <div class="title">Recurring</div>
-                            <div class="type">Billing</div>
-                            <div class="description">
-                                Automate subscription management and recurring payments for predictable revenue.
-                            </div>
-                            <div class="button">
-                                <button class="border-2 border-white text-white px-6 py-3 rounded-full font-semibold text-sm transition hover:bg-brand-crimson hover:border-brand-crimson">Get a Quote</button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="item">
-                        <img src="/assets/img/card10.webp" alt="Customer Support">
+                        <img src="/assets/img/card10land.webp" alt="Customer Support">
                         <div class="content">
                             <div class="title">24/7</div>
                             <div class="type">Support</div>
@@ -591,24 +578,18 @@
                         <!-- Original set of cards -->
                         <div class="item"><img src="/assets/img/card1.webp" alt="Payments"></div>
                         <div class="item"><img src="/assets/img/card2.webp" alt="Retail"></div>
-                        <div class="item"><img src="/assets/img/card3.webp" alt="APIs"></div>
                         <div class="item"><img src="/assets/img/card4.webp" alt="AI"></div>
                         <div class="item"><img src="/assets/img/card5.webp" alt="Security"></div>
                         <div class="item"><img src="/assets/img/card6.webp" alt="Mobile"></div>
                         <div class="item"><img src="/assets/img/card7.webp" alt="Global"></div>
-                        <div class="item"><img src="/assets/img/card8.webp" alt="Analytics"></div>
-                        <div class="item"><img src="/assets/img/card9.webp" alt="Billing"></div>
                         <div class="item"><img src="/assets/img/card10.webp" alt="Support"></div>
                         <!-- Duplicate set for infinite loop -->
                         <div class="item"><img src="/assets/img/card1.webp" alt="Payments"></div>
                         <div class="item"><img src="/assets/img/card2.webp" alt="Retail"></div>
-                        <div class="item"><img src="/assets/img/card3.webp" alt="APIs"></div>
                         <div class="item"><img src="/assets/img/card4.webp" alt="AI"></div>
                         <div class="item"><img src="/assets/img/card5.webp" alt="Security"></div>
                         <div class="item"><img src="/assets/img/card6.webp" alt="Mobile"></div>
                         <div class="item"><img src="/assets/img/card7.webp" alt="Global"></div>
-                        <div class="item"><img src="/assets/img/card8.webp" alt="Analytics"></div>
-                        <div class="item"><img src="/assets/img/card9.webp" alt="Billing"></div>
                         <div class="item"><img src="/assets/img/card10.webp" alt="Support"></div>
                     </div>
                 </div>
@@ -1179,66 +1160,161 @@
 </script>
 
 <script>
-    // Enhanced slider script with clickable cards and improved modal close functionality
+    // Enhanced slider script with hero-thumbnail synchronization
     let nextBtn = document.querySelector('.next');
     let prevBtn = document.querySelector('.prev');
     let slider = document.querySelector('.slider');
     let sliderList = slider.querySelector('.slider .list');
+    let thumbnailTrack = document.querySelector('.thumbnail-track');
     let thumbnailItems = document.querySelectorAll('.thumbnail .item');
     
-    // Make cards clickable - clicking a card switches to that slide
-    thumbnailItems.forEach((card, index) => {
-        card.addEventListener('click', () => {
-            // Move to the clicked card's slide
-            const sliderItems = sliderList.querySelectorAll('.item');
-            const currentIndex = 0; // First item is always the active one
-            const targetIndex = index;
-            
-            if (targetIndex !== currentIndex) {
-                // Calculate how many moves needed
-                const moves = targetIndex;
-                for (let i = 0; i < moves; i++) {
-                    sliderList.appendChild(sliderItems[0]);
+    // Card sequence for rotation (only the 7 cards specified)
+    const cardSequence = ['card1', 'card2', 'card4', 'card5', 'card6', 'card7', 'card10'];
+    
+    // Current hero index (which card is displayed as hero)
+    let currentHeroIndex = 0;
+    
+    // Function to update hero image based on current index
+    function updateHeroImage() {
+        const heroSlides = sliderList.querySelectorAll('.item');
+        const currentCard = cardSequence[currentHeroIndex];
+        
+        // Find and move the correct hero slide to front
+        let targetSlide = null;
+        heroSlides.forEach((slide, index) => {
+            const img = slide.querySelector('img');
+            if (img && img.src) {
+                const imageName = img.src.split('/').pop().toLowerCase();
+                const searchName = currentCard + 'land.webp';
+                if (imageName === searchName) {
+                    targetSlide = slide;
                 }
-                
-                // Add animation class
-                slider.classList.add('next');
-                slider.addEventListener('animationend', function() {
-                    slider.classList.remove('next');
-                }, { once: true });
             }
         });
-    });
-    
-    // Simple main slider functionality
-    function moveSlider(direction) {
-        let sliderItems = sliderList.querySelectorAll('.item');
         
-        if (direction === 'next') {
-            sliderList.appendChild(sliderItems[0]);
-            slider.classList.add('next');
-        } else {
-            sliderList.prepend(sliderItems[sliderItems.length - 1]);
-            slider.classList.add('prev');
+        if (targetSlide) {
+            // Move target slide to front
+            sliderList.insertBefore(targetSlide, sliderList.firstChild);
         }
-
-        slider.addEventListener('animationend', function() {
-            if (direction === 'next') {
-                slider.classList.remove('next');
-            } else {
-                slider.classList.remove('prev');
+    }
+    
+    // Function to update thumbnail visibility - hero card should be at back of queue
+    function updateThumbnailQueue() {
+        // The hero card's thumbnail should be moved to the back
+        // First, get all thumbnail cards and reorganize them
+        const allThumbnails = Array.from(thumbnailTrack.children);
+        const firstSetThumbnails = allThumbnails.slice(0, 7);
+        const secondSetThumbnails = allThumbnails.slice(7, 14);
+        
+        // Create new order: start with the card AFTER the hero card
+        const newOrder = [];
+        const startIndex = (currentHeroIndex + 1) % cardSequence.length;
+        
+        // Add cards in sequence, skipping the hero card
+        for (let i = 0; i < cardSequence.length; i++) {
+            const cardIndex = (startIndex + i) % cardSequence.length;
+            if (cardIndex !== currentHeroIndex) {
+                newOrder.push(firstSetThumbnails[cardIndex]);
             }
-        }, { once: true });
+        }
+        // Add the hero card at the end
+        newOrder.push(firstSetThumbnails[currentHeroIndex]);
+        
+        // Do the same for duplicates
+        for (let i = 0; i < cardSequence.length; i++) {
+            const cardIndex = (startIndex + i) % cardSequence.length;
+            if (cardIndex !== currentHeroIndex) {
+                newOrder.push(secondSetThumbnails[cardIndex]);
+            }
+        }
+        newOrder.push(secondSetThumbnails[currentHeroIndex]);
+        
+        // Clear and rebuild thumbnail track
+        thumbnailTrack.innerHTML = '';
+        newOrder.forEach(thumbnail => {
+            if (thumbnail) {
+                thumbnailTrack.appendChild(thumbnail);
+            }
+        });
     }
-
+    
+    // Make cards clickable - clicking a card advances to show that card as hero
+    function setupThumbnailClicks() {
+        // Re-get thumbnail items after reorganization
+        const currentThumbnails = document.querySelectorAll('.thumbnail .item');
+        currentThumbnails.forEach((card, index) => {
+            // Remove existing listeners
+            card.replaceWith(card.cloneNode(true));
+        });
+        
+        const newThumbnails = document.querySelectorAll('.thumbnail .item');
+        newThumbnails.forEach((card, index) => {
+            card.addEventListener('click', () => {
+                // Only use first 7 cards (ignore duplicates)
+                if (index >= 7) return;
+                
+                // Find which card this represents in our sequence
+                const img = card.querySelector('img');
+                if (!img) return;
+                
+                const cardName = img.src.split('/').pop().replace('.webp', '').replace('.png', '');
+                const cardIndex = cardSequence.findIndex(seq => seq === cardName);
+                
+                if (cardIndex >= 0 && cardIndex !== currentHeroIndex) {
+                    currentHeroIndex = cardIndex;
+                    updateHeroImage();
+                    updateThumbnailQueue();
+                    setupThumbnailClicks(); // Re-setup click handlers
+                    
+                    // Add animation class
+                    slider.classList.add('next');
+                    setTimeout(() => {
+                        slider.classList.remove('next');
+                    }, 500);
+                }
+            });
+        });
+    }
+    
+    // Navigation functions
+    function moveToNext() {
+        currentHeroIndex = (currentHeroIndex + 1) % cardSequence.length;
+        updateHeroImage();
+        updateThumbnailQueue();
+        setupThumbnailClicks();
+        
+        slider.classList.add('next');
+        setTimeout(() => {
+            slider.classList.remove('next');
+        }, 500);
+    }
+    
+    function moveToPrev() {
+        currentHeroIndex = (currentHeroIndex - 1 + cardSequence.length) % cardSequence.length;
+        updateHeroImage();
+        updateThumbnailQueue();
+        setupThumbnailClicks();
+        
+        slider.classList.add('prev');
+        setTimeout(() => {
+            slider.classList.remove('prev');
+        }, 500);
+    }
+    
+    // Navigation button handlers
     if (nextBtn && prevBtn) {
-        nextBtn.onclick = function() {
-            moveSlider('next');
-        }
-        prevBtn.onclick = function() {
-            moveSlider('prev');
-        }
+        nextBtn.onclick = moveToNext;
+        prevBtn.onclick = moveToPrev;
     }
+    
+    // Initialize hero-thumbnail synchronization
+    document.addEventListener('DOMContentLoaded', function() {
+        // Start with card1 as hero (index 0)
+        currentHeroIndex = 0;
+        updateHeroImage();
+        updateThumbnailQueue();
+        setupThumbnailClicks();
+    });
     
     // Enhanced modal close functionality
     function ensureModalCloseWorks() {
