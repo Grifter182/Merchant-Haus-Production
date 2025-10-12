@@ -563,6 +563,33 @@
 .dark .feature-display { background-color: #1f2937; color: #f9fafb; }
 .feature-display.active { opacity: 1; transform: translateX(-50%) translateY(0); }
 .feature-display.exiting { opacity: 0; transform: translateX(-50%) translateY(-10px); }
+.section-pill-wrapper {
+  display: flex;
+  justify-content: center;
+  margin: clamp(2rem, 5vw, 3.5rem) 0 clamp(1.5rem, 3vw, 2.5rem);
+}
+.section-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.45rem 1.35rem;
+  border-radius: 999px;
+  background: rgba(0, 206, 219, 0.12);
+  border: 1px solid rgba(0, 206, 219, 0.4);
+  color: rgba(180, 252, 255, 0.95);
+  font-size: 0.75rem;
+  letter-spacing: 0.26em;
+  text-transform: uppercase;
+  font-weight: 600;
+}
+.section-pill i {
+  width: 1rem;
+  height: 1rem;
+}
+.dark .section-pill {
+  background: rgba(0, 206, 219, 0.18);
+  border-color: rgba(0, 206, 219, 0.55);
+}
 .integrations {
   background: radial-gradient(circle at left, #2c0c17, transparent),
               radial-gradient(circle at right, #0a1d1f, transparent);
@@ -647,92 +674,122 @@
         /* === SERVICES HERO EXPERIENCE === */
         .services-hero {
             position: relative;
-            min-height: clamp(640px, 86svh, 960px);
-            display: grid;
-            grid-template-rows: 1fr auto;
-            overflow: hidden;
-            background: #0f0f10;
+            padding: clamp(3rem, 6vw, 6rem) clamp(1.5rem, 5vw, 4rem);
+            background:
+                radial-gradient(circle at top left, rgba(220, 20, 60, 0.35), transparent 55%),
+                radial-gradient(circle at bottom right, rgba(0, 206, 219, 0.28), transparent 50%),
+                #0f0f10;
             color: #ffffff;
+            overflow: hidden;
         }
-        .dark .services-hero {
-            background: #050506;
-        }
-
-        .services-hero__bg {
-            position: absolute;
-            inset: 0;
-            background-size: cover;
-            background-position: center;
-            transition: opacity 0.4s ease, transform 0.4s ease;
-        }
-        .services-hero__bg::after {
+        .services-hero::before,
+        .services-hero::after {
             content: '';
             position: absolute;
-            inset: 0;
-            background: linear-gradient(180deg, rgba(0, 0, 0, 0.55), rgba(0, 0, 0, 0.35) 40%, rgba(0, 0, 0, 0.55));
+            width: 420px;
+            height: 420px;
+            border-radius: 50%;
+            filter: blur(140px);
+            opacity: 0.45;
+            pointer-events: none;
         }
-
-        .services-hero__content {
+        .services-hero::before {
+            inset: -220px auto auto -160px;
+            background: rgba(220, 20, 60, 0.8);
+        }
+        .services-hero::after {
+            inset: auto -160px -260px auto;
+            background: rgba(0, 206, 219, 0.85);
+        }
+        .services-hero__inner {
             position: relative;
-            z-index: 2;
-            padding: clamp(16px, 3vw, 48px);
-            max-width: 1100px;
+            z-index: 1;
+            margin: 0 auto;
+            max-width: 1120px;
+            display: grid;
+            gap: clamp(2rem, 5vw, 4rem);
+            align-items: center;
         }
-
-        .services-hero__brand {
+        .services-hero__text {
             display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+        .services-hero__ticker {
+            display: flex;
+            flex-direction: column;
+            gap: 0.35rem;
+            font-family: 'Ubuntu', sans-serif;
+            font-weight: 600;
+        }
+        .services-hero__row {
+            display: flex;
+            align-items: baseline;
+            gap: 0.75rem;
+            line-height: 1.05;
+        }
+        .services-hero__row--headline {
+            font-size: clamp(3.25rem, 7vw, 5.1rem);
+        }
+        .services-hero__row--sub {
+            font-size: clamp(1.9rem, 4.6vw, 3rem);
+        }
+        .services-hero__token {
+            display: inline-flex;
+            min-width: 7.5ch;
+            text-transform: capitalize;
+        }
+        .services-hero__token--noun { color: #ff6b81; }
+        .services-hero__token--verb { color: #00cedb; }
+        .services-hero__token--object { color: #f2c94c; }
+        .services-hero__token.is-swapping {
+            animation: servicesTokenSwap 0.6s ease both;
+        }
+        @keyframes servicesTokenSwap {
+            0% { opacity: 0; transform: translateY(60%); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+        .services-hero__benefits {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem 1.5rem;
+            margin-top: 0.5rem;
+        }
+        .services-hero__benefit {
+            display: inline-flex;
             align-items: center;
             gap: 0.75rem;
-            filter: drop-shadow(0 8px 24px rgba(0, 0, 0, 0.45));
-        }
-        .services-hero__brand svg {
-            width: 44px;
-            height: 44px;
-        }
-        .services-hero__brand-name {
-            font-family: 'Ubuntu', sans-serif;
+            font-size: clamp(1.2rem, 3.1vw, 1.75rem);
             font-weight: 700;
-            font-size: clamp(1.6rem, 2.6vw, 2.5rem);
         }
-        .services-hero__tag {
-            display: block;
-            margin-top: 0.25rem;
-            margin-left: 56px;
-            font: 500 0.95rem 'Inter', sans-serif;
-            color: #ffffffcc;
-            letter-spacing: 0.18em;
-            text-transform: uppercase;
+        .services-hero__benefit i {
+            width: clamp(1.5rem, 3vw, 2rem);
+            height: clamp(1.5rem, 3vw, 2rem);
         }
-
-        .services-hero__headline {
-            font-family: 'Ubuntu', sans-serif;
-            font-size: clamp(2.2rem, 5.2vw, 4.2rem);
-            margin: 12px 0 8px;
-        }
-        .services-hero__subhead {
-            max-width: 55ch;
+        .services-hero__body {
+            max-width: 60ch;
             font-family: 'Inter', sans-serif;
-            opacity: 0.92;
+            font-size: clamp(1rem, 2.2vw, 1.15rem);
+            line-height: 1.7;
+            color: rgba(226, 232, 240, 0.9);
         }
-
         .services-hero__cta {
             display: flex;
             flex-wrap: wrap;
             gap: 0.75rem;
-            margin-top: 1rem;
         }
         .services-hero__btn {
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            border: none;
             border-radius: 999px;
-            padding: 0.9rem 1.4rem;
+            padding: 0.85rem 1.6rem;
             font-weight: 700;
-            cursor: pointer;
             font-family: 'Inter', sans-serif;
-            transition: transform 0.2s ease, box-shadow 0.2s ease;
             text-decoration: none;
+            cursor: pointer;
+            border: 1px solid transparent;
+            transition: transform 0.25s ease, box-shadow 0.25s ease, background 0.25s ease, color 0.25s ease;
             color: inherit;
         }
         .services-hero__btn:focus-visible {
@@ -740,143 +797,151 @@
             outline-offset: 2px;
         }
         .services-hero__btn:hover {
-            transform: translateY(-1px);
-            box-shadow: 0 10px 24px rgba(0, 0, 0, 0.25);
+            transform: translateY(-2px);
         }
         .services-hero__btn--primary {
             background: var(--brand-crimson, #DC143C);
-            color: #ffffff;
-            box-shadow: 0 16px 30px rgba(220, 20, 60, 0.25);
+            box-shadow: 0 18px 36px rgba(220, 20, 60, 0.35);
         }
         .services-hero__btn--ghost {
-            background: #ffffff18;
-            border: 1px solid #ffffff33;
-            color: #ffffff;
+            border-color: rgba(255, 255, 255, 0.35);
+            background: rgba(255, 255, 255, 0.08);
         }
-
-        .services-hero__rail {
+        .services-hero__btn--ghost:hover {
+            background: rgba(255, 255, 255, 0.16);
+        }
+        .services-hero__showcase {
+            display: grid;
+            gap: 1rem;
+        }
+        @media (min-width: 640px) {
+            .services-hero__showcase {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+        }
+        @media (min-width: 768px) {
+            .services-hero__showcase {
+                grid-template-columns: repeat(3, minmax(0, 1fr));
+            }
+        }
+        .services-hero__card {
             position: relative;
-            z-index: 2;
-            display: flex;
-            align-items: center;
-            justify-content: flex-start;
-            gap: 12px;
-            padding: 0 16px 24px;
-        }
-        .services-hero__arrows {
+            padding: 1.5rem;
+            border-radius: 1.5rem;
+            background: rgba(18, 18, 24, 0.7);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.35);
+            backdrop-filter: blur(12px);
             display: flex;
             flex-direction: column;
-            gap: 8px;
-        }
-        .services-hero__arrow {
-            width: 48px;
-            height: 48px;
-            border-radius: 999px;
-            border: 1px solid #ffffff33;
-            background: #ffffff18;
-            color: #ffffff;
-            display: grid;
-            place-items: center;
-            cursor: pointer;
-            transition: transform 0.3s ease;
-        }
-        .services-hero__arrow:focus-visible {
-            outline: 3px solid var(--brand-teal, #00CEDB);
-            outline-offset: 2px;
-        }
-        .services-hero__arrow:hover {
-            transform: translateY(-2px);
-        }
-
-        .services-hero__viewport {
-            --services-hero-gap: 16px;
-            flex: 1;
-            display: flex;
-            gap: var(--services-hero-gap);
-            overflow: hidden;
-            scroll-behavior: smooth;
-        }
-
-        .services-hero__card {
-            flex-shrink: 0;
-            flex-basis: calc((100% - var(--services-hero-gap)) / 2.2);
-            aspect-ratio: 3 / 4;
-            border-radius: 16px;
-            background: #222 center/cover;
-            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.35);
-            cursor: pointer;
-            transition: transform 0.2s ease, box-shadow 0.2s ease;
-            border: none;
-            padding: 0;
-            position: relative;
+            gap: 0.75rem;
+            min-height: 220px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
         .services-hero__card:hover {
-            transform: scale(1.03);
+            transform: translateY(-6px);
+            box-shadow: 0 28px 60px rgba(0, 0, 0, 0.45);
         }
         .services-hero__card:focus-visible {
             outline: 3px solid var(--brand-teal, #00CEDB);
             outline-offset: 3px;
         }
-        .services-hero__card.active {
-            box-shadow: 0 0 0 3px var(--brand-teal, #00CEDB), 0 12px 24px rgba(0, 0, 0, 0.35);
-            transform: scale(1.03);
+        .services-hero__card-title {
+            font-family: 'Ubuntu', sans-serif;
+            font-size: 1.1rem;
+            font-weight: 600;
         }
-
-        @media (min-width: 600px) {
-            .services-hero__card {
-                flex-basis: calc((100% - var(--services-hero-gap) * 3) / 4);
-            }
+        .services-hero__card-subtitle {
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.14em;
+            color: rgba(255, 255, 255, 0.6);
         }
-
+        .services-hero__visual {
+            margin-top: auto;
+        }
+        .services-flow path {
+            stroke: rgba(255, 255, 255, 0.55);
+            stroke-width: 2;
+            fill: none;
+            stroke-linecap: round;
+            stroke-dasharray: 220;
+            stroke-dashoffset: 220;
+            animation: servicesFlow 5.6s ease-in-out infinite;
+        }
+        .services-flow path:nth-child(2) {
+            animation-delay: 0.25s;
+            opacity: 0.8;
+        }
+        .services-flow path:nth-child(3) {
+            animation-delay: 0.5s;
+            opacity: 0.6;
+        }
+        @keyframes servicesFlow {
+            to { stroke-dashoffset: 0; }
+        }
+        .services-mesh line {
+            stroke: rgba(255, 255, 255, 0.18);
+            stroke-width: 1.5;
+            stroke-dasharray: 120;
+            stroke-dashoffset: 120;
+            animation: servicesMeshLine 6s ease-in-out infinite;
+        }
+        .services-mesh line:nth-child(odd) { animation-delay: 0.35s; }
+        .services-mesh circle {
+            fill: rgba(0, 206, 219, 0.85);
+            transform-origin: center;
+            animation: servicesMeshNode 4.4s ease-in-out infinite;
+        }
+        .services-mesh circle:nth-of-type(odd) { animation-delay: 0.4s; }
+        @keyframes servicesMeshLine {
+            0% { stroke-dashoffset: 120; opacity: 0; }
+            35% { opacity: 1; }
+            100% { stroke-dashoffset: 0; opacity: 1; }
+        }
+        @keyframes servicesMeshNode {
+            0%, 100% { transform: scale(0.85); opacity: 0.7; }
+            50% { transform: scale(1.05); opacity: 1; }
+        }
+        .services-kpis {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 0.75rem;
+        }
+        .services-kpi {
+            padding: 0.75rem;
+            border-radius: 1rem;
+            background: rgba(0, 0, 0, 0.4);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+        .services-kpi__label {
+            font-size: 0.7rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: rgba(255, 255, 255, 0.55);
+        }
+        .services-kpi__value {
+            margin-top: 0.4rem;
+            font-family: 'Ubuntu', sans-serif;
+            font-size: 0.95rem;
+            letter-spacing: 0.05em;
+            color: rgba(255, 255, 255, 0.7);
+        }
         @media (min-width: 1024px) {
-            .services-hero {
-                grid-template-columns: minmax(auto, 55ch) 1fr;
-                grid-template-rows: 1fr;
-                align-items: center;
-                gap: 32px;
-                padding: 0 clamp(16px, 3vw, 48px);
-            }
-            .services-hero__content {
-                max-width: 100%;
-            }
-            .services-hero__rail {
-                flex-direction: column;
-                align-self: stretch;
-                justify-content: center;
-                padding: 0;
-                gap: 16px;
-            }
-            .services-hero__viewport {
-                flex-direction: column;
-                overflow-y: hidden;
-                overflow-x: visible;
-                max-height: 80vh;
-                width: 240px;
-            }
-            .services-hero__card {
-                width: 100%;
-                flex-basis: auto;
-            }
-            .services-hero__arrows {
-                order: 1;
-                flex-direction: row;
-            }
-            #services-hero-prev {
-                transform: rotate(-90deg);
-            }
-            #services-hero-next {
-                transform: rotate(90deg);
+            .services-hero__inner {
+                grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
             }
         }
-
         @media (prefers-reduced-motion: reduce) {
-            .services-hero__viewport {
-                scroll-behavior: auto;
-            }
             .services-hero__btn,
-            .services-hero__arrow,
             .services-hero__card {
                 transition: none;
+            }
+            .services-hero__token.is-swapping,
+            .services-flow path,
+            .services-mesh line,
+            .services-mesh circle {
+                animation: none !important;
             }
         }
 
@@ -982,50 +1047,104 @@
 </div>
 <!-- ================= HERO SECTION END ================= -->
 
+<div class="section-pill-wrapper">
+  <span class="section-pill">
+    <i data-lucide="sparkles" class="h-4 w-4"></i>
+    MerchantHaus Services
+  </span>
+</div>
+
 <!-- ================= PAYMENT SERVICES SHOWCASE START ================= -->
 <!-- Immersive hero replacing the previous services carousel -->
-<section id="payments" class="services-hero" aria-label="MerchantHaus payments hero">
-  <div id="services-hero-bg" class="services-hero__bg" aria-hidden="true"></div>
+<section id="payments" class="services-hero" aria-label="MerchantHaus payment services">
+  <div class="services-hero__inner">
+    <div class="services-hero__text">
+      <div class="services-hero__ticker" aria-live="polite">
+        <div class="services-hero__row services-hero__row--headline">
+          <span>Payment</span>
+          <span class="services-hero__token services-hero__token--noun" data-token="noun">flexibility</span>
+        </div>
+        <div class="services-hero__row services-hero__row--sub">
+          <span>That</span>
+          <span class="services-hero__token services-hero__token--verb" data-token="verb">fuels</span>
+        </div>
+        <div class="services-hero__row services-hero__row--sub">
+          <span>Your</span>
+          <span class="services-hero__token services-hero__token--object" data-token="object">momentum</span>
+        </div>
+      </div>
 
-  <div class="services-hero__content">
-    <div class="services-hero__brand">
-      <svg viewBox="0 0 90 90" role="img" aria-label="MerchantHaus shield">
-        <defs>
-          <linearGradient id="services-hero-gradient" x1="0" y1="0" x2="1" y2="0">
-            <stop offset="0%" stop-color="#DC143C" />
-            <stop offset="50%" stop-color="#FFFFFF" />
-            <stop offset="100%" stop-color="#DC143C" />
-          </linearGradient>
-        </defs>
-        <path d="M45 5 L78 20 L78 52 L45 85 L12 52 L12 20 Z" fill="url(#services-hero-gradient)" />
-      </svg>
-      <div>
-        <div class="services-hero__brand-name">MerchantHaus</div>
-        <small class="services-hero__tag">plug. play. grow.</small>
+      <div class="services-hero__benefits" aria-label="Key benefits">
+        <div class="services-hero__benefit">
+          <i data-lucide="zap"></i>
+          <span>Speed.</span>
+        </div>
+        <div class="services-hero__benefit">
+          <i data-lucide="lock"></i>
+          <span>Security.</span>
+        </div>
+        <div class="services-hero__benefit">
+          <i data-lucide="bar-chart-3"></i>
+          <span>Scale.</span>
+        </div>
+      </div>
+
+      <p class="services-hero__body" id="services-typewriter" aria-live="polite">
+        Create your business profile in minutes and start accepting cards, ACH, and secure pay links — online, in-store, or on the go. Reduce costs, onboard quickly, and safeguard every transaction with advanced fraud protection and chargeback defense.
+      </p>
+
+      <div class="services-hero__cta">
+        <a href="/apply.html" class="services-hero__btn services-hero__btn--primary">Get Started</a>
+        <button type="button" id="open-ai-modal-btn" class="services-hero__btn services-hero__btn--ghost">Discover My Best Fit</button>
       </div>
     </div>
-    <h2 id="services-hero-title" class="services-hero__headline">Payments Anywhere &amp; Everywhere</h2>
-    <p id="services-hero-sub" class="services-hero__subhead">
-      Accept cards, ACH and contactless. POS, mobile and online — unified and secure.
-    </p>
-    <div class="services-hero__cta">
-      <a href="/apply.html" class="services-hero__btn services-hero__btn--primary">Get a Quote</a>
-      <button type="button" id="open-ai-modal-btn" class="services-hero__btn services-hero__btn--ghost">Discover My Best Fit</button>
-    </div>
-  </div>
 
-  <div class="services-hero__rail">
-    <div class="services-hero__arrows">
-      <button type="button" class="services-hero__arrow" id="services-hero-prev" aria-label="Previous slide">◀</button>
-      <button type="button" class="services-hero__arrow" id="services-hero-next" aria-label="Next slide">▶</button>
-    </div>
-    <div class="services-hero__viewport" id="services-hero-cards">
-      <button type="button" class="services-hero__card" data-title="Payments Anywhere &amp; Everywhere" data-sub="Accept cards, ACH and contactless. POS, mobile and online — unified and secure." data-img="assets/img/card1land.webp"></button>
-      <button type="button" class="services-hero__card" data-title="AI-Powered Fraud Detection" data-sub="Leverage machine learning to protect your business and your customers." data-img="assets/img/card2land.webp"></button>
-      <button type="button" class="services-hero__card" data-title="Seamless Mobile Commerce" data-sub="Empower your sales on the go with our robust mobile payment solutions." data-img="assets/img/card4land.webp"></button>
-      <button type="button" class="services-hero__card" data-title="Flexible Payment Options" data-sub="From credit cards to ACH and checks, we've got all your payment needs covered." data-img="assets/img/card5land.webp"></button>
-      <button type="button" class="services-hero__card" data-title="Hundreds of Integrations" data-sub="Connect with the tools you already use to streamline your entire workflow." data-img="assets/img/card6land.webp"></button>
-      <button type="button" class="services-hero__card" data-title="Advanced Point of Sale" data-sub="Modernize your in-person transactions with our powerful POS systems." data-img="assets/img/card7land.webp"></button>
+    <div class="services-hero__showcase" aria-label="Highlights of our platform">
+      <article class="services-hero__card" tabindex="0">
+        <h3 class="services-hero__card-title">Real-time Flow</h3>
+        <p class="services-hero__card-subtitle">Auth → Settle → Payout</p>
+        <svg class="services-hero__visual services-flow" viewBox="0 0 220 120" role="img" aria-label="Animated payment flow lines">
+          <path d="M10 30 C 70 10, 150 50, 210 20" />
+          <path d="M10 55 C 70 35, 150 75, 210 45" />
+          <path d="M10 80 C 70 60, 150 95, 210 70" />
+        </svg>
+      </article>
+      <article class="services-hero__card" tabindex="0">
+        <h3 class="services-hero__card-title">Gateway Mesh</h3>
+        <p class="services-hero__card-subtitle">Terminals • APIs • Wallets</p>
+        <svg class="services-hero__visual services-mesh" viewBox="0 0 220 120" role="img" aria-label="Illustration of connected nodes">
+          <line x1="30" y1="30" x2="100" y2="20" />
+          <line x1="30" y1="30" x2="40" y2="95" />
+          <line x1="40" y1="95" x2="110" y2="80" />
+          <line x1="100" y1="20" x2="190" y2="45" />
+          <line x1="110" y1="80" x2="185" y2="95" />
+          <line x1="190" y1="45" x2="185" y2="95" />
+          <circle cx="30" cy="30" r="5" />
+          <circle cx="40" cy="95" r="5" />
+          <circle cx="100" cy="20" r="5" />
+          <circle cx="110" cy="80" r="5" />
+          <circle cx="190" cy="45" r="5" />
+          <circle cx="185" cy="95" r="5" />
+        </svg>
+      </article>
+      <article class="services-hero__card" tabindex="0">
+        <h3 class="services-hero__card-title">Live KPIs</h3>
+        <p class="services-hero__card-subtitle">Latency • Approval • Volume</p>
+        <div class="services-hero__visual services-kpis" role="group" aria-label="Live KPI placeholders">
+          <div class="services-kpi">
+            <span class="services-kpi__label">Latency</span>
+            <span class="services-kpi__value">— ms</span>
+          </div>
+          <div class="services-kpi">
+            <span class="services-kpi__label">Approval</span>
+            <span class="services-kpi__value">— %</span>
+          </div>
+          <div class="services-kpi">
+            <span class="services-kpi__label">Volume</span>
+            <span class="services-kpi__value">— k</span>
+          </div>
+        </div>
+      </article>
     </div>
   </div>
 </section>
@@ -1302,107 +1421,94 @@
 document.addEventListener('DOMContentLoaded', () => {
   if (window.lucide) lucide.createIcons();
 
-  const heroCardsContainer = document.getElementById('services-hero-cards');
-  const heroCards = heroCardsContainer ? Array.from(heroCardsContainer.querySelectorAll('.services-hero__card')) : [];
-  const heroBackground = document.getElementById('services-hero-bg');
-  const heroPrev = document.getElementById('services-hero-prev');
-  const heroNext = document.getElementById('services-hero-next');
-  const heroTitle = document.getElementById('services-hero-title');
-  const heroSubhead = document.getElementById('services-hero-sub');
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const tokenPools = {
+    noun: ['flexibility', 'control', 'independence', 'advantage', 'capability', 'empowerment', 'agility', 'opportunity', 'simplicity', 'confidence'],
+    verb: ['fuels', 'drives', 'accelerates', 'ignites', 'propels', 'enables', 'supports', 'advances', 'amplifies', 'energizes'],
+    object: ['momentum', 'expansion', 'business', 'performance', 'progress', 'potential', 'future', 'scalability', 'revenue']
+  };
+  const pickNextIndex = (prev, len) => {
+    if (len <= 1) return 0;
+    let next = Math.floor(Math.random() * len);
+    if (next === prev) next = (prev + 1) % len;
+    return next;
+  };
+  const tokenElements = {
+    noun: document.querySelector('[data-token="noun"]'),
+    verb: document.querySelector('[data-token="verb"]'),
+    object: document.querySelector('[data-token="object"]')
+  };
+  const tokenState = { noun: 0, verb: 0, object: 0 };
+  const tokenTimers = [];
 
-  if (heroCards.length && heroBackground && heroTitle && heroSubhead) {
-    let heroIndex = 0;
-    const totalCards = heroCards.length;
-    let isAnimating = false;
+  const clearTokenTimers = () => {
+    while (tokenTimers.length) {
+      const id = tokenTimers.pop();
+      window.clearTimeout(id);
+      window.clearInterval(id);
+    }
+  };
 
-    const hydrateCards = () => {
-      heroCards.forEach(card => {
-        const image = card.dataset.img;
-        if (image) {
-          card.style.backgroundImage = `url('${image}')`;
-        }
-      });
-    };
+  const swapToken = (key) => {
+    const el = tokenElements[key];
+    const pool = tokenPools[key];
+    if (!el || !pool.length) return;
+    tokenState[key] = pickNextIndex(tokenState[key], pool.length);
+    el.textContent = pool[tokenState[key]];
+    el.classList.remove('is-swapping');
+    void el.offsetWidth;
+    el.classList.add('is-swapping');
+  };
 
-    const setHeroContent = (index) => {
-      const card = heroCards[index];
-      if (!card) return;
-
-      heroBackground.style.opacity = '0';
-      heroBackground.style.transform = 'scale(1.03)';
-
-      setTimeout(() => {
-        if (card.dataset.img) {
-          heroBackground.style.backgroundImage = `url('${card.dataset.img}')`;
-        }
-        if (card.dataset.title) {
-          heroTitle.textContent = card.dataset.title;
-        }
-        if (card.dataset.sub) {
-          heroSubhead.textContent = card.dataset.sub;
-        }
-        heroBackground.style.opacity = '1';
-        heroBackground.style.transform = 'scale(1)';
-      }, 200);
-    };
-
-    const highlightCard = (index) => {
-      heroCards.forEach(card => card.classList.remove('active'));
-      const activeCard = heroCards[index];
-      if (activeCard) {
-        activeCard.classList.add('active');
-        const isDesktop = window.matchMedia('(min-width: 1024px)').matches;
-        if (isDesktop) {
-          heroCardsContainer.scrollTo({
-            top: activeCard.offsetTop - (heroCardsContainer.offsetHeight / 2) + (activeCard.offsetHeight / 2),
-            left: 0,
-            behavior: 'smooth'
-          });
-        } else {
-          heroCardsContainer.scrollTo({
-            left: activeCard.offsetLeft - (heroCardsContainer.offsetWidth / 2) + (activeCard.offsetWidth / 2),
-            top: 0,
-            behavior: 'smooth'
-          });
-        }
-      }
-    };
-
-    const updateState = (nextIndex) => {
-      if (isAnimating) return;
-      isAnimating = true;
-      heroIndex = (nextIndex + totalCards) % totalCards;
-      highlightCard(heroIndex);
-      setHeroContent(heroIndex);
-      setTimeout(() => {
-        isAnimating = false;
-      }, 400);
-    };
-
-    const move = (direction) => {
-      updateState(heroIndex + direction);
-    };
-
-    heroCards.forEach((card, index) => {
-      card.addEventListener('click', () => updateState(index));
-      card.addEventListener('keydown', (event) => {
-        if (event.key === 'Enter' || event.key === ' ') {
-          event.preventDefault();
-          updateState(index);
-        }
-      });
+  const startTokenCycles = () => {
+    clearTokenTimers();
+    if (reduceMotion) return;
+    const keys = ['noun', 'verb', 'object'];
+    keys.forEach((key, index) => {
+      const timeoutId = window.setTimeout(() => {
+        swapToken(key);
+        const intervalId = window.setInterval(() => swapToken(key), 7000);
+        tokenTimers.push(intervalId);
+      }, 4000 + index * 150);
+      tokenTimers.push(timeoutId);
     });
+  };
 
-    if (heroNext) {
-      heroNext.addEventListener('click', () => move(1));
-    }
-    if (heroPrev) {
-      heroPrev.addEventListener('click', () => move(-1));
-    }
+  const hasTokenElements = Object.values(tokenElements).some(Boolean);
+  if (hasTokenElements) {
+    Object.entries(tokenElements).forEach(([key, el]) => {
+      const pool = tokenPools[key];
+      if (!el || !pool.length) return;
+      el.textContent = pool[tokenState[key]];
+    });
+    startTokenCycles();
 
-    hydrateCards();
-    setHeroContent(heroIndex);
-    highlightCard(heroIndex);
+    document.addEventListener('visibilitychange', () => {
+      if (document.hidden) {
+        clearTokenTimers();
+      } else {
+        startTokenCycles();
+      }
+    });
+  }
+
+  const typewriterEl = document.getElementById('services-typewriter');
+  if (typewriterEl) {
+    const fullCopy = typewriterEl.textContent.trim();
+    if (reduceMotion) {
+      typewriterEl.textContent = fullCopy;
+    } else {
+      typewriterEl.textContent = '';
+      let i = 0;
+      const type = () => {
+        typewriterEl.textContent = fullCopy.slice(0, i);
+        i += 1;
+        if (i <= fullCopy.length) {
+          window.setTimeout(type, 14);
+        }
+      };
+      window.setTimeout(type, 300);
+    }
   }
 
   const modal = document.getElementById('ai-suggester-modal');
@@ -1414,8 +1520,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
   if (modal && openBtn && closeBtn && getRecsBtn && businessDesc && resultsContainer) {
     const services = [
-      'Payments Anywhere & Everywhere', 'AI-Powered Fraud Detection', 'Seamless Mobile Commerce',
-      'Flexible Payment Options', 'Hundreds of Integrations', 'Advanced Point of Sale'
+      'Real-time Flow',
+      'Gateway Mesh',
+      'Live KPIs Dashboard',
+      'Omnichannel Payments',
+      'Advanced Fraud Shield',
+      'Rapid Merchant Onboarding'
     ];
 
     openBtn.addEventListener('click', () => {
