@@ -182,7 +182,7 @@
             position: absolute;
             bottom: 50px;
             right: 20px;
-            width: calc(150px * 5 + 20px * 4); /* Show 5 cards at a time */
+            width: calc(150px * 5 + 20px * 4); /* Show 5 cards at a time as requested */
             max-width: calc(100vw - 40px); /* Ensure it doesn't exceed viewport */
             z-index: 100;
             display: flex;
@@ -521,7 +521,7 @@
                         </div>
                     </div>
                     <div class="item">
-                        <img src="/assets/img/Card2land.webp" alt="Retail POS">
+                        <img src="/assets/img/card2land.webp" alt="Retail POS">
                         <div class="content">
                             <div class="title">Omnichannel</div>
                             <div class="type">Solutions</div>
@@ -534,7 +534,7 @@
                         </div>
                     </div>
                     <div class="item">
-                        <img src="/assets/img/Card4land.webp" alt="Business Analytics">
+                        <img src="/assets/img/card4land.webp" alt="Business Analytics">
                         <div class="content">
                             <div class="title">AI-Powered</div>
                             <div class="type">Insights</div>
@@ -601,22 +601,22 @@
                 </div>
                 <div class="thumbnail">
                     <div class="thumbnail-track">
-                        <!-- Original set of cards -->
-                        <div class="item"><img src="/assets/img/card1.webp" alt="Payments"></div>
+                        <!-- Original set of cards (cards with matching land images, starting order: 2,4,5,6,7,10,1) -->
                         <div class="item"><img src="/assets/img/card2.webp" alt="Retail"></div>
                         <div class="item"><img src="/assets/img/card4.webp" alt="AI"></div>
                         <div class="item"><img src="/assets/img/card5.webp" alt="Security"></div>
                         <div class="item"><img src="/assets/img/card6.webp" alt="Mobile"></div>
                         <div class="item"><img src="/assets/img/card7.webp" alt="Global"></div>
                         <div class="item"><img src="/assets/img/card10.webp" alt="Support"></div>
+                        <div class="item"><img src="/assets/img/card1.webp" alt="Payments"></div>
                         <!-- Duplicate set for infinite loop -->
-                        <div class="item"><img src="/assets/img/card1.webp" alt="Payments"></div>
                         <div class="item"><img src="/assets/img/card2.webp" alt="Retail"></div>
                         <div class="item"><img src="/assets/img/card4.webp" alt="AI"></div>
                         <div class="item"><img src="/assets/img/card5.webp" alt="Security"></div>
                         <div class="item"><img src="/assets/img/card6.webp" alt="Mobile"></div>
                         <div class="item"><img src="/assets/img/card7.webp" alt="Global"></div>
                         <div class="item"><img src="/assets/img/card10.webp" alt="Support"></div>
+                        <div class="item"><img src="/assets/img/card1.webp" alt="Payments"></div>
                     </div>
                 </div>
                 <div class="nextPrevArrows">
@@ -1194,7 +1194,7 @@
     let thumbnailTrack = document.querySelector('.thumbnail-track');
     let thumbnailItems = document.querySelectorAll('.thumbnail .item');
     
-    // Card sequence for rotation (only the 7 cards specified)
+    // Card sequence for rotation (only cards with matching land images)
     const cardSequence = ['card1', 'card2', 'card4', 'card5', 'card6', 'card7', 'card10'];
     
     // Current hero index (which card is displayed as hero)
@@ -1229,7 +1229,7 @@
         // The hero card's thumbnail should be moved to the back
         // First, get all thumbnail cards and reorganize them
         const allThumbnails = Array.from(thumbnailTrack.children);
-        const firstSetThumbnails = allThumbnails.slice(0, 7);
+        const firstSetThumbnails = allThumbnails.slice(0, 7); // Now we have 7 cards instead of original count
         const secondSetThumbnails = allThumbnails.slice(7, 14);
         
         // Create new order: start with the card AFTER the hero card
