@@ -1,3 +1,565 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<!-- ================= HEAD SECTION START ================= -->
+<!-- Meta tags, external resources, and global styling configuration -->
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MerchantHaus.io  - Empiritos Automata</title>
+    <meta name="description" content="Effortlessly set up your business profile and start taking payments in minutes—cards, ACH, and secure pay links—online, in-store, or on the go.">
+    <meta name="theme-color" content="#E63946">
+    <meta name="theme-color" media="(prefers-color-scheme: light)" content="#E63946">
+    <meta name="theme-color" media="(prefers-color-scheme: dark)" content="linear-gradient(#1B1B1B, #E63946)">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="msapplication-navbutton-color" content="#E63946">
+    <link rel="preload" as="image" href="/public/assets/images/banner1.webp">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@700&family=Vollkorn:wght@400&family=Inter:wght@500&display=swap" rel="stylesheet">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Vollkorn', 'serif'],
+                        ubuntu: ['Ubuntu', 'sans-serif'],
+                        inter: ['Inter', 'sans-serif']
+                    },
+                    colors: {
+                        'brand-crimson': '#DC143C',
+                        'brand-teal': '#00CEDB',
+                        'brand-silver': '#A9A9A9',
+                        'brand-dark': '#1A1A1A',
+                        'brand-light': '#F8F9FA',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <!-- Support CTA Handler -->
+    <script src="/assets/support.js" defer></script>
+
+    <!-- Custom Styles -->
+    <style>
+        html {
+            scroll-behavior: smooth;
+        }
+        body {
+            font-family: 'Vollkorn', serif;
+            position: relative;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            background-color: #ffffff;
+            color: #0f172a;
+            font-size: 16px;
+            line-height: 1.6;
+        }
+        .dark body {
+            background-color: #1c1c1c;
+            color: #f5f5f5;
+        }
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0; left: 0;
+            width: 100vw; height: 100vh;
+            z-index: -1;
+            background: 
+                radial-gradient(circle at 15% 25%, rgba(220, 20, 60, 0.25), transparent 40%),
+                radial-gradient(circle at 85% 75%, rgba(0, 206, 219, 0.2), transparent 40%);
+            animation: bloom 25s linear infinite alternate;
+        }
+        @keyframes bloom {
+            0% { background-position: 0% 0%, 0% 0%; }
+            100% { background-position: 50% -50%, -50% 50%; }
+        }
+        .header-glass {
+            background-color: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(15, 23, 42, 0.1);
+        }
+        .dark .header-glass {
+            background-color: rgba(28, 28, 28, 0.8);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .dark .border-slate-800 { border-color: #2a2a2a !important; }
+
+        /* Headline scroller */
+        .scrolling-words-container {
+            height: 4.5rem; 
+            line-height: 4.5rem;
+            overflow: hidden;
+            position: relative;
+            display: inline-block;
+        }
+        @media (min-width: 768px) {
+            .scrolling-words-container {
+                height: 3.75rem;
+                line-height: 3.75rem;
+            }
+        }
+        .scrolling-words-box {
+            display: inline-block;
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            animation: spin-words 10s ease-in-out infinite;
+        }
+        @keyframes spin-words {
+            0%, 20% { transform: translateY(0); }
+            25%, 45% { transform: translateY(-4.5rem); }
+            50%, 70% { transform: translateY(-9rem); }
+            75%, 95% { transform: translateY(-13.5rem); }
+            100% { transform: translateY(-18rem); }
+        }
+        @media (min-width: 768px) {
+           @keyframes spin-words {
+                0%, 20% { transform: translateY(0); }
+                25%, 45% { transform: translateY(-3.75rem); }
+                50%, 70% { transform: translateY(-7.5rem); }
+                75%, 95% { transform: translateY(-11.25rem); }
+                100% { transform: translateY(-15rem); }
+            }
+        }
+
+        /* Typewriter effect */
+        .typewriter-text {
+            border-right: .15em solid #00CEDB;
+            white-space: pre-wrap;
+            animation: blink-caret .75s step-end infinite;
+        }
+        @keyframes blink-caret {
+            from, to { border-color: transparent }
+            50% { border-color: #00CEDB; }
+        }
+
+        .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0,0,0,0);
+            border: 0;
+        }
+
+        .hero-content-grid {
+            display: grid;
+            gap: 3rem;
+        }
+
+        .hero-text-block {
+            max-width: 38rem;
+        }
+
+        .hero-overlay {
+            max-width: clamp(90%, 80rem, 100%);
+            width: 100%;
+        }
+
+        .hero-heading {
+            font-size: clamp(2.25rem, 4.5vw + 0.5rem, 3.75rem);
+            line-height: 1.08;
+        }
+
+        .hero-subheading {
+            font-size: clamp(1.25rem, 3vw + 0.25rem, 2.5rem);
+        }
+
+        .hero-kicker {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.35rem 0.85rem;
+            border-radius: 9999px;
+            background: linear-gradient(120deg, rgba(92, 221, 173, 0.18), rgba(220, 20, 60, 0.18));
+            border: 1px solid rgba(255, 255, 255, 0.25);
+            font-size: 0.875rem;
+            font-weight: 600;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: #5CDDAD;
+        }
+
+        .hero-cta-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        .hero-secondary-cta {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.75rem 1.5rem;
+            border-radius: 9999px;
+            border: 1px solid rgba(255, 255, 255, 0.45);
+            color: #F5F7FA;
+            font-weight: 600;
+            transition: border-color 250ms ease, background-color 250ms ease, color 250ms ease;
+        }
+
+        .hero-secondary-cta:hover,
+        .hero-secondary-cta:focus-visible {
+            color: #111827;
+            border-color: rgba(92, 221, 173, 0.8);
+            background-color: rgba(92, 221, 173, 0.9);
+        }
+
+        .hero-metrics {
+            display: grid;
+            gap: 1.25rem;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+        }
+
+        .hero-metric {
+            display: flex;
+            flex-direction: column;
+            gap: 0.25rem;
+            padding-left: 0.65rem;
+            border-left: 2px solid rgba(255, 255, 255, 0.25);
+        }
+
+        .hero-metric strong {
+            font-size: 1.1rem;
+            color: #5CDDAD;
+        }
+
+        .hero-highlight-card {
+            position: relative;
+            overflow: hidden;
+            border-radius: 1.5rem;
+            padding: clamp(1.75rem, 2vw + 1rem, 2.5rem);
+            background: linear-gradient(165deg, rgba(15, 23, 42, 0.7), rgba(12, 74, 110, 0.35));
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            backdrop-filter: blur(12px);
+            box-shadow: 0 32px 120px rgba(8, 47, 73, 0.35);
+        }
+
+        .hero-highlight-card::before {
+            content: "";
+            position: absolute;
+            inset: -40% 30% auto -30%;
+            height: 200%;
+            background: radial-gradient(circle at top, rgba(92, 221, 173, 0.22), transparent 60%);
+            pointer-events: none;
+            opacity: 0.8;
+        }
+
+        .hero-highlight-card::after {
+            content: "";
+            position: absolute;
+            inset: auto -20% -50% 20%;
+            height: 200%;
+            background: radial-gradient(circle at bottom, rgba(220, 20, 60, 0.18), transparent 60%);
+            pointer-events: none;
+        }
+
+        .hero-highlight-card > * {
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.4rem 0.9rem;
+            font-size: 0.75rem;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            border-radius: 9999px;
+            background: rgba(15, 118, 110, 0.25);
+            border: 1px solid rgba(255, 255, 255, 0.25);
+            color: #F8FAFC;
+        }
+
+        .hero-highlight-title {
+            font-size: clamp(1.35rem, 2.8vw, 2rem);
+            font-weight: 700;
+            color: #F8FAFC;
+        }
+
+        .hero-feature-list {
+            margin-top: 1.5rem;
+            display: grid;
+            gap: 1rem;
+        }
+
+        .hero-feature-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.75rem;
+        }
+
+        .hero-feature-item i {
+            color: #5CDDAD;
+        }
+
+        .hero-feature-item span {
+            color: #E2E8F0;
+            line-height: 1.5;
+        }
+
+        .hero-animate {
+            opacity: 0;
+            transform: translateY(24px);
+            animation: heroFadeUp 0.85s forwards;
+            animation-delay: var(--hero-delay, 0s);
+        }
+
+        .hero-highlight-card.hero-animate {
+            animation-name: heroFadeUp, heroFloat;
+            animation-duration: 0.85s, 8s;
+            animation-delay: var(--hero-delay, 0s), calc(var(--hero-delay, 0s) + 0.85s);
+            animation-fill-mode: forwards, both;
+            animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1), ease-in-out;
+            animation-iteration-count: 1, infinite;
+        }
+
+        @keyframes heroFadeUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes heroFloat {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-12px);
+            }
+        }
+
+        .section-heading {
+            font-size: clamp(1.5rem, 3vw + 0.5rem, 2.75rem);
+        }
+
+        .hero-moving-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            background-image: url('/assets/img/hero-overlay.svg');
+            background-size: 150% 150%;
+            opacity: 0.4;
+            animation: slideOverlay 60s linear infinite;
+            z-index: -20;
+        }
+
+        @keyframes slideOverlay {
+            from {
+                transform: translate(0%, 0%);
+            }
+            to {
+                transform: translate(-50%, -30%);
+            }
+        }
+
+        .section-subheading {
+            font-size: clamp(1.125rem, 2.5vw, 2.25rem);
+        }
+
+        .application-section {
+            padding-bottom: 1rem;
+        }
+
+        @media (min-width: 768px) {
+            .hero-content-grid {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+                align-items: center;
+            }
+        }
+
+        @media (max-width: 767px) {
+            .hero-text-block {
+                text-align: center;
+                margin: 0 auto;
+            }
+
+            .hero-cta-group {
+                justify-content: center;
+            }
+
+            .hero-highlight-card {
+                margin: 0 auto;
+                max-width: 28rem;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .hero-animate {
+                animation: none;
+                opacity: 1;
+                transform: none;
+            }
+
+            .hero-highlight-card.hero-animate {
+                animation: none;
+            }
+        }
+    </style>
+
+    <!-- Favicons -->
+    <link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.webp">
+    <link rel="icon" type="image/png" sizes="192x192" href="/favicons/android-chrome-192x192.webp">
+    <link rel="icon" type="image/png" sizes="512x512" href="/favicons/android-chrome-512x512.webp">
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <link rel="manifest" href="/site.webmanifest">
+</head>
+<!-- ================= HEAD SECTION END ================= -->
+<body class="text-slate-800 dark:text-slate-100">
+
+    <!-- Header -->
+    <!-- ================= HEADER SECTION START ================= -->
+    <!-- Sticky navigation bar with logo, contact info, and responsive menus -->
+    <div class="sticky top-0 z-50">
+        <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-4 pb-6">
+             <header class="header-glass border border-slate-200/70 dark:border-slate-800 rounded-full shadow-lg">
+                 <div class="relative max-w-7xl mx-auto px-6 py-3 flex items-center justify-between">
+                    <a href="/index.html" class="flex items-center gap-3 group">
+                         <div class="w-[190px] md:w-[260px]" data-mh-logo-header></div>
+                         <span class="sr-only">MerchantHaus Homepage</span>
+                     </a>
+                     <div class="flex items-center gap-6">
+                         <div class="hidden md:flex items-center gap-4 text-sm font-sans">
+                             <a href="tel:15056006042" class="hover:text-brand-teal transition-colors">1-505-600-6042</a>
+                             <button
+                               type="button"
+                               class="js-support inline-flex items-center justify-center rounded-full border border-brand-teal px-4 py-2 font-semibold text-brand-teal transition-colors duration-300 hover:bg-brand-teal hover:text-white"
+                               data-cta="contact-support"
+                               data-cta-location="header-desktop"
+                             >Contact Support</button>
+                         </div>
+                         <button type="button" class="js-signup-cta bg-brand-crimson hover:bg-opacity-90 text-white border border-transparent px-4 py-2 rounded-full text-sm font-semibold font-inter transition-colors duration-300">Get Started</button>
+                         <!-- Theme Toggle -->
+                        <button type="button" id="theme-toggle" class="hidden sm:block p-2 rounded-lg border border-brand-teal text-brand-teal hover:bg-brand-teal hover:text-white transition-colors duration-300">
+                            <i data-lucide="sun" class="h-5 w-5 dark:hidden"></i>
+                            <i data-lucide="moon" class="h-5 w-5 hidden dark:block"></i>
+                        </button>
+                        <a href="https://retailmanager.merchant.haus" class="hidden sm:block bg-transparent hover:bg-brand-teal text-brand-teal hover:text-white border border-brand-teal px-4 py-2 rounded-lg text-sm font-semibold font-inter transition-colors duration-300">Login</a>
+                     </div>
+                 </div>
+            </header>
+            <button id="mobile-menu-button" class="md:hidden p-3 rounded-full bg-slate-900/50 backdrop-blur-sm text-white absolute left-6 top-full translate-y-3 z-[60] hover:bg-slate-800/70 transition-colors shadow-lg">
+                <i data-lucide="menu" class="h-6 w-6"></i>
+                <span class="sr-only">Open menu</span>
+            </button>
+            <div id="mobile-menu" class="absolute left-6 top-full mt-16 w-72 rounded-xl bg-[#1c1c1c] shadow-2xl border border-brand-teal p-4 z-[59] hidden">
+                <nav class="flex flex-col space-y-6 text-base font-medium font-inter">
+                    <div class="space-y-2">
+                        <h4 class="text-sm font-semibold text-brand-teal uppercase tracking-[0.2em]">Product</h4>
+                        <a href="/#payments" class="block w-full px-4 py-2 text-left rounded-full border border-brand-teal bg-[#262626] text-white transition-colors duration-200 hover:bg-brand-teal">Payment Services</a>
+                        <button type="button" id="mobile-integrations-toggle" aria-expanded="false" aria-controls="mobile-integrations-menu" class="flex items-center justify-between w-full px-4 py-2 text-left rounded-full border border-brand-teal bg-[#262626] text-white transition-colors duration-200 hover:bg-brand-teal">
+                            <span>Integrations</span>
+                            <span class="ml-2 text-brand-teal">
+                                <svg data-collapsible-icon class="w-4 h-4 transition-transform" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <polyline points="6 9 12 15 18 9"></polyline>
+                                </svg>
+                            </span>
+                        </button>
+                        <div id="mobile-integrations-menu" class="mt-2 space-y-2 pl-3 hidden">
+                            <a href="/integrations.html" class="block w-full px-4 py-2 text-left rounded-full border border-brand-teal bg-[#1f1f1f] text-white transition-colors duration-200 hover:bg-brand-teal">Integrations Directory</a>
+                            <a href="/shopify.html" class="block w-full px-4 py-2 text-left rounded-full border border-brand-teal bg-[#1f1f1f] text-white transition-colors duration-200 hover:bg-brand-teal">Shopify Integration</a>
+                            <a href="/gohighlevel.html" class="block w-full px-4 py-2 text-left rounded-full border border-brand-teal bg-[#1f1f1f] text-white transition-colors duration-200 hover:bg-brand-teal">GoHighLevel Integration</a>
+                        </div>
+                        <a href="/#checklist" class="block w-full px-4 py-2 text-left rounded-full border border-brand-teal bg-[#262626] text-white transition-colors duration-200 hover:bg-brand-teal">Setup Checklist</a>
+                    </div>
+                    <div class="space-y-2">
+                        <h4 class="text-sm font-semibold text-brand-teal uppercase tracking-[0.2em]">Support</h4>
+                        <button
+                          type="button"
+                          class="js-support block w-full rounded-full border border-brand-teal bg-[#262626] px-4 py-2 text-left font-semibold text-white transition-colors duration-200 hover:bg-brand-teal"
+                          data-cta="contact-support"
+                          data-cta-location="mobile-nav"
+                        >Contact Support</button>
+                        <a href="/faq.html" class="block w-full px-4 py-2 text-left rounded-full border border-brand-teal bg-[#262626] text-white transition-colors duration-200 hover:bg-brand-teal">FAQ</a>
+                    </div>
+                    <div class="space-y-2">
+                        <h4 class="text-sm font-semibold text-brand-teal uppercase tracking-[0.2em]">Legal</h4>
+                        <a href="/privacy.html" class="block w-full px-4 py-2 text-left rounded-full border border-brand-teal bg-[#262626] text-white transition-colors duration-200 hover:bg-brand-teal">Privacy Policy</a>
+                        <a href="/terms.html" class="block w-full px-4 py-2 text-left rounded-full border border-brand-teal bg-[#262626] text-white transition-colors duration-200 hover:bg-brand-teal">Terms &amp; Conditions</a>
+                        <a href="/compliance.html" class="block w-full px-4 py-2 text-left rounded-full border border-brand-teal bg-[#262626] text-white transition-colors duration-200 hover:bg-brand-teal">Compliance</a>
+                    </div>
+                    <div class="space-y-2">
+                        <h4 class="text-sm font-semibold text-brand-teal uppercase tracking-[0.2em]">Settings</h4>
+                        <button type="button" id="mobile-theme-toggle" class="flex items-center justify-between w-full px-4 py-2 text-left rounded-full border border-brand-teal bg-[#262626] text-white transition-colors duration-200 hover:bg-brand-teal">
+                            <span>Theme</span>
+                            <span class="ml-2">
+                                <i data-lucide="sun" class="h-4 w-4 dark:hidden"></i>
+                                <i data-lucide="moon" class="h-4 w-4 hidden dark:block"></i>
+                            </span>
+                        </button>
+                    </div>
+                    <a href="https://retailmanager.merchant.haus" class="sm:hidden block w-full px-4 py-2 text-center rounded-full border border-brand-teal bg-[#262626] text-white transition-colors duration-200 hover:bg-brand-teal">Login</a>
+                </nav>
+            </div>
+        </div>
+    </div>
+    <!-- ================= HEADER SECTION END ================= -->
+
+    <!-- ================= SIGNUP PANEL OVERLAY START ================= -->
+    <!-- Slide-in multi-step signup workflow for creating new accounts -->
+    <div id="signup-panel-overlay" class="panel-overlay fixed inset-0 bg-black/60 z-50 opacity-0 invisible">
+        <div id="signup-panel" class="panel-container fixed top-0 right-0 h-full w-full max-w-2xl bg-white dark:bg-slate-900 shadow-2xl transform translate-x-full flex flex-col">
+            <div class="p-6 sm:p-8 relative flex-shrink-0">
+                <button id="close-signup-panel-btn" class="absolute top-4 right-4 text-slate-500 hover:text-slate-800 dark:hover:text-slate-200">
+                    <i data-lucide="x" class="h-6 w-6"></i>
+                </button>
+                <div class="mb-6">
+                    <div class="flex justify-between mb-2 text-sm font-semibold text-slate-800 dark:text-slate-200">
+                        <p>Step <span id="current-step-text">1</span> of 3</p>
+                        <p id="step-name">Account Details</p>
+                    </div>
+                    <div class="w-full bg-slate-200 dark:bg-slate-700 rounded-full h-2.5 overflow-hidden">
+                        <div id="progress-bar" class="bg-brand-crimson h-full rounded-full" style="width: 33%"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="px-6 sm:px-8 pb-4 flex-grow overflow-y-auto">
+                <form id="signup-form" novalidate></form>
+                <div id="form-message" class="mt-4 text-center text-sm"></div>
+            </div>
+            <div class="p-6 sm:p-8 mt-auto pt-6 border-t border-slate-200 dark:border-slate-800 flex justify-between items-center flex-shrink-0">
+                <div class="text-sm">
+                    <p class="font-semibold">Need Help?</p>
+                    <a href="tel:15056006042" class="text-slate-500 hover:text-brand-crimson dark:hover:text-brand-teal transition-colors">1-505-600-6042</a>
+                </div>
+                <div class="flex items-center gap-4">
+                    <button type="button" id="prev-btn" class="bg-slate-200 text-slate-800 dark:bg-slate-700 dark:text-slate-200 px-6 py-2.5 rounded-lg font-semibold hover:bg-slate-300 dark:hover:bg-slate-600 transition-all invisible">Previous</button>
+                    <button type="button" id="next-btn" class="bg-brand-crimson text-white px-6 py-2.5 rounded-lg font-semibold hover:bg-brand-crimson transition-all shadow-sm hover:shadow-md">Next</button>
+                    <button type="submit" id="submit-btn" form="signup-form" class="bg-brand-crimson text-white px-6 py-2.5 rounded-lg font-bold hover:bg-brand-crimson transition-all shadow-sm hover:shadow-md hidden">Create Account</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- ================= SIGNUP PANEL OVERLAY END ================= -->
+
+<!-- ================= INLINE EXPERIENCE STYLES START ================= -->
+<!-- Additional page-specific styling for hero, banners, and dynamic effects -->
+<style>
+.field:focus { outline: none; box-shadow: 0 0 0 3px rgba(239,60,91,.35); }
+.cursor { display: inline-block; width: 3px; height: 1em; background-color: #dc2743; animation: blink-caret .75s step-end infinite; vertical-align: bottom; }
+@keyframes blink-caret { from, to { background-color: transparent; } 50% { background-color: #dc2743; } }
+.loader { width: 16px; height: 16px; border: 2px solid #FFF; border-bottom-color: transparent; border-radius: 50%; display: inline-block; box-sizing: border-box; animation: rotation 1s linear infinite; vertical-align: middle; margin-right: 8px; }
+@keyframes rotation { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+.feature-display { display: flex; align-items: center; justify-content: center; min-width: 150px; height: 38px; padding: 0 16px; border-radius: 9999px; background-color: #F3F4F6; color: #111827; font-size: 0.875rem; font-weight: 500; transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out; opacity: 0; transform: translateX(-50%) translateY(10px); position: absolute; left: 50%; white-space: nowrap; }
 .dark .feature-display { background-color: #1f2937; color: #f9fafb; }
 .feature-display.active { opacity: 1; transform: translateX(-50%) translateY(0); }
 .feature-display.exiting { opacity: 0; transform: translateX(-50%) translateY(-10px); }
@@ -29,292 +591,459 @@
   border-color: rgba(0, 206, 219, 0.55);
 }
 .integrations {
-background: radial-gradient(circle at left, #2c0c17, transparent),
-radial-gradient(circle at right, #0a1d1f, transparent);
-/* === PAYMENT HERO EXPERIENCE === */
-.services-hero {
-  position: relative;
-  min-height: clamp(640px, 86svh, 960px);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: clamp(3rem, 6vw, 6rem) clamp(1.5rem, 5vw, 4rem);
-  color: #ffffff;
-  background:
-    radial-gradient(circle at top left, rgba(220, 20, 60, 0.35), transparent 55%),
-    radial-gradient(circle at bottom right, rgba(0, 206, 219, 0.28), transparent 50%),
-    #0f0f10;
+  background: radial-gradient(circle at left, #2c0c17, transparent),
+              radial-gradient(circle at right, #0a1d1f, transparent);
+  padding: 4rem 2rem;
+  color: #fff;
   overflow: hidden;
 }
-.dark .services-hero {
-  background: #050506;
-}
-.services-hero::before,
-.services-hero::after {
-  content: "";
-  position: absolute;
-  width: 420px;
-  height: 420px;
-  border-radius: 50%;
-  filter: blur(140px);
-  opacity: 0.45;
-  pointer-events: none;
-}
-.services-hero::before {
-  inset: -220px auto auto -160px;
-  background: rgba(220, 20, 60, 0.8);
-}
-.services-hero::after {
-  inset: auto -160px -260px auto;
-  background: rgba(0, 206, 219, 0.85);
-}
-.services-hero__inner {
-  position: relative;
-  z-index: 1;
-  width: min(1120px, 100%);
-  display: grid;
-  gap: clamp(2rem, 5vw, 4rem);
-}
-.services-hero__text {
+.title-with-logo {
   display: flex;
-  flex-direction: column;
-  gap: clamp(1.5rem, 3vw, 2.25rem);
-}
-.services-hero__ticker {
-  display: flex;
-  flex-direction: column;
-  gap: 0.4rem;
-  font-family: 'Ubuntu', sans-serif;
-  font-weight: 600;
-}
-.services-hero__row {
-  display: flex;
-  align-items: baseline;
-  gap: 0.75rem;
-  line-height: 1.05;
-  text-align: left;
-}
-.services-hero__row--headline {
-  font-size: clamp(3.25rem, 7vw, 5.1rem);
-}
-.services-hero__row--sub {
-  font-size: clamp(1.9rem, 4.6vw, 3rem);
-}
-.services-hero__token {
-  display: inline-flex;
-  min-width: 7.5ch;
-  text-transform: capitalize;
-}
-.services-hero__token--noun { color: #ff6b81; }
-.services-hero__token--verb { color: #00cedb; }
-.services-hero__token--object { color: #f2c94c; }
-.services-hero__token.is-swapping {
-  animation: servicesTokenSwap 0.6s ease both;
-}
-@keyframes servicesTokenSwap {
-  0% { opacity: 0; transform: translateY(60%); }
-  100% { opacity: 1; transform: translateY(0); }
-}
-.services-hero__benefits {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 1rem 1.5rem;
-}
-.services-hero__benefit {
-  display: inline-flex;
+  justify-content: flex-start;
   align-items: center;
-  gap: 0.75rem;
-  font-size: clamp(1.2rem, 3.1vw, 1.75rem);
-  font-weight: 700;
-}
-.services-hero__benefit i {
-  width: clamp(1.9rem, 3vw, 2.4rem);
-  height: clamp(1.9rem, 3vw, 2.4rem);
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  color: #ffffff;
-}
-.services-hero__body {
-  max-width: 60ch;
-  font-size: clamp(1.05rem, 2.2vw, 1.25rem);
-  line-height: 1.7;
-  color: rgba(255, 255, 255, 0.88);
-}
-.services-hero__cta {
-  display: inline-flex;
-  flex-wrap: wrap;
-  gap: 0.9rem;
-}
-.services-hero__btn {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 999px;
-  padding: 0.85rem 1.8rem;
-  font-weight: 600;
-  font-size: 1rem;
-  border: 1px solid transparent;
-  transition: transform 0.25s ease, background-color 0.25s ease, color 0.25s ease, box-shadow 0.25s ease;
-  cursor: pointer;
-}
-.services-hero__btn--primary {
-  background: #00cedb;
-  color: #0b0b0c;
-  border-color: rgba(255, 255, 255, 0.1);
-  box-shadow: 0 20px 32px rgba(0, 206, 219, 0.25);
-}
-.services-hero__btn--primary:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 26px 38px rgba(0, 206, 219, 0.35);
-}
-.services-hero__btn--ghost {
-  background: rgba(255, 255, 255, 0.08);
-  color: #ffffff;
-  border-color: rgba(255, 255, 255, 0.28);
-}
-.services-hero__btn--ghost:hover {
-  background: rgba(255, 255, 255, 0.16);
-}
-.services-hero__showcase {
-  display: grid;
   gap: 1rem;
+  flex-wrap: wrap;
 }
-.services-hero__card {
-  background: rgba(255, 255, 255, 0.06);
-  border-radius: 1.5rem;
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  padding: 1.6rem;
-  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.45);
-  backdrop-filter: blur(14px);
-  transition: transform 0.35s ease, box-shadow 0.35s ease;
-  min-height: 220px;
-  display: flex;
-  flex-direction: column;
-  gap: 0.75rem;
-}
-.services-hero__card:hover {
-  transform: translateY(-6px);
-  box-shadow: 0 26px 50px rgba(0, 0, 0, 0.55);
-}
-.services-hero__card:focus-visible {
-  outline: 3px solid #00cedb;
-  outline-offset: 3px;
-}
-.services-hero__card-title {
-  font-size: 1.1rem;
-  font-weight: 600;
-  letter-spacing: 0.04em;
-}
-.services-hero__card-subtitle {
-  font-size: 0.85rem;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.65);
-}
-.services-hero__visual {
-  width: 100%;
-  height: 112px;
-}
-.services-flow path {
-  stroke: rgba(255, 255, 255, 0.6);
-  stroke-width: 2;
-  fill: none;
-  stroke-dasharray: 320;
-  stroke-dashoffset: 320;
-  animation: servicesFlow 3.4s ease-in-out infinite;
-}
-.services-flow path:nth-child(2) {
-  animation-delay: 0.25s;
-}
-.services-flow path:nth-child(3) {
-  animation-delay: 0.5s;
-}
-@keyframes servicesFlow {
-  0% { stroke-dashoffset: 320; opacity: 0; }
-  15% { opacity: 1; }
-  60% { stroke-dashoffset: 0; opacity: 1; }
-  100% { stroke-dashoffset: 0; opacity: 0; }
-}
-.services-mesh line {
-  stroke: rgba(255, 255, 255, 0.18);
-  stroke-width: 1.4;
-  opacity: 0;
-  animation: servicesMeshFade 1.2s ease forwards;
-}
-.services-mesh circle {
-  fill: rgba(0, 206, 219, 0.8);
-  opacity: 0;
-  transform: scale(0.85);
-  animation: servicesMeshPop 0.6s ease forwards;
-}
-.services-mesh line:nth-child(n) { animation-delay: calc(0.05s * var(--i, 1)); }
-.services-mesh circle:nth-child(n) { animation-delay: calc(0.05s * var(--i, 1)); }
-@keyframes servicesMeshFade {
-  to { opacity: 1; }
-}
-@keyframes servicesMeshPop {
-  to { opacity: 1; transform: scale(1); }
-}
-.services-kpi {
-  display: grid;
-  place-items: center;
-  border-radius: 1.25rem;
-  padding: 1rem;
-  background: rgba(0, 0, 0, 0.35);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-}
-.services-kpi__label {
-  font-size: 0.7rem;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.55);
-}
-.services-kpi__value {
-  margin-top: 0.4rem;
-  font-family: 'Ubuntu', sans-serif;
-  font-size: 0.95rem;
-  letter-spacing: 0.05em;
-  color: rgba(255, 255, 255, 0.7);
-}
-@media (min-width: 768px) {
-  .services-hero__showcase {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-  }
-}
-@media (min-width: 1024px) {
-  .services-hero__inner {
-    grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
-    align-items: center;
-  }
-}
-@media (prefers-reduced-motion: reduce) {
-  .services-hero__btn,
-  .services-hero__card,
-  .services-hero__benefit,
-  .services-flow path,
-  .services-mesh line,
-  .services-mesh circle {
-    transition: none !important;
-    animation: none !important;
-  }
-}
-
-.services-section-heading {
-  display: flex;
-  justify-content: center;
-  padding: clamp(2.5rem, 6vw, 4rem) clamp(1.5rem, 6vw, 3rem) 0;
-}
-.services-section-heading h2 {
-  font-family: 'Ubuntu', sans-serif;
-  font-size: clamp(2rem, 5vw, 3.25rem);
+.integrations .section-title {
+  font-size: 2rem;
   font-weight: 700;
-  text-align: center;
-  color: #f9fafb;
-  letter-spacing: 0.02em;
+  margin: 0;
+  overflow: hidden;
+  white-space: nowrap;
+  border-right: .15em solid #fff;
 }
+.typewriter {
+  display: inline-block;
+  width: 0;
+  animation: typing 4s steps(34, end) forwards, blink .75s step-end infinite;
+}
+@keyframes typing {
+  from { width: 0 }
+  to { width: 34ch }
+}
+@keyframes blink {
+  from, to { border-color: transparent }
+  50% { border-color: #fff }
+}
+.shopify-hero {
+  height: clamp(50px, 7vw, 98px);
+  width: auto;
+  object-fit: contain;
+}
+.integrations .section-subtitle {
+  font-size: 1.1rem;
+  margin: 1rem 0 2rem;
+  color: #ccc;
+}
+.integrations-marquee {
+  position: relative;
+  overflow: hidden;
+}
+.marquee-track {
+  display: flex;
+  width: max-content;
+  animation: marquee 30s linear infinite;
+}
+.integrations-logos {
+  display: flex;
+  gap: 2rem;
+  align-items: center;
+}
+.integrations-logos img {
+  max-height: 35px;
+  object-fit: contain;
+  transition: transform 0.3s ease;
+}
+.integrations-logos img:hover {
+  transform: scale(1.1);
+}
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+.service-cell { opacity: 0; transition: opacity 0.5s ease-in-out; }
+.service-cell.is-visible { opacity: 1; }
+.service-cell h3, .service-cell p { opacity: 0; transform: translateY(10px); transition: opacity 0.4s ease-out, transform 0.4s ease-out; }
+.service-cell.is-visible h3 { opacity: 1; transform: translateY(0); transition-delay: 0.2s; }
+.service-cell.is-visible p { opacity: 1; transform: translateY(0); transition-delay: 0.3s; }
+.hero-bg-container::before { content: ''; position: absolute; inset: 0; background-image: url('/public/assets/images/hero.webp'); background-size: 100%; background-position: center; background-repeat: no-repeat; animation: kenBurns 20s ease-in-out infinite alternate; z-index: -20; }
+@keyframes kenBurns { 0% { transform: scale(1) rotate(0deg); background-position: center; } 100% { transform: scale(1.1) rotate(1deg); background-position: top left; } }
+@media (prefers-reduced-motion: reduce) { .marquee-track { animation: none !important; } }
+.panel-overlay, .panel-container { transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
 
-.loader {
+        /* === SERVICES HERO EXPERIENCE === */
+        .services-hero {
+            position: relative;
+            padding: clamp(3rem, 6vw, 6rem) clamp(1.5rem, 5vw, 4rem);
+            background:
+                radial-gradient(circle at top left, rgba(220, 20, 60, 0.35), transparent 55%),
+                radial-gradient(circle at bottom right, rgba(0, 206, 219, 0.28), transparent 50%),
+                #0f0f10;
+            color: #ffffff;
+            overflow: hidden;
+        }
+        .services-hero::before,
+        .services-hero::after {
+            content: '';
+            position: absolute;
+            width: 420px;
+            height: 420px;
+            border-radius: 50%;
+            filter: blur(140px);
+            opacity: 0.45;
+            pointer-events: none;
+        }
+        .services-hero::before {
+            inset: -220px auto auto -160px;
+            background: rgba(220, 20, 60, 0.8);
+        }
+        .services-hero::after {
+            inset: auto -160px -260px auto;
+            background: rgba(0, 206, 219, 0.85);
+        }
+        .services-hero__inner {
+            position: relative;
+            z-index: 1;
+            margin: 0 auto;
+            max-width: 1120px;
+            display: grid;
+            gap: clamp(2rem, 5vw, 4rem);
+            align-items: center;
+        }
+        .services-hero__text {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+        .services-hero__ticker {
+            display: flex;
+            flex-direction: column;
+            gap: 0.35rem;
+            font-family: 'Ubuntu', sans-serif;
+            font-weight: 600;
+        }
+        .services-hero__row {
+            display: flex;
+            align-items: baseline;
+            gap: 0.75rem;
+            line-height: 1.05;
+        }
+        .services-hero__row--headline {
+            font-size: clamp(3.25rem, 7vw, 5.1rem);
+        }
+        .services-hero__row--sub {
+            font-size: clamp(1.9rem, 4.6vw, 3rem);
+        }
+        .services-hero__token {
+            display: inline-flex;
+            min-width: 7.5ch;
+            text-transform: capitalize;
+        }
+        .services-hero__token--noun { color: #ff6b81; }
+        .services-hero__token--verb { color: #00cedb; }
+        .services-hero__token--object { color: #f2c94c; }
+        .services-hero__token.is-swapping {
+            animation: servicesTokenSwap 0.6s ease both;
+        }
+        @keyframes servicesTokenSwap {
+            0% { opacity: 0; transform: translateY(60%); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+        .services-hero__benefits {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem 1.5rem;
+            margin-top: 0.5rem;
+        }
+        .services-hero__benefit {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.75rem;
+            font-size: clamp(1.2rem, 3.1vw, 1.75rem);
+            font-weight: 700;
+        }
+        .services-hero__benefit i {
+            width: clamp(1.5rem, 3vw, 2rem);
+            height: clamp(1.5rem, 3vw, 2rem);
+        }
+        .services-hero__body {
+            max-width: 60ch;
+            font-family: 'Inter', sans-serif;
+            font-size: clamp(1rem, 2.2vw, 1.15rem);
+            line-height: 1.7;
+            color: rgba(226, 232, 240, 0.9);
+        }
+        .services-hero__cta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+        }
+        .services-hero__btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 999px;
+            padding: 0.85rem 1.6rem;
+            font-weight: 700;
+            font-family: 'Inter', sans-serif;
+            text-decoration: none;
+            cursor: pointer;
+            border: 1px solid transparent;
+            transition: transform 0.25s ease, box-shadow 0.25s ease, background 0.25s ease, color 0.25s ease;
+            color: inherit;
+        }
+        .services-hero__btn:focus-visible {
+            outline: 3px solid var(--brand-teal, #00CEDB);
+            outline-offset: 2px;
+        }
+        .services-hero__btn:hover {
+            transform: translateY(-2px);
+        }
+        .services-hero__btn--primary {
+            background: var(--brand-crimson, #DC143C);
+            box-shadow: 0 18px 36px rgba(220, 20, 60, 0.35);
+        }
+        .services-hero__btn--ghost {
+            border-color: rgba(255, 255, 255, 0.35);
+            background: rgba(255, 255, 255, 0.08);
+        }
+        .services-hero__btn--ghost:hover {
+            background: rgba(255, 255, 255, 0.16);
+        }
+        .services-hero__showcase {
+            display: grid;
+            gap: 1rem;
+        }
+        @media (min-width: 640px) {
+            .services-hero__showcase {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+        }
+        @media (min-width: 768px) {
+            .services-hero__showcase {
+                grid-template-columns: repeat(3, minmax(0, 1fr));
+            }
+        }
+        .services-hero__card {
+            position: relative;
+            padding: 1.5rem;
+            border-radius: 1.5rem;
+            background: rgba(18, 18, 24, 0.7);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.35);
+            backdrop-filter: blur(12px);
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+            min-height: 220px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .services-hero__card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 28px 60px rgba(0, 0, 0, 0.45);
+        }
+        .services-hero__card:focus-visible {
+            outline: 3px solid var(--brand-teal, #00CEDB);
+            outline-offset: 3px;
+        }
+        .services-hero__card-title {
+            font-family: 'Ubuntu', sans-serif;
+            font-size: 1.1rem;
+            font-weight: 600;
+        }
+        .services-hero__card-subtitle {
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.14em;
+            color: rgba(255, 255, 255, 0.6);
+        }
+        .services-hero__visual {
+            margin-top: auto;
+        }
+        .services-flow path {
+            stroke: rgba(255, 255, 255, 0.55);
+            stroke-width: 2;
+            fill: none;
+            stroke-linecap: round;
+            stroke-dasharray: 220;
+            stroke-dashoffset: 220;
+            animation: servicesFlow 5.6s ease-in-out infinite;
+        }
+        .services-flow path:nth-child(2) {
+            animation-delay: 0.25s;
+            opacity: 0.8;
+        }
+        .services-flow path:nth-child(3) {
+            animation-delay: 0.5s;
+            opacity: 0.6;
+        }
+        @keyframes servicesFlow {
+            to { stroke-dashoffset: 0; }
+        }
+        .services-mesh line {
+            stroke: rgba(255, 255, 255, 0.18);
+            stroke-width: 1.5;
+            stroke-dasharray: 120;
+            stroke-dashoffset: 120;
+            animation: servicesMeshLine 6s ease-in-out infinite;
+        }
+        .services-mesh line:nth-child(odd) { animation-delay: 0.35s; }
+        .services-mesh circle {
+            fill: rgba(0, 206, 219, 0.85);
+            transform-origin: center;
+            animation: servicesMeshNode 4.4s ease-in-out infinite;
+        }
+        .services-mesh circle:nth-of-type(odd) { animation-delay: 0.4s; }
+        @keyframes servicesMeshLine {
+            0% { stroke-dashoffset: 120; opacity: 0; }
+            35% { opacity: 1; }
+            100% { stroke-dashoffset: 0; opacity: 1; }
+        }
+        @keyframes servicesMeshNode {
+            0%, 100% { transform: scale(0.85); opacity: 0.7; }
+            50% { transform: scale(1.05); opacity: 1; }
+        }
+        .services-kpis {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 0.75rem;
+        }
+        .services-kpi {
+            padding: 0.75rem;
+            border-radius: 1rem;
+            background: rgba(0, 0, 0, 0.4);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+        .services-kpi__label {
+            font-size: 0.7rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: rgba(255, 255, 255, 0.55);
+        }
+        .services-kpi__value {
+            margin-top: 0.4rem;
+            font-family: 'Ubuntu', sans-serif;
+            font-size: 0.95rem;
+            letter-spacing: 0.05em;
+            color: rgba(255, 255, 255, 0.7);
+        }
+        @media (min-width: 1024px) {
+            .services-hero__inner {
+                grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
+            }
+        }
+        @media (prefers-reduced-motion: reduce) {
+            .services-hero__btn,
+            .services-hero__card {
+                transition: none;
+            }
+            .services-hero__token.is-swapping,
+            .services-flow path,
+            .services-mesh line,
+            .services-mesh circle {
+                animation: none !important;
+            }
+        }
+
+        .loader {
+            width: 20px;
+            height: 20px;
+            border: 3px solid #FFF;
+            border-bottom-color: transparent;
+            border-radius: 50%;
+            display: inline-block;
+            box-sizing: border-box;
+            animation: rotation 1s linear infinite;
+        }
+        @keyframes rotation {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        /* === END SERVICES HERO EXPERIENCE === */
+</style>
+<!-- ================= INLINE EXPERIENCE STYLES END ================= -->
+
+<!-- ================= HERO SECTION START ================= -->
+<div class="relative">
+  <section class="relative overflow-hidden hero-bg-container">
+    <!-- Animated overlay moves across the hero to mimic Netlify's dynamic lines -->
+    <div class="hero-moving-overlay"></div>
+    <!-- Dark overlay to improve contrast -->
+    <div class="absolute inset-0 bg-black/60 -z-10"></div>
+    <div class="max-w-7xl mx-auto px-4 pt-16 sm:pt-24 md:pt-32 pb-24 md:pb-32">
+      <div class="hero-content-grid">
+        <div class="hero-text-block space-y-6">
+          <span class="hero-kicker hero-animate" style="--hero-delay: 0.1s">
+            <i data-lucide="sparkles" class="h-4 w-4"></i>
+            Merchant Payments OS
+          </span>
+          <h1 class="hero-heading tracking-tight text-white uppercase font-ubuntu hero-animate" style="--hero-delay: 0.2s">
+            Payment freedom that <span class="text-brand-teal">powers your growth</span>
+          </h1>
+          <h2 class="hero-subheading text-brand-teal font-ubuntu font-bold hero-animate" style="--hero-delay: 0.3s">
+            Speed. Security. Scale.
+          </h2>
+          <p class="text-lg text-gray-200 dark:text-slate-300 font-inter hero-animate" style="--hero-delay: 0.4s; font-weight:100">
+            Create your business profile in minutes and begin accepting cards, ACH, and secure pay links anywhere—online, in‑store, or on the go. Reduce your costs, onboard quickly, monitor performance in real time, and safeguard every transaction with next‑generation fraud and chargeback protection.
+          </p>
+          <div class="hero-cta-group hero-animate" style="--hero-delay: 0.5s">
+            <button
+              class="js-signup-cta inline-flex items-center justify-center rounded-full bg-brand-crimson px-6 py-3 font-semibold text-white transition-transform duration-300 hover:scale-[1.02] hover:bg-brand-crimson/90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-brand-crimson"
+            >
+              Get Started
+            </button>
+            <a
+              class="hero-secondary-cta"
+              href="#payments"
+            >
+              <i data-lucide="arrow-right" class="h-4 w-4"></i>
+              Explore Platform
+            </a>
+          </div>
+          <div class="hero-metrics hero-animate" style="--hero-delay: 0.65s">
+            <div class="hero-metric">
+              <strong>24hr</strong>
+              <span class="text-sm text-slate-200">Average onboarding turnaround</span>
+            </div>
+            <div class="hero-metric">
+              <strong>40+</strong>
+              <span class="text-sm text-slate-200">Payment integrations ready to launch</span>
+            </div>
+            <div class="hero-metric">
+              <strong>99.99%</strong>
+              <span class="text-sm text-slate-200">Uptime across every channel</span>
+            </div>
+          </div>
+        </div>
+        <div class="hero-highlight-card hero-animate" style="--hero-delay: 0.4s">
+          <span class="hero-badge">
+            <i data-lucide="shield-check" class="h-4 w-4"></i>
+            Built for bold merchants
+          </span>
+          <h3 class="hero-highlight-title mt-4">
+            Launch unified payments with enterprise-grade safeguards.
+          </h3>
+          <p class="mt-3 text-slate-200/90 leading-relaxed">
+            MerchantHaus orchestrates every payment touchpoint with advanced fraud controls, intelligent routing, and real-time analytics so you can scale without friction.
+          </p>
+          <ul class="hero-feature-list">
+            <li class="hero-feature-item">
+              <i data-lucide="zap" class="h-5 w-5"></i>
+              <span>Instant approvals and fast funding keep revenue flowing.</span>
+            </li>
+            <li class="hero-feature-item">
+              <i data-lucide="lock" class="h-5 w-5"></i>
+              <span>Adaptive fraud defense, tokenization, and Level 3 optimization.</span>
+            </li>
+            <li class="hero-feature-item">
+              <i data-lucide="bar-chart-3" class="h-5 w-5"></i>
+              <span>Command-center insights with configurable dashboards and alerts.</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
 </div>
 <!-- ================= HERO SECTION END ================= -->
 
@@ -347,15 +1076,15 @@ radial-gradient(circle at right, #0a1d1f, transparent);
 
       <div class="services-hero__benefits" aria-label="Key benefits">
         <div class="services-hero__benefit">
-          <i data-lucide="zap" aria-hidden="true"></i>
+          <i data-lucide="zap"></i>
           <span>Speed.</span>
         </div>
         <div class="services-hero__benefit">
-          <i data-lucide="lock" aria-hidden="true"></i>
+          <i data-lucide="lock"></i>
           <span>Security.</span>
         </div>
         <div class="services-hero__benefit">
-          <i data-lucide="bar-chart-3" aria-hidden="true"></i>
+          <i data-lucide="bar-chart-3"></i>
           <span>Scale.</span>
         </div>
       </div>
@@ -419,38 +1148,296 @@ radial-gradient(circle at right, #0a1d1f, transparent);
     </div>
   </div>
 </section>
-<div class="services-section-heading">
-  <h2>Payments Services Tailored to your Business</h2>
-</div>
+<!-- ================= PAYMENT SERVICES SHOWCASE END ================= -->
 
+<!-- ================= AI SUGGESTER MODAL START ================= -->
+<!-- Pop-up assistant collecting business context to recommend services -->
+<div id="ai-suggester-modal" class="fixed inset-0 bg-black/70 z-50 hidden items-center justify-center p-4">
+  <div class="bg-[#1c1c1c] border-2 border-brand-teal rounded-2xl shadow-xl p-6 sm:p-8 w-full max-w-2xl transform transition-all relative">
+    <button id="close-ai-modal" class="absolute top-4 right-4 text-slate-400 hover:text-white transition-colors">
+      <i data-lucide="x" class="h-6 w-6"></i>
+    </button>
+    <div class="flex items-center gap-3 mb-4">
+      <h3 class="text-2xl font-ubuntu font-bold text-white">✨ AI Service Suggester</h3>
+    </div>
+    <p class="text-slate-300 mb-4 font-inter text-sm sm:text-base">Describe your business, and our AI will recommend the best payment services for your needs.</p>
+
+    <textarea id="business-description" class="w-full bg-[#2a2a2a] border border-slate-700 rounded-lg p-3 text-white placeholder-slate-400 focus:ring-2 focus:ring-brand-teal focus:border-transparent transition" rows="3" placeholder="e.g., 'I run an online clothing store using Shopify.' or 'I'm a freelance photographer who needs to send invoices.'"></textarea>
+
+    <button id="get-recommendations-btn" class="mt-4 w-full bg-brand-crimson text-white font-bold py-3 px-4 rounded-lg hover:bg-opacity-90 transition-all flex items-center justify-center disabled:opacity-50 disabled:cursor-not-allowed">
+      <span class="btn-text">Get Recommendations</span>
+      <span class="loader hidden ml-2"></span>
+    </button>
+
+    <div id="recommendations-result" class="mt-6 max-h-64 overflow-y-auto pr-2"></div>
+  </div>
+</div>
+<!-- ================= AI SUGGESTER MODAL END ================= -->
+
+<!-- ================= INTEGRATIONS SECTION START ================= -->
+<!-- Rotating partner logos showcasing supported commerce platforms -->
+<section id="integrations" class="integrations">
+  <div class="container text-center">
+    <div class="title-with-logo">
+      <h2 class="section-title typewriter">INTEGRATE WITH YOUR FAVORITE TOOLS</h2>
+      <img class="shopify-hero" src="/public/assets/images/shopifydark.webp" alt="Shopify" />
+    </div>
+    <p class="section-subtitle">Connect with your favorite tools and services</p>
+
+    <!-- Scroller with all logos -->
+    <div class="integrations-marquee">
+      <div class="marquee-track">
+        <div class="integrations-logos">
+          <img src="/assets/integrations/bigcommerce.webp" alt="BigCommerce" />
+          <img src="/assets/integrations/clovernew.svg" alt="Clover" />
+          <img src="/assets/integrations/freshbooks.webp" alt="FreshBooks" />
+          <img src="/assets/integrations/hubspot.webp" alt="HubSpot" />
+          <img src="/assets/integrations/keap.webp" alt="Keap" />
+          <img src="/assets/integrations/lightspeed.webp" alt="Lightspeed" />
+          <img src="/assets/integrations/magento.webp" alt="Magento" />
+          <img src="/assets/integrations/mastercard.webp" alt="Mastercard" />
+          <img src="/assets/integrations/memberpress.svg" alt="MemberPress" />
+          <img src="/assets/integrations/ncr.webp" alt="NCR" />
+          <img src="/assets/integrations/quickbooks.webp" alt="QuickBooks" />
+          <img src="/assets/integrations/salesforce.webp" alt="Salesforce" />
+          <img src="/assets/integrations/squarespace.webp" alt="Squarespace" />
+          <img src="/assets/integrations/vend.webp" alt="Vend" />
+          <img src="/assets/integrations/visa.webp" alt="Visa" />
+          <img src="/assets/integrations/wix.webp" alt="Wix" />
+          <img src="/assets/integrations/woocommerce.webp" alt="WooCommerce" />
+          <img src="/assets/integrations/zoho_crm.webp" alt="Zoho CRM" />
+        </div>
+        <!-- duplicate for infinite loop -->
+        <div class="integrations-logos">
+          <img src="/assets/integrations/bigcommerce.webp" alt="BigCommerce" />
+          <img src="/assets/integrations/clovernew.svg" alt="Clover" />
+          <img src="/assets/integrations/freshbooks.webp" alt="FreshBooks" />
+          <img src="/assets/integrations/hubspot.webp" alt="HubSpot" />
+          <img src="/assets/integrations/keap.webp" alt="Keap" />
+          <img src="/assets/integrations/lightspeed.webp" alt="Lightspeed" />
+          <img src="/assets/integrations/magento.webp" alt="Magento" />
+          <img src="/assets/integrations/mastercard.webp" alt="Mastercard" />
+          <img src="/assets/integrations/memberpress.svg" alt="MemberPress" />
+          <img src="/assets/integrations/ncr.webp" alt="NCR" />
+          <img src="/assets/integrations/quickbooks.webp" alt="QuickBooks" />
+          <img src="/assets/integrations/salesforce.webp" alt="Salesforce" />
+          <img src="/assets/integrations/squarespace.webp" alt="Squarespace" />
+          <img src="/assets/integrations/vend.webp" alt="Vend" />
+          <img src="/assets/integrations/visa.webp" alt="Visa" />
+          <img src="/assets/integrations/wix.webp" alt="Wix" />
+          <img src="/assets/integrations/woocommerce.webp" alt="WooCommerce" />
+          <img src="/assets/integrations/zoho_crm.webp" alt="Zoho CRM" />
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- ================= INTEGRATIONS SECTION END ================= -->
+
+<!-- ================= SETUP CHECKLIST SECTION START ================= -->
+<!-- Step-by-step onboarding checklist with pinned heading overlay -->
+<div class="relative">
+  <section id="checklist" class="pt-28 pb-16 bg-slate-50 dark:bg-slate-900/40 border-y border-slate-200 dark:border-slate-800">
+    <div class="max-w-7xl mx-auto px-4 text-center">
+      <p class="mt-4 max-w-3xl mx-auto text-slate-600 dark:text-slate-300">Here’s everything we’ll ask for during setup—business details, security info, documentation. We’ll guide you step‑by‑step.</p>
+      <div class="grid md:grid-cols-3 gap-8 mt-12 text-left">
+        <div class="bg-white dark:bg-slate-950 p-6 rounded-xl border border-slate-200 dark:border-slate-800 space-y-4">
+          <div class="flex items-center gap-4">
+            <div class="w-12 h-12 rounded-full bg-brand-crimson/10 dark:bg-brand-teal/10 flex-shrink-0 flex items-center justify-center text-brand-crimson dark:text-brand-teal">
+              <i data-lucide="briefcase" class="w-6 h-6"></i>
+            </div>
+            <h3 class="text-xl font-ubuntu font-bold">Business Information</h3>
+          </div>
+          <ul class="list-disc pl-5 space-y-2 text-sm text-slate-600 dark:text-slate-400">
+            <li>Business information (name, address, industry)</li>
+            <li>Owner/representative info (name, contact, ID)</li>
+            <li>Bank account for payouts</li>
+            <li>Verification documents (e.g. photo ID, business registration)—upload when prompted</li>
+          </ul>
+        </div>
+        <div class="bg-white dark:bg-slate-950 p-6 rounded-xl border border-slate-200 dark:border-slate-800 space-y-4">
+          <div class="flex items-center gap-4">
+            <div class="w-12 h-12 rounded-full bg-brand-crimson/10 dark:bg-brand-teal/10 flex-shrink-0 flex items-center justify-center text-brand-crimson dark:text-brand-teal">
+              <i data-lucide="shield-check" class="w-6 h-6"></i>
+            </div>
+            <h3 class="text-xl font-ubuntu font-bold">Security & Compliance</h3>
+          </div>
+          <ul class="list-disc pl-5 space-y-2 text-sm text-slate-600 dark:text-slate-400">
+            <li>Basic fraud and security setup (required for processing)</li>
+            <li>Evidence of PCI DSS certification or self-assessment</li>
+            <li>Use of PCI-compliant POS systems or software</li>
+            <li>Merchant attestation of cardholder data handling policies</li>
+          </ul>
+        </div>
+        <div class="bg-white dark:bg-slate-950 p-6 rounded-xl border border-slate-200 dark:border-slate-800 space-y-4">
+          <div class="flex items-center gap-4">
+            <div class="w-12 h-12 rounded-full bg-brand-crimson/10 dark:bg-brand-teal/10 flex-shrink-0 flex items-center justify-center text-brand-crimson dark:text-brand-teal">
+              <i data-lucide="rocket" class="w-6 h-6"></i>
+            </div>
+            <h3 class="text-xl font-ubuntu font-bold">Platform Readiness</h3>
+          </div>
+          <ul class="list-disc pl-5 space-y-2 text-sm text-slate-600 dark:text-slate-400">
+            <li>User account creation and login testing</li>
+            <li>Review of available transaction and reconciliation tools</li>
+            <li>Setup of reporting email or dashboard notifications</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+  <div class="hero-overlay absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 z-10 w-full px-4">
+    <div class="bg-brand-teal px-8 py-4 rounded-xl shadow-lg text-center">
+      <h2 class="text-3xl font-ubuntu font-bold text-slate-800 dark:text-slate-100">Setup Checklist: What You'll Need to Begin</h2>
+    </div>
+  </div>
+</div>
+<!-- ================= SETUP CHECKLIST SECTION END ================= -->
+
+<!-- ================= SUPPORT MODAL START ================= -->
+<!-- Contact form modal enabling merchants to reach support team -->
+<div id="support-modal" class="fixed inset-0 z-[70] hidden flex items-center justify-center">
+  <div class="absolute inset-0 bg-black/60" data-close></div>
+  <div class="relative z-10 w-full max-w-[clamp(20rem,90vw,35rem)] max-h-[90vh] overflow-y-auto rounded-2xl bg-white p-6 shadow-2xl border border-slate-200" data-modal-card>
+    <div class="flex items-center justify-between">
+      <h3 class="text-xl font-extrabold font-ubuntu text-slate-900">Contact Support</h3>
+      <button class="p-2 text-slate-500 hover:text-slate-700" data-close aria-label="Close"><i data-lucide="x" class="h-5 w-5"></i></button>
+    </div>
+    <p class="mt-1 text-sm text-slate-600">Have a question? Fill out the form below or contact us at <a href="tel:15056006042" class="text-brand-crimson hover:underline">1-505-600-6042</a>.</p>
+    <form
+      id="support-form"
+      name="contact"
+      method="POST"
+      data-netlify="true"
+      netlify-honeypot="bot-field"
+      action="/thankyou.html"
+      class="mt-4 space-y-4"
+    >
+      <input type="hidden" name="form-name" value="contact">
+      <p class="hidden">
+        <label>Don’t fill this out: <input name="bot-field"></label>
+      </p>
+      <div>
+        <label for="support-name" class="block text-sm font-medium text-slate-700">Name</label>
+        <input id="support-name" name="name" placeholder="Your name" class="mt-1 block w-full rounded-md border border-slate-300 bg-white px-3 py-2 text-slate-900 shadow-sm focus:border-brand-crimson focus:ring-brand-crimson" required>
+      </div>
+      <div>
+        <label for="support-email" class="block text-sm font-medium text-slate-700">Email</label>
+        <input id="support-email" name="email" type="email" placeholder="Work email" class="mt-1 block w-full rounded-md border border-slate-300 bg-white px-3 py-2 text-slate-900 shadow-sm focus:border-brand-crimson focus:ring-brand-crimson" required>
+      </div>
+      <div>
+        <label for="support-message" class="block text-sm font-medium text-slate-700">Message</label>
+        <textarea id="support-message" name="message" placeholder="Your message..." rows="4" class="mt-1 block w-full rounded-md border border-slate-300 bg-white px-3 py-2 text-slate-900 shadow-sm focus:border-brand-crimson focus:ring-brand-crimson" required></textarea>
+      </div>
+      <div>
+        <button class="inline-flex justify-center rounded-md border border-transparent bg-brand-crimson px-4 py-2 text-sm font-semibold text-white shadow-sm transition hover:bg-brand-crimson/90 focus:outline-none focus:ring-2 focus:ring-brand-crimson focus:ring-offset-2" type="submit">Send Message</button>
+      </div>
+      <p
+        id="support-error"
+        class="text-xs text-red-500 hidden"
+        role="alert"
+        aria-live="polite"
+      ></p>
+    </form>
+  </div>
+  </div>
+</div>
+<!-- ================= SUPPORT MODAL END ================= -->
+
+<!-- ================= APPLICATION FORM SECTION START ================= -->
+<!-- Detailed merchant onboarding form capturing business and compliance data -->
+<main class="max-w-5xl mx-auto px-4 pt-10 pb-4 application-section">
+    <h1 class="text-3xl md:text-4xl font-extrabold">Merchant Application</h1>
+    <p class="mt-2 text-slate-300">U.S. retail only. Provide the details below — we’ll review and issue your Merchant ID (MID) &amp; access credentials during onboarding.</p>
+    <form class="mt-8 grid gap-6" id="apply-form">
+    <!-- Merchant Information -->
+    <section class="p-6 rounded-2xl border border-slate-800">
+    <h2 class="text-xl font-bold">Merchant Information</h2>
+    <div class="mt-4 grid md:grid-cols-2 gap-4">
+    <label class="text-sm">Company Name*<input class="field mt-1 w-full rounded-lg border border-slate-700 bg-slate-900 px-3 py-2" name="companyName" required=""/></label>
+    <label class="text-sm">External Identifier<input class="field mt-1 w-full rounded-lg border border-slate-700 bg-slate-900 px-3 py-2" name="externalId"/></label>
+    <label class="text-sm">Country*<select class="field mt-1 w-full rounded-lg border border-slate-700 bg-slate-900 px-3 py-2" name="country" required=""><option>United States</option></select></label>
+    <label class="text-sm">Timezone*<select class="field mt-1 w-full rounded-lg border border-slate-700 bg-slate-900 px-3 py-2" name="timezone" required="">
+    <option>(GMT-08:00) Pacific Time (US &amp; Canada)</option>
+    <option>(GMT-07:00) Mountain Time (US &amp; Canada)</option>
+    <option>(GMT-06:00) Central Time (US &amp; Canada)</option>
+    <option>(GMT-05:00) Eastern Time (US &amp; Canada)</option>
+    </select></label>
+    <label class="text-sm md:col-span-2">Address*<input class="field mt-1 w-full rounded-lg border border-slate-700 bg-slate-900 px-3 py-2" name="address1" required=""/></label>
+    <label class="text-sm">Address 2<input class="field mt-1 w-full rounded-lg border border-slate-700 bg-slate-900 px-3 py-2" name="address2"/></label>
+    <label class="text-sm">City*<input class="field mt-1 w-full rounded-lg border border-slate-700 bg-slate-900 px-3 py-2" name="city" required=""/></label>
+    <label class="text-sm">State*<select class="field mt-1 w-full rounded-lg border border-slate-700 bg-slate-900 px-3 py-2" name="state" required=""></select></label>
+    <label class="text-sm">Zip/Postal Code*<input class="field mt-1 w-full rounded-lg border border-slate-700 bg-slate-900 px-3 py-2" name="postalCode" required=""/></label>
+    <label class="text-sm md:col-span-2">Website<input class="field mt-1 w-full rounded-lg border border-slate-700 bg-slate-900 px-3 py-2" name="website" placeholder="https://example.com" type="url"/></label>
+    <label class="text-sm">Language<select class="field mt-1 w-full rounded-lg border border-slate-700 bg-slate-900 px-3 py-2" name="language"><option>English</option></select></label>
+    </div>
+    </section>
+    <!-- Company Contact -->
+    <section class="p-6 rounded-2xl border border-slate-800">
+    <h2 class="text-xl font-bold">Company Contact (Primary User)</h2>
+    <p class="text-xs text-slate-500 mt-1">This person receives the welcome email and appears on receipts if enabled.</p>
+    <div class="mt-4 grid md:grid-cols-2 gap-4">
+    <label class="text-sm">First Name*<input class="field mt-1 w-full rounded-lg border border-slate-700 bg-slate-900 px-3 py-2" name="firstName" required=""/></label>
+    <label class="text-sm">Last Name*<input class="field mt-1 w-full rounded-lg border border-slate-700 bg-slate-900 px-3 py-2" name="lastName" required=""/></label>
+    <label class="text-sm">Email Address*<input class="field mt-1 w-full rounded-lg border border-slate-700 bg-slate-900 px-3 py-2" name="email" required="" type="email"/></label>
+    <label class="text-sm">Phone Number*<input class="field mt-1 w-full rounded-lg border border-slate-700 bg-slate-900 px-3 py-2" name="phone" required=""/></label>
+    <label class="text-sm">Fax Number<input class="field mt-1 w-full rounded-lg border border-slate-700 bg-slate-900 px-3 py-2" name="fax"/></label>
+    </div>
+    </section>
+    <!-- Account Setup & Services -->
+    <section class="p-6 rounded-2xl border border-slate-800">
+    <h2 class="text-xl font-bold">Account Setup</h2>
+    <div class="mt-4 grid md:grid-cols-2 gap-4">
+    <label class="text-sm md:col-span-2">Primary Username*<input class="field mt-1 w-full rounded-lg border border-slate-700 bg-slate-900 px-3 py-2" maxlength="32" minlength="4" name="username" pattern="[A-Za-z0-9]+" placeholder="letters and numbers only" required=""/></label>
+    </div>
+    <h3 class="mt-4 font-semibold">Processing Services</h3>
+    <div class="mt-2 grid md:grid-cols-3 gap-3 text-sm">
+    <label class="inline-flex items-center gap-2"><input checked="" class="accent-brand-crimson" name="svcCredit" type="checkbox"/>Credit Card</label>
+    <label class="inline-flex items-center gap-2"><input class="accent-brand-crimson" name="svcAch" type="checkbox"/>ACH / eCheck</label>
+    <label class="inline-flex items-center gap-2"><input class="accent-brand-crimson" name="svcCash" type="checkbox"/>Cash</label>
+    </div>
+    <h3 class="mt-4 font-semibold">Value‑added Services</h3>
+    <div class="mt-2 grid md:grid-cols-3 gap-3 text-sm">
+    <label class="inline-flex items-center gap-2"><input class="accent-brand-crimson" name="valEncryption" type="checkbox"/>Encryption (Encrypted Devices)</label>
+    <label class="inline-flex items-center gap-2"><input checked="" class="accent-brand-crimson" name="valInvoice" type="checkbox"/>Invoice</label>
+    <label class="inline-flex items-center gap-2"><input class="accent-brand-crimson" name="valLevel3" type="checkbox"/>Level III Advantage</label>
+    <label class="inline-flex items-center gap-2"><input class="accent-brand-crimson" name="valMobile" type="checkbox"/>Mobile Payments</label>
+    <label class="inline-flex items-center gap-2"><input checked="" class="accent-brand-crimson" name="valVault" type="checkbox"/>Customer Vault</label>
+    </div>
+    <div class="mt-4 text-xs text-slate-400">
+              By submitting, you agree to our <a class="underline hover:text-brand-teal" href="/terms.html" rel="noopener" target="_blank">Terms &amp; Conditions</a> and <a class="underline hover:text-brand-teal" href="/privacy.html" rel="noopener" target="_blank">Privacy Policy</a>.
+            </div>
+    </section>
+    <div class="flex items-center gap-3">
+    <button class="px-5 py-3 rounded-lg bg-brand-crimson text-white font-semibold hover:bg-opacity-90 transition-colors" type="submit">Submit Application</button>
+    <span class="text-sm text-slate-400" id="apply-out"></span>
+    </div>
+    </form>
+
+</main>
+<!-- ================= APPLICATION FORM SECTION END ================= -->
+<!-- ================= APPLICATION INTERACTIVITY SCRIPT START ================= -->
+<!-- Handles AI suggestions, FAQs, form logic, and scroll-based animations -->
+<script>
 document.addEventListener('DOMContentLoaded', () => {
-  if (window.lucide) {
-    try { window.lucide.createIcons(); } catch (error) {
-      console.error('Icon hydration failed', error);
-    }
-  }
+  if (window.lucide) lucide.createIcons();
 
   const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
   const tokenPools = {
     noun: ['flexibility', 'control', 'independence', 'advantage', 'capability', 'empowerment', 'agility', 'opportunity', 'simplicity', 'confidence'],
     verb: ['fuels', 'drives', 'accelerates', 'ignites', 'propels', 'enables', 'supports', 'advances', 'amplifies', 'energizes'],
     object: ['momentum', 'expansion', 'business', 'performance', 'progress', 'potential', 'future', 'scalability', 'revenue']
   };
-
   const pickNextIndex = (prev, len) => {
     if (len <= 1) return 0;
     let next = Math.floor(Math.random() * len);
     if (next === prev) next = (prev + 1) % len;
     return next;
   };
-
   const tokenElements = {
     noun: document.querySelector('[data-token="noun"]'),
     verb: document.querySelector('[data-token="verb"]'),
     object: document.querySelector('[data-token="object"]')
   };
-
   const tokenState = { noun: 0, verb: 0, object: 0 };
   const tokenTimers = [];
 
@@ -476,7 +1463,8 @@ document.addEventListener('DOMContentLoaded', () => {
   const startTokenCycles = () => {
     clearTokenTimers();
     if (reduceMotion) return;
-    ['noun', 'verb', 'object'].forEach((key, index) => {
+    const keys = ['noun', 'verb', 'object'];
+    keys.forEach((key, index) => {
       const timeoutId = window.setTimeout(() => {
         swapToken(key);
         const intervalId = window.setInterval(() => swapToken(key), 7000);
@@ -486,13 +1474,15 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   };
 
-  if (Object.values(tokenElements).some(Boolean)) {
+  const hasTokenElements = Object.values(tokenElements).some(Boolean);
+  if (hasTokenElements) {
     Object.entries(tokenElements).forEach(([key, el]) => {
       const pool = tokenPools[key];
       if (!el || !pool.length) return;
       el.textContent = pool[tokenState[key]];
     });
     startTokenCycles();
+
     document.addEventListener('visibilitychange', () => {
       if (document.hidden) {
         clearTokenTimers();
@@ -520,25 +1510,630 @@ document.addEventListener('DOMContentLoaded', () => {
       window.setTimeout(type, 300);
     }
   }
-});
 
-const modal = document.getElementById('ai-suggester-modal');
-const openBtn = document.getElementById('open-ai-modal-btn');
-const closeBtn = document.getElementById('close-ai-modal');
-const getRecsBtn = document.getElementById('get-recommendations-btn');
-const businessDesc = document.getElementById('business-description');
-const resultsContainer = document.getElementById('recommendations-result');
+  const modal = document.getElementById('ai-suggester-modal');
+  const openBtn = document.getElementById('open-ai-modal-btn');
+  const closeBtn = document.getElementById('close-ai-modal');
+  const getRecsBtn = document.getElementById('get-recommendations-btn');
+  const businessDesc = document.getElementById('business-description');
+  const resultsContainer = document.getElementById('recommendations-result');
 
-if (modal && openBtn && closeBtn && getRecsBtn && businessDesc && resultsContainer) {
-const services = [
-      'Payments Anywhere & Everywhere', 'AI-Powered Fraud Detection', 'Seamless Mobile Commerce',
-      'Flexible Payment Options', 'Hundreds of Integrations', 'Advanced Point of Sale'
+  if (modal && openBtn && closeBtn && getRecsBtn && businessDesc && resultsContainer) {
+    const services = [
       'Real-time Flow',
       'Gateway Mesh',
       'Live KPIs Dashboard',
       'Omnichannel Payments',
       'Advanced Fraud Shield',
       'Rapid Merchant Onboarding'
-];
+    ];
 
-openBtn.addEventListener('click', () => {
+    openBtn.addEventListener('click', () => {
+      modal.classList.remove('hidden');
+      modal.classList.add('flex');
+    });
+    closeBtn.addEventListener('click', () => modal.classList.add('hidden'));
+    modal.addEventListener('click', (event) => {
+      if (event.target === modal) {
+        modal.classList.add('hidden');
+      }
+    });
+
+    getRecsBtn.addEventListener('click', async () => {
+      const description = businessDesc.value.trim();
+      if (!description) {
+        alert('Please describe your business first.');
+        return;
+      }
+
+      toggleLoading(true);
+
+      try {
+        const recommendations = await getAiRecommendations(description);
+        renderRecommendations(recommendations);
+      } catch (error) {
+        console.error('Error getting recommendations:', error);
+        resultsContainer.innerHTML = `<p class="text-red-400">Sorry, something went wrong. Please try again later.</p>`;
+      } finally {
+        toggleLoading(false);
+      }
+    });
+
+    function toggleLoading(isLoading) {
+      const btnText = getRecsBtn.querySelector('.btn-text');
+      const loader = getRecsBtn.querySelector('.loader');
+      if (isLoading) {
+        getRecsBtn.disabled = true;
+        btnText.textContent = 'Analyzing...';
+        loader.classList.remove('hidden');
+      } else {
+        getRecsBtn.disabled = false;
+        btnText.textContent = 'Get Recommendations';
+        loader.classList.add('hidden');
+      }
+    }
+
+    function renderRecommendations(recs) {
+      if (!recs || !recs.length) {
+        resultsContainer.innerHTML = `<p class="text-slate-400">No specific recommendations found. Try describing your business in more detail.</p>`;
+        return;
+      }
+
+      resultsContainer.innerHTML = '<h4 class="font-bold text-lg mb-2 text-brand-teal">Recommended For You:</h4>';
+      const list = document.createElement('ul');
+      list.className = 'space-y-3';
+      recs.forEach(rec => {
+        const li = document.createElement('li');
+        li.className = 'bg-[#2a2a2a] p-3 rounded-lg border border-slate-700';
+        li.innerHTML = `
+            <p class="font-bold text-white">${rec.serviceName}</p>
+            <p class="text-slate-300 text-sm">${rec.reason}</p>
+        `;
+        list.appendChild(li);
+      });
+      resultsContainer.appendChild(list);
+    }
+
+    async function getAiRecommendations(businessDescription) {
+      const apiKey = '';
+      const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-05-20:generateContent?key=${apiKey}`;
+
+      const systemPrompt = `You are an expert business consultant specializing in payment processing solutions. Your goal is to recommend the most relevant payment services for a business based on its description. You must choose from the following list of available services: ${services.join(', ')}.`;
+
+      const userQuery = `Here is the business description: "${businessDescription}". Based on this, which services do you recommend?`;
+
+      const payload = {
+          systemInstruction: { parts: [{ text: systemPrompt }] },
+          contents: [{ parts: [{ text: userQuery }] }],
+          generationConfig: {
+              responseMimeType: "application/json",
+              responseSchema: {
+                  type: "ARRAY",
+                  items: {
+                      type: "OBJECT",
+                      properties: {
+                          "serviceName": { "type": "STRING" },
+                          "reason": { "type": "STRING" }
+                      },
+                      required: ["serviceName", "reason"]
+                  }
+              }
+          }
+      };
+
+      let response;
+      let delay = 1000;
+      for (let attempt = 0; attempt < 5; attempt += 1) {
+          try {
+              response = await fetch(apiUrl, {
+                  method: 'POST',
+                  headers: { 'Content-Type': 'application/json' },
+                  body: JSON.stringify(payload)
+              });
+
+              if (response.status === 429) {
+                  await new Promise(resolve => setTimeout(resolve, delay));
+                  delay *= 2;
+                  continue;
+              }
+
+              if (!response.ok) {
+                  throw new Error(`API request failed with status ${response.status}`);
+              }
+              break;
+          } catch (error) {
+              if (attempt === 4) throw error;
+          }
+      }
+
+      const result = await response.json();
+
+      const candidate = result.candidates?.[0];
+      if (candidate && candidate.content?.parts?.[0]?.text) {
+          try {
+              return JSON.parse(candidate.content.parts[0].text);
+          } catch (e) {
+              console.error("Failed to parse JSON response from AI", e);
+              throw new Error("Invalid format received from AI.");
+          }
+      } else {
+          console.error("Unexpected API response structure:", result);
+          throw new Error("Could not get a valid response from the AI.");
+      }
+    }
+  }
+  const headingTexts = { "integrations-old": "Integrate with Your Favorite Tools" }; // Old logic, can be removed or updated
+  const headingObserver = new IntersectionObserver((entries, observer) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const heading = entry.target;
+        const sectionId = heading.closest('section').id;
+        const text = headingTexts[sectionId];
+        if (text && !heading.dataset.animated) {
+          heading.dataset.animated = 'true';
+          typeWriter(heading, text, 75);
+          observer.unobserve(heading);
+        }
+      }
+    });
+  }, { threshold: 0.8 });
+  document.querySelectorAll('.animate-on-scroll').forEach(el => headingObserver.observe(el));
+
+  // --- APPLICATION FORM LOGIC ---
+  const applyForm = document.getElementById('apply-form');
+  if (applyForm) {
+    const states = ["Alabama","Alaska","Arizona","Arkansas","California","Colorado","Connecticut","Delaware","District of Columbia","Florida","Georgia","Hawaii","Idaho","Illinois","Indiana","Iowa","Kansas","Kentucky","Louisiana","Maine","Maryland","Massachusetts","Michigan","Minnesota","Mississippi","Missouri","Montana","Nebraska","Nevada","New Hampshire","New Jersey","New Mexico","New York","North Carolina","North Dakota","Ohio","Oklahoma","Oregon","Pennsylvania","Rhode Island","South Carolina","South Dakota","Tennessee","Texas","Utah","Vermont","Virginia","Washington","West Virginia","Wisconsin","Wyoming"];
+    const stateSelect = document.querySelector('select[name="state"]');
+    if (stateSelect) { states.forEach(s => { const opt=document.createElement('option'); opt.textContent=opt.value=s; stateSelect.appendChild(opt); }); }
+
+    const out = document.getElementById('apply-out');
+    const LS_KEY = 'mh_apply_draft';
+    
+    function saveDraft(){ const data = Object.fromEntries(new FormData(applyForm).entries()); localStorage.setItem(LS_KEY, JSON.stringify(data)); }
+    function loadDraft(){ try { const d = JSON.parse(localStorage.getItem(LS_KEY)||'{}'); for (const k in d){ const el = applyForm.elements[k]; if (!el) continue; if (el.type==='checkbox'){ el.checked = !!d[k]; } else { el.value = d[k]; } } } catch(e){} }
+    
+    applyForm.addEventListener('input', saveDraft);
+    loadDraft();
+
+    function getUTM(){
+      const p = new URLSearchParams(location.search);
+      return {source:p.get('utm_source')||'',medium:p.get('utm_medium')||'',campaign:p.get('utm_campaign')||'',term:p.get('utm_term')||'',content:p.get('utm_content')||'',ref:document.referrer||''};
+    }
+
+    applyForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      out.textContent = 'Submitting…';
+      try {
+        const data = Object.fromEntries(new FormData(applyForm).entries());
+        ['svcCredit','svcAch','svcCash','valEncryption','valInvoice','valLevel3','valMobile','valVault'].forEach(k => { data[k] = !!applyForm.elements[k].checked; });
+        data.utm = getUTM();
+
+        const res = await fetch('/.netlify/functions/submit-application', {
+          method: 'POST',
+          headers: {'Content-Type':'application/json'},
+          body: JSON.stringify(data)
+        });
+        if (!res.ok) throw new Error('Request failed');
+        out.textContent = 'Thanks — we emailed you next steps and sent your application to our team.';
+        localStorage.removeItem(LS_KEY);
+        applyForm.reset();
+      } catch (err) {
+        console.error(err);
+        out.textContent = 'Something went wrong. Please try again or email hello@merchant.haus.';
+      }
+    });
+  }
+
+
+  function typeWriter(element, text, speed, callback) {
+    let i = 0;
+    if (!element) return;
+    element.innerHTML = '';
+    const typingInterval = setInterval(() => {
+      if (i < text.length) {
+        element.innerHTML = text.substring(0, i + 1) + '<span class="cursor"></span>';
+        i++;
+      } else {
+        clearInterval(typingInterval);
+        element.innerHTML = text;
+        if (callback) callback();
+      }
+    }, speed);
+  }
+});
+</script>
+<!-- ================= APPLICATION INTERACTIVITY SCRIPT END ================= -->
+
+    <!-- Footer -->
+    <!-- ================= FOOTER SECTION START ================= -->
+    <!-- Multi-column footer with contact details, navigation, and legal links -->
+    <footer class="border-t border-slate-200 dark:border-slate-800 py-8 mt-8 bg-white dark:bg-transparent">
+        <div class="max-w-7xl mx-auto px-4 grid sm:grid-cols-2 lg:grid-cols-4 gap-8 text-sm" >
+            <div class="space-y-4">
+                <a href="/index.html" class="flex items-center gap-3">
+                    <div class="w-[220px]" data-mh-logo-footer></div>
+                     <span class="sr-only">MerchantHaus Homepage</span>
+                </a>
+                <div class="text-sm">
+                    <a href="tel:15056006042" class="block text-slate-300 hover:text-brand-teal">1-505-600-6042</a>
+                    <a href="mailto:support@merchanthaus.io" class="block text-slate-300 hover:text-brand-teal">support@merchanthaus.io</a>
+                    <div class="mt-2 text-slate-400">
+                        <p class="text-sm">1209 Mountain Road Pl Ne Ste N</p>
+                        <p class="text-sm">Albuquerque, NM 87110 US</p>
+                    </div>
+                </div>
+            </div>
+            <nav class="space-y-2">
+                <h3 class="font-semibold font-ubuntu text-slate-900 dark:text-white">Product</h3>
+                <a href="/#payments" class="block text-slate-600 dark:text-slate-300 hover:text-brand-teal">Payment Services</a>
+                <button
+                    type="button"
+                    id="footer-integrations-toggle"
+                    aria-expanded="false"
+                    aria-controls="footer-integrations-menu"
+                    class="flex items-center justify-between w-full text-left text-slate-600 dark:text-slate-300 hover:text-brand-teal transition-colors"
+                >
+                    <span>Integrations</span>
+                    <span class="ml-2 text-slate-400">
+                        <svg data-collapsible-icon class="w-4 h-4 transition-transform" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <polyline points="6 9 12 15 18 9" />
+                        </svg>
+                    </span>
+                </button>
+                <div id="footer-integrations-menu" class="mt-2 space-y-2 pl-4 hidden">
+                    <a href="/integrations.html" class="block text-slate-500 dark:text-slate-400 hover:text-brand-teal">Integrations Directory</a>
+                    <a href="/shopify.html" class="block text-slate-500 dark:text-slate-400 hover:text-brand-teal">Shopify Integration</a>
+                    <a href="/gohighlevel.html" class="block text-slate-500 dark:text-slate-400 hover:text-brand-teal">GoHighLevel Integration</a>
+                </div>
+                <a href="/#checklist" class="block text-slate-600 dark:text-slate-300 hover:text-brand-teal">Setup Checklist</a>
+            </nav>
+            <nav class="space-y-2">
+                <h3 class="font-semibold font-ubuntu text-slate-900 dark:text-white">Support</h3>
+                <a
+                  href="mailto:support@merchanthaus.io"
+                  class="js-support block text-slate-600 dark:text-slate-300 hover:text-brand-teal"
+                  data-cta="contact-support"
+                  data-cta-location="footer"
+                >Contact Support</a>
+                <a href="/faq.html" class="block text-slate-600 dark:text-slate-300 hover:text-brand-teal">FAQ</a>
+            </nav>
+            <nav class="space-y-2">
+                <h3 class="font-semibold font-ubuntu text-slate-900 dark:text-white">Legal</h3>
+                <a href="/privacy.html" class="block text-slate-600 dark:text-slate-300 hover:text-brand-teal">Privacy Policy</a>
+                <a href="/terms.html" class="block text-slate-600 dark:text-slate-300 hover:text-brand-teal">Terms & Conditions</a>
+            </nav>
+        </div>
+        <div class="text-center text-xs pt-8 mt-8 border-t border-slate-200 dark:border-slate-800 text-slate-500 dark:text-slate-500 font-inter">
+            <div class="mb-2">
+                © <span id="year"></span> Merchant Haus. All rights reserved.
+            </div>
+            <div class="text-xs text-slate-600">
+                New Mexico Formation Date: 09/29/2025 | State Entity ID: 0008052674
+            </div>
+        </div>
+    </footer>
+    <!-- ================= FOOTER SECTION END ================= -->
+
+    <!-- Back to Top Button -->
+    <!-- ================= BACK TO TOP CONTROL START ================= -->
+    <!-- Floating action button returning users to page top -->
+    <button id="back-to-top" class="fixed bottom-6 right-6 bg-brand-crimson text-white p-3 rounded-full shadow-lg opacity-0 invisible transition-all duration-300 z-50 hover:bg-opacity-90">
+        <i data-lucide="arrow-up" class="h-6 w-6"></i>
+        <span class="sr-only">Back to top</span>
+    </button>
+    <!-- ================= BACK TO TOP CONTROL END ================= -->
+
+
+    <!-- ================= GLOBAL LAYOUT SCRIPTS START ================= -->
+    <!-- External signup panel logic plus helpers for navigation, logos, and UI polish -->
+    <script src="/assets/signup-panel.js" defer></script>
+    <script type="module" src="/assets/banner-carousel.js"></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            if (window.lucide) lucide.createIcons();
+            document.getElementById('year').textContent = new Date().getFullYear();
+
+            // Theme toggle functionality
+            const themeToggle = document.getElementById('theme-toggle');
+            const mobileThemeToggle = document.getElementById('mobile-theme-toggle');
+            const htmlElement = document.documentElement;
+            
+            const toggleTheme = () => {
+                if (htmlElement.classList.contains('dark')) {
+                    htmlElement.classList.remove('dark');
+                    localStorage.setItem('theme', 'light');
+                } else {
+                    htmlElement.classList.add('dark');
+                    localStorage.setItem('theme', 'dark');
+                }
+                
+                // Refresh icons after theme change
+                if (window.lucide) {
+                    setTimeout(() => lucide.createIcons(), 50);
+                }
+            };
+            
+            // Initialize theme from localStorage or default to dark
+            const savedTheme = localStorage.getItem('theme');
+            if (savedTheme) {
+                if (savedTheme === 'light') {
+                    htmlElement.classList.remove('dark');
+                } else {
+                    htmlElement.classList.add('dark');
+                }
+            } else {
+                // Default to dark mode
+                htmlElement.classList.add('dark');
+                localStorage.setItem('theme', 'dark');
+            }
+            
+            // Theme toggle event listeners
+            if (themeToggle) {
+                themeToggle.addEventListener('click', toggleTheme);
+            }
+            if (mobileThemeToggle) {
+                mobileThemeToggle.addEventListener('click', toggleTheme);
+            }
+
+            const logoImagePath = "\/public\/assets\/images\/Shield.webp";
+            // --- Animated Logo Injection ---
+            const logoSVG = (id, tagline = true, shimmer = true) => {
+                const letters = ['M','e','r','c','h','a','n','t','H','a','u','s'];
+                let letterTags = '';
+                letters.forEach((letter, index) => {
+                    const delay = index * 0.1;
+                    letterTags += `<tspan opacity="0" dy="-20">${letter}<animate attributeName="opacity" from="0" to="1" dur="0.2s" begin="${delay}s" fill="freeze"/><animate attributeName="dy" from="-20" to="0" dur="0.2s" begin="${delay}s" fill="freeze" calcMode="discrete"/></tspan>`;
+                });
+
+                return `
+                <svg viewBox="0 0 600 100" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%">
+                    <defs>
+                        <linearGradient id="shimmer-${id}" gradientUnits="userSpaceOnUse" x1="120" y1="0" x2="560" y2="0">
+                            <stop offset="0%" stop-color="#DC143C" />
+                            <stop offset="45%" stop-color="#DC143C">
+                                ${shimmer ? `<animate attributeName="stop-color" values="#DC143C; #FFC0CB; #DC143C" keyTimes="0; 0.5; 1" dur="2s" begin="1.5s" fill="freeze" repeatCount="1"/>` : ''}
+                            </stop>
+                            <stop offset="50%" stop-color="#DC143C">
+                                ${shimmer ? `<animate attributeName="stop-color" values="#DC143C; #FFFFFF; #DC143C" keyTimes="0; 0.5; 1" dur="2s" begin="1.5s" fill="freeze" repeatCount="1"/>` : ''}
+                            </stop>
+                            <stop offset="55%" stop-color="#DC143C">
+                                ${shimmer ? `<animate attributeName="stop-color" values="#DC143C; #FFC0CB; #DC143C" keyTimes="0; 0.5; 1" dur="2s" begin="1.5s" fill="freeze" repeatCount="1"/>` : ''}
+                            </stop>
+                            <stop offset="100%" stop-color="#DC143C" />
+                            ${shimmer ? `<animateTransform attributeName="transform" type="translate" from="-600 0" to="600 0" dur="2s" begin="1.5s" fill="freeze" repeatCount="1"/>` : ''}
+                        </linearGradient>
+                        <style>
+                            .mh-text-${id} { font-family: 'Ubuntu', sans-serif; font-size: 50px; font-weight: 700; fill: url(#shimmer-${id}); }
+                            .mh-tagline-${id} { font-family: 'Inter', sans-serif; font-size: 18px; font-weight: 500; fill: #A9A9A9; text-anchor: middle; letter-spacing: 4px; }
+                        </style>
+                    </defs>
+                    <image href="${logoImagePath}" x="10" y="10" height="80" width="80" />
+                    <text class="mh-text-${id}" y="60" x="110">${letterTags}</text>
+                    ${tagline ? `
+                        <line x1="160" x2="400" y1="72" y2="72" stroke="#00CEDB" stroke-width="2" opacity="0">
+                            <animate attributeName="opacity" from="0" to="1" dur="1s" begin="1.5s" fill="freeze" />
+                        </line>
+                        <text x="280" y="92" class="mh-tagline-${id}" opacity="0">
+                            <animate attributeName="opacity" from="0" to="1" dur="1s" begin="2s" fill="freeze" />plug. play. grow.
+                        </text>
+                    ` : ''}
+                </svg>`;
+            };
+            
+            // Only select and inject logos if the placeholder exists on the current page
+            if (document.querySelector('[data-mh-logo-header]')) {
+                document.querySelector('[data-mh-logo-header]').innerHTML = logoSVG('header', false, false);
+            }
+            if (document.querySelector('[data-mh-logo-hero]')) {
+                document.querySelector('[data-mh-logo-hero]').innerHTML = logoSVG('hero', true, true);
+            }
+            if (document.querySelector('[data-mh-logo-footer]')) {
+                 document.querySelector('[data-mh-logo-footer]').innerHTML = logoSVG('footer', true, false);
+            }
+
+
+            const setupCollapsibleMenu = (toggleId, menuId) => {
+                const toggle = document.getElementById(toggleId);
+                const menu = document.getElementById(menuId);
+                if (!toggle || !menu) return;
+
+                const icon = toggle.querySelector('[data-collapsible-icon]');
+
+                const openMenu = () => {
+                    menu.classList.remove('hidden');
+                    toggle.setAttribute('aria-expanded', 'true');
+                    if (icon) icon.classList.add('rotate-180');
+                };
+
+                const closeMenu = () => {
+                    menu.classList.add('hidden');
+                    toggle.setAttribute('aria-expanded', 'false');
+                    if (icon) icon.classList.remove('rotate-180');
+                };
+
+                toggle.addEventListener('click', (event) => {
+                    event.preventDefault();
+                    if (menu.classList.contains('hidden')) {
+                        openMenu();
+                    } else {
+                        closeMenu();
+                    }
+                });
+
+                document.addEventListener('click', (event) => {
+                    if (!menu.classList.contains('hidden') && !menu.contains(event.target) && !toggle.contains(event.target)) {
+                        closeMenu();
+                    }
+                });
+
+                menu.querySelectorAll('a').forEach(link => {
+                    link.addEventListener('click', closeMenu);
+                });
+            };
+
+            setupCollapsibleMenu('footer-integrations-toggle', 'footer-integrations-menu');
+            setupCollapsibleMenu('mobile-integrations-toggle', 'mobile-integrations-menu');
+
+
+            // --- Mobile Menu ---
+            const mobileMenuButton = document.getElementById('mobile-menu-button');
+            const mobileMenu = document.getElementById('mobile-menu');
+            if(mobileMenuButton && mobileMenu) {
+                mobileMenuButton.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    mobileMenu.classList.toggle('hidden');
+                });
+                document.addEventListener('click', (e) => {
+                    if (!mobileMenu.classList.contains('hidden') && !mobileMenu.contains(e.target) && !mobileMenuButton.contains(e.target)) {
+                        mobileMenu.classList.add('hidden');
+                    }
+                });
+                mobileMenu.querySelectorAll('a').forEach(link => {
+                    link.addEventListener('click', () => mobileMenu.classList.add('hidden'));
+                });
+            }
+
+            // --- Stars Canvas Logic (if canvas exists) ---
+            const canvas = document.getElementById('mh-stars');
+            if (canvas) {
+                const ctx = canvas.getContext('2d');
+                let stars;
+                let animationFrameId;
+                const starColors = [
+                    'rgba(255, 255, 255,', 'rgba(230, 230, 250,',
+                    'rgba(255, 250, 205,', 'rgba(240, 255, 255,'
+                ];
+
+                const setupStars = () => {
+                    const parent = canvas.parentElement;
+                    canvas.width = parent.offsetWidth;
+                    canvas.height = parent.offsetHeight;
+                    stars = [];
+                    const numStars = Math.floor((canvas.width * canvas.height) / 8000);
+                    for (let i = 0; i < numStars; i++) {
+                        stars.push({
+                            x: Math.random() * canvas.width,
+                            y: Math.random() * canvas.height,
+                            radius: Math.random() * 1.2 + 0.3,
+                            alpha: Math.random(),
+                            dAlpha: Math.random() * 0.02 - 0.01,
+                            color: starColors[Math.floor(Math.random() * starColors.length)],
+                            vx: (Math.random() - 0.5) * 0.1,
+                            vy: (Math.random() - 0.5) * 0.1
+                        });
+                    }
+                };
+
+                const drawStars = () => {
+                    if(!ctx) return;
+                    ctx.clearRect(0, 0, canvas.width, canvas.height);
+                    stars.forEach(star => {
+                        star.x += star.vx;
+                        star.y += star.vy;
+                        if (star.x < 0) star.x = canvas.width;
+                        if (star.x > canvas.width) star.x = 0;
+                        if (star.y < 0) star.y = canvas.height;
+                        if (star.y > canvas.height) star.y = 0;
+
+                        star.alpha += star.dAlpha;
+                        if (star.alpha <= 0.1 || star.alpha >= 1) { star.dAlpha *= -1; }
+                        
+                        ctx.beginPath();
+                        ctx.arc(star.x, star.y, star.radius, 0, Math.PI * 2);
+                        ctx.fillStyle = star.color + star.alpha + ')';
+                        ctx.fill();
+                    });
+                    animationFrameId = requestAnimationFrame(drawStars);
+                };
+                
+                let resizeTimeout;
+                const initCanvas = () => {
+                    cancelAnimationFrame(animationFrameId);
+                    clearTimeout(resizeTimeout);
+                    resizeTimeout = setTimeout(() => {
+                        setupStars();
+                        drawStars();
+                    }, 100);
+                };
+
+                initCanvas();
+                window.addEventListener('resize', initCanvas);
+            }
+
+            // --- Sequential Typewriter Animation on Scroll (if steps exist) ---
+            const steps = [
+                { id: 'step-1', text: "Fill out our simple application form. Our team will review your details and get you approved quickly." },
+                { id: 'step-2', text: "Once approved, we'll provide you with API keys to easily connect MerchantHaus as your payment provider in your Shopify admin." },
+                { id: 'step-3', text: "That's it! You're ready to accept payments securely and affordably, with all your transaction data synced to your MerchantHaus dashboard." }
+            ];
+            
+            const stepElements = document.querySelectorAll('.step-card');
+
+            if(stepElements.length > 0) {
+                let animationQueue = Promise.resolve();
+                let animatedSteps = new Set();
+
+                const typewriter = (element, text, duration) => {
+                    return new Promise(resolve => {
+                        let i = 0;
+                        element.innerHTML = '<span class="typewriter-text"></span>';
+                        const span = element.querySelector('.typewriter-text');
+                        
+                        function type() {
+                            if (i < text.length) {
+                                span.textContent += text.charAt(i);
+                                i++;
+                                setTimeout(type, duration / text.length);
+                            } else {
+                            if (span) span.style.borderRight = 'none';
+                            resolve();
+                            }
+                        }
+                        type();
+                    });
+                };
+
+                const animateStep = (entry) => {
+                    if (entry.isIntersecting && !animatedSteps.has(entry.target.id)) {
+                        const stepConf = steps.find(s => s.id === entry.target.id);
+                        if (stepConf) {
+                            animatedSteps.add(stepConf.id);
+                            const pElement = entry.target.querySelector('p');
+                            entry.target.style.opacity = '1';
+                            entry.target.style.transform = 'translateY(0)';
+                            animationQueue = animationQueue.then(() => typewriter(pElement, stepConf.text, 2000));
+                        }
+                    }
+                };
+                
+                const observer = new IntersectionObserver((entries) => {
+                    entries.forEach(animateStep);
+                }, { threshold: 0.8 });
+
+                steps.forEach(step => {
+                    const el = document.getElementById(step.id);
+                    if (el) observer.observe(el);
+                });
+            }
+
+            // --- Back to Top Button ---
+            const backToTopButton = document.getElementById('back-to-top');
+            if(backToTopButton) {
+                window.addEventListener('scroll', () => {
+                    if (window.scrollY > 300) {
+                        backToTopButton.classList.remove('invisible', 'opacity-0');
+                    } else {
+                        backToTopButton.classList.add('invisible', 'opacity-0');
+                    }
+                });
+                backToTopButton.addEventListener('click', () => {
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                });
+            }
+        });
+    </script>
+    <!-- ================= GLOBAL LAYOUT SCRIPTS END ================= -->
+
+</body>
+</html>
