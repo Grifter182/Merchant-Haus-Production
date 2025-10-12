@@ -176,6 +176,29 @@
             font-size: clamp(1.5rem, 3vw + 0.5rem, 2.75rem);
         }
 
+        .hero-moving-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            background-image: url('/assets/img/hero-overlay.svg');
+            background-size: 150% 150%;
+            opacity: 0.4;
+            animation: slideOverlay 60s linear infinite;
+            z-index: -20;
+        }
+
+        @keyframes slideOverlay {
+            from {
+                transform: translate(0%, 0%);
+            }
+            to {
+                transform: translate(-50%, -30%);
+            }
+        }
+
         .section-subheading {
             font-size: clamp(1.125rem, 2.5vw, 2.25rem);
         }
@@ -454,327 +477,240 @@
 @media (prefers-reduced-motion: reduce) { .marquee-track { animation: none !important; } }
 .panel-overlay, .panel-container { transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
 
-        /* === PAYMENT SERVICES EXPERIENCE === */
-        #payments {
-          position: relative;
-          overflow: hidden;
-          width: 100%;
-        }
-
-        /* Animated overlay for hero section */
-        .hero-moving-overlay {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            /* Use the colorful geometric pattern image as the moving texture. The file is at /assets/img/hero-overlay.svg */
-            background-image: url('/assets/img/hero-overlay.svg');
-            /* Make the image larger than the container so it can move across */
-            background-size: 150% 150%;
-            opacity: 0.4;
-            animation: slideOverlay 60s linear infinite;
-            z-index: -20;
-        }
-
-        @keyframes slideOverlay {
-            from {
-                transform: translate(0%, 0%);
-            }
-            to {
-                /* Move diagonally upward/left; adjust percentages to tune speed/direction */
-                transform: translate(-50%, -30%);
-            }
-        }
-
-        body.grabbing {
-            cursor: grabbing;
-        }
-
-        .payments-experience {
+        /* === SERVICES HERO EXPERIENCE === */
+        .services-hero {
             position: relative;
-            background-color: #ffffff;
-            color: #1a1a1a;
-        }
-        .dark .payments-experience {
-            background-color: #1c1c1c;
-            color: #f5f5f5;
-        }
-
-        /* Enhanced 3D Slider Styles */
-        .banner {
-            width: 100%;
-            text-align: center;
+            min-height: clamp(640px, 86svh, 960px);
+            display: grid;
+            grid-template-rows: 1fr auto;
             overflow: hidden;
-            position: relative;
-            display: flex;
-            justify-content: center;
-            align-items: center;
+            background: #0f0f10;
+            color: #ffffff;
         }
-        .banner .slider{
+        .dark .services-hero {
+            background: #050506;
+        }
+
+        .services-hero__bg {
             position: absolute;
-            width: 160px; 
-            height: 200px; 
-            transform-style: preserve-3d;
-            transform: perspective(1500px) rotateX(-18deg);
-            cursor: grab;
-            transition: transform 1.2s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.5s;
-        }
-        #front-slider { z-index: 2; }
-        #back-slider { z-index: 0; }
-        
-        .banner .slider.dragging {
-            transition: none;
-        }
-        .banner .slider.hidden {
-            opacity: 0;
-            pointer-events: none;
-        }
-
-
-        .banner .slider .item{
-            position: absolute;
-            inset: 0 0 0 0;
-            transform: 
-                rotateY(calc( (var(--position) - 1) * (360 / var(--quantity)) * 1deg))
-                translateZ(380px); 
-        }
-
-        .service-card {
-            width: 100%;
-            height: 100%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            pointer-events: none;
+            inset: 0;
             background-size: cover;
             background-position: center;
-            border-radius: 1rem;
-            overflow: hidden;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            position: relative;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            transition: opacity 0.4s ease, transform 0.4s ease;
         }
-        
-        .service-card::before {
+        .services-hero__bg::after {
             content: '';
             position: absolute;
             inset: 0;
-            background: linear-gradient(135deg, rgba(0,0,0,0.3), rgba(0,0,0,0.1));
-            z-index: 1;
-            transition: background 0.3s ease;
+            background: linear-gradient(180deg, rgba(0, 0, 0, 0.55), rgba(0, 0, 0, 0.35) 40%, rgba(0, 0, 0, 0.55));
         }
 
-        .item:hover .service-card {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 35px rgba(0,0,0,0.4);
+        .services-hero__content {
+            position: relative;
+            z-index: 2;
+            padding: clamp(16px, 3vw, 48px);
+            max-width: 1100px;
         }
 
-        .item:hover .service-card::before {
-            background: linear-gradient(135deg, rgba(0,0,0,0.2), rgba(0,0,0,0.05));
-        }
-        
-        /* Applying Images */
-        .item[data-pos="1"] .service-card { background-image: url('assets/img/card1.webp'); }
-        .item[data-pos="2"] .service-card { background-image: url('assets/img/card2.webp'); }
-        .item[data-pos="3"] .service-card { background-image: url('assets/img/card3.webp'); }
-        .item[data-pos="4"] .service-card { background-image: url('assets/img/card4.webp'); }
-        .item[data-pos="5"] .service-card { background-image: url('assets/img/card5.webp'); }
-        .item[data-pos="6"] .service-card { background-image: url('assets/img/card6.webp'); }
-        .item[data-pos="7"] .service-card { background-image: url('assets/img/card7.webp'); }
-        .item[data-pos="8"] .service-card { background-image: url('assets/img/card8.webp'); }
-        .item[data-pos="9"] .service-card { background-image: url('assets/img/card9.webp'); }
-        .item[data-pos="10"] .service-card { background-image: url('assets/img/card10.webp'); }
-
-
-        .service-icon-container {
-            width: 90px;
-            height: 90px;
-            border-radius: 50%;
-            background: rgba(255, 255, 255, 0.15);
-            backdrop-filter: blur(12px);
-            border: 2px solid rgba(255, 255, 255, 0.3);
-            box-shadow: 0 8px 25px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.2);
+        .services-hero__brand {
             display: flex;
             align-items: center;
-            justify-content: center;
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            position: relative;
-            overflow: hidden;
-            z-index: 2;
+            gap: 0.75rem;
+            filter: drop-shadow(0 8px 24px rgba(0, 0, 0, 0.45));
         }
-
-        .service-icon-container::before {
-            content: '';
-            position: absolute;
-            inset: -2px;
-            background: linear-gradient(45deg, transparent, rgba(255,255,255,0.1), transparent);
-            border-radius: 50%;
-            opacity: 0;
-            transition: opacity 0.3s ease;
+        .services-hero__brand svg {
+            width: 44px;
+            height: 44px;
         }
-        
-        .item:hover .service-icon-container {
-             transform: translateY(-15px) scale(1.05);
-             box-shadow: 0 12px 35px rgba(0,0,0,0.4), inset 0 2px 0 rgba(255,255,255,0.3);
-        }
-
-        .item:hover .service-icon-container::before {
-            opacity: 1;
-        }
-
-        .service-icon {
-            width: 3.5rem;
-            height: 3.5rem;
-            stroke-width: 1.5;
-            filter: drop-shadow(3px 3px 2px rgba(0, 0, 0, 0.3)); 
-            position: relative;
-            z-index: 2;
-        }
-        
-        .item[data-pos="1"] .service-icon { stroke: #33FF57; }
-        .item[data-pos="2"] .service-icon { stroke: #3357FF; }
-        .item[data-pos="3"] .service-icon { stroke: #FF33A1; }
-        .item[data-pos="4"] .service-icon { stroke: #A133FF; }
-        .item[data-pos="5"] .service-icon { stroke: #33FFF6; }
-        .item[data-pos="6"] .service-icon { stroke: #F6FF33; }
-        .item[data-pos="7"] .service-icon { stroke: #FF8C33; }
-        .item[data-pos="8"] .service-icon { stroke: #8CFF33; }
-        .item[data-pos="9"] .service-icon { stroke: #DC143C; }
-        .item[data-pos="10"] .service-icon { stroke: #FF5733; }
-        
-        .service-title {
-            position: absolute;
-            bottom: 105%;
-            left: 50%;
-            transform: translateX(-50%) translateZ(50px);
-            background-color: rgba(10, 10, 10, 0.8);
-            backdrop-filter: blur(10px);
-            color: #fff;
-            padding: 0.35rem 1rem;
-            border-radius: 9999px;
-            font-size: 1rem;
+        .services-hero__brand-name {
             font-family: 'Ubuntu', sans-serif;
-            font-weight: bold;
-            white-space: nowrap;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
-            pointer-events: none;
+            font-weight: 700;
+            font-size: clamp(1.6rem, 2.6vw, 2.5rem);
+        }
+        .services-hero__tag {
+            display: block;
+            margin-top: 0.25rem;
+            margin-left: 56px;
+            font: 500 0.95rem 'Inter', sans-serif;
+            color: #ffffffcc;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
         }
 
-        #particle-canvas {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
-            pointer-events: none;
-            z-index: 100;
+        .services-hero__headline {
+            font-family: 'Ubuntu', sans-serif;
+            font-size: clamp(2.2rem, 5.2vw, 4.2rem);
+            margin: 12px 0 8px;
+        }
+        .services-hero__subhead {
+            max-width: 55ch;
+            font-family: 'Inter', sans-serif;
+            opacity: 0.92;
         }
 
-        #fullscreen-view {
-            position: fixed;
-            inset: 0;
-            z-index: 110;
-            background-color: rgba(0,0,0,0.8);
-            backdrop-filter: blur(10px);
-            opacity: 0;
-            pointer-events: none;
-            transition: opacity 0.5s ease;
+        .services-hero__cta {
             display: flex;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+            margin-top: 1rem;
+        }
+        .services-hero__btn {
+            display: inline-flex;
             align-items: center;
             justify-content: center;
+            border: none;
+            border-radius: 999px;
+            padding: 0.9rem 1.4rem;
+            font-weight: 700;
+            cursor: pointer;
+            font-family: 'Inter', sans-serif;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            text-decoration: none;
+            color: inherit;
         }
-        #fullscreen-view.visible {
-            opacity: 1;
-            pointer-events: all;
+        .services-hero__btn:focus-visible {
+            outline: 3px solid var(--brand-teal, #00CEDB);
+            outline-offset: 2px;
         }
-        #fullscreen-card {
-            position: relative;
-            transition: all 0.6s cubic-bezier(0.645, 0.045, 0.355, 1);
-            width: clamp(320px, 40vmax, 600px); 
-            height: clamp(400px, 50vmax, 750px);
-            opacity: 0;
+        .services-hero__btn:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 10px 24px rgba(0, 0, 0, 0.25);
         }
-        #fullscreen-card.visible {
-            opacity: 1;
+        .services-hero__btn--primary {
+            background: var(--brand-crimson, #DC143C);
+            color: #ffffff;
+            box-shadow: 0 16px 30px rgba(220, 20, 60, 0.25);
+        }
+        .services-hero__btn--ghost {
+            background: #ffffff18;
+            border: 1px solid #ffffff33;
+            color: #ffffff;
         }
 
-        #fullscreen-card .service-card {
-             width: 100%;
-             height: 100%;
-             position: absolute;
-             inset: 0;
-             z-index: 1;
-        }
-        
-        .fullscreen-content-overlay {
+        .services-hero__rail {
             position: relative;
             z-index: 2;
-            width: 100%;
-            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            gap: 12px;
+            padding: 0 16px 24px;
+        }
+        .services-hero__arrows {
             display: flex;
             flex-direction: column;
-            padding: 2.5rem;
-            background-color: rgba(28, 28, 28, 0.9);
-            backdrop-filter: blur(5px);
-            border-radius: 1rem;
+            gap: 8px;
         }
-
-        .fullscreen-title {
-            color: #f5f5f5;
-            font-family: 'Ubuntu', sans-serif;
-            font-size: 2rem;
-            font-weight: bold;
-            text-align: center;
-            margin-bottom: 1.5rem;
-            flex-shrink: 0;
-        }
-
-        .fullscreen-description {
-            color: #d1d5db;
-            font-family: 'Inter', sans-serif;
-            font-size: 1.1vmax;
-            width: 100%;
-            flex-grow: 1;
-            overflow-y: auto;
-            text-align: center;
-        }
-        
-        .fullscreen-description ul {
-            list-style-position: inside;
-            margin-top: 1em;
-            padding-left: 0;
-            display: inline-block;
-            text-align: left;
-        }
-
-        .fullscreen-bottom-icon-container {
-            margin-top: 1.5rem;
-            flex-shrink: 0;
-            display: flex;
-            justify-content: center;
-        }
-
-        .fullscreen-bottom-icon-container .service-icon {
-            width: 3.5rem;
-            height: 3.5rem;
-        }
-        #close-fullscreen-btn {
-            position: absolute;
-            top: 40px;
-            right: 40px;
-            color: white;
-            opacity: 0.8;
+        .services-hero__arrow {
+            width: 48px;
+            height: 48px;
+            border-radius: 999px;
+            border: 1px solid #ffffff33;
+            background: #ffffff18;
+            color: #ffffff;
+            display: grid;
+            place-items: center;
             cursor: pointer;
-            transition: opacity 0.3s, transform 0.3s;
-            z-index: 120;
+            transition: transform 0.3s ease;
         }
-        #close-fullscreen-btn:hover {
-            opacity: 1;
-            transform: scale(1.1);
+        .services-hero__arrow:focus-visible {
+            outline: 3px solid var(--brand-teal, #00CEDB);
+            outline-offset: 2px;
+        }
+        .services-hero__arrow:hover {
+            transform: translateY(-2px);
+        }
+
+        .services-hero__viewport {
+            --services-hero-gap: 16px;
+            flex: 1;
+            display: flex;
+            gap: var(--services-hero-gap);
+            overflow: hidden;
+            scroll-behavior: smooth;
+        }
+
+        .services-hero__card {
+            flex-shrink: 0;
+            flex-basis: calc((100% - var(--services-hero-gap)) / 2.2);
+            aspect-ratio: 3 / 4;
+            border-radius: 16px;
+            background: #222 center/cover;
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.35);
+            cursor: pointer;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            border: none;
+            padding: 0;
+            position: relative;
+        }
+        .services-hero__card:hover {
+            transform: scale(1.03);
+        }
+        .services-hero__card:focus-visible {
+            outline: 3px solid var(--brand-teal, #00CEDB);
+            outline-offset: 3px;
+        }
+        .services-hero__card.active {
+            box-shadow: 0 0 0 3px var(--brand-teal, #00CEDB), 0 12px 24px rgba(0, 0, 0, 0.35);
+            transform: scale(1.03);
+        }
+
+        @media (min-width: 600px) {
+            .services-hero__card {
+                flex-basis: calc((100% - var(--services-hero-gap) * 3) / 4);
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .services-hero {
+                grid-template-columns: minmax(auto, 55ch) 1fr;
+                grid-template-rows: 1fr;
+                align-items: center;
+                gap: 32px;
+                padding: 0 clamp(16px, 3vw, 48px);
+            }
+            .services-hero__content {
+                max-width: 100%;
+            }
+            .services-hero__rail {
+                flex-direction: column;
+                align-self: stretch;
+                justify-content: center;
+                padding: 0;
+                gap: 16px;
+            }
+            .services-hero__viewport {
+                flex-direction: column;
+                overflow-y: hidden;
+                overflow-x: visible;
+                max-height: 80vh;
+                width: 240px;
+            }
+            .services-hero__card {
+                width: 100%;
+                flex-basis: auto;
+            }
+            .services-hero__arrows {
+                order: 1;
+                flex-direction: row;
+            }
+            #services-hero-prev {
+                transform: rotate(-90deg);
+            }
+            #services-hero-next {
+                transform: rotate(90deg);
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .services-hero__viewport {
+                scroll-behavior: auto;
+            }
+            .services-hero__btn,
+            .services-hero__arrow,
+            .services-hero__card {
+                transition: none;
+            }
         }
 
         .loader {
@@ -791,29 +727,7 @@
             0% { transform: rotate(0deg); }
             100% { transform: rotate(360deg); }
         }
-
-        .banner .content{
-            position: absolute;
-            bottom: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-        }
-        .banner .content .model{
-            background-image: url(assets/img/model.webp);
-            width: 100%;
-            height: 100%;
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            background-size: contain;
-            background-repeat: no-repeat;
-            background-position: center bottom;
-            z-index: 1;
-        }
-        /* === END PAYMENT SERVICES EXPERIENCE === */
+        /* === END SERVICES HERO EXPERIENCE === */
 </style>
 <!-- ================= INLINE EXPERIENCE STYLES END ================= -->
 
@@ -875,128 +789,52 @@
 <!-- ================= HERO SECTION END ================= -->
 
 <!-- ================= PAYMENT SERVICES SHOWCASE START ================= -->
-<!-- 3D carousel and CTAs highlighting core payment capabilities -->
-<div class="payments-experience">
-  <canvas id="particle-canvas"></canvas>
+<!-- Immersive hero replacing the previous services carousel -->
+<section id="payments" class="services-hero" aria-label="MerchantHaus payments hero">
+  <div id="services-hero-bg" class="services-hero__bg" aria-hidden="true"></div>
 
-  <div id="fullscreen-view">
-    <div id="fullscreen-card"></div>
-    <i id="close-fullscreen-btn" data-lucide="x-circle" class="h-12 w-12"></i>
+  <div class="services-hero__content">
+    <div class="services-hero__brand">
+      <svg viewBox="0 0 90 90" role="img" aria-label="MerchantHaus shield">
+        <defs>
+          <linearGradient id="services-hero-gradient" x1="0" y1="0" x2="1" y2="0">
+            <stop offset="0%" stop-color="#DC143C" />
+            <stop offset="50%" stop-color="#FFFFFF" />
+            <stop offset="100%" stop-color="#DC143C" />
+          </linearGradient>
+        </defs>
+        <path d="M45 5 L78 20 L78 52 L45 85 L12 52 L12 20 Z" fill="url(#services-hero-gradient)" />
+      </svg>
+      <div>
+        <div class="services-hero__brand-name">MerchantHaus</div>
+        <small class="services-hero__tag">plug. play. grow.</small>
+      </div>
+    </div>
+    <h2 id="services-hero-title" class="services-hero__headline">Payments Anywhere &amp; Everywhere</h2>
+    <p id="services-hero-sub" class="services-hero__subhead">
+      Accept cards, ACH and contactless. POS, mobile and online — unified and secure.
+    </p>
+    <div class="services-hero__cta">
+      <a href="/apply.html" class="services-hero__btn services-hero__btn--primary">Get a Quote</a>
+      <button type="button" id="open-ai-modal-btn" class="services-hero__btn services-hero__btn--ghost">Discover My Best Fit</button>
+    </div>
   </div>
 
-  <section id="payments" class="w-full min-h-screen flex flex-col items-center justify-center p-4 relative py-20">
-        <!-- Title -->
-        <div class="max-w-5xl w-full mx-auto px-4 text-center mb-4">
-            <div class="inline-block bg-transparent text-slate-200 px-8 py-4 rounded-full border-2 border-brand-teal shadow-lg">
-                <h2 class="text-3xl font-ubuntu font-bold">Payment Services Tailored for You</h2>
-            </div>
-        </div>
-        
-        <!-- Carousel Container -->
-        <div class="banner flex-grow w-full h-[50vh]">
-            <div id="back-slider" class="slider" style="--quantity: 10">
-                <div class="item" data-pos="1" style="--position: 1">
-                    <div class="service-card">
-                        <div class="service-icon-container">
-                            <i data-lucide="smartphone" class="service-icon"></i>
-                        </div>
-                    </div>
-                    <div class="service-title">Mobile Payments</div>
-                </div>
-                <div class="item" data-pos="2" style="--position: 2">
-                    <div class="service-card">
-                        <div class="service-icon-container">
-                            <i data-lucide="shuffle" class="service-icon"></i>
-                        </div>
-                    </div>
-                    <div class="service-title">Smart Routing</div>
-                </div>
-                <div class="item" data-pos="3" style="--position: 3">
-                    <div class="service-card">
-                        <div class="service-icon-container">
-                            <i data-lucide="file-text" class="service-icon"></i>
-                        </div>
-                    </div>
-                    <div class="service-title">Invoicing</div>
-                </div>
-                <div class="item" data-pos="4" style="--position: 4">
-                    <div class="service-card">
-                        <div class="service-icon-container">
-                            <i data-lucide="repeat" class="service-icon"></i>
-                        </div>
-                    </div>
-                    <div class="service-title">Recurring Billing</div>
-                </div>
-                <div class="item" data-pos="5" style="--position: 5">
-                    <div class="service-card">
-                        <div class="service-icon-container">
-                            <i data-lucide="lock" class="service-icon"></i>
-                        </div>
-                    </div>
-                    <div class="service-title">Secure Tokenization</div>
-                </div>
-                <div class="item" data-pos="6" style="--position: 6">
-                    <div class="service-card">
-                        <div class="service-icon-container">
-                            <i data-lucide="bar-chart-2" class="service-icon"></i>
-                        </div>
-                    </div>
-                    <div class="service-title">Detailed Reporting</div>
-                </div>
-                <div class="item" data-pos="7" style="--position: 7">
-                    <div class="service-card">
-                        <div class="service-icon-container">
-                            <i data-lucide="cpu" class="service-icon"></i>
-                        </div>
-                    </div>
-                    <div class="service-title">Automation</div>
-                </div>
-                <div class="item" data-pos="8" style="--position: 8">
-                    <div class="service-card">
-                        <div class="service-icon-container">
-                            <i data-lucide="landmark" class="service-icon"></i>
-                        </div>
-                    </div>
-                    <div class="service-title">ACH Payments</div>
-                </div>
-                <div class="item" data-pos="9" style="--position: 9">
-                    <div class="service-card">
-                        <div class="service-icon-container">
-                            <i data-lucide="shield-alert" class="service-icon"></i>
-                        </div>
-                    </div>
-                    <div class="service-title">Fraud Prevention</div>
-                </div>
-                <div class="item" data-pos="10" style="--position: 10">
-                    <div class="service-card">
-                        <div class="service-icon-container">
-                            <i data-lucide="globe-2" class="service-icon"></i>
-                        </div>
-                    </div>
-                    <div class="service-title">Global Payments</div>
-                </div>
-            </div>
-            <div id="front-slider" class="slider" style="--quantity: 10"></div>
-            <div class="content">
-                <div class="model"></div>
-            </div>
-        </div>
-    
-        <!-- Subtitle -->
-        <p class="text-2xl sm:text-3xl font-ubuntu text-slate-400 text-center px-4 mt-4">
-           Your complete business toolkit for accepting and managing payments.
-        </p>
-
-        <div class="mt-8 sm:mt-10 flex flex-wrap justify-center gap-4 px-4">
-            <button type="button" class="js-signup-cta inline-flex items-center justify-center rounded-full px-8 py-3 text-lg font-semibold text-white shadow-lg transition-all duration-300 hover:-translate-y-0.5 hover:shadow-xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-crimson focus-visible:ring-offset-2" style="background-image: linear-gradient(135deg, #dc143c 0%, #f43f5e 50%, #ff758c 100%);">
-                Start accepting payments today
-            </button>
-             <button id="open-ai-modal-btn" type="button" class="inline-flex items-center justify-center rounded-full px-8 py-3 text-lg font-semibold text-brand-dark bg-white shadow-lg transition-all duration-300 hover:-translate-y-0.5 hover:shadow-xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-teal focus-visible:ring-offset-2">
-                ✨ Find Your Perfect Fit
-            </button>
-        </div>
-    </section>
-</div>
+  <div class="services-hero__rail">
+    <div class="services-hero__arrows">
+      <button type="button" class="services-hero__arrow" id="services-hero-prev" aria-label="Previous slide">◀</button>
+      <button type="button" class="services-hero__arrow" id="services-hero-next" aria-label="Next slide">▶</button>
+    </div>
+    <div class="services-hero__viewport" id="services-hero-cards">
+      <button type="button" class="services-hero__card" data-title="Payments Anywhere &amp; Everywhere" data-sub="Accept cards, ACH and contactless. POS, mobile and online — unified and secure." data-img="assets/img/card1land.webp"></button>
+      <button type="button" class="services-hero__card" data-title="AI-Powered Fraud Detection" data-sub="Leverage machine learning to protect your business and your customers." data-img="assets/img/card2land.webp"></button>
+      <button type="button" class="services-hero__card" data-title="Seamless Mobile Commerce" data-sub="Empower your sales on the go with our robust mobile payment solutions." data-img="assets/img/card4land.webp"></button>
+      <button type="button" class="services-hero__card" data-title="Flexible Payment Options" data-sub="From credit cards to ACH and checks, we've got all your payment needs covered." data-img="assets/img/card5land.webp"></button>
+      <button type="button" class="services-hero__card" data-title="Hundreds of Integrations" data-sub="Connect with the tools you already use to streamline your entire workflow." data-img="assets/img/card6land.webp"></button>
+      <button type="button" class="services-hero__card" data-title="Advanced Point of Sale" data-sub="Modernize your in-person transactions with our powerful POS systems." data-img="assets/img/card7land.webp"></button>
+    </div>
+  </div>
+</section>
 <!-- ================= PAYMENT SERVICES SHOWCASE END ================= -->
 
 <!-- ================= AI SUGGESTER MODAL START ================= -->
@@ -1270,354 +1108,107 @@
 document.addEventListener('DOMContentLoaded', () => {
   if (window.lucide) lucide.createIcons();
 
-  const serviceDetails = {
-    "Mobile Payments": {
-      description: "Take payments anywhere using a phone or tablet. Supports Tap to Pay and popular mobile wallets. Ideal for retail, service, and on-the-go transactions. Backed by secure, PCI-compliant technology."
-    },
-    "Smart Routing": { description: "Dynamically route transactions to optimize for cost, speed, and success rates. Our intelligent algorithms analyze each payment in real-time to select the best processing path." },
-    "Invoicing": { description: "Create and send professional, customized invoices in minutes. Track payment status, send automated reminders, and accept payments directly from the invoice." },
-    "Recurring Billing": { description: "Automate your subscription and recurring payment processes. Set up flexible billing cycles, manage customer plans, and reduce churn with smart dunning management." },
-    "Secure Tokenization": { description: "Protect sensitive customer data with our advanced tokenization technology. Cardholder information is replaced with a secure token, reducing your PCI compliance scope." },
-    "Detailed Reporting": { description: "Gain valuable insights into your business with comprehensive reporting tools. Track sales trends, monitor transaction history, and easily reconcile your accounts." },
-    "Automation": { description: "Streamline your workflows with powerful automation tools. Set up rules for fraud detection, chargeback management, and other repetitive tasks to save time and reduce errors." },
-    "ACH Payments": { description: "Offer your customers the flexibility of paying directly from their bank accounts. Our ACH processing is secure, reliable, and cost-effective for large transactions." },
-    "Fraud Prevention": { description: "Protect your business from fraudulent transactions with our multi-layered security system. We use machine learning, velocity checks, and customizable rules to minimize risk." },
-    "Global Payments": { description: "Expand your business internationally by accepting payments in multiple currencies. We provide competitive exchange rates and settlement in your local currency." }
-  };
+  const heroCardsContainer = document.getElementById('services-hero-cards');
+  const heroCards = heroCardsContainer ? Array.from(heroCardsContainer.querySelectorAll('.services-hero__card')) : [];
+  const heroBackground = document.getElementById('services-hero-bg');
+  const heroPrev = document.getElementById('services-hero-prev');
+  const heroNext = document.getElementById('services-hero-next');
+  const heroTitle = document.getElementById('services-hero-title');
+  const heroSubhead = document.getElementById('services-hero-sub');
 
-  const particleCanvas = document.getElementById('particle-canvas');
-  const frontSlider = document.getElementById('front-slider');
-  const backSlider = document.getElementById('back-slider');
-  // Only select carousel items within the services banner
-  const allItems = document.querySelectorAll('.banner .item');
-  const fullscreenView = document.getElementById('fullscreen-view');
-  const fullscreenCard = document.getElementById('fullscreen-card');
-  const closeFullscreenBtn = document.getElementById('close-fullscreen-btn');
+  if (heroCards.length && heroBackground && heroTitle && heroSubhead) {
+    let heroIndex = 0;
+    const totalCards = heroCards.length;
+    let isAnimating = false;
 
-  if (particleCanvas && frontSlider && backSlider && allItems.length && fullscreenView && fullscreenCard && closeFullscreenBtn) {
-    const pCtx = particleCanvas.getContext('2d');
-    let particles = [];
-
-    const resizeParticleCanvas = () => {
-      particleCanvas.width = window.innerWidth;
-      particleCanvas.height = window.innerHeight;
-    };
-    resizeParticleCanvas();
-    window.addEventListener('resize', resizeParticleCanvas);
-
-    class Particle {
-      constructor(x, y, vx = (Math.random() - 0.5) * 2, vy = (Math.random() - 0.5) * 2) {
-        this.x = x;
-        this.y = y;
-        this.vx = vx;
-        this.vy = vy;
-        this.alpha = 1;
-        this.radius = Math.random() * 1.5 + 1;
-        this.life = Math.random() * 30 + 20;
-      }
-      update() {
-        this.x += this.vx;
-        this.y += this.vy;
-        this.alpha -= 0.05;
-        this.life -= 1;
-      }
-      draw() {
-        pCtx.beginPath();
-        pCtx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
-        pCtx.fillStyle = `rgba(0, 206, 219, ${this.alpha})`;
-        pCtx.fill();
-      }
-    }
-
-    function createCurvedParticleTrail(startX, startY, endX, endY, duration) {
-      const startTime = Date.now();
-      const midX = (startX + endX) / 2;
-      const midY = (startY + endY) / 2;
-      const dx = endX - startX;
-      const dy = endY - startY;
-      const dist = Math.sqrt(dx * dx + dy * dy);
-      const angle = Math.atan2(dy, dx);
-      const perpAngle = angle - Math.PI / 2;
-      const curveAmount = dist * 0.3;
-      const controlX = midX + Math.cos(perpAngle) * curveAmount;
-      const controlY = midY + Math.sin(perpAngle) * curveAmount;
-
-      function animateTrail() {
-        const elapsedTime = Date.now() - startTime;
-        const progress = Math.min(elapsedTime / duration, 1);
-        const pX = Math.pow(1 - progress, 2) * startX + 2 * (1 - progress) * progress * controlX + Math.pow(progress, 2) * endX;
-        const pY = Math.pow(1 - progress, 2) * startY + 2 * (1 - progress) * progress * controlY + Math.pow(progress, 2) * endY;
-
-        if (Math.random() > 0.3) {
-          const prev = particles[particles.length - 1];
-          const particleAngle = Math.atan2(pY - (prev?.y ?? pY), pX - (prev?.x ?? pX));
-          const speed = 2;
-          const vx = Math.cos(particleAngle) * speed + (Math.random() - 0.5) * 1.5;
-          const vy = Math.sin(particleAngle) * speed + (Math.random() - 0.5) * 1.5;
-          particles.push(new Particle(pX, pY, vx, vy));
-        }
-        if (progress < 1) requestAnimationFrame(animateTrail);
-      }
-      requestAnimationFrame(animateTrail);
-    }
-
-    function animateParticles() {
-      pCtx.clearRect(0, 0, particleCanvas.width, particleCanvas.height);
-      for (let i = particles.length - 1; i >= 0; i -= 1) {
-        const particle = particles[i];
-        particle.update();
-        particle.draw();
-        if (particle.alpha <= 0 || particle.life <= 0) {
-          particles.splice(i, 1);
-        }
-      }
-      requestAnimationFrame(animateParticles);
-    }
-    animateParticles();
-
-    const numItems = allItems.length;
-    const rotationIncrement = 360 / numItems;
-    // keep CSS variable in sync with actual number of items
-    frontSlider.style.setProperty('--quantity', numItems);
-    backSlider.style.setProperty('--quantity', numItems);
-
-    let currentYRotation = 0;
-    let isDragging = false;
-    let startX;
-    let startRotation;
-    let dragDistance = 0;
-    const dragThreshold = 5;
-    let autoRotate = true;
-    let autoRotateTimeout;
-
-    const updateCardZIndexes = () => {
-      allItems.forEach(item => {
-        const position = parseInt(item.style.getPropertyValue('--position'), 10);
-        const itemAngle = (position - 1) * rotationIncrement;
-        let effectiveAngle = (currentYRotation + itemAngle) % 360;
-        if (effectiveAngle < 0) effectiveAngle += 360;
-
-        if (effectiveAngle > 90 && effectiveAngle < 270) {
-          if (item.parentElement !== backSlider) {
-            backSlider.appendChild(item);
-          }
-        } else {
-          if (item.parentElement !== frontSlider) {
-            frontSlider.appendChild(item);
-          }
+    const hydrateCards = () => {
+      heroCards.forEach(card => {
+        const image = card.dataset.img;
+        if (image) {
+          card.style.backgroundImage = `url('${image}')`;
         }
       });
     };
 
-    const updateSliderRotation = () => {
-      const rotationStyle = `perspective(1500px) rotateX(-18deg) rotateY(${currentYRotation}deg)`;
-      frontSlider.style.transform = rotationStyle;
-      backSlider.style.transform = rotationStyle;
-      updateCardZIndexes();
-    };
+    const setHeroContent = (index) => {
+      const card = heroCards[index];
+      if (!card) return;
 
-    const stopAutoRotate = () => {
-      autoRotate = false;
-      clearTimeout(autoRotateTimeout);
-    };
-    const resumeAutoRotate = (delay = 5000) => {
-      clearTimeout(autoRotateTimeout);
-      autoRotateTimeout = setTimeout(() => {
-        autoRotate = true;
-      }, delay);
-    };
+      heroBackground.style.opacity = '0';
+      heroBackground.style.transform = 'scale(1.03)';
 
-    const handleMouseDown = (event) => {
-      stopAutoRotate();
-      isDragging = true;
-      frontSlider.classList.add('dragging');
-      backSlider.classList.add('dragging');
-      startX = (event.pageX ?? event.touches?.[0]?.pageX ?? 0);
-      startRotation = currentYRotation;
-      dragDistance = 0;
-      document.body.classList.add('grabbing');
-    };
-
-    const handleMouseMove = (event) => {
-      if (!isDragging) return;
-      const x = (event.pageX ?? event.touches?.[0]?.pageX ?? 0);
-      const walk = (x - startX) * 0.5;
-      currentYRotation = startRotation - walk;
-      dragDistance = Math.abs(walk);
-      updateSliderRotation();
-    };
-
-    const handleMouseUp = () => {
-      if (!isDragging) return;
-      isDragging = false;
-      frontSlider.classList.remove('dragging');
-      backSlider.classList.remove('dragging');
-      document.body.classList.remove('grabbing');
-      resumeAutoRotate();
-    };
-
-    const zoomIn = (item) => {
-      stopAutoRotate();
-      frontSlider.classList.add('hidden');
-      backSlider.classList.add('hidden');
-      
-      const title = item.querySelector('.service-title').textContent;
-      const service = serviceDetails[title];
-      const iconHTML = item.querySelector('.service-icon').outerHTML;
-
-      fullscreenCard.innerHTML = ''; 
-
-      const clonedCardBackground = item.querySelector('.service-card').cloneNode(true);
-      clonedCardBackground.innerHTML = '';
-      fullscreenCard.appendChild(clonedCardBackground);
-      
-      const contentOverlay = document.createElement('div');
-      contentOverlay.className = 'fullscreen-content-overlay';
-
-      const titleEl = document.createElement('h2');
-      titleEl.className = 'fullscreen-title';
-      titleEl.textContent = title;
-      contentOverlay.appendChild(titleEl);
-      
-      if (service) {
-        const descriptionContainer = document.createElement('div');
-        descriptionContainer.className = 'fullscreen-description';
-        const [firstLine, ...bulletPoints] = service.description.split('. ');
-
-        let bulletHTML = bulletPoints.filter(p => p).map(point => `<li>${point.replace(/\.$/, '')}</li>`).join('');
-        
-        descriptionContainer.innerHTML = `
-          <div>
-            <p style="margin: 0; padding: 0; line-height: 1.5;">
-              ${firstLine}.
-            </p>
-            <ul>
-              ${bulletHTML}
-            </ul>
-          </div>
-        `;
-        contentOverlay.appendChild(descriptionContainer);
-      }
-      
-      const bottomIconContainer = document.createElement('div');
-      bottomIconContainer.className = 'fullscreen-bottom-icon-container';
-      bottomIconContainer.innerHTML = iconHTML;
-      contentOverlay.appendChild(bottomIconContainer);
-
-      fullscreenCard.appendChild(contentOverlay);
-      
-      fullscreenView.classList.add('visible');
       setTimeout(() => {
-        fullscreenCard.classList.add('visible');
-        if (window.lucide) {
-          lucide.createIcons();
+        if (card.dataset.img) {
+          heroBackground.style.backgroundImage = `url('${card.dataset.img}')`;
         }
-      }, 50);
+        if (card.dataset.title) {
+          heroTitle.textContent = card.dataset.title;
+        }
+        if (card.dataset.sub) {
+          heroSubhead.textContent = card.dataset.sub;
+        }
+        heroBackground.style.opacity = '1';
+        heroBackground.style.transform = 'scale(1)';
+      }, 200);
     };
 
-    const zoomOut = () => {
-      fullscreenCard.classList.remove('visible');
-      fullscreenView.classList.remove('visible');
+    const highlightCard = (index) => {
+      heroCards.forEach(card => card.classList.remove('active'));
+      const activeCard = heroCards[index];
+      if (activeCard) {
+        activeCard.classList.add('active');
+        const isDesktop = window.matchMedia('(min-width: 1024px)').matches;
+        if (isDesktop) {
+          heroCardsContainer.scrollTo({
+            top: activeCard.offsetTop - (heroCardsContainer.offsetHeight / 2) + (activeCard.offsetHeight / 2),
+            left: 0,
+            behavior: 'smooth'
+          });
+        } else {
+          heroCardsContainer.scrollTo({
+            left: activeCard.offsetLeft - (heroCardsContainer.offsetWidth / 2) + (activeCard.offsetWidth / 2),
+            top: 0,
+            behavior: 'smooth'
+          });
+        }
+      }
+    };
+
+    const updateState = (nextIndex) => {
+      if (isAnimating) return;
+      isAnimating = true;
+      heroIndex = (nextIndex + totalCards) % totalCards;
+      highlightCard(heroIndex);
+      setHeroContent(heroIndex);
       setTimeout(() => {
-        frontSlider.classList.remove('hidden');
-        backSlider.classList.remove('hidden');
-        resumeAutoRotate();
-      }, 500);
+        isAnimating = false;
+      }, 400);
     };
 
-    const anglesAreClose = (angleA, angleB, tolerance = 0.5) => {
-      const normalized = ((angleA - angleB + 540) % 360) - 180;
-      return Math.abs(normalized) < tolerance;
+    const move = (direction) => {
+      updateState(heroIndex + direction);
     };
 
-    const handleClick = (event) => {
-      if (dragDistance > dragThreshold) {
-        event.preventDefault();
-        return;
-      }
-
-      stopAutoRotate();
-
-      const item = event.currentTarget;
-      const iconContainer = item.querySelector('.service-icon-container');
-      const startRect = iconContainer.getBoundingClientRect();
-      const startCenterX = startRect.left + startRect.width / 2;
-      const startYTop = startRect.top;
-      const startYBottom = startRect.bottom;
-      const position = parseInt(item.style.getPropertyValue('--position'), 10);
-      const targetRotation = -(position - 1) * rotationIncrement;
-
-      const emitParticleStreaks = () => {
-        const bannerRect = banner.getBoundingClientRect();
-        const iconHeight = iconContainer.offsetHeight || 90;
-        const endCenterX = bannerRect.left + bannerRect.width / 2;
-        const bannerCenterY = bannerRect.top + bannerRect.height / 2;
-        const endYTop = bannerCenterY - iconHeight / 2;
-        const endYBottom = bannerCenterY + iconHeight / 2;
-        createCurvedParticleTrail(startCenterX, startYTop, endCenterX, endYTop, 1100);
-        createCurvedParticleTrail(startCenterX, startYBottom, endCenterX, endYBottom, 1100);
-      };
-
-      if (anglesAreClose(currentYRotation, targetRotation)) {
-        emitParticleStreaks();
-        zoomIn(item);
-        return;
-      }
-
-      const handleTransitionEnd = (transitionEvent) => {
-        if ((transitionEvent.target !== frontSlider && transitionEvent.target !== backSlider) || transitionEvent.propertyName !== 'transform') {
-          return;
+    heroCards.forEach((card, index) => {
+      card.addEventListener('click', () => updateState(index));
+      card.addEventListener('keydown', (event) => {
+        if (event.key === 'Enter' || event.key === ' ') {
+          event.preventDefault();
+          updateState(index);
         }
-        frontSlider.removeEventListener('transitionend', handleTransitionEnd);
-        backSlider.removeEventListener('transitionend', handleTransitionEnd);
-        zoomIn(item);
-      };
+      });
+    });
 
-      frontSlider.addEventListener('transitionend', handleTransitionEnd);
-      backSlider.addEventListener('transitionend', handleTransitionEnd);
-
-      currentYRotation = targetRotation;
-      updateSliderRotation();
-      emitParticleStreaks();
-    };
-
-    function carouselLoop() {
-      if (autoRotate && !isDragging) {
-        currentYRotation -= 0.08;
-        updateSliderRotation();
-      } else {
-        updateCardZIndexes();
-      }
-      requestAnimationFrame(carouselLoop);
+    if (heroNext) {
+      heroNext.addEventListener('click', () => move(1));
+    }
+    if (heroPrev) {
+      heroPrev.addEventListener('click', () => move(-1));
     }
 
-    const banner = document.querySelector('.banner');
-    banner.addEventListener('mousedown', handleMouseDown);
-    banner.addEventListener('touchstart', handleMouseDown, { passive: true });
-    document.addEventListener('mousemove', handleMouseMove);
-    document.addEventListener('touchmove', handleMouseMove, { passive: true });
-    document.addEventListener('mouseup', handleMouseUp);
-    document.addEventListener('touchend', handleMouseUp);
-    banner.addEventListener('mouseenter', stopAutoRotate);
-    banner.addEventListener('mouseleave', () => resumeAutoRotate(1000));
-    allItems.forEach(item => {
-      item.addEventListener('click', handleClick);
-    });
-    
-    fullscreenView.addEventListener('click', (e) => {
-      if (e.target.closest('#close-fullscreen-btn')) {
-        zoomOut();
-      }
-    });
-
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape' && fullscreenView.classList.contains('visible')) {
-        zoomOut();
-      }
-    });
-
-    updateCardZIndexes();
-    carouselLoop();
+    hydrateCards();
+    setHeroContent(heroIndex);
+    highlightCard(heroIndex);
   }
 
   const modal = document.getElementById('ai-suggester-modal');
@@ -1629,9 +1220,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
   if (modal && openBtn && closeBtn && getRecsBtn && businessDesc && resultsContainer) {
     const services = [
-      'Mobile Payments', 'Smart Routing', 'Invoicing', 'Recurring Billing',
-      'Secure Tokenization', 'Detailed Reporting', 'Automation', 'ACH Payments',
-      'Fraud Prevention', 'Global Payments'
+      'Payments Anywhere & Everywhere', 'AI-Powered Fraud Detection', 'Seamless Mobile Commerce',
+      'Flexible Payment Options', 'Hundreds of Integrations', 'Advanced Point of Sale'
     ];
 
     openBtn.addEventListener('click', () => {
