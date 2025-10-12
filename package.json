@@ -16,7 +16,9 @@
     "node": ">=18"
   },
   "dependencies": {
-    "@google/generative-ai": "^0.21.0"
+    "@google/generative-ai": "^0.21.0",
+    "framer-motion": "^12.23.24",
+    "lucide-react": "^0.545.0"
   },
   "devDependencies": {
     "@types/node": "^20.14.0",
