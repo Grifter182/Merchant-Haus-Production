@@ -1,0 +1,43 @@
+<svg width="500" height="100" viewBox="0 0 500 100" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+        <linearGradient id="animatedGradient" gradientUnits="userSpaceOnUse" x1="120" y1="0" x2="420" y2="0">
+            <stop offset="0%" stop-color="#DC143C" />
+            <stop offset="45%" stop-color="#DC143C">
+                <animate attributeName="stop-color" values="#DC143C; #FFC0CB; #DC143C" keyTimes="0; 0.5; 1" dur="5s" begin="1.5s" fill="freeze" repeatCount="1"/>
+            </stop>
+            <stop offset="50%" stop-color="#DC143C">
+                <animate attributeName="stop-color" values="#DC143C; #FFFFFF; #DC143C" keyTimes="0; 0.5; 1" dur="5s" begin="1.5s" fill="freeze" repeatCount="1"/>
+            </stop>
+            <stop offset="55%" stop-color="#DC143C">
+                <animate attributeName="stop-color" values="#DC143C; #FFC0CB; #DC143C" keyTimes="0; 0.5; 1" dur="5s" begin="1.5s" fill="freeze" repeatCount="1"/>
+            </stop>
+            <stop offset="100%" stop-color="#DC143C" />
+            <animateTransform attributeName="transform" type="translate" from="-450 0" to="450 0" dur="5s" begin="1.5s" fill="freeze" repeatCount="1"/>
+        </linearGradient>
+        <style>
+            g.merchanthaus-text text { font-family: 'Ubuntu', sans-serif; font-size: 50px; font-weight: 600; }
+            .tagline-text { font-family: 'Inter', sans-serif; font-size: 18px; font-weight: 500; fill: #A9A9A9; text-anchor: start; letter-spacing: 4px; }
+        </style>
+    </defs>
+    <!-- Updated the shield image path -->
+    <image href="images/merchanthaus-logo.webp" x="10" y="10" height="80" width="80" />
+    <g class="merchanthaus-text" shape-rendering="geometricPrecision" text-rendering="optimizeLegibility" fill="url(#animatedGradient)">
+        <text y="25" x="120" opacity="0">M<animate attributeName="opacity" from="0" to="1" dur="0.2s" begin="0s" fill="freeze"/><animate attributeName="y" from="25" to="45" dur="0.2s" begin="0s" fill="freeze" calcMode="discrete"/></text>
+        <text y="25" x="160" opacity="0">e<animate attributeName="opacity" from="0" to="1" dur="0.2s" begin="0.1s" fill="freeze"/><animate attributeName="y" from="25" to="45" dur="0.2s" begin="0.1s" fill="freeze" calcMode="discrete"/></text>
+        <text y="25" x="185" opacity="0">r<animate attributeName="opacity" from="0" to="1" dur="0.2s" begin="0.2s" fill="freeze"/><animate attributeName="y" from="25" to="45" dur="0.2s" begin="0.2s" fill="freeze" calcMode="discrete"/></text>
+        <text y="25" x="205" opacity="0">c<animate attributeName="opacity" from="0" to="1" dur="0.2s" begin="0.3s" fill="freeze"/><animate attributeName="y" from="25" to="45" dur="0.2s" begin="0.3s" fill="freeze" calcMode="discrete"/></text>
+        <text y="25" x="225" opacity="0">h<animate attributeName="opacity" from="0" to="1" dur="0.2s" begin="0.4s" fill="freeze"/><animate attributeName="y" from="25" to="45" dur="0.2s" begin="0.4s" fill="freeze" calcMode="discrete"/></text>
+        <text y="25" x="250" opacity="0">a<animate attributeName="opacity" from="0" to="1" dur="0.2s" begin="0.5s" fill="freeze"/><animate attributeName="y" from="25" to="45" dur="0.2s" begin="0.5s" fill="freeze" calcMode="discrete"/></text>
+        <text y="25" x="275" opacity="0">n<animate attributeName="opacity" from="0" to="1" dur="0.2s" begin="0.6s" fill="freeze"/><animate attributeName="y" from="25" to="45" dur="0.2s" begin="0.6s" fill="freeze" calcMode="discrete"/></text>
+        <text y="25" x="300" opacity="0">t<animate attributeName="opacity" from="0" to="1" dur="0.2s" begin="0.7s" fill="freeze"/><animate attributeName="y" from="25" to="45" dur="0.2s" begin="0.7s" fill="freeze" calcMode="discrete"/></text>
+        <text y="25" x="318" opacity="0">H<animate attributeName="opacity" from="0" to="1" dur="0.2s" begin="0.8s" fill="freeze"/><animate attributeName="y" from="25" to="45" dur="0.2s" begin="0.8s" fill="freeze" calcMode="discrete"/></text>
+        <text y="25" x="348" opacity="0">a<animate attributeName="opacity" from="0" to="1" dur="0.2s" begin="0.9s" fill="freeze"/><animate attributeName="y" from="25" to="45" dur="0.2s" begin="0.9s" fill="freeze" calcMode="discrete"/></text>
+        <text y="25" x="373" opacity="0">u<animate attributeName="opacity" from="0" to="1" dur="0.2s" begin="1.0s" fill="freeze"/><animate attributeName="y" from="25" to="45" dur="0.2s" begin="1.0s" fill="freeze" calcMode="discrete"/></text>
+        <text y="25" x="398" opacity="0">s<animate attributeName="opacity" from="0" to="1" dur="0.2s" begin="1.1s" fill="freeze"/><animate attributeName="y" from="25" to="45" dur="0.2s" begin="1.1s" fill="freeze" calcMode="discrete"/></text>
+    </g>
+    <!-- Adjusted line to align left with the text -->
+    <line x1="120" x2="340" y1="68" y2="68" stroke="#00CEDB" stroke-width="2" opacity="0"><animate attributeName="opacity" from="0" to="1" dur="1s" begin="1.5s" fill="freeze" /></line>
+    <!-- Adjusted text x-coordinate to align left -->
+    <text x="120" y="88" class="tagline-text" opacity="0"><animate attributeName="opacity" from="0" to="1" dur="1s" begin="2s" fill="freeze" />plug. play. grow.</text>
+</svg>
+
