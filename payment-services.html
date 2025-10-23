@@ -1,0 +1,1148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>MerchantHaus — Payments Anywhere & Everywhere</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@600;700&family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --brand-crimson: #DC143C;
+      --brand-teal: #00CEDB;
+      --gap: 16px;
+    }
+    *, *::before, *::after {
+      box-sizing: border-box;
+    }
+    body {
+      margin: 0;
+      font-family: 'Inter', system-ui;
+      background: #0f0f10;
+      color: #fff;
+    }
+    header {
+      background: #111;
+      padding: 16px 24px;
+      font-weight: 600;
+    }
+    /* --- Base Hero Layout (Mobile First) --- */
+    .hero {
+      position: relative;
+      min-height: 86svh;
+      display: grid;
+      grid-template-rows: 1fr auto;
+      overflow: hidden;
+    }
+    .hero__bg {
+      position: absolute;
+      inset: 0;
+      background-size: cover;
+      background-position: center;
+      transition: opacity .4s ease, transform .4s ease;
+    }
+    .hero__bg::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(0, 0, 0, .55), rgba(0, 0, 0, .35) 40%, rgba(0, 0, 0, .55));
+    }
+    .content {
+      position: relative;
+      z-index: 2;
+      padding: clamp(16px, 3vw, 48px);
+      max-width: 1100px;
+    }
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: .75rem;
+      filter: drop-shadow(0 8px 24px rgba(0, 0, 0, .45))
+    }
+    .brand svg {
+      width: 44px;
+      height: 44px
+    }
+    .brand-name {
+      font-family: 'Ubuntu', sans-serif;
+      font-weight: 700;
+      font-size: clamp(1.6rem, 2.6vw, 2.5rem)
+    }
+    .tag {
+      display: block;
+      margin-top: .25rem;
+      margin-left: 56px;
+      font: 500 .95rem 'Inter', sans-serif;
+      color: #ffffffcc;
+      letter-spacing: .18em
+    }
+    h1 {
+      font-family: 'Ubuntu', sans-serif;
+      font-size: clamp(2.2rem, 5.2vw, 4.2rem);
+      margin: 12px 0 8px
+    }
+    p {
+      max-width: 55ch;
+      opacity: .92
+    }
+    .cta {
+      display: flex;
+      gap: .75rem;
+      margin-top: 1rem
+    }
+    .btn {
+      border: none;
+      border-radius: 999px;
+      padding: .9rem 1.4rem;
+      font-weight: 700;
+      cursor: pointer
+    }
+    .primary {
+      background: var(--brand-crimson);
+      color: #fff;
+      box-shadow: 0 16px 30px rgba(220, 20, 60, .25)
+    }
+    .ghost {
+      background: #ffffff18;
+      border: 1px solid #ffffff33;
+      color: #fff
+    }
+    /* --- Carousel area --- */
+    .rail {
+      position: relative;
+      z-index: 2;
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      gap: 12px;
+      padding: 0 16px 24px;
+    }
+    .arrows {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .arrow {
+      width: 48px;
+      height: 48px;
+      border-radius: 999px;
+      border: 1px solid #ffffff33;
+      background: #ffffff18;
+      color: #fff;
+      display: grid;
+      place-items: center;
+      cursor: pointer;
+      transition: transform .3s ease;
+    }
+    .arrow:focus-visible {
+      outline: 3px solid var(--brand-teal);
+      outline-offset: 2px;
+    }
+    .viewport {
+      flex: 1;
+      display: flex;
+      gap: var(--gap);
+      overflow: hidden;
+      scroll-behavior: smooth;
+    }
+    .card {
+      flex-shrink: 0;
+      border-radius: 16px;
+      background: #222 center/cover;
+      box-shadow: 0 12px 24px rgba(0, 0, 0, .35);
+      cursor: pointer;
+      transition: transform .2s ease, box-shadow .2s ease;
+      aspect-ratio: 3 / 4; /* UPDATED ASPECT RATIO */
+    }
+    .card:hover {
+      transform: scale(1.03);
+    }
+    .card.active {
+        box-shadow: 0 0 0 3px var(--brand-teal), 0 12px 24px rgba(0,0,0,.35);
+        transform: scale(1.03);
+    }
+    
+    /* Card sizing for different breakpoints */
+    .card {
+      flex-basis: calc((100% - var(--gap)) / 2.2);
+    }
+    @media (min-width: 600px) {
+      .card {
+        flex-basis: calc((100% - var(--gap) * 3) / 4);
+      }
+    }
+
+    /* --- Desktop Layout (>=1024px): Right-side Vertical Carousel --- */
+    @media (min-width: 1024px) {
+      .hero {
+        grid-template-columns: minmax(auto, 55ch) 1fr;
+        grid-template-rows: 1fr;
+        align-items: center;
+        gap: 32px;
+        padding: 0 clamp(16px, 3vw, 48px);
+      }
+      .content {
+        max-width: 100%;
+      }
+      .rail {
+        flex-direction: column;
+        align-self: stretch;
+        justify-content: center;
+        padding: 0;
+        gap: 16px;
+      }
+      .viewport {
+        flex-direction: column;
+        overflow-y: hidden;
+        overflow-x: visible;
+        max-height: 80vh;
+        width: 240px;
+      }
+      .card {
+        width: 100%;
+        flex-basis: auto;
+      }
+      .arrows {
+        order: 1; /* Move arrows below the viewport */
+        flex-direction: row;
+      }
+      #left {
+        transform: rotate(-90deg); /* Becomes Up Arrow */
+      }
+      #right {
+        transform: rotate(90deg); /* Becomes Down Arrow */
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>MerchantHaus — Sample Header</header>
+
+  <section class="hero" aria-label="MerchantHaus payments hero">
+    <div id="bg" class="hero__bg" aria-hidden="true"></div>
+
+    <div class="content">
+      <div class="brand">
+        <svg viewBox="0 0 90 90" role="img" aria-label="MerchantHaus shield">
+          <defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#DC143C"/><stop offset="50%" stop-color="#FFFFFF"/><stop offset="100%" stop-color="#DC143C"/></linearGradient></defs>
+          <path d="M45 5 L78 20 L78 52 L45 85 L12 52 L12 20 Z" fill="url(#g)"/>
+        </svg>
+        <div>
+          <div class="brand-name">MerchantHaus</div>
+          <small class="tag">plug. play. grow.</small>
+        </div>
+      </div>
+      <h1 id="title">Payments Anywhere & Everywhere</h1>
+      <p id="sub">Accept cards, ACH and contactless. POS, mobile and online — unified and secure.</p>
+      <div class="cta">
+        <button class="btn primary">Get a Quote</button>
+        <button class="btn ghost">Learn More</button>
+      </div>
+    </div>
+
+    <div class="rail">
+      <div class="arrows">
+        <button class="arrow" id="left" aria-label="Previous">◀</button>
+        <button class="arrow" id="right" aria-label="Next">▶</button>
+      </div>
+      <div class="viewport" id="cards">
+        <div class="card" data-title="Payments Anywhere & Everywhere" data-sub="Accept cards, ACH and contactless. POS, mobile and online — unified and secure." data-img="assets/omg/Card1land.webp"></div>
+        <div class="card" data-title="AI-Powered Fraud Detection" data-sub="Leverage machine learning to protect your business and your customers." data-img="assets/omg/Card2land.webp"></div>
+        <div class="card" data-title="Seamless Mobile Commerce" data-sub="Empower your sales on the go with our robust mobile payment solutions." data-img="assets/omg/Card3land.webp"></div>
+        <div class="card" data-title="Flexible Payment Options" data-sub="From credit cards to ACH and checks, we've got all your payment needs covered." data-img="assets/omg/Card4land.webp"></div>
+        <div class="card" data-title="Hundreds of Integrations" data-sub="Connect with the tools you already use to streamline your entire workflow." data-img="assets/omg/Card5land.webp"></div>
+        <div class="card" data-title="Advanced Point of Sale" data-sub="Modernize your in-person transactions with our powerful POS systems." data-img="assets/omg/Card6land.webp"></div>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    // --- DOM ELEMENT SELECTORS ---
+    const qs = s => document.querySelector(s);
+    const cardsContainer = qs('#cards');
+    const allCards = [...cardsContainer.querySelectorAll('.card')];
+    const bg = qs('#bg');
+    const left = qs('#left');
+    const right = qs('#right');
+    const title = qs('#title');
+    const sub = qs('#sub');
+
+    // --- STATE MANAGEMENT ---
+    let heroIndex = 0;
+    const numCards = allCards.length;
+    let isAnimating = false; // Prevents spamming clicks during animations
+
+    // --- CORE FUNCTIONS ---
+
+    // 1. Set background images on all cards once on load
+    function hydrate() {
+      allCards.forEach(c => {
+        c.style.backgroundImage = `url('${c.dataset.img}')`;
+      });
+    }
+
+    // 2. Update the main hero content based on a card's data
+    function setHero(index) {
+      const card = allCards[index];
+      if (!card) return;
+
+      // Fade out, update content, then fade in
+      bg.style.opacity = '0';
+      bg.style.transform = 'scale(1.03)';
+      setTimeout(() => {
+        bg.style.backgroundImage = `url('${card.dataset.img}')`;
+        title.textContent = card.dataset.title;
+        sub.textContent = card.dataset.sub;
+        bg.style.opacity = '1';
+        bg.style.transform = 'scale(1)';
+      }, 200); // This delay should match the transition time in CSS
+    }
+    
+    // 3. Main function to update visuals and state
+    function updateState(newHeroIndex) {
+      if (isAnimating) return;
+      isAnimating = true;
+
+      // The highlighted card is always the one after the current hero
+      const newHighlightedIndex = (newHeroIndex + 1) % numCards;
+
+      // Update state
+      heroIndex = newHeroIndex;
+
+      // Update the active class to highlight the upcoming card
+      allCards.forEach(c => c.classList.remove('active'));
+      allCards[newHighlightedIndex].classList.add('active');
+      
+      const cardToFocus = allCards[newHighlightedIndex];
+      const isDesktop = window.matchMedia('(min-width: 1024px)').matches;
+
+      // Scroll the container to center the newly highlighted card
+      if (isDesktop) {
+        cardsContainer.scrollTo({
+          top: cardToFocus.offsetTop - (cardsContainer.offsetHeight / 2) + (cardToFocus.offsetHeight / 2),
+          behavior: 'smooth'
+        });
+      } else {
+        cardsContainer.scrollTo({
+          left: cardToFocus.offsetLeft - (cardsContainer.offsetWidth / 2) + (cardToFocus.offsetWidth / 2),
+          behavior: 'smooth'
+        });
+      }
+
+      // After a delay to allow for the scroll animation, update the hero content
+      setTimeout(() => {
+        setHero(heroIndex);
+        isAnimating = false; // Allow new selections
+      }, 400);
+    }
+    
+    // 4. Handle arrow navigation
+    function move(dir) {
+      // dir is 1 for next, -1 for previous
+      const newHeroIndex = (heroIndex + dir + numCards) % numCards;
+      updateState(newHeroIndex);
+    }
+
+    // 5. Handle direct card click
+    function handleCardClick(clickedIndex) {<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MerchantHaus - Unified Payment Services</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Ubuntu:wght@700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+          theme: {
+            extend: {
+              colors: {
+                'crimson': '#DC143C',
+                'neutral-light': '#F8F9FA',
+                'neutral-dark': '#1A1A1A',
+                'cyber-teal': '#00CEDB',
+                'silver-grey': '#A9A9A9',
+              }
+            }
+          }
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #1A1A1A; /* Ensure bg is dark */
+        }
+        h1, h2, h3, h4, .cta-heading, .logo, .footer-col h4 {
+            font-family: 'Ubuntu', sans-serif;
+        }
+        /* Typewriter caret */
+        .typewriter-cursor {
+            display: inline-block;
+            width: 3px;
+            height: 1em;
+            background-color: #00CEDB; /* Cyber Teal cursor */
+            animation: blink 0.7s infinite;
+            margin-left: 4px;
+            position: relative;
+            top: 0.1em;
+        }
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
+        }
+
+        /* Styles for the tilt effect */
+        .tilt-card {
+            transform-style: preserve-3d;
+            transition: transform 0.2s ease-out;
+        }
+        .icon-shadow {
+            /* A sharper, less diffused default shadow using two layers */
+            filter: drop-shadow(0 8px 6px rgb(0 0 0 / 0.55)) drop-shadow(0 4px 3px rgb(0 0 0 / 0.65));
+        }
+        /* Styles for scroll animations */
+        .animate-on-scroll {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+        .animate-on-scroll.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        /* Fade-in style for hero subtitle */
+        .hero-subtitle {
+            opacity: 0;
+            transition: opacity 1s ease-out;
+        }
+        .hero-subtitle.is-visible {
+            opacity: 1;
+        }
+
+        /* List styling */
+        .key-points {
+            list-style: none;
+            padding-left: 0;
+        }
+        .key-points li {
+            position: relative;
+            padding-left: 28px; /* Space for the icon */
+            margin-bottom: 12px;
+        }
+        .key-points li::before {
+            content: '✓'; /* Checkmark */
+            position: absolute;
+            left: 0;
+            top: 2px;
+            color: #DC143C; /* Crimson */
+            font-weight: bold;
+            font-family: Arial, sans-serif;
+        }
+        
+        /* Add top padding to all but the first page-section */
+        .page-section + .page-section {
+            padding-top: 5rem; /* 80px */
+            margin-top: 5rem; /* 80px */
+            border-top: 1px solid #333; /* border-neutral-light/10 */
+        }
+
+        /* Back to Top Button */
+        #back-to-top {
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease-out, visibility 0.3s ease-out;
+        }
+        #back-to-top.is-visible {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        /* Mobile Menu Styling */
+        #mobile-menu {
+            transition: opacity 0.3s ease-out;
+        }
+
+        /* --- New CTA Section Styling --- */
+        .cta-section {
+            padding: 2.5rem 1.5rem; /* 40px 24px */
+            border-radius: 1rem; /* 16px */
+            text-align: center;
+            transition: background-color 0.3s ease, border-color 0.3s ease;
+            background-color: #262626; /* neutral-800 */
+            border: 1px solid #404040; /* neutral-700 */
+            box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+        }
+        .cta-section .cta-heading {
+            color: #F8F9FA;
+        }
+        .cta-section p {
+            color: #A9A9A9; /* silver-grey */
+        }
+
+    </style>
+</head>
+<body class="bg-neutral-dark text-neutral-light antialiased">
+
+    <!-- Header -->
+    <header class="bg-neutral-dark/80 backdrop-blur-md sticky top-0 z-50 border-b border-neutral-light/10">
+        <div class="container mx-auto px-6 py-4">
+            <div class="flex items-center justify-between">
+                <a href="index.html" class="logo text-2xl font-bold text-neutral-light transition-colors hover:text-crimson">MerchantHaus.io</a>
+                <nav id="desktop-nav" class="hidden md:flex items-center space-x-6">
+                    <a href="#omnichannel" class="text-silver-grey transition-colors hover:text-neutral-light">Omnichannel</a>
+                    <a href="#pos" class="text-silver-grey transition-colors hover:text-neutral-light">Modern POS</a>
+                    <a href="#mobile" class="text-silver-grey transition-colors hover:text-neutral-light">Mobile</a>
+                    <a href="#global" class="text-silver-grey transition-colors hover:text-neutral-light">Global</a>
+                    <a href="#onboarding" class="bg-crimson text-neutral-light font-bold py-2 px-4 rounded-lg transition-transform duration-300 hover:scale-105">Onboarding</a>
+                </nav>
+                <!-- Mobile menu toggle -->
+                <button id="mobile-menu-toggle" class="md:hidden text-neutral-light" aria-label="Toggle navigation">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <!-- Mobile Menu Panel -->
+        <div id="mobile-menu" class="hidden md:hidden absolute top-full left-0 w-full bg-neutral-dark border-t border-neutral-light/10 shadow-lg">
+            <div class="flex flex-col p-4 space-y-2">
+                <a href="#omnichannel" class="mobile-menu-link text-silver-grey transition-colors hover:text-neutral-light p-3 rounded-lg hover:bg-neutral-dark/50">Omnichannel</a>
+                <a href="#pos" class="mobile-menu-link text-silver-grey transition-colors hover:text-neutral-light p-3 rounded-lg hover:bg-neutral-dark/50">Modern POS</a>
+                <a href="#mobile" class="mobile-menu-link text-silver-grey transition-colors hover:text-neutral-light p-3 rounded-lg hover:bg-neutral-dark/50">Mobile</a>
+                <a href="#global" class="mobile-menu-link text-silver-grey transition-colors hover:text-neutral-light p-3 rounded-lg hover:bg-neutral-dark/50">Global</a>
+                <a href="#onboarding" class="bg-crimson text-neutral-light font-bold py-3 px-5 rounded-lg transition-transform duration-300 hover:scale-105 text-center mt-2">Onboarding</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Container -->
+    <main class="container mx-auto px-6 py-16 md:py-24 overflow-x-hidden">
+        
+        <!-- =================================== -->
+        <!-- OMNICHANNEL Section                 -->
+        <!-- =================================== -->
+        <section id="omnichannel" class="page-section">
+            <!-- Animated Hero Section with Background Image -->
+            <section 
+                class="typewriter-hero hero relative min-h-[450px] md:min-h-[500px] flex items-center justify-center text-center rounded-2xl overflow-hidden p-6 animate-on-scroll"
+                aria-label="Illustration of unified payment routing across channels"
+            >
+                <!-- Background Image -->
+                <div 
+                    class="absolute inset-0 bg-cover bg-center z-0" 
+                    style="background-image: url('images/omni.webp.webp');"
+                ></div>
+                <!-- Gradient Overlay + Blur -->
+                <div class="absolute inset-0 bg-gradient-to-t from-neutral-dark/80 via-neutral-dark/40 to-transparent z-10 backdrop-blur-sm"></div>
+
+                <!-- Hero Content -->
+                <div class="relative z-20 max-w-3xl mx-auto">
+                    <!-- Typewriter Heading -->
+                    <h1 class="text-4xl md:text-6xl font-bold tracking-tight text-neutral-light">
+                        <span class="typewriter-text" data-text="Omnichannel Payments"></span><span class="typewriter-cursor"></span>
+                    </h1>
+                    <!-- Fading Subtitle -->
+                    <p class="hero-subtitle mt-6 text-lg md:text-xl text-silver-grey">
+                        One gateway for every way they want to pay — online, in‑store, mobile, or unattended.
+                    </p>
+                </div>
+            </section>
+            
+            <!-- Content Sections -->
+            <div class="space-y-20 md:space-y-28 mt-20 md:mt-28">
+
+                <!-- Section 1: Unified Acceptance -->
+                <div class="animate-on-scroll max-w-4xl mx-auto text-center md:text-left md:flex md:flex-row md:items-center md:gap-16">
+                    <div class="md:w-1/2">
+                        <h2 class="text-3xl font-bold">Unified acceptance across channels</h2>
+                        <p class="mt-4 text-silver-grey">
+                            Modern commerce happens everywhere. Our gateway lets you accept cards, ACH and contactless from a single platform. Whether checkout happens on your site, a countertop terminal, or a self‑service kiosk, everything lands in one settlement and reporting engine.
+                        </p>
+                        <ul class="key-points mt-6 text-left inline-block">
+                            <li>One account to manage multiple merchant IDs and locations.</li>
+                            <li>Consistent tokenization and customer profiles across channels.</li>
+                            <li>White‑label ready so the full experience matches your brand.</li>
+                        </ul>
+                    </div>
+                    <div class="hidden md:flex md:w-1/2 items-center justify-center mt-12 md:mt-0">
+                        <div class="p-8 rounded-2xl bg-neutral-dark/50 border border-neutral-light/10 w-full max-w-sm">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-24 h-24 mx-auto text-cyber-teal">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 21v-7.5a.75.75 0 0 1 .75-.75h3a.75.75 0 0 1 .75.75V21m-4.5 0H2.36m11.14 0H18m0 0h2.64m-13.5 0V11.25A1.125 1.125 0 0 0 9.375 10.125h4.25a1.125 1.125 0 0 0 1.125 1.125V21m-7.5 0a1.125 1.125 0 0 1-1.125-1.125V11.25a1.125 1.125 0 0 1 1.125-1.125h1.5a1.125 1.125 0 0 1 1.125 1.125V21a1.125 1.125 0 0 1-1.125 1.125h-1.5Zm9-1.125a1.125 1.125 0 0 0-1.125-1.125h-1.5a1.125 1.125 0 0 0-1.125 1.125V21a1.125 1.125 0 0 0 1.125 1.125h1.5a1.125 1.125 0 0 0 1.125-1.125V19.875Z" />
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Section 2: Key Benefits (Feature Grid) -->
+                <div class="animate-on-scroll max-w-5xl mx-auto">
+                    <h2 class="text-3xl font-bold text-center">Powerful reporting & tokenization</h2>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mt-12">
+                        
+                        <!-- Card 1: Single customer view -->
+                        <div class="tilt-card h-full flex flex-col rounded-2xl bg-gradient-to-br from-cyber-teal to-blue-600 p-8 shadow-2xl shadow-cyan-900/40 text-center">
+                            <div class="flex-grow flex items-center justify-center">
+                                <svg class="w-20 h-20 text-white icon-shadow" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="transform: translateZ(40px);">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M17.982 18.725A7.488 7.488 0 0 0 12 15.75a7.488 7.488 0 0 0-5.982 2.975m11.963 0a9 9 0 1 0-11.963 0m11.963 0A8.966 8.966 0 0 1 12 21a8.966 8.966 0 0 1-5.982-2.275M15 9.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
+                                </svg>
+                            </div>
+                            <h3 class="text-xl font-bold mt-6">Single customer view</h3>
+                            <p class="text-neutral-light/80 text-sm mt-2">See every transaction and trend in one place to spot patterns, reduce churn, and plan smarter promotions.</p>
+                        </div>
+
+                        <!-- Card 2: Secure, reusable tokens -->
+                        <div class="tilt-card h-full flex flex-col rounded-2xl bg-gradient-to-br from-crimson to-purple-800 p-8 shadow-2xl shadow-purple-900/40 text-center">
+                            <div class="flex-grow flex items-center justify-center">
+                                <svg class="w-20 h-20 text-white icon-shadow" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="transform: translateZ(40px);">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 10.5V6.75a4.5 4.5 0 1 1 9 0v3.75M3.75 21.75h10.5a2.25 2.25 0 0 0 2.25-2.25v-6.75a2.25 2.25 0 0 0-2.25-2.25H3.75a2.25 2.25 0 0 0-2.25 2.25v6.75a2.25 2.25 0 0 0 2.25 2.25Z" />
+                                </svg>
+                            </div>
+                            <h3 class="text-xl font-bold mt-6">Secure, reusable tokens</h3>
+                            <p class="text-neutral-light/80 text-sm mt-2">Use vaulted credentials for returns, recurring billing, and on‑file payments — without storing raw PAN data.</p>
+                        </div>
+
+                        <!-- Card 3: Compliance made simpler -->
+                        <div class="tilt-card h-full flex flex-col rounded-2xl bg-gradient-to-br from-green-600 to-emerald-700 p-8 shadow-2xl shadow-green-900/40 text-center">
+                            <div class="flex-grow flex items-center justify-center">
+                                <svg class="w-20 h-20 text-white icon-shadow" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="transform: translateZ(40px);">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m0-10.036A11.959 11.959 0 0 1 3.598 6 11.99 11.99 0 0 0 3 9.75c0 5.592 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.57-.598-3.75h-.152c-3.196 0-6.1-1.249-8.25-3.286Zm0 13.036h.008v.008H12v-.008Z" />
+                                </svg>
+                            </div>
+                            <h3 class="text-xl font-bold mt-6">Compliance made simpler</h3>
+                            <p class="text-neutral-light/80 text-sm mt-2">Minimize PCI scope with tokenization and role‑based access, and keep audit trails tidy for your team.</p>
+                        </div>
+
+                    </div>
+                </div>
+
+                <!-- Section 3: Built to scale -->
+                <div class="animate-on-scroll max-w-4xl mx-auto text-center">
+                    <h2 class="text-3xl font-bold">Built to scale with you</h2>
+                    <p class="mt-4 text-silver-grey">
+                        Add new channels, devices, or regions without re‑architecting. Our platform plays well with leading processors, shopping carts, and POS providers so you can choose the partners and hardware that fit your model.
+                    </p>
+                    <ul class="key-points mt-6 text-left inline-block">
+                        <li>API‑first and developer‑friendly.</li>
+                        <li>Supports card‑present and card‑not‑present use cases.</li>
+                        <li>Designed for ISVs and multi‑location merchants.</li>
+                    </ul>
+                </div>
+
+            </div>
+
+            <!-- CTA Section -->
+            <div class="mt-24 md:mt-32 animate-on-scroll">
+                <div class="max-w-4xl mx-auto cta-section">
+                    <h2 class="text-3xl md:text-4xl font-bold cta-heading">Get started with omnichannel payments</h2>
+                    <p class="mt-4 text-lg max-w-2xl mx-auto">Bring all of your payment channels together. Build seamless checkout with unified settlement and rich reporting.</p>
+                    <a href="onboarding.html" class="mt-8 inline-block bg-neutral-light text-crimson font-bold py-3 px-8 rounded-lg text-lg transition-transform duration-300 hover:scale-105">
+                        Create Your Account
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- =================================== -->
+        <!-- MODERN POS Section                  -->
+        <!-- =================================== -->
+        <section id="pos" class="page-section">
+            <!-- Animated Hero Section -->
+            <section 
+                class="typewriter-hero hero relative min-h-[450px] md:min-h-[500px] flex items-center justify-center text-center rounded-2xl overflow-hidden p-6"
+                aria-label="Illustration of modern POS terminals"
+            >
+                <!-- Background Image -->
+                <div 
+                    class="absolute inset-0 bg-cover bg-center z-0" 
+                    style="background-image: url('images/modern_pos.png');"
+                ></div>
+                <!-- Gradient Overlay + Blur -->
+                <div class="absolute inset-0 bg-gradient-to-t from-neutral-dark/80 via-neutral-dark/40 to-transparent z-10 backdrop-blur-sm"></div>
+                <!-- Hero Content -->
+                <div class="relative z-20 max-w-3xl mx-auto">
+                    <!-- Typewriter Heading -->
+                    <h1 class="text-4xl md:text-6xl font-bold tracking-tight text-neutral-light">
+                        <span class="typewriter-text" data-text="Modern POS"></span><span class="typewriter-cursor"></span>
+                    </h1>
+                    <!-- Fading Subtitle -->
+                    <p class="hero-subtitle mt-6 text-lg md:text-xl text-silver-grey">
+                        Modular, powerful and built for busy counters and unattended kiosks alike.
+                    </p>
+                </div>
+            </section>
+            
+            <!-- Content Sections -->
+            <div class="space-y-20 md:space-y-28 mt-20 md:mt-28">
+
+                <!-- Section 1: Feature Grid for POS -->
+                <div class="animate-on-scroll max-w-5xl mx-auto">
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                        
+                        <!-- Card 1: Unify in-person payments -->
+                        <div class="tilt-card h-full flex flex-col rounded-2xl bg-gradient-to-br from-silver-grey to-slate-700 p-8 shadow-2xl shadow-gray-900/40 text-center">
+                            <div class="flex-grow flex items-center justify-center">
+                                <svg class="w-20 h-20 text-white icon-shadow" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="transform: translateZ(40px);">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 8.25h19.5M2.25 9h19.5m-16.5 5.25h6m-6 2.25h6m3-3.75l-3 3m3 0l-3-3m-3.75 6.75h16.5a1.5 1.5 0 0 0 1.5-1.5V6.75a1.5 1.5 0 0 0-1.5-1.5H3.75a1.5 1.5 0 0 0-1.5 1.5v10.5a1.5 1.5 0 0 0 1.5 1.5Z" />
+                                </svg>
+                            </div>
+                            <h3 class="text-xl font-bold mt-6">Unify in‑person payments</h3>
+                            <p class="text-neutral-light/80 text-sm mt-2">Power your countertop and self‑service experiences with industry‑leading devices, all with a unified settlement engine.</p>
+                        </div>
+
+                        <!-- Card 2: Mobile readers & unattended -->
+                        <div class="tilt-card h-full flex flex-col rounded-2xl bg-gradient-to-br from-silver-grey to-slate-600 p-8 shadow-2xl shadow-gray-900/40 text-center">
+                            <div class="flex-grow flex items-center justify-center">
+                                <svg class="w-20 h-20 text-white icon-shadow" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="transform: translateZ(40px);">
+                                  <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 1.5H8.25A2.25 2.25 0 0 0 6 3.75v16.5a2.25 2.25 0 0 0 2.25 2.25h7.5A2.25 2.25 0 0 0 18 20.25V3.75a2.25 2.25 0 0 0-2.25-2.25H13.5m-3 0V3h3V1.5m-3 0h3m-3 18.75h3" />
+                                  <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75h6" />
+                                </svg>
+                            </div>
+                            <h3 class="text-xl font-bold mt-6">Mobile readers & unattended</h3>
+                            <p class="text-neutral-light/80 text-sm mt-2">Extend your POS to the field, or integrate secure kiosks and vending machines with the same gateway.</p>
+                        </div>
+
+                        <!-- Card 3: Centralized reporting -->
+                        <div class="tilt-card h-full flex flex-col rounded-2xl bg-gradient-to-br from-silver-grey to-slate-800 p-8 shadow-2xl shadow-gray-900/40 text-center">
+                            <div class="flex-grow flex items-center justify-center">
+                                <svg class="w-20 h-20 text-white icon-shadow" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="transform: translateZ(40px);">
+                                  <path stroke-linecap="round" stroke-linejoin="round" d="M3 13.125C3 12.504 3.504 12 4.125 12h2.25c.621 0 1.125.504 1.125 1.125v6.75C7.5 20.496 6.996 21 6.375 21h-2.25A1.125 1.125 0 0 1 3 19.875v-6.75ZM9.75 8.625c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v11.25c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 0 1-1.125-1.125V8.625ZM16.5 4.125c0-.621.504-1.125 1.125-1.125h2.25C20.496 3 21 3.504 21 4.125v15.75c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 0 1-1.125-1.125V4.125Z" />
+                                </svg>
+                            </div>
+                            <h3 class="text-xl font-bold mt-6">Centralized reporting</h3>
+                            <p class="text-neutral-light/80 text-sm mt-2">Consolidate all in‑person channels into a single dashboard to track sales, settlements, and device health.</p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- CTA Section -->
+            <div class="mt-24 md:mt-32 animate-on-scroll">
+                <div class="max-w-4xl mx-auto cta-section">
+                    <h2 class="text-3xl md:text-4xl font-bold cta-heading">Upgrade your POS</h2>
+                    <p class="mt-4 text-lg max-w-2xl mx-auto">
+                        Discover how easy it is to modernise your hardware and unify in‑person payments on a
+                        single platform.
+                    </p>
+                    <a href="onboarding.html" class="mt-8 inline-block bg-neutral-light text-crimson font-bold py-3 px-8 rounded-lg text-lg transition-transform duration-300 hover:scale-105">
+                        Start Today
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- =================================== -->
+        <!-- MOBILE COMMERCE Section             -->
+        <!-- =================================== -->
+        <section id="mobile" class="page-section">
+            <!-- Animated Hero Section -->
+            <section 
+                class="typewriter-hero hero relative min-h-[450px] md:min-h-[500px] flex items-center justify-center text-center rounded-2xl overflow-hidden p-6"
+                aria-label="Illustration of mobile commerce and tap to pay"
+            >
+                <!-- Background Image -->
+                <div 
+                    class="absolute inset-0 bg-cover bg-center z-0" 
+                    style="background-image: url('images/mobile_commerce.png');"
+                ></div>
+                <!-- Gradient Overlay + Blur -->
+                <div class="absolute inset-0 bg-gradient-to-t from-neutral-dark/80 via-neutral-dark/40 to-transparent z-10 backdrop-blur-sm"></div>
+                <!-- Hero Content -->
+                <div class="relative z-20 max-w-3xl mx-auto">
+                    <!-- Typewriter Heading -->
+                    <h1 class="text-4xl md:text-6xl font-bold tracking-tight text-neutral-light">
+                        <span class="typewriter-text" data-text="Mobile Commerce"></span><span class="typewriter-cursor"></span>
+                    </h1>
+                    <!-- Fading Subtitle -->
+                    <p class="hero-subtitle mt-6 text-lg md:text-xl text-silver-grey">
+                        Checkout that moves with your team—fast, secure and reliable.
+                    </p>
+                </div>
+            </section>
+            
+            <!-- Content Sections -->
+            <div class="space-y-20 md:space-y-28 mt-20 md:mt-28">
+
+                <!-- Section 1: Feature Grid for Mobile -->
+                <div class="animate-on-scroll max-w-5xl mx-auto">
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                        
+                        <!-- Card 1: Tap-to-pay -->
+                        <div class="tilt-card h-full flex flex-col rounded-2xl bg-gradient-to-br from-cyber-teal to-indigo-600 p-8 shadow-2xl shadow-indigo-900/40 text-center">
+                            <div class="flex-grow flex items-center justify-center">
+                                <svg class="w-20 h-20 text-white icon-shadow" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="transform: translateZ(40px);">
+                                  <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 1.5H8.25A2.25 2.25 0 0 0 6 3.75v16.5a2.25 2.25 0 0 0 2.25 2.25h7.5A2.25 2.25 0 0 0 18 20.25V3.75a2.25 2.25 0 0 0-2.25-2.25H13.5m-3 0V3h3V1.5m-3 0h3m-3 18.75h3" />
+                                  <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6.75c.5-1.5.834-3 1.042-4.5m-1.042 4.5c-.5 1.5-.834 3-1.042 4.5m1.042-4.5H14.25m1.5 0c.5 1.5.834 3 1.042 4.5m-1.042-4.5c-.5-1.5-.834-3-1.042-4.5" />
+                                </svg>
+                            </div>
+                            <h3 class="text-xl font-bold mt-6">Tap‑to‑pay & EMV on the go</h3>
+                            <p class="text-neutral-light/80 text-sm mt-2">Transform any smartphone into a payment terminal. Accept Apple Pay, Google Pay, and contactless cards without extra hardware.</p>
+                        </div>
+
+                        <!-- Card 2: One SDK -->
+                        <div class="tilt-card h-full flex flex-col rounded-2xl bg-gradient-to-br from-cyber-teal to-blue-600 p-8 shadow-2xl shadow-cyan-900/40 text-center">
+                            <div class="flex-grow flex items-center justify-center">
+                                <svg class="w-20 h-20 text-white icon-shadow" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="transform: translateZ(40px);">
+                                  <path stroke-linecap="round" stroke-linejoin="round" d="M17.25 6.75 22.5 12l-5.25 5.25m-10.5 0L1.5 12l5.25-5.25m7.5 0-4.5 16.5" />
+                                </svg>
+                            </div>
+                            <h3 class="text-xl font-bold mt-6">One SDK for iOS & Android</h3>
+                            <p class="text-neutral-light/80 text-sm mt-2">Accelerate your integration with our SDKs. Pair with certified EMV readers for chip, swipe, and contactless payments.</p>
+                        </div>
+
+                        <!-- Card 3: Mobile wallets -->
+                        <div class="tilt-card h-full flex flex-col rounded-2xl bg-gradient-to-br from-cyber-teal to-emerald-600 p-8 shadow-2xl shadow-teal-900/40 text-center">
+                            <div class="flex-grow flex items-center justify-center">
+                                <svg class="w-20 h-20 text-white icon-shadow" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="transform: translateZ(40px);">
+                                  <path stroke-linecap="round" stroke-linejoin="round" d="M21 12a2.25 2.25 0 0 0-2.25-2.25H5.25A2.25 2.25 0 0 0 3 12m18 0v6.75A2.25 2.25 0 0 1 18.75 21H5.25A2.25 2.25 0 0 1 3 18.75V12m18 0v-6.75A2.25 2.25 0 0 0 18.75 3H5.25A2.25 2.25 0 0 0 3 5.25v6.75m16.5 0h.008v.008h-.008V12Z" />
+                                </svg>
+                            </div>
+                            <h3 class="text-xl font-bold mt-6">Mobile wallets & checkout</h3>
+                            <p class="text-neutral-light/80 text-sm mt-2">Delight customers with fast checkout. Embed wallet buttons in your app or website to reduce cart abandonment.</p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- CTA Section -->
+            <div class="mt-24 md:mt-32 animate-on-scroll">
+                <div class="max-w-4xl mx-auto cta-section">
+                    <h2 class="text-3xl md:text-4xl font-bold cta-heading">Bring your checkout anywhere</h2>
+                    <p class="mt-4 text-lg max-w-2xl mx-auto">
+                        Deploy secure mobile payments today. Download our SDKs and get your first
+                        transaction running in minutes.
+                    </p>
+                    <a href="developers/index.html" class="mt-8 inline-block bg-neutral-light text-crimson font-bold py-3 px-8 rounded-lg text-lg transition-transform duration-300 hover:scale-105">
+                        View Developer Docs
+                    </a>
+                </div>
+            </div>
+        </section>
+        
+        <!-- =================================== -->
+        <!-- GLOBAL EXPANSION Section            -->
+        <!-- =================================== -->
+        <section id="global" class="page-section">
+            <!-- Animated Hero Section -->
+            <section 
+                class="typewriter-hero hero relative min-h-[450px] md:min-h-[500px] flex items-center justify-center text-center rounded-2xl overflow-hidden p-6"
+                aria-label="Illustration of global expansion"
+            >
+                <!-- Background Image -->
+                <div 
+                    class="absolute inset-0 bg-cover bg-center z-0" 
+                    style="background-image: url('images/global_expansion.png');"
+                ></div>
+                <!-- Gradient Overlay + Blur -->
+                <div class="absolute inset-0 bg-gradient-to-t from-neutral-dark/80 via-neutral-dark/40 to-transparent z-10 backdrop-blur-sm"></div>
+                <!-- Hero Content -->
+                <div class="relative z-20 max-w-3xl mx-auto">
+                    <!-- Typewriter Heading -->
+                    <h1 class="text-4xl md:text-6xl font-bold tracking-tight text-neutral-light">
+                        <span class="typewriter-text" data-text="Global Expansion"></span><span class="typewriter-cursor"></span>
+                    </h1>
+                    <!-- Fading Subtitle -->
+                    <p class="hero-subtitle mt-6 text-lg md:text-xl text-silver-grey">
+                        Multi‑currency support and smart routing for higher approvals everywhere you do business.
+                    </Vp>
+                </div>
+            </section>
+            
+            <!-- Content Sections -->
+            <div class="space-y-20 md:space-y-28 mt-20 md:mt-28">
+
+                <!-- Section 1: Feature Grid for Global -->
+                <div class="animate-on-scroll max-w-5xl mx-auto">
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                        
+                        <!-- Card 1: Multi-currency -->
+                        <div class="tilt-card h-full flex flex-col rounded-2xl bg-gradient-to-br from-crimson to-rose-700 p-8 shadow-2xl shadow-rose-900/40 text-center">
+                            <div class="flex-grow flex items-center justify-center">
+                                <svg class="w-20 h-20 text-white icon-shadow" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="transform: translateZ(40px);">
+                                  <path stroke-linecap="round" stroke-linejoin="round" d="M12 21a9.004 9.004 0 0 0 8.716-6.747M12 21a9.004 9.004 0 0 1-8.716-6.747M12 21c2.485 0 4.5-4.03 4.5-9S14.485 3 12 3m0 18c-2.485 0-4.5-4.03-4.5-9S9.515 3 12 3m0 0a8.997 8.997 0 0 1 7.843 4.582M12 3a8.997 8.997 0 0 0-7.843 4.582m15.686 0A11.953 11.953 0 0 1 12 10.5c-2.998 0-5.74-1.1-7.843-2.918m15.686 0A8.959 8.959 0 0 1 21 12c0 .778-.099 1.533-.284 2.253m0 0A17.919 17.919 0 0 1 12 16.5c-3.162 0-6.133-.815-8.716-2.247m0 0A9.015 9.015 0 0 1 3 12c0-1.605.42-3.113 1.157-4.418" />
+                                </svg>
+                            </div>
+                            <h3 class="text-xl font-bold mt-6">Multi‑currency & cross‑border</h3>
+                            <p class="text-neutral-light/80 text-sm mt-2">Reach customers around the world. Let buyers pay in their local currency while you settle in yours.</p>
+                        </div>
+
+                        <!-- Card 2: DCC -->
+                        <div class="tilt-card h-full flex flex-col rounded-2xl bg-gradient-to-br from-crimson to-purple-800 p-8 shadow-2xl shadow-purple-900/40 text-center">
+                            <div class="flex-grow flex items-center justify-center">
+                                <svg class="w-20 h-20 text-white icon-shadow" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="transform: translateZ(40px);">
+                                  <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v12m-3-2.818.879.659c1.171.879 3.07.879 4.242 0 1.172-.879 1.172-2.303 0-3.182C13.536 11.21 12.77 10.5 12 10.5s-1.536.71-2.121 1.256c-1.172.879-1.172 2.303 0 3.182Z" />
+                                  <path stroke-linecap="round" stroke-linejoin="round" d="M12 6V4.5m4.5 1.5h1.5m-1.5 0V4.5m0 1.5v1.5m0-1.5H12m6 12v1.5m-1.5-1.5H18m1.5 0v1.5m0-1.5v-1.5m0 1.5H18M6 12v1.5m-1.5-1.5H3m1.5 0v1.5m0-1.5V9m0 3H3m0 0H1.5m1.5 0V9m0 3v1.5" />
+                                </svg>
+                            </div>
+                            <h3 class="text-xl font-bold mt-6">Dynamic currency conversion</h3>
+                            <p class="text-neutral-light/80 text-sm mt-2">Offer cardholders the choice to pay in their home currency at the point of sale with full visibility into conversion rates.</p>
+                        </div>
+
+                        <!-- Card 3: Smart routing -->
+                        <div class="tilt-card h-full flex flex-col rounded-2xl bg-gradient-to-br from-crimson to-red-600 p-8 shadow-2xl shadow-red-900/40 text-center">
+                            <div class="flex-grow flex items-center justify-center">
+                                <svg class="w-20 h-20 text-white icon-shadow" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="transform: translateZ(40px);">
+                                  <path stroke-linecap="round" stroke-linejoin="round" d="M15.042 21.672 13.684 16.6m0 0-2.51 2.225.569-9.47 5.227 7.917-3.286-.672ZM21 12h-1.5m-1.5 0H12m-1.5 0H6m4.5 0h1.5m-1.5 0h-1.5m1.5 0H9m-3-3.903c-.353-.263-.73-.42-1.15-.462l-4.11 2.502M3 12.75l4.11-2.502c.42-.258.8-.42 1.15-.462m0 0v-2.126c0-1.141.66-2.186 1.708-2.611l4.11-1.651c1.048-.421 2.29-.421 3.338 0l4.11 1.651c1.048.425 1.708 1.47 1.708 2.611v2.126m-9.418 0c.353.263.73.42 1.15.462l4.11 2.502M19.85 12.75l-4.11-2.502c-.42-.258-.8-.42-1.15-.462" />
+                                </svg>
+                            </div>
+                            <h3 class="text-xl font-bold mt-6">Smart routing & performance</h3>
+                            <p class="text-neutral-light/80 text-sm mt-2">Optimise approval rates and minimise costs with intelligent routing that adapts in real time to deliver the best outcomes.</p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- CTA Section -->
+            <div class="mt-24 md:mt-32 animate-on-scroll">
+                <div class="max-w-4xl mx-auto cta-section">
+                    <h2 class="text-3xl md:text-4xl font-bold cta-heading">Expand your reach</h2>
+                    <p class="mt-4 text-lg max-w-2xl mx-auto">
+                        Ready to go global? Sign up today and start accepting payments from customers around
+                        the world.
+                    </p>
+                    <a href="onboarding.html" class="mt-8 inline-block bg-neutral-light text-crimson font-bold py-3 px-8 rounded-lg text-lg transition-transform duration-300 hover:scale-105">
+                        Get Started
+                    </a>
+                </div>
+            </div>
+        </section>
+        
+        <!-- =================================== -->
+        <!-- ONBOARDING Section (Placeholder)    -->
+        <!-- =================================== -->
+        <section id="onboarding" class="page-section">
+             <div class="animate-on-scroll max-w-4xl mx-auto text-center">
+                <h2 class="text-3xl font-bold">Ready to Onboard?</h2>
+                <p class="mt-4 text-silver-grey">
+                    This is where the main content for the onboarding page would go.
+                </D>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-neutral-dark border-t border-neutral-light/10 mt-20 md:mt-28">
+        <div class="container mx-auto px-6 py-16 grid grid-cols-2 md:grid-cols-4 gap-8">
+            <div class="footer-col">
+                <h4 class="text-lg font-bold text-neutral-light mb-4">Products</h4>
+                <ul class="space-y-2">
+                    <li><a href="#omnichannel" class="text-silver-grey transition-colors hover:text-neutral-light">Omnichannel</a></li>
+                    <li><a href="#pos" class="text-silver-grey transition-colors hover:text-neutral-light">Modern POS</a></li>
+                    <li><a href="#mobile" class="text-silver-grey transition-colors hover:text-neutral-light">Mobile Commerce</a></li>
+                    <li><a href="#global" class="text-silver-grey transition-colors hover:text-neutral-light">Global Expansion</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4 class="text-lg font-bold text-neutral-light mb-4">Resources</h4>
+                <ul class="space-y-2">
+                    <li><a href="developers/index.html" class="text-silver-grey transition-colors hover:text-neutral-light">Developer Docs</a></li>
+                    <li><a href="support/index.html" class="text-silver-grey transition-colors hover:text-neutral-light">Support Center</a></li>
+                    <li><a href="pricing.html" class="text-silver-grey transition-colors hover:text-neutral-light">Pricing</a></li>
+                    <li><a href="#onboarding" class="text-silver-grey transition-colors hover:text-neutral-light">Onboarding</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4 class="text-lg font-bold text-neutral-light mb-4">Company</h4>
+                <ul class="space-y-2">
+                    <li><a href="about.html" class="text-silver-grey transition-colors hover:text-neutral-light">About Us</a></li>
+                    <li><a href="security.html" class="text-silver-grey transition-colors hover:text-neutral-light">Security</a></li>
+                    <li><a href="support/index.html" class="text-silver-grey transition-colors hover:text-neutral-light">Contact</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4 class="text-lg font-bold text-neutral-light mb-4">Follow Us</h4>
+                <ul class="space-y-2">
+                    <li><a href="#" class="text-silver-grey transition-colors hover:text-neutral-light">LinkedIn</a></li>
+                    <li><a href="#" class="text-silver-grey transition-colors hover:text-neutral-light">Twitter</a></li>
+                    <li><a href="#" class="text-silver-grey transition-colors hover:text-neutral-light">Facebook</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="container mx-auto px-6 py-6 border-t border-neutral-light/10 text-center text-silver-grey text-sm">
+            © 2025 MerchantHaus.io — All rights reserved.
+        </div>
+    </footer>
+
+    <!-- Back to Top Button -->
+    <button id="back-to-top" class="fixed bottom-6 right-6 bg-crimson text-neutral-light w-12 h-12 rounded-full shadow-lg flex items-center justify-center transition-transform duration-300 hover:scale-110">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-6 h-6">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 10.5 12 3m0 0 7.5 7.5M12 3v18" />
+        </svg>
+    </button>
+
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            
+            // --- Typewriter Effect for multiple heroes ---
+            const typewriterHeroes = document.querySelectorAll('.typewriter-hero');
+            const typeObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const hero = entry.target;
+                        const typeElement = hero.querySelector('.typewriter-text');
+                        const cursorElement = hero.querySelector('.typewriter-cursor');
+                        const subtitleElement = hero.querySelector('.hero-subtitle');
+                        const typeText = typeElement.dataset.text;
+                        let charIndex = 0;
+
+                        // Ensure we don't re-type
+                        if (typeElement.textContent.length > 0) return;
+
+                        function type() {
+                            if (charIndex < typeText.length) {
+                                typeElement.textContent += typeText.charAt(charIndex);
+                                charIndex++;
+                                setTimeout(type, 70);
+                            } else {
+                                if (cursorElement) cursorElement.style.display = 'none';
+                                if (subtitleElement) subtitleElement.classList.add('is-visible');
+                            }
+                        }
+                        
+                        setTimeout(type, 500); // Start typing
+                        typeObserver.unobserve(hero); // Only type once
+                    }
+                });
+            }, { threshold: 0.1 });
+
+            typewriterHeroes.forEach(hero => typeObserver.observe(hero));
+
+
+            // --- Tilt Card Effect ---
+            const cards = document.querySelectorAll('.tilt-card');
+            cards.forEach(card => {
+                const tiltIntensity = 15;
+                const icon = card.querySelector('.icon-shadow');
+
+                card.addEventListener('mousemove', (e) => {
+                    const { left, top, width, height } = card.getBoundingClientRect();
+                    const x = e.clientX - left;
+                    const y = e.clientY - top;
+                    const centerX = width / 2;
+                    const centerY = height / 2;
+                    const deltaX = x - centerX;
+                    const deltaY = y - centerY;
+                    const rotateY = (deltaX / centerX) * tiltIntensity;
+                    const rotateX = -(deltaY / centerY) * tiltIntensity;
+
+                    card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.05, 1.05, 1.05)`;
+
+                    if (icon) {
+                        const shadowOffsetMultiplier = 1.0;
+                        const shadowOffsetX = -rotateY * shadowOffsetMultiplier;
+                        const shadowOffsetY = rotateX * shadowOffsetMultiplier;
+                        const shadowBlurLarge = 8 + (Math.abs(shadowOffsetX) + Math.abs(shadowOffsetY)) * 0.5;
+                        const shadowBlurSmall = 4 + (Math.abs(shadowOffsetX) + Math.abs(shadowOffsetY)) * 0.2;
+                        
+                        icon.style.transition = 'transform 0.2s ease-out';
+                        icon.style.transform = 'translateZ(40px) scale(1.25)';
+                        icon.style.filter = `drop-shadow(${shadowOffsetX}px ${shadowOffsetY}px ${shadowBlurLarge}px rgb(0 0 0 / 0.55)) drop-shadow(${shadowOffsetX * 0.5}px ${shadowOffsetY * 0.5}px ${shadowBlurSmall}px rgb(0 0 0 / 0.65))`;
+                    }
+                });
+
+                card.addEventListener('mouseleave', () => {
+                    card.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)';
+                    if (icon) {
+                        icon.style.transition = 'transform 0.3s ease-out, filter 0.3s ease-out';
+                        icon.style.transform = 'translateZ(40px) scale(1)';
+                        icon.style.filter = ''; 
+                    }
+                });
+            });
+
+            // --- Intersection Observer for scroll animations (non-hero) ---
+            const animatedElements = document.querySelectorAll('.animate-on-scroll');
+            const scrollObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('is-visible');
+                        scrollObserver.unobserve(entry.target);
+                    }
+                });
+            }, {
+                threshold: 0.1 
+            });
+
+            animatedElements.forEach(el => {
+                scrollObserver.observe(el);
+            });
+
+            // --- Mobile Menu Toggle ---
+            const menuToggle = document.getElementById('mobile-menu-toggle');
+            const mobileMenu = document.getElementById('mobile-menu');
+            const mobileMenuLinks = document.querySelectorAll('.mobile-menu-link');
+
+            if (menuToggle && mobileMenu) {
+                menuToggle.addEventListener('click', () => {
+                    mobileMenu.classList.toggle('hidden');
+                });
+
+                // Close menu when a link is clicked
+                mobileMenuLinks.forEach(link => {
+                    link.addEventListener('click', () => {
+                        mobileMenu.classList.add('hidden');
+                    });
+                });
+            }
+
+            // --- Back to Top Button ---
+            const toTopButton = document.getElementById('back-to-top');
+            
+            if (toTopButton) {
+                window.addEventListener('scroll', () => {
+                    if (window.scrollY > 400) {
+                        toTopButton.classList.add('is-visible');
+                    } else {
+                        toTopButton.classList.remove('is-visible');
+                    }
+                });
+
+                toTopButton.addEventListener('click', () => {
+                    window.scrollTo({
+                        top: 0,
+                        behavior: 'smooth'
+                    });
+                });
+            }
+
+        });
+    </script>
+</body>
+</html>
+
+
+
+      // When a card is clicked, it becomes the highlighted one (the next hero).
+      // The hero to display now is the one right before the clicked card.
+      const newHeroIndex = (clickedIndex - 1 + numCards) % numCards;
+      if (newHeroIndex === heroIndex) return; // Do nothing if it would result in no change
+      updateState(newHeroIndex);
+    }
+
+    // --- EVENT LISTENERS ---
+    right.addEventListener('click', () => move(1));
+    left.addEventListener('click', () => move(-1));
+    allCards.forEach((card, index) => {
+      card.addEventListener('click', () => handleCardClick(index));
+    });
+
+    // --- INITIALIZATION ---
+    function init() {
+        hydrate();
+        // Initialize with the first hero and highlight the second card
+        updateState(0); 
+    }
+    
+    init();
+  </script>
+</body>
+</html>
+
+
