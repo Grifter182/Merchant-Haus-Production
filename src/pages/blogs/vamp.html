@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Visa's VAMP: A New Era for Fraud and Dispute Management - MerchantHaus</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800&family=Ubuntu:wght@600;700&display=swap" rel="stylesheet">
+    <script>
+        // MerchantHaus Brand Colors from branding.html
+        tailwind.config = {
+          theme: {
+            extend: {
+              colors: {
+                'crimson': '#DC143C',
+                'neutral-light': '#F8F9FA',
+                'neutral-dark': '#1A1A1A',
+                'cyber-teal': '#00CEDB',
+                'silver-grey': '#A9A9A9',
+                'purple-dark': '#3C2F53', /* Added for masked image backgrounds */
+                'purple-light': '#8E6FBC',
+              }
+            }
+          }
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.7;
+        }
+        /* Custom styles for the crimson/teal accents */
+        .post-container {
+            max-width: 800px;
+        }
+        .section-heading {
+            border-left: 5px solid #DC143C; /* Crimson border */
+            padding-left: 1rem;
+            transition: all 0.3s ease-in-out;
+        }
+        .math-block {
+            background-color: #f0f0f0;
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            font-family: monospace;
+            overflow-x: auto;
+            border: 1px solid #ddd;
+        }
+        .callout {
+            border-left: 4px solid #00CEDB; /* Cyber Teal border */
+            background-color: #edfcfd;
+            padding: 1rem 1.5rem;
+            border-radius: 8px;
+        }
+        .logo-text {
+             font-family: 'Ubuntu', sans-serif;
+             font-weight: 600;
+        }
+        
+        /* --- ANIMATION STYLES --- */
+
+        /* 1. Scroll-Triggered Fade Up/General Initial State */
+        @keyframes fade-up {
+            0% { opacity: 0; transform: translateY(20px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+        
+        /* 2. Responsive Height-Based Title Reveal */
+        @keyframes reveal-title {
+            0% { max-height: 0; opacity: 0; }
+            100% { max-height: 100vh; opacity: 1; } 
+        }
+        
+        #main-title {
+            /* Start with zero height/opacity to trigger reveal */
+            max-height: 0; 
+            opacity: 0;
+            overflow: hidden;
+            /* Animation timing remains the same for feel */
+            animation: reveal-title 1.5s ease-out 0.5s forwards; 
+        }
+
+        /* 3. Tagline Pulse Animation */
+        @keyframes pulse {
+            0% { transform: scale(1); opacity: 0.85; }
+            50% { transform: scale(1.01); opacity: 1; }
+            100% { transform: scale(1); opacity: 0.85; }
+        }
+        .tagline-pulse {
+            opacity: 0.85;
+            transition: all 0.3s;
+            animation: pulse 5s ease-in-out infinite;
+        }
+
+        /* 4. Pop-in animation for Math Block */
+        @keyframes pop-in {
+            0% { opacity: 0; transform: scale(0.8); }
+            100% { opacity: 1; transform: scale(1); }
+        }
+
+        /* Utility class applied by JS on scroll-in */
+        .initial-hidden {
+            opacity: 0;
+        }
+
+        .fade-up-active {
+            animation: fade-up 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+        }
+        
+        .pop-in-active {
+             animation: pop-in 0.8s cubic-bezier(0.68, -0.55, 0.27, 1.55) forwards;
+        }
+        
+        /* Staggered lists use fade-up-active, with delay set by JS */
+        .stagger-item {
+            transform: translateY(10px); /* Small offset for staggering */
+        }
+
+        /* --- MASKED IMAGE STYLES --- */
+        .masked-image-container {
+            position: relative;
+            width: 100%;
+            overflow: hidden; /* Crucial for masking */
+            margin-bottom: 2.5rem;
+            border-radius: 12px; /* Slight rounded corners for the container */
+            background-color: #3C2F53; /* Dark purple background from image 1 */
+        }
+
+        .masked-image-container.shape-1 { /* Inspired by Image 1: large wave/arc at bottom */
+            height: 300px; /* Adjust height as needed */
+            clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%);
+        }
+        
+        .masked-image-container.shape-2 { /* Inspired by Image 2: side-curve */
+            height: 350px;
+            clip-path: polygon(0 0, 100% 0, 100% 80%, 75% 100%, 0% 60%);
+        }
+
+        .masked-image-container.shape-3 { /* Simple diagonal cut */
+            height: 280px;
+            clip-path: polygon(0 0, 100% 0, 100% 70%, 0% 100%);
+        }
+
+        .masked-image-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover; /* Ensures image covers the masked area */
+            display: block;
+            opacity: 0.7; /* Slightly faded to let the mask feel more integrated */
+        }
+
+        .masked-image-overlay-text {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: white;
+            text-align: center;
+            font-size: 2.5rem;
+            font-weight: bold;
+            text-shadow: 2px 2px 8px rgba(0,0,0,0.7);
+            z-index: 10;
+        }
+
+        /* Animation for masked images to fade in with content */
+        .masked-image-container.fade-up-active {
+            animation: fade-up 0.9s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+        }
+
+    </style>
+</head>
+<body class="bg-neutral-light text-neutral-dark p-4 sm:p-8">
+
+    <div class="post-container mx-auto">
+        
+        <!-- Header Section -->
+        <header class="mb-12 pt-8 border-b-4 border-crimson flex items-center space-x-3">
+            <img 
+                src="Merchant2/src/assets/shield.webp" 
+                alt="MerchantHaus Shield Logo" 
+                class="w-12 h-12 sm:w-16 sm:h-16"
+                onerror="this.onerror=null; this.src='https://placehold.co/64x64/DC143C/FFFFFF?text=MH'"
+            >
+            <div class="flex flex-col">
+                <h1 class="text-4xl sm:text-5xl font-extrabold text-neutral-dark leading-tight logo-text">
+                    MerchantHaus <span class="text-crimson">Blog</span>
+                </h1>
+                <p class="mt-2 mb-8 text-lg text-silver-grey tracking-wider tagline-pulse">plug in, play, process.</p>
+            </div>
+        </header>
+
+        <!-- Main Title (Animated) -->
+        <h2 id="main-title" class="text-3xl sm:text-4xl font-bold text-neutral-dark mb-6">
+            Visa's VAMP: A New Era for Fraud and Dispute Management
+        </h2>
+        
+        <p class="text-lg mb-8 italic text-neutral-dark/80 border-b pb-4 initial-hidden" data-animate>
+            The world of payment processing is always evolving, and staying ahead means understanding Visa's new **Visa Acquirer Monitoring Program (VAMP)**. This global framework redefines how fraud and disputes are tracked and managed across the payment ecosystem.
+        </p>
+        
+        <!-- Masked Image 1: Global Network -->
+        <div class="masked-image-container shape-1 initial-hidden" data-animate>
+            <img src="Merchant2/src/assets/vamp_header.webp" alt="Abstract global payment network" onerror="this.onerror=null; this.src='https://placehold.co/1200x400/3C2F53/FFFFFF?text=VAMP+Header+Image'" />
+            <div class="masked-image-overlay-text text-xl sm:text-3xl lg:text-4xl">Shaping the Future of Payments</div>
+        </div>
+
+        <!-- Section: What is VAMP -->
+        <div class="mb-10">
+            <h3 class="text-2xl font-bold mb-4 mt-6 section-heading text-crimson initial-hidden" data-animate>
+                What is VAMP and How Does It Work?
+            </h3>
+            
+            <p class="mb-4 initial-hidden" data-animate>
+                VAMP officially began replacing the previous, separate monitoring programs&mdash;the Visa Fraud Monitoring Program (VFMP) and the Visa Dispute Monitoring Program (VDMP)&mdash;starting in April 2025.
+            </p>
+            
+            <p class="mb-4 initial-hidden" data-animate>
+                The program's core is a single, unified metric called the **VAMP Ratio**, which measures an acquirer's or merchant's overall risk profile.
+            </p>
+
+            <h4 class="text-xl font-bold mt-6 mb-3 text-neutral-dark initial-hidden" data-animate>The VAMP Ratio Calculation:</h4>
+            
+            <p class="mb-4 initial-hidden" data-animate>
+                The ratio combines two critical components of card-not-present (CNP) transaction risk:
+            </p>
+            
+            <!-- Math Block (Animated Pop-In) -->
+            <div class="math-block initial-hidden" data-animate-pop>
+                $$
+                \text{VAMP Ratio} = \frac{\text{Count of [Fraud (TC40) + Disputes (TC15)]}}{\text{Count of Settled Transactions (TC05)}}
+                $$
+                <!-- Staggered List 1 -->
+                <ul class="text-sm mt-3 list-disc list-inside space-y-1" data-stagger-parent>
+                    <li class="stagger-item"><strong class="text-crimson">TC40s (Fraud Reports):</strong> Cases where a cardholder reports a fraudulent transaction to their bank.</li>
+                    <li class="stagger-item"><strong class="text-crimson">TC15s (All Disputes):</strong> All chargebacks, including both fraud-related and non-fraud disputes (e.g., merchandise quality or non-receipt).</li>
+                    <li class="stagger-item"><strong class="text-crimson">TC05s (Settled Transactions):</strong> The total count of all settled transactions in a calendar month.</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Masked Image 2: Metrics -->
+        <div class="masked-image-container shape-2 initial-hidden" data-animate>
+            <img src="Merchant2/src/assets/vamp_metrics.webp" alt="Data analysis and trends" onerror="this.onerror=null; this.src='https://placehold.co/1200x500/8E6FBC/FFFFFF?text=VAMP+Metrics+Image'" />
+            <div class="masked-image-overlay-text text-xl sm:text-3xl">Understanding the Metrics</div>
+        </div>
+
+        <!-- Section: Key Changes and Merchant Impact -->
+        <div class="mb-10">
+            <h3 class="text-2xl font-bold mb-4 mt-10 section-heading text-crimson initial-hidden" data-animate>
+                Key Changes and Merchant Impact
+            </h3>
+            
+            <p class="mb-6 initial-hidden" data-animate>
+                VAMP's consolidation into one framework and the calculation of the new ratio bring several major implications for merchants:
+            </p>
+
+            <!-- Staggered List 2 -->
+            <ul class="list-disc ml-6 space-y-4 text-neutral-dark/90" data-stagger-parent>
+                <li class="stagger-item">
+                    <strong class="text-neutral-dark">Unified Risk Management:</strong> By combining fraud and all dispute types into a single metric, VAMP encourages merchants and acquirers to address the root causes of *all* transactional issues, not just chargebacks.
+                </li>
+                <li class="stagger-item">
+                    <strong class="text-neutral-dark">Increased Penalties for Non-Compliance:</strong> If a merchant’s activity pushes their acquirer above VAMP's thresholds, the merchant can face financial penalties. For merchants, the <span class="text-crimson font-bold">Excessive</span> threshold is around 2.2% in many regions, and exceeding this can result in fees per disputed transaction.
+                </li>
+                <li class="stagger-item">
+                    <strong class="text-neutral-dark">Focus on Enumeration Attacks:</strong> VAMP introduces a separate monitoring element specifically for "enumeration" or card testing fraud, where criminals rapidly attempt small transactions to validate stolen card details. Merchants with a high rate of enumeration attempts may face penalties, regardless of their main VAMP ratio.
+                </li>
+                <li class="stagger-item">
+                    <strong class="text-neutral-dark">The Double-Counting Effect:</strong> Since the ratio includes both fraud reports (TC40s) and chargebacks (TC15s), a single transaction that is first reported as fraud and then becomes a chargeback can be <span class="font-bold text-cyber-teal">counted twice</span> against your VAMP ratio.
+                </li>
+            </ul>
+        </div>
+
+        <!-- Masked Image 3: Security -->
+        <div class="masked-image-container shape-3 initial-hidden" data-animate>
+            <img src="Merchant2/src/assets/vamp_security.webp" alt="Secure payment solutions" onerror="this.onerror=null; this.src='https://placehold.co/1200x350/3C2F53/FFFFFF?text=VAMP+Security+Image'" />
+            <div class="masked-image-overlay-text text-xl sm:text-3xl">Protecting Your Transactions</div>
+        </div>
+
+        <!-- Section: Actionable Steps -->
+        <div class="mb-10">
+            <h3 class="text-2xl font-bold mb-4 mt-10 section-heading text-crimson initial-hidden" data-animate>
+                Staying Compliant: Actionable Steps
+            </h3>
+            
+            <p class="mb-4 initial-hidden" data-animate>
+                Compliance is crucial, and merchants can take proactive steps to manage their risk and stay below VAMP's thresholds:
+            </p>
+
+            <!-- Staggered List 3 (Callout Box) -->
+            <div class="callout initial-hidden" data-animate>
+                <ul class="list-disc ml-5 space-y-3" data-stagger-parent>
+                    <li class="stagger-item"><strong class="text-cyber-teal">Proactive Monitoring:</strong> Gain access to and regularly monitor your TC40 (fraud) and TC15 (dispute) data from your acquirer to track your VAMP ratio in real-time.</li>
+                    <li class="stagger-item"><strong class="text-cyber-teal">Layered Fraud Prevention:</strong> Implement robust fraud tools like AVS (Address Verification Service), CVV/CVC2 validation, and 3D Secure 2.0 to catch fraudulent transactions before they settle.</li>
+                    <li class="stagger-item"><strong class="text-cyber-teal">Leverage Dispute Tools:</strong> Utilize pre-dispute tools and alerts (like Visa's Order Insight) to resolve disputes directly with the cardholder before they escalate to a formal chargeback (TC15) and count against your ratio.</li>
+                    <li class="stagger-item"><strong class="text-cyber-teal">Address Root Causes:</strong> Analyze the data to understand why customers are disputing charges (e.g., poor fulfillment, misleading product descriptions) and make operational fixes.</li>
+                </ul>
+            </div>
+            
+            <p class="mt-6 text-lg font-medium text-neutral-dark initial-hidden" data-animate>
+                VAMP is a signal from Visa that fraud prevention and dispute management must be a top priority. By understanding this new framework and proactively implementing strong controls, your business can protect its transactional integrity and continue to grow securely.
+            </p>
+        </div>
+
+        <!-- Footer -->
+        <footer class="mt-16 pt-8 border-t border-silver-grey/50 initial-hidden" data-animate>
+            <p class="text-sm text-silver-grey">Posted by the MerchantHaus Compliance Team | <time datetime="2025-10-24">October 24, 2025</time></p>
+        </footer>
+
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            
+            // --- 1. Scroll Animations (Intersection Observer) ---
+            const observerOptions = {
+                root: null,
+                rootMargin: '0px',
+                threshold: 0.1 // Trigger when 10% of the element is visible
+            };
+
+            const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const target = entry.target;
+                        
+                        // Handle standard fade-up elements and masked images
+                        if (target.hasAttribute('data-animate') && !target.hasAttribute('data-animate-pop')) {
+                            target.classList.remove('initial-hidden');
+                            target.classList.add('fade-up-active');
+                            observer.unobserve(target);
+                        } 
+                        // Handle pop-in elements
+                        else if (target.hasAttribute('data-animate-pop')) {
+                             target.classList.remove('initial-hidden');
+                             target.classList.add('pop-in-active');
+                             observer.unobserve(target);
+                        }
+                        // Handle staggered parents
+                        else if (target.hasAttribute('data-stagger-parent')) {
+                            const staggerItems = target.querySelectorAll('.stagger-item');
+                            
+                            // Check if items are already visible to avoid re-animating on scroll back up
+                            const firstItem = staggerItems[0];
+                            if (firstItem && firstItem.classList.contains('fade-up-active')) {
+                                observer.unobserve(target);
+                                return;
+                            }
+
+                            staggerItems.forEach((item, index) => {
+                                // Add initial hidden state for items that start hidden (for reliability)
+                                item.classList.add('initial-hidden');
+                                
+                                // Remove initial-hidden and add active class with a staggered delay
+                                setTimeout(() => {
+                                    item.classList.remove('initial-hidden');
+                                    item.classList.add('fade-up-active');
+                                }, index * 100); // 100ms delay between items
+                            });
+                            observer.unobserve(target);
+                        }
+                    }
+                });
+            }, observerOptions);
+
+            // Set animation delay to allow the title to fully reveal before content starts
+            const initialDelay = 1.8; 
+            let delayCounter = 0;
+            
+            // 2.1 Observe simple fade-up elements (paragraphs, headers, footer, AND masked image containers)
+            document.querySelectorAll('[data-animate]').forEach((element) => {
+                if (!element.hasAttribute('data-animate-pop')) {
+                     element.style.animationDelay = `${initialDelay + delayCounter * 0.15}s`;
+                     delayCounter++;
+                     observer.observe(element);
+                }
+            });
+            
+            // 2.2 Observe pop-in elements (math block)
+            document.querySelectorAll('[data-animate-pop]').forEach((element) => {
+                element.style.animationDelay = `${initialDelay + delayCounter * 0.15 + 0.5}s`; // Slightly longer delay for the big pop
+                observer.observe(element);
+            });
+
+            // 2.3 Observe staggered parents (ul/ol containing li.stagger-item)
+            document.querySelectorAll('[data-stagger-parent]').forEach(element => {
+                observer.observe(element);
+            });
+        });
+    </script>
+</body>
+</html>
