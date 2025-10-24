@@ -491,6 +491,140 @@
       }
     });
   }
+diff --git a/assets/support.js b/assets/support.js
+index 8bbc5aa41b1665fee02a8179f827406785ef790a..8f99afed854cd3b519fcf3f8c606e1522dd44837 100644
+--- a/assets/support.js
++++ b/assets/support.js
+@@ -470,35 +470,129 @@
+         }
+       });
+     }
+   }
+ 
+   function bindCta(element) {
+     if (!element || element.dataset.supportCtaBound === 'true') return;
+ 
+     element.dataset.supportCtaBound = 'true';
+     const tag = element.tagName.toLowerCase();
+     if (tag === 'a' && !element.getAttribute('href')) {
+       element.setAttribute('href', MAILTO_URL);
+     }
+ 
+     element.addEventListener('click', (event) => {
+       dispatchAnalytics(element);
+       const modalOpened = openModal();
+       if (modalOpened) {
+         event.preventDefault();
+       } else if (tag !== 'a') {
+         window.location.href = MAILTO_URL;
+       }
+     });
+   }
+ 
++  const BLOG_ROUTE = '/blogs/blogs.html';
++
++  function ensureDesktopBlogLink() {
++    const signupButton = document.querySelector('.js-signup-cta');
++    if (!signupButton) return;
++
++    const container = signupButton.parentElement;
++    if (!container || container.querySelector(`a[href="${BLOG_ROUTE}"]`)) return;
++
++    const blogLink = document.createElement('a');
++    blogLink.href = BLOG_ROUTE;
++    blogLink.textContent = 'Blog';
++    blogLink.className = 'hidden md:inline-flex items-center text-sm font-semibold text-slate-700 dark:text-neutral-light transition-colors duration-300 hover:text-brand-teal';
++
++    if (window.location && window.location.pathname.startsWith('/blogs/')) {
++      blogLink.setAttribute('aria-current', 'page');
++      blogLink.classList.add('text-brand-teal');
++    }
++
++    container.insertBefore(blogLink, signupButton);
++  }
++
++  function cloneNavLink(template, label) {
++    if (!template) {
++      const fallback = document.createElement('a');
++      fallback.className = 'block text-slate-300 hover:text-brand-teal';
++      fallback.textContent = label;
++      fallback.href = BLOG_ROUTE;
++      return fallback;
++    }
++
++    const clone = template.cloneNode(true);
++    clone.href = BLOG_ROUTE;
++    clone.textContent = label;
++    clone.removeAttribute('data-cta');
++    clone.removeAttribute('data-cta-location');
++    clone.removeAttribute('data-support-cta-bound');
++    return clone;
++  }
++
++  function ensureMobileBlogLink() {
++    const mobileMenu = document.getElementById('mobile-menu');
++    if (!mobileMenu) return;
++
++    const productSection = Array.from(mobileMenu.querySelectorAll('nav > div')).find((section) => {
++      const heading = section.querySelector('h4');
++      return heading && heading.textContent && heading.textContent.trim().toLowerCase() === 'product';
++    });
++
++    if (!productSection || productSection.querySelector(`a[href="${BLOG_ROUTE}"]`)) return;
++
++    const referenceLink = productSection.querySelector('a');
++    const blogLink = cloneNavLink(referenceLink, 'Blog');
++    if (!blogLink) return;
++
++    if (referenceLink && referenceLink.nextElementSibling) {
++      productSection.insertBefore(blogLink, referenceLink.nextElementSibling);
++    } else {
++      productSection.appendChild(blogLink);
++    }
++
++    if (blogLink && window.location && window.location.pathname.startsWith('/blogs/')) {
++      blogLink.setAttribute('aria-current', 'page');
++    }
++  }
++
++  function ensureFooterBlogLink() {
++    const footerNavs = document.querySelectorAll('footer nav');
++    if (!footerNavs.length) return;
++
++    footerNavs.forEach((nav) => {
++      const heading = nav.querySelector('h3');
++      if (!heading || heading.textContent.trim().toLowerCase() !== 'product') return;
++      if (nav.querySelector(`a[href="${BLOG_ROUTE}"]`)) return;
++
++      const referenceLink = nav.querySelector('a');
++      const blogLink = cloneNavLink(referenceLink, 'Blog');
++      if (blogLink) {
++        if (window.location && window.location.pathname.startsWith('/blogs/')) {
++          blogLink.setAttribute('aria-current', 'page');
++          blogLink.classList.add('text-brand-teal');
++        }
++        nav.appendChild(blogLink);
++      }
++    });
++  }
++
++  function ensureBlogLinks() {
++    ensureDesktopBlogLink();
++    ensureMobileBlogLink();
++    ensureFooterBlogLink();
++  }
++
+   onReady(() => {
+     document.querySelectorAll(CTA_SELECTOR).forEach(bindCta);
+     const existing = document.getElementById('support-modal');
+     if (existing) {
+       cachedModal = existing;
+       attachModalEvents(existing);
+     }
+     initCookieConsent();
++    ensureBlogLinks();
+   });
+ })();
 
   onReady(() => {
     document.querySelectorAll(CTA_SELECTOR).forEach(bindCta);
