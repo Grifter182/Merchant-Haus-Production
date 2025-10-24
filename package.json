@@ -10,7 +10,7 @@
     "format": "prettier --write .",
     "typecheck": "tsc --noEmit",
     "test": "jest --passWithNoTests",
-    "build": "rm -rf dist && mkdir -p dist/integrations && cp -a *.html dist/ && cp -a integrations/*.html dist/integrations/ && cp -a assets dist/ && cp -a public dist/ && cp -a favicons dist/ && cp favicon.ico robots.txt sitemap.xml site.webmanifest dist/"
+       "build": "rm -rf dist && mkdir -p dist/integrations dist/blogs && cp -a *.html dist/ && cp -a integrations/*.html dist/integrations/ && cp -a src/pages/blogs/*.html dist/blogs/ && cp -a assets dist/ && cp -a public dist/ && cp -a favicons dist/ && cp favicon.ico robots.txt sitemap.xml site.webmanifest dist/"
   },
   "engines": {
     "node": ">=18"
