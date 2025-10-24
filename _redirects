@@ -1,1 +1,3 @@
-/thankyou   /thankyou.html   200
+ /thankyou   /thankyou.html   200
++/blogs      /blogs/blogs.html   301
++/blogs/     /blogs/blogs.html   301
