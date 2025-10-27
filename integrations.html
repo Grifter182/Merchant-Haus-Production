@@ -1,905 +1,406 @@
 <!DOCTYPE html>
-<html lang="en" class="dark">
-
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MerchantHaus – Integrations Directory – MerchantHaus</title>
-    <meta name="description" content="A showcase of our trusted partners and integrated platforms.">
-    <meta name="theme-color" content="#E63946">
-    <meta name="theme-color" media="(prefers-color-scheme: light)" content="#E63946">
-    <meta name="theme-color" media="(prefers-color-scheme: dark)" content="linear-gradient(#1B1B1B, #E63946)">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <meta name="msapplication-navbutton-color" content="#E63946">
-    <link rel="preload" as="image" href="/public/assets/images/banner1.webp">
-
-    <!-- Google Fonts -->
+    <title>MerchantHaus – Integrations Directory</title>
+    <meta name="description" content="A comprehensive directory of our trusted technology partners and integrated platforms.">
+    <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@700&family=Vollkorn:wght@400&family=Inter:wght@500&display=swap"
-        rel="stylesheet">
-
-    <!-- Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-        tailwind.config = {
-            darkMode: 'class',
-            theme: {
-                extend: {
-                    fontFamily: {
-                        sans: ['Vollkorn', 'serif'],
-                        ubuntu: ['Ubuntu', 'sans-serif'],
-                        inter: ['Inter', 'sans-serif']
-                    },
-                    colors: {
-                        'brand-crimson': '#DC143C',
-                        'brand-teal': '#00CEDB',
-                        'brand-silver': '#A9A9A9',
-                        'brand-dark': '#1A1A1A',
-                        'brand-light': '#F8F9FA',
-                    }
-                }
-            }
-        }
-    </script>
-
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Ubuntu:wght@700&display=swap" rel="stylesheet">
+    
     <!-- Lucide Icons -->
     <script src="https://unpkg.com/lucide@latest"></script>
 
-    <!-- Custom Styles -->
     <style>
-        html {
-            scroll-behavior: smooth;
+        /* Root colour variables (From index (11).html) */
+        :root {
+            --crimson: #DC143C;
+            --dark-bg: #0f0f10;
+            --light-bg: #ffffff;
+            --teal: #00CEDB;
+            --silver-grey: #A9A9A9;
         }
-
+        /* Global resets */
+        *, *::before, *::after { box-sizing: border-box; }
         body {
-            font-family: 'Vollkorn', serif;
-            position: relative;
-            -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
-            background-color: #1c1c1c;
-            color: #f5f5f5;
-        }
-
-        body::before {
-            content: '';
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
-            z-index: -1;
-            background:
-                radial-gradient(circle at 15% 25%, rgba(220, 20, 60, 0.25), transparent 40%),
-                radial-gradient(circle at 85% 75%, rgba(0, 206, 219, 0.2), transparent 40%);
-            animation: bloom 25s linear infinite alternate;
-        }
-
-        @keyframes bloom {
-            0% {
-                background-position: 0% 0%, 0% 0%;
-            }
-
-            100% {
-                background-position: 50% -50%, -50% 50%;
-            }
-        }
-
-        .header-glass {
-            background-color: rgba(28, 28, 28, 0.8);
-            backdrop-filter: blur(10px);
-        }
-
-        .dark .border-slate-800 {
-            border-color: #2a2a2a !important;
-        }
-
-        /* Headline scroller */
-        .scrolling-words-container {
-            height: 4.5rem;
-            line-height: 4.5rem;
-            overflow: hidden;
-            position: relative;
-            display: inline-block;
-        }
-
-        @media (min-width: 768px) {
-            .scrolling-words-container {
-                height: 3.75rem;
-                line-height: 3.75rem;
-            }
-        }
-
-        .scrolling-words-box {
-            display: inline-block;
-            list-style: none;
-            padding: 0;
             margin: 0;
-            animation: spin-words 10s ease-in-out infinite;
-        }
-
-        @keyframes spin-words {
-
-            0%,
-            20% {
-                transform: translateY(0);
-            }
-
-            25%,
-            45% {
-                transform: translateY(-4.5rem);
-            }
-
-            50%,
-            70% {
-                transform: translateY(-9rem);
-            }
-
-            75%,
-            95% {
-                transform: translateY(-13.5rem);
-            }
-
-            100% {
-                transform: translateY(-18rem);
-            }
-        }
-
-        @media (min-width: 768px) {
-            @keyframes spin-words {
-
-                0%,
-                20% {
-                    transform: translateY(0);
-                }
-
-                25%,
-                45% {
-                    transform: translateY(-3.75rem);
-                }
-
-                50%,
-                70% {
-                    transform: translateY(-7.5rem);
-                }
-
-                75%,
-                95% {
-                    transform: translateY(-11.25rem);
-                }
-
-                100% {
-                    transform: translateY(-15rem);
-                }
-            }
-        }
-
-        /* Typewriter effect */
-        .typewriter-text {
-            border-right: .15em solid #00CEDB;
-            white-space: pre-wrap;
-            animation: blink-caret .75s step-end infinite;
-        }
-
-        @keyframes blink-caret {
-
-            from,
-            to {
-                border-color: transparent
-            }
-
-            50% {
-                border-color: #00CEDB;
-            }
-        }
-
-        .sr-only {
-            position: absolute;
-            width: 1px;
-            height: 1px;
-            padding: 0;
-            margin: -1px;
-            overflow: hidden;
-            clip: rect(0, 0, 0, 0);
-            border: 0;
-        }
-    </style>
-
-    <!-- Favicons -->
-    <link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.webp">
-    <link rel="icon" type="image/png" sizes="192x192" href="/favicons/android-chrome-192x192.webp">
-    <link rel="icon" type="image/png" sizes="512x512" href="/favicons/android-chrome-512x512.webp">
-    <link rel="icon" type="image/x-icon" href="/favicon.ico">
-    <link rel="manifest" href="/site.webmanifest">
-</head>
-
-<body class="text-slate-100">
-
-    <!-- Header -->
-    <div class="sticky top-0 z-50">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-4 pb-6">
-            <header class="header-glass border border-slate-200/70 dark:border-slate-800 rounded-full shadow-lg">
-                <div class="relative max-w-7xl mx-auto px-6 py-3 flex items-center justify-between">
-                    <a href="/index.html" class="flex items-center gap-3 group">
-                        <div class="w-[190px] md:w-[260px]" data-mh-logo-header></div>
-                        <span class="sr-only">MerchantHaus Homepage</span>
-                    </a>
-                    <div class="flex items-center gap-6">
-                        <div class="hidden md:flex items-center gap-4 text-sm font-sans">
-                            <a href="tel:15056006042" class="hover:text-brand-teal transition-colors">1-505-600-6042</a>
-                            <button
-                                type="button"
-                                class="js-support inline-flex items-center justify-center rounded-full border border-brand-teal px-4 py-2 font-semibold text-brand-teal transition-colors duration-300 hover:bg-brand-teal hover:text-white"
-                                data-cta="contact-support"
-                                data-cta-location="header-desktop"
-                            >Contact Support</button>
-                        </div>
-                        <button type="button"
-                            class="js-signup-cta bg-brand-crimson hover:bg-opacity-90 text-white border border-transparent px-4 py-2 rounded-full text-sm font-semibold font-inter transition-colors duration-300">Get
-                            Started</button>
-                        <a href="https://retailmanager.merchant.haus"
-                            class="hidden sm:block bg-transparent hover:bg-brand-teal text-brand-teal hover:text-white border border-brand-teal px-4 py-2 rounded-lg text-sm font-semibold font-inter transition-colors duration-300">Login</a>
-                        <button id="mobile-menu-button" class="md:hidden p-2 rounded-lg hover:bg-slate-800">
-                            <i data-lucide="menu" class="h-6 w-6"></i>
-                        </button>
-                    </div>
-                </div>
-            </header>
-            <div id="mobile-menu"
-                class="absolute right-4 mt-2 w-72 rounded-xl bg-[#1c1c1c] shadow-2xl border border-brand-teal p-4 z-40 hidden">
-                <nav class="flex flex-col space-y-6 text-base font-medium font-inter">
-                    <div class="space-y-2">
-                        <h4 class="text-sm font-semibold text-brand-teal uppercase tracking-[0.2em]">Product</h4>
-                        <a href="/#payments"
-                            class="block w-full px-4 py-2 text-left rounded-full border border-brand-teal bg-[#262626] text-white transition-colors duration-200 hover:bg-brand-teal">Payment
-                            Services</a>
-                        <button type="button" id="mobile-integrations-toggle" aria-expanded="false"
-                            aria-controls="mobile-integrations-menu"
-                            class="flex items-center justify-between w-full px-4 py-2 text-left rounded-full border border-brand-teal bg-[#262626] text-white transition-colors duration-200 hover:bg-brand-teal">
-                            <span>Integrations</span>
-                            <span class="ml-2 text-brand-teal">
-                                <svg data-collapsible-icon class="w-4 h-4 transition-transform" viewBox="0 0 24 24"
-                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                    stroke-linejoin="round">
-                                    <polyline points="6 9 12 15 18 9" />
-                                </svg>
-                            </span>
-                        </button>
-                        <div id="mobile-integrations-menu" class="mt-2 space-y-2 pl-3 hidden">
-                            <a href="/integrations.html"
-                                class="block w-full px-4 py-2 text-left rounded-full border border-brand-teal bg-[#1f1f1f] text-white transition-colors duration-200 hover:bg-brand-teal">Integrations
-                                Directory</a>
-                            <a href="/shopify.html"
-                                class="block w-full px-4 py-2 text-left rounded-full border border-brand-teal bg-[#1f1f1f] text-white transition-colors duration-200 hover:bg-brand-teal">Shopify
-                                Integration</a>
-                            <a href="/gohighlevel.html"
-                                class="block w-full px-4 py-2 text-left rounded-full border border-brand-teal bg-[#1f1f1f] text-white transition-colors duration-200 hover:bg-brand-teal">GoHighLevel
-                                Integration</a>
-                        </div>
-                        <a href="/#checklist"
-                            class="block w-full px-4 py-2 text-left rounded-full border border-brand-teal bg-[#262626] text-white transition-colors duration-200 hover:bg-brand-teal">Setup
-                            Checklist</a>
-                    </div>
-                    <div class="space-y-2">
-                        <h4 class="text-sm font-semibold text-brand-teal uppercase tracking-[0.2em]">Support</h4>
-                        <button
-                            type="button"
-                            class="js-support block w-full rounded-full border border-brand-teal bg-[#262626] px-4 py-2 text-left font-semibold text-white transition-colors duration-200 hover:bg-brand-teal"
-                            data-cta="contact-support"
-                            data-cta-location="mobile-nav"
-                        >Contact Support</button>
-                        <a href="/faq.html"
-                            class="block w-full px-4 py-2 text-left rounded-full border border-brand-teal bg-[#262626] text-white transition-colors duration-200 hover:bg-brand-teal">FAQ</a>
-                    </div>
-                    <div class="space-y-2">
-                        <h4 class="text-sm font-semibold text-brand-teal uppercase tracking-[0.2em]">Legal</h4>
-                        <a href="/privacy.html"
-                            class="block w-full px-4 py-2 text-left rounded-full border border-brand-teal bg-[#262626] text-white transition-colors duration-200 hover:bg-brand-teal">Privacy
-                            Policy</a>
-                        <a href="/terms.html"
-                            class="block w-full px-4 py-2 text-left rounded-full border border-brand-teal bg-[#262626] text-white transition-colors duration-200 hover:bg-brand-teal">Terms
-                            &amp; Conditions</a>
-                        <a href="/compliance.html"
-                            class="block w-full px-4 py-2 text-left rounded-full border border-brand-teal bg-[#262626] text-white transition-colors duration-200 hover:bg-brand-teal">Compliance</a>
-                    </div>
-                    <a href="https://retailmanager.merchant.haus"
-                        class="sm:hidden block w-full px-4 py-2 text-center rounded-full border border-brand-teal bg-[#262626] text-white transition-colors duration-200 hover:bg-brand-teal">Login</a>
-                </nav>
-            </div>
-        </div>
-    </div>
-
-    <div id="signup-panel-overlay" class="panel-overlay fixed inset-0 bg-black/60 z-50 opacity-0 invisible">
-        <div id="signup-panel"
-            class="panel-container fixed top-0 right-0 h-full w-full max-w-2xl bg-white dark:bg-slate-900 shadow-2xl transform translate-x-full flex flex-col">
-            <div class="p-6 sm:p-8 relative flex-shrink-0">
-                <button id="close-signup-panel-btn"
-                    class="absolute top-4 right-4 text-slate-500 hover:text-slate-800 dark:hover:text-slate-200">
-                    <i data-lucide="x" class="h-6 w-6"></i>
-                </button>
-                <div class="mb-6">
-                    <div class="flex justify-between mb-2 text-sm font-semibold text-slate-800 dark:text-slate-200">
-                        <p>Step <span id="current-step-text">1</span> of 3</p>
-                        <p id="step-name">Account Details</p>
-                    </div>
-                    <div class="w-full bg-slate-200 dark:bg-slate-700 rounded-full h-2.5 overflow-hidden">
-                        <div id="progress-bar" class="bg-brand-crimson h-full rounded-full" style="width: 33%"></div>
-                    </div>
-                </div>
-            </div>
-            <div class="px-6 sm:px-8 pb-4 flex-grow overflow-y-auto">
-                <form id="signup-form" novalidate></form>
-                <div id="form-message" class="mt-4 text-center text-sm"></div>
-            </div>
-            <div
-                class="p-6 sm:p-8 mt-auto pt-6 border-t border-slate-200 dark:border-slate-800 flex justify-between items-center flex-shrink-0">
-                <div class="text-sm">
-                    <p class="font-semibold">Need Help?</p>
-                    <a href="tel:15056006042"
-                        class="text-slate-500 hover:text-brand-crimson dark:hover:text-brand-teal transition-colors">1-505-600-6042</a>
-                </div>
-                <div class="flex items-center gap-4">
-                    <button type="button" id="prev-btn"
-                        class="bg-slate-200 text-slate-800 dark:bg-slate-700 dark:text-slate-200 px-6 py-2.5 rounded-lg font-semibold hover:bg-slate-300 dark:hover:bg-slate-600 transition-all invisible">Previous</button>
-                    <button type="button" id="next-btn"
-                        class="bg-brand-crimson text-white px-6 py-2.5 rounded-lg font-semibold hover:bg-brand-crimson transition-all shadow-sm hover:shadow-md">Next</button>
-                    <button type="submit" id="submit-btn" form="signup-form"
-                        class="bg-brand-crimson text-white px-6 py-2.5 rounded-lg font-bold hover:bg-brand-crimson transition-all shadow-sm hover:shadow-md hidden">Create
-                        Account</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <style>
-        .integrations-page {
             font-family: 'Inter', sans-serif;
+            background: var(--dark-bg);
+            color: var(--light-bg);
+            line-height: 1.6;
+        }
+        a { color: inherit; text-decoration: none; }
+
+        /* Utility classes */
+        .hidden { display: none !important; }
+        .max-w-7xl { max-width: 1280px; }
+        .mx-auto { margin-left: auto; margin-right: auto; }
+        .px-6 { padding-left: 1.5rem; padding-right: 1.5rem; }
+        .py-20 { padding-top: 5rem; padding-bottom: 5rem; }
+
+        /* --- Section Headings --- */
+        .section-header-container { text-align: center; margin-bottom: 4rem; }
+        .section-title {
+            font-family: 'Ubuntu', sans-serif;
+            font-size: clamp(2rem, 5vw, 3rem); 
+            font-weight: 700;
+            line-height: 1.1;
+            margin-bottom: 0.5rem;
+            color: var(--light-bg);
+        }
+        .section-subtitle {
+            font-size: clamp(1rem, 2vw, 1.25rem);
+            color: var(--silver-grey);
+            max-width: 800px;
+            margin: 0.5rem auto 0;
         }
 
-        .integrations-page .card-hover-effect {
-            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+        /* --- Header Styles (Simplified) --- */
+        .main-header { 
+            /* Removed sticky header styling as the component is removed. */
+            display: none; /* Ensure no residual space is taken */
+        }
+        .onboarding-btn { background: var(--crimson); color: var(--light-bg); border-radius: 9999px; padding: 0.5rem 1.25rem; font-weight: 600; text-decoration: none; border: 1px solid var(--crimson); transition: background 0.2s ease, box-shadow 0.2s ease; }
+        .onboarding-btn:hover { background: #b51731; box-shadow: 0 4px 8px rgba(220, 20, 60, 0.4); }
+        .contact-btn {
+            background: none; 
+            color: var(--crimson); 
+            border: 1px solid var(--crimson); 
+            border-radius: 9999px; 
+            padding: 0.5rem 1.25rem; 
+            font-weight: 600; 
+            text-decoration: none; 
+            transition: all 0.2s ease;
+        }
+        .contact-btn:hover {
+            background: rgba(220, 20, 60, 0.1);
         }
 
-        .integrations-page .card-hover-effect:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        /* --- Integrations Grid --- */
+        .integrations-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); /* Responsive columns */
+            gap: 1.5rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .integration-card {
+            background: #1f1f1f;
+            border: 1px solid #2a2a2a;
+            border-radius: 0.75rem;
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            aspect-ratio: 1 / 1; /* Square cards */
+            /* Added transition for smoother effects */
+            transition: transform 0.35s cubic-bezier(0.25, 0.8, 0.25, 1), box-shadow 0.35s cubic-bezier(0.25, 0.8, 0.25, 1), border-color 0.3s ease; 
+        }
+        .integration-card:hover {
+            /* Exaggerated zoom and tilt/lift effect */
+            transform: translateY(-12px) scale(1.05) rotateZ(0.5deg); 
+            box-shadow: 0 20px 40px rgba(0, 206, 219, 0.2); 
+            border-color: var(--teal);
+        }
+        .integration-card img {
+            max-height: 40px;
+            width: auto;
+            object-fit: contain;
+            filter: grayscale(100%) brightness(1.5); /* Desaturate/brighten logos */
+            opacity: 0.75;
+            transition: opacity 0.3s ease, filter 0.3s ease;
+        }
+        .integration-card:hover img {
+            opacity: 1;
+            filter: grayscale(0%) brightness(1);
+        }
+        .integration-card p {
+            margin-top: 1rem;
+            font-weight: 500;
+            color: var(--silver-grey);
+            transition: color 0.3s ease;
+        }
+        .integration-card:hover p {
+            color: var(--light-bg);
         }
 
-        .dark .integrations-page .card-hover-effect:hover {
-            box-shadow: 0 10px 20px rgba(0, 206, 219, 0.1);
+        /* --- Footer --- */
+        footer { background: var(--dark-bg); padding: 3rem 1rem; color: rgba(255,255,255,0.8); font-size: 0.9rem; border-top: 1px solid rgba(255,255,255,0.1); }
+        .footer-inner { 
+            max-width: 1280px; 
+            margin: 0 auto; 
+            display: grid; 
+            gap: 2rem; 
+            /* Grid definition for smaller screens */
+            grid-template-columns: repeat(1, 1fr);
+        }
+        @media (min-width: 640px) { .footer-inner { grid-template-columns: repeat(2, 1fr); } }
+        @media (min-width: 1024px) { 
+            /* Custom grid template for 4 columns on desktop (1.5fr/1fr/1fr/1.5fr ratio for Logo/Links/Links/Contact) */
+            .footer-inner { grid-template-columns: 1.5fr 1fr 1fr 1.5fr; } 
+        }
+        
+        .footer-col h4 { font-family: 'Ubuntu', sans-serif; font-size: 1.2rem; margin-bottom: 0.75rem; color: var(--light-bg); }
+        .footer-col ul { list-style: none; padding: 0; margin: 0; }
+        .footer-col li { margin-bottom: 0.5rem; }
+        .footer-col a { color: rgba(255,255,255,0.8); transition: color 0.2s ease; }
+        .footer-col a:hover { color: var(--crimson); }
+        
+        /* New style for address/break line */
+        .footer-logo-address {
+            padding-top: 0.75rem;
+            color: rgba(255,255,255,0.8);
+            line-height: 1.4;
         }
 
-        .integrations-page .mh-aurora {
-            position: absolute;
-            inset: 0;
-            width: 100%;
-            height: 100%;
-            overflow: hidden;
-            z-index: -1;
+        .footer-bottom { text-align: center; margin-top: 2rem; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 1rem; color: rgba(255,255,255,0.6); }
+
+        /* --- Custom CTA Block Styling --- */
+        .cta-block {
+            background: var(--crimson); 
+            color: var(--light-bg); 
+            text-align: center; 
+            padding: 3rem 1.5rem; 
+            border-radius: 0.75rem; 
+            box-shadow: 0 10px 30px rgba(220, 20, 60, 0.35);
+            margin-top: 5rem;
         }
-
-        .integrations-page .mh-aurora__glow {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 200%;
-            padding-bottom: 200%;
-            border-radius: 50%;
-            background-image: radial-gradient(circle, rgba(0, 206, 219, 0.1), transparent 45%),
-                radial-gradient(circle, rgba(220, 20, 60, 0.1), transparent 45%);
-            transform: translate(-50%, -50%);
-            animation: aurora-glow 20s linear infinite;
-            will-change: transform;
+        .cta-block h2 {
+            font-family: 'Ubuntu', sans-serif; 
+            font-size: clamp(2rem, 4vw, 2.5rem); 
+            font-weight: 700; 
+            margin-bottom: 0.5rem;
         }
-
-        .dark .integrations-page .mh-aurora__glow {
-            background-image: radial-gradient(circle, rgba(0, 206, 219, 0.15), transparent 45%),
-                radial-gradient(circle, rgba(220, 20, 60, 0.15), transparent 45%);
+        .cta-button {
+            display: inline-block; 
+            background: var(--light-bg); 
+            color: var(--crimson); 
+            font-weight: 700; 
+            padding: 0.75rem 2rem; 
+            border-radius: 9999px; 
+            transition: transform 0.2s ease, opacity 0.2s ease;
+            margin-top: 1.5rem;
         }
-
-        @keyframes aurora-glow {
-            0% {
-                transform: translate(-50%, -50%) rotate(0deg);
-            }
-
-            100% {
-                transform: translate(-50%, -50%) rotate(360deg);
-            }
+        .cta-button:hover {
+            transform: scale(1.05);
+            opacity: 0.95;
         }
     </style>
+</head>
+<body>
 
-    <main class="integrations-page relative overflow-hidden py-16 min-h-screen">
-        <div aria-hidden="true" class="mh-aurora pointer-events-none">
-            <canvas class="absolute inset-0 w-full h-full" id="mh-stars"></canvas>
-            <div class="mh-aurora__glow"></div>
-        </div>
+    <!-- Removed Main header content, leaving only the main tag and body structure -->
 
-        <div class="container mx-auto px-4 py-16 relative z-10">
-            <div class="text-center mb-16">
-                <h1 class="text-4xl sm:text-5xl font-extrabold font-ubuntu text-brand-dark dark:text-white">Integrations
-                </h1>
-                <p class="mt-4 text-xl text-slate-600 dark:text-slate-300 max-w-2xl mx-auto">
-                    A showcase of our trusted partners and integrated platforms.
-                </p>
+    <main class="relative overflow-hidden py-20 min-h-screen">
+        <div class="container max-w-7xl mx-auto px-6 relative z-10">
+
+            <!-- Title Section (New Style) -->
+            <div class="section-header-container">
+                <h1 class="section-title">Partner Integrations Directory</h1>
+                <p class="section-subtitle">Connect MerchantHaus to the world's most popular e-commerce, POS, and financial platforms, ensuring seamless data flow and maximum business agility.</p>
             </div>
 
-
-            <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-6 md:gap-8">
-                <a href="https://www.salesforce.com/"
-                    class="p-6 rounded-2xl bg-white/10 dark:bg-gray-800/50 backdrop-blur-lg border border-white/10 shadow-lg flex flex-col items-center justify-center aspect-square card-hover-effect"
-                    target="_blank" rel="noopener">
-                    <img src="https://www.salesforce.com/content/dam/sfdc-docs/www/logos/logo-salesforce.svg"
-                        alt="Salesforce Logo" class="max-h-10 object-contain"
-                        onerror="this.onerror=null;this.src='https://placehold.co/200x100/e2e8f0/e2e8f0?text=Logo';">
-                    <p class="mt-4 text-sm font-medium text-slate-700 dark:text-slate-300">Salesforce</p>
+            <!-- Integrations Grid -->
+            <div class="integrations-grid">
+                <!-- Using placeholder images that will adapt to the dark background -->
+                <a href="https://www.salesforce.com/" class="integration-card" target="_blank" rel="noopener">
+                    <img src="https://placehold.co/100x40/0f0f10/ffffff?text=Salesforce" alt="Salesforce Logo">
+                    <p>Salesforce</p>
                 </a>
-                <a href="https://quickbooks.intuit.com/"
-                    class="p-6 rounded-2xl bg-white/10 dark:bg-gray-800/50 backdrop-blur-lg border border-white/10 shadow-lg flex flex-col items-center justify-center aspect-square card-hover-effect"
-                    target="_blank" rel="noopener">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/7/79/Intuit_QuickBooks_logo.svg"
-                        alt="QuickBooks Logo" class="max-h-10 object-contain"
-                        onerror="this.onerror=null;this.src='https://placehold.co/200x100/e2e8f0/e2e8f0?text=Logo';">
-                    <p class="mt-4 text-sm font-medium text-slate-700 dark:text-slate-300">QuickBooks</p>
+                <a href="https://quickbooks.intuit.com/" class="integration-card" target="_blank" rel="noopener">
+                    <img src="https://placehold.co/100x40/0f0f10/ffffff?text=QuickBooks" alt="QuickBooks Logo">
+                    <p>QuickBooks</p>
                 </a>
-                <a href="https://www.hubspot.com/"
-                    class="p-6 rounded-2xl bg-white/10 dark:bg-gray-800/50 backdrop-blur-lg border border-white/10 shadow-lg flex flex-col items-center justify-center aspect-square card-hover-effect"
-                    target="_blank" rel="noopener">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/3/3f/HubSpot_Logo.svg" alt="HubSpot Logo"
-                        class="max-h-10 object-contain"
-                        onerror="this.onerror=null;this.src='https://placehold.co/200x100/e2e8f0/e2e8f0?text=Logo';">
-                    <p class="mt-4 text-sm font-medium text-slate-700 dark:text-slate-300">HubSpot</p>
+                <a href="https://www.hubspot.com/" class="integration-card" target="_blank" rel="noopener">
+                    <img src="https://placehold.co/100x40/0f0f10/ffffff?text=HubSpot" alt="HubSpot Logo">
+                    <p>HubSpot</p>
                 </a>
-                <a href="https://www.vendhq.com/"
-                    class="p-6 rounded-2xl bg-white/10 dark:bg-gray-800/50 backdrop-blur-lg border border-white/10 shadow-lg flex flex-col items-center justify-center aspect-square card-hover-effect"
-                    target="_blank" rel="noopener">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/79/Vend-logo.svg/512px-Vend-logo.svg.webp"
-                        alt="Vend Logo" class="max-h-10 object-contain"
-                        onerror="this.onerror=null;this.src='https://placehold.co/200x100/e2e8f0/e2e8f0?text=Logo';">
-                    <p class="mt-4 text-sm font-medium text-slate-700 dark:text-slate-300">Vend</p>
+                <a href="https://www.vendhq.com/" class="integration-card" target="_blank" rel="noopener">
+                    <img src="https://placehold.co/100x40/0f0f10/ffffff?text=Vend" alt="Vend Logo">
+                    <p>Vend</p>
                 </a>
-                <a href="https://www.squarespace.com/"
-                    class="p-6 rounded-2xl bg-white/10 dark:bg-gray-800/50 backdrop-blur-lg border border-white/10 shadow-lg flex flex-col items-center justify-center aspect-square card-hover-effect"
-                    target="_blank" rel="noopener">
-                    <img src="https://upload.wikimedia.org/wikipedia/en/5/53/Squarespace_Logo.svg"
-                        alt="Squarespace Logo" class="max-h-10 object-contain"
-                        onerror="this.onerror=null;this.src='https://placehold.co/200x100/e2e8f0/e2e8f0?text=Logo';">
-                    <p class="mt-4 text-sm font-medium text-slate-700 dark:text-slate-300">Squarespace</p>
+                <a href="https://www.squarespace.com/" class="integration-card" target="_blank" rel="noopener">
+                    <img src="https://placehold.co/100x40/0f0f10/ffffff?text=Squarespace" alt="Squarespace Logo">
+                    <p>Squarespace</p>
                 </a>
-                <a href="https://memberpress.com/"
-                    class="p-6 rounded-2xl bg-white/10 dark:bg-gray-800/50 backdrop-blur-lg border border-white/10 shadow-lg flex flex-col items-center justify-center aspect-square card-hover-effect"
-                    target="_blank" rel="noopener">
-                    <img src="https://memberpress.com/wp-content/uploads/2023/07/memberpress-by-awesome-motive-logo-flame-blue-rgb.svg"
-                        alt="MemberPress Logo" class="max-h-10 object-contain"
-                        onerror="this.onerror=null;this.src='https://placehold.co/200x100/e2e8f0/e2e8f0?text=Logo';">
-                    <p class="mt-4 text-sm font-medium text-slate-700 dark:text-slate-300">MemberPress</p>
+                <a href="https://memberpress.com/" class="integration-card" target="_blank" rel="noopener">
+                    <img src="https://placehold.co/100x40/0f0f10/ffffff?text=MemberPress" alt="MemberPress Logo">
+                    <p>MemberPress</p>
                 </a>
-                <a href="https://woocommerce.com/"
-                    class="p-6 rounded-2xl bg-white/10 dark:bg-gray-800/50 backdrop-blur-lg border border-white/10 shadow-lg flex flex-col items-center justify-center aspect-square card-hover-effect"
-                    target="_blank" rel="noopener">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2a/WooCommerce_logo.svg/512px-WooCommerce_logo.svg.webp"
-                        alt="WooCommerce Logo" class="max-h-10 object-contain"
-                        onerror="this.onerror=null;this.src='https://placehold.co/200x100/e2e8f0/e2e8f0?text=Logo';">
-                    <p class="mt-4 text-sm font-medium text-slate-700 dark:text-slate-300">WooCommerce</p>
+                <a href="https://woocommerce.com/" class="integration-card" target="_blank" rel="noopener">
+                    <img src="https://placehold.co/100x40/0f0f10/ffffff?text=WooCommerce" alt="WooCommerce Logo">
+                    <p>WooCommerce</p>
                 </a>
-                <a href="https://www.zoho.com/crm/"
-                    class="p-6 rounded-2xl bg-white/10 dark:bg-gray-800/50 backdrop-blur-lg border border-white/10 shadow-lg flex flex-col items-center justify-center aspect-square card-hover-effect"
-                    target="_blank" rel="noopener">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/3/30/ZOHO_logo_2023.svg"
-                        alt="Zoho CRM Logo" class="max-h-10 object-contain"
-                        onerror="this.onerror=null;this.src='https://placehold.co/200x100/e2e8f0/e2e8f0?text=Logo';">
-                    <p class="mt-4 text-sm font-medium text-slate-700 dark:text-slate-300">Zoho CRM</p>
+                <a href="https://www.zoho.com/crm/" class="integration-card" target="_blank" rel="noopener">
+                    <img src="https://placehold.co/100x40/0f0f10/ffffff?text=Zoho" alt="Zoho CRM Logo">
+                    <p>Zoho CRM</p>
                 </a>
-                <a href="https://www.lightspeedhq.com/"
-                    class="p-6 rounded-2xl bg-white/10 dark:bg-gray-800/50 backdrop-blur-lg border border-white/10 shadow-lg flex flex-col items-center justify-center aspect-square card-hover-effect"
-                    target="_blank" rel="noopener">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/3/38/Lightspeed_-_logo.webp"
-                        alt="Lightspeed Logo" class="max-h-10 object-contain"
-                        onerror="this.onerror=null;this.src='https://placehold.co/200x100/e2e8f0/e2e8f0?text=Logo';">
-                    <p class="mt-4 text-sm font-medium text-slate-700 dark:text-slate-300">Lightspeed</p>
+                <a href="https://www.lightspeedhq.com/" class="integration-card" target="_blank" rel="noopener">
+                    <img src="https://placehold.co/100x40/0f0f10/ffffff?text=Lightspeed" alt="Lightspeed Logo">
+                    <p>Lightspeed</p>
                 </a>
-                <a href="https://www.wix.com/"
-                    class="p-6 rounded-2xl bg-white/10 dark:bg-gray-800/50 backdrop-blur-lg border border-white/10 shadow-lg flex flex-col items-center justify-center aspect-square card-hover-effect"
-                    target="_blank" rel="noopener">
-                    <img src="https://static.wixstatic.com/media/de991a_321c4356214644169542e724ef57529b~mv2.webp"
-                        alt="Wix Logo" class="max-h-10 object-contain"
-                        onerror="this.onerror=null;this.src='https://placehold.co/200x100/e2e8f0/e2e8f0?text=Logo';">
-                    <p class="mt-4 text-sm font-medium text-slate-700 dark:text-slate-300">Wix</p>
+                <a href="https://www.wix.com/" class="integration-card" target="_blank" rel="noopener">
+                    <img src="https://placehold.co/100x40/0f0f10/ffffff?text=Wix" alt="Wix Logo">
+                    <p>Wix</p>
                 </a>
-                <a href="https://keap.com/"
-                    class="p-6 rounded-2xl bg-white/10 dark:bg-gray-800/50 backdrop-blur-lg border border-white/10 shadow-lg flex flex-col items-center justify-center aspect-square card-hover-effect"
-                    target="_blank" rel="noopener">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/e/e0/Logo_of_Keap_Company.svg"
-                        alt="Keap Logo" class="max-h-10 object-contain"
-                        onerror="this.onerror=null;this.src='https://placehold.co/200x100/e2e8f0/e2e8f0?text=Logo';">
-                    <p class="mt-4 text-sm font-medium text-slate-700 dark:text-slate-300">Keap</p>
+                <a href="https://keap.com/" class="integration-card" target="_blank" rel="noopener">
+                    <img src="https://placehold.co/100x40/0f0f10/ffffff?text=Keap" alt="Keap Logo">
+                    <p>Keap</p>
                 </a>
-                <a href="https://www.clover.com/"
-                    class="p-6 rounded-2xl bg-white/10 dark:bg-gray-800/50 backdrop-blur-lg border border-white/10 shadow-lg flex flex-col items-center justify-center aspect-square card-hover-effect"
-                    target="_blank" rel="noopener">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/cf/Clover_logo.svg/512px-Clover_logo.svg.webp"
-                        alt="Clover Logo" class="max-h-10 object-contain"
-                        onerror="this.onerror=null;this.src='https://placehold.co/200x100/e2e8f0/e2e8f0?text=Logo';">
-                    <p class="mt-4 text-sm font-medium text-slate-700 dark:text-slate-300">Clover</p>
+                <a href="https://www.clover.com/" class="integration-card" target="_blank" rel="noopener">
+                    <img src="https://placehold.co/100x40/0f0f10/ffffff?text=Clover" alt="Clover Logo">
+                    <p>Clover</p>
                 </a>
-                <a href="https://www.freshbooks.com/"
-                    class="p-6 rounded-2xl bg-white/10 dark:bg-gray-800/50 backdrop-blur-lg border border-white/10 shadow-lg flex flex-col items-center justify-center aspect-square card-hover-effect"
-                    target="_blank" rel="noopener">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/1/17/FreshBooks_logo_%282020%29.svg"
-                        alt="FreshBooks Logo" class="max-h-10 object-contain"
-                        onerror="this.onerror=null;this.src='https://placehold.co/200x100/e2e8f0/e2e8f0?text=Logo';">
-                    <p class="mt-4 text-sm font-medium text-slate-700 dark:text-slate-300">FreshBooks</p>
+                <a href="https://www.freshbooks.com/" class="integration-card" target="_blank" rel="noopener">
+                    <img src="https://placehold.co/100x40/0f0f10/ffffff?text=FreshBooks" alt="FreshBooks Logo">
+                    <p>FreshBooks</p>
                 </a>
-                <a href="https://magento.com/"
-                    class="p-6 rounded-2xl bg-white/10 dark:bg-gray-800/50 backdrop-blur-lg border border-white/10 shadow-lg flex flex-col items-center justify-center aspect-square card-hover-effect"
-                    target="_blank" rel="noopener">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/55/Magento_Logo.svg/512px-Magento_Logo.svg.webp"
-                        alt="Magento Logo" class="max-h-10 object-contain"
-                        onerror="this.onerror=null;this.src='https://placehold.co/200x100/e2e8f0/e2e8f0?text=Logo';">
-                    <p class="mt-4 text-sm font-medium text-slate-700 dark:text-slate-300">Magento</p>
+                <a href="https://magento.com/" class="integration-card" target="_blank" rel="noopener">
+                    <img src="https://placehold.co/100x40/0f0f10/ffffff?text=Magento" alt="Magento Logo">
+                    <p>Magento</p>
                 </a>
-                <a href="https://www.bigcommerce.com/"
-                    class="p-6 rounded-2xl bg-white/10 dark:bg-gray-800/50 backdrop-blur-lg border border-white/10 shadow-lg flex flex-col items-center justify-center aspect-square card-hover-effect"
-                    target="_blank" rel="noopener">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/c/c4/Bc-logo-dark.svg"
-                        alt="BigCommerce Logo" class="max-h-10 object-contain"
-                        onerror="this.onerror=null;this.src='https://placehold.co/200x100/e2e8f0/e2e8f0?text=Logo';">
-                    <p class="mt-4 text-sm font-medium text-slate-700 dark:text-slate-300">BigCommerce</p>
+                <a href="https://www.bigcommerce.com/" class="integration-card" target="_blank" rel="noopener">
+                    <img src="https://placehold.co/100x40/0f0f10/ffffff?text=BigCommerce" alt="BigCommerce Logo">
+                    <p>BigCommerce</p>
                 </a>
-                <a href="https://www.ncr.com/"
-                    class="p-6 rounded-2xl bg-white/10 dark:bg-gray-800/50 backdrop-blur-lg border border-white/10 shadow-lg flex flex-col items-center justify-center aspect-square card-hover-effect"
-                    target="_blank" rel="noopener">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/9/92/NCR_logo_color.svg" alt="NCR Logo"
-                        class="max-h-10 object-contain"
-                        onerror="this.onerror=null;this.src='https://placehold.co/200x100/e2e8f0/e2e8f0?text=Logo';">
-                    <p class="mt-4 text-sm font-medium text-slate-700 dark:text-slate-300">NCR</p>
+                <a href="https://www.ncr.com/" class="integration-card" target="_blank" rel="noopener">
+                    <img src="https://placehold.co/100x40/0f0f10/ffffff?text=NCR" alt="NCR Logo">
+                    <p>NCR</p>
                 </a>
-                <a href="https://www.visa.com/"
-                    class="p-6 rounded-2xl bg-white/10 dark:bg-gray-800/50 backdrop-blur-lg border border-white/10 shadow-lg flex flex-col items-center justify-center aspect-square card-hover-effect"
-                    target="_blank" rel="noopener">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/4/41/Visa_2021.svg" alt="Visa Logo"
-                        class="max-h-10 object-contain"
-                        onerror="this.onerror=null;this.src='https://placehold.co/200x100/e2e8f0/e2e8f0?text=Logo';">
-                    <p class="mt-4 text-sm font-medium text-slate-700 dark:text-slate-300">Visa</p>
+                <a href="https://www.visa.com/" class="integration-card" target="_blank" rel="noopener">
+                    <img src="https://placehold.co/100x40/0f0f10/ffffff?text=Visa" alt="Visa Logo">
+                    <p>Visa</p>
                 </a>
-                <a href="https://www.mastercard.us/"
-                    class="p-6 rounded-2xl bg-white/10 dark:bg-gray-800/50 backdrop-blur-lg border border-white/10 shadow-lg flex flex-col items-center justify-center aspect-square card-hover-effect"
-                    target="_blank" rel="noopener">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/a/a4/Mastercard_2019_logo.svg"
-                        alt="Mastercard Logo" class="max-h-10 object-contain"
-                        onerror="this.onerror=null;this.src='https://placehold.co/200x100/e2e8f0/e2e8f0?text=Logo';">
-                    <p class="mt-4 text-sm font-medium text-slate-700 dark:text-slate-300">Mastercard</p>
+                <a href="https://www.mastercard.us/" class="integration-card" target="_blank" rel="noopener">
+                    <img src="https://placehold.co/100x40/0f0f10/ffffff?text=Mastercard" alt="Mastercard Logo">
+                    <p>Mastercard</p>
                 </a>
             </div>
+            
+            <!-- NEW: CTA Block added beneath the grid -->
+            <div class="max-w-4xl mx-auto cta-block">
+                <h2>Ready to connect your business?</h2>
+                <p>Start a free account today and streamline all your payments and integrations instantly.</p>
+                <a href="/apply.html" class="cta-button">
+                    Start Your Free Account
+                </a>
+            </div>
+            
         </div>
     </main>
 
     <!-- Footer -->
-    <footer class="border-t border-slate-800 py-10 mt-16">
-        <div class="max-w-7xl mx-auto px-4 grid sm:grid-cols-2 lg:grid-cols-4 gap-8 text-sm">
-            <div class="space-y-4">
-                <a href="/index.html" class="flex items-center gap-3">
-                    <div class="w-[220px]" data-mh-logo-footer></div>
-                    <span class="sr-only">MerchantHaus Homepage</span>
-                </a>
-                <div class="text-sm">
-                    <a href="tel:15056006042" class="block text-slate-300 hover:text-brand-teal">1-505-600-6042</a>
-                    <a href="mailto:support@merchanthaus.io"
-                        class="block text-slate-300 hover:text-brand-teal">support@merchanthaus.io</a>
+    <footer>
+        <div class="footer-inner">
+            <!-- COLUMN 1: Logo and Contact Info -->
+            <div class="footer-col">
+                <div style="width: 220px; height: 50px; margin-bottom: 0.5rem;">
+                    <svg viewBox="0 0 250 50" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%">
+                        <text x="5" y="35" style="font-family:'Ubuntu', sans-serif; font-size:28px; font-weight:700; fill: var(--light-bg);">MerchantHaus</text>
+                    </svg>
+                </div>
+                <div class="footer-logo-address">
+                    <a href="tel:15056006042" style="display: block; margin-bottom: 0.25rem;">1-505-600-6042</a>
+                    <a href="mailto:support@merchanthaus.io" style="display: block; margin-bottom: 0.75rem;">support@merchanthaus.io</a>
+                    1209 Mountain Road Pl NE Ste N<br>
+                    Albuquerque, NM 87110 US
                 </div>
             </div>
-            <nav class="space-y-2">
-                <h3 class="font-semibold font-ubuntu text-white">Product</h3>
-                <a href="/#payments" class="block text-slate-300 hover:text-brand-teal">Payment Services</a>
-                <button type="button" id="footer-integrations-toggle" aria-expanded="false"
-                    aria-controls="footer-integrations-menu"
-                    class="flex items-center justify-between w-full text-left text-slate-300 hover:text-brand-teal transition-colors">
-                    <span>Integrations</span>
-                    <span class="ml-2 text-slate-400">
-                        <svg data-collapsible-icon class="w-4 h-4 transition-transform" viewBox="0 0 24 24" fill="none"
-                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <polyline points="6 9 12 15 18 9" />
-                        </svg>
-                    </span>
-                </button>
-                <div id="footer-integrations-menu" class="mt-2 space-y-2 pl-4 hidden">
-                    <a href="/integrations.html" class="block text-slate-400 hover:text-brand-teal">Integrations
-                        Directory</a>
-                    <a href="/shopify.html" class="block text-slate-400 hover:text-brand-teal">Shopify Integration</a>
-                    <a href="/gohighlevel.html" class="block text-slate-400 hover:text-brand-teal">GoHighLevel
-                        Integration</a>
-                </div>
-                <a href="/#checklist" class="block text-slate-300 hover:text-brand-teal">Setup Checklist</a>
-            </nav>
-            <nav class="space-y-2">
-                <h3 class="font-semibold font-ubuntu text-white">Support</h3>
-                <a href="mailto:support@merchanthaus.io" class="block text-slate-300 hover:text-brand-teal">Contact
-                    Support</a>
-                <a href="/faq.html" class="block text-slate-300 hover:text-brand-teal">FAQ</a>
-            </nav>
-            <nav class="space-y-2">
-                <h3 class="font-semibold font-ubuntu text-white">Legal</h3>
-                <a href="/privacy.html" class="block text-slate-300 hover:text-brand-teal">Privacy Policy</a>
-                <a href="/terms.html" class="block text-slate-300 hover:text-brand-teal">Terms & Conditions</a>
-            </nav>
+            
+            <!-- COLUMN 2: Products -->
+            <div class="footer-col">
+                <h4>Products</h4>
+                <ul>
+                    <li><a href="#">Gateway Services</a></li>
+                    <li><a href="#">Professional Services</a></li>
+                    <li><a href="#">Ecommerce</a></li>
+                </ul>
+            </div>
+            
+            <!-- COLUMN 3: Resources -->
+            <div class="footer-col">
+                <h4>Resources</h4>
+                <ul>
+                    <li><a href="#">Blog</a></li>
+                    <li><a href="#">Developer API</a></li>
+                    <li><a href="#">Support</a></li>
+                </ul>
+            </div>
+            
+            <!-- COLUMN 4: Company -->
+            <div class="footer-col">
+                <h4>Company</h4>
+                <ul>
+                    <li><a href="#">About Us</a></li>
+                    <li><a href="#">Security</a></li>
+                    <li><a href="#">Contact</a></li>
+                </ul>
+            </div>
+            
         </div>
-        <div class="text-center text-xs pt-8 mt-8 border-t border-slate-800 text-slate-500 font-inter">
-            © <span id="year"></span> Merchant Haus. All rights reserved.
+        <div class="footer-bottom">
+            © 2025 MerchantHaus.io — All rights reserved. | 
+            <a href="#" style="color: var(--crimson);">Terms</a> | 
+            <a href="#" style="color: var(--crimson);">Privacy</a>
         </div>
     </footer>
 
     <!-- Back to Top Button -->
     <button id="back-to-top"
-        class="fixed bottom-6 right-6 bg-brand-crimson text-white p-3 rounded-full shadow-lg opacity-0 invisible transition-all duration-300 z-50 hover:bg-opacity-90">
-        <i data-lucide="arrow-up" class="h-6 w-6"></i>
-        <span class="sr-only">Back to top</span>
+        style="position: fixed; bottom: 1.5rem; right: 1.5rem; background: var(--crimson); color: var(--light-bg); padding: 0.75rem; border-radius: 9999px; box-shadow: 0 4px 6px rgba(0,0,0,0.4); opacity: 0; visibility: hidden; transition: all 0.3s; z-index: 50;">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 15 12 9 6 15"></polyline></svg>
+        <span style="position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); border: 0;">Back to top</span>
     </button>
 
 
-    <script src="/assets/signup-panel.js" defer></script>
-
+    <!-- Scripts (Includes mobile menu toggle and general UI functionality) -->
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            if (window.lucide) lucide.createIcons();
-            document.getElementById('year').textContent = new Date().getFullYear();
-
-            const logoImagePath = "\/public\/assets\/images\/Shield.webp";
-            // --- Animated Logo Injection ---
-            const logoSVG = (id, tagline = true, shimmer = true) => {
-                const letters = ['M', 'e', 'r', 'c', 'h', 'a', 'n', 't', 'H', 'a', 'u', 's'];
-                let letterTags = '';
-                letters.forEach((letter, index) => {
-                    const delay = index * 0.1;
-                    letterTags += `<tspan opacity="0" dy="-20">${letter}<animate attributeName="opacity" from="0" to="1" dur="0.2s" begin="${delay}s" fill="freeze"/><animate attributeName="dy" from="-20" to="0" dur="0.2s" begin="${delay}s" fill="freeze" calcMode="discrete"/></tspan>`;
-                });
-
-                return `
-                <svg viewBox="0 0 600 100" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%">
-                    <defs>
-                        <linearGradient id="shimmer-${id}" gradientUnits="userSpaceOnUse" x1="120" y1="0" x2="560" y2="0">
-                            <stop offset="0%" stop-color="#DC143C" />
-                            <stop offset="45%" stop-color="#DC143C">
-                                ${shimmer ? `<animate attributeName="stop-color" values="#DC143C; #FFC0CB; #DC143C" keyTimes="0; 0.5; 1" dur="2s" begin="1.5s" fill="freeze" repeatCount="1"/>` : ''}
-                            </stop>
-                            <stop offset="50%" stop-color="#DC143C">
-                                ${shimmer ? `<animate attributeName="stop-color" values="#DC143C; #FFFFFF; #DC143C" keyTimes="0; 0.5; 1" dur="2s" begin="1.5s" fill="freeze" repeatCount="1"/>` : ''}
-                            </stop>
-                            <stop offset="55%" stop-color="#DC143C">
-                                ${shimmer ? `<animate attributeName="stop-color" values="#DC143C; #FFC0CB; #DC143C" keyTimes="0; 0.5; 1" dur="2s" begin="1.5s" fill="freeze" repeatCount="1"/>` : ''}
-                            </stop>
-                            <stop offset="100%" stop-color="#DC143C" />
-                            ${shimmer ? `<animateTransform attributeName="transform" type="translate" from="-600 0" to="600 0" dur="2s" begin="1.5s" fill="freeze" repeatCount="1"/>` : ''}
-                        </linearGradient>
-                        <style>
-                            .mh-text-${id} { font-family: 'Ubuntu', sans-serif; font-size: 50px; font-weight: 700; fill: url(#shimmer-${id}); }
-                            .mh-tagline-${id} { font-family: 'Inter', sans-serif; font-size: 18px; font-weight: 500; fill: #A9A9A9; text-anchor: middle; letter-spacing: 4px; }
-                        </style>
-                    </defs>
-                    <image href="${logoImagePath}" x="10" y="10" height="80" width="80" />
-                    <text class="mh-text-${id}" y="60" x="110">${letterTags}</text>
-                    ${tagline ? `
-                        <line x1="160" x2="400" y1="72" y2="72" stroke="#00CEDB" stroke-width="2" opacity="0">
-                            <animate attributeName="opacity" from="0" to="1" dur="1s" begin="1.5s" fill="freeze" />
-                        </line>
-                        <text x="280" y="92" class="mh-tagline-${id}" opacity="0">
-                            <animate attributeName="opacity" from="0" to="1" dur="1s" begin="2s" fill="freeze" />plug. play. grow.
-                        </text>
-                    ` : ''}
-                </svg>`;
-            };
-
-            // Only select and inject logos if the placeholder exists on the current page
-            if (document.querySelector('[data-mh-logo-header]')) {
-                document.querySelector('[data-mh-logo-header]').innerHTML = logoSVG('header', false, false);
-            }
-            if (document.querySelector('[data-mh-logo-hero]')) {
-                document.querySelector('[data-mh-logo-hero]').innerHTML = logoSVG('hero', true, true);
-            }
-            if (document.querySelector('[data-mh-logo-footer]')) {
-                document.querySelector('[data-mh-logo-footer]').innerHTML = logoSVG('footer', true, false);
-            }
-
-
-            const setupCollapsibleMenu = (toggleId, menuId) => {
-                const toggle = document.getElementById(toggleId);
-                const menu = document.getElementById(menuId);
-                if (!toggle || !menu) return;
-
-                const icon = toggle.querySelector('[data-collapsible-icon]');
-
-                const openMenu = () => {
-                    menu.classList.remove('hidden');
-                    toggle.setAttribute('aria-expanded', 'true');
-                    if (icon) icon.classList.add('rotate-180');
-                };
-
-                const closeMenu = () => {
-                    menu.classList.add('hidden');
-                    toggle.setAttribute('aria-expanded', 'false');
-                    if (icon) icon.classList.remove('rotate-180');
-                };
-
-                toggle.addEventListener('click', (event) => {
-                    event.preventDefault();
-                    if (menu.classList.contains('hidden')) {
-                        openMenu();
-                    } else {
-                        closeMenu();
-                    }
-                });
-
-                document.addEventListener('click', (event) => {
-                    if (!menu.classList.contains('hidden') && !menu.contains(event.target) && !toggle.contains(event.target)) {
-                        closeMenu();
-                    }
-                });
-
-                menu.querySelectorAll('a').forEach(link => {
-                    link.addEventListener('click', closeMenu);
-                });
-            };
-
-            setupCollapsibleMenu('footer-integrations-toggle', 'footer-integrations-menu');
-            setupCollapsibleMenu('mobile-integrations-toggle', 'mobile-integrations-menu');
-
-
-            // --- Mobile Menu ---
-            const mobileMenuButton = document.getElementById('mobile-menu-button');
-            const mobileMenu = document.getElementById('mobile-menu');
-            if (mobileMenuButton && mobileMenu) {
-                mobileMenuButton.addEventListener('click', (e) => {
-                    e.stopPropagation();
-                    mobileMenu.classList.toggle('hidden');
-                });
-                document.addEventListener('click', (e) => {
-                    if (!mobileMenu.classList.contains('hidden') && !mobileMenu.contains(e.target) && !mobileMenuButton.contains(e.target)) {
-                        mobileMenu.classList.add('hidden');
-                    }
-                });
-                mobileMenu.querySelectorAll('a').forEach(link => {
-                    link.addEventListener('click', () => mobileMenu.classList.add('hidden'));
+            // Functionality for the simplified header
+            const contactBtn = document.getElementById('contact-support-btn');
+            if (contactBtn) {
+                contactBtn.addEventListener('click', () => {
+                    console.log('Contact support form action triggered. (Pop-out placeholder)');
                 });
             }
 
-            // --- Stars Canvas Logic (if canvas exists) ---
-            const canvas = document.getElementById('mh-stars');
-            if (canvas) {
-                const ctx = canvas.getContext('2d');
-                let stars;
-                let animationFrameId;
-                const starColors = [
-                    'rgba(255, 255, 255,', 'rgba(230, 230, 250,',
-                    'rgba(255, 250, 205,', 'rgba(240, 255, 255,'
-                ];
-
-                const setupStars = () => {
-                    const parent = canvas.parentElement;
-                    canvas.width = parent.offsetWidth;
-                    canvas.height = parent.offsetHeight;
-                    stars = [];
-                    const numStars = Math.floor((canvas.width * canvas.height) / 8000);
-                    for (let i = 0; i < numStars; i++) {
-                        stars.push({
-                            x: Math.random() * canvas.width,
-                            y: Math.random() * canvas.height,
-                            radius: Math.random() * 1.2 + 0.3,
-                            alpha: Math.random(),
-                            dAlpha: Math.random() * 0.02 - 0.01,
-                            color: starColors[Math.floor(Math.random() * starColors.length)],
-                            vx: (Math.random() - 0.5) * 0.1,
-                            vy: (Math.random() - 0.5) * 0.1
-                        });
-                    }
-                };
-
-                const drawStars = () => {
-                    if (!ctx) return;
-                    ctx.clearRect(0, 0, canvas.width, canvas.height);
-                    stars.forEach(star => {
-                        star.x += star.vx;
-                        star.y += star.vy;
-                        if (star.x < 0) star.x = canvas.width;
-                        if (star.x > canvas.width) star.x = 0;
-                        if (star.y < 0) star.y = canvas.height;
-                        if (star.y > canvas.height) star.y = 0;
-
-                        star.alpha += star.dAlpha;
-                        if (star.alpha <= 0.1 || star.alpha >= 1) { star.dAlpha *= -1; }
-
-                        ctx.beginPath();
-                        ctx.arc(star.x, star.y, star.radius, 0, Math.PI * 2);
-                        ctx.fillStyle = star.color + star.alpha + ')';
-                        ctx.fill();
-                    });
-                    animationFrameId = requestAnimationFrame(drawStars);
-                };
-
-                let resizeTimeout;
-                const initCanvas = () => {
-                    cancelAnimationFrame(animationFrameId);
-                    clearTimeout(resizeTimeout);
-                    resizeTimeout = setTimeout(() => {
-                        setupStars();
-                        drawStars();
-                    }, 100);
-                };
-
-                initCanvas();
-                window.addEventListener('resize', initCanvas);
-            }
-
-            // --- Sequential Typewriter Animation on Scroll (if steps exist) ---
-            const steps = [
-                { id: 'step-1', text: "Fill out our simple application form. Our team will review your details and get you approved quickly." },
-                { id: 'step-2', text: "Once approved, we'll provide you with API keys to easily connect MerchantHaus as your payment provider in your Shopify admin." },
-                { id: 'step-3', text: "That's it! You're ready to accept payments securely and affordably, with all your transaction data synced to your MerchantHaus dashboard." }
-            ];
-
-            const stepElements = document.querySelectorAll('.step-card');
-
-            if (stepElements.length > 0) {
-                let animationQueue = Promise.resolve();
-                let animatedSteps = new Set();
-
-                const typewriter = (element, text, duration) => {
-                    return new Promise(resolve => {
-                        let i = 0;
-                        element.innerHTML = '<span class="typewriter-text"></span>';
-                        const span = element.querySelector('.typewriter-text');
-
-                        function type() {
-                            if (i < text.length) {
-                                span.textContent += text.charAt(i);
-                                i++;
-                                setTimeout(type, duration / text.length);
-                            } else {
-                                if (span) span.style.borderRight = 'none';
-                                resolve();
-                            }
-                        }
-                        type();
-                    });
-                };
-
-                const animateStep = (entry) => {
-                    if (entry.isIntersecting && !animatedSteps.has(entry.target.id)) {
-                        const stepConf = steps.find(s => s.id === entry.target.id);
-                        if (stepConf) {
-                            animatedSteps.add(stepConf.id);
-                            const pElement = entry.target.querySelector('p');
-                            entry.target.style.opacity = '1';
-                            entry.target.style.transform = 'translateY(0)';
-                            animationQueue = animationQueue.then(() => typewriter(pElement, stepConf.text, 2000));
-                        }
-                    }
-                };
-
-                const observer = new IntersectionObserver((entries) => {
-                    entries.forEach(animateStep);
-                }, { threshold: 0.8 });
-
-                steps.forEach(step => {
-                    const el = document.getElementById(step.id);
-                    if (el) observer.observe(el);
-                });
-            }
-
-            // --- Back to Top Button ---
+            // Back to Top Button Logic
             const backToTopButton = document.getElementById('back-to-top');
-            if (backToTopButton) {
+            if(backToTopButton) {
                 window.addEventListener('scroll', () => {
                     if (window.scrollY > 300) {
-                        backToTopButton.classList.remove('invisible', 'opacity-0');
+                        backToTopButton.style.opacity = '1';
+                        backToTopButton.style.visibility = 'visible';
                     } else {
-                        backToTopButton.classList.add('invisible', 'opacity-0');
+                        backToTopButton.style.opacity = '0';
+                        backToTopButton.style.visibility = 'hidden';
                     }
                 });
                 backToTopButton.addEventListener('click', () => {
                     window.scrollTo({ top: 0, behavior: 'smooth' });
                 });
             }
+
+            // Simple Logo SVG Injection for Header/Footer (Needed for the look)
+            const logoSVG = (id, tagline = true) => {
+                return `<svg viewBox="0 0 250 50" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%">
+                    <text x="5" y="35" style="font-family:'Ubuntu', sans-serif; font-size:28px; font-weight:700; fill: ${id === 'header' ? 'var(--dark-bg)' : 'var(--light-bg)'};">MerchantHaus</text>
+                    ${tagline ? `<text x="5" y="48" style="font-family:'Inter', sans-serif; font-size:10px; font-weight:500; fill: var(--silver-grey);">Integrations Directory</text>` : ''}
+                </svg>`;
+            };
+
+            // Inject header logo for consistency (no change needed here)
+            const headerLogo = document.querySelector('.main-header-container .logo');
+            if (headerLogo) {
+                headerLogo.innerHTML = logoSVG('header', false);
+                headerLogo.style.width = '200px'; 
+                headerLogo.style.height = '50px';
+            }
         });
     </script>
 </body>
-
 </html>

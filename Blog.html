@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MerchantHaus Blog | Insights on Payments, Fraud, and Compliance</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&family=Ubuntu:wght@600;700&display=swap" rel="stylesheet">
+    <!-- Load Lucide icons for clean UI elements -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script>
+        // MerchantHaus Brand Colors
+        tailwind.config = {
+          theme: {
+            extend: {
+              colors: {
+                'crimson': '#DC143C',
+                'neutral-light': '#F8F9FA',
+                'neutral-dark': '#1A1A1A',
+                'cyber-teal': '#00CEDB',
+                'silver-grey': '#A9A9A9',
+                'purple-dark': '#3C2F53',
+                'purple-light': '#8E6FBC',
+              },
+              fontFamily: {
+                sans: ['Inter', 'sans-serif'],
+                display: ['Ubuntu', 'sans-serif'],
+              }
+            }
+          }
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #F8F9FA;
+        }
+        .logo-text {
+             font-family: 'Ubuntu', sans-serif;
+             font-weight: 600;
+        }
+        /* New Tilt Container Style */
+        .card-container {
+            perspective: 1000px; /* Required for 3D transforms */
+            z-index: 1; /* Default stacking context */
+        }
+        /* Dimming effect for main content */
+        main {
+            transition: filter 0.5s ease;
+        }
+        main.main-dimmed {
+            filter: brightness(0.95); /* Slight dimming/darkening effect */
+        }
+
+        .card-shadow {
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05), 0 4px 6px -2px rgba(0, 0, 0, 0.03);
+            transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94), box-shadow 0.3s ease;
+            transform-style: preserve-3d;
+            /* Ensure the card itself is not dimmed by the main filter */
+            filter: none; 
+        }
+        
+        /* Combined Zoom and Tilt Effect (More Pronounced) */
+        .card-shadow:hover {
+            transform: scale(1.04) rotateX(4deg) rotateY(-4deg); /* Increased Zoom and Tilt */
+            box-shadow: 0 25px 40px -8px rgba(0, 0, 0, 0.3), 0 10px 15px -5px rgba(0, 0, 0, 0.1);
+            z-index: 10; /* Ensures the hovered card is above others */
+            /* Crucial: Ensure the hovered card is never dimmed */
+            filter: none !important;
+        }
+        
+        /* Specific hover effect for the arrow */
+        .hover-crimson-arrow:hover .arrow-icon {
+            transform: translateX(5px);
+            color: #DC143C; /* Crimson */
+        }
+        .arrow-icon {
+            transition: all 0.3s ease;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header & Navigation -->
+    <header class="bg-white shadow-md">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center">
+            <!-- Logo -->
+            <a href="#" class="flex items-center space-x-2">
+                <img 
+                    src="src/assets/shield.webp" 
+                    alt="MerchantHaus Shield Logo" 
+                    class="w-8 h-8"
+                    onerror="this.onerror=null; this.src='https://placehold.co/32x32/DC143C/FFFFFF?text=MH'"
+                >
+                <span class="text-2xl font-bold logo-text text-neutral-dark">MerchantHaus <span class="text-crimson">Blog</span></span>
+            </a>
+            <!-- Tagline/CTA -->
+            <div class="hidden md:flex items-center space-x-4 text-sm font-medium">
+                <span class="text-silver-grey">plug in, play, process.</span>
+                <a href="#" class="px-4 py-2 bg-cyber-teal text-white rounded-lg hover:bg-opacity-80 transition-colors">Client Login</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
+
+        <!-- Blog Hero / Featured Article -->
+        <section class="mb-16">
+            <h2 class="text-4xl sm:text-5xl font-extrabold text-neutral-dark mb-8 font-display">
+                Latest Insights <span class="text-cyber-teal">on the Digital Frontier</span>
+            </h2>
+            
+            <!-- Featured Card - Apply card-container to this wrapper -->
+            <div class="card-container">
+                <div class="bg-white rounded-2xl overflow-hidden shadow-xl border border-gray-100 card-shadow hover-crimson-arrow">
+                    <a href="vamp.html" class="block">
+                        <div class="grid grid-cols-1 lg:grid-cols-2">
+                            <!-- Featured Image Area -->
+                            <div class="h-64 lg:h-96 relative">
+                                <img 
+                                    src="src/assets/vamp_header.webp" 
+                                    alt="Visa VAMP Featured Image" 
+                                    class="w-full h-full object-cover"
+                                    onerror="this.onerror=null; this.src='https://placehold.co/800x600/DC143C/FFFFFF?text=FEATURED'"
+                                >
+                                <span class="absolute top-4 left-4 bg-crimson text-white text-xs font-bold px-3 py-1 rounded-full uppercase">Featured</span>
+                            </div>
+                            <!-- Content Area -->
+                            <div class="p-6 sm:p-10 flex flex-col justify-center">
+                                <p class="text-sm font-semibold uppercase tracking-wider text-cyber-teal mb-2">Compliance & Fraud</p>
+                                <h3 class="text-3xl lg:text-4xl font-bold font-display text-neutral-dark mb-4">
+                                    Visa's VAMP: A New Era for Fraud and Dispute Management
+                                </h3>
+                                <p class="text-silver-grey mb-6 leading-relaxed">
+                                    VAMP replaces legacy programs (VFMP/VDMP) with a unified metric, reshaping how merchants and acquirers manage risk. Learn what it means for your business.
+                                </p>
+                                <div class="flex items-center text-neutral-dark font-semibold">
+                                    Read Article
+                                    <i data-lucide="arrow-right" class="arrow-icon w-5 h-5 ml-2"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Category Filters -->
+        <section class="mb-12">
+            <h3 class="text-2xl font-bold text-neutral-dark mb-4 font-display">Explore Topics</h3>
+            <div class="flex flex-wrap gap-3">
+                <a href="#" class="px-4 py-2 text-sm bg-crimson text-white rounded-full hover:bg-opacity-90 transition-colors flex items-center">
+                    <i data-lucide="shield-check" class="w-4 h-4 mr-2"></i> Compliance (4)
+                </a>
+                <a href="#" class="px-4 py-2 text-sm bg-gray-200 text-neutral-dark rounded-full hover:bg-gray-300 transition-colors flex items-center">
+                    <i data-lucide="lock" class="w-4 h-4 mr-2"></i> Fraud Prevention (7)
+                </a>
+                <a href="#" class="px-4 py-2 text-sm bg-gray-200 text-neutral-dark rounded-full hover:bg-gray-300 transition-colors flex items-center">
+                    <i data-lucide="dollar-sign" class="w-4 h-4 mr-2"></i> FinTech News (12)
+                </a>
+                <a href="#" class="px-4 py-2 text-sm bg-gray-200 text-neutral-dark rounded-full hover:bg-gray-300 transition-colors flex items-center">
+                    <i data-lucide="credit-card" class="w-4 h-4 mr-2"></i> Payments Tech (5)
+                </a>
+            </div>
+        </section>
+
+        <!-- Article Grid -->
+        <section>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+                
+                <!-- Card 1: VAMP Article (Re-listed) -->
+                <div class="card-container">
+                    <div class="bg-white rounded-xl overflow-hidden card-shadow hover-crimson-arrow">
+                        <a href="/src/assets/pages/blogs/vamp.html" class="block">
+                            <img 
+                                src="src/assets/vamp_metrics.webp" 
+                                alt="VAMP Metrics" 
+                                class="w-full h-40 object-cover"
+                                onerror="this.onerror=null; this.src='https://placehold.co/400x250/DC143C/FFFFFF?text=VAMP+METRICS'"
+                            >
+                            <div class="p-6">
+                                <p class="text-xs font-semibold uppercase tracking-wider text-crimson mb-2">Compliance</p>
+                                <h4 class="text-xl font-bold text-neutral-dark mb-3">
+                                    Visa VAMP: Decoding the New Risk Ratio
+                                </h4>
+                                <p class="text-sm text-silver-grey mb-4">
+                                    A deep dive into the TC40 and TC15 metrics that determine your program enrollment.
+                                </p>
+                                <div class="flex items-center text-sm text-neutral-dark font-medium">
+                                    Read More
+                                    <i data-lucide="arrow-right" class="arrow-icon w-4 h-4 ml-2"></i>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Card 2: Mock Article -->
+                <div class="card-container">
+                    <div class="bg-white rounded-xl overflow-hidden card-shadow hover-crimson-arrow">
+                        <a href="#" class="block">
+                            <img 
+                                src="src/assets/mock_card1.webp" 
+                                alt="3D Secure" 
+                                class="w-full h-40 object-cover"
+                                onerror="this.onerror=null; this.src='https://placehold.co/400x250/00CEDB/FFFFFF?text=3DS2+FEATURE'"
+                            >
+                            <div class="p-6">
+                                <p class="text-xs font-semibold uppercase tracking-wider text-cyber-teal mb-2">Fraud Prevention</p>
+                                <h4 class="text-xl font-bold text-neutral-dark mb-3">
+                                    3D Secure 2.0: Optimizing the Frictionless Flow
+                                </h4>
+                                <p class="text-sm text-silver-grey mb-4">
+                                    How modern authentication can boost security without sacrificing conversion rates.
+                                </p>
+                                <div class="flex items-center text-sm text-neutral-dark font-medium">
+                                    Read More
+                                    <i data-lucide="arrow-right" class="arrow-icon w-4 h-4 ml-2"></i>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Card 3: Mock Article -->
+                <div class="card-container">
+                    <div class="bg-white rounded-xl overflow-hidden card-shadow hover-crimson-arrow">
+                        <a href="#" class="block">
+                            <img 
+                                src="src/assets/mock_card2.webp" 
+                                alt="B2B Payments" 
+                                class="w-full h-40 object-cover"
+                                onerror="this.onerror=null; this.src='https://placehold.co/400x250/1A1A1A/FFFFFF?text=B2B+PAYMENTS'"
+                            >
+                            <div class="p-6">
+                                <p class="text-xs font-semibold uppercase tracking-wider text-neutral-dark/60 mb-2">Payments Tech</p>
+                                <h4 class="text-xl font-bold text-neutral-dark mb-3">
+                                    The Rise of B2B Embedded Finance
+                                </h4>
+                                <p class="text-sm text-silver-grey mb-4">
+                                    Integrating payment capabilities directly into non-financial software platforms.
+                                </p>
+                                <div class="flex items-center text-sm text-neutral-dark font-medium">
+                                    Read More
+                                    <i data-lucide="arrow-right" class="arrow-icon w-4 h-4 ml-2"></i>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+            <!-- Pagination/Load More -->
+            <div class="text-center mt-12">
+                <button class="px-6 py-3 border-2 border-crimson text-crimson font-semibold rounded-full hover:bg-crimson hover:text-white transition-colors">
+                    Load More Articles
+                </button>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-neutral-dark text-white mt-20">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-8 text-center">
+            <p class="text-sm text-silver-grey">&copy; 2025 MerchantHaus. All Rights Reserved. | plug in, play, process.</p>
+        </div>
+    </footer>
+    
+    <!-- Initialize Lucide icons and handle dimming -->
+    <script>
+        lucide.createIcons();
+        
+        const mainElement = document.querySelector('main');
+        const cardContainers = document.querySelectorAll('.card-container');
+
+        cardContainers.forEach(container => {
+            container.addEventListener('mouseover', () => {
+                mainElement.classList.add('main-dimmed');
+                // Ensure the hovered card is on top
+                container.style.zIndex = '10';
+            });
+            
+            container.addEventListener('mouseout', () => {
+                // Return z-index to normal
+                container.style.zIndex = '1';
+
+                // Use a short timeout to prevent flickering when moving between cards quickly
+                setTimeout(() => {
+                    // Check if the mouse is currently hovering over ANY card
+                    const isHovering = Array.from(cardContainers).some(c => c.matches(':hover'));
+                    if (!isHovering) {
+                        mainElement.classList.remove('main-dimmed');
+                    }
+                }, 50);
+            });
+        });
+    </script>
+</body>
+</html>

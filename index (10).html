@@ -1,0 +1,652 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MerchantHaus.io – Payments Simplified</title>
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Ubuntu:wght@700&display=swap" rel="stylesheet">
+    <style>
+        /* Root colour variables */
+        :root {
+            --crimson: #DC143C;
+            --dark-bg: #0f0f10;
+            --light-bg: #ffffff;
+            --teal: #00CEDB;
+            --silver-grey: #A9A9A9;
+        }
+        /* Global resets */
+        *, *::before, *::after { box-sizing: border-box; }
+        body {
+            margin: 0;
+            font-family: 'Inter', sans-serif;
+            background: var(--dark-bg);
+            color: var(--light-bg);
+            line-height: 1.6;
+        }
+        a { color: inherit; text-decoration: none; }
+
+        /* Utility classes */
+        .hidden { display: none !important; }
+        .max-w-7xl { max-width: 1280px; }
+        .mx-auto { margin-left: auto; margin-right: auto; }
+        .px-6 { padding-left: 1.5rem; padding-right: 1.5rem; }
+        .py-20 { padding-top: 5rem; padding-bottom: 5rem; }
+
+        /* --- Section Headings (New Consistent Style) --- */
+        .section-header-container { text-align: center; margin-bottom: 4rem; }
+        .section-header-container.align-right { text-align: right; }
+        .section-header-container.align-left { text-align: left; }
+
+        .section-title {
+            font-family: 'Ubuntu', sans-serif;
+            font-size: clamp(2rem, 5vw, 3rem); /* Responsive font size */
+            font-weight: 700;
+            line-height: 1.1;
+            margin-bottom: 0.5rem;
+            color: var(--light-bg);
+            display: inline-block; /* Required for typewriter effect */
+            overflow: hidden; /* Required for typewriter effect */
+            white-space: nowrap; /* Required for typewriter effect */
+        }
+        .section-subtitle {
+            font-size: clamp(1rem, 2vw, 1.25rem);
+            color: var(--silver-grey);
+            max-width: 800px;
+            margin: 0.5rem auto 0;
+        }
+        .section-header-container.align-left .section-subtitle { margin-left: 0; margin-right: auto; }
+        .section-header-container.align-right .section-subtitle { margin-right: 0; margin-left: auto; }
+
+        .typing-cursor {
+            display: inline-block;
+            width: 2px;
+            height: 1.1em;
+            background-color: var(--teal);
+            animation: blink-caret .75s step-end infinite;
+            vertical-align: middle;
+            margin-left: 0.15em;
+        }
+        @keyframes blink-caret {
+            from, to { opacity: 0 }
+            50% { opacity: 1; }
+        }
+
+        /* --- Top Bar and Header --- */
+        /* Removed .top-bar styles */
+        
+        .main-header { 
+            background: var(--light-bg); 
+            color: var(--dark-bg); 
+            position: sticky; 
+            top: 0; 
+            z-index: 50; 
+            border-bottom: 1px solid #e5e5e5; 
+            background: rgba(255, 255, 255, 0.95); /* Light glass effect */
+            backdrop-filter: blur(8px);
+        }
+        .main-header-container { max-width: 1280px; margin: 0 auto; padding: 0.75rem 1rem; display: flex; align-items: center; justify-content: space-between; }
+        .onboarding-btn { background: var(--crimson); color: var(--light-bg); border-radius: 9999px; padding: 0.5rem 1.25rem; font-weight: 600; text-decoration: none; border: 1px solid transparent; transition: background 0.2s ease; }
+        .onboarding-btn:hover { background: #b51731; }
+
+        /* --- Hero section --- */
+        .hero { position: relative; padding: clamp(4rem, 8vw, 7rem) 1.5rem; overflow: hidden; display: flex; flex-direction: column; justify-content: center; background: var(--dark-bg); }
+
+        /* --- Marquee/Logo Scroller --- */
+        .logo-marquee-wrapper { overflow: hidden; position: relative; margin-top: 3rem; }
+        .logo-marquee-track { display: flex; align-items: center; gap: 4rem; animation: marquee 30s linear infinite; }
+        .logo-item { flex-shrink: 0; height: 35px; object-fit: contain; opacity: 0.6; transition: opacity 0.3s ease; }
+        .logo-item:hover { opacity: 1.0; }
+        @keyframes marquee {
+            0% { transform: translateX(0%); }
+            100% { transform: translateX(-50%); }
+        }
+
+        /* --- Horizontal Card Carousel --- */
+        .card-carousel-wrapper { position: relative; }
+        .card-carousel {
+          display: flex;
+          overflow-x: scroll;
+          scroll-snap-type: x mandatory;
+          padding-bottom: 2rem;
+          -ms-overflow-style: none; scrollbar-width: none;
+          scroll-behavior: smooth;
+        }
+        .card-carousel::-webkit-scrollbar { display: none; }
+
+        .card-carousel-card {
+          flex-shrink: 0;
+          width: 90vw; 
+          margin-right: 1.5rem;
+          scroll-snap-align: start;
+          transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        @media (min-width: 640px) {
+          .card-carousel-card { width: calc(50% - 0.75rem); }
+        }
+        @media (min-width: 1024px) {
+          .card-carousel-card { width: calc(33.333% - 1rem); }
+        }
+        
+        .carousel-content-box {
+          height: 100%;
+          padding: 2rem;
+          border-radius: 1rem;
+          box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+          display: flex;
+          flex-direction: column;
+          justify-content: flex-start;
+          color: white;
+          background-color: #1f1f1f; 
+          border: 1px solid #2a2a2a;
+          text-align: center;
+          transition: transform 0.4s ease-out, box-shadow 0.4s ease-out; /* Add transition for tilt */
+        }
+        .carousel-content-box:hover {
+            box-shadow: 0 20px 40px rgba(220, 20, 60, 0.4); /* Exaggerated Shadow */
+        }
+
+
+        /* Desktop/Absolute Controls */
+        .card-nav-controls {
+            position: absolute;
+            top: 50%; 
+            transform: translateY(-50%);
+            width: 100%;
+            height: 0;
+            max-width: 1280px; 
+            margin: 0 auto;
+            left: 50%;
+            /* Adjust the offset to position the container based on the max-width */
+            transform: translate(-50%, -50%); 
+            pointer-events: none;
+            display: none; 
+            justify-content: space-between;
+        }
+        @media (min-width: 1024px) {
+            .card-nav-controls { 
+                display: flex; 
+                padding: 0 1rem; 
+            }
+        }
+
+        .card-nav-btn {
+            pointer-events: auto; 
+            padding: 0.85rem;
+            border-radius: 9999px;
+            border: 1px solid var(--crimson);
+            color: var(--crimson);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            background: rgba(255, 255, 255, 0.9);
+            z-index: 10;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.4);
+        }
+        .card-nav-btn:hover:not(:disabled) {
+            background: var(--crimson);
+            color: white;
+            transform: scale(1.1);
+            box-shadow: 0 8px 15px rgba(220, 20, 60, 0.6);
+        }
+        .card-nav-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: scale(1);
+        }
+
+        .card-icon-visual {
+            width: 8rem; height: 8rem;
+            margin: 0 auto 2rem;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+            transition: transform 0.3s ease;
+        }
+        
+        /* Footer */
+        footer { background: var(--dark-bg); padding: 3rem 1rem; color: rgba(255,255,255,0.8); font-size: 0.9rem; border-top: 1px solid rgba(255,255,255,0.1); }
+        .footer-inner { max-width: 1280px; margin: 0 auto; display: grid; gap: 2rem; }
+    </style>
+</head>
+<body>
+    <!-- Main header with navigation (Simplified) -->
+    <header class="main-header">
+        <div class="main-header-container">
+            <a href="/index.html" class="logo" style="font-family:'Ubuntu', sans-serif; font-weight:700; font-size:1.4rem;">MerchantHaus.io</a>
+            <div style="display: flex; gap: 0.75rem; align-items: center;">
+                <!-- New Contact Support Button -->
+                <button id="contact-support-btn" style="background: none; color: var(--crimson); border: 1px solid var(--crimson); border-radius: 9999px; padding: 0.5rem 1.25rem; font-weight: 600; text-decoration: none; transition: all 0.2s ease;" onmouseover="this.style.background='rgba(220, 20, 60, 0.1)'" onmouseout="this.style.background='none'">
+                    Contact Support
+                </button>
+                <!-- Get a Quote (repurposed onboarding button) -->
+                <a href="/apply.html" class="onboarding-btn" style="background: var(--crimson); color: var(--light-bg); border: 1px solid var(--crimson); border-radius: 9999px; padding: 0.5rem 1.25rem; font-weight: 600; text-decoration: none;">Get a Quote</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero section -->
+    <section class="hero" aria-label="MerchantHaus payments overview">
+        <div class="hero-image">
+            <img src="hero.webp" alt="MerchantHaus payment services backdrop">
+        </div>
+        <div class="hero-inner">
+            <div class="hero-text">
+                <h1>
+                    <span>Payment</span>
+                    <span id="agility-word" style="color: var(--crimson);">Agility</span><br/>
+                    <span>That</span>
+                    <span id="empower-word" style="color: var(--teal);">Empowers</span><br/>
+                    <span>Your</span>
+                    <span id="growth-word" style="color: #f2c94c;">Growth</span>
+                </h1>
+                <p>Build your business profile in minutes and start accepting cards, ACH, and secure pay links across every channel—online, in‑store or on the go. Reduce costs, onboard quickly and safeguard every transaction with advanced fraud protection.</p>
+                <div class="hero-cta">
+                    <a href="/apply.html" class="primary">Get Started</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Integrations Marquee -->
+    <section id="integrations" class="py-20" aria-label="Trusted integrations and technology partners">
+        <div class="section-container max-w-7xl mx-auto px-6">
+            <!-- Align Right -->
+            <div id="integrations-header" class="section-header-container align-right">
+                <h2 class="section-title" data-typewriter-text="Integrations and Partners"></h2>
+                <p class="section-subtitle">Plug into the platforms your business already uses, with over 200 processors to choose from</p>
+            </div>
+            <div class="logo-marquee-wrapper">
+                <div class="logo-marquee-track">
+                    <!-- Logos - Repeated twice for seamless loop -->
+                    <img src="https://placehold.co/100x35/DC143C/ffffff?text=Shopify" alt="Shopify Logo" class="logo-item" />
+                    <img src="https://placehold.co/100x35/00CEDB/000000?text=Clover" alt="Clover Logo" class="logo-item" />
+                    <img src="https://placehold.co/100x35/8B5CF6/ffffff?text=HubSpot" alt="HubSpot Logo" class="logo-item" />
+                    <img src="https://placehold.co/100x35/10B981/ffffff?text=QuickBooks" alt="QuickBooks Logo" class="logo-item" />
+                    <img src="https://placehold.co/100x35/00CEDB/000000?text=Visa" alt="Visa Logo" class="logo-item" />
+                    <img src="https://placehold.co/100x35/DC143C/ffffff?text=Mastercard" alt="Mastercard Logo" class="logo-item" />
+                    <img src="https://placehold.co/100x35/DC143C/ffffff?text=Shopify" alt="Shopify Logo" class="logo-item" />
+                    <img src="https://placehold.co/100x35/00CEDB/000000?text=Clover" alt="Clover Logo" class="logo-item" />
+                    <img src="https://placehold.co/100x35/8B5CF6/ffffff?text=HubSpot" alt="HubSpot Logo" class="logo-item" />
+                    <img src="https://placehold.co/100x35/10B981/ffffff?text=QuickBooks" alt="QuickBooks Logo" class="logo-item" />
+                    <img src="https://placehold.co/100x35/00CEDB/000000?text=Visa" alt="Visa Logo" class="logo-item" />
+                    <img src="https://placehold.co/100x35/DC143C/ffffff?text=Mastercard" alt="Mastercard Logo" class="logo-item" />
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section (Horizontal Carousel) -->
+    <section id="services" class="py-20 bg-dark-bg" aria-label="MerchantHaus Core Services">
+        <div class="section-container max-w-7xl mx-auto px-6">
+            <!-- Align Left -->
+            <div id="services-header" class="section-header-container align-left">
+                <h2 class="section-title" data-typewriter-text="MerchantHaus Core Services"></h2>
+                <p class="section-subtitle">Innovative solutions designed to power modern commerce safely and efficiently across the globe.</p>
+            </div>
+            
+            <div class="card-carousel-wrapper">
+                <div id="services-carousel" class="card-carousel" aria-live="polite">
+
+                    <!-- Card 1: Omnichannel Payments -->
+                    <div class="card-carousel-card">
+                        <div class="carousel-content-box" data-tilt-target style="min-height: 450px;">
+                            <div class="card-icon-visual" style="background: linear-gradient(135deg, var(--crimson), #A91038);">
+                                <svg class="icon-shadow" xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="15" rx="2" ry="2"></rect><polyline points="17 2 12 7 7 2"></polyline></svg>
+                            </div>
+                            <h3 style="font-size: 1.5rem; font-weight: 600; margin-bottom: 0.5rem; color: var(--light-bg);">Omnichannel Payments</h3>
+                            <p style="color: var(--silver-grey); flex-grow: 1;">Accept cards, ACH, and contactless across every touchpoint—online, in-app, and in-store—from a unified platform.</p>
+                        </div>
+                    </div>
+
+                    <!-- Card 2: Advanced Fraud Detection -->
+                    <div class="card-carousel-card">
+                        <div class="carousel-content-box" data-tilt-target style="min-height: 450px;">
+                            <div class="card-icon-visual" style="background: linear-gradient(135deg, #10B981, #065F46);">
+                                <svg class="icon-shadow" xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path><path d="M12 8l-4 4 2 2 4-4 2 2 4-4-2-2"></path></svg>
+                            </div>
+                            <h3 style="font-size: 1.5rem; font-weight: 600; margin-bottom: 0.5rem; color: var(--light-bg);">Advanced Fraud Detection</h3>
+                            <p style="color: var(--silver-grey); flex-grow: 1;">Protect every transaction with adaptive machine learning models and real-time data analysis to block suspicious activity.</p>
+                        </div>
+                    </div>
+
+                    <!-- Card 3: Modern POS Devices -->
+                    <div class="card-carousel-card">
+                        <div class="carousel-content-box" data-tilt-target style="min-height: 450px;">
+                            <div class="card-icon-visual" style="background: linear-gradient(135deg, #A9A9A9, #6B6B6B);">
+                                <svg class="icon-shadow" xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 9V5a3 3 0 0 0-3-3l-4 9v11h11.23a2 2 0 0 0 2-1.72l.7-10.25a2 2 0 0 0-2-2.25H14z"></path></svg>
+                            </div>
+                            <h3 style="font-size: 1.5rem; font-weight: 600; margin-bottom: 0.5rem; color: var(--light-bg);">Modern POS Devices</h3>
+                            <p style="color: var(--silver-grey); flex-grow: 1;">Upgrade your retail with sleek, powerful Point-of-Sale terminals supporting chip, contactless, and digital wallet payments.</p>
+                        </div>
+                    </div>
+
+                    <!-- Card 4: Global Payments -->
+                    <div class="card-carousel-card">
+                        <div class="carousel-content-box" data-tilt-target style="min-height: 450px;">
+                            <div class="card-icon-visual" style="background: linear-gradient(135deg, var(--teal), #008C9A);">
+                                <svg class="icon-shadow" xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><path d="M12 2a15.3 15.3 0 0 0 4 10 15.3 15.3 0 0 0-4 10 15.3 15.3 0 0 0-4-10 15.3 15.3 0 0 0 4-10z"></path></svg>
+                            </div>
+                            <h3 style="font-size: 1.5rem; font-weight: 600; margin-bottom: 0.5rem; color: var(--light-bg);">Global Payments</h3>
+                            <p style="color: var(--silver-grey); flex-grow: 1;">Expand your reach by accepting multi-currency and international payments with localized processing and compliance.</p>
+                        </div>
+                    </div>
+
+                    <!-- Card 5: Data & Analytics -->
+                    <div class="card-carousel-card">
+                        <div class="carousel-content-box" data-tilt-target style="min-height: 450px;">
+                            <div class="card-icon-visual" style="background: linear-gradient(135deg, #3B82F6, #1D4ED8);">
+                                <svg class="icon-shadow" xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"></path><path d="M18.7 8l-5 5-4-4-6 6"></path></svg>
+                            </div>
+                            <h3 style="font-size: 1.5rem; font-weight: 600; margin-bottom: 0.5rem; color: var(--light-bg);">Data & Analytics</h3>
+                            <p style="color: var(--silver-grey); flex-grow: 1;">Unlock real-time transaction insights, sales trends, and customer behavior analysis to drive smarter business decisions.</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Card 6: Subscription Billing -->
+                    <div class="card-carousel-card">
+                        <div class="carousel-content-box" data-tilt-target style="min-height: 450px;">
+                            <div class="card-icon-visual" style="background: linear-gradient(135deg, #F59E0B, #B45309);">
+                                <svg class="icon-shadow" xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="16" rx="2" ry="2"></rect><line x1="12" y1="2" x2="12" y2="6"></line><line x1="12" y1="18" x2="12" y2="22"></line><path d="M17.5 10.25l-.75-.75h-9.5l-.75.75-.75-.75h-.5l.75.75v3.5l-.75.75h.5l.75-.75.75.75h9.5l.75-.75.75.75h.5l-.75-.75v-3.5z"></path></svg>
+                            </div>
+                            <h3 style="font-size: 1.5rem; font-weight: 600; margin-bottom: 0.5rem; color: var(--light-bg);">Subscription Billing</h3>
+                            <p style="color: var(--silver-grey); flex-grow: 1;">Automate recurring revenue with flexible plans, prorated charges, smart dunning, and automatic card updating features.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Desktop Controls (Absolute Positioning) -->
+                <div class="card-nav-controls">
+                    <button id="prev-card-desktop" class="card-nav-btn" aria-label="Previous service card" disabled>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
+                    </button>
+                    <button id="next-card-desktop" class="card-nav-btn" aria-label="Next service card">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+                    </button>
+                </div>
+
+                <!-- Mobile Controls (Below Carousel) - Kept for mobile user experience -->
+                <div id="mobile-nav-buttons" class="flex justify-center mt-8 space-x-4 lg:hidden">
+                    <button id="prev-card-mobile" class="card-nav-btn" aria-label="Previous service card" disabled>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
+                    </button>
+                    <button id="next-card-mobile" class="card-nav-btn" aria-label="Next service card">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Call to Action Section -->
+    <section id="cta" class="py-20" aria-label="Start your payments journey">
+        <div class="section-container max-w-7xl mx-auto px-6">
+            <div style="background: var(--crimson); color: var(--light-bg); text-align: center; padding: 3rem 1.5rem; border-radius: 1rem; box-shadow: 0 10px 20px rgba(220, 20, 60, 0.4);">
+                <h2 style="font-family: 'Ubuntu', sans-serif; font-size: 2rem; font-weight: 700; margin-bottom: 0.5rem;">Ready to Elevate Your Payments?</h2>
+                <p style="font-size: 1.125rem; max-width: 700px; margin: 0.5rem auto 2rem;">Join the merchants who trust MerchantHaus to deliver secure, reliable and innovative solutions. Let's build the future of commerce together.</p>
+                <a href="/apply.html" style="display: inline-block; background: var(--light-bg); color: var(--crimson); font-weight: 700; padding: 0.75rem 2rem; border-radius: 9999px; transition: transform 0.2s ease, opacity 0.2s ease;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
+                    Get Started Now
+                </a>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-inner">
+            <div class="footer-col">
+                <h4>Products</h4>
+                <ul>
+                    <li><a href="/payment-services.html#omnichannel">Omnichannel</a></li>
+                    <li><a href="/payment-services.html#modern-pos">Modern POS</a></li>
+                    <li><a href="/payment-services.html#mobile">Mobile Commerce</a></li>
+                    <li><a href="/payment-services.html#global">Global Expansion</a></li>
+                    <li><a href="/payment-services.html#analytics">Analytics</a></li>
+                    <li><a href="/payment-services.html#fraud">Fraud Detection</a></li>
+                    <li><a href="/payment-services.html#options">Payment Options</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Resources</h4>
+                <ul>
+                    <li><a href="/developers/index.html">Developer Docs</a></li>
+                    <li><a href="/support/index.html">Support Center</a></li>
+                    <li><a href="/pricing.html">Pricing</a></li>
+                    <li><a href="/payment-services.html#onboarding">Onboarding</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Company</h4>
+                <ul>
+                    <li><a href="/about.html">About Us</a></li>
+                    <li><a href="/security.html">Security</a></li>
+                    <li><a href="/support/index.html">Contact</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Follow Us</h4>
+                <ul>
+                    <li><a href="#">LinkedIn</a></li>
+                    <li><a href="#">Twitter</a></li>
+                    <li><a href="#">Facebook</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">© 2025 MerchantHaus.io — All rights reserved.</div>
+    </footer>
+
+    <!-- Scripts -->
+    <script>
+        // Placeholder for lucide icons, if included later.
+        function setupIcons() {
+             if (window.lucide) lucide.createIcons();
+        }
+        setupIcons();
+
+        // Typewriter Effect Function
+        function typeWriter(targetEl, text, speed) {
+            let i = 0;
+            targetEl.innerHTML = '';
+            const cursor = document.createElement('span');
+            cursor.className = 'typing-cursor';
+            
+            function typing() {
+                if (i < text.length) {
+                    targetEl.textContent += text.charAt(i);
+                    i++;
+                    targetEl.appendChild(cursor);
+                    setTimeout(typing, speed);
+                } else {
+                    cursor.remove();
+                }
+            }
+            typing();
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            
+            // --- Contact Support Action ---
+            const contactBtn = document.getElementById('contact-support-btn');
+            if (contactBtn) {
+                contactBtn.addEventListener('click', () => {
+                    console.log('Contact support form action triggered. Wire up your pop-out form here!');
+                    // Placeholder for future modal/form display
+                });
+            }
+
+            // --- Hero word cycling ---
+            const agilityWords = ['Agility', 'Speed', 'Flexibility', 'Efficiency', 'Velocity', 'Responsiveness', 'Adaptability', 'Acceleration'];
+            const empowerWords = ['Empowers', 'Strengthens', 'Boosts', 'Energizes', 'Amplifies', 'Enhances', 'Elevates', 'Enables'];
+            const growthWords = ['Growth', 'Success', 'Scaling', 'Expansion', 'Progress', 'Advancement', 'Prosperity', 'Momentum'];
+            const agilityEl = document.getElementById('agility-word');
+            const empowerEl = document.getElementById('empower-word');
+            const growthEl = document.getElementById('growth-word');
+            let cycleIndex = 0;
+            
+            function updateWord(el, words, index) {
+                if (!el) return;
+                el.style.opacity = 0;
+                setTimeout(() => {
+                    el.textContent = words[index];
+                    el.style.opacity = 1;
+                }, 300);
+            }
+            
+            if (agilityEl && empowerEl && growthEl) {
+                 agilityEl.textContent = agilityWords[0];
+                 empowerEl.textContent = empowerWords[0];
+                 growthEl.textContent = growthWords[0];
+                 function rotateWords() {
+                     cycleIndex = (cycleIndex + 1) % agilityWords.length;
+                     updateWord(agilityEl, agilityWords, cycleIndex);
+                     setTimeout(() => updateWord(empowerEl, empowerWords, cycleIndex), 500);
+                     setTimeout(() => updateWord(growthEl, growthWords, cycleIndex), 1000);
+                 }
+                 setInterval(rotateWords, 6000);
+            }
+            
+            // --- Section Heading Typewriter Observer ---
+            const headerTitles = document.querySelectorAll('.section-title[data-typewriter-text]');
+            const headerObserver = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting && !entry.target.dataset.animated) {
+                        const fullText = entry.target.getAttribute('data-typewriter-text');
+                        typeWriter(entry.target, fullText, 50); // Speed 50ms per character
+                        entry.target.dataset.animated = 'true';
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.8 });
+            
+            headerTitles.forEach(title => headerObserver.observe(title));
+
+            // --- Card Hover/Tilt Logic (Exaggerated) ---
+            const cards = document.querySelectorAll('[data-tilt-target]'); 
+            cards.forEach(card => {
+                const tiltIntensity = 20; // Increased intensity
+                const maxScale = 1.05; // Exaggerated scale
+                const icon = card.querySelector('.icon-shadow'); 
+                
+                card.addEventListener('mousemove', e => {
+                    const { left, top, width, height } = card.getBoundingClientRect();
+                    const x = e.clientX - left;
+                    const y = e.clientY - top;
+                    const centerX = width / 2;
+                    const centerY = height / 2;
+                    const deltaX = x - centerX;
+                    const deltaY = y - centerY;
+                    const rotateY = (deltaX / centerX) * tiltIntensity;
+                    const rotateX = -(deltaY / centerY) * tiltIntensity;
+                    
+                    card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(${maxScale}, ${maxScale}, ${maxScale})`;
+                    
+                    if (icon) {
+                        const shadowOffsetMultiplier = 1.5; // Increased shadow effect
+                        const shadowOffsetX = -rotateY * shadowOffsetMultiplier;
+                        const shadowOffsetY = rotateX * shadowOffsetMultiplier;
+                        const visualContainer = icon.closest('.card-icon-visual');
+                        
+                        if (visualContainer) {
+                            visualContainer.style.transition = 'transform 0.2s ease-out';
+                            visualContainer.style.transform = `translateZ(60px) scale(1.15)`; // Increased icon pop-out
+                            visualContainer.style.filter = `drop-shadow(${shadowOffsetX}px ${shadowOffsetY}px 15px rgb(0 0 0 / 0.8))`;
+                        }
+                    }
+                });
+                
+                card.addEventListener('mouseleave', () => {
+                    card.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)';
+                    if (icon) {
+                        const visualContainer = icon.closest('.card-icon-visual');
+                        if (visualContainer) {
+                            visualContainer.style.transition = 'transform 0.3s ease-out, filter 0.3s ease-out';
+                            visualContainer.style.transform = 'translateZ(0) scale(1)';
+                            visualContainer.style.filter = '';
+                        }
+                    }
+                });
+            });
+
+
+            // --- Horizontal Card Carousel Logic ---
+            const carousel = document.getElementById('services-carousel');
+            // Unified button IDs to simplify JS logic
+            const prevBtn = document.getElementById('prev-card-desktop'); 
+            const nextBtn = document.getElementById('next-card-desktop');
+            
+            // The mobile buttons are now aliases for the desktop ones in the HTML structure
+
+            if (carousel && prevBtn && nextBtn) {
+                const cardList = Array.from(carousel.querySelectorAll('.card-carousel-card'));
+                if (cardList.length === 0) return;
+
+                let currentIndex = 0;
+
+                const getScrollDistance = () => {
+                    const card = cardList[0];
+                    const cardStyle = window.getComputedStyle(card);
+                    const cardWidth = card.offsetWidth;
+                    const marginRight = parseFloat(cardStyle.marginRight) || 0;
+                    return cardWidth + marginRight;
+                };
+
+                const updateButtons = () => {
+                    const visibleCards = window.innerWidth >= 1024 ? 3 : window.innerWidth >= 640 ? 2 : 1;
+                    const maxIndex = Math.max(0, cardList.length - visibleCards);
+                    
+                    // Update all button variants based on state
+                    document.querySelectorAll('.card-nav-btn').forEach(btn => {
+                        if (btn.id.includes('prev')) {
+                             btn.disabled = currentIndex === 0;
+                        } else if (btn.id.includes('next')) {
+                             btn.disabled = currentIndex >= maxIndex;
+                        }
+                    });
+                };
+
+                const scrollToCard = (index) => {
+                    const visibleCards = window.innerWidth >= 1024 ? 3 : window.innerWidth >= 640 ? 2 : 1;
+                    const maxIndex = Math.max(0, cardList.length - visibleCards);
+
+                    if (index < 0) index = 0;
+                    if (index > maxIndex) index = maxIndex;
+
+                    currentIndex = index;
+                    
+                    const scrollDistance = getScrollDistance();
+                    carousel.scrollLeft = currentIndex * scrollDistance;
+                    updateButtons();
+                };
+                
+                // Attach event listeners to all button variants (desktop and mobile)
+                document.querySelectorAll('[id^="prev-card-"]').forEach(btn => {
+                    btn.addEventListener('click', () => scrollToCard(currentIndex - 1));
+                });
+                document.querySelectorAll('[id^="next-card-"]').forEach(btn => {
+                    btn.addEventListener('click', () => scrollToCard(currentIndex + 1));
+                });
+
+                
+                // Adjust current index on manual scroll (for swiping)
+                carousel.addEventListener('scroll', () => {
+                    const scrollDistance = getScrollDistance();
+                    currentIndex = Math.round(carousel.scrollLeft / scrollDistance);
+                    updateButtons();
+                });
+                
+                // Recalculate button state on resize, as visibleCards and maxIndex change
+                window.addEventListener('resize', () => {
+                    // Re-snap to current logical position after resize
+                    scrollToCard(currentIndex); 
+                });
+                
+                // Initial update
+                scrollToCard(0);
+            }
+        });
+    </script>
+</body>
+</html>

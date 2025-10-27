@@ -8,7 +8,6 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Ubuntu:wght@700&display=swap" rel="stylesheet">
-    <!-- REMOVED TAILWIND SCRIPT -->
     <style>
         /* Root colour variables */
         :root {
@@ -89,7 +88,7 @@
             }
         }
 
-        /* RESTORED ORIGINAL HEADER CSS */
+        /* Main Header */
         .main-header {
             background: var(--light-bg);
             color: var(--dark-bg);
@@ -177,7 +176,6 @@
             text-align: center;
         }
         #mobile-menu .mobile-onboard-btn:hover { background: #b51731; }
-
 
         /* Hero section */
         .hero {
@@ -343,21 +341,12 @@
             padding-top: 1rem;
             color: rgba(255,255,255,0.6);
         }
-        .footer-bottom a {
-            text-decoration: underline;
-            text-decoration-color: rgba(220, 20, 60, 0.5); /* Semi-transparent crimson */
-            transition: color 0.2s ease, text-decoration-color 0.2s ease;
-        }
-        .footer-bottom a:hover {
-            color: var(--crimson);
-            text-decoration-color: var(--crimson);
-        }
     </style>
 </head>
 <body>
     <!-- Top bar -->
     <div class="top-bar">
-        <div class="tagline">Plug in, play and process</div>
+        <div class="tagline">PLUG IN. PLAY. PROCESS</div>
         <div class="contact-info">
             <a href="tel:15056006042" title="Call us">
                 <span style="font-size:1rem;" aria-hidden="true">📞</span><span>1‑505‑600‑6042</span>
@@ -371,7 +360,7 @@
         </div>
     </div>
 
-    <!-- RESTORED ORIGINAL HEADER -->
+    <!-- Main header with navigation -->
     <header class="main-header">
         <div class="main-header-container">
             <a href="/index.html" class="logo" style="font-family:'Ubuntu', sans-serif; font-weight:700; font-size:1.4rem;">MerchantHaus.io</a>
@@ -386,7 +375,7 @@
             </nav>
             <a href="/apply.html" class="onboarding-btn">Onboarding</a>
             <button id="mobile-menu-toggle" class="mobile-toggle" aria-label="Toggle menu">
-                <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 24 24" stroke="currentColor" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width: 24px; height: 24px;">
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 24 24" stroke="currentColor" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                     <line x1="3" y1="6" x2="21" y2="6"></line>
                     <line x1="3" y1="12" x2="21" y2="12"></line>
                     <line x1="3" y1="18" x2="21" y2="18"></line>
@@ -432,42 +421,35 @@
     <!-- Footer -->
     <footer>
         <div class="footer-inner">
-            <!-- UPDATED PRODUCTS COLUMN -->
             <div class="footer-col">
                 <h4>Products</h4>
                 <ul>
-                    <!-- UPDATED LINKS per user request -->
-                    <li><a href="/gateway-services.html">Gateway Services</a></li>
-                    <li><a href="/professional-services.html">Professional Services</a></li>
-                    <li><a href="/ecommerce.html">Ecommerce</a></li>
+                    <li><a href="/payment-services.html#omnichannel">Omnichannel</a></li>
+                    <li><a href="/payment-services.html#modern-pos">Modern POS</a></li>
+                    <li><a href="/payment-services.html#mobile">Mobile Commerce</a></li>
+                    <li><a href="/payment-services.html#global">Global Expansion</a></li>
+                    <li><a href="/payment-services.html#analytics">Analytics</a></li>
+                    <li><a href="/payment-services.html#fraud">Fraud Detection</a></li>
+                    <li><a href="/payment-services.html#options">Payment Options</a></li>
                 </ul>
             </div>
-            <!-- UPDATED RESOURCES COLUMN -->
             <div class="footer-col">
                 <h4>Resources</h4>
                 <ul>
-                    <li><a href="/docs.html">Documentation</a></li>
-                    <li><a href="/developer-api.html">Developer API</a></li>
-                    <li><a href="/support.html">Support</a></li>
+                    <li><a href="/developers/index.html">Developer Docs</a></li>
+                    <li><a href="/support/index.html">Support Center</a></li>
+                    <li><a href="/pricing.html">Pricing</a></li>
+                    <li><a href="/payment-services.html#onboarding">Onboarding</a></li>
                 </ul>
             </div>
-            <!-- UPDATED COMPANY COLUMN with ADDRESS -->
             <div class="footer-col">
                 <h4>Company</h4>
                 <ul>
                     <li><a href="/about.html">About Us</a></li>
                     <li><a href="/security.html">Security</a></li>
-                    <li><a href="/contact.html">Contact</a></li>
-                    <!-- ADDED ADDRESS per user request -->
-                    <li style="margin-top: 1rem; padding-top: 1rem; border-top: 1px solid rgba(255,255,255,0.1);">
-                        <address style="font-style: normal; line-height: 1.5; color: rgba(255,255,255,0.6);">
-                            1209 Mountain Road Pl Ne Ste N<br>
-                            Albuquerque, NM 87110 US
-                        </address>
-                    </li>
+                    <li><a href="/support/index.html">Contact</a></li>
                 </ul>
             </div>
-            <!-- UPDATED FOLLOW US COLUMN -->
             <div class="footer-col">
                 <h4>Follow Us</h4>
                 <ul>
@@ -477,28 +459,13 @@
                 </ul>
             </div>
         </div>
-        <!-- UPDATED FOOTER BOTTOM with TERMS & PRIVACY -->
-        <div class="footer-bottom">
-            <div style="display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 0.25rem 0.75rem;">
-                <span>© 2025 MerchantHaus.io — All rights reserved.</span>
-                <span style="display: none;" class="md-separator">|</span>
-                <a href="/terms.html">Terms</a>
-                <span>|</span>
-                <a href="/privacy.html">Privacy</a>
-            </div>
-            <!-- Simple media query to hide the first separator on small screens -->
-            <style>
-                @media (min-width: 768px) {
-                    .md-separator { display: inline !important; }
-                }
-            </style>
-        </div>
+        <div class="footer-bottom">© 2025 MerchantHaus.io — All rights reserved.</div>
     </footer>
 
     <!-- Scripts -->
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            // RESTORED ORIGINAL Mobile menu toggle
+            // Mobile menu toggle
             const toggleBtn = document.getElementById('mobile-menu-toggle');
             const mobileMenu = document.getElementById('mobile-menu');
             const links = document.querySelectorAll('.mobile-menu-link');
@@ -513,7 +480,7 @@
                 });
             }
 
-            // Hero word cycling (Unchanged)
+            // Hero word cycling
             const agilityWords = ['Agility', 'Speed', 'Flexibility', 'Efficiency', 'Velocity', 'Responsiveness', 'Adaptability', 'Acceleration'];
             const empowerWords = ['Empowers', 'Strengthens', 'Boosts', 'Energizes', 'Amplifies', 'Enhances', 'Elevates', 'Enables'];
             const growthWords = ['Growth', 'Success', 'Scaling', 'Expansion', 'Progress', 'Advancement', 'Prosperity', 'Momentum'];
@@ -547,4 +514,3 @@
     </script>
 </body>
 </html>
-
