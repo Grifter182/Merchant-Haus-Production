@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MerchantHaus.io – Multi-Color Glow Cards</title>
+<style>
+body {
+  background: #0f0f10;
+  color: #fff;
+  font-family: 'Inter', sans-serif;
+  margin: 0;
+  overflow-x: hidden;
+}
+section#services {
+  padding: 4rem 2rem;
+  max-width: 1400px;
+  margin: 0 auto;
+  position: relative;
+}
+h2 {
+  text-align: center;
+  font-family: 'Ubuntu', sans-serif;
+  font-size: 2.5rem;
+  margin-bottom: 2.5rem;
+}
+.card-slider {
+  display: flex;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  scroll-snap-type: x mandatory;
+  gap: 2rem;
+  padding: 2rem 4rem;
+  scrollbar-width: none;
+}
+.card-slider::-webkit-scrollbar { display: none; }
+.card {
+  flex: 0 0 320px;
+  scroll-snap-align: center;
+  background: #2a2a2a;
+  border-radius: 1rem;
+  padding: 3rem 2rem 2rem;
+  text-align: center;
+  transition: transform 0.1s ease, background 0.4s ease, box-shadow 0.4s ease;
+  transform-style: preserve-3d;
+  perspective: 800px;
+}
+.card-icon {
+  width: 6rem;
+  height: 6rem;
+  border-radius: 50%;
+  margin: 0 auto 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2.8rem;
+  transition: all 0.5s ease;
+  overflow: visible;
+  box-shadow: 0 0 25px currentColor;
+}
+
+.card[data-color="crimson"] .card-icon { background: radial-gradient(circle, #DC143C, #600018); color: #DC143C; }
+.card[data-color="green"] .card-icon { background: radial-gradient(circle, #10B981, #065F46); color: #10B981; }
+.card[data-color="blue"] .card-icon { background: radial-gradient(circle, #3B82F6, #1E3A8A); color: #3B82F6; }
+.card[data-color="gold"] .card-icon { background: radial-gradient(circle, #F59E0B, #92400E); color: #F59E0B; }
+.card[data-color="teal"] .card-icon { background: radial-gradient(circle, #00CEDB, #006A72); color: #00CEDB; }
+.card[data-color="purple"] .card-icon { background: radial-gradient(circle, #8B5CF6, #4C1D95); color: #8B5CF6; }
+
+.card:hover .card-icon {
+  background: transparent;
+  transform: scale(2.5) translateY(-40px);
+  box-shadow: 0 0 60px currentColor;
+}
+
+.card:hover h3, .card:hover p {
+  transform: scale(1.3);
+  transition: transform 0.4s ease;
+}
+
+.card:hover[data-color="crimson"] { background: linear-gradient(145deg, #600018, #DC143C); box-shadow: 0 0 60px 20px #DC143C; }
+.card:hover[data-color="green"] { background: linear-gradient(145deg, #065F46, #10B981); box-shadow: 0 0 60px 20px #10B981; }
+.card:hover[data-color="blue"] { background: linear-gradient(145deg, #1E3A8A, #3B82F6); box-shadow: 0 0 60px 20px #3B82F6; }
+.card:hover[data-color="gold"] { background: linear-gradient(145deg, #92400E, #F59E0B); box-shadow: 0 0 60px 20px #F59E0B; }
+.card:hover[data-color="teal"] { background: linear-gradient(145deg, #006A72, #00CEDB); box-shadow: 0 0 60px 20px #00CEDB; }
+.card:hover[data-color="purple"] { background: linear-gradient(145deg, #4C1D95, #8B5CF6); box-shadow: 0 0 60px 20px #8B5CF6; }
+
+h3 { font-size: 1.5rem; margin-bottom: 0.75rem; transition: transform 0.4s ease; }
+p { color: #ccc; font-size: 1rem; transition: transform 0.4s ease; }
+
+.nav-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(255,255,255,0.1);
+  color: #fff;
+  border: 1px solid #555;
+  border-radius: 50%;
+  width: 3rem;
+  height: 3rem;
+  font-size: 1.25rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  z-index: 10;
+}
+.nav-btn:hover { background: #fff; color: #000; transform: scale(1.1) translateY(-50%); }
+#prev { left: 0; }
+#next { right: 0; }
+</style>
+</head>
+<body>
+<section id="services">
+  <h2>MerchantHaus Multi-Color Experience</h2>
+  <button id="prev" class="nav-btn">◀</button>
+  <button id="next" class="nav-btn">▶</button>
+  <div class="card-slider" id="slider">
+    <div class="card" data-color="crimson"><div class="card-icon">💳</div><h3>Omnichannel Payments</h3><p>Accept payments seamlessly across online, mobile, and in-store platforms.</p></div>
+    <div class="card" data-color="green"><div class="card-icon">🛡️</div><h3>Fraud Protection</h3><p>AI-powered fraud detection ensures every transaction is secure and reliable.</p></div>
+    <div class="card" data-color="blue"><div class="card-icon">🖥️</div><h3>Modern POS</h3><p>Elegant terminals that combine power, performance, and intuitive design.</p></div>
+    <div class="card" data-color="teal"><div class="card-icon">🌍</div><h3>Global Payments</h3><p>Expand your reach with localized processing and currency flexibility.</p></div>
+    <div class="card" data-color="purple"><div class="card-icon">📈</div><h3>Data & Analytics</h3><p>Get actionable insights into sales, customer trends, and growth.</p></div>
+    <div class="card" data-color="gold"><div class="card-icon">💡</div><h3>Smart Billing</h3><p>Automate invoices, recurring payments, and subscription management.</p></div>
+  </div>
+</section>
+<script>
+const slider = document.getElementById('slider');
+const prev = document.getElementById('prev');
+const next = document.getElementById('next');
+next.addEventListener('click', () => slider.scrollBy({ left: 350, behavior: 'smooth' }));
+prev.addEventListener('click', () => slider.scrollBy({ left: -350, behavior: 'smooth' }));
+
+// Tilt dynamic
+const cards = document.querySelectorAll('.card');
+cards.forEach(card => {
+  card.addEventListener('mousemove', e => {
+    const rect = card.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+    const rotateY = ((x / rect.width) - 0.5) * 40;
+    const rotateX = ((y / rect.height) - 0.5) * -40;
+    card.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.15)`;
+    const color = getComputedStyle(card.querySelector('.card-icon')).color;
+    card.style.boxShadow = `${rotateY * 1.5}px ${rotateX * 1.5}px 60px ${color}, 0 0 60px ${color}`;
+  });
+  card.addEventListener('mouseleave', () => {
+    card.style.transform = 'rotateX(0) rotateY(0) scale(1)';
+    card.style.boxShadow = 'none';
+  });
+});
+</script>
+</body>
+</html>
