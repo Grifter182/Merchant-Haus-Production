@@ -355,6 +355,21 @@
             </div>
         </section>
 
+        <section class="p-6 rounded-2xl border border-slate-200 dark:border-slate-800">
+            <h2 class="text-xl font-bold">Processor Status</h2>
+            <p class="text-sm text-slate-600 dark:text-slate-300 mt-2">Do you currently have a processor?</p>
+            <div class="mt-4 flex flex-col sm:flex-row gap-3 text-sm">
+                <label class="inline-flex items-center gap-2 px-4 py-2 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-900 shadow-sm">
+                    <input class="accent-red-600" type="radio" name="hasProcessor" value="Yes" required>
+                    Yes
+                </label>
+                <label class="inline-flex items-center gap-2 px-4 py-2 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-900 shadow-sm">
+                    <input class="accent-red-600" type="radio" name="hasProcessor" value="No" required>
+                    No
+                </label>
+            </div>
+        </section>
+
         <button class="mt-6 bg-brand-crimson text-white px-4 py-2 rounded-lg" type="submit">Submit Application</button>
         <p id="apply-out" class="mt-2 text-sm"></p>
     </form>
@@ -366,13 +381,27 @@
 
   const LS_KEY = 'mh_apply_draft';
   function saveDraft(){ const data = Object.fromEntries(new FormData(form).entries()); localStorage.setItem(LS_KEY, JSON.stringify(data)); }
-  function loadDraft(){ try { const d = JSON.parse(localStorage.getItem(LS_KEY)||'{}'); for (const k in d){ const el = form.elements[k]; if (!el) continue; if (el.type==='checkbox'){ el.checked = !!d[k]; } else { el.value = d[k]; } } } catch(e){} }
+  function loadDraft(){ try { const d = JSON.parse(localStorage.getItem(LS_KEY)||'{}'); for (const k in d){ const el = form.elements[k]; if (!el) continue; if (el.type==='checkbox'){ el.checked = !!d[k]; } else if (el instanceof RadioNodeList) { el.value = d[k]; } else { el.value = d[k]; } } } catch(e){} }
   form.addEventListener('input', saveDraft);
   loadDraft();
 
   function getUTM(){
     const p = new URLSearchParams(location.search);
     return {source:p.get('utm_source')||'',medium:p.get('utm_medium')||'',campaign:p.get('utm_campaign')||'',term:p.get('utm_term')||'',content:p.get('utm_content')||'',ref:document.referrer||''};
+  }
+
+  function getProcessorChoice(){
+    const selected = form.querySelector('input[name="hasProcessor"]:checked');
+    return selected ? selected.value : '';
+  }
+
+  function handlePostSubmitRedirect(){
+    const choice = getProcessorChoice();
+    if (choice === 'No') {
+      window.location.href = '/pricing-choice.html';
+      return true;
+    }
+    return false;
   }
 
   form.addEventListener('submit', async (e) => {
@@ -398,7 +427,10 @@
         if (res.ok) {
           out.textContent = 'Thanks — we emailed you next steps and sent your application to our team.';
           localStorage.removeItem(LS_KEY);
-          form.reset();
+          const redirected = handlePostSubmitRedirect();
+          if (!redirected) {
+            form.reset();
+          }
           return;
         }
         throw new Error('Function failed');
@@ -424,11 +456,15 @@
           headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
           body: new URLSearchParams(new FormData(form)).toString()
         });
-        
+
         if (!netlifyRes.ok) throw new Error('Netlify Forms submission failed');
-        
-        // Redirect to thank you page for Netlify Forms
-        window.location.href = '/thankyou.html';
+
+        out.textContent = 'Thanks — we emailed you next steps and sent your application to our team.';
+        localStorage.removeItem(LS_KEY);
+        const redirected = handlePostSubmitRedirect();
+        if (!redirected) {
+          form.reset();
+        }
         return;
       }
     } catch (err) {

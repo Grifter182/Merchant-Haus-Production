@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Choose Your Pricing Model — MerchantHaus</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Vollkorn:wght@600&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+            serif: ['Vollkorn', 'serif'],
+          },
+          colors: {
+            'brand-crimson': '#DC143C',
+            'brand-teal': '#00CEDB',
+            'brand-night': '#0B0B0F',
+          },
+          boxShadow: {
+            glow: '0 20px 60px rgba(220, 20, 60, 0.35)',
+          },
+        },
+      },
+    }
+  </script>
+  <style>
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+      background: radial-gradient(circle at 15% 20%, rgba(220, 20, 60, 0.35), transparent 35%),
+                  radial-gradient(circle at 85% 80%, rgba(0, 206, 219, 0.25), transparent 30%),
+                  linear-gradient(135deg, #0b0b0f, #11121a 45%, #0b0b0f);
+    }
+  </style>
+</head>
+<body class="min-h-screen text-white bg-brand-night font-sans">
+  <div class="max-w-5xl mx-auto px-6 py-12">
+    <header class="flex items-center justify-between gap-6">
+      <div class="flex items-center gap-3">
+        <img src="/public/assets/images/Shield.webp" alt="MerchantHaus" class="w-14 h-14 rounded-xl border border-white/10 shadow-lg">
+        <div>
+          <p class="text-xs uppercase tracking-[0.28em] text-brand-teal">MerchantHaus</p>
+          <h1 class="text-3xl font-bold font-serif">Choose your pricing model</h1>
+        </div>
+      </div>
+      <a href="/index.html" class="text-sm text-white/80 hover:text-white underline">Back to site</a>
+    </header>
+
+    <section class="mt-10 grid gap-6 lg:grid-cols-2">
+      <article class="p-8 rounded-3xl border border-white/10 bg-white/5 backdrop-blur-xl shadow-glow">
+        <div class="flex items-center justify-between gap-4">
+          <div>
+            <p class="text-sm text-brand-teal font-semibold">Recommended</p>
+            <h2 class="text-2xl font-bold mt-1">Flat Rate</h2>
+            <p class="mt-2 text-white/80 text-sm leading-relaxed">Predictable pricing for modern merchants. Simple monthly statements with our best blend of speed, security, and support.</p>
+          </div>
+          <span class="inline-flex items-center gap-2 text-xs font-semibold px-3 py-1 rounded-full bg-brand-crimson/15 text-brand-crimson border border-brand-crimson/30">Fast onboarding</span>
+        </div>
+        <div class="mt-6 flex flex-wrap gap-3 text-sm text-white/80">
+          <span class="inline-flex items-center gap-2 px-3 py-2 rounded-full bg-white/5 border border-white/10"><span class="w-2 h-2 rounded-full bg-brand-teal"></span>Best for retail</span>
+          <span class="inline-flex items-center gap-2 px-3 py-2 rounded-full bg-white/5 border border-white/10"><span class="w-2 h-2 rounded-full bg-brand-teal"></span>Instant setup</span>
+        </div>
+        <a href="https://merchanthaus-fr.nmipays.com/form/MerchantHaus-fr" class="mt-8 inline-flex w-full items-center justify-center gap-2 px-4 py-3 text-lg font-semibold rounded-xl bg-brand-crimson hover:bg-brand-crimson/90 transition-colors shadow-lg">
+          Flat Rate (Recommended)
+        </a>
+      </article>
+
+      <article class="p-8 rounded-3xl border border-white/10 bg-white/5 backdrop-blur-xl">
+        <div class="flex items-center justify-between gap-4">
+          <div>
+            <p class="text-sm text-brand-teal font-semibold">Flexible</p>
+            <h2 class="text-2xl font-bold mt-1">Interchange Plus</h2>
+            <p class="mt-2 text-white/80 text-sm leading-relaxed">Transparent pricing that scales with your volume. Keep control over pass-through costs while gaining premium support.</p>
+          </div>
+          <span class="inline-flex items-center gap-2 text-xs font-semibold px-3 py-1 rounded-full bg-brand-teal/15 text-brand-teal border border-brand-teal/30">Detailed statements</span>
+        </div>
+        <div class="mt-6 flex flex-wrap gap-3 text-sm text-white/80">
+          <span class="inline-flex items-center gap-2 px-3 py-2 rounded-full bg-white/5 border border-white/10"><span class="w-2 h-2 rounded-full bg-brand-teal"></span>Volume aware</span>
+          <span class="inline-flex items-center gap-2 px-3 py-2 rounded-full bg-white/5 border border-white/10"><span class="w-2 h-2 rounded-full bg-brand-teal"></span>Statement detail</span>
+        </div>
+        <a href="https://merchanthaus-ic.nmipays.com/form/MerchantHaus-ic" class="mt-8 inline-flex w-full items-center justify-center gap-2 px-4 py-3 text-lg font-semibold rounded-xl border border-brand-teal text-brand-teal hover:bg-brand-teal hover:text-brand-night transition-colors">
+          Interchange Plus
+        </a>
+      </article>
+    </section>
+
+    <footer class="mt-12 text-sm text-white/70 flex flex-wrap items-center gap-4">
+      <span>Questions? <a href="mailto:support@merchanthaus.io" class="text-brand-teal hover:text-white underline">support@merchanthaus.io</a></span>
+      <span class="hidden sm:inline">•</span>
+      <span class="text-white/50">Secure payment experiences powered by MerchantHaus.</span>
+    </footer>
+  </div>
+</body>
+</html>
